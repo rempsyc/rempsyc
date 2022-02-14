@@ -17,6 +17,7 @@ You can install the development version (the only version currently
 available) of the `rempsyc` package from GitHub with:
 
 ``` r
+# If devtools isn't already installed, install it with install.packages("devtools")
 library(devtools)
 install_github("rempsyc/rempsyc")
 ```
