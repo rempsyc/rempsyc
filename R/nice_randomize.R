@@ -1,4 +1,4 @@
-#' @title Randomize easily with different designs
+#' @title Easily randomization
 #'
 #' @description Randomize easily with different designs.
 #' @param dataframe The dataframe

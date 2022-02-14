@@ -1,4 +1,4 @@
-#' @title Make nice violin plots easily
+#' @title Easy violin plots
 #'
 #' @description Make nice violin plots easily with 95% bootstrapped confidence intervals.
 #' @param dataframe The dataframe

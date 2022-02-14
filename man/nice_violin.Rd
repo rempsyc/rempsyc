@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_violin.R
 \name{nice_violin}
 \alias{nice_violin}
-\title{Make nice violin plots easily}
+\title{Easy violin plots}
 \usage{
 nice_violin(
   data,

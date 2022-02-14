@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_randomize.R
 \name{nice_randomize}
 \alias{nice_randomize}
-\title{Randomize easily with different designs}
+\title{Easily randomization}
 \usage{
 nice_randomize(
   design = "between",

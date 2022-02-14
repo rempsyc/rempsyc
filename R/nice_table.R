@@ -1,4 +1,4 @@
-#' @title Make nice APA tables easily
+#' @title Easily make nice APA tables
 #'
 #' @description Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 #' @param dataframe The dataframe

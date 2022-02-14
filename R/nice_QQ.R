@@ -1,4 +1,4 @@
-#' @title Easy per-group QQ plots
+#' @title Easy QQ plots per group
 #'
 #' @description Easily make nice per-group QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
 #' @param dataframe The dataframe

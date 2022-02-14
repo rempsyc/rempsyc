@@ -1,4 +1,4 @@
-#' @title Make nice density plots easily
+#' @title Easy density plots
 #'
 #' @description Make nice density plots easily.
 #' @param dataframe The dataframe

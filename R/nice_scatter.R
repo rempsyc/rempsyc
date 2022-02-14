@@ -1,4 +1,4 @@
-#' @title Make nice scatter plots easily
+#' @title Easy scatter plots
 #'
 #' @description Make nice violon plots easily.
 #' @param dataframe The dataframe

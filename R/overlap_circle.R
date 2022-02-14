@@ -1,4 +1,4 @@
-#' @title Interpolating the Inclusion of the Other in the Self Scale
+#' @title Interpolate the Inclusion of the Other in the Self Scale
 #'
 #' @description Interpolating the Inclusion of the Other in the Self Scale easily.
 #' @param dataframe The dataframe

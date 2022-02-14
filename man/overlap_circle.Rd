@@ -2,7 +2,7 @@
 % Please edit documentation in R/overlap_circle.R
 \name{overlap_circle}
 \alias{overlap_circle}
-\title{Interpolating the Inclusion of the Other in the Self Scale}
+\title{Interpolate the Inclusion of the Other in the Self Scale}
 \usage{
 overlap_circle(response, categories = c("Self", "Other"))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_QQ.R
 \name{nice_QQ}
 \alias{nice_QQ}
-\title{Easy per-group QQ plots}
+\title{Easy QQ plots per group}
 \usage{
 nice_QQ(
   variable,

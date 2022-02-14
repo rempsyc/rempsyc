@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_table.R
 \name{nice_table}
 \alias{nice_table}
-\title{Make nice APA tables easily}
+\title{Easily make nice APA tables}
 \usage{
 nice_table(
   dataframe,

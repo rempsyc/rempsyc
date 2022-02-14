@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_scatter.R
 \name{nice_scatter}
 \alias{nice_scatter}
-\title{Make nice scatter plots easily}
+\title{Easy scatter plots}
 \usage{
 nice_scatter(
   data,

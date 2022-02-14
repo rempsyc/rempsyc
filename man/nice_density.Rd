@@ -2,7 +2,7 @@
 % Please edit documentation in R/nice_density.R
 \name{nice_density}
 \alias{nice_density}
-\title{Make nice density plots easily}
+\title{Easy density plots}
 \usage{
 nice_density(
   variable,
