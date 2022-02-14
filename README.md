@@ -7,21 +7,22 @@
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily
-customizable plots (via ‘ggplot2’), nice APA tables exportable to Word
-(via ‘flextable’), easily ran statistical tests or check assumptions,
-and automatization of various other tasks.
+customizable plots (via `ggplot2`), nice APA tables exportable to Word
+(via `flextable`), easily run statistical tests or check assumptions,
+and automatize various other tasks.
 
 ## Installation
 
-You can install the released version of rempsyc from GitHub with:
+You can install the development version (the only version currently
+available) of the `rempsyc` package from GitHub with:
 
 ``` r
 library(devtools)
 install_github("rempsyc/rempsyc")
 ```
 
-You can load library and open the help file, and click “Index” at the
-bottom. You will see all the functions listed.
+You can load the package and open the help file, and click “Index” at
+the bottom. You will see all the available functions listed.
 
 ``` r
 library(rempsyc)
@@ -45,7 +46,7 @@ moderations
 #> 3                mpg   gear:wt 28 -1.966931 -2.1551077 0.03989970 0.035022025
 
 # Format results in nice table
-(my_table <- nice_table(moderations, highlight = TRUE))
+my_table <- nice_table(moderations, highlight = TRUE)
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -54,6 +55,8 @@ moderations
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+
+knitr::knit_print(my_table)
 ```
 
 ``` r
@@ -98,3 +101,7 @@ See tutorials here:
 <https://remi-theriault.com/blog_t-test>
 
 <https://remi-theriault.com/blog_moderation>
+
+Visit my website here: <https://remi-theriault.com>
+
+Support me and my work here: <https://remi-theriault.com/donate/>
