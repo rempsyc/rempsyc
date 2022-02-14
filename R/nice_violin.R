@@ -83,7 +83,7 @@
 #'            response = "len",
 #'            obs = TRUE)
 #'
-#' # Micro-Customizations
+#' # Micro-customizations
 #' nice_violin(data = ToothGrowth,
 #'            group = "dose",
 #'            response = "len",

@@ -156,7 +156,7 @@ nice_scatter(data = mtcars,
             group.variable = factor(mtcars$cyl),
             has.legend = TRUE,
             groups.names = c("Weak","Average","Powerful"))
-            # Warning: This applies after changing order of level
+# Warning: This applies after changing order of level
 
 # Add a title to legend
 nice_scatter(data = mtcars,
