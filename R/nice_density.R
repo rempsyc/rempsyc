@@ -25,7 +25,6 @@
 nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
   library(dplyr)
   library(ggplot2)
-  library(ggrepel)
   options(dplyr.summarise.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
@@ -66,14 +65,14 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
     geom_line(data = dat_norm, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
     ylab(ytitle) +
     xlab(xtitle) +
-    {if (shapiro == TRUE) geom_text_repel(data = dat_text,
-                                          mapping = aes(x = Inf,
-                                                        y = Inf,
-                                                        label = text),
-                                          inherit.aes = FALSE,
-                                          size = 6,
-                                          force = 0,
-                                          parse = TRUE)} +
+    {if (shapiro == TRUE) ggrepel::geom_text_repel(data = dat_text,
+                                                   mapping = aes(x = Inf,
+                                                                 y = Inf,
+                                                                 label = text),
+                                                   inherit.aes = FALSE,
+                                                   size = 6,
+                                                   force = 0,
+                                                   parse = TRUE)} +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (grid == FALSE) theme(panel.grid.major=element_blank(),
                               panel.grid.minor=element_blank())} +
