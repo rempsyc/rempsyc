@@ -47,17 +47,10 @@ moderations
 
 # Format results in nice table
 my_table <- nice_table(moderations, highlight = TRUE)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-
-knitr::knit_print(my_table)
+my_table
 ```
+
+<img src="man/figures/nicetable.png" width="100%" />
 
 ``` r
 # Save to word
@@ -67,22 +60,24 @@ save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len")
-#> Registered S3 method overwritten by 'DescTools':
-#>   method         from  
-#>   reorder.factor gplots
 ```
 
-<img src="man/figures/README-example-2.png" width="100%" />
+<img src="man/figures/README-example2-1.png" width="100%" />
 
 ``` r
 # Scatter plot
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg)
-#> `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="man/figures/README-example-3.png" width="100%" />
+<img src="man/figures/README-example2-2.png" width="100%" />
+
+``` r
+# Save plot
+ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
+       dpi = 300, path = "D:/R treasures/")
+```
 
 See tutorials here:
 
