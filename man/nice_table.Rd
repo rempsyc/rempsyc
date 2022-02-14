@@ -37,7 +37,6 @@ stats.table <- cbind(row.names(stats.table),
                      stats.table, CI)
 names(stats.table) <- c("Term", "B", "SE", "t", "p",
                         "CI_lower", "CI_upper")
-
 nice_table(stats.table, highlight = TRUE)
 
 # Test different column names
@@ -45,7 +44,6 @@ test <- head(mtcars)
 names(test) <- c("dR", "df", "M", "SD", "b", "np2",
                  "ges", "p", "r", "R2", "sr2")
 test[, 10:11] <- test[, 10:11]/10
-
 nice_table(test)
 
 # Custom cell formatting (such as p or r)

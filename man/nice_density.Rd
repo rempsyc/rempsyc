@@ -25,12 +25,12 @@ Make nice density plots easily.
 }
 \examples{
 # Make the basic plot
-niceDensity(variable = "Sepal.Length",
+nice_density(variable = "Sepal.Length",
             group = "Species",
             data = iris)
 
 # Further customization
-niceDensity(variable = "Sepal.Length",
+nice_density(variable = "Sepal.Length",
             group = "Species",
             data = iris,
             colours = c("#00BA38", "#619CFF", "#F8766D"),
