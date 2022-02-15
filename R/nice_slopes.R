@@ -47,7 +47,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+    rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
     })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
   stats.list <- lapply(stats.list, function(x) x[predictor,])
@@ -62,7 +62,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+    rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
     })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
   stats.list <- lapply(stats.list, function(x) x[predictor,])
@@ -78,7 +78,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+    rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
     })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
   stats.list <- lapply(stats.list, function(x) x[predictor,])
@@ -112,7 +112,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {
-      lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+      rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
       })
     stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
     stats.list <- lapply(stats.list, function(x) x[predictor,])
@@ -127,7 +127,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {
-      lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+      rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
       })
     stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
     stats.list <- lapply(stats.list, function(x) x[predictor,])
@@ -143,7 +143,7 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {
-      lmSupport::modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
+      rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]})
     stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
     stats.list <- lapply(stats.list, function(x) x[predictor,])
     table.stats3 <- do.call(rbind.data.frame, stats.list)
