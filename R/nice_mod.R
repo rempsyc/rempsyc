@@ -1,6 +1,9 @@
 #' @title Easy moderations
 #'
 #' @description Easily compute moderation analyses, with effect sizes, and format in publication-ready format.
+#'
+#' Note: this function uses the `modelEffectSizes` function from the `lmSupport` package to get the sr2 effect sizes.
+#'
 #' @param dataframe The dataframe
 #' @keywords moderation, interaction, regression
 #' @export
@@ -24,7 +27,7 @@
 #'          covariates = c("am", "vs"),
 #'          data = mtcars)
 #'
-#' # Three-way interaction (continuous moderator and binary second moderator required)
+#' # Three-way interaction
 #' nice_mod(response = "mpg",
 #'          predictor = "gear",
 #'          moderator = "wt",
@@ -44,7 +47,7 @@ nice_mod <- function(response, predictor, moderator, moderator2=NULL, covariates
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    rempsyc::lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+    lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
     })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
   table.stats <- do.call(rbind.data.frame, stats.list)

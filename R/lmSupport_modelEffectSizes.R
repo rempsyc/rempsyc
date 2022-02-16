@@ -9,7 +9,6 @@
 #' @param Print Display results to screen. Default = TRUE
 #' @param Digits Number of digits for printing effect sizes
 #' @keywords moderation, interaction, regression, effect size
-#' @export
 #' @examples
 #' ##NOT RUN
 #' ##m = lm(FPS~BAC+TA, data=BAC)

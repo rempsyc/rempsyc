@@ -19,6 +19,8 @@ nice_mod(
 }
 \description{
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format.
+
+Note: this function uses the \code{modelEffectSizes} function from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make the basic table
@@ -40,7 +42,7 @@ nice_mod(response = "mpg",
          covariates = c("am", "vs"),
          data = mtcars)
 
-# Three-way interaction (continuous moderator and binary second moderator required)
+# Three-way interaction
 nice_mod(response = "mpg",
          predictor = "gear",
          moderator = "wt",
