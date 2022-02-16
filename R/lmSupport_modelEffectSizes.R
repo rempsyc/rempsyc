@@ -8,11 +8,12 @@
 #' @param Model	 a linear model, produced by lm
 #' @param Print Display results to screen. Default = TRUE
 #' @param Digits Number of digits for printing effect sizes
-#' @keywords moderation, interaction, regression, effect size
+#' @keywords moderation, interaction, regression, effect size, internal
 #' @examples
 #' ##NOT RUN
 #' ##m = lm(FPS~BAC+TA, data=BAC)
 #' ##lmSupport_modelEffectSizes(m)
+
 
 lmSupport_modelEffectSizes <- function (Model, Print = TRUE, Digits = 4)
 {

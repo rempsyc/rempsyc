@@ -27,6 +27,7 @@ Author: John J. Curtin jjcurtin@wisc.edu
 }
 \keyword{effect}
 \keyword{interaction,}
+\keyword{internal}
 \keyword{moderation,}
 \keyword{regression,}
-\keyword{size}
+\keyword{size,}
