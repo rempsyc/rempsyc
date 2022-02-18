@@ -17,9 +17,10 @@
 #' # Changing labels
 #' overlap_circle(3.12, categories = c("Humans","Animals"))
 #'
+#' ##  NOT RUN
 #' # Saving to file (PDF or PNG)
-#' plot <- overlap_circle(3.5)
-#' ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
+#' ## plot <- overlap_circle(3.5)
+#' ## ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
 #' # Change for your own desired path
 
 overlap_circle <- function(response, categories = c("Self", "Other")){
