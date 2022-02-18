@@ -10,20 +10,20 @@ nice_scatter(
   response,
   xtitle = waiver(),
   ytitle = waiver(),
-  has.points = T,
-  has.jitter = F,
+  has.points = TRUE,
+  has.jitter = FALSE,
   alpha = 0.7,
-  has.confband = F,
-  has.fullrange = F,
-  has.linetype = F,
-  has.shape = F,
+  has.confband = FALSE,
+  has.fullrange = FALSE,
+  has.linetype = FALSE,
+  has.shape = FALSE,
   xmin,
   xmax,
   xby = 1,
   ymin,
   ymax,
   yby = 1,
-  has.legend = F,
+  has.legend = FALSE,
   legend.title = "",
   group.variable = NULL,
   colours = "#619CFF",
@@ -51,15 +51,15 @@ nice_scatter(data = mtcars,
             response = mpg)
 
 # Save a high-resolution image file to specified directory
-ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in', dpi = 300,
-       path = NULL) # change for your own desired path
+ggplot2::ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in',
+                dpi = 300, path = NULL) # change for your own desired path
 
 # Change x- and y- axis labels
 nice_scatter(data = mtcars,
-           predictor = wt,
-           response = mpg,
-           ytitle = "Miles/(US) gallon",
-           xtitle = "Weight (1000 lbs)")
+            predictor = wt,
+            response = mpg,
+            ytitle = "Miles/(US) gallon",
+            xtitle = "Weight (1000 lbs)")
 
 # Have points "jittered"
 nice_scatter(data = mtcars,
