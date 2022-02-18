@@ -27,7 +27,7 @@ nice_QQ(variable = "Sepal.Length",
        group = "Species",
        data = iris)
 
-Further customization
+# Further customization
 nice_QQ(variable = "Sepal.Length",
        group = "Species",
        data = iris,
