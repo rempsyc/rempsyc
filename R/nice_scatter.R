@@ -16,10 +16,10 @@
 #'
 #' # Change x- and y- axis labels
 #' nice_scatter(data = mtcars,
-#'            predictor = wt,
-#'            response = mpg,
-#'            ytitle = "Miles/(US) gallon",
-#'            xtitle = "Weight (1000 lbs)")
+#'             predictor = wt,
+#'             response = mpg,
+#'             ytitle = "Miles/(US) gallon",
+#'             xtitle = "Weight (1000 lbs)")
 #'
 #' # Have points "jittered"
 #' nice_scatter(data = mtcars,
@@ -147,7 +147,13 @@
 #'             group.variable = factor(mtcars$cyl),
 #'             has.shape = TRUE)
 
-nice_scatter <- function(data,predictor,response,xtitle=waiver(),ytitle=waiver(),has.points=T,has.jitter=F,alpha=0.7,has.confband=F,has.fullrange=F,has.linetype=F,has.shape=F,xmin,xmax,xby=1,ymin,ymax,yby=1,has.legend=F,legend.title="",group.variable=NULL,colours="#619CFF",groups.order=NULL,groups.names=NULL,manual.slope.alpha=NULL,has.r=FALSE, r.x = Inf, r.y = -Inf, has.p=FALSE, p.x = Inf, p.y = -Inf) {
+nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waiver(),
+                         has.points=TRUE, has.jitter=FALSE, alpha=0.7, has.confband=FALSE,
+                         has.fullrange=FALSE, has.linetype=FALSE, has.shape=FALSE, xmin,
+                         xmax, xby=1, ymin, ymax, yby=1, has.legend=FALSE, legend.title="",
+                         group.variable=NULL, colours="#619CFF", groups.order=NULL,
+                         groups.names=NULL, manual.slope.alpha=NULL, has.r=FALSE, r.x=Inf,
+                         r.y=-Inf, has.p=FALSE, p.x=Inf, p.y=-Inf) {
   library(ggplot2)
   has.groups=!missing(group.variable)
   if (has.r == T) {
