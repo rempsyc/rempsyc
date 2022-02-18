@@ -11,8 +11,8 @@
 #'             response = mpg)
 #'
 #' # Save a high-resolution image file to specified directory
-#' ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in', dpi = 300,
-#'        path = NULL) # change for your own desired path
+#' ggplot2::ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in',
+#'                 dpi = 300, path = NULL) # change for your own desired path
 #'
 #' # Change x- and y- axis labels
 #' nice_scatter(data = mtcars,

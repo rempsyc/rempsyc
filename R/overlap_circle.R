@@ -19,8 +19,8 @@
 #'
 #' # Saving to file (PDF or PNG)
 #' plot <- overlap_circle(3.5)
-#' ggsave(plot, file=NULL, width=7, height=7,
-#'        unit='in', dpi=300) # change for your own desired path
+#' ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
+#' # Change for your own desired path
 
 overlap_circle <- function(response, categories = c("Self", "Other")){
   if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7! (scoring system of the Inclusion of the Other in the Self Scale...)')}
