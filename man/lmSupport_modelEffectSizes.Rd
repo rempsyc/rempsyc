@@ -22,7 +22,7 @@ Author: John J. Curtin jjcurtin@wisc.edu
 }
 \examples{
 ##NOT RUN
-##m = lm(FPS~BAC+TA, data=BAC)
+##m = lm(mpg~cyl+disp, data=mtcars)
 ##lmSupport_modelEffectSizes(m)
 }
 \keyword{effect}

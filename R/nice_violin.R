@@ -102,17 +102,17 @@ nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
   gform <- reformulate(group, response)
   class(data[[response]]) <- "numeric"
   library(ggplot2)
-  dataSummary <- rcompanion::groupwiseMean(gform,
-                                           data = data,
-                                           conf = 0.95,
-                                           digits = 3,
-                                           R = bootstraps,
-                                           boot = TRUE,
-                                           traditional = !boot,
-                                           normal = FALSE,
-                                           basic = FALSE,
-                                           percentile = FALSE,
-                                           bca = boot)
+  dataSummary <- rcompanion_groupwiseMean(gform,
+                                          data = data,
+                                          conf = 0.95,
+                                          digits = 3,
+                                          R = bootstraps,
+                                          boot = TRUE,
+                                          traditional = !boot,
+                                          normal = FALSE,
+                                          basic = FALSE,
+                                          percentile = FALSE,
+                                          bca = boot)
   ggplot(data, aes(x = .data[[group]],
                    y = .data[[response]],
                    fill = .data[[group]])) +
