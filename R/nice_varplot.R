@@ -33,14 +33,14 @@ nice_varplot <- function(variable, group, data, colours, groups.labels, grid=TRU
   dat_text <- var %>%
     mutate(text=paste0("var = ", round(var,2)))
   # Make plot
-  niceScatter(data=data,
-              predictor=.data[[group]],
-              response=.data[[variable]],
-              group.variable=data[[group]],
-              colours=colours,
-              groups.names=groups.labels,
-              xtitle=NULL,
-              ytitle=ytitle) +
+  nice_scatter(data=data,
+               predictor=.data[[group]],
+               response=.data[[variable]],
+               group.variable=data[[group]],
+               colours=colours,
+               groups.names=groups.labels,
+               xtitle=NULL,
+               ytitle=ytitle) +
     annotate(geom="text",
              x=median(1:length(levels(data[[group]]))),
              y=max(data[[variable]]),
