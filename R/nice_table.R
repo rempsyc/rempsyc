@@ -10,7 +10,7 @@
 #' my_table
 #'
 #' # Save table to word
-#' save_as_docx(my_table, path = "nicetablehere.docx")
+#' flextable::save_as_docx(my_table, path = "nicetablehere.docx")
 #'
 #' # Publication-ready tables
 #' mtcars.std <- lapply(mtcars, scale)

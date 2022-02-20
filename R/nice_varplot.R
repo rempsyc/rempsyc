@@ -18,7 +18,7 @@
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 
 nice_varplot <- function(variable, group, data, colours, groups.labels, grid=TRUE, shapiro=FALSE, ytitle=variable) {
   source("https://raw.githubusercontent.com/RemPsyc/niceplots/master/niceScatterFunction.R")

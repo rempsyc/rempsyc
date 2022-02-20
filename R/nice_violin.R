@@ -90,7 +90,7 @@
 #'            CIcap.width = 0,
 #'            alpha = 1,
 #'            border.colour = "black")
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes
 
 nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                         colours, xlabels=NULL, ytitle=waiver(), xtitle=NULL,
