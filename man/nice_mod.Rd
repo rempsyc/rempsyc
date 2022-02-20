@@ -15,7 +15,19 @@ nice_mod(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{response}{The response}
+
+\item{predictor}{The predictor}
+
+\item{moderator}{The moderator}
+
+\item{moderator2}{The moderator2}
+
+\item{covariates}{The covariates}
+
+\item{data}{The data}
+
+\item{...}{The ...}
 }
 \description{
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format.

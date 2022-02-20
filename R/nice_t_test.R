@@ -2,7 +2,10 @@
 #'
 #' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
 #'
-#' @param dataframe The dataframe
+#' @param response The response
+#' @param group The group
+#' @param data The data
+#' @param ... The ...
 #'
 #' @keywords t-test, group differences
 #' @export

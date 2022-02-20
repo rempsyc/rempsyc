@@ -13,7 +13,15 @@ nice_randomize(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{design}{The design}
+
+\item{Ncondition}{The Ncondition}
+
+\item{n}{The n}
+
+\item{condition.names}{The condition.names}
+
+\item{col.names}{The col.names}
 }
 \description{
 Randomize easily with different designs.

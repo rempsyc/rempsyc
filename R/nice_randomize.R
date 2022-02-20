@@ -2,7 +2,11 @@
 #'
 #' @description Randomize easily with different designs.
 #'
-#' @param dataframe The dataframe
+#' @param design The design
+#' @param Ncondition The Ncondition
+#' @param n The n
+#' @param condition.names The condition.names
+#' @param col.names The col.names
 #'
 #' @keywords randomization, conditions, random allocation, experimental design
 #' @export

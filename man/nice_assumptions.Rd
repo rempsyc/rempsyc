@@ -7,7 +7,9 @@
 nice_assumptions(model, interpretation = TRUE)
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{model}{The model}
+
+\item{interpretation}{The interpretation}
 }
 \description{
 Test linear regression assumptions easily with a nice summary table.

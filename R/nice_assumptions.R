@@ -2,7 +2,8 @@
 #'
 #' @description Test linear regression assumptions easily with a nice summary table.
 #'
-#' @param dataframe The dataframe
+#' @param model The model
+#' @param interpretation The interpretation
 #'
 #' @keywords assumptions, linear regression, statistical, violations
 #' @export

@@ -7,7 +7,9 @@
 overlap_circle(response, categories = c("Self", "Other"))
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{response}{The response}
+
+\item{categories}{The categories}
 }
 \description{
 Interpolating the Inclusion of the Other in the Self Scale easily.

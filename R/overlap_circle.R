@@ -2,7 +2,8 @@
 #'
 #' @description Interpolating the Inclusion of the Other in the Self Scale easily.
 #'
-#' @param dataframe The dataframe
+#' @param response The response
+#' @param categories The categories
 #'
 #' @keywords self-other merging, self-other overlap, Venn diagrams, social psychology
 #' @export

@@ -7,7 +7,13 @@
 nice_t_test(response, group, data, ...)
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{response}{The response}
+
+\item{group}{The group}
+
+\item{data}{The data}
+
+\item{...}{The ...}
 }
 \description{
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
