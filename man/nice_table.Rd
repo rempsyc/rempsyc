@@ -59,7 +59,7 @@ nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 # character code instead of the multiplication symbol
 # because of package documentation restrictions but you
 # can use special characters directly.
-fun <- function(x) {paste("\u00d7", x)}
+fun <- function(x) {paste("x", x)}
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 }
 \keyword{APA}

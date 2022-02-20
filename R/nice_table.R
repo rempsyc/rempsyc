@@ -43,14 +43,14 @@
 #' # character code instead of the multiplication symbol
 #' # because of package documentation restrictions but you
 #' # can use special characters directly.
-#' fun <- function(x) {paste("\u00d7", x)}
+#' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
+#' @importFrom dplyr mutate %>% select
+#' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg
 
 nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
                        col.format.r, format.custom, col.format.custom) {
   dataframe
-  library(flextable)
-  library(dplyr)
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
     dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1, function(x) paste0("[", x[1], ", ", x[2], "]"))
