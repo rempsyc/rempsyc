@@ -16,7 +16,7 @@ nice_QQ(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{data}{The data}
 }
 \description{
 Easily make nice per-group QQ plots through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.

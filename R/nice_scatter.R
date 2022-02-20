@@ -146,6 +146,7 @@
 #'             response = mpg,
 #'             group.variable = factor(mtcars$cyl),
 #'             has.shape = TRUE)
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual
 
 nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waiver(),
                          has.points=TRUE, has.jitter=FALSE, alpha=0.7, has.confband=FALSE,
@@ -154,7 +155,6 @@ nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waive
                          group.variable=NULL, colours="#619CFF", groups.order=NULL,
                          groups.names=NULL, manual.slope.alpha=NULL, has.r=FALSE, r.x=Inf,
                          r.y=-Inf, has.p=FALSE, p.x=Inf, p.y=-Inf) {
-  library(ggplot2)
   has.groups=!missing(group.variable)
   if (has.r == T) {
     format.r <- function(r, precision = 0.01) {

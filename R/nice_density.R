@@ -21,17 +21,17 @@
 #'             grid = FALSE,
 #'             shapiro = TRUE,
 #'             title = "Density (Sepal Length)")
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line
 
 nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
-  library(dplyr)
-  library(ggplot2)
-  options(dplyr.summarise.inform = FALSE)
+  options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
   # Make data for normally distributed lines
   dat_norm <- data %>% group_by(.data[[group]]) %>%
-    do(summarise(.,x=seq(min(.[[variable]]),
+    do(summarize(.,x=seq(min(.[[variable]]),
                          max(.[[variable]]),
                          length.out=100),
                  y=dnorm(seq(min(.[[variable]]),

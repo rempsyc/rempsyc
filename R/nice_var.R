@@ -14,15 +14,15 @@
 #' DV <- names(iris[1:4])
 #' var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 #' var.table
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise
 
 nice_var <- function(variable, group, data) {
-  library(dplyr)
   # Make group as factor
   data[[group]] <- as.factor(data[[group]])
   # Make basic frame
   var.table <- data %>%
     group_by(.data[[group]]) %>%
-    summarise(var=var(.data[[variable]])) %>%
+    summarize(var=var(.data[[variable]])) %>%
     t %>%
     as.data.frame
   # Format table in an acceptable format

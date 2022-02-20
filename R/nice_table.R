@@ -39,10 +39,6 @@
 #' fun <- function(x) {x+11.1}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' # For the example below, I have to use a unicode
-#' # character code instead of the multiplication symbol
-#' # because of package documentation restrictions but you
-#' # can use special characters directly.
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #' @importFrom dplyr mutate %>% select
@@ -145,7 +141,7 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
   if("B" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "B", part = "header",
-              value = as_paragraph("β")) %>%
+              value = as_paragraph("\u00df")) %>%
       colformat_double(j = "B", big.mark=",", digits = 2) -> table
   }
   if("R2" %in% names(dataframe)) {

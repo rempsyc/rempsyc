@@ -1,7 +1,7 @@
 #' @title Easy QQ plots per group
 #'
 #' @description Easily make nice per-group QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
-#' @param dataframe The dataframe
+#' @param data The data
 #' @keywords QQ plots, normality, distribution
 #' @export
 #' @examples
@@ -19,10 +19,10 @@
 #'        grid = FALSE,
 #'        shapiro = TRUE,
 #'        title = NULL)
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme
 
 nice_QQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
-  library(dplyr)
-  library(ggplot2)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
@@ -38,7 +38,7 @@ nice_QQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRU
       sub("0", "", p)
     }
     dat_text <- data %>% group_by(.data[[group]]) %>%
-        summarise(text=shapiro.test(.data[[variable]])$p.value) %>%
+        summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
         rowwise() %>%
         mutate(text=sprintf("italic('p')~'%s'", format.p(text)))
     }

@@ -17,10 +17,10 @@
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate
 
 nice_varplot <- function(variable, group, data, colours, groups.labels, grid=TRUE, shapiro=FALSE, ytitle=variable) {
-  library(dplyr)
-  library(ggplot2)
   source("https://raw.githubusercontent.com/RemPsyc/niceplots/master/niceScatterFunction.R")
   data[[group]] <- as.factor(data[[group]])
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}

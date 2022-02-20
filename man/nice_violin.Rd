@@ -123,7 +123,6 @@ nice_violin(data = ToothGrowth,
            CIcap.width = 0,
            alpha = 1,
            border.colour = "black")
-
 }
 \keyword{plots}
 \keyword{violin}
