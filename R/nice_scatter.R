@@ -146,7 +146,7 @@
 #'             response = mpg,
 #'             group.variable = factor(mtcars$cyl),
 #'             has.shape = TRUE)
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text
 
 nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waiver(),
                          has.points=TRUE, has.jitter=FALSE, alpha=0.7, has.confband=FALSE,

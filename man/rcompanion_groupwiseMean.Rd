@@ -131,10 +131,6 @@ right side are used for the grouping variables.\preformatted{     In general, it
 \references{
 \url{http://rcompanion.org/handbook/C_03.html}
 }
-\seealso{
-\code{\link{groupwiseMedian}}, \code{\link{groupwiseHuber}}
-\code{\link{groupwiseGeometric}}
-}
 \author{
 Salvatore Mangiafico, \email{mangiafico@njaes.rutgers.edu}
 }

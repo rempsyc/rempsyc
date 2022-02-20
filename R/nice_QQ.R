@@ -20,7 +20,7 @@
 #'        shapiro = TRUE,
 #'        title = NULL)
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
 
 nice_QQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
   data[[group]] <- as.factor(data[[group]])
