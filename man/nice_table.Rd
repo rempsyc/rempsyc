@@ -15,7 +15,19 @@ nice_table(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{dataframe}{The data}
+
+\item{italics}{italics}
+
+\item{highlight}{highlight}
+
+\item{col.format.p}{col.format.p}
+
+\item{col.format.r}{col.format.r}
+
+\item{format.custom}{format.custom}
+
+\item{col.format.custom}{col.format.custom}
 }
 \description{
 Make nice APA tables easily through a wrapper around the \code{flextable} package with sensical defaults and automatic formatting features.
@@ -57,6 +69,7 @@ nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
 fun <- function(x) {paste("x", x)}
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
+
 }
 \keyword{APA}
 \keyword{style}

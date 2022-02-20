@@ -7,7 +7,11 @@
 nice_var(variable, group, data)
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{variable}{The variable}
+
+\item{group}{The group}
+
+\item{data}{The data}
 }
 \description{
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
@@ -22,5 +26,6 @@ nice_var(variable="Sepal.Length",
 DV <- names(iris[1:4])
 var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 var.table
+
 }
 \keyword{variance}

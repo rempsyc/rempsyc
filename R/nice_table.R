@@ -1,7 +1,15 @@
 #' @title Easily make nice APA tables
 #'
 #' @description Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
-#' @param dataframe The dataframe
+#'
+#' @param dataframe The data
+#' @param italics italics
+#' @param highlight highlight
+#' @param col.format.p col.format.p
+#' @param col.format.r col.format.r
+#' @param format.custom format.custom
+#' @param col.format.custom col.format.custom
+#'
 #' @keywords APA style table
 #' @export
 #' @examples
@@ -41,6 +49,7 @@
 #'
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
+#'
 #' @importFrom dplyr mutate %>% select
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg
 

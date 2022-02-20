@@ -16,7 +16,21 @@ nice_QQ(
 )
 }
 \arguments{
+\item{variable}{The variable}
+
+\item{group}{The group}
+
 \item{data}{The data}
+
+\item{colours}{The colours}
+
+\item{groups.labels}{The groups.labels}
+
+\item{grid}{The grid}
+
+\item{shapiro}{The shapiro}
+
+\item{title}{The title}
 }
 \description{
 Easily make nice per-group QQ plots through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
@@ -36,6 +50,7 @@ nice_QQ(variable = "Sepal.Length",
        grid = FALSE,
        shapiro = TRUE,
        title = NULL)
+
 }
 \keyword{QQ}
 \keyword{distribution}

@@ -1,7 +1,32 @@
 #' @title Easy violin plots
 #'
 #' @description Make nice violin plots easily with 95% bootstrapped confidence intervals.
-#' @param dataframe The dataframe
+#'
+#' @param data The data
+#' @param group The group
+#' @param response The response
+#' @param boot The boot
+#' @param bootstraps The bootstraps
+#' @param colours The colours
+#' @param xlabels The xlabels
+#' @param ytitle The ytitle
+#' @param xtitle The xtitle
+#' @param has.ylabels The has.ylabels
+#' @param has.xlabels The has.xlabels
+#' @param comp1 The comp1
+#' @param comp2 The comp2
+#' @param signif_annotation The signif_annotation
+#' @param signif_yposition The signif_yposition
+#' @param signif_xmin The signif_xmin
+#' @param signif_xmax The signif_xmax
+#' @param ymin The ymin
+#' @param ymax The ymax
+#' @param yby The yby
+#' @param CIcap.width The CIcap.width
+#' @param obs The obs
+#' @param alpha The alpha
+#' @param border.colour The border.colour
+#'
 #' @keywords violin plots
 #' @export
 #' @examples
@@ -90,6 +115,7 @@
 #'            CIcap.width = 0,
 #'            alpha = 1,
 #'            border.colour = "black")
+#'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
 
 nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,

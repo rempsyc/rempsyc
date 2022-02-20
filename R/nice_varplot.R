@@ -1,7 +1,16 @@
 #' @title Attempt to visualize variance per group
 #'
 #' @description Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. use for exploratory purposes only.
-#' @param dataframe The dataframe
+#'
+#' @param variable The variable
+#' @param group The group
+#' @param data The data
+#' @param colours The colours
+#' @param groups.labels The groups.labels
+#' @param grid The grid
+#' @param shapiro The shapiro
+#' @param ytitle The ytitle
+#'
 #' @keywords variance
 #' @export
 #' @examples
@@ -17,7 +26,8 @@
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#'
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 
 nice_varplot <- function(variable, group, data, colours, groups.labels, grid=TRUE, shapiro=FALSE, ytitle=variable) {

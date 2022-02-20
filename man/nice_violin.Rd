@@ -32,7 +32,53 @@ nice_violin(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{data}{The data}
+
+\item{group}{The group}
+
+\item{response}{The response}
+
+\item{boot}{The boot}
+
+\item{bootstraps}{The bootstraps}
+
+\item{colours}{The colours}
+
+\item{xlabels}{The xlabels}
+
+\item{ytitle}{The ytitle}
+
+\item{xtitle}{The xtitle}
+
+\item{has.ylabels}{The has.ylabels}
+
+\item{has.xlabels}{The has.xlabels}
+
+\item{comp1}{The comp1}
+
+\item{comp2}{The comp2}
+
+\item{signif_annotation}{The signif_annotation}
+
+\item{signif_yposition}{The signif_yposition}
+
+\item{signif_xmin}{The signif_xmin}
+
+\item{signif_xmax}{The signif_xmax}
+
+\item{ymin}{The ymin}
+
+\item{ymax}{The ymax}
+
+\item{yby}{The yby}
+
+\item{CIcap.width}{The CIcap.width}
+
+\item{obs}{The obs}
+
+\item{alpha}{The alpha}
+
+\item{border.colour}{The border.colour}
 }
 \description{
 Make nice violin plots easily with 95\% bootstrapped confidence intervals.
@@ -123,6 +169,7 @@ nice_violin(data = ToothGrowth,
            CIcap.width = 0,
            alpha = 1,
            border.colour = "black")
+
 }
 \keyword{plots}
 \keyword{violin}

@@ -18,7 +18,25 @@ nice_density(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{variable}{The variable}
+
+\item{group}{The group}
+
+\item{data}{The data}
+
+\item{colours}{The colours}
+
+\item{ytitle}{The ytitle}
+
+\item{xtitle}{The xtitle}
+
+\item{groups.labels}{The groups.labels}
+
+\item{grid}{The grid}
+
+\item{shapiro}{The shapiro}
+
+\item{title}{The title}
 }
 \description{
 Make nice density plots easily.
@@ -40,6 +58,7 @@ nice_density(variable = "Sepal.Length",
             grid = FALSE,
             shapiro = TRUE,
             title = "Density (Sepal Length)")
+
 }
 \keyword{density,}
 \keyword{normality}

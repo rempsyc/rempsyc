@@ -1,7 +1,11 @@
 #' @title Obtain variance per group
 #'
 #' @description Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
-#' @param dataframe The dataframe
+#'
+#' @param variable The variable
+#' @param group The group
+#' @param data The data
+#'
 #' @keywords variance
 #' @export
 #' @examples
@@ -14,7 +18,8 @@
 #' DV <- names(iris[1:4])
 #' var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 #' var.table
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#'
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 
 nice_var <- function(variable, group, data) {
   # Make group as factor

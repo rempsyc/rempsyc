@@ -1,7 +1,9 @@
 #' @title Easy assumptions checks
 #'
 #' @description Test linear regression assumptions easily with a nice summary table.
+#'
 #' @param dataframe The dataframe
+#'
 #' @keywords assumptions, linear regression, statistical, violations
 #' @export
 #' @examples

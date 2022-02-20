@@ -1,9 +1,22 @@
 #' @title Easy density plots
 #'
 #' @description Make nice density plots easily.
-#' @param dataframe The dataframe
+#'
+#' @param variable The variable
+#' @param group The group
+#' @param data The data
+#' @param colours The colours
+#' @param ytitle The ytitle
+#' @param xtitle The xtitle
+#' @param groups.labels The groups.labels
+#' @param grid The grid
+#' @param shapiro The shapiro
+#' @param title The title
+#'
 #' @keywords density, normality
+#'
 #' @export
+#'
 #' @examples
 #' # Make the basic plot
 #' nice_density(variable = "Sepal.Length",
@@ -21,7 +34,8 @@
 #'             grid = FALSE,
 #'             shapiro = TRUE,
 #'             title = "Density (Sepal Length)")
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#'
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text
 
 nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {

@@ -39,7 +39,67 @@ nice_scatter(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{data}{The data}
+
+\item{predictor}{The predictor}
+
+\item{response}{The response}
+
+\item{xtitle}{The xtitle}
+
+\item{ytitle}{The ytitle}
+
+\item{has.points}{The has.points}
+
+\item{has.jitter}{The has.jitter}
+
+\item{alpha}{The alpha}
+
+\item{has.confband}{The has.confband}
+
+\item{has.fullrange}{The has.fullrange}
+
+\item{has.linetype}{The has.linetype}
+
+\item{has.shape}{The has.shape}
+
+\item{xmin}{The xmin}
+
+\item{xmax}{The xmax}
+
+\item{xby}{The xby}
+
+\item{ymin}{The ymin}
+
+\item{ymax}{The ymax}
+
+\item{yby}{The yby}
+
+\item{has.legend}{The has.legend}
+
+\item{legend.title}{The legend.title}
+
+\item{group.variable}{The group.variable}
+
+\item{colours}{The colours}
+
+\item{groups.order}{The groups.order}
+
+\item{groups.names}{The groups.names}
+
+\item{manual.slope.alpha}{The manual.slope.alpha}
+
+\item{has.r}{The has.r}
+
+\item{r.x}{The r.x}
+
+\item{r.y}{The r.y}
+
+\item{has.p}{The has.p}
+
+\item{p.x}{The p.x}
+
+\item{p.y}{The p.y}
 }
 \description{
 Make nice violon plots easily.
@@ -186,6 +246,7 @@ nice_scatter(data = mtcars,
             response = mpg,
             group.variable = factor(mtcars$cyl),
             has.shape = TRUE)
+
 }
 \keyword{plots}
 \keyword{scatter}

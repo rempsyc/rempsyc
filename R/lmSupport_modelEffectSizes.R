@@ -4,10 +4,11 @@
 #'
 #' From the original documentation: "Calculates unique SSRs, SSE, SST. Based on these SSs, it calculates partial eta2 and delta R2 for all effects in a linear model object. For categorical variables coded as factors, it calculates these for multi-df effect. Manually code regressors to get 1 df effects Uses car::Anova() with Type 3 error"
 #'
-#' Author: John J. Curtin jjcurtin@wisc.edu
 #' @param Model	 a linear model, produced by lm
 #' @param Print Display results to screen. Default = TRUE
 #' @param Digits Number of digits for printing effect sizes
+#'
+#' @author John J. Curtin, \email{jjcurtin@wisc.edu}
 #' @keywords moderation, interaction, regression, effect size, internal
 #' @examples
 #' ##NOT RUN

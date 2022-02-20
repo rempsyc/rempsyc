@@ -16,7 +16,21 @@ nice_varplot(
 )
 }
 \arguments{
-\item{dataframe}{The dataframe}
+\item{variable}{The variable}
+
+\item{group}{The group}
+
+\item{data}{The data}
+
+\item{colours}{The colours}
+
+\item{groups.labels}{The groups.labels}
+
+\item{grid}{The grid}
+
+\item{shapiro}{The shapiro}
+
+\item{ytitle}{The ytitle}
 }
 \description{
 Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. use for exploratory purposes only.
@@ -34,5 +48,6 @@ nice_varplot(variable = "Sepal.Length",
              colours = c("#00BA38", "#619CFF", "#F8766D"),
              ytitle = "Sepal Length",
              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
+
 }
 \keyword{variance}

@@ -1,7 +1,39 @@
 #' @title Easy scatter plots
 #'
 #' @description Make nice violon plots easily.
-#' @param dataframe The dataframe
+#'
+#' @param data The data
+#' @param predictor The predictor
+#' @param response The response
+#' @param xtitle The xtitle
+#' @param ytitle The ytitle
+#' @param has.points The has.points
+#' @param has.jitter The has.jitter
+#' @param alpha The alpha
+#' @param has.confband The has.confband
+#' @param has.fullrange The has.fullrange
+#' @param has.linetype The has.linetype
+#' @param has.shape The has.shape
+#' @param xmin The xmin
+#' @param xmax The xmax
+#' @param xby The xby
+#' @param ymin The ymin
+#' @param ymax The ymax
+#' @param yby The yby
+#' @param has.legend The has.legend
+#' @param legend.title The legend.title
+#' @param group.variable The group.variable
+#' @param colours The colours
+#' @param groups.order The groups.order
+#' @param groups.names The groups.names
+#' @param manual.slope.alpha The manual.slope.alpha
+#' @param has.r The has.r
+#' @param r.x The r.x
+#' @param r.y The r.y
+#' @param has.p The has.p
+#' @param p.x The p.x
+#' @param p.y The p.y
+#'
 #' @keywords scatter plots
 #' @export
 #' @examples
@@ -146,6 +178,7 @@
 #'             response = mpg,
 #'             group.variable = factor(mtcars$cyl),
 #'             has.shape = TRUE)
+#'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text
 
 nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waiver(),

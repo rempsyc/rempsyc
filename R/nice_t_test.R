@@ -1,7 +1,9 @@
 #' @title Easy t-tests
 #'
 #' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
+#'
 #' @param dataframe The dataframe
+#'
 #' @keywords t-test, group differences
 #' @export
 #' @examples

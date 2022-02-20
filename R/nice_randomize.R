@@ -1,7 +1,9 @@
 #' @title Easily randomization
 #'
 #' @description Randomize easily with different designs.
+#'
 #' @param dataframe The dataframe
+#'
 #' @keywords randomization, conditions, random allocation, experimental design
 #' @export
 #' @examples
