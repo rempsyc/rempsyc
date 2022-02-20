@@ -181,10 +181,11 @@
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text
 
-nice_scatter <- function(data,predictor, response, xtitle=waiver(), ytitle=waiver(),
-                         has.points=TRUE, has.jitter=FALSE, alpha=0.7, has.confband=FALSE,
-                         has.fullrange=FALSE, has.linetype=FALSE, has.shape=FALSE, xmin,
-                         xmax, xby=1, ymin, ymax, yby=1, has.legend=FALSE, legend.title="",
+nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
+                         ytitle=ggplot2::waiver(), has.points=TRUE, has.jitter=FALSE,
+                         alpha=0.7, has.confband=FALSE, has.fullrange=FALSE,
+                         has.linetype=FALSE, has.shape=FALSE, xmin, xmax, xby=1, ymin,
+                         ymax, yby=1, has.legend=FALSE, legend.title="",
                          group.variable=NULL, colours="#619CFF", groups.order=NULL,
                          groups.names=NULL, manual.slope.alpha=NULL, has.r=FALSE, r.x=Inf,
                          r.y=-Inf, has.p=FALSE, p.x=Inf, p.y=-Inf) {
