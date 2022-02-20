@@ -65,7 +65,7 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
       sub("0", "", p)
     }
     dat_text <- data %>% group_by(.data[[group]]) %>%
-        summarise(text=shapiro.test(.data[[variable]])$p.value) %>%
+      summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
         rowwise() %>%
         mutate(text=sprintf("italic('p')~'%s'", format.p(text)))
   }
