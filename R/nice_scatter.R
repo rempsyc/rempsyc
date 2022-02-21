@@ -217,7 +217,7 @@ nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
   }
   if (!missing(groups.order)) {group.variable <- factor(group.variable,
                                                         levels=groups.order)}
-  if (!missing(groups.names)) {levels(group.variable) = groups.names}
+  if (!missing(groups.names)) {levels(group.variable) <- groups.names}
   if (missing(group.variable)) {
     smooth <- stat_smooth(geom="line", method="lm", fullrange=has.fullrange, color = colours, size = 1)}
   if (!missing(group.variable)) {
@@ -228,7 +228,7 @@ nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
     band <- geom_smooth(method="lm",colour=NA)}
   if (has.points == TRUE & missing(group.variable) & missing(colours)) {
     observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
-  if (has.points == TRUE & !missing(group.variable) & has.shape == F) {
+  if (has.points == TRUE & !missing(group.variable) & has.shape == FALSE) {
     observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
   if (has.points == TRUE & missing(group.variable) & !missing(colours)) {
     observations <- geom_point(size = 2, alpha = alpha, colour = colours, shape = 16)}
@@ -300,3 +300,4 @@ nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
 }
+niceScatter <- nice_scatter

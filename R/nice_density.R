@@ -16,7 +16,6 @@
 #' @keywords density, normality
 #'
 #' @export
-#'
 #' @examples
 #' # Make the basic plot
 #' nice_density(variable = "Sepal.Length",
@@ -99,3 +98,4 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
 }
+niceDensity <- nice_density

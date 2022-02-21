@@ -52,3 +52,4 @@ nice_var <- function(variable, group, data) {
   # Get resulting table
   var.table
 }
+niceVar <- nice_var

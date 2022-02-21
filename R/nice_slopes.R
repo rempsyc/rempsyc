@@ -171,7 +171,8 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     table.stats3 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (HIGH-", moderator, ")")
     table.stats3 <- cbind(response, predictor.names, table.stats3)
-    names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+    names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                             "df", "b", "t", "p", "sr2")
 
     # Combine both dataframes for both LOWS and HIGHS
     table2.stats <- rbind(table.stats1,table.stats2,table.stats3)
@@ -191,3 +192,4 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   }
 
 }
+niceSlopes <- nice_slopes
