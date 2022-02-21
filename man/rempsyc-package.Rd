@@ -4,7 +4,7 @@
 \name{rempsyc-package}
 \alias{rempsyc}
 \alias{rempsyc-package}
-\title{rempsyc: Convenience functions for increased productivity}
+\title{rempsyc: Convenience functions for increased productivity in the psychological sciences}
 \description{
 Convenience functions to make your workflow faster and easier. Easily customizable plots (via `ggplot2`), nice APA tables exportable to Word (via `flextable`), easily run statistical tests or check assumptions, and automatize various other tasks.
 }

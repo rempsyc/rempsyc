@@ -4,12 +4,15 @@
 # rempsyc
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily
 customizable plots (via `ggplot2`), nice APA tables exportable to Word
 (via `flextable`), easily run statistical tests or check assumptions,
-and automatize various other tasks.
+and automatize various other tasks. Mostly geared at researchers in the
+psychological sciences.
 
 ## Installation
 
@@ -55,7 +58,7 @@ my_table
 
 ``` r
 # Save to word
-save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
+flextable::save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
 
 # Violin plot
 nice_violin(data = ToothGrowth,
@@ -76,8 +79,8 @@ nice_scatter(data = mtcars,
 
 ``` r
 # Save plot
-ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-       dpi = 300, path = "D:/R treasures/")
+ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
+                dpi = 300, path = "D:/R treasures/")
 ```
 
 See tutorials here:
