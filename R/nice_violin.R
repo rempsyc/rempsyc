@@ -35,9 +35,11 @@
 #'            group = "dose",
 #'            response = "len")
 #'
+#' \dontrun{
 #' # Save a high-resolution image file to specified directory
 #' ggplot2::ggsave('niceviolinplothere.tiff', width = 7, height = 7, unit = 'in',
-#'        dpi = 300, path = NULL) # change for your own desired path
+#'        dpi = 300, path = "/") # change for your own desired path
+#' }
 #'
 #' # Change x- and y- axes labels
 #' nice_violin(data = ToothGrowth,
@@ -190,3 +192,4 @@ nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                                                             size=1.3,
                                                             textsize=8)}
 }
+niceViolin <- nice_violin
