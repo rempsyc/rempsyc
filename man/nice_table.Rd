@@ -37,8 +37,10 @@ Make nice APA tables easily through a wrapper around the \code{flextable} packag
 my_table <- nice_table(head(mtcars))
 my_table
 
+\dontrun{
 # Save table to word
 flextable::save_as_docx(my_table, path = "nicetablehere.docx")
+}
 
 # Publication-ready tables
 mtcars.std <- lapply(mtcars, scale)

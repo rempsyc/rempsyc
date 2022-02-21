@@ -12,7 +12,7 @@ nice_violin(
   bootstraps = 2000,
   colours,
   xlabels = NULL,
-  ytitle = waiver(),
+  ytitle = ggplot2::waiver(),
   xtitle = NULL,
   has.ylabels = TRUE,
   has.xlabels = TRUE,

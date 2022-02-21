@@ -41,7 +41,8 @@
 #'          moderator2 = "am",
 #'          data = mtcars)
 
-nice_mod <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {
+nice_mod <- function(response, predictor, moderator, moderator2=NULL,
+                     covariates=NULL, data, ...) {
 
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
@@ -49,13 +50,14 @@ nice_mod <- function(response, predictor, moderator, moderator2=NULL, covariates
   if(!missing(moderator2)) {
     moderator2.term <- paste("*", moderator2, collapse = " ")
   } else {moderator2.term <- ""}
-  formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
+  formulas <- paste(response, "~", predictor, "*", moderator,
+                    moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
     lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
-    })
+  })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
   table.stats <- do.call(rbind.data.frame, stats.list)
   response.names <- rep(response, each=nrow(sums.list[[1]]))
@@ -66,3 +68,4 @@ nice_mod <- function(response, predictor, moderator, moderator2=NULL, covariates
   names(table.stats) <- c("Dependent Variable", "Predictor", "df", "b", "t", "p", "sr2")
   table.stats
 }
+niceMod <- nice_mod

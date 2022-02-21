@@ -11,8 +11,8 @@ Convenience functions to make your workflow faster and easier. Easily customizab
 \seealso{
 Useful links:
 \itemize{
-  \item \url{"https://github.com/RemPsyc/rempsyc"}
-  \item Report bugs at \url{"https://github.com/RemPsyc/rempsyc/issues"}
+  \item \url{https://github.com/RemPsyc/rempsyc}
+  \item Report bugs at \url{https://github.com/RemPsyc/rempsyc/issues}
 }
 
 }

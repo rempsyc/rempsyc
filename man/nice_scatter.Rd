@@ -8,8 +8,8 @@ nice_scatter(
   data,
   predictor,
   response,
-  xtitle = waiver(),
-  ytitle = waiver(),
+  xtitle = ggplot2::waiver(),
+  ytitle = ggplot2::waiver(),
   has.points = TRUE,
   has.jitter = FALSE,
   alpha = 0.7,
@@ -110,9 +110,11 @@ nice_scatter(data = mtcars,
             predictor = wt,
             response = mpg)
 
+\dontrun{
 # Save a high-resolution image file to specified directory
 ggplot2::ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in',
-                dpi = 300, path = NULL) # change for your own desired path
+                dpi = 300, path = "/") # change for your own desired path
+}
 
 # Change x- and y- axis labels
 nice_scatter(data = mtcars,

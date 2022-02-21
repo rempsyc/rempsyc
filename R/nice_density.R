@@ -16,7 +16,6 @@
 #' @keywords density, normality
 #'
 #' @export
-#'
 #' @examples
 #' # Make the basic plot
 #' nice_density(variable = "Sepal.Length",
@@ -38,7 +37,8 @@
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text
 
-nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
+nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable,
+                         groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
   options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
@@ -59,15 +59,15 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
       digits <- -log(precision, base = 10)
       p <- formatC(p, format = 'f', digits = digits)
       if (p < .001) {
-        p = paste0('< ', precision, " (Shapiro-Wilk)")}
+        p <- paste0('< ', precision, " (Shapiro-Wilk)")}
       if (p >= .001) {
-        p = paste0('= ', p, " (Shapiro-Wilk)")    }
+        p <- paste0('= ', p, " (Shapiro-Wilk)")    }
       sub("0", "", p)
     }
     dat_text <- data %>% group_by(.data[[group]]) %>%
       summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
-        rowwise() %>%
-        mutate(text=sprintf("italic('p')~'%s'", format.p(text)))
+      rowwise() %>%
+      mutate(text=sprintf("italic('p')~'%s'", format.p(text)))
   }
   # Make plot
   ggplot(data, aes_string(x=variable, fill=group)) +
@@ -75,7 +75,8 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
     theme_bw(base_size = 24) +
     ggtitle(title) +
     facet_grid(gform) +
-    geom_line(data = dat_norm, aes(x = x, y = y), color = "darkslateblue", size=1.2, alpha=0.9) +
+    geom_line(data = dat_norm, aes(x = x, y = y),
+              color = "darkslateblue", size=1.2, alpha=0.9) +
     ylab(ytitle) +
     xlab(xtitle) +
     {if (shapiro == TRUE) ggrepel::geom_text_repel(data = dat_text,
@@ -97,3 +98,4 @@ nice_density <- function(variable, group, data, colours, ytitle="Density", xtitl
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
 }
+niceDensity <- nice_density

@@ -19,7 +19,7 @@
 #' var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 #' var.table
 #'
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with
 
 nice_var <- function(variable, group, data) {
   # Make group as factor
@@ -52,3 +52,4 @@ nice_var <- function(variable, group, data) {
   # Get resulting table
   var.table
 }
+niceVar <- nice_var

@@ -36,12 +36,12 @@ nice_randomize(design = "within", Ncondition = 4, n = 6,
                condition.names = c("SV","AV","ST","AT"))
 
 # Make a quick runsheet
-randomized_subjects <- nice_randomize(design = "within", Ncondition = 4, n = 128,
-                                      condition.names = c("SV","AV","ST","AT"),
-                                      col.names = c("id", "Condition", "Date/Time",
-                                      "SONA ID", "Age/Gd.", "Handedness",
-                                      "Tester", "Notes"))
-head(randomized_subjects)
+randomized <- nice_randomize(design = "within", Ncondition = 4, n = 128,
+                             condition.names = c("SV","AV","ST","AT"),
+                             col.names = c("id", "Condition", "Date/Time",
+                             "SONA ID", "Age/Gd.", "Handedness",
+                             "Tester", "Notes"))
+head(randomized)
 }
 \keyword{allocation,}
 \keyword{conditions,}

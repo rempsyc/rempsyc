@@ -42,9 +42,11 @@
 #'             predictor = wt,
 #'             response = mpg)
 #'
+#' \dontrun{
 #' # Save a high-resolution image file to specified directory
 #' ggplot2::ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in',
-#'                 dpi = 300, path = NULL) # change for your own desired path
+#'                 dpi = 300, path = "/") # change for your own desired path
+#' }
 #'
 #' # Change x- and y- axis labels
 #' nice_scatter(data = mtcars,
@@ -179,7 +181,7 @@
 #'             group.variable = factor(mtcars$cyl),
 #'             has.shape = TRUE)
 #'
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text guide_legend
 
 nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
                          ytitle=ggplot2::waiver(), has.points=TRUE, has.jitter=FALSE,
@@ -189,72 +191,113 @@ nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
                          group.variable=NULL, colours="#619CFF", groups.order=NULL,
                          groups.names=NULL, manual.slope.alpha=NULL, has.r=FALSE, r.x=Inf,
                          r.y=-Inf, has.p=FALSE, p.x=Inf, p.y=-Inf) {
-  has.groups=!missing(group.variable)
-  if (has.r == T) {
+  has.groups <- !missing(group.variable)
+  if (has.r == TRUE) {
     format.r <- function(r, precision = 0.01) {
       digits <- -log(precision, base = 10)
       r <- formatC(r, format = 'f', digits = digits)
       sub("0", "", r)}
-    r = format.r(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$estimate)
+    r <- format.r(cor.test(data[,deparse(substitute(predictor))],
+                           data[,deparse(substitute(response))],
+                           use="complete.obs",)$estimate)
   }
-  if (has.p == T) {
+  if (has.p == TRUE) {
     format.p <- function(p, precision = 0.001) {
       digits <- -log(precision, base = 10)
       p <- formatC(p, format = 'f', digits = digits)
       if (p < .001) {
-        p = paste0('< ', precision)}
+        p <- paste0('< ', precision)}
       if (p >= .001) {
-        p = paste0('= ', p)    }
+        p <- paste0('= ', p)    }
       sub("0", "", p)
     }
-    p = format.p(cor.test(data[,deparse(substitute(predictor))],data[,deparse(substitute(response))], use="complete.obs",)$p.value)
+    p <- format.p(cor.test(data[,deparse(substitute(predictor))],
+                           data[,deparse(substitute(response))],
+                           use="complete.obs",)$p.value)
   }
-  if (!missing(groups.order)) {group.variable <- factor(group.variable, levels=groups.order)}
-  if (!missing(groups.names)) {levels(group.variable) = groups.names}
+  if (!missing(groups.order)) {group.variable <- factor(group.variable,
+                                                        levels=groups.order)}
+  if (!missing(groups.names)) {levels(group.variable) <- groups.names}
   if (missing(group.variable)) {
     smooth <- stat_smooth(geom="line", method="lm", fullrange=has.fullrange, color = colours, size = 1)}
   if (!missing(group.variable)) {
     smooth <- stat_smooth(geom="line", method="lm", fullrange=has.fullrange, size = 1)}
-  if (has.confband == T & missing(group.variable)) {
+  if (has.confband == TRUE & missing(group.variable)) {
     band <- geom_smooth(method="lm",colour=NA,fill=colours)}
-  if (has.confband == T & !missing(group.variable)) {
+  if (has.confband == TRUE & !missing(group.variable)) {
     band <- geom_smooth(method="lm",colour=NA)}
-  if (has.points == T & missing(group.variable) & missing(colours)) {
+  if (has.points == TRUE & missing(group.variable) & missing(colours)) {
     observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
-  if (has.points == T & !missing(group.variable) & has.shape == F) {
+  if (has.points == TRUE & !missing(group.variable) & has.shape == FALSE) {
     observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
-  if (has.points == T & missing(group.variable) & !missing(colours)) {
+  if (has.points == TRUE & missing(group.variable) & !missing(colours)) {
     observations <- geom_point(size = 2, alpha = alpha, colour = colours, shape = 16)}
-  if (has.points == T & !missing(group.variable) & has.shape == T) {
+  if (has.points == TRUE & !missing(group.variable) & has.shape == TRUE) {
     observations <- geom_point(size = 2, alpha = alpha)}
-  if (has.jitter == T & missing(group.variable) & missing(colours)) {
+  if (has.jitter == TRUE & missing(group.variable) & missing(colours)) {
     observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
-    has.points=F}
-  if (has.jitter == T & !missing(group.variable) & has.shape == F) {
+    has.points <- FALSE}
+  if (has.jitter == TRUE & !missing(group.variable) & has.shape == FALSE) {
     observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
-    has.points=F}
-  if (has.jitter == T & missing(group.variable) & !missing(colours)) {
+    has.points <- FALSE}
+  if (has.jitter == TRUE & missing(group.variable) & !missing(colours)) {
     observations <- geom_jitter(size = 2, alpha = alpha, colour = colours, shape = 16)
-    has.points=F}
-  if (has.jitter == T & !missing(group.variable) & has.shape == T) {
+    has.points <- FALSE}
+  if (has.jitter == TRUE & !missing(group.variable) & has.shape == TRUE) {
     observations <- geom_jitter(size = 2, alpha = alpha)
-    has.points=F}
-  ggplot(data,aes(x={{predictor}},y={{response}}, colour = switch(has.groups==T, group.variable), fill = switch(has.groups==T, group.variable), linetype = switch(has.groups==T & has.linetype==T, group.variable), shape = switch(has.groups==T & has.shape==T, group.variable), alpha = switch(!is.null(manual.slope.alpha),group.variable))) +
+    has.points <- FALSE}
+  ggplot(data,
+         aes(x={{predictor}},
+             y={{response}},
+             colour = switch(has.groups==TRUE, group.variable),
+             fill = switch(has.groups==TRUE, group.variable),
+             linetype = switch(has.groups==TRUE & has.linetype==TRUE, group.variable),
+             shape = switch(has.groups==TRUE & has.shape==TRUE, group.variable),
+             alpha = switch(!is.null(manual.slope.alpha), group.variable))) +
     xlab(xtitle) +
     ylab(ytitle) +
     smooth +
     theme_bw(base_size = 24) +
     {if (has.confband == TRUE) band} +
     {if (exists("observations")) observations} +
-    {if (!missing(xmin)) scale_x_continuous(limits=c(xmin, xmax), breaks = seq(xmin, xmax, by = xby))} +
-    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
-    {if (!missing(colours) & !missing(group.variable)) scale_color_manual(values=colours, name = legend.title)} +
-    {if (!missing(colours) & !missing(group.variable)) scale_fill_manual(values=colours, name = legend.title)} +
-    {if (!missing(colours)) guides(fill = guide_legend(override.aes=list(colour = colours)))} +
+    {if (!missing(xmin)) scale_x_continuous(limits=c(xmin, xmax),
+                                            breaks = seq(xmin, xmax, by = xby))} +
+    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax),
+                                            breaks = seq(ymin, ymax, by = yby))} +
+    {if (!missing(colours) & !missing(group.variable))
+      scale_color_manual(values=colours, name = legend.title)} +
+    {if (!missing(colours) & !missing(group.variable))
+      scale_fill_manual(values=colours, name = legend.title)} +
+    {if (!missing(colours)) guides(fill = guide_legend(override.aes=
+                                                         list(colour = colours)))} +
     {if (has.legend == FALSE) theme(legend.position = "none")} +
-    labs(legend.title = legend.title, colour = legend.title, fill = legend.title, linetype = legend.title, shape = legend.title) +
-    {if (!missing(manual.slope.alpha)) scale_alpha_manual(values=manual.slope.alpha, guide=FALSE)} +
-    {if (has.r == TRUE) annotate(geom="text", x=r.x, y=r.y, label=sprintf("italic('r =')~'%s'", r), parse = TRUE, hjust=1, vjust=-3, size=7)} +
-    {if (has.p == TRUE) annotate(geom="text", x=p.x, y=p.y, label=sprintf("italic('p')~'%s'", p), parse = TRUE, hjust=1, vjust=-1, size=7)} +
-    theme(axis.text.x = element_text(colour="black"), axis.text.y = element_text(colour="black"), panel.grid.major=element_blank(), panel.grid.minor=element_blank(), panel.border=element_blank(), axis.line=element_line(colour = "black"), axis.ticks=element_line(colour = "black"))
+    labs(legend.title = legend.title, colour = legend.title,
+         fill = legend.title, linetype = legend.title, shape = legend.title) +
+    {if (!missing(manual.slope.alpha))
+      scale_alpha_manual(values=manual.slope.alpha, guide=FALSE)} +
+    {if (has.r == TRUE)
+      annotate(geom="text",
+               x=r.x,
+               y=r.y,
+               label=sprintf("italic('r =')~'%s'", r),
+               parse = TRUE,
+               hjust=1,
+               vjust=-3,
+               size=7)} +
+    {if (has.p == TRUE) annotate(geom="text",
+                                 x=p.x,
+                                 y=p.y,
+                                 label=sprintf("italic('p')~'%s'", p),
+                                 parse = TRUE,
+                                 hjust=1,
+                                 vjust=-1,
+                                 size=7)} +
+    theme(axis.text.x = element_text(colour="black"),
+          axis.text.y = element_text(colour="black"),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          panel.border=element_blank(),
+          axis.line=element_line(colour = "black"),
+          axis.ticks=element_line(colour = "black"))
 }
+niceScatter <- nice_scatter
