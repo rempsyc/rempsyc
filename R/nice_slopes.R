@@ -40,6 +40,8 @@
 #'             moderator = "wt",
 #'             moderator2 = "am",
 #'             data = mtcars)
+#'
+#' @importFrom stats lm sd
 
 nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {
 

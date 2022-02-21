@@ -25,15 +25,18 @@
 #' ## plot <- overlap_circle(3.5)
 #' ## ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
 #' # Change for your own desired path
+#'
+#' @import graphics
 
 overlap_circle <- function(response, categories = c("Self", "Other")){
   if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7!
                                         (scoring system of the Inclusion of the
                                         Other in the Self Scale...)')}
   grid::grid.newpage()
-  scale <- (c(1,2,3,4,5,6,7))
-  overlap <- (c(0,10,20,30,55,65,85))
-  po <- round(approx(scale, overlap, xout = response)$y, digits=2) # po = Percentage overlap
+  scale <- c(1,2,3,4,5,6,7)
+  overlap <- c(0,10,20,30,55,65,85)
+  po <- round(stats::approx(scale, overlap, xout = response)$y, digits=2)
+  # po = Percentage overlap
   invisible(VennDiagram::draw.pairwise.venn(area1 = 100,
                                             area2 = 100,
                                             cross.area = po,

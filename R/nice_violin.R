@@ -119,6 +119,7 @@
 #'            border.colour = "black")
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
+#' @importFrom rlang .data
 
 nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                         colours, xlabels=NULL, ytitle=ggplot2::waiver(), xtitle=NULL,
@@ -127,7 +128,7 @@ nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                         signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE,
                         alpha=.70, border.colour="white") {
   data[[group]] <- as.factor(data[[group]])
-  gform <- reformulate(group, response)
+  gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"
   dataSummary <- rcompanion_groupwiseMean(gform,
                                           data = data,
@@ -149,11 +150,11 @@ nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
     ylab(ytitle) +
     xlab(xtitle) +
     geom_violin(color = border.colour, alpha = alpha) +
-    geom_point(aes(y = Mean),
+    geom_point(aes(y = .data$Mean),
                color = "black",
                size = 4,
                data = dataSummary) +
-    geom_errorbar(aes(y = Mean,
+    geom_errorbar(aes(y = .data$Mean,
                       ymin = dataSummary[,6],
                       ymax = dataSummary[,7]),
                   color = "black",

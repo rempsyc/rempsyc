@@ -26,7 +26,7 @@ lmSupport_modelEffectSizes <- function (Model, Print = TRUE, Digits = 4)
   rownames(tSS) <- c(row.names(tANOVA)[1:(nEffects)])
   colnames(tSS) <- c("SSR", "df", "pEta-sqr",
                      "dR-sqr")
-  SSE <- sum(residuals(Model)^2)
+  SSE <- sum(stats::residuals(Model)^2)
   SST <- sum((Model$model[, 1] - mean(Model$model[, 1]))^2)
   tSS[1:nEffects, 1] <- tANOVA[1:nEffects, 1]
   tSS[1:nEffects, 2] <- tANOVA[1:nEffects, 2]

@@ -49,7 +49,7 @@ nice_randomize <- function (design="between", Ncondition=3, n=9,
     }
   }
   Condition <- as.matrix(dplyr::recode(as.matrix(Condition),
-                                       !!!setNames(condition.names, 1:Ncondition)))
+                                       !!!stats::setNames(condition.names, 1:Ncondition)))
   for (i in 1:n) {
     Condition[i,1] <- paste(Condition[i,], collapse=" - ") # Adds hyphen between conditions for easier read
   }

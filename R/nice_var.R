@@ -7,7 +7,6 @@
 #' @param data The data
 #'
 #' @keywords variance
-#' @export
 #' @examples
 #' # Make the basic table
 #' nice_var(variable="Sepal.Length",
@@ -19,8 +18,9 @@
 #' var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 #' var.table
 #'
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
 
+#' @export
 nice_var <- function(variable, group, data) {
   # Make group as factor
   data[[group]] <- as.factor(data[[group]])

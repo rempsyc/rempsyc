@@ -60,6 +60,7 @@ nice_slopes(response = "mpg",
             moderator = "wt",
             moderator2 = "am",
             data = mtcars)
+
 }
 \keyword{interaction,}
 \keyword{moderation,}

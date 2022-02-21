@@ -192,7 +192,7 @@ rcompanion_groupwiseMean <- function (formula = NULL, data = NULL, var = NULL, g
         N <- length(x)
       }
       Dist <- conf + (1 - conf)/2
-      Inty <- qt(Dist, df = (N - 1)) * S/sqrt(N)
+      Inty <- stats::qt(Dist, df = (N - 1)) * S/sqrt(N)
       if (trim == 0) {
         return(Inty)
       }

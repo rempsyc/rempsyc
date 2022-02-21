@@ -31,6 +31,7 @@
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
+#' @importFrom stats reformulate shapiro.test
 
 nice_qq <- function(variable, group, data, colours, groups.labels=NULL,
                     grid=TRUE, shapiro=FALSE, title=variable) {

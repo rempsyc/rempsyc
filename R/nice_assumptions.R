@@ -23,7 +23,7 @@
 
 nice_assumptions <- function(model, interpretation = TRUE) {
   model.name <- format(model$terms)
-  shapiro <- round(shapiro.test(model$residuals)$p.value, 3)
+  shapiro <- round(stats::shapiro.test(model$residuals)$p.value, 3)
   bp <- round(lmtest::bptest(model)$p.value, 3)
   dw <- round(lmtest::dwtest(model)$p.value, 3)
   dg <- sum(shapiro < .05, bp < .05, dw < .05)

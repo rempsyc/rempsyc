@@ -11,7 +11,6 @@
 #' @param col.format.custom col.format.custom
 #'
 #' @keywords APA style table
-#' @export
 #' @examples
 #' # Make the basic table
 #' my_table <- nice_table(head(mtcars))
@@ -52,9 +51,10 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' @importFrom dplyr mutate %>% select
+#' @importFrom dplyr mutate %>% select matches
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
+#' @export
 nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
                        col.format.r, format.custom, col.format.custom) {
   dataframe
@@ -74,7 +74,8 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   dataframe %>%
-    {if(highlight == TRUE | is.numeric(highlight)) flextable(., col_keys = names(dataframe)[-length(dataframe)])
+    {if(highlight == TRUE | is.numeric(highlight))
+      flextable(., col_keys = names(dataframe)[-length(dataframe)])
       else flextable(.)} %>%
     theme_booktabs %>%
     hline_top(part="head", border = nice.borders) %>%
