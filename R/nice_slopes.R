@@ -64,10 +64,12 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   table.stats1 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (LOW-", moderator, ")")
   table.stats1 <- cbind(response, predictor.names, table.stats1)
-  names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+  names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                           "df", "b", "t", "p", "sr2")
 
   # Calculate simple slopes for mean-level
-  formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
+  formulas <- paste(response, "~", predictor, "*", moderator,
+                    moderator2.term, covariates.term)
   models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
@@ -79,7 +81,8 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   table.stats2 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (MEAN-", moderator, ")")
   table.stats2 <- cbind(response, predictor.names, table.stats2)
-  names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+  names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                           "df", "b", "t", "p", "sr2")
 
   # Calculate simple slopes for HIGHS
   data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
@@ -95,7 +98,8 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   table.stats3 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (HIGH-", moderator, ")")
   table.stats3 <- cbind(response, predictor.names, table.stats3)
-  names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+  names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                           "df", "b", "t", "p", "sr2")
 
   # Combine both dataframes for both LOWS and HIGHS
   table.stats <- rbind(table.stats1,table.stats2,table.stats3)
@@ -117,8 +121,10 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
 
     # Calculate simple slopes for LOWS
     data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
-    formulas <- paste(response, "~", predictor, "* lows", moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
+    formulas <- paste(response, "~", predictor, "* lows",
+                      moderator2.term, covariates.term)
+    models.list <- sapply(formulas, lm, data = data, ...,
+                          simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {
@@ -129,11 +135,14 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     table.stats1 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (LOW-", moderator, ")")
     table.stats1 <- cbind(response, predictor.names, table.stats1)
-    names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+    names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                             "df", "b", "t", "p", "sr2")
 
     # Calculate simple slopes for mean-level
-    formulas <- paste(response, "~", predictor, "*", moderator, moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
+    formulas <- paste(response, "~", predictor, "*", moderator,
+                      moderator2.term, covariates.term)
+    models.list <- sapply(formulas, lm, data = data, ...,
+                          simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {
@@ -144,12 +153,15 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
     table.stats2 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (MEAN-", moderator, ")")
     table.stats2 <- cbind(response, predictor.names, table.stats2)
-    names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)", "df", "b", "t", "p", "sr2")
+    names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                             "df", "b", "t", "p", "sr2")
 
     # Calculate simple slopes for HIGHS
     data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
-    formulas <- paste(response, "~", predictor, "* highs", moderator2.term, covariates.term)
-    models.list <- sapply(formulas, lm, data = data, ..., simplify = FALSE, USE.NAMES = TRUE)
+    formulas <- paste(response, "~", predictor, "* highs",
+                      moderator2.term, covariates.term)
+    models.list <- sapply(formulas, lm, data = data, ...,
+                          simplify = FALSE, USE.NAMES = TRUE)
     sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
     df.list <- lapply(models.list, function(x) x[["df.residual"]])
     ES.list <- lapply(models.list, function(x) {

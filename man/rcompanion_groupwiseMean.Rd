@@ -112,20 +112,22 @@ right side are used for the grouping variables.\preformatted{     In general, it
 }
 }
 \examples{
-## NOT RUN
+\dontrun{
 ### Example with formula notation
-## data(mtcars)
-## rcompanion_groupwiseMean(mpg ~ factor(cyl),
-##                          data         = mtcars,
-##                          traditional  = FALSE,
-##                          percentile   = TRUE)
-### Example with variable notation
-## data(mtcars)
-## rcompanion_groupwiseMean(data        = mtcars,
-##                          var         = "mpg",
-##                          group       = c("cyl", "am"),
-##                          traditional = FALSE,
-##                          percentile  = TRUE)
+data(mtcars)
+rcompanion_groupwiseMean(mpg ~ factor(cyl),
+                         data         = mtcars,
+                         traditional  = FALSE,
+                         percentile   = TRUE)
+
+# Example with variable notation
+data(mtcars)
+rcompanion_groupwiseMean(data        = mtcars,
+                         var         = "mpg",
+                         group       = c("cyl", "am"),
+                         traditional = FALSE,
+                         percentile  = TRUE)
+}
 
 }
 \references{

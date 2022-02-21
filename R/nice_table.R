@@ -17,8 +17,10 @@
 #' my_table <- nice_table(head(mtcars))
 #' my_table
 #'
+#' \dontrun{
 #' # Save table to word
 #' flextable::save_as_docx(my_table, path = "nicetablehere.docx")
+#' }
 #'
 #' # Publication-ready tables
 #' mtcars.std <- lapply(mtcars, scale)
@@ -51,13 +53,14 @@
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
 #' @importFrom dplyr mutate %>% select
-#' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg
+#' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
 nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
                        col.format.r, format.custom, col.format.custom) {
   dataframe
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
-    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
     dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1, function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
   }
@@ -202,18 +205,21 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
     colformat_double(j = (select(dataframe, where(is.numeric)) %>%
                             select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
                                     ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
-                                            ignore.case =F)) %>% names),
+                                            ignore.case = FALSE)) %>% names),
                      big.mark=",", digits = 2) -> table
   if(!missing(col.format.p)) {
-    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.p], "` = ", "format.p", ")")
+    rExpression <- paste0("table <- table %>% set_formatter(table,`",
+                          table$col_keys[col.format.p], "` = ", "format.p", ")")
     eval(parse(text = rExpression))
   }
   if(!missing(col.format.r)) {
-    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.r], "` = ", "format.r", ")")
+    rExpression <- paste0("table <- table %>% set_formatter(table,`",
+                          table$col_keys[col.format.r], "` = ", "format.r", ")")
     eval(parse(text = rExpression))
   }
   if(!missing(format.custom) & !missing(col.format.custom)) {
-    rExpression = paste0("table <- table %>% set_formatter(table,`", table$col_keys[col.format.custom], "` = ", format.custom, ")")
+    rExpression <- paste0("table <- table %>% set_formatter(table,`",
+                          table$col_keys[col.format.custom], "` = ", format.custom, ")")
     eval(parse(text = rExpression))
   }
   table

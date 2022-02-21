@@ -32,7 +32,8 @@
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
 
-nice_QQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
+nice_QQ <- function(variable, group, data, colours, groups.labels=NULL,
+                    grid=TRUE, shapiro=FALSE, title=variable) {
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
@@ -42,9 +43,9 @@ nice_QQ <- function(variable, group, data, colours, groups.labels=NULL, grid=TRU
       digits <- -log(precision, base = 10)
       p <- formatC(p, format = 'f', digits = digits)
       if (p < .001) {
-        p = paste0('< ', precision, " (Shapiro-Wilk)")}
+        p <- paste0('< ', precision, " (Shapiro-Wilk)")}
       if (p >= .001) {
-        p = paste0('= ', p, " (Shapiro-Wilk)")    }
+        p <- paste0('= ', p, " (Shapiro-Wilk)")    }
       sub("0", "", p)
     }
     dat_text <- data %>% group_by(.data[[group]]) %>%
