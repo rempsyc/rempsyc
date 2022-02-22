@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rempsyc
+# rempsyc <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -54,7 +54,7 @@ my_table <- nice_table(moderations, highlight = TRUE)
 my_table
 ```
 
-<img src="man/figures/nicetable.png" width="100%" />
+<img src="man/figures/README-example1-1.png" width="50%" />
 
 ``` r
 # Save to word
@@ -66,7 +66,7 @@ nice_violin(data = ToothGrowth,
             response = "len")
 ```
 
-<img src="man/figures/README-example2-1.png" width="100%" />
+<img src="man/figures/README-example2-1.png" width="60%" />
 
 ``` r
 # Scatter plot
@@ -75,7 +75,7 @@ nice_scatter(data = mtcars,
              response = mpg)
 ```
 
-<img src="man/figures/README-example2-2.png" width="100%" />
+<img src="man/figures/README-example2-2.png" width="60%" />
 
 ``` r
 # Save plot
