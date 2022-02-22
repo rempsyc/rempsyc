@@ -56,7 +56,7 @@ my_table <- nice_table(moderations, highlight = TRUE)
 my_table
 ```
 
-<img src="man/figures/nicetable.png" width="80%" />
+<img src="man/figures/nicetable.png" width="100%" />
 
 ``` r
 # Save to word
