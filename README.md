@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--02--22-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily
@@ -54,7 +56,7 @@ my_table <- nice_table(moderations, highlight = TRUE)
 my_table
 ```
 
-<img src="man/figures/README-example1-1.png" width="50%" />
+<img src="man/figures/nicetable.png" width="80%" />
 
 ``` r
 # Save to word
@@ -63,7 +65,8 @@ flextable::save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
 # Violin plot
 nice_violin(data = ToothGrowth,
             group = "dose",
-            response = "len")
+            response = "len",
+            xlabels = c("Low", "Medium", "High"))
 ```
 
 <img src="man/figures/README-example2-1.png" width="60%" />
