@@ -19,22 +19,19 @@
 #' # Reverse score of 3 with a maximum score of 5
 #' nice_reverse(3, 5)
 #'
-#' # Reverse score of 4 with a maximum score of 4 and a minimum of 0
+#' # Reverse score of 4 with maximum = 4 and minimum = 0
 #' nice_reverse(4, 4, min = 0)
 #'
-#' # Reverse score of 0 with a maximum score of 4 and a minimum of 0
+#' # Reverse score of 0 with maximum = 4 and minimum = 0
 #' nice_reverse(0, 4, min = 0)
 #'
-#' # Reverse score of -3 with a maximum score of 3 and a minimum of -3
+#' # Reverse score of -3 with maximum = 3 and minimum = -3
 #' nice_reverse(-3, 3, min = -3)
 #'
-#' # Reverse score of 0 with a maximum score of 4 and a minimum of 0
+#' # Reverse score of 0 with maximum = 4 and minimum = 0
 #' nice_reverse(3, 3, min = -3)
 
 nice_reverse <- function(x, max, min = 1, warning = TRUE) {
   if(missing(min) & warning == TRUE) { message("If your scale minimum score is not '1', please specify it in the 'min' argument")}
-  if(min < 1) {
-    max + 1 - as.numeric(x) - 1 + min
-    } else
-      max + 1 - as.numeric(x)
+  max - as.numeric(x) + min
 }
