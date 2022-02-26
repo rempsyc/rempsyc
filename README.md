@@ -6,6 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2022--02--26-yellowgreen.svg)](/commits/main)
 <!-- badges: end -->
@@ -60,7 +63,7 @@ my_table
 
 ``` r
 # Save to word
-flextable::save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
+save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
 
 # Violin plot
 nice_violin(data = ToothGrowth,
@@ -82,8 +85,8 @@ nice_scatter(data = mtcars,
 
 ``` r
 # Save plot
-ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-                dpi = 300, path = "D:/R treasures/")
+ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
+       dpi = 300, path = "D:/R treasures/")
 ```
 
 See tutorials here:
