@@ -44,8 +44,8 @@
 #'
 #' \dontrun{
 #' # Save a high-resolution image file to specified directory
-#' ggplot2::ggsave('nicescatterplothere.tiff', width = 7, height = 7, unit = 'in',
-#'                 dpi = 300, path = "/") # change for your own desired path
+#' ggsave('nicescatterplothere.pdf', width = 7, height = 7, unit = 'in',
+#'        dpi = 300, path = "/") # change for your own desired path
 #' }
 #'
 #' # Change x- and y- axis labels

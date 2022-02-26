@@ -18,7 +18,7 @@
 #'
 #' \dontrun{
 #' # Save table to word
-#' flextable::save_as_docx(my_table, path = "nicetablehere.docx")
+#' save_as_docx(my_table, path = "nicetablehere.docx")
 #' }
 #'
 #' # Publication-ready tables
