@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--02--22-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--02--26-yellowgreen.svg)](/commits/main)
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily

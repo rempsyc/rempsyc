@@ -91,7 +91,7 @@ nice_violin(data = ToothGrowth,
 
 \dontrun{
 # Save a high-resolution image file to specified directory
-ggplot2::ggsave('niceviolinplothere.tiff', width = 7, height = 7, unit = 'in',
+ggsave('niceviolinplothere.pdf', width = 7, height = 7, unit = 'in',
        dpi = 300, path = "/") # change for your own desired path
 }
 
