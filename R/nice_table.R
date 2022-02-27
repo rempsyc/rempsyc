@@ -154,7 +154,7 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
   if("B" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "B", part = "header",
-              value = as_paragraph("\u00df")) %>%
+              value = as_paragraph("\u03B2")) %>%
       colformat_double(j = "B", big.mark=",", digits = 2) -> table
   }
   if("R2" %in% names(dataframe)) {
