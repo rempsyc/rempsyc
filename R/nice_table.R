@@ -89,7 +89,7 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
     height(height = 0.55, part = "body") %>%
     height(height = 0.55, part = "head") %>%
     hrule(rule = "exact", part = "all") %>%
-    set_table_properties(layout = "autofit") -> table
+    set_table_properties(layout = "autofit", width = 1) -> table
   if(!missing(italics)) {
     table %>%
       italic(j = italics, part = "header") -> table
