@@ -9,6 +9,7 @@
 #' @param col.format.r col.format.r
 #' @param format.custom format.custom
 #' @param col.format.custom col.format.custom
+#' @param width width of the table (in %)
 #'
 #' @keywords APA style table
 #' @examples
@@ -56,7 +57,7 @@
 
 #' @export
 nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
-                       col.format.r, format.custom, col.format.custom) {
+                       col.format.r, format.custom, col.format.custom, width = 1) {
   dataframe
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
@@ -89,7 +90,7 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
     height(height = 0.55, part = "body") %>%
     height(height = 0.55, part = "head") %>%
     hrule(rule = "exact", part = "all") %>%
-    set_table_properties(layout = "autofit", width = 1) -> table
+    set_table_properties(layout = "autofit", width = width) -> table
   if(!missing(italics)) {
     table %>%
       italic(j = italics, part = "header") -> table

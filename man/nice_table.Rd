@@ -11,7 +11,8 @@ nice_table(
   col.format.p = NULL,
   col.format.r,
   format.custom,
-  col.format.custom
+  col.format.custom,
+  width = 1
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ nice_table(
 \item{format.custom}{format.custom}
 
 \item{col.format.custom}{col.format.custom}
+
+\item{width}{width of the table (in \%)}
 }
 \description{
 Make nice APA tables easily through a wrapper around the \code{flextable} package with sensical defaults and automatic formatting features.
