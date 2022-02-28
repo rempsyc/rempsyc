@@ -91,7 +91,7 @@
 #' }
 #'
 #' @importFrom boot boot boot.ci
-#' @importFrom plyr ddply rename
+#' @importFrom dplyr syms cur_data group_by summarize rename all_of across
 
 rcompanion_groupwiseMean <- function (formula = NULL, data = NULL, var = NULL, group = NULL,
                                       trim = 0, na.rm = FALSE, conf = 0.95, R = 5000,
@@ -99,6 +99,14 @@ rcompanion_groupwiseMean <- function (formula = NULL, data = NULL, var = NULL, g
                                       basic = FALSE, percentile = FALSE, bca = FALSE,
                                       digits = 3, ...)
 {
+
+  ddply <- function(.data, .variables, var, .fun, ...) {
+    .data %>%
+      group_by(across(all_of(.variables))) %>%
+      summarize(V1 = .fun(as.data.frame(cur_data()), var), .groups = "drop") %>%
+      as.data.frame
+  }
+
   if (!is.null(formula)) {
     var <- all.vars(formula[[2]])[1]
     group <- all.vars(formula[[3]])
@@ -209,7 +217,8 @@ rcompanion_groupwiseMean <- function (formula = NULL, data = NULL, var = NULL, g
     D12 <- ddply(.data = data, .variables = group, var, .fun = fun12)
     D13 <- ddply(.data = data, .variables = group, var, .fun = fun13)
   }
-  DF <- rename(DF, c(V1 = "n"))
+
+  DF <- rename(DF, n = V1)
   DF$Mean <- signif(D1$V1, digits = digits)
   if (boot == TRUE) {
     DF$Boot.mean <- signif(D2$V1, digits = digits)
