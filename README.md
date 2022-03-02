@@ -9,8 +9,9 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.3-orange.svg?style=flat-square)](commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--03--02-yellowgreen.svg)](/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--02--26-yellowgreen.svg)](/commits/main)
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily
