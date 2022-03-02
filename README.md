@@ -11,7 +11,13 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.3-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2022--03--02-yellowgreen.svg)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
+[![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://paypal.me/rempsyc)
+[![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/RemPsyc?tab=followers)
+[![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/RemPsyc/rempsyc/network/members)
+![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)
 <!-- badges: end -->
 
 Convenience functions to make your workflow faster and easier. Easily
