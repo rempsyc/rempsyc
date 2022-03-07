@@ -102,7 +102,7 @@ nice_scatter(
 \item{p.y}{The p.y}
 }
 \description{
-Make nice violon plots easily.
+Make nice scatter plots easily.
 }
 \examples{
 # Make the basic plot

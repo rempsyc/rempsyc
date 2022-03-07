@@ -1,6 +1,6 @@
 #' @title Interpolate the Inclusion of the Other in the Self Scale
 #'
-#' @description Interpolating the Inclusion of the Other in the Self Scale easily.
+#' @description Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 #'
 #' @param response The response
 #' @param categories The categories
@@ -52,4 +52,4 @@ overlap_circle <- function(response, categories = c("Self", "Other")){
                                             label.col = c("white","black","white")))
 
 }
-overlapCircle <- overlap_circle
+overlapCircle <-  nice_circle <- overlap_circle

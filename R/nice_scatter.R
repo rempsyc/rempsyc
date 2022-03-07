@@ -1,6 +1,6 @@
 #' @title Easy scatter plots
 #'
-#' @description Make nice violon plots easily.
+#' @description Make nice scatter plots easily.
 #'
 #' @param data The data
 #' @param predictor The predictor

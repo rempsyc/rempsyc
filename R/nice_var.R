@@ -10,8 +10,8 @@
 #' @examples
 #' # Make the basic table
 #' nice_var(variable="Sepal.Length",
-#'         group="Species",
-#'         data=iris)
+#'          group="Species",
+#'          data=iris)
 #'
 #' # Try on multiple variables
 #' DV <- names(iris[1:4])
@@ -41,7 +41,7 @@ nice_var <- function(variable, group, data) {
   var.table %>%
     rowwise() %>%
     mutate(`Max/Min Ratio` = round(max(select(., -variable))/min(select(., -variable)),1),
-           `Heteroscedastic (four times bigger)?` = `Max/Min Ratio` > 4) -> var.table
+           `Heteroscedastic (4x bigger)?` = `Max/Min Ratio` > 4) -> var.table
   # Change names to something meaningful
   for (i in 1:length(levels(data[[group]]))) {
     names(var.table)[1+i] <- levels(data[[group]])[i]

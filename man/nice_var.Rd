@@ -19,8 +19,8 @@ Obtain variance per group as well as check for the rule of thumb of one group ha
 \examples{
 # Make the basic table
 nice_var(variable="Sepal.Length",
-        group="Species",
-        data=iris)
+         group="Species",
+         data=iris)
 
 # Try on multiple variables
 DV <- names(iris[1:4])

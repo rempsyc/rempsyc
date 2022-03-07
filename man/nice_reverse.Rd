@@ -22,23 +22,15 @@ Easily recode scores (reverse-score), typically for questionnaire answers.
 # Reverse score of 5 with a maximum score of 5
 nice_reverse(5, 5)
 
-# Reverse score of 1 with a maximum score of 5
-nice_reverse(1, 5)
+# Reverse several scores at once
+nice_reverse(1:5, 5)
 
-# Reverse score of 3 with a maximum score of 5
-nice_reverse(3, 5)
+# Reverse scores with maximum = 4 and minimum = 0
+nice_reverse(1:4, 4, min = 0)
 
-# Reverse score of 4 with maximum = 4 and minimum = 0
-nice_reverse(4, 4, min = 0)
+# Reverse scores with maximum = 3 and minimum = -3
+nice_reverse(-3:3, 3, min = -3)
 
-# Reverse score of 0 with maximum = 4 and minimum = 0
-nice_reverse(0, 4, min = 0)
-
-# Reverse score of -3 with maximum = 3 and minimum = -3
-nice_reverse(-3, 3, min = -3)
-
-# Reverse score of 0 with maximum = 4 and minimum = 0
-nice_reverse(3, 3, min = -3)
 }
 \keyword{reverse}
 \keyword{scoring}

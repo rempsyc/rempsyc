@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  webshot="webshot2"
 )
 ```
 
@@ -24,7 +25,6 @@ version <- gsub('-', '.', version)
 [![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -42,8 +42,7 @@ You can install the development version (the only version currently available) o
 
 ``` r
 # If devtools isn't already installed, install it with install.packages("devtools")
-library(devtools)
-install_github("rempsyc/rempsyc")
+devtools::install_github("rempsyc/rempsyc")
 ```
 You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
 
@@ -52,64 +51,250 @@ library(rempsyc)
 ?rempsyc
 ```
 
-## Example functions/outputs
+## Features
 
-```{r example1, warning = FALSE, message = FALSE}
+### `nice_reverse`
+
+Easily recode scores (reverse-score), typically for questionnaire answers.
+
+```{r warning = FALSE, message = FALSE}
 library(rempsyc)
 
-# Moderations
-nice_mod(response = "mpg",
+# Reverse score of 5 with a maximum score of 5
+nice_reverse(5, 5)
+
+# Reverse scores with maximum = 4 and minimum = 0
+nice_reverse(1:4, 4, min = 0)
+
+# Reverse scores with maximum = 3 and minimum = -3
+nice_reverse(-3:3, 3, min = -3)
+```
+
+### `nice_t_test`
+
+Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once.
+
+```{r warning = FALSE, message = FALSE}
+nice_t_test(response = c("mpg", "disp", "drat", "wt"),
+            group = "am",
+            data = mtcars) -> t.tests
+t.tests
+```
+
+Full tutorial: https://remi-theriault.com/blog_t-test
+
+### `nice_mod`
+
+Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
+
+```{r warning = FALSE, message = FALSE}
+nice_mod(response = c("mpg", "disp"),
          predictor = "gear",
          moderator = "wt",
          data = mtcars) -> moderations
 moderations
-
-# Format results in nice table
-my_table <- nice_table(moderations, highlight = TRUE)
-my_table
 ```
 
-<img src="man/figures/nicetable.png" width="100%" />
+Full tutorial: https://remi-theriault.com/blog_moderation
 
-```{r example2, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%" }
+### `nice_slopes`
+
+Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
+
+```{r warning = FALSE, message = FALSE}
+nice_slopes(response = c("mpg", "disp"),
+            predictor = "gear",
+            moderator = "wt",
+            data = mtcars) -> simple.slopes
+simple.slopes
+```
+
+Full tutorial: https://remi-theriault.com/blog_moderation
+
+### `nice_table`
+
+Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
+
+```{r example1, warning = FALSE, message = FALSE}
+# Format t-test results
+t_table <- nice_table(t.tests, width = .75)
+t_table
+```
+
+```{r echo = FALSE, results='hide'}
+flextable::save_as_image(t_table, path = "man/figures/t_table.png")
+```
+
+<img src="man/figures/t_table.png" width="90%" />
+
+```{r warning = FALSE, message = FALSE}
 # Save to word
-save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
+save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
+```
 
-# Violin plot
+```{r warning = FALSE, message = FALSE}
+# Format moderation results
+mod_table <- nice_table(moderations, highlight = TRUE, width = .75)
+mod_table
+```
+
+```{r echo = FALSE, results='hide'}
+flextable::save_as_image(mod_table, path = "man/figures/mod_table.png")
+```
+
+<img src="man/figures/mod_table.png" width="90%" />
+
+```{r warning = FALSE, message = FALSE}
+# Format simple slopes results
+slopes_table <- nice_table(simple.slopes, width = .75)
+slopes_table
+```
+
+```{r echo = FALSE, results='hide'}
+flextable::save_as_image(slopes_table, path = "man/figures/slopes_table.png")
+```
+
+<img src="man/figures/slopes_table.png" width="90%" />
+
+Full tutorial: https://remi-theriault.com/blog_table.html
+
+### `nice_violin`
+
+Make nice violin plots easily with 95% bootstrapped confidence intervals.
+
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
-            xlabels = c("Low", "Medium", "High"))
-
-# Scatter plot
-nice_scatter(data = mtcars,
-             predictor = wt,
-             response = mpg)
+            xlabels = c("Low", "Medium", "High"),
+            comp1 = 1,
+            comp2 = 3)
 
 # Save plot
 ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
        dpi = 300, path = "D:/R treasures/")
-
 ```
 
-See tutorials here:
+Full tutorial: https://remi-theriault.com/blog_violin.html
 
-https://remi-theriault.com/blog_violin.html
+### `nice_scatter`
 
-https://remi-theriault.com/blog_scatter.html
+Make nice scatter plots easily.
 
-https://remi-theriault.com/blog_randomize.html
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
+nice_scatter(data = mtcars,
+             predictor = wt,
+             response = mpg,
+             has.confband = TRUE,
+             has.r = TRUE,
+             has.p = TRUE)
+```
 
-https://remi-theriault.com/blog_circles.html
+Full tutorial: https://remi-theriault.com/blog_scatter.html
 
-https://remi-theriault.com/blog_table.html
+### `nice_randomize`
 
-https://remi-theriault.com/blog_assumptions
+Randomize easily with different designs.
 
-https://remi-theriault.com/blog_t-test
+```{r warning = FALSE, message = FALSE}
 
-https://remi-theriault.com/blog_moderation
+# Specify design, number of conditions, number of participants, and names of conditions:
+nice_randomize(design = "between", Ncondition = 4, n = 8,
+               condition.names = c("BP","CX","PZ","ZL"))
 
-Visit my website here: https://remi-theriault.com
+# Within-Group Design
+nice_randomize(design = "within", Ncondition = 3, n = 3,
+               condition.names = c("SV","AV","ST"))
+```
 
-Support me and my work here: https://remi-theriault.com/donate/
+Full tutorial: https://remi-theriault.com/blog_randomize.html
+
+### `overlap_circle `
+
+Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
+
+```{r warning = FALSE, message = FALSE, , fig.width=7, fig.height=7, out.width="60%"}
+
+# Score of 3.5 (25% overlap)
+overlap_circle(3.5)
+
+# Score of 6.84 (81.8% overlap)
+overlap_circle(6.84)
+```
+
+Full tutorial: https://remi-theriault.com/blog_circles.html
+
+## Testing assumptions
+
+Full tutorial: https://remi-theriault.com/blog_assumptions
+
+### `nice_assumptions `
+
+Test linear regression assumptions easily with a nice summary table.
+
+```{r warning = FALSE, message = FALSE}
+
+# Create regression model
+model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
+# View results
+View(nice_assumptions(model))
+```
+
+<img src="man/figures/assumptions_table.png" width="65%" />
+
+### `nice_qq `
+
+Easily make nice per-group QQ plots.
+
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
+
+# Create regression model
+nice_qq(variable = "Sepal.Length",
+       group = "Species",
+       data = iris,
+       grid = FALSE,
+       shapiro = TRUE,
+       title = NULL)
+```
+
+### `nice_density `
+
+Easily make nice per-group QQ plots.
+
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
+
+# Create regression model
+nice_density(variable = "Sepal.Length",
+            group = "Species",
+            data = iris,
+            xtitle = "Sepal Length",
+            ytitle = "Density (vs. Normal Distribution)",
+            grid = FALSE,
+            shapiro = TRUE,
+            title = "Density (Sepal Length)")
+```
+
+
+### `nice_var `
+
+Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
+
+```{r warning = FALSE, message = FALSE}
+nice_var(variable="Sepal.Length",
+         group="Species",
+         data=iris)
+```
+
+### `nice_varplot `
+
+Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
+
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=6, out.width="70%"}
+nice_varplot(variable = "Sepal.Length",
+             group = "Species",
+             data = iris)
+```
+
+## Support me and this package
+
+You can support me and this package here: https://remi-theriault.com/donate/
