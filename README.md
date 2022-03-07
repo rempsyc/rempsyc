@@ -159,6 +159,10 @@ t_table <- nice_table(t.tests, width = .75)
 t_table
 ```
 
+    #> Registered S3 method overwritten by 'webshot':
+    #>   method        from    
+    #>   print.webshot webshot2
+
 <img src="man/figures/t_table.png" width="90%" />
 
 ``` r
@@ -235,27 +239,27 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
 #> 1  1        CX
-#> 2  2        BP
-#> 3  3        ZL
-#> 4  4        PZ
-#> 5  5        PZ
-#> 6  6        CX
-#> 7  7        BP
-#> 8  8        ZL
+#> 2  2        PZ
+#> 3  3        BP
+#> 4  4        ZL
+#> 5  5        BP
+#> 6  6        PZ
+#> 7  7        ZL
+#> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
-#> 2  2        ST
-#> 3  3        SV
+#> 1  1        AV
+#> 2  2        SV
+#> 3  3        ST
 #> 4  1        SV
-#> 5  2        SV
-#> 6  3        AV
-#> 7  1        AV
-#> 8  2        AV
-#> 9  3        ST
+#> 5  2        AV
+#> 6  3        SV
+#> 7  1        ST
+#> 8  2        ST
+#> 9  3        AV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
