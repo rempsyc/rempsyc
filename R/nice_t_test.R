@@ -53,6 +53,7 @@ nice_t_test <- function(response, group, data, ...) {
                             d,
                             CI_lower,
                             CI_higher)
+  row.names(table.stats) <- NULL
   names(table.stats) <- c("Dependent Variable", "t", "df", "p", "d", "CI_lower", "CI_upper")
   table.stats
 }
