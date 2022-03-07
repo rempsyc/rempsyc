@@ -12,7 +12,7 @@ overlap_circle(response, categories = c("Self", "Other"))
 \item{categories}{The categories}
 }
 \description{
-Interpolating the Inclusion of the Other in the Self Scale easily.
+Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 }
 \examples{
 # Score of 1 (0\% overlap)

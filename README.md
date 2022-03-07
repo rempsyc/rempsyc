@@ -45,6 +45,11 @@ library(rempsyc)
 
 ## Features
 
+All plots can be saved with the `ggsave()` function. They are `ggplot`
+objects so can be modified as such. The tables can be saved with the
+`save_as_docx` function, and are `flextable` objects, and can be
+modified as such.
+
 ### `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire
@@ -229,28 +234,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
+#> 1  1        CX
 #> 2  2        BP
-#> 3  3        CX
+#> 3  3        ZL
 #> 4  4        PZ
 #> 5  5        PZ
 #> 6  6        CX
-#> 7  7        ZL
-#> 8  8        BP
+#> 7  7        BP
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
-#> 2  2        AV
-#> 3  3        AV
+#> 1  1        ST
+#> 2  2        ST
+#> 3  3        SV
 #> 4  1        SV
-#> 5  2        ST
-#> 6  3        ST
-#> 7  1        ST
-#> 8  2        SV
-#> 9  3        SV
+#> 5  2        SV
+#> 6  3        AV
+#> 7  1        AV
+#> 8  2        AV
+#> 9  3        ST
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -294,7 +299,7 @@ View(nice_assumptions(model))
 #> 
 ```
 
-<img src="man/figures/assumptions_table.png" width="65%" />
+<img src="man/figures/assumptions_table.png" width="70%" />
 
 ### `nice_qq`
 
@@ -362,5 +367,5 @@ nice_varplot(variable = "Sepal.Length",
 
 ## Support me and this package
 
-You can support me and this package here:
+Thank you for your support. You can support me and this package here:
 <https://remi-theriault.com/donate/>

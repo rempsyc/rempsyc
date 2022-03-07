@@ -53,6 +53,8 @@ library(rempsyc)
 
 ## Features
 
+All plots can be saved with the `ggsave()` function. They are `ggplot` objects so can be modified as such. The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such.
+
 ### `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire answers.
@@ -240,7 +242,7 @@ model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 View(nice_assumptions(model))
 ```
 
-<img src="man/figures/assumptions_table.png" width="65%" />
+<img src="man/figures/assumptions_table.png" width="70%" />
 
 ### `nice_qq `
 
@@ -289,7 +291,7 @@ nice_var(variable="Sepal.Length",
 
 Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=6, out.width="70%"}
+```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
 nice_varplot(variable = "Sepal.Length",
              group = "Species",
              data = iris)
@@ -297,4 +299,4 @@ nice_varplot(variable = "Sepal.Length",
 
 ## Support me and this package
 
-You can support me and this package here: https://remi-theriault.com/donate/
+Thank you for your support. You can support me and this package here: https://remi-theriault.com/donate/
