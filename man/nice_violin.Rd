@@ -173,5 +173,8 @@ nice_violin(data = ToothGrowth,
            border.colour = "black")
 
 }
+\seealso{
+Visualize group differences via scatter plots: \code{\link{nice_scatter}}
+}
 \keyword{plots}
 \keyword{violin}

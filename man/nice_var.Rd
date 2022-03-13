@@ -28,4 +28,7 @@ var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 var.table
 
 }
+\seealso{
+Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}
+}
 \keyword{variance}

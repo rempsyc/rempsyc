@@ -27,6 +27,9 @@
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
 #'
+#' @seealso
+#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}
+#'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 #' @importFrom stats var median

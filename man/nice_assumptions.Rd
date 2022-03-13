@@ -27,6 +27,10 @@ models.list <- sapply(X = formulas, FUN = lm, data = mtcars,
 assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
                                              interpretation = FALSE))
 assumptions.table
+
+}
+\seealso{
+Other functions useful in assumption testing: \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}
 }
 \keyword{assumptions,}
 \keyword{linear}

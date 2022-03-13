@@ -20,6 +20,10 @@
 #' assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
 #'                                              interpretation = FALSE))
 #' assumptions.table
+#'
+#' @seealso
+#' Other functions useful in assumption testing: \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}
+#'
 
 nice_assumptions <- function(model, interpretation = TRUE) {
   model.name <- format(model$terms)

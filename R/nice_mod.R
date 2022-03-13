@@ -40,6 +40,10 @@
 #'          moderator = "wt",
 #'          moderator2 = "am",
 #'          data = mtcars)
+#'
+#' @seealso
+#' Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
+#'
 
 nice_mod <- function(response, predictor, moderator, moderator2=NULL,
                      covariates=NULL, data, ...) {

@@ -7,6 +7,7 @@
 #' @param data The data
 #'
 #' @keywords variance
+#'
 #' @examples
 #' # Make the basic table
 #' nice_var(variable="Sepal.Length",
@@ -17,6 +18,9 @@
 #' DV <- names(iris[1:4])
 #' var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
 #' var.table
+#'
+#' @seealso
+#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
 

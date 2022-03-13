@@ -62,6 +62,9 @@ nice_slopes(response = "mpg",
             data = mtcars)
 
 }
+\seealso{
+Checking for moderation before checking simple slopes: \code{\link{nice_mod}}
+}
 \keyword{interaction,}
 \keyword{moderation,}
 \keyword{regression}

@@ -60,6 +60,10 @@ nice_mod(response = "mpg",
          moderator = "wt",
          moderator2 = "am",
          data = mtcars)
+
+}
+\seealso{
+Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
 }
 \keyword{interaction,}
 \keyword{moderation,}

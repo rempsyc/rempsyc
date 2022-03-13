@@ -50,4 +50,7 @@ nice_varplot(variable = "Sepal.Length",
              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
 
 }
+\seealso{
+Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}
+}
 \keyword{variance}

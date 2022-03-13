@@ -29,6 +29,9 @@
 #'        shapiro = TRUE,
 #'        title = NULL)
 #'
+#' @seealso
+#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_var}}, \code{\link{nice_varplot}}
+#'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
 #' @importFrom stats reformulate shapiro.test

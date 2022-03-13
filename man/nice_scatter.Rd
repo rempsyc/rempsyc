@@ -250,5 +250,8 @@ nice_scatter(data = mtcars,
             has.shape = TRUE)
 
 }
+\seealso{
+Visualize group differences via violin plots: \code{\link{nice_violin}}
+}
 \keyword{plots}
 \keyword{scatter}

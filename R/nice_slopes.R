@@ -41,6 +41,9 @@
 #'             moderator2 = "am",
 #'             data = mtcars)
 #'
+#' @seealso
+#' Checking for moderation before checking simple slopes: \code{\link{nice_mod}}
+#'
 #' @importFrom stats lm sd
 
 nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covariates=NULL, data, ...) {

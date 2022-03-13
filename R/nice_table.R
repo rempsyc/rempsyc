@@ -226,4 +226,3 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
   }
   table
 }
-niceTable <- nice_table
