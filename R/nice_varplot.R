@@ -2,14 +2,14 @@
 #'
 #' @description Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
 #'
-#' @param variable The variable
-#' @param group The group
-#' @param data The data
-#' @param colours The colours
-#' @param groups.labels The groups.labels
-#' @param grid The grid
-#' @param shapiro The shapiro
-#' @param ytitle The ytitle
+#' @param variable The dependent variable to be plotted.
+#' @param group The group by which to plot the variable.
+#' @param data The data frame
+#' @param colours Supports providing custom colours
+#' @param groups.labels How to label the groups?
+#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param ytitle An optional y-axis label, if desired.
 #'
 #' @keywords variance
 #' @export

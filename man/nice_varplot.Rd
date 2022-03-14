@@ -16,21 +16,21 @@ nice_varplot(
 )
 }
 \arguments{
-\item{variable}{The variable}
+\item{variable}{The dependent variable to be plotted.}
 
-\item{group}{The group}
+\item{group}{The group by which to plot the variable.}
 
-\item{data}{The data}
+\item{data}{The data frame}
 
-\item{colours}{The colours}
+\item{colours}{Supports providing custom colours}
 
-\item{groups.labels}{The groups.labels}
+\item{groups.labels}{How to label the groups?}
 
-\item{grid}{The grid}
+\item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 
-\item{shapiro}{The shapiro}
+\item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
 
-\item{ytitle}{The ytitle}
+\item{ytitle}{An optional y-axis label, if desired.}
 }
 \description{
 Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
