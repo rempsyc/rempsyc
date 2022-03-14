@@ -16,7 +16,7 @@ nice_table(
 )
 }
 \arguments{
-\item{dataframe}{a data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
+\item{dataframe}{the data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
 
 \item{italics}{which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.}
 
