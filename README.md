@@ -50,7 +50,7 @@ objects so can be modified as such. The tables can be saved with the
 `save_as_docx` function, and are `flextable` objects, and can be
 modified as such.
 
-### `nice_reverse`
+## `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire
 answers.
@@ -71,7 +71,7 @@ nice_reverse(-3:3, 3, min = -3)
 #> [1]  3  2  1  0 -1 -2 -3
 ```
 
-### `nice_t_test`
+## `nice_t_test`
 
 Easily compute t-test analyses, with effect sizes, and format in
 publication-ready format. Supports multiple dependent variables at once.
@@ -95,7 +95,7 @@ t.tests
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
 
-### `nice_mod`
+## `nice_mod`
 
 Easily compute moderation analyses, with effect sizes, and format in
 publication-ready format. Supports multiple dependent variables and
@@ -118,7 +118,7 @@ moderations
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
 
-### `nice_slopes`
+## `nice_slopes`
 
 Easily compute simple slopes in moderation analysis, with effect sizes,
 and format in publication-ready format. Supports multiple dependent
@@ -148,7 +148,7 @@ simple.slopes
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
 
-### `nice_table`
+## `nice_table`
 
 Make nice APA tables easily through a wrapper around the `flextable`
 package with sensical defaults and automatic formatting features.
@@ -184,7 +184,7 @@ slopes_table
 
 Full tutorial: <https://remi-theriault.com/blog_table.html>
 
-### `nice_violin`
+## `nice_violin`
 
 Make nice violin plots easily with 95% bootstrapped confidence
 intervals.
@@ -208,7 +208,7 @@ ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in',
 
 Full tutorial: <https://remi-theriault.com/blog_violin.html>
 
-### `nice_scatter`
+## `nice_scatter`
 
 Make nice scatter plots easily.
 
@@ -225,7 +225,7 @@ nice_scatter(data = mtcars,
 
 Full tutorial: <https://remi-theriault.com/blog_scatter.html>
 
-### `nice_randomize`
+## `nice_randomize`
 
 Randomize easily with different designs.
 
@@ -234,33 +234,33 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        BP
-#> 2  2        CX
-#> 3  3        PZ
-#> 4  4        ZL
+#> 1  1        ZL
+#> 2  2        PZ
+#> 3  3        CX
+#> 4  4        BP
 #> 5  5        ZL
 #> 6  6        PZ
-#> 7  7        CX
-#> 8  8        BP
+#> 7  7        BP
+#> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
-#> 2  2        SV
-#> 3  3        SV
-#> 4  1        AV
-#> 5  2        ST
-#> 6  3        AV
+#> 1  1        AV
+#> 2  2        ST
+#> 3  3        AV
+#> 4  1        SV
+#> 5  2        SV
+#> 6  3        ST
 #> 7  1        ST
 #> 8  2        AV
-#> 9  3        ST
+#> 9  3        SV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
 
-### `overlap_circle`
+## `overlap_circle`
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other
 merging) easily.
@@ -285,7 +285,7 @@ Full tutorial: <https://remi-theriault.com/blog_circles.html>
 
 Full tutorial: <https://remi-theriault.com/blog_assumptions>
 
-### `nice_assumptions`
+## `nice_assumptions`
 
 Test linear regression assumptions easily with a nice summary table.
 
@@ -301,7 +301,7 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
-### `nice_qq`
+## `nice_qq`
 
 Easily make nice per-group QQ plots.
 
@@ -317,7 +317,7 @@ nice_qq(variable = "Sepal.Length",
 
 <img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" />
 
-### `nice_density`
+## `nice_density`
 
 Easily make nice per-group QQ plots.
 
@@ -335,7 +335,7 @@ nice_density(variable = "Sepal.Length",
 
 <img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
 
-### `nice_var`
+## `nice_var`
 
 Obtain variance per group as well as check for the rule of thumb of one
 group having variance four times bigger than any of the other groups.
@@ -351,7 +351,7 @@ nice_var(variable="Sepal.Length",
 #> 1 Sepal.Length  0.124      0.266     0.404             3.3 FALSE
 ```
 
-### `nice_varplot`
+## `nice_varplot`
 
 Attempt to visualize variance per group. It is not a good way to
 visualize variance because the concentration of points may be hidden on
