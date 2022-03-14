@@ -2,9 +2,9 @@
 #'
 #' @description Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
 #'
-#' @param variable The variable
-#' @param group The group
-#' @param data The data
+#' @param variable The dependent variable to be plotted.
+#' @param group The group by which to plot the variable.
+#' @param data The data frame
 #'
 #' @keywords variance
 #'

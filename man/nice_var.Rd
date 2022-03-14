@@ -7,11 +7,11 @@
 nice_var(variable, group, data)
 }
 \arguments{
-\item{variable}{The variable}
+\item{variable}{The dependent variable to be plotted.}
 
-\item{group}{The group}
+\item{group}{The group by which to plot the variable.}
 
-\item{data}{The data}
+\item{data}{The data frame}
 }
 \description{
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
