@@ -32,53 +32,53 @@ nice_violin(
 )
 }
 \arguments{
-\item{data}{The data}
+\item{data}{The data frame}
 
-\item{group}{The group}
+\item{group}{The group by which to plot the variable.}
 
-\item{response}{The response}
+\item{response}{The dependent variable to be plotted.}
 
-\item{boot}{The boot}
+\item{boot}{Logical, whether to use bootstrapping or not.}
 
-\item{bootstraps}{The bootstraps}
+\item{bootstraps}{How many bootstraps to use?}
 
-\item{colours}{The colours}
+\item{colours}{Supports providing custom colours.}
 
-\item{xlabels}{The xlabels}
+\item{xlabels}{The individual group labels on the x-axis.}
 
-\item{ytitle}{The ytitle}
+\item{ytitle}{An optional y-axis label, if desired.}
 
-\item{xtitle}{The xtitle}
+\item{xtitle}{An optional x-axis label, if desired.}
 
-\item{has.ylabels}{The has.ylabels}
+\item{has.ylabels}{Logical, whether the x-axis should have labels or not}
 
-\item{has.xlabels}{The has.xlabels}
+\item{has.xlabels}{Logical, whether the y-axis should have labels or not}
 
-\item{comp1}{The comp1}
+\item{comp1}{The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "\emph{", "\strong{", or "}}" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp2}.}
 
-\item{comp2}{The comp2}
+\item{comp2}{The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "\emph{", "\strong{", or "}}" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp1}.}
 
-\item{signif_annotation}{The signif_annotation}
+\item{signif_annotation}{Manually provide the required annotations/numbers of stars (as character strings). Useful if the automatic pairwise comparison annotation does not work as expected, or yet if one wants more than one pairwise comparison. Must be provided along with arguments \code{signif_yposition}, \code{signif_xmin}, and \code{signif_xmax}.}
 
-\item{signif_yposition}{The signif_yposition}
+\item{signif_yposition}{Manually provide the vertical position of the annotations/stars, based on the y-scale.}
 
-\item{signif_xmin}{The signif_xmin}
+\item{signif_xmin}{Manually provide the first part of the horizontal position of the annotations/stars (start of the left-sided bracket), based on the x-scale.}
 
-\item{signif_xmax}{The signif_xmax}
+\item{signif_xmax}{Manually provide the second part of the horizontal position of the annotations/stars (end of the right-sided bracket), based on the x-scale.}
 
-\item{ymin}{The ymin}
+\item{ymin}{The minimum score on the x-axis scale.}
 
-\item{ymax}{The ymax}
+\item{ymax}{The minimum score on the y-axis scale.}
 
-\item{yby}{The yby}
+\item{yby}{How much to increase on each "tick" on the y-axis scale.}
 
-\item{CIcap.width}{The CIcap.width}
+\item{CIcap.width}{The width of the confidence interval cap.}
 
-\item{obs}{The obs}
+\item{obs}{Logical, whether to plot individual observations or not.}
 
-\item{alpha}{The alpha}
+\item{alpha}{The alpha (transparency) of the plot.}
 
-\item{border.colour}{The border.colour}
+\item{border.colour}{The colour of the plot border.}
 }
 \description{
 Make nice violin plots easily with 95\% bootstrapped confidence intervals.

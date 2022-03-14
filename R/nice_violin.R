@@ -2,30 +2,30 @@
 #'
 #' @description Make nice violin plots easily with 95% bootstrapped confidence intervals.
 #'
-#' @param data The data
-#' @param group The group
-#' @param response The response
-#' @param boot The boot
-#' @param bootstraps The bootstraps
-#' @param colours The colours
-#' @param xlabels The xlabels
-#' @param ytitle The ytitle
-#' @param xtitle The xtitle
-#' @param has.ylabels The has.ylabels
-#' @param has.xlabels The has.xlabels
-#' @param comp1 The comp1
-#' @param comp2 The comp2
-#' @param signif_annotation The signif_annotation
-#' @param signif_yposition The signif_yposition
-#' @param signif_xmin The signif_xmin
-#' @param signif_xmax The signif_xmax
-#' @param ymin The ymin
-#' @param ymax The ymax
-#' @param yby The yby
-#' @param CIcap.width The CIcap.width
-#' @param obs The obs
-#' @param alpha The alpha
-#' @param border.colour The border.colour
+#' @param data The data frame
+#' @param group The group by which to plot the variable.
+#' @param response The dependent variable to be plotted.
+#' @param boot Logical, whether to use bootstrapping or not.
+#' @param bootstraps How many bootstraps to use?
+#' @param colours Supports providing custom colours.
+#' @param xlabels The individual group labels on the x-axis.
+#' @param ytitle An optional y-axis label, if desired.
+#' @param xtitle An optional x-axis label, if desired.
+#' @param has.ylabels Logical, whether the x-axis should have labels or not
+#' @param has.xlabels Logical, whether the y-axis should have labels or not
+#' @param comp1 The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "*", "**", or "***" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp2`.
+#' @param comp2 The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "*", "**", or "***" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp1`.
+#' @param signif_annotation Manually provide the required annotations/numbers of stars (as character strings). Useful if the automatic pairwise comparison annotation does not work as expected, or yet if one wants more than one pairwise comparison. Must be provided along with arguments `signif_yposition`, `signif_xmin`, and `signif_xmax`.
+#' @param signif_yposition Manually provide the vertical position of the annotations/stars, based on the y-scale.
+#' @param signif_xmin Manually provide the first part of the horizontal position of the annotations/stars (start of the left-sided bracket), based on the x-scale.
+#' @param signif_xmax Manually provide the second part of the horizontal position of the annotations/stars (end of the right-sided bracket), based on the x-scale.
+#' @param ymin The minimum score on the x-axis scale.
+#' @param ymax The minimum score on the y-axis scale.
+#' @param yby How much to increase on each "tick" on the y-axis scale.
+#' @param CIcap.width The width of the confidence interval cap.
+#' @param obs Logical, whether to plot individual observations or not.
+#' @param alpha The alpha (transparency) of the plot.
+#' @param border.colour The colour of the plot border.
 #'
 #' @keywords violin plots
 #' @export
