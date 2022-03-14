@@ -13,7 +13,7 @@
 #' @param xtitle An optional x-axis label, if desired.
 #' @param has.ylabels Logical, whether the x-axis should have labels or not
 #' @param has.xlabels Logical, whether the y-axis should have labels or not
-#' @param comp1 The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "*", "**", or "***" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp2`.
+#' @param comp1 The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays `*`, `**`, or `***` depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp2`.
 #' @param comp2 The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "*", "**", or "***" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp1`.
 #' @param signif_annotation Manually provide the required annotations/numbers of stars (as character strings). Useful if the automatic pairwise comparison annotation does not work as expected, or yet if one wants more than one pairwise comparison. Must be provided along with arguments `signif_yposition`, `signif_xmin`, and `signif_xmax`.
 #' @param signif_yposition Manually provide the vertical position of the annotations/stars, based on the y-scale.

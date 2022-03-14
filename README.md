@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rempsyc <img src='man/figures/logo.png' align="right" height="139" />
+# rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -19,11 +19,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 ![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)
 <!-- badges: end -->
 
-Convenience functions to make your workflow faster and easier. Easily
-customizable plots (via `ggplot2`), nice APA tables exportable to Word
-(via `flextable`), easily run statistical tests or check assumptions,
-and automatize various other tasks. Mostly geared at researchers in the
-psychological sciences.
+R package of convenience functions to make your workflow faster and
+easier. Easily customizable plots (via `ggplot2`), nice APA tables
+exportable to Word (via `flextable`), easily run statistical tests or
+check assumptions, and automatize various other tasks. Mostly geared at
+researchers in the psychological sciences.
 
 ## Installation
 
@@ -234,12 +234,12 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        PZ
-#> 2  2        BP
-#> 3  3        CX
+#> 1  1        BP
+#> 2  2        CX
+#> 3  3        PZ
 #> 4  4        ZL
-#> 5  5        PZ
-#> 6  6        ZL
+#> 5  5        ZL
+#> 6  6        PZ
 #> 7  7        CX
 #> 8  8        BP
 
@@ -247,15 +247,15 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        SV
 #> 2  2        SV
-#> 3  3        ST
-#> 4  1        ST
+#> 3  3        SV
+#> 4  1        AV
 #> 5  2        ST
 #> 6  3        AV
-#> 7  1        SV
+#> 7  1        ST
 #> 8  2        AV
-#> 9  3        SV
+#> 9  3        ST
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -346,7 +346,7 @@ nice_var(variable="Sepal.Length",
          data=iris)
 #> # A tibble: 1 x 6
 #> # Rowwise: 
-#>   Variable     Setosa Versicolor Virginica `Max/Min Ratio` `Heteroscedastic (F~`
+#>   Variable     Setosa Versicolor Virginica `Max/Min Ratio` `Heteroscedastic (4~`
 #>   <chr>         <dbl>      <dbl>     <dbl>           <dbl> <lgl>                
 #> 1 Sepal.Length  0.124      0.266     0.404             3.3 FALSE
 ```
