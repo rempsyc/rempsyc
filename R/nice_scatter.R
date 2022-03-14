@@ -306,4 +306,3 @@ nice_scatter <- function(data,predictor, response, xtitle=ggplot2::waiver(),
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
 }
-niceScatter <- nice_scatter

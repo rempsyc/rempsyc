@@ -70,4 +70,3 @@ nice_varplot <- function(variable, group, data, colours, groups.labels,
                     inherit.aes=FALSE,
                     size=6)
 }
-niceVariance <- nice_varplot

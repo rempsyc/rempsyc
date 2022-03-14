@@ -60,4 +60,3 @@ nice_randomize <- function (design="between", Ncondition=3, n=9,
   names(final_table) <- col.names
   final_table
 }
-niceRandomize <- nice_randomize

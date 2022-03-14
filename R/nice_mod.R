@@ -73,4 +73,3 @@ nice_mod <- function(response, predictor, moderator, moderator2=NULL,
   names(table.stats) <- c("Dependent Variable", "Predictor", "df", "b", "t", "p", "sr2")
   table.stats
 }
-niceMod <- nice_mod

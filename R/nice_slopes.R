@@ -197,4 +197,3 @@ nice_slopes <- function(response, predictor, moderator, moderator2=NULL, covaria
   }
 
 }
-niceSlopes <- nice_slopes

@@ -196,4 +196,3 @@ nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
                                                             size=1.3,
                                                             textsize=8)}
 }
-niceViolin <- nice_violin

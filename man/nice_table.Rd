@@ -16,21 +16,21 @@ nice_table(
 )
 }
 \arguments{
-\item{dataframe}{the data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
+\item{dataframe}{The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
 
-\item{italics}{which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.}
+\item{italics}{Which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.}
 
-\item{highlight}{highlight rows with statistically significant results? Requires a column named "p" containing p-values. Can either accept logical (TRUE/FALSE) OR a numeric value for a custom critical p-value threshold.}
+\item{highlight}{Highlight rows with statistically significant results? Requires a column named "p" containing p-values. Can either accept logical (TRUE/FALSE) OR a numeric value for a custom critical p-value threshold (e.g., 0.10 or 0.001).}
 
-\item{col.format.p}{applies p-value formatting to columns that cannot be named "p" (for example for a data frame full of p-values, also because it is not possible to have more than one column named "p").}
+\item{col.format.p}{Applies p-value formatting to columns that cannot be named "p" (for example for a data frame full of p-values, also because it is not possible to have more than one column named "p"). Select with numerical range, e.g., 1:3.}
 
-\item{col.format.r}{applies r-value formatting to columns that cannot be named "r" (for example for a data frame full of r-values, also because it is not possible to have more than one column named "r").}
+\item{col.format.r}{Applies r-value formatting to columns that cannot be named "r" (for example for a data frame full of r-values, also because it is not possible to have more than one column named "r"). Select with numerical range, e.g., 1:3.}
 
-\item{format.custom}{applies custom formatting to columns selected via the \code{col.format.custom} argument. This is useful if one wants custom formatting other than for p- or r-values. It can also be used to transform (e.g., multiply) certain values or print a specific symbol along the values for instance.}
+\item{format.custom}{Applies custom formatting to columns selected via the \code{col.format.custom} argument. This is useful if one wants custom formatting other than for p- or r-values. It can also be used to transform (e.g., multiply) certain values or print a specific symbol along the values for instance.}
 
-\item{col.format.custom}{which columns to apply the custom function to. Takes a numeric range, e.g., 1:3.}
+\item{col.format.custom}{Which columns to apply the custom function to. Select with numerical range, e.g., 1:3.}
 
-\item{width}{width of the table, in percentage of the total width, when exported e.g., to Word.}
+\item{width}{Width of the table, in percentage of the total width, when exported e.g., to Word.}
 }
 \description{
 Make nice APA tables easily through a wrapper around the \code{flextable} package with sensical defaults and automatic formatting features.

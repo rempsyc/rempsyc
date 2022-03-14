@@ -16,21 +16,21 @@ nice_qq(
 )
 }
 \arguments{
-\item{variable}{the dependent variable to be plotted.}
+\item{variable}{The dependent variable to be plotted.}
 
-\item{group}{the group by which to plot the variable.}
+\item{group}{The group by which to plot the variable.}
 
 \item{data}{The data frame}
 
-\item{colours}{supports providing custom colours}
+\item{colours}{Supports providing custom colours}
 
-\item{groups.labels}{how to label the groups?}
+\item{groups.labels}{How to label the groups?}
 
-\item{grid}{logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
+\item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 
-\item{shapiro}{logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
+\item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
 
-\item{title}{an optional title, if desired.}
+\item{title}{An optional title, if desired.}
 }
 \description{
 Easily make nice per-group QQ plots through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.

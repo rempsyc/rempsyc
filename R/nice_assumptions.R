@@ -41,4 +41,3 @@ nice_assumptions <- function(model, interpretation = TRUE) {
   if(interpretation == TRUE) { cat("Interpretation: (p) values < .05 imply assumptions are not respected. \nDiagnostic is how many assumptions are not respected for a given model or variable. \n  \n") }
   df
 }
-niceAssumptions <- nice_assumptions

@@ -2,14 +2,14 @@
 #'
 #' @description Easily make nice per-group QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
-#' @param variable the dependent variable to be plotted.
-#' @param group the group by which to plot the variable.
+#' @param variable The dependent variable to be plotted.
+#' @param group The group by which to plot the variable.
 #' @param data The data frame
-#' @param colours supports providing custom colours
-#' @param groups.labels how to label the groups?
-#' @param grid logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
-#' @param shapiro logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
-#' @param title an optional title, if desired.
+#' @param colours Supports providing custom colours
+#' @param groups.labels How to label the groups?
+#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param title An optional title, if desired.
 #'
 #' @keywords QQ plots, normality, distribution
 #' @export
@@ -85,4 +85,3 @@ nice_qq <- function(variable, group, data, colours, groups.labels=NULL,
           axis.line=element_line(colour = "black"),
           axis.ticks=element_line(colour = "black"))
 }
-niceQQ <- nice_qq

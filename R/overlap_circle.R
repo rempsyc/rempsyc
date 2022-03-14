@@ -52,4 +52,4 @@ overlap_circle <- function(response, categories = c("Self", "Other")){
                                             label.col = c("white","black","white")))
 
 }
-overlapCircle <-  nice_circle <- overlap_circle
+nice_circle <- overlap_circle
