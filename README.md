@@ -235,25 +235,25 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
 #> 1  1        ZL
-#> 2  2        PZ
-#> 3  3        CX
+#> 2  2        CX
+#> 3  3        PZ
 #> 4  4        BP
-#> 5  5        ZL
-#> 6  6        PZ
-#> 7  7        BP
-#> 8  8        CX
+#> 5  5        CX
+#> 6  6        ZL
+#> 7  7        PZ
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        SV
 #> 2  2        ST
-#> 3  3        AV
-#> 4  1        SV
+#> 3  3        ST
+#> 4  1        ST
 #> 5  2        SV
-#> 6  3        ST
-#> 7  1        ST
+#> 6  3        AV
+#> 7  1        AV
 #> 8  2        AV
 #> 9  3        SV
 ```
@@ -368,4 +368,4 @@ nice_varplot(variable = "Sepal.Length",
 ## Support me and this package
 
 Thank you for your support. You can support me and this package here:
-<https://remi-theriault.com/donate/>
+<https://github.com/sponsors/rempsyc>
