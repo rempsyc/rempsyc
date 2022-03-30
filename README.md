@@ -234,12 +234,12 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
-#> 2  2        CX
+#> 1  1        CX
+#> 2  2        ZL
 #> 3  3        PZ
 #> 4  4        BP
-#> 5  5        CX
-#> 6  6        ZL
+#> 5  5        ZL
+#> 6  6        CX
 #> 7  7        PZ
 #> 8  8        BP
 
@@ -247,15 +247,15 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
+#> 1  1        AV
 #> 2  2        ST
 #> 3  3        ST
-#> 4  1        ST
+#> 4  1        SV
 #> 5  2        SV
-#> 6  3        AV
-#> 7  1        AV
+#> 6  3        SV
+#> 7  1        ST
 #> 8  2        AV
-#> 9  3        SV
+#> 9  3        AV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -280,6 +280,33 @@ overlap_circle(6.84)
 <img src="man/figures/README-unnamed-chunk-16-2.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_circles.html>
+
+## `cormatrix_excel`
+
+Easily output a correlation matrix and export it to Microsoft Excel,
+with the first row and column frozen, and correlation coefficients
+colour-coded based on their effect size (0.0-0.3: small (no colour);
+0.3-0.6: medium (pink); 0.6-1.0: large (red)).
+
+``` r
+cormatrix_excel(mtcars)
+#>        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#> mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+#> cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+#> disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+#> hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+#> drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+#> wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+#> qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+#> vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+#> am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+#> gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+#> carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+#> 
+#>  [Correlation matrix 'mycormatrix.xlsx' has been saved to working directory (or where specified.]
+```
+
+<img src="man/figures/cormatrix.png" width="100%" />
 
 ## Testing assumptions
 
@@ -315,7 +342,7 @@ nice_qq(variable = "Sepal.Length",
        title = NULL)
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
 
 ## `nice_density`
 
@@ -333,7 +360,7 @@ nice_density(variable = "Sepal.Length",
             title = "Density (Sepal Length)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
 
 ## `nice_var`
 
@@ -363,7 +390,7 @@ nice_varplot(variable = "Sepal.Length",
              data = iris)
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="70%" />
 
 ## Support me and this package
 

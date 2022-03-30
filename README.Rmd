@@ -214,7 +214,7 @@ Full tutorial: https://remi-theriault.com/blog_randomize.html
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 
-```{r warning = FALSE, message = FALSE, , fig.width=7, fig.height=7, out.width="60%"}
+```{r warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
 
 # Score of 3.5 (25% overlap)
 overlap_circle(3.5)
@@ -224,6 +224,18 @@ overlap_circle(6.84)
 ```
 
 Full tutorial: https://remi-theriault.com/blog_circles.html
+
+## `cormatrix_excel`
+
+Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0: large (red)).
+
+```{r warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
+
+cormatrix_excel(mtcars)
+
+```
+
+<img src="man/figures/cormatrix.png" width="100%" />
 
 ## Testing assumptions
 
