@@ -85,5 +85,5 @@ cormatrix_excel <- function(data, filename = "mycormatrix", overwrite = TRUE) {
   openxlsx::saveWorkbook(wb,
                          file = paste0(filename, ".xlsx"),
                          overwrite = overwrite)
-  cat(paste0("\n [Correlation matrix '", filename, ".xlsx' has been saved to working directory (or where specified.]"))
+  cat(paste0("\n [Correlation matrix '", filename, ".xlsx' has been saved to working directory (or where specified).]"))
 }
