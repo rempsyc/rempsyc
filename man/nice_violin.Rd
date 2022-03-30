@@ -54,7 +54,7 @@ nice_violin(
 
 \item{has.xlabels}{Logical, whether the y-axis should have labels or not}
 
-\item{comp1}{The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "\emph{", "\strong{", or "}}" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp2}.}
+\item{comp1}{The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays \code{*}, \verb{**}, or \verb{***} depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp2}.}
 
 \item{comp2}{The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "\emph{", "\strong{", or "}}" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp1}.}
 

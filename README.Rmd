@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r README-1, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r, echo = FALSE}                                  
+```{r README-2, echo = FALSE                                  }
 version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                                  
 version <- gsub('-', '.', version)                                  
 ```
@@ -58,7 +58,7 @@ All plots can be saved with the `ggsave()` function. They are `ggplot` objects s
 
 Easily recode scores (reverse-score), typically for questionnaire answers.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-3, warning = FALSE, message = FALSE}
 library(rempsyc)
 
 # Reverse score of 5 with a maximum score of 5
@@ -75,7 +75,7 @@ nice_reverse(-3:3, 3, min = -3)
 
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-4, warning = FALSE, message = FALSE}
 nice_t_test(response = c("mpg", "disp", "drat", "wt"),
             group = "am",
             data = mtcars) -> t.tests
@@ -88,7 +88,7 @@ Full tutorial: https://remi-theriault.com/blog_t-test
 
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-5, warning = FALSE, message = FALSE}
 nice_mod(response = c("mpg", "disp"),
          predictor = "gear",
          moderator = "wt",
@@ -102,7 +102,7 @@ Full tutorial: https://remi-theriault.com/blog_moderation
 
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-6, warning = FALSE, message = FALSE}
 nice_slopes(response = c("mpg", "disp"),
             predictor = "gear",
             moderator = "wt",
@@ -116,42 +116,42 @@ Full tutorial: https://remi-theriault.com/blog_moderation
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 
-```{r example1, warning = FALSE, message = FALSE}
+```{r README-7, warning = FALSE, message = FALSE}
 # Format t-test results
 t_table <- nice_table(t.tests, width = .75)
 t_table
 ```
 
-```{r echo = FALSE, results='hide'}
+```{r README-8, echo = FALSE, results='hide'}
 flextable::save_as_image(t_table, path = "man/figures/t_table.png")
 ```
 
 <img src="man/figures/t_table.png" width="90%" />
 
-```{r warning = FALSE, message = FALSE}
+```{r README-9, warning = FALSE, message = FALSE}
 # Save to word
 save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
-```{r warning = FALSE, message = FALSE}
+```{r README-10, warning = FALSE, message = FALSE}
 # Format moderation results
 mod_table <- nice_table(moderations, highlight = TRUE, width = .75)
 mod_table
 ```
 
-```{r echo = FALSE, results='hide'}
+```{r README-11, echo = FALSE, results='hide'}
 flextable::save_as_image(mod_table, path = "man/figures/mod_table.png")
 ```
 
 <img src="man/figures/mod_table.png" width="90%" />
 
-```{r warning = FALSE, message = FALSE}
+```{r README-12, warning = FALSE, message = FALSE}
 # Format simple slopes results
 slopes_table <- nice_table(simple.slopes, width = .75)
 slopes_table
 ```
 
-```{r echo = FALSE, results='hide'}
+```{r README-13, echo = FALSE, results='hide'}
 flextable::save_as_image(slopes_table, path = "man/figures/slopes_table.png")
 ```
 
@@ -163,7 +163,7 @@ Full tutorial: https://remi-theriault.com/blog_table.html
 
 Make nice violin plots easily with 95% bootstrapped confidence intervals.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
+```{r README-14, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
@@ -182,7 +182,7 @@ Full tutorial: https://remi-theriault.com/blog_violin.html
 
 Make nice scatter plots easily.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
+```{r README-15, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
@@ -197,7 +197,7 @@ Full tutorial: https://remi-theriault.com/blog_scatter.html
 
 Randomize easily with different designs.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-16, warning = FALSE, message = FALSE}
 
 # Specify design, number of conditions, number of participants, and names of conditions:
 nice_randomize(design = "between", Ncondition = 4, n = 8,
@@ -214,7 +214,7 @@ Full tutorial: https://remi-theriault.com/blog_randomize.html
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 
-```{r warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
+```{r README-17, warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
 
 # Score of 3.5 (25% overlap)
 overlap_circle(3.5)
@@ -229,7 +229,7 @@ Full tutorial: https://remi-theriault.com/blog_circles.html
 
 Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0: large (red)).
 
-```{r warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
+```{r README-18, warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="60%"}
 
 cormatrix_excel(mtcars)
 
@@ -245,7 +245,7 @@ Full tutorial: https://remi-theriault.com/blog_assumptions
 
 Test linear regression assumptions easily with a nice summary table.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-19, warning = FALSE, message = FALSE}
 
 # Create regression model
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
@@ -259,7 +259,7 @@ View(nice_assumptions(model))
 
 Easily make nice per-group QQ plots.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
+```{r README-20, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
 
 # Create regression model
 nice_qq(variable = "Sepal.Length",
@@ -274,7 +274,7 @@ nice_qq(variable = "Sepal.Length",
 
 Easily make nice per-group QQ plots.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
+```{r README-21, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
 
 # Create regression model
 nice_density(variable = "Sepal.Length",
@@ -292,7 +292,7 @@ nice_density(variable = "Sepal.Length",
 
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
 
-```{r warning = FALSE, message = FALSE}
+```{r README-22, warning = FALSE, message = FALSE}
 nice_var(variable="Sepal.Length",
          group="Species",
          data=iris)
@@ -302,7 +302,7 @@ nice_var(variable="Sepal.Length",
 
 Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
 
-```{r warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
+```{r README-23, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
 nice_varplot(variable = "Sepal.Length",
              group = "Species",
              data = iris)
