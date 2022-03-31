@@ -13,7 +13,9 @@ format_p(p, precision = 0.001)
 format_r(r, precision = 0.01)
 }
 \arguments{
-\item{type}{Value to be formatted, when using the generic \code{format_value()}}
+\item{value}{Value to be formatted, when using the generic \code{format_value()}}
+
+\item{type}{Specify r or p value}
 
 \item{...}{To specify precision level, if necessary, when using the generic \code{format_value()}}
 

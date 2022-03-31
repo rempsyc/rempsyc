@@ -6,7 +6,7 @@
 #' @param r r-value to format
 #' @param precision Level of precision desired, if necessary
 #' @param type Specify r or p value
-#' @param type Value to be formatted, when using the generic `format_value()`
+#' @param value Value to be formatted, when using the generic `format_value()`
 #' @param ... To specify precision level, if necessary, when using the generic `format_value()`
 #'
 #' @keywords formatting, p-value, r-value, correlation
