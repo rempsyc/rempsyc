@@ -212,7 +212,7 @@ nice_violin(data = ToothGrowth,
             comp2 = 3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="60%" />
+<img src="man/figures/README-nice_violin-1.png" width="60%" />
 
 ``` r
 # Save plot
@@ -235,7 +235,7 @@ nice_scatter(data = mtcars,
              has.p = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="60%" />
+<img src="man/figures/README-nice_scatter-1.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_scatter.html>
 
@@ -248,26 +248,26 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        BP
-#> 2  2        CX
-#> 3  3        PZ
-#> 4  4        ZL
-#> 5  5        PZ
-#> 6  6        ZL
-#> 7  7        CX
+#> 1  1        CX
+#> 2  2        PZ
+#> 3  3        ZL
+#> 4  4        BP
+#> 5  5        CX
+#> 6  6        PZ
+#> 7  7        ZL
 #> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
-#> 2  2        ST
-#> 3  3        AV
-#> 4  1        AV
-#> 5  2        AV
-#> 6  3        ST
-#> 7  1        ST
+#> 1  1        ST
+#> 2  2        AV
+#> 3  3        ST
+#> 4  1        SV
+#> 5  2        ST
+#> 6  3        AV
+#> 7  1        AV
 #> 8  2        SV
 #> 9  3        SV
 ```
@@ -284,14 +284,14 @@ merging) easily.
 overlap_circle(3.5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="60%" />
+<img src="man/figures/README-overlap_circle-1.png" width="60%" />
 
 ``` r
 # Score of 6.84 (81.8% overlap)
 overlap_circle(6.84)
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-2.png" width="60%" />
+<img src="man/figures/README-overlap_circle-2.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_circles.html>
 
@@ -356,7 +356,7 @@ nice_qq(variable = "Sepal.Length",
        title = NULL)
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="80%" />
+<img src="man/figures/README-nice_qq-1.png" width="80%" />
 
 ## `nice_density`
 
@@ -374,7 +374,7 @@ nice_density(variable = "Sepal.Length",
             title = "Density (Sepal Length)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-22-1.png" width="80%" />
+<img src="man/figures/README-nice_density-1.png" width="80%" />
 
 ## `nice_var`
 
@@ -404,7 +404,7 @@ nice_varplot(variable = "Sepal.Length",
              data = iris)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="70%" />
+<img src="man/figures/README-nice_varplot-1.png" width="70%" />
 
 ## Support me and this package
 
