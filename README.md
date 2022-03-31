@@ -71,6 +71,24 @@ nice_reverse(-3:3, 3, min = -3)
 #> [1]  3  2  1  0 -1 -2 -3
 ```
 
+## `format_value`
+
+Easily format *p* or *r* values. Note: converts to `character` class for
+use in figures or manuscripts to accommodate e.g., “\< .001”.
+
+``` r
+format_value(0.00041231, "p")
+#> [1] "< .001"
+format_value(0.00041231, "r")
+#> [1] ".00"
+format_p(0.00041231)
+#> [1] "< .001"
+format_p(0.0041231)
+#> [1] ".004"
+format_r(0.41231)
+#> [1] ".41"
+```
+
 ## `nice_t_test`
 
 Easily compute t-test analyses, with effect sizes, and format in
@@ -198,7 +216,7 @@ nice_violin(data = ToothGrowth,
             comp2 = 3)
 ```
 
-<img src="man/figures/README-README-14-1.png" width="60%" />
+<img src="man/figures/README-README-15-1.png" width="60%" />
 
 ``` r
 # Save plot
@@ -221,7 +239,7 @@ nice_scatter(data = mtcars,
              has.p = TRUE)
 ```
 
-<img src="man/figures/README-README-15-1.png" width="60%" />
+<img src="man/figures/README-README-16-1.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_scatter.html>
 
@@ -234,27 +252,27 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        CX
-#> 2  2        PZ
-#> 3  3        ZL
-#> 4  4        BP
-#> 5  5        ZL
-#> 6  6        PZ
-#> 7  7        BP
-#> 8  8        CX
+#> 1  1        ZL
+#> 2  2        BP
+#> 3  3        CX
+#> 4  4        PZ
+#> 5  5        PZ
+#> 6  6        BP
+#> 7  7        CX
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
-#> 2  2        ST
+#> 1  1        AV
+#> 2  2        AV
 #> 3  3        AV
 #> 4  1        ST
-#> 5  2        SV
+#> 5  2        ST
 #> 6  3        ST
-#> 7  1        AV
-#> 8  2        AV
+#> 7  1        SV
+#> 8  2        SV
 #> 9  3        SV
 ```
 
@@ -270,14 +288,14 @@ merging) easily.
 overlap_circle(3.5)
 ```
 
-<img src="man/figures/README-README-17-1.png" width="60%" />
+<img src="man/figures/README-README-18-1.png" width="60%" />
 
 ``` r
 # Score of 6.84 (81.8% overlap)
 overlap_circle(6.84)
 ```
 
-<img src="man/figures/README-README-17-2.png" width="60%" />
+<img src="man/figures/README-README-18-2.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_circles.html>
 
@@ -303,7 +321,7 @@ cormatrix_excel(mtcars)
 #> gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
 #> carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
 #> 
-#>  [Correlation matrix 'mycormatrix.xlsx' has been saved to working directory (or where specified.]
+#>  [Correlation matrix 'mycormatrix.xlsx' has been saved to working directory (or where specified).]
 ```
 
 <img src="man/figures/cormatrix.png" width="100%" />
@@ -342,7 +360,7 @@ nice_qq(variable = "Sepal.Length",
        title = NULL)
 ```
 
-<img src="man/figures/README-README-20-1.png" width="80%" />
+<img src="man/figures/README-README-21-1.png" width="80%" />
 
 ## `nice_density`
 
@@ -360,7 +378,7 @@ nice_density(variable = "Sepal.Length",
             title = "Density (Sepal Length)")
 ```
 
-<img src="man/figures/README-README-21-1.png" width="80%" />
+<img src="man/figures/README-README-22-1.png" width="80%" />
 
 ## `nice_var`
 
@@ -390,7 +408,7 @@ nice_varplot(variable = "Sepal.Length",
              data = iris)
 ```
 
-<img src="man/figures/README-README-23-1.png" width="70%" />
+<img src="man/figures/README-README-24-1.png" width="70%" />
 
 ## Support me and this package
 
