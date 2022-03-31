@@ -71,24 +71,6 @@ nice_reverse(-3:3, 3, min = -3)
 #> [1]  3  2  1  0 -1 -2 -3
 ```
 
-## `format_value`
-
-Easily format *p* or *r* values. Note: converts to `character` class for
-use in figures or manuscripts to accommodate e.g., “\< .001”.
-
-``` r
-format_value(0.00041231, "p")
-#> [1] "< .001"
-format_value(0.00041231, "r")
-#> [1] ".00"
-format_p(0.00041231)
-#> [1] "< .001"
-format_p(0.0041231)
-#> [1] ".004"
-format_r(0.41231)
-#> [1] ".41"
-```
-
 ## `nice_t_test`
 
 Easily compute t-test analyses, with effect sizes, and format in
@@ -166,6 +148,20 @@ simple.slopes
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
 
+## `format_value`
+
+Easily format *p* or *r* values. Note: converts to `character` class for
+use in figures or manuscripts to accommodate e.g., “\< .001”.
+
+``` r
+format_p(0.0041231)
+#> [1] ".004"
+format_p(t.tests$p)
+#> [1] ".001"   "< .001" "< .001" "< .001"
+format_r(moderations$sr2)
+#> [1] ".03" ".00" ".04" ".00" ".04" ".00"
+```
+
 ## `nice_table`
 
 Make nice APA tables easily through a wrapper around the `flextable`
@@ -216,7 +212,7 @@ nice_violin(data = ToothGrowth,
             comp2 = 3)
 ```
 
-<img src="man/figures/README-README-15-1.png" width="60%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="60%" />
 
 ``` r
 # Save plot
@@ -239,7 +235,7 @@ nice_scatter(data = mtcars,
              has.p = TRUE)
 ```
 
-<img src="man/figures/README-README-16-1.png" width="60%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_scatter.html>
 
@@ -252,26 +248,26 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
-#> 2  2        BP
-#> 3  3        CX
-#> 4  4        PZ
+#> 1  1        BP
+#> 2  2        CX
+#> 3  3        PZ
+#> 4  4        ZL
 #> 5  5        PZ
-#> 6  6        BP
+#> 6  6        ZL
 #> 7  7        CX
-#> 8  8        ZL
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
-#> 2  2        AV
+#> 1  1        SV
+#> 2  2        ST
 #> 3  3        AV
-#> 4  1        ST
-#> 5  2        ST
+#> 4  1        AV
+#> 5  2        AV
 #> 6  3        ST
-#> 7  1        SV
+#> 7  1        ST
 #> 8  2        SV
 #> 9  3        SV
 ```
@@ -288,14 +284,14 @@ merging) easily.
 overlap_circle(3.5)
 ```
 
-<img src="man/figures/README-README-18-1.png" width="60%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="60%" />
 
 ``` r
 # Score of 6.84 (81.8% overlap)
 overlap_circle(6.84)
 ```
 
-<img src="man/figures/README-README-18-2.png" width="60%" />
+<img src="man/figures/README-unnamed-chunk-18-2.png" width="60%" />
 
 Full tutorial: <https://remi-theriault.com/blog_circles.html>
 
@@ -360,7 +356,7 @@ nice_qq(variable = "Sepal.Length",
        title = NULL)
 ```
 
-<img src="man/figures/README-README-21-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="80%" />
 
 ## `nice_density`
 
@@ -378,7 +374,7 @@ nice_density(variable = "Sepal.Length",
             title = "Density (Sepal Length)")
 ```
 
-<img src="man/figures/README-README-22-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="80%" />
 
 ## `nice_var`
 
@@ -408,7 +404,7 @@ nice_varplot(variable = "Sepal.Length",
              data = iris)
 ```
 
-<img src="man/figures/README-README-24-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="70%" />
 
 ## Support me and this package
 
