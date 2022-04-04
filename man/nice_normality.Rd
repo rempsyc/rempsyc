@@ -12,7 +12,7 @@ nice_normality(
   groups.labels,
   grid = TRUE,
   shapiro = FALSE,
-  title = variable,
+  title = NULL,
   ...
 )
 }
@@ -51,8 +51,7 @@ nice_normality(data = iris,
                colours = c("#00BA38", "#619CFF", "#F8766D"),
                groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
                grid = FALSE,
-               shapiro = TRUE,
-               title = NULL)
+               shapiro = TRUE)
 
 }
 \seealso{
