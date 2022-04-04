@@ -7,13 +7,13 @@
 nice_reverse(x, max, min = 1, warning = TRUE)
 }
 \arguments{
-\item{x}{the score to reverse}
+\item{x}{The score to reverse.}
 
-\item{max}{the maximum score on the scale}
+\item{max}{The maximum score on the scale.}
 
-\item{min}{the miminum score on the scale (optional unless it isn't 1)}
+\item{min}{The miminum score on the scale (optional unless it isn't 1).}
 
-\item{warning}{whether to show the warning about the minimum not being 1}
+\item{warning}{Logical. Whether to show the warning about the minimum not being 1.}
 }
 \description{
 Easily recode scores (reverse-score), typically for questionnaire answers.

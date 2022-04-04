@@ -7,9 +7,9 @@
 nice_assumptions(model, interpretation = TRUE)
 }
 \arguments{
-\item{model}{The model}
+\item{model}{The \code{lm} object to be passed to the function.}
 
-\item{interpretation}{The interpretation}
+\item{interpretation}{Whether to display the interpretation helper or not.}
 }
 \description{
 Test linear regression assumptions easily with a nice summary table.

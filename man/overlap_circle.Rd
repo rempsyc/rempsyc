@@ -7,9 +7,9 @@
 overlap_circle(response, categories = c("Self", "Other"))
 }
 \arguments{
-\item{response}{The response}
+\item{response}{The variable to plot.}
 
-\item{categories}{The categories}
+\item{categories}{The desired categories of the two overlapping circles.}
 }
 \description{
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.

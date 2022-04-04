@@ -5,9 +5,9 @@
 \title{Easy QQ plots per group}
 \usage{
 nice_qq(
+  data,
   variable,
   group,
-  data,
   colours,
   groups.labels = NULL,
   grid = TRUE,
@@ -16,15 +16,15 @@ nice_qq(
 )
 }
 \arguments{
+\item{data}{The data frame.}
+
 \item{variable}{The dependent variable to be plotted.}
 
 \item{group}{The group by which to plot the variable.}
 
-\item{data}{The data frame}
+\item{colours}{Desired colours for the plot, if desired.}
 
-\item{colours}{Supports providing custom colours}
-
-\item{groups.labels}{How to label the groups?}
+\item{groups.labels}{How to label the groups.}
 
 \item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 
@@ -37,19 +37,19 @@ Easily make nice per-group QQ plots through a wrapper around the \code{ggplot2} 
 }
 \examples{
 # Make the basic plot
-nice_qq(variable = "Sepal.Length",
-       group = "Species",
-       data = iris)
+nice_qq(data = iris,
+        variable = "Sepal.Length",
+        group = "Species")
 
 # Further customization
-nice_qq(variable = "Sepal.Length",
-       group = "Species",
-       data = iris,
-       colours = c("#00BA38", "#619CFF", "#F8766D"),
-       groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-       grid = FALSE,
-       shapiro = TRUE,
-       title = NULL)
+nice_qq(data = iris,
+        variable = "Sepal.Length",
+        group = "Species",
+        colours = c("#00BA38", "#619CFF", "#F8766D"),
+        groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+        grid = FALSE,
+        shapiro = TRUE,
+        title = NULL)
 
 }
 \seealso{

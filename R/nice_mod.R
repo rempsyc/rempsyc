@@ -4,49 +4,49 @@
 #'
 #' Note: this function uses the `modelEffectSizes` function from the `lmSupport` package to get the sr2 effect sizes.
 #'
-#' @param response The response
-#' @param predictor The predictor
-#' @param moderator The moderator
-#' @param moderator2 The moderator2
-#' @param covariates The covariates
-#' @param data The data
-#' @param ... The ...
+#' @param data The data frame
+#' @param response The dependent variable.
+#' @param predictor The independent variable.
+#' @param moderator The moderating variable.
+#' @param moderator2 The second moderating variable, if applicable.
+#' @param covariates The desired covariates in the model.
+#' @param ... Further arguments to be passed to the `lm` function for the models.
 #'
 #' @keywords moderation, interaction, regression
 #' @export
 #' @examples
 #' # Make the basic table
-#' nice_mod(response = "mpg",
-#'         predictor = "gear",
-#'         moderator = "wt",
-#'         data = mtcars)
+#' nice_mod(data = mtcars,
+#'          response = "mpg",
+#'          predictor = "gear",
+#'          moderator = "wt")
 #'
 #' # Multiple dependent variables at once
-#' nice_mod(response = c("mpg", "disp", "hp"),
-#'         predictor = "gear",
-#'         moderator = "wt",
-#'         data = mtcars)
+#' nice_mod(data = mtcars,
+#'          response = c("mpg", "disp", "hp"),
+#'          predictor = "gear",
+#'          moderator = "wt")
 #'
 #' # Add covariates
-#' nice_mod(response = "mpg",
+#' nice_mod(data = mtcars,
+#'          response = "mpg",
 #'          predictor = "gear",
 #'          moderator = "wt",
-#'          covariates = c("am", "vs"),
-#'          data = mtcars)
+#'          covariates = c("am", "vs"))
 #'
 #' # Three-way interaction
-#' nice_mod(response = "mpg",
+#' nice_mod(data = mtcars,
+#'          response = "mpg",
 #'          predictor = "gear",
 #'          moderator = "wt",
-#'          moderator2 = "am",
-#'          data = mtcars)
+#'          moderator2 = "am")
 #'
 #' @seealso
 #' Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
 #'
 
-nice_mod <- function(response, predictor, moderator, moderator2=NULL,
-                     covariates=NULL, data, ...) {
+nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
+                     covariates=NULL, ...) {
 
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")

@@ -5,8 +5,8 @@
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
 #' @param data The data frame
-#' @param colours Supports providing custom colours
-#' @param groups.labels How to label the groups?
+#' @param colours Desired colours for the plot, if desired.
+#' @param groups.labels How to label the groups.
 #' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
 #' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
 #' @param ytitle An optional y-axis label, if desired.
@@ -15,14 +15,14 @@
 #' @export
 #' @examples
 #' # Make the basic plot
-#' nice_varplot(variable = "Sepal.Length",
-#'              group = "Species",
-#'              data = iris)
+#' nice_varplot(data = iris,
+#'              variable = "Sepal.Length",
+#'              group = "Species")
 #'
 #' # Further customization
-#' nice_varplot(variable = "Sepal.Length",
+#' nice_varplot(data = iris,
+#'              variable = "Sepal.Length",
 #'              group = "Species",
-#'              data = iris,
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
@@ -34,7 +34,7 @@
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 #' @importFrom stats var median
 
-nice_varplot <- function(variable, group, data, colours, groups.labels,
+nice_varplot <- function(data, variable, group, colours, groups.labels,
                          grid=TRUE, shapiro=FALSE, ytitle=variable) {
   data[[group]] <- as.factor(data[[group]])
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
@@ -50,9 +50,9 @@ nice_varplot <- function(variable, group, data, colours, groups.labels,
   nice_scatter(data=data,
                predictor=.data[[group]],
                response=.data[[variable]],
-               group.variable=data[[group]],
+               group=data[[group]],
                colours=colours,
-               groups.names=groups.labels,
+               groups.labels=groups.labels,
                xtitle=NULL,
                ytitle=ytitle) +
     annotate(geom="text",

@@ -9,7 +9,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.3-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.5-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -77,9 +77,9 @@ Easily compute t-test analyses, with effect sizes, and format in
 publication-ready format. Supports multiple dependent variables at once.
 
 ``` r
-nice_t_test(response = c("mpg", "disp", "drat", "wt"),
-            group = "am",
-            data = mtcars) -> t.tests
+nice_t_test(data = mtcars,
+            response = c("mpg", "disp", "drat", "wt"),
+            group = "am") -> t.tests
 t.tests
 #>   Dependent Variable         t       df            p         d   CI_lower
 #> 1                mpg -3.767123 18.33225 1.373638e-03 -1.477947 -2.3042092
@@ -102,10 +102,10 @@ publication-ready format. Supports multiple dependent variables and
 covariates at once.
 
 ``` r
-nice_mod(response = c("mpg", "disp"),
+nice_mod(data = mtcars,
+         response = c("mpg", "disp"),
          predictor = "gear",
-         moderator = "wt",
-         data = mtcars) -> moderations
+         moderator = "wt") -> moderations
 moderations
 #>   Dependent Variable Predictor df          b          t          p         sr2
 #> 1                mpg      gear 28   5.615951  1.9437108 0.06204275 0.028488305
@@ -125,10 +125,10 @@ and format in publication-ready format. Supports multiple dependent
 variables and covariates at once.
 
 ``` r
-nice_slopes(response = c("mpg", "disp"),
+nice_slopes(data = mtcars,
+            response = c("mpg", "disp"),
             predictor = "gear",
-            moderator = "wt",
-            data = mtcars) -> simple.slopes
+            moderator = "wt") -> simple.slopes
 simple.slopes
 #>   Dependent Variable Predictor (+/-1 SD) df         b         t          p
 #> 1                mpg       gear (LOW-wt) 28  7.540509 2.0106560 0.05408136
@@ -248,28 +248,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        CX
-#> 2  2        PZ
+#> 1  1        BP
+#> 2  2        CX
 #> 3  3        ZL
-#> 4  4        BP
-#> 5  5        CX
-#> 6  6        PZ
-#> 7  7        ZL
-#> 8  8        BP
+#> 4  4        PZ
+#> 5  5        PZ
+#> 6  6        CX
+#> 7  7        BP
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
-#> 2  2        AV
-#> 3  3        ST
+#> 1  1        AV
+#> 2  2        ST
+#> 3  3        SV
 #> 4  1        SV
-#> 5  2        ST
+#> 5  2        SV
 #> 6  3        AV
-#> 7  1        AV
-#> 8  2        SV
-#> 9  3        SV
+#> 7  1        ST
+#> 8  2        AV
+#> 9  3        ST
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -348,12 +348,12 @@ Easily make nice per-group QQ plots.
 
 ``` r
 # Create regression model
-nice_qq(variable = "Sepal.Length",
-       group = "Species",
-       data = iris,
-       grid = FALSE,
-       shapiro = TRUE,
-       title = NULL)
+nice_qq(data = iris,
+        variable = "Sepal.Length",
+        group = "Species",
+        grid = FALSE,
+        shapiro = TRUE,
+        title = NULL)
 ```
 
 <img src="man/figures/README-nice_qq-1.png" width="80%" />
@@ -364,14 +364,14 @@ Easily make nice per-group QQ plots.
 
 ``` r
 # Create regression model
-nice_density(variable = "Sepal.Length",
-            group = "Species",
-            data = iris,
-            xtitle = "Sepal Length",
-            ytitle = "Density (vs. Normal Distribution)",
-            grid = FALSE,
-            shapiro = TRUE,
-            title = "Density (Sepal Length)")
+nice_density(data = iris,
+             variable = "Sepal.Length",
+             group = "Species",
+             xtitle = "Sepal Length",
+             ytitle = "Density (vs. Normal Distribution)",
+             grid = FALSE,
+             shapiro = TRUE,
+             title = "Density (Sepal Length)")
 ```
 
 <img src="man/figures/README-nice_density-1.png" width="80%" />
@@ -382,9 +382,9 @@ Obtain variance per group as well as check for the rule of thumb of one
 group having variance four times bigger than any of the other groups.
 
 ``` r
-nice_var(variable="Sepal.Length",
-         group="Species",
-         data=iris)
+nice_var(data = iris,
+         variable = "Sepal.Length",
+         group = "Species")
 #> # A tibble: 1 x 6
 #> # Rowwise: 
 #>   Variable     Setosa Versicolor Virginica `Max/Min Ratio` `Heteroscedastic (4~`
@@ -399,9 +399,9 @@ visualize variance because the concentration of points may be hidden on
 such plots. Use at your own risk and for exploratory purposes only.
 
 ``` r
-nice_varplot(variable = "Sepal.Length",
-             group = "Species",
-             data = iris)
+nice_varplot(data = iris,
+             variable = "Sepal.Length",
+             group = "Species")
 ```
 
 <img src="man/figures/README-nice_varplot-1.png" width="70%" />

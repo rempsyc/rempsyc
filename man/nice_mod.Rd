@@ -5,29 +5,29 @@
 \title{Easy moderations}
 \usage{
 nice_mod(
+  data,
   response,
   predictor,
   moderator,
   moderator2 = NULL,
   covariates = NULL,
-  data,
   ...
 )
 }
 \arguments{
-\item{response}{The response}
+\item{data}{The data frame}
 
-\item{predictor}{The predictor}
+\item{response}{The dependent variable.}
 
-\item{moderator}{The moderator}
+\item{predictor}{The independent variable.}
 
-\item{moderator2}{The moderator2}
+\item{moderator}{The moderating variable.}
 
-\item{covariates}{The covariates}
+\item{moderator2}{The second moderating variable, if applicable.}
 
-\item{data}{The data}
+\item{covariates}{The desired covariates in the model.}
 
-\item{...}{The ...}
+\item{...}{Further arguments to be passed to the \code{lm} function for the models.}
 }
 \description{
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format.
@@ -36,30 +36,30 @@ Note: this function uses the \code{modelEffectSizes} function from the \code{lmS
 }
 \examples{
 # Make the basic table
-nice_mod(response = "mpg",
-        predictor = "gear",
-        moderator = "wt",
-        data = mtcars)
+nice_mod(data = mtcars,
+         response = "mpg",
+         predictor = "gear",
+         moderator = "wt")
 
 # Multiple dependent variables at once
-nice_mod(response = c("mpg", "disp", "hp"),
-        predictor = "gear",
-        moderator = "wt",
-        data = mtcars)
+nice_mod(data = mtcars,
+         response = c("mpg", "disp", "hp"),
+         predictor = "gear",
+         moderator = "wt")
 
 # Add covariates
-nice_mod(response = "mpg",
+nice_mod(data = mtcars,
+         response = "mpg",
          predictor = "gear",
          moderator = "wt",
-         covariates = c("am", "vs"),
-         data = mtcars)
+         covariates = c("am", "vs"))
 
 # Three-way interaction
-nice_mod(response = "mpg",
+nice_mod(data = mtcars,
+         response = "mpg",
          predictor = "gear",
          moderator = "wt",
-         moderator2 = "am",
-         data = mtcars)
+         moderator2 = "am")
 
 }
 \seealso{

@@ -2,12 +2,12 @@
 #'
 #' @description Easily format p or r values. Note: converts to character class for use in figures or manuscripts to accommodate e.g., "< .001".
 #'
-#' @param p p-value to format
-#' @param r r-value to format
-#' @param precision Level of precision desired, if necessary
-#' @param type Specify r or p value
-#' @param value Value to be formatted, when using the generic `format_value()`
-#' @param ... To specify precision level, if necessary, when using the generic `format_value()`
+#' @param p p-value to format.
+#' @param r r-value to format.
+#' @param precision Level of precision desired, if necessary.
+#' @param type Specify r or p value.
+#' @param value Value to be formatted, when using the generic `format_value()`.
+#' @param ... To specify precision level, if necessary, when using the generic `format_value()`. Simply add the `precision` argument.
 #'
 #' @keywords formatting, p-value, r-value, correlation
 #' @export

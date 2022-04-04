@@ -76,9 +76,9 @@ nice_reverse(-3:3, 3, min = -3)
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once.
 
 ```{r nice_t_test, warning = FALSE, message = FALSE}
-nice_t_test(response = c("mpg", "disp", "drat", "wt"),
-            group = "am",
-            data = mtcars) -> t.tests
+nice_t_test(data = mtcars,
+            response = c("mpg", "disp", "drat", "wt"),
+            group = "am") -> t.tests
 t.tests
 ```
 
@@ -89,10 +89,10 @@ Full tutorial: https://remi-theriault.com/blog_t-test
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
 ```{r nice_mod, warning = FALSE, message = FALSE}
-nice_mod(response = c("mpg", "disp"),
+nice_mod(data = mtcars,
+         response = c("mpg", "disp"),
          predictor = "gear",
-         moderator = "wt",
-         data = mtcars) -> moderations
+         moderator = "wt") -> moderations
 moderations
 ```
 
@@ -103,10 +103,10 @@ Full tutorial: https://remi-theriault.com/blog_moderation
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
 ```{r nice_slopes, warning = FALSE, message = FALSE}
-nice_slopes(response = c("mpg", "disp"),
+nice_slopes(data = mtcars,
+            response = c("mpg", "disp"),
             predictor = "gear",
-            moderator = "wt",
-            data = mtcars) -> simple.slopes
+            moderator = "wt") -> simple.slopes
 simple.slopes
 ```
 
@@ -272,12 +272,12 @@ Easily make nice per-group QQ plots.
 ```{r nice_qq, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
 
 # Create regression model
-nice_qq(variable = "Sepal.Length",
-       group = "Species",
-       data = iris,
-       grid = FALSE,
-       shapiro = TRUE,
-       title = NULL)
+nice_qq(data = iris,
+        variable = "Sepal.Length",
+        group = "Species",
+        grid = FALSE,
+        shapiro = TRUE,
+        title = NULL)
 ```
 
 ## `nice_density `
@@ -287,14 +287,14 @@ Easily make nice per-group QQ plots.
 ```{r nice_density, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
 
 # Create regression model
-nice_density(variable = "Sepal.Length",
-            group = "Species",
-            data = iris,
-            xtitle = "Sepal Length",
-            ytitle = "Density (vs. Normal Distribution)",
-            grid = FALSE,
-            shapiro = TRUE,
-            title = "Density (Sepal Length)")
+nice_density(data = iris,
+             variable = "Sepal.Length",
+             group = "Species",
+             xtitle = "Sepal Length",
+             ytitle = "Density (vs. Normal Distribution)",
+             grid = FALSE,
+             shapiro = TRUE,
+             title = "Density (Sepal Length)")
 ```
 
 
@@ -303,9 +303,9 @@ nice_density(variable = "Sepal.Length",
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
 
 ```{r nice_var, warning = FALSE, message = FALSE}
-nice_var(variable="Sepal.Length",
-         group="Species",
-         data=iris)
+nice_var(data = iris,
+         variable = "Sepal.Length",
+         group = "Species")
 ```
 
 ## `nice_varplot `
@@ -313,9 +313,9 @@ nice_var(variable="Sepal.Length",
 Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
 
 ```{r nice_varplot, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
-nice_varplot(variable = "Sepal.Length",
-             group = "Species",
-             data = iris)
+nice_varplot(data = iris,
+             variable = "Sepal.Length",
+             group = "Species")
 ```
 
 ## Support me and this package

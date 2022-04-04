@@ -2,8 +2,8 @@
 #'
 #' @description Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 #'
-#' @param response The response
-#' @param categories The categories
+#' @param response The variable to plot.
+#' @param categories The desired categories of the two overlapping circles.
 #'
 #' @keywords self-other merging, self-other overlap, Venn diagrams, social psychology
 #' @export

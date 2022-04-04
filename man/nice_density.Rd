@@ -5,9 +5,9 @@
 \title{Easy density plots}
 \usage{
 nice_density(
+  data,
   variable,
   group,
-  data,
   colours,
   ytitle = "Density",
   xtitle = variable,
@@ -18,46 +18,46 @@ nice_density(
 )
 }
 \arguments{
-\item{variable}{The variable}
+\item{data}{The data frame}
 
-\item{group}{The group}
+\item{variable}{The dependent variable to be plotted.}
 
-\item{data}{The data}
+\item{group}{The group by which to plot the variable.}
 
-\item{colours}{The colours}
+\item{colours}{Desired colours for the plot, if desired.}
 
-\item{ytitle}{The ytitle}
+\item{ytitle}{An optional y-axis label, if desired.}
 
-\item{xtitle}{The xtitle}
+\item{xtitle}{An optional x-axis label, if desired.}
 
-\item{groups.labels}{The groups.labels}
+\item{groups.labels}{The groups.labels (might rename to \code{xlabels} for consistency with other functions)}
 
-\item{grid}{The grid}
+\item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 
-\item{shapiro}{The shapiro}
+\item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
 
-\item{title}{The title}
+\item{title}{The desired title of the plot. Can be put to \code{NULL} to remove.}
 }
 \description{
 Make nice density plots easily.
 }
 \examples{
 # Make the basic plot
-nice_density(variable = "Sepal.Length",
-            group = "Species",
-            data = iris)
+nice_density(data = iris,
+             variable = "Sepal.Length",
+             group = "Species")
 
 # Further customization
-nice_density(variable = "Sepal.Length",
-            group = "Species",
-            data = iris,
-            colours = c("#00BA38", "#619CFF", "#F8766D"),
-            xtitle = "Sepal Length",
-            ytitle = "Density (vs. Normal Distribution)",
-            groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-            grid = FALSE,
-            shapiro = TRUE,
-            title = "Density (Sepal Length)")
+nice_density(data = iris,
+             variable = "Sepal.Length",
+             group = "Species",
+             colours = c("#00BA38", "#619CFF", "#F8766D"),
+             xtitle = "Sepal Length",
+             ytitle = "Density (vs. Normal Distribution)",
+             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+             grid = FALSE,
+             shapiro = TRUE,
+             title = "Density (Sepal Length)")
 
 }
 \keyword{density,}

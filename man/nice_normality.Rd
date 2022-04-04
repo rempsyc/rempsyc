@@ -17,15 +17,15 @@ nice_normality(
 )
 }
 \arguments{
-\item{data}{The data frame}
+\item{data}{The data frame.}
 
 \item{variable}{The dependent variable to be plotted.}
 
 \item{group}{The group by which to plot the variable.}
 
-\item{colours}{Supports providing custom colours}
+\item{colours}{Desired colours for the plot, if desired.}
 
-\item{groups.labels}{How to label the groups?}
+\item{groups.labels}{How to label the groups.}
 
 \item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 

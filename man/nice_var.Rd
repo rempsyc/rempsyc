@@ -18,13 +18,13 @@ Obtain variance per group as well as check for the rule of thumb of one group ha
 }
 \examples{
 # Make the basic table
-nice_var(variable="Sepal.Length",
-         group="Species",
-         data=iris)
+nice_var(variable = "Sepal.Length",
+         group = "Species",
+         data = iris)
 
 # Try on multiple variables
 DV <- names(iris[1:4])
-var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
+var.table <- do.call("rbind", lapply(DV, nice_var, data = iris, group = "Species"))
 var.table
 
 }

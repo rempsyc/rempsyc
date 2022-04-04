@@ -2,10 +2,10 @@
 #'
 #' @description Easily recode scores (reverse-score), typically for questionnaire answers.
 #'
-#' @param x the score to reverse
-#' @param max the maximum score on the scale
-#' @param min the miminum score on the scale (optional unless it isn't 1)
-#' @param warning whether to show the warning about the minimum not being 1
+#' @param x The score to reverse.
+#' @param max The maximum score on the scale.
+#' @param min The miminum score on the scale (optional unless it isn't 1).
+#' @param warning Logical. Whether to show the warning about the minimum not being 1.
 #'
 #' @keywords reverse scoring
 #' @export

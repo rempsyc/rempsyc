@@ -2,11 +2,11 @@
 #'
 #' @description Easily make nice per-group density and QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
+#' @param data The data frame.
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
-#' @param data The data frame
-#' @param colours Supports providing custom colours
-#' @param groups.labels How to label the groups?
+#' @param colours Desired colours for the plot, if desired.
+#' @param groups.labels How to label the groups.
 #' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
 #' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.

@@ -4,35 +4,35 @@
 \alias{nice_t_test}
 \title{Easy t-tests}
 \usage{
-nice_t_test(response, group, data, ...)
+nice_t_test(data, response, group, ...)
 }
 \arguments{
-\item{response}{The response}
+\item{data}{The data frame.}
 
-\item{group}{The group}
+\item{response}{The dependent variable.}
 
-\item{data}{The data}
+\item{group}{The group for the comparison.}
 
-\item{...}{The ...}
+\item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to change from two-tail to one-tail).}
 }
 \description{
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
 }
 \examples{
 # Make the basic table
-nice_t_test(response = "mpg",
-            group = "am",
-            data = mtcars)
+nice_t_test(data = mtcars,
+            response = "mpg",
+            group = "am")
 
 # Multiple dependent variables at once
-nice_t_test(response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
-            group = "am",
-            data = mtcars)
+nice_t_test(data = mtcars,
+            response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
+            group = "am")
 
 # Can be passed some of the regular arguments of base `t.test()`
-nice_t_test(response = "mpg",
+nice_t_test(data = mtcars,
+            response = "mpg",
             group = "am",
-            data = mtcars,
             alternative = "less") # to make it one-sided instead of two-sided
 }
 \keyword{differences}

@@ -6,4 +6,3 @@ check_namespace <- function(package) {
          paste0('Package "', package, '" required.'))
   }
 }
-# Credit for this function goes to StatisMike: https://github.com/StatisMike/shiny.reglog/blob/master/R/utils.R#L1

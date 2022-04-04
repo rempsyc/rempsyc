@@ -2,11 +2,11 @@
 #'
 #' @description Randomize easily with different designs.
 #'
-#' @param design The design
-#' @param Ncondition The Ncondition
-#' @param n The n
-#' @param condition.names The condition.names
-#' @param col.names The col.names
+#' @param design The design: either between-subject (different groups) or within-subject (repeated-measures on same people).
+#' @param Ncondition The number of conditions you want to randomize.
+#' @param n The desired sample size. Note that it needs to be a multiple of your number of groups if you are using`between`.
+#' @param condition.names The names of the randomized conditions.
+#' @param col.names The desired additional column names for a runsheet.
 #'
 #' @keywords randomization, conditions, random allocation, experimental design
 #' @export
@@ -27,9 +27,9 @@
 #'                              "Tester", "Notes"))
 #' head(randomized)
 
-nice_randomize <- function (design="between", Ncondition=3, n=9,
-                            condition.names=c("a","b","c"),
-                            col.names=c("id", "Condition")) {
+nice_randomize <- function(design="between", Ncondition=3, n=9,
+                           condition.names=c("a","b","c"),
+                           col.names=c("id", "Condition")) {
   Condition <- data.frame() # to precreate dataframe
   if (design=="between") {
     if (!n%%Ncondition==0) {cat("Warning(!): sample size needs to be a multiple

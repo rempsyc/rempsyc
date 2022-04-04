@@ -13,15 +13,15 @@ nice_randomize(
 )
 }
 \arguments{
-\item{design}{The design}
+\item{design}{The design: either between-subject (different groups) or within-subject (repeated-measures on same people).}
 
-\item{Ncondition}{The Ncondition}
+\item{Ncondition}{The number of conditions you want to randomize.}
 
-\item{n}{The n}
+\item{n}{The desired sample size. Note that it needs to be a multiple of your number of groups if you are using\code{between}.}
 
-\item{condition.names}{The condition.names}
+\item{condition.names}{The names of the randomized conditions.}
 
-\item{col.names}{The col.names}
+\item{col.names}{The desired additional column names for a runsheet.}
 }
 \description{
 Randomize easily with different designs.

@@ -25,11 +25,11 @@ nice_scatter(
   yby = 1,
   has.legend = FALSE,
   legend.title = "",
-  group.variable = NULL,
+  group = NULL,
   colours = "#619CFF",
   groups.order = NULL,
-  groups.names = NULL,
-  manual.slope.alpha = NULL,
+  groups.labels = NULL,
+  groups.alpha = NULL,
   has.r = FALSE,
   r.x = Inf,
   r.y = -Inf,
@@ -39,67 +39,67 @@ nice_scatter(
 )
 }
 \arguments{
-\item{data}{The data}
+\item{data}{The data frame.}
 
-\item{predictor}{The predictor}
+\item{predictor}{The independent variable to be plotted.}
 
-\item{response}{The response}
+\item{response}{The dependent variable to be plotted.}
 
-\item{xtitle}{The xtitle}
+\item{xtitle}{An optional y-axis label, if desired.}
 
-\item{ytitle}{The ytitle}
+\item{ytitle}{An optional x-axis label, if desired.}
 
-\item{has.points}{The has.points}
+\item{has.points}{Whether to plot the individual observations or not.}
 
-\item{has.jitter}{The has.jitter}
+\item{has.jitter}{Alternative to \code{has.points}. "Jitters" the observations to avoid overlap (overplotting). Use one or the other, not both.}
 
-\item{alpha}{The alpha}
+\item{alpha}{The desired level of transparency.}
 
-\item{has.confband}{The has.confband}
+\item{has.confband}{Logical. Whether to display the confidence band around the slope.}
 
-\item{has.fullrange}{The has.fullrange}
+\item{has.fullrange}{Logical. Whether to extend the slope beyond the range of observations.}
 
-\item{has.linetype}{The has.linetype}
+\item{has.linetype}{Logical. Whether to change line types as a function of group.}
 
-\item{has.shape}{The has.shape}
+\item{has.shape}{Logical. Whether to change shape of observations as a function of group.}
 
-\item{xmin}{The xmin}
+\item{xmin}{The minimum score on the x-axis scale.}
 
-\item{xmax}{The xmax}
+\item{xmax}{The maximum score on the x-axis scale.}
 
-\item{xby}{The xby}
+\item{xby}{How much to increase on each "tick" on the x-axis scale.}
 
-\item{ymin}{The ymin}
+\item{ymin}{The minimum score on the y-axis scale.}
 
-\item{ymax}{The ymax}
+\item{ymax}{The maximum score on the y-axis scale.}
 
-\item{yby}{The yby}
+\item{yby}{How much to increase on each "tick" on the y-axis scale.}
 
-\item{has.legend}{The has.legend}
+\item{has.legend}{Logical. Whether to display the legend or not.}
 
-\item{legend.title}{The legend.title}
+\item{legend.title}{The desired legend title.}
 
-\item{group.variable}{The group.variable}
+\item{group}{The group by which to plot the variable}
 
-\item{colours}{The colours}
+\item{colours}{Desired colours for the plot, if desired.}
 
-\item{groups.order}{The groups.order}
+\item{groups.order}{Specifies the desired display order of the groups.}
 
-\item{groups.names}{The groups.names}
+\item{groups.labels}{Changes groups names (labels). Note: This applies after changing order of level.}
 
-\item{manual.slope.alpha}{The manual.slope.alpha}
+\item{groups.alpha}{The manually specified transparency desired for the groups slopes. Use only when plotting groups separately.}
 
-\item{has.r}{The has.r}
+\item{has.r}{Whether to display the correlation coefficient, the r-value.}
 
-\item{r.x}{The r.x}
+\item{r.x}{The x-axis coordinates for the r-value.}
 
-\item{r.y}{The r.y}
+\item{r.y}{The y-axis coordinates for the r-value.}
 
-\item{has.p}{The has.p}
+\item{has.p}{Whether to display the p-value.}
 
-\item{p.x}{The p.x}
+\item{p.x}{The x-axis coordinates for the p-value.}
 
-\item{p.y}{The p.y}
+\item{p.y}{The y-axis coordinates for the p-value.}
 }
 \description{
 Make nice scatter plots easily.
@@ -107,8 +107,8 @@ Make nice scatter plots easily.
 \examples{
 # Make the basic plot
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg)
+             predictor = wt,
+             response = mpg)
 
 \dontrun{
 # Save a high-resolution image file to specified directory
@@ -118,140 +118,140 @@ ggsave('nicescatterplothere.pdf', width = 7, height = 7, unit = 'in',
 
 # Change x- and y- axis labels
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            ytitle = "Miles/(US) gallon",
-            xtitle = "Weight (1000 lbs)")
+             predictor = wt,
+             response = mpg,
+             ytitle = "Miles/(US) gallon",
+             xtitle = "Weight (1000 lbs)")
 
 # Have points "jittered"
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            has.jitter = TRUE)
+             predictor = wt,
+             response = mpg,
+             has.jitter = TRUE)
 
 # Change the transparency of the points
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            alpha = 1)
+             predictor = wt,
+             response = mpg,
+             alpha = 1)
 
 # Remove points
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            has.points = FALSE,
-            has.jitter = FALSE)
+             predictor = wt,
+             response = mpg,
+             has.points = FALSE,
+             has.jitter = FALSE)
 
 # Add confidence band
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            has.confband = TRUE)
+             predictor = wt,
+             response = mpg,
+             has.confband = TRUE)
 
 # Set x- and y- scales manually
 nice_scatter(data = mtcars,
-           predictor = wt,
-           response = mpg,
-           xmin = 1,
-           xmax = 6,
-           xby = 1,
-           ymin = 10,
-           ymax = 35,
-           yby = 5)
+             predictor = wt,
+             response = mpg,
+             xmin = 1,
+             xmax = 6,
+             xby = 1,
+             ymin = 10,
+             ymax = 35,
+             yby = 5)
 
 # Change plot colour
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            colours = "blueviolet")
+             predictor = wt,
+             response = mpg,
+             colours = "blueviolet")
 
 # Add correlation coefficient to plot and p-value
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            has.r = TRUE,
-            has.p = TRUE)
+             predictor = wt,
+             response = mpg,
+             has.r = TRUE,
+             has.p = TRUE)
 
 # Change location of correlation coefficient or p-value
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            has.r = TRUE,
-            r.x = 4,
-            r.y = 25,
-            has.p = TRUE,
-            p.x = 5,
-            p.y = 20)
+             predictor = wt,
+             response = mpg,
+             has.r = TRUE,
+             r.x = 4,
+             r.y = 25,
+             has.p = TRUE,
+             p.x = 5,
+             p.y = 20)
 
 # Plot by group
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl))
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl))
 
 # Use full range on the slope/confidence band
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.fullrange = TRUE)
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.fullrange = TRUE)
 
 # Add a legend
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.legend = TRUE)
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.legend = TRUE)
 
 # Change order of labels on the legend
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.legend = TRUE,
-            groups.order = c(8,4,6))
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.legend = TRUE,
+             groups.order = c(8,4,6))
 
 # Change legend labels
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.legend = TRUE,
-            groups.names = c("Weak","Average","Powerful"))
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.legend = TRUE,
+             groups.labels = c("Weak","Average","Powerful"))
 # Warning: This applies after changing order of level
 
 # Add a title to legend
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.legend = TRUE,
-            legend.title = "Cylinders")
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.legend = TRUE,
+             legend.title = "Cylinders")
 
 # Plot by group + manually specify colours
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            colours = c("burlywood","darkgoldenrod","chocolate"))
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             colours = c("burlywood","darkgoldenrod","chocolate"))
 
 # Plot by group + use different line types for each group
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.linetype = TRUE)
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.linetype = TRUE)
 
 # Plot by group + use different point shapes for each group
 nice_scatter(data = mtcars,
-            predictor = wt,
-            response = mpg,
-            group.variable = factor(mtcars$cyl),
-            has.shape = TRUE)
+             predictor = wt,
+             response = mpg,
+             group = factor(mtcars$cyl),
+             has.shape = TRUE)
 
 }
 \seealso{
-Visualize group differences via violin plots: \code{\link{nice_violin}}
+Visualize group differences via violin plots: \code{\link{nice_violin}}. The tutorial for \code{nice_scatter} is available here: https://remi-theriault.com/blog_scatter.
 }
 \keyword{plots}
 \keyword{scatter}

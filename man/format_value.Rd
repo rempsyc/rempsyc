@@ -13,17 +13,17 @@ format_p(p, precision = 0.001)
 format_r(r, precision = 0.01)
 }
 \arguments{
-\item{value}{Value to be formatted, when using the generic \code{format_value()}}
+\item{value}{Value to be formatted, when using the generic \code{format_value()}.}
 
-\item{type}{Specify r or p value}
+\item{type}{Specify r or p value.}
 
-\item{...}{To specify precision level, if necessary, when using the generic \code{format_value()}}
+\item{...}{To specify precision level, if necessary, when using the generic \code{format_value()}. Simply add the \code{precision} argument.}
 
-\item{p}{p-value to format}
+\item{p}{p-value to format.}
 
-\item{precision}{Level of precision desired, if necessary}
+\item{precision}{Level of precision desired, if necessary.}
 
-\item{r}{r-value to format}
+\item{r}{r-value to format.}
 }
 \description{
 Easily format p or r values. Note: converts to character class for use in figures or manuscripts to accommodate e.g., "< .001".

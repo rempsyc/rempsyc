@@ -2,31 +2,31 @@
 #'
 #' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
 #'
-#' @param response The response
-#' @param group The group
-#' @param data The data
-#' @param ... The ...
+#' @param data The data frame.
+#' @param response The dependent variable.
+#' @param group The group for the comparison.
+#' @param ... Further arguments to be passed to the `t.test` function (e.g., to change from two-tail to one-tail).
 #'
 #' @keywords t-test, group differences
 #' @export
 #' @examples
 #' # Make the basic table
-#' nice_t_test(response = "mpg",
-#'             group = "am",
-#'             data = mtcars)
+#' nice_t_test(data = mtcars,
+#'             response = "mpg",
+#'             group = "am")
 #'
 #' # Multiple dependent variables at once
-#' nice_t_test(response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
-#'             group = "am",
-#'             data = mtcars)
+#' nice_t_test(data = mtcars,
+#'             response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
+#'             group = "am")
 #'
 #' # Can be passed some of the regular arguments of base `t.test()`
-#' nice_t_test(response = "mpg",
+#' nice_t_test(data = mtcars,
+#'             response = "mpg",
 #'             group = "am",
-#'             data = mtcars,
 #'             alternative = "less") # to make it one-sided instead of two-sided
 
-nice_t_test <- function(response, group, data, ...) {
+nice_t_test <- function(data, response, group, ...) {
 
   data[[group]] <- as.factor(data[[group]])
   formulas <- paste0(response, " ~ ", group)

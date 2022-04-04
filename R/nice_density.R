@@ -2,43 +2,43 @@
 #'
 #' @description Make nice density plots easily.
 #'
-#' @param variable The variable
-#' @param group The group
-#' @param data The data
-#' @param colours The colours
-#' @param ytitle The ytitle
-#' @param xtitle The xtitle
-#' @param groups.labels The groups.labels
-#' @param grid The grid
-#' @param shapiro The shapiro
-#' @param title The title
+#' @param data The data frame
+#' @param variable The dependent variable to be plotted.
+#' @param group The group by which to plot the variable.
+#' @param colours Desired colours for the plot, if desired.
+#' @param ytitle An optional y-axis label, if desired.
+#' @param xtitle An optional x-axis label, if desired.
+#' @param groups.labels The groups.labels (might rename to `xlabels` for consistency with other functions)
+#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param title The desired title of the plot. Can be put to `NULL` to remove.
 #'
 #' @keywords density, normality
 #'
 #' @examples
 #' # Make the basic plot
-#' nice_density(variable = "Sepal.Length",
-#'             group = "Species",
-#'             data = iris)
+#' nice_density(data = iris,
+#'              variable = "Sepal.Length",
+#'              group = "Species")
 #'
 #' # Further customization
-#' nice_density(variable = "Sepal.Length",
-#'             group = "Species",
-#'             data = iris,
-#'             colours = c("#00BA38", "#619CFF", "#F8766D"),
-#'             xtitle = "Sepal Length",
-#'             ytitle = "Density (vs. Normal Distribution)",
-#'             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-#'             grid = FALSE,
-#'             shapiro = TRUE,
-#'             title = "Density (Sepal Length)")
+#' nice_density(data = iris,
+#'              variable = "Sepal.Length",
+#'              group = "Species",
+#'              colours = c("#00BA38", "#619CFF", "#F8766D"),
+#'              xtitle = "Sepal Length",
+#'              ytitle = "Density (vs. Normal Distribution)",
+#'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+#'              grid = FALSE,
+#'              shapiro = TRUE,
+#'              title = "Density (Sepal Length)")
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text
 #' @importFrom stats reformulate dnorm
 
 #' @export
-nice_density <- function(variable, group, data, colours, ytitle="Density", xtitle=variable,
+nice_density <- function(data, variable, group, colours, ytitle="Density", xtitle=variable,
                          groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
   options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])

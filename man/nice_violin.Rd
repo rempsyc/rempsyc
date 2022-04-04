@@ -32,7 +32,7 @@ nice_violin(
 )
 }
 \arguments{
-\item{data}{The data frame}
+\item{data}{The data frame.}
 
 \item{group}{The group by which to plot the variable.}
 
@@ -40,9 +40,9 @@ nice_violin(
 
 \item{boot}{Logical, whether to use bootstrapping or not.}
 
-\item{bootstraps}{How many bootstraps to use?}
+\item{bootstraps}{How many bootstraps to use.}
 
-\item{colours}{Supports providing custom colours.}
+\item{colours}{Desired colours for the plot, if desired.}
 
 \item{xlabels}{The individual group labels on the x-axis.}
 
@@ -50,9 +50,9 @@ nice_violin(
 
 \item{xtitle}{An optional x-axis label, if desired.}
 
-\item{has.ylabels}{Logical, whether the x-axis should have labels or not}
+\item{has.ylabels}{Logical, whether the x-axis should have labels or not.}
 
-\item{has.xlabels}{Logical, whether the y-axis should have labels or not}
+\item{has.xlabels}{Logical, whether the y-axis should have labels or not.}
 
 \item{comp1}{The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays \code{*}, \verb{**}, or \verb{***} depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp2}.}
 
@@ -66,9 +66,9 @@ nice_violin(
 
 \item{signif_xmax}{Manually provide the second part of the horizontal position of the annotations/stars (end of the right-sided bracket), based on the x-scale.}
 
-\item{ymin}{The minimum score on the x-axis scale.}
+\item{ymin}{The minimum score on the y-axis scale.}
 
-\item{ymax}{The minimum score on the y-axis scale.}
+\item{ymax}{The maximum score on the y-axis scale.}
 
 \item{yby}{How much to increase on each "tick" on the y-axis scale.}
 
@@ -76,7 +76,7 @@ nice_violin(
 
 \item{obs}{Logical, whether to plot individual observations or not.}
 
-\item{alpha}{The alpha (transparency) of the plot.}
+\item{alpha}{The transparency of the plot.}
 
 \item{border.colour}{The colour of the plot border.}
 }
@@ -97,80 +97,80 @@ ggsave('niceviolinplothere.pdf', width = 7, height = 7, unit = 'in',
 
 # Change x- and y- axes labels
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           ytitle = "Length of Tooth",
-           xtitle = "Vitamin C Dosage")
+            group = "dose",
+            response = "len",
+            ytitle = "Length of Tooth",
+            xtitle = "Vitamin C Dosage")
 
 # See difference between two groups
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           comp1 = "0.5",
-           comp2 = "2")
+            group = "dose",
+            response = "len",
+            comp1 = "0.5",
+            comp2 = "2")
 
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           comp1 = 2,
-           comp2 = 3)
+            group = "dose",
+            response = "len",
+            comp1 = 2,
+            comp2 = 3)
 
 # Compare all three groups
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           signif_annotation = c("*","**","***"), # manually enter the number of stars
-           signif_yposition = c(30,35,40), # What height (y) should the stars appear?
-           signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)?
-           signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)?
+            group = "dose",
+            response = "len",
+            signif_annotation = c("*","**","***"), # manually enter the number of stars
+            signif_yposition = c(30,35,40), # What height (y) should the stars appear?
+            signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)?
+            signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)?
 
 # Set the colours manually
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           colours = c("darkseagreen","cadetblue","darkslateblue"))
+            group = "dose",
+            response = "len",
+            colours = c("darkseagreen","cadetblue","darkslateblue"))
 
 # Changing the names of the x-axis labels
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           xlabels = c("Low", "Medium", "High"))
+            group = "dose",
+            response = "len",
+            xlabels = c("Low", "Medium", "High"))
 
 # Removing the x-axis or y-axis titles
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           ytitle = NULL,
-           xtitle = NULL)
+            group = "dose",
+            response = "len",
+            ytitle = NULL,
+            xtitle = NULL)
 
 # Removing the x-axis or y-axis labels (for whatever purpose)
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           has.ylabels = FALSE,
-           has.xlabels = FALSE)
+            group = "dose",
+            response = "len",
+            has.ylabels = FALSE,
+            has.xlabels = FALSE)
 
 # Set y-scale manually
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           ymin = 5,
-           ymax = 35,
-           yby = 5)
+            group = "dose",
+            response = "len",
+            ymin = 5,
+            ymax = 35,
+            yby = 5)
 
 # Plotting individual observations
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           obs = TRUE)
+            group = "dose",
+            response = "len",
+            obs = TRUE)
 
 # Micro-customizations
 nice_violin(data = ToothGrowth,
-           group = "dose",
-           response = "len",
-           CIcap.width = 0,
-           alpha = 1,
-           border.colour = "black")
+            group = "dose",
+            response = "len",
+            CIcap.width = 0,
+            alpha = 1,
+            border.colour = "black")
 
 }
 \seealso{

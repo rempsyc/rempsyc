@@ -5,29 +5,29 @@
 \title{Easy simple slopes}
 \usage{
 nice_slopes(
+  data,
   response,
   predictor,
   moderator,
   moderator2 = NULL,
   covariates = NULL,
-  data,
   ...
 )
 }
 \arguments{
-\item{response}{The response}
+\item{data}{The data frame}
 
-\item{predictor}{The predictor}
+\item{response}{The dependent variable.}
 
-\item{moderator}{The moderator}
+\item{predictor}{The independent variable}
 
-\item{moderator2}{The moderator2}
+\item{moderator}{The moderating variable.}
 
-\item{covariates}{The covariates}
+\item{moderator2}{The second moderating variable, if applicable.}
 
-\item{data}{The data}
+\item{covariates}{The desired covariates in the model.}
 
-\item{...}{The ...}
+\item{...}{Further arguments to be passed to the \code{lm} function for the models.}
 }
 \description{
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format.
@@ -36,30 +36,30 @@ Note: this function uses the \code{modelEffectSizes} function from the \code{lmS
 }
 \examples{
 # Make the basic table
-nice_slopes(response = "mpg",
+nice_slopes(data = mtcars,
+            response = "mpg",
             predictor = "gear",
-            moderator = "wt",
-            data = mtcars)
+            moderator = "wt")
 
 # Multiple dependent variables at once
-nice_slopes(response = c("mpg", "disp", "hp"),
+nice_slopes(data = mtcars,
+            response = c("mpg", "disp", "hp"),
             predictor = "gear",
-            moderator = "wt",
-            data = mtcars)
+            moderator = "wt")
 
 # Add covariates
-nice_slopes(response = "mpg",
+nice_slopes(data = mtcars,
+            response = "mpg",
             predictor = "gear",
             moderator = "wt",
-            covariates = c("am", "vs"),
-            data = mtcars)
+            covariates = c("am", "vs"))
 
 # Three-way interaction (continuous moderator and binary second moderator required)
-nice_slopes(response = "mpg",
+nice_slopes(data = mtcars,
+            response = "mpg",
             predictor = "gear",
             moderator = "wt",
-            moderator2 = "am",
-            data = mtcars)
+            moderator2 = "am")
 
 }
 \seealso{

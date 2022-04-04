@@ -2,8 +2,8 @@
 #'
 #' @description Test linear regression assumptions easily with a nice summary table.
 #'
-#' @param model The model
-#' @param interpretation The interpretation
+#' @param model The `lm` object to be passed to the function.
+#' @param interpretation Whether to display the interpretation helper or not.
 #'
 #' @keywords assumptions, linear regression, statistical, violations
 #' @export

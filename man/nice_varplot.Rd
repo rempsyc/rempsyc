@@ -5,9 +5,9 @@
 \title{Attempt to visualize variance per group}
 \usage{
 nice_varplot(
+  data,
   variable,
   group,
-  data,
   colours,
   groups.labels,
   grid = TRUE,
@@ -16,15 +16,15 @@ nice_varplot(
 )
 }
 \arguments{
+\item{data}{The data frame}
+
 \item{variable}{The dependent variable to be plotted.}
 
 \item{group}{The group by which to plot the variable.}
 
-\item{data}{The data frame}
+\item{colours}{Desired colours for the plot, if desired.}
 
-\item{colours}{Supports providing custom colours}
-
-\item{groups.labels}{How to label the groups?}
+\item{groups.labels}{How to label the groups.}
 
 \item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
 
@@ -37,14 +37,14 @@ Attempt to visualize variance per group. It is not a good way to visualize varia
 }
 \examples{
 # Make the basic plot
-nice_varplot(variable = "Sepal.Length",
-             group = "Species",
-             data = iris)
+nice_varplot(data = iris,
+             variable = "Sepal.Length",
+             group = "Species")
 
 # Further customization
-nice_varplot(variable = "Sepal.Length",
+nice_varplot(data = iris,
+             variable = "Sepal.Length",
              group = "Species",
-             data = iris,
              colours = c("#00BA38", "#619CFF", "#F8766D"),
              ytitle = "Sepal Length",
              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
