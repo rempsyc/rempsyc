@@ -249,24 +249,24 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
 #> 1  1        BP
-#> 2  2        CX
-#> 3  3        ZL
-#> 4  4        PZ
-#> 5  5        PZ
+#> 2  2        PZ
+#> 3  3        CX
+#> 4  4        ZL
+#> 5  5        ZL
 #> 6  6        CX
 #> 7  7        BP
-#> 8  8        ZL
+#> 8  8        PZ
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        SV
 #> 2  2        ST
-#> 3  3        SV
-#> 4  1        SV
+#> 3  3        AV
+#> 4  1        AV
 #> 5  2        SV
-#> 6  3        AV
+#> 6  3        SV
 #> 7  1        ST
 #> 8  2        AV
 #> 9  3        ST
@@ -342,39 +342,20 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
-## `nice_qq`
+## `nice_normality`
 
-Easily make nice per-group QQ plots.
-
-``` r
-# Create regression model
-nice_qq(data = iris,
-        variable = "Sepal.Length",
-        group = "Species",
-        grid = FALSE,
-        shapiro = TRUE,
-        title = NULL)
-```
-
-<img src="man/figures/README-nice_qq-1.png" width="80%" />
-
-## `nice_density`
-
-Easily make nice per-group QQ plots.
+Easily make nice density and QQ plots per-group.
 
 ``` r
-# Create regression model
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
-             xtitle = "Sepal Length",
-             ytitle = "Density (vs. Normal Distribution)",
-             grid = FALSE,
-             shapiro = TRUE,
-             title = "Density (Sepal Length)")
+nice_normality(data = iris,
+               variable = "Sepal.Length",
+               group = "Species",
+               grid = FALSE,
+               shapiro = TRUE,
+               title = NULL)
 ```
 
-<img src="man/figures/README-nice_density-1.png" width="80%" />
+<img src="man/figures/README-nice_normality-1.png" width="100%" />
 
 ## `nice_var`
 

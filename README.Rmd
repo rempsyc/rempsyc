@@ -265,36 +265,17 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
-## `nice_qq `
+## `nice_normality `
 
-Easily make nice per-group QQ plots.
+Easily make nice density and QQ plots per-group.
 
-```{r nice_qq, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
-
-# Create regression model
-nice_qq(data = iris,
-        variable = "Sepal.Length",
-        group = "Species",
-        grid = FALSE,
-        shapiro = TRUE,
-        title = NULL)
-```
-
-## `nice_density `
-
-Easily make nice per-group QQ plots.
-
-```{r nice_density, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="80%"}
-
-# Create regression model
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
-             xtitle = "Sepal Length",
-             ytitle = "Density (vs. Normal Distribution)",
-             grid = FALSE,
-             shapiro = TRUE,
-             title = "Density (Sepal Length)")
+```{r nice_normality, warning = FALSE, message = FALSE, fig.width=16, fig.height=7, out.width="100%"}
+nice_normality(data = iris,
+               variable = "Sepal.Length",
+               group = "Species",
+               grid = FALSE,
+               shapiro = TRUE,
+               title = NULL)
 ```
 
 
