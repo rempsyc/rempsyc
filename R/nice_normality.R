@@ -27,15 +27,14 @@
 #'                colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'                groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
 #'                grid = FALSE,
-#'                shapiro = TRUE,
-#'                title = NULL)
+#'                shapiro = TRUE)
 #'
 #' @seealso
 #' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}, \code{\link{nice_varplot}}
 #'
 
 nice_normality <- function(data, variable, group, colours, groups.labels,
-                    grid=TRUE, shapiro=FALSE, title=variable, ...) {
+                    grid=TRUE, shapiro=FALSE, title=NULL, ...) {
   plot.a <- nice_density(data = data, variable = variable, group = group, colours = colours,
                          groups.labels = groups.labels, grid = grid, shapiro = shapiro,
                          title = title, ...)

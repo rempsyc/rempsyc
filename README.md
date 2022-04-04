@@ -248,14 +248,14 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        BP
-#> 2  2        PZ
+#> 1  1        PZ
+#> 2  2        ZL
 #> 3  3        CX
-#> 4  4        ZL
-#> 5  5        ZL
-#> 6  6        CX
-#> 7  7        BP
-#> 8  8        PZ
+#> 4  4        BP
+#> 5  5        BP
+#> 6  6        PZ
+#> 7  7        CX
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
@@ -263,13 +263,13 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
 #>   id Condition
 #> 1  1        SV
 #> 2  2        ST
-#> 3  3        AV
+#> 3  3        SV
 #> 4  1        AV
 #> 5  2        SV
-#> 6  3        SV
+#> 6  3        ST
 #> 7  1        ST
 #> 8  2        AV
-#> 9  3        ST
+#> 9  3        AV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -351,8 +351,7 @@ nice_normality(data = iris,
                variable = "Sepal.Length",
                group = "Species",
                grid = FALSE,
-               shapiro = TRUE,
-               title = NULL)
+               shapiro = TRUE)
 ```
 
 <img src="man/figures/README-nice_normality-1.png" width="100%" />
