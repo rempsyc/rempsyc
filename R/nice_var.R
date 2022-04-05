@@ -1,18 +1,19 @@
 #' @title Obtain variance per group
 #'
-#' @description Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
+#' @description Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups. Variance ratio is calculated as Max / Min.
 #'
+#' @param data The data frame
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
-#' @param data The data frame
+#' @param criteria Desired threshold if one wants something different than four times the variance.
 #'
 #' @keywords variance
 #'
 #' @examples
 #' # Make the basic table
-#' nice_var(variable = "Sepal.Length",
-#'          group = "Species",
-#'          data = iris)
+#' nice_var(data = iris,
+#'          variable = "Sepal.Length",
+#'          group = "Species")
 #'
 #' # Try on multiple variables
 #' DV <- names(iris[1:4])
@@ -25,7 +26,7 @@
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
 
 #' @export
-nice_var <- function(variable, group, data) {
+nice_var <- function(data, variable, group, criteria = 4) {
   # Make group as factor
   data[[group]] <- as.factor(data[[group]])
   # Make basic frame
@@ -44,8 +45,9 @@ nice_var <- function(variable, group, data) {
   # Add the ratio and hetero columns
   var.table %>%
     rowwise() %>%
-    mutate(`Max/Min Ratio` = round(max(select(., -variable))/min(select(., -variable)),1),
-           `Heteroscedastic (4x bigger)?` = `Max/Min Ratio` > 4) -> var.table
+    mutate(variance.ratio = round(max(select(., -variable))/min(select(., -variable)), 1),
+           criteria = criteria,
+           heteroscedastic = variance.ratio > criteria) -> var.table
   # Change names to something meaningful
   for (i in 1:length(levels(data[[group]]))) {
     names(var.table)[1+i] <- levels(data[[group]])[i]
