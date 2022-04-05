@@ -4,23 +4,25 @@
 \alias{nice_var}
 \title{Obtain variance per group}
 \usage{
-nice_var(variable, group, data)
+nice_var(data, variable, group, criteria = 4)
 }
 \arguments{
+\item{data}{The data frame}
+
 \item{variable}{The dependent variable to be plotted.}
 
 \item{group}{The group by which to plot the variable.}
 
-\item{data}{The data frame}
+\item{criteria}{Desired threshold if one wants something different than four times the variance.}
 }
 \description{
-Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
+Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups. Variance ratio is calculated as Max / Min.
 }
 \examples{
 # Make the basic table
-nice_var(variable = "Sepal.Length",
-         group = "Species",
-         data = iris)
+nice_var(data = iris,
+         variable = "Sepal.Length",
+         group = "Species")
 
 # Try on multiple variables
 DV <- names(iris[1:4])

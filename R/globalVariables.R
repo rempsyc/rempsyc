@@ -1,2 +1,2 @@
 #' @export
-utils::globalVariables(c(".", "p", "where", "x", "y", "Max/Min Ratio", "V1"))
+utils::globalVariables(c(".", "p", "where", "x", "y", "variance.ratio", "V1"))
