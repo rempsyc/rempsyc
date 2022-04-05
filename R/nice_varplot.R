@@ -54,7 +54,10 @@ nice_varplot <- function(data, variable, group, colours, groups.labels,
                colours=colours,
                groups.labels=groups.labels,
                xtitle=NULL,
-               ytitle=ytitle) +
+               ytitle=ytitle,
+               has.points = FALSE,
+               has.jitter = FALSE) +
+    geom_jitter(size = 2, width = 0.10) +
     annotate(geom="text",
              x=median(1:length(levels(data[[group]]))),
              y=max(data[[variable]]),

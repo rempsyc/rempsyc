@@ -197,11 +197,7 @@ nice_scatter <- function(data, predictor, response, xtitle=ggplot2::waiver(),
                          r.y=-Inf, has.p=FALSE, p.x=Inf, p.y=-Inf) {
   has.groups <- !missing(group)
   if (has.r == TRUE) {
-    format.r <- function(r, precision = 0.01) {
-      digits <- -log(precision, base = 10)
-      r <- formatC(r, format = 'f', digits = digits)
-      sub("0", "", r)}
-    r <- format.r(cor.test(data[,deparse(substitute(predictor))],
+    r <- format_r(cor.test(data[,deparse(substitute(predictor))],
                            data[,deparse(substitute(response))],
                            use="complete.obs",)$estimate)
   }

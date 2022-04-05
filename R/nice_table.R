@@ -95,27 +95,17 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
     table %>%
       italic(j = italics, part = "header") -> table
   }
-  format.p <- function(p, precision = 0.001) {
-    digits <- -log(precision, base = 10)
-    p <- formatC(p, format = 'f', digits = digits)
-    p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
-    sub("0", "", p)
-  }
-  format.r <- function(r, precision = 0.01) {
-    digits <- -log(precision, base = 10)
-    r <- formatC(r, format = 'f', digits = digits)
-    sub("0", "", r)}
   if("p" %in% names(dataframe)) {
     table %>%
       italic(j = "p", part = "header") %>%
       set_formatter(p = function(x) {
-        format.p(x)}) -> table
+        format_p(x)}) -> table
   }
   if("r" %in% names(dataframe)) {
     table %>%
       italic(j = "r", part = "header") %>%
       set_formatter(r = function(x)
-        format.r(x)) -> table
+        format_r(x)) -> table
   }
   if("t" %in% names(dataframe)) {
     table %>%
@@ -163,14 +153,14 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
       compose(i = 1, j = "R2", part = "header",
               value = as_paragraph(as_i("R"), as_sup("2"))) %>%
       set_formatter(R2 = function(x)
-        format.r(x)) -> table
+        format_r(x)) -> table
   }
   if("sr2" %in% names(dataframe)) {
     table %>%
       compose(i = 1, j = "sr2", part = "header",
               value = as_paragraph(as_i("sr"), as_sup("2"))) %>%
       set_formatter(sr2 = function(x)
-        format.r(x)) -> table
+        format_r(x)) -> table
   }
   if("np2" %in% names(dataframe)) {
     table %>%
@@ -211,12 +201,12 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
                      big.mark=",", digits = 2) -> table
   if(!missing(col.format.p)) {
     rExpression <- paste0("table <- table %>% set_formatter(table,`",
-                          table$col_keys[col.format.p], "` = ", "format.p", ")")
+                          table$col_keys[col.format.p], "` = ", "format_p", ")")
     eval(parse(text = rExpression))
   }
   if(!missing(col.format.r)) {
     rExpression <- paste0("table <- table %>% set_formatter(table,`",
-                          table$col_keys[col.format.r], "` = ", "format.r", ")")
+                          table$col_keys[col.format.r], "` = ", "format_r", ")")
     eval(parse(text = rExpression))
   }
   if(!missing(format.custom) & !missing(col.format.custom)) {
