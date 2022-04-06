@@ -10,6 +10,7 @@
 #' @param has.points Whether to plot the individual observations or not.
 #' @param has.jitter Alternative to `has.points`. "Jitters" the observations to avoid overlap (overplotting). Use one or the other, not both.
 #' @param alpha The desired level of transparency.
+#' @param has.line Whether to plot the regression line(s).
 #' @param has.confband Logical. Whether to display the confidence band around the slope.
 #' @param has.fullrange Logical. Whether to extend the slope beyond the range of observations.
 #' @param has.linetype Logical. Whether to change line types as a function of group.
@@ -119,27 +120,34 @@
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl))
+#'              group = cyl)
 #'
 #' # Use full range on the slope/confidence band
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.fullrange = TRUE)
+#'
+#' # Remove lines
+#' nice_scatter(data = mtcars,
+#'              predictor = wt,
+#'              response = mpg,
+#'              group = cyl,
+#'              has.line = FALSE)
 #'
 #' # Add a legend
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.legend = TRUE)
 #'
 #' # Change order of labels on the legend
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.legend = TRUE,
 #'              groups.order = c(8,4,6))
 #'
@@ -147,7 +155,7 @@
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.legend = TRUE,
 #'              groups.labels = c("Weak","Average","Powerful"))
 #' # Warning: This applies after changing order of level
@@ -156,7 +164,7 @@
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.legend = TRUE,
 #'              legend.title = "Cylinders")
 #'
@@ -164,21 +172,21 @@
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
-#'              colours = c("burlywood","darkgoldenrod","chocolate"))
+#'              group = cyl,
+#'              colours = c("burlywood", "darkgoldenrod", "chocolate"))
 #'
 #' # Plot by group + use different line types for each group
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.linetype = TRUE)
 #'
 #' # Plot by group + use different point shapes for each group
 #' nice_scatter(data = mtcars,
 #'              predictor = wt,
 #'              response = mpg,
-#'              group = factor(mtcars$cyl),
+#'              group = cyl,
 #'              has.shape = TRUE)
 #'
 #' @seealso
@@ -189,7 +197,7 @@
 
 nice_scatter <- function(data, predictor, response, xtitle=ggplot2::waiver(),
                          ytitle=ggplot2::waiver(), has.points=TRUE, has.jitter=FALSE,
-                         alpha=0.7, has.confband=FALSE, has.fullrange=FALSE,
+                         alpha=0.7, has.line=TRUE, has.confband=FALSE, has.fullrange=FALSE,
                          has.linetype=FALSE, has.shape=FALSE, xmin, xmax, xby=1, ymin,
                          ymax, yby=1, has.legend=FALSE, legend.title="",
                          group=NULL, colours="#619CFF", groups.order=NULL,
@@ -215,14 +223,16 @@ nice_scatter <- function(data, predictor, response, xtitle=ggplot2::waiver(),
                            data[,deparse(substitute(response))],
                            use="complete.obs",)$p.value)
   }
-  if (!missing(groups.order)) {group <- factor(group, levels=groups.order)}
-  if (!missing(groups.labels)) {levels(group) <- groups.labels}
   if (missing(group)) {
     smooth <- stat_smooth(formula = y ~ x, geom="line", method="lm",
                           fullrange=has.fullrange, color = colours, size = 1)}
   if (!missing(group)) {
+    data$group <- as.factor(data[,deparse(substitute(group))])
     smooth <- stat_smooth(formula = y ~ x, geom="line", method="lm",
                           fullrange=has.fullrange, size = 1)}
+  if (!missing(groups.order)) {
+    data$group <- factor(data$group, levels=groups.order)}
+  if (!missing(groups.labels)) {levels(data$group) <- groups.labels}
   if (has.confband == TRUE & missing(group)) {
     band <- geom_smooth(formula = y ~ x, method="lm",colour=NA,fill=colours)}
   if (has.confband == TRUE & !missing(group)) {
@@ -250,15 +260,16 @@ nice_scatter <- function(data, predictor, response, xtitle=ggplot2::waiver(),
   ggplot(data,
          aes(x={{predictor}},
              y={{response}},
-             colour = switch(has.groups==TRUE, group),
-             fill = switch(has.groups==TRUE, group),
-             linetype = switch(has.groups==TRUE & has.linetype==TRUE, group),
-             shape = switch(has.groups==TRUE & has.shape==TRUE, group),
-             alpha = switch(!is.null(groups.alpha), group))) +
+             colour = switch(has.groups==TRUE, data[,deparse(substitute(group))]),
+             fill = switch(has.groups==TRUE, data[,deparse(substitute(group))]),
+             linetype = switch(has.groups==TRUE & has.linetype==TRUE,
+                               data[,deparse(substitute(group))]),
+             shape = switch(has.groups==TRUE & has.shape==TRUE, data[,deparse(substitute(group))]),
+             alpha = switch(!is.null(groups.alpha), data[,deparse(substitute(group))]))) +
     xlab(xtitle) +
     ylab(ytitle) +
-    smooth +
     theme_bw(base_size = 24) +
+    {if (has.line == TRUE) smooth} +
     {if (has.confband == TRUE) band} +
     {if (exists("observations")) observations} +
     {if (!missing(xmin)) scale_x_continuous(limits=c(xmin, xmax),

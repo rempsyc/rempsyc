@@ -9,7 +9,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.5-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.6-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -237,6 +237,16 @@ nice_scatter(data = mtcars,
 
 <img src="man/figures/README-nice_scatter-1.png" width="60%" />
 
+``` r
+nice_scatter(data = mtcars,
+             predictor = wt,
+             response = mpg,
+             group = cyl,
+             has.confband = TRUE)
+```
+
+<img src="man/figures/README-nice_scatter-2.png" width="60%" />
+
 Full tutorial: <https://remi-theriault.com/blog_scatter.html>
 
 ## `nice_randomize`
@@ -248,28 +258,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        PZ
-#> 2  2        ZL
-#> 3  3        CX
+#> 1  1        ZL
+#> 2  2        CX
+#> 3  3        PZ
 #> 4  4        BP
-#> 5  5        BP
-#> 6  6        PZ
-#> 7  7        CX
-#> 8  8        ZL
+#> 5  5        PZ
+#> 6  6        ZL
+#> 7  7        BP
+#> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
-#> 2  2        ST
-#> 3  3        SV
-#> 4  1        AV
-#> 5  2        SV
+#> 1  1        AV
+#> 2  2        AV
+#> 3  3        AV
+#> 4  1        ST
+#> 5  2        ST
 #> 6  3        ST
-#> 7  1        ST
-#> 8  2        AV
-#> 9  3        AV
+#> 7  1        SV
+#> 8  2        SV
+#> 9  3        SV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -365,11 +375,11 @@ group having variance four times bigger than any of the other groups.
 nice_var(data = iris,
          variable = "Sepal.Length",
          group = "Species")
-#> # A tibble: 1 x 6
+#> # A tibble: 1 x 7
 #> # Rowwise: 
-#>   Variable     Setosa Versicolor Virginica `Max/Min Ratio` `Heteroscedastic (4~`
-#>   <chr>         <dbl>      <dbl>     <dbl>           <dbl> <lgl>                
-#> 1 Sepal.Length  0.124      0.266     0.404             3.3 FALSE
+#>   Variable   Setosa Versicolor Virginica Variance.ratio Criteria Heteroscedastic
+#>   <chr>       <dbl>      <dbl>     <dbl>          <dbl>    <dbl> <lgl>          
+#> 1 Sepal.Len~  0.124      0.266     0.404            3.3        4 FALSE
 ```
 
 ## `nice_varplot`
@@ -380,8 +390,8 @@ such plots. Use at your own risk and for exploratory purposes only.
 
 ``` r
 nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+             variable = Sepal.Length,
+             group = Species)
 ```
 
 <img src="man/figures/README-nice_varplot-1.png" width="70%" />

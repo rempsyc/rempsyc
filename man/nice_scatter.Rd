@@ -13,6 +13,7 @@ nice_scatter(
   has.points = TRUE,
   has.jitter = FALSE,
   alpha = 0.7,
+  has.line = TRUE,
   has.confband = FALSE,
   has.fullrange = FALSE,
   has.linetype = FALSE,
@@ -54,6 +55,8 @@ nice_scatter(
 \item{has.jitter}{Alternative to \code{has.points}. "Jitters" the observations to avoid overlap (overplotting). Use one or the other, not both.}
 
 \item{alpha}{The desired level of transparency.}
+
+\item{has.line}{Whether to plot the regression line(s).}
 
 \item{has.confband}{Logical. Whether to display the confidence band around the slope.}
 
@@ -187,27 +190,34 @@ nice_scatter(data = mtcars,
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl))
+             group = cyl)
 
 # Use full range on the slope/confidence band
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.fullrange = TRUE)
+
+# Remove lines
+nice_scatter(data = mtcars,
+             predictor = wt,
+             response = mpg,
+             group = cyl,
+             has.line = FALSE)
 
 # Add a legend
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.legend = TRUE)
 
 # Change order of labels on the legend
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.legend = TRUE,
              groups.order = c(8,4,6))
 
@@ -215,7 +225,7 @@ nice_scatter(data = mtcars,
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.legend = TRUE,
              groups.labels = c("Weak","Average","Powerful"))
 # Warning: This applies after changing order of level
@@ -224,7 +234,7 @@ nice_scatter(data = mtcars,
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.legend = TRUE,
              legend.title = "Cylinders")
 
@@ -232,21 +242,21 @@ nice_scatter(data = mtcars,
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
-             colours = c("burlywood","darkgoldenrod","chocolate"))
+             group = cyl,
+             colours = c("burlywood", "darkgoldenrod", "chocolate"))
 
 # Plot by group + use different line types for each group
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.linetype = TRUE)
 
 # Plot by group + use different point shapes for each group
 nice_scatter(data = mtcars,
              predictor = wt,
              response = mpg,
-             group = factor(mtcars$cyl),
+             group = cyl,
              has.shape = TRUE)
 
 }

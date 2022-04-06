@@ -16,13 +16,13 @@
 #' @examples
 #' # Make the basic plot
 #' nice_varplot(data = iris,
-#'              variable = "Sepal.Length",
-#'              group = "Species")
+#'              variable = Sepal.Length,
+#'              group = Species)
 #'
 #' # Further customization
 #' nice_varplot(data = iris,
-#'              variable = "Sepal.Length",
-#'              group = "Species",
+#'              variable = Sepal.Length,
+#'              group = Species,
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
@@ -30,46 +30,49 @@
 #' @seealso
 #' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}
 #'
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 #' @importFrom stats var median
 
 nice_varplot <- function(data, variable, group, colours, groups.labels,
-                         grid=TRUE, shapiro=FALSE, ytitle=variable) {
-  data[[group]] <- as.factor(data[[group]])
-  {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
+                         grid=TRUE, shapiro=FALSE, ytitle=ggplot2::waiver()) {
+  data$group2 <- as.factor(data[,deparse(substitute(group))])
+  data$variable2 <- data[,deparse(substitute(variable))]
+  {if (!missing(groups.labels)) levels(data$group2) <- groups.labels}
   # Calculate variance
   var <- data %>%
-    group_by(.data[[group]]) %>%
-    summarize(var=var(.data[[variable]]))
+    group_by(data$group2) %>%
+    summarize(var=var(variable2))
   diff <- max(var[,"var"])/min(var[,"var"])
   # Make annotation dataframe
   dat_text <- var %>%
     mutate(text=paste0("var = ", round(var,2)))
+  names(dat_text)[1] <- "group2"
   # Make plot
   nice_scatter(data=data,
-               predictor=.data[[group]],
-               response=.data[[variable]],
-               group=data[[group]],
+               predictor=group2,
+               response=variable2,
+               group=group2,
                colours=colours,
                groups.labels=groups.labels,
                xtitle=NULL,
-               ytitle=ytitle,
+               ytitle=deparse(substitute(variable)),
                has.points = FALSE,
                has.jitter = FALSE) +
     geom_jitter(size = 2, width = 0.10) +
     annotate(geom="text",
-             x=median(1:length(levels(data[[group]]))),
-             y=max(data[[variable]]),
+             x=median(1:length(levels(data$group2))),
+             y=max(data$variable2),
              label=paste0("max/min = ",
                           round(diff, 2),
                           "x bigger"),
              hjust=0.5,
              size=6) +
     ggrepel::geom_text_repel(data=dat_text,
-                    mapping=aes(x=.data[[group]],
+                    mapping=aes(x=group2,
                                 y=-Inf,
                                 label=text),
                     inherit.aes=FALSE,
                     size=6)
 }
+

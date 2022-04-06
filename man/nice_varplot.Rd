@@ -12,7 +12,7 @@ nice_varplot(
   groups.labels,
   grid = TRUE,
   shapiro = FALSE,
-  ytitle = variable
+  ytitle = ggplot2::waiver()
 )
 }
 \arguments{
@@ -38,13 +38,13 @@ Attempt to visualize variance per group. It is not a good way to visualize varia
 \examples{
 # Make the basic plot
 nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+             variable = Sepal.Length,
+             group = Species)
 
 # Further customization
 nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
+             variable = Sepal.Length,
+             group = Species,
              colours = c("#00BA38", "#619CFF", "#F8766D"),
              ytitle = "Sepal Length",
              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))

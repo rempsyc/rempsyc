@@ -199,6 +199,12 @@ nice_scatter(data = mtcars,
              has.confband = TRUE,
              has.r = TRUE,
              has.p = TRUE)
+
+nice_scatter(data = mtcars,
+             predictor = wt,
+             response = mpg,
+             group = cyl,
+             has.confband = TRUE)
 ```
 
 Full tutorial: https://remi-theriault.com/blog_scatter.html
@@ -294,8 +300,8 @@ Attempt to visualize variance per group. It is not a good way to visualize varia
 
 ```{r nice_varplot, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
 nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+             variable = Sepal.Length,
+             group = Species)
 ```
 
 ## Support me and this package
