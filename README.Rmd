@@ -194,16 +194,16 @@ Make nice scatter plots easily.
 
 ```{r nice_scatter, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
 nice_scatter(data = mtcars,
-             predictor = wt,
-             response = mpg,
+             predictor = "wt",
+             response = "mpg",
              has.confband = TRUE,
              has.r = TRUE,
              has.p = TRUE)
 
 nice_scatter(data = mtcars,
-             predictor = wt,
-             response = mpg,
-             group = cyl,
+             predictor = "wt",
+             response = "mpg",
+             group = "cyl",
              has.confband = TRUE)
 ```
 
@@ -300,8 +300,8 @@ Attempt to visualize variance per group.
 
 ```{r nice_varplot, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
 nice_varplot(data = iris,
-             variable = Sepal.Length,
-             group = Species)
+             variable = "Sepal.Length",
+             group = "Species")
 ```
 
 ## Support me and this package

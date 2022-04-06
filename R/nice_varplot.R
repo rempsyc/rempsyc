@@ -16,13 +16,13 @@
 #' @examples
 #' # Make the basic plot
 #' nice_varplot(data = iris,
-#'              variable = Sepal.Length,
-#'              group = Species)
+#'              variable = "Sepal.Length",
+#'              group = "Species")
 #'
 #' # Further customization
 #' nice_varplot(data = iris,
-#'              variable = Sepal.Length,
-#'              group = Species,
+#'              variable = "Sepal.Length",
+#'              group = "Species",
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              ytitle = "Sepal Length",
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
@@ -36,40 +36,38 @@
 
 nice_varplot <- function(data, variable, group, colours, groups.labels,
                          grid=TRUE, shapiro=FALSE, ytitle=ggplot2::waiver()) {
-  data$group2 <- as.factor(data[,deparse(substitute(group))])
-  data$variable2 <- data[,deparse(substitute(variable))]
-  {if (!missing(groups.labels)) levels(data$group2) <- groups.labels}
+  data[[group]] <- as.factor(data[[group]])
+  {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
   # Calculate variance
   var <- data %>%
-    group_by(data$group2) %>%
-    summarize(var=var(variable2))
+    group_by(.data[[group]]) %>%
+    summarize(var=var(.data[[variable]]))
   diff <- max(var[,"var"])/min(var[,"var"])
   # Make annotation dataframe
   dat_text <- var %>%
     mutate(text=paste0("var = ", round(var,2)))
-  names(dat_text)[1] <- "group2"
   # Make plot
   nice_scatter(data=data,
-               predictor=group2,
-               response=variable2,
-               group=group2,
+               predictor=group,
+               response=variable,
+               group=group,
                colours=colours,
                groups.labels=groups.labels,
                xtitle=NULL,
-               ytitle=deparse(substitute(variable)),
+               ytitle=ytitle,
                has.points = FALSE,
                has.jitter = FALSE) +
     geom_jitter(size = 2, width = 0.10) +
     annotate(geom="text",
-             x=median(1:length(levels(data$group2))),
-             y=max(data$variable2),
+             x=median(1:length(levels(data[[group]]))),
+             y=max(data[[variable]]),
              label=paste0("max/min = ",
                           round(diff, 2),
                           "x bigger"),
              hjust=0.5,
              size=6) +
     ggrepel::geom_text_repel(data=dat_text,
-                    mapping=aes(x=group2,
+                    mapping=aes(x=.data[[group]],
                                 y=-Inf,
                                 label=text),
                     inherit.aes=FALSE,
