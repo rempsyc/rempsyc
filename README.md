@@ -258,28 +258,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
+#> 1  1        BP
 #> 2  2        CX
-#> 3  3        PZ
-#> 4  4        BP
-#> 5  5        PZ
-#> 6  6        ZL
-#> 7  7        BP
+#> 3  3        ZL
+#> 4  4        PZ
+#> 5  5        ZL
+#> 6  6        BP
+#> 7  7        PZ
 #> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
-#> 2  2        AV
-#> 3  3        AV
-#> 4  1        ST
-#> 5  2        ST
-#> 6  3        ST
+#> 1  1        ST
+#> 2  2        ST
+#> 3  3        ST
+#> 4  1        AV
+#> 5  2        SV
+#> 6  3        SV
 #> 7  1        SV
-#> 8  2        SV
-#> 9  3        SV
+#> 8  2        AV
+#> 9  3        AV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
@@ -384,9 +384,7 @@ nice_var(data = iris,
 
 ## `nice_varplot`
 
-Attempt to visualize variance per group. It is not a good way to
-visualize variance because the concentration of points may be hidden on
-such plots. Use at your own risk and for exploratory purposes only.
+Attempt to visualize variance per group.
 
 ``` r
 nice_varplot(data = iris,

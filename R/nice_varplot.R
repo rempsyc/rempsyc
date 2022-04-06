@@ -1,6 +1,6 @@
 #' @title Attempt to visualize variance per group
 #'
-#' @description Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
+#' @description Attempt to visualize variance per group.
 #'
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.

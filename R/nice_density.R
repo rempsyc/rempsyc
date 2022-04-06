@@ -56,19 +56,12 @@ nice_density <- function(data, variable, group, colours, ytitle="Density", xtitl
                          sd(.[[variable]]))))
   # Make data for the Shapiro-Wilk tests
   if (shapiro == TRUE) {
-    format.p <- function(p, precision = 0.001) {
-      digits <- -log(precision, base = 10)
-      p <- formatC(p, format = 'f', digits = digits)
-      if (p < .001) {
-        p <- paste0('< ', precision, " (Shapiro-Wilk)")}
-      if (p >= .001) {
-        p <- paste0('= ', p, " (Shapiro-Wilk)")    }
-      sub("0", "", p)
-    }
     dat_text <- data %>% group_by(.data[[group]]) %>%
       summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
       rowwise() %>%
-      mutate(text=sprintf("italic('p')~'%s'", format.p(text)))
+      mutate(text=sprintf("italic('p')~'%s'", format_p(text,
+                                                       sign = TRUE,
+                                                       suffix = " (Shapiro-Wilk)")))
   }
   # Make plot
   ggplot(data, aes_string(x=variable, fill=group)) +

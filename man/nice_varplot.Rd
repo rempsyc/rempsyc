@@ -33,7 +33,7 @@ nice_varplot(
 \item{ytitle}{An optional y-axis label, if desired.}
 }
 \description{
-Attempt to visualize variance per group. It is not a good way to visualize variance because the concentration of points may be hidden on such plots. Use at your own risk and for exploratory purposes only.
+Attempt to visualize variance per group.
 }
 \examples{
 # Make the basic plot

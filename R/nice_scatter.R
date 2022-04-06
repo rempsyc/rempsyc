@@ -210,18 +210,10 @@ nice_scatter <- function(data, predictor, response, xtitle=ggplot2::waiver(),
                            use="complete.obs",)$estimate)
   }
   if (has.p == TRUE) {
-    format.p <- function(p, precision = 0.001) {
-      digits <- -log(precision, base = 10)
-      p <- formatC(p, format = 'f', digits = digits)
-      if (p < .001) {
-        p <- paste0('< ', precision)}
-      if (p >= .001) {
-        p <- paste0('= ', p)    }
-      sub("0", "", p)
-    }
-    p <- format.p(cor.test(data[,deparse(substitute(predictor))],
+    p <- format_p(cor.test(data[,deparse(substitute(predictor))],
                            data[,deparse(substitute(response))],
-                           use="complete.obs",)$p.value)
+                           use="complete.obs",)$p.value,
+                  sign = TRUE)
   }
   if (missing(group)) {
     smooth <- stat_smooth(formula = y ~ x, geom="line", method="lm",

@@ -8,7 +8,7 @@
 \usage{
 format_value(value, type, ...)
 
-format_p(p, precision = 0.001)
+format_p(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = FALSE)
 
 format_r(r, precision = 0.01)
 }
@@ -22,6 +22,12 @@ format_r(r, precision = 0.01)
 \item{p}{p-value to format.}
 
 \item{precision}{Level of precision desired, if necessary.}
+
+\item{prefix}{To add a prefix before the value.}
+
+\item{suffix}{To add a suffix after the value.}
+
+\item{sign}{Logical. Whether to add an equal sign for p-values higher or equal to .001.}
 
 \item{r}{r-value to format.}
 }

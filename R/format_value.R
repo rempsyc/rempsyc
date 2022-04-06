@@ -7,6 +7,9 @@
 #' @param precision Level of precision desired, if necessary.
 #' @param type Specify r or p value.
 #' @param value Value to be formatted, when using the generic `format_value()`.
+#' @param prefix To add a prefix before the value.
+#' @param suffix To add a suffix after the value.
+#' @param sign Logical. Whether to add an equal sign for p-values higher or equal to .001.
 #' @param ... To specify precision level, if necessary, when using the generic `format_value()`. Simply add the `precision` argument.
 #'
 #' @keywords formatting, p-value, r-value, correlation
@@ -26,11 +29,19 @@ format_value <- function(value, type, ...) {
 
 #' @export
 #' @rdname format_value
-format_p <- function(p, precision = 0.001) {
+format_p <- function(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = FALSE) {
   digits <- -log(precision, base = 10)
   p <- formatC(p, format = 'f', digits = digits)
+  if(sign == TRUE) {
+    p[p != formatC(0,
+                   format = 'f',
+                   digits = digits)] <- paste0('= ',
+                                               p[p != formatC(0,
+                                                              format = 'f',
+                                                              digits = digits)])}
   p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
-  sub("0", "", p)
+  p <- sub("0", "", p)
+  paste0(prefix, p, suffix)
 }
 
 #' @export
