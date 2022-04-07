@@ -42,6 +42,7 @@ randomized <- nice_randomize(design = "within", Ncondition = 4, n = 128,
                              "SONA ID", "Age/Gd.", "Handedness",
                              "Tester", "Notes"))
 head(randomized)
+
 }
 \keyword{allocation,}
 \keyword{conditions,}

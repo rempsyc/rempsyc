@@ -26,6 +26,9 @@
 #'                              "SONA ID", "Age/Gd.", "Handedness",
 #'                              "Tester", "Notes"))
 #' head(randomized)
+#'
+#' @importFrom dplyr arrange %>%
+
 
 nice_randomize <- function(design="between", Ncondition=3, n=9,
                            condition.names=c("a","b","c"),
@@ -58,5 +61,7 @@ nice_randomize <- function(design="between", Ncondition=3, n=9,
   id <- t(t(1:n))
   final_table <- data.frame(id, Condition, matrix(NA, ncol = length(col.names)))[,1:length(col.names)]
   names(final_table) <- col.names
+  final_table %>%
+    arrange(id) -> final_table
   final_table
 }
