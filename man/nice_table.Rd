@@ -17,6 +17,8 @@ nice_table(
 )
 }
 \arguments{
+\item{data}{The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
+
 \item{italics}{Which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.}
 
 \item{highlight}{Highlight rows with statistically significant results? Requires a column named "p" containing p-values. Can either accept logical (TRUE/FALSE) OR a numeric value for a custom critical p-value threshold (e.g., 0.10 or 0.001).}
@@ -32,8 +34,6 @@ nice_table(
 \item{width}{Width of the table, in percentage of the total width, when exported e.g., to Word.}
 
 \item{broom}{If providing a tidy table produced with the \code{broom} package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").}
-
-\item{dataframe}{The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.}
 }
 \description{
 Make nice APA tables easily through a wrapper around the \code{flextable} package with sensical defaults and automatic formatting features.

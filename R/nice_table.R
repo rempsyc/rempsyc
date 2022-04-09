@@ -2,7 +2,7 @@
 #'
 #' @description Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 #'
-#' @param dataframe The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.
+#' @param data The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.
 #' @param italics Which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.
 #' @param highlight Highlight rows with statistically significant results? Requires a column named "p" containing p-values. Can either accept logical (TRUE/FALSE) OR a numeric value for a custom critical p-value threshold (e.g., 0.10 or 0.001).
 #' @param col.format.p Applies p-value formatting to columns that cannot be named "p" (for example for a data frame full of p-values, also because it is not possible to have more than one column named "p"). Select with numerical range, e.g., 1:3.
