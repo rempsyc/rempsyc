@@ -10,6 +10,7 @@
 #' @param format.custom Applies custom formatting to columns selected via the `col.format.custom` argument. This is useful if one wants custom formatting other than for p- or r-values. It can also be used to transform (e.g., multiply) certain values or print a specific symbol along the values for instance.
 #' @param col.format.custom Which columns to apply the custom function to. Select with numerical range, e.g., 1:3.
 #' @param width Width of the table, in percentage of the total width, when exported e.g., to Word.
+#' @param broom If providing a tidy table produced with the `broom` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").
 #'
 #' @keywords APA style table
 #' @examples
@@ -52,13 +53,65 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' @importFrom dplyr mutate %>% select matches
+#' @importFrom dplyr mutate %>% select matches case_when relocate
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
 #' @export
-nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format.p = NULL,
-                       col.format.r, format.custom, col.format.custom, width = 1) {
-  dataframe
+nice_table <- function (data, italics = NULL, highlight = FALSE,
+                        col.format.p = NULL, col.format.r, format.custom,
+                        col.format.custom, width = 1, broom = "") {
+  dataframe <- data
+  if(!missing(broom)) {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "p.value" ~ "p",
+          . == "conf.low" ~ "CI_lower",
+          . == "conf.high" ~ "CI_upper",
+          . == "statistic" ~ "t",
+          . == "std.error" ~ "SE",
+          . == "parameter" ~ "df",
+          . == "term" ~ "Term",
+          . == "method" ~ "Method",
+          . == "alternative" ~ "Tails",
+          TRUE ~ .)) -> dataframe
+  }
+  if(broom == "t.test") {
+    dataframe %>%
+      relocate(estimate, .after = estimate2) %>%
+      rename_with(
+        ~ case_when(
+          . == "estimate" ~ "M1 - M2",
+          . == "estimate1" ~ "Mean 1",
+          . == "estimate2" ~ "Mean 2",
+          TRUE ~ .)) %>%
+      relocate(df, .before = p) %>%
+      relocate(Method:Tails, .before = t) -> dataframe
+  }
+  if(broom == "lm") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "estimate" ~ "b",
+          TRUE ~ .)) -> dataframe
+  }
+  if(broom == "cor.test") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "estimate" ~ "r",
+          TRUE ~ .)) %>%
+      relocate(df, .before = p) %>%
+      relocate(Method:Tails, .before = r) -> dataframe
+  }
+  if(broom == "wilcox.test") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "t" ~ "W",
+          TRUE ~ .)) %>%
+      relocate(Method:Tails, .before = W) -> dataframe
+  }
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
       dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
@@ -141,6 +194,11 @@ nice_table <- function (dataframe, italics = NULL, highlight = FALSE, col.format
     table %>%
       italic(j = "M", part = "header") %>%
       colformat_double(j = "M", big.mark=",", digits = 2) -> table
+  }
+  if("W" %in% names(dataframe)) {
+    table %>%
+      italic(j = "W", part = "header") %>%
+      colformat_double(j = "W", big.mark=",", digits = 2) -> table
   }
   if("B" %in% names(dataframe)) {
     table %>%
