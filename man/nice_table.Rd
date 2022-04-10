@@ -13,7 +13,8 @@ nice_table(
   format.custom,
   col.format.custom,
   width = 1,
-  broom = ""
+  broom = "",
+  report = ""
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ nice_table(
 \item{width}{Width of the table, in percentage of the total width, when exported e.g., to Word.}
 
 \item{broom}{If providing a tidy table produced with the \code{broom} package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").}
+
+\item{report}{If providing an object produced with the \code{report} package, which model type to use if one wants automatic formatting (options are "t.test", "lm", and "cor.test").}
 }
 \description{
 Make nice APA tables easily through a wrapper around the \code{flextable} package with sensical defaults and automatic formatting features.

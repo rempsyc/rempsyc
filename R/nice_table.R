@@ -11,6 +11,7 @@
 #' @param col.format.custom Which columns to apply the custom function to. Select with numerical range, e.g., 1:3.
 #' @param width Width of the table, in percentage of the total width, when exported e.g., to Word.
 #' @param broom If providing a tidy table produced with the `broom` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").
+#' @param report If providing an object produced with the `report` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", and "cor.test").
 #'
 #' @keywords APA style table
 #' @examples
@@ -59,7 +60,8 @@
 #' @export
 nice_table <- function (data, italics = NULL, highlight = FALSE,
                         col.format.p = NULL, col.format.r, format.custom,
-                        col.format.custom, width = 1, broom = "") {
+                        col.format.custom, width = 1, broom = "",
+                        report = "") {
   dataframe <- data
   if(!missing(broom)) {
     dataframe %>%
@@ -73,7 +75,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           . == "parameter" ~ "df",
           . == "term" ~ "Term",
           . == "method" ~ "Method",
-          . == "alternative" ~ "Tails",
+          . == "alternative" ~ "Alternative",
           TRUE ~ .)) -> dataframe
   }
   if(broom == "t.test") {
@@ -86,7 +88,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           . == "estimate2" ~ "Mean 2",
           TRUE ~ .)) %>%
       relocate(df, .before = p) %>%
-      relocate(Method:Tails, .before = t) -> dataframe
+      relocate(Method:Alternative, .before = t) -> dataframe
   }
   if(broom == "lm") {
     dataframe %>%
@@ -102,7 +104,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           . == "estimate" ~ "r",
           TRUE ~ .)) %>%
       relocate(df, .before = p) %>%
-      relocate(Method:Tails, .before = r) -> dataframe
+      relocate(Method:Alternative, .before = r) -> dataframe
   }
   if(broom == "wilcox.test") {
     dataframe %>%
@@ -110,7 +112,47 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
         ~ case_when(
           . == "t" ~ "W",
           TRUE ~ .)) %>%
-      relocate(Method:Tails, .before = W) -> dataframe
+      relocate(Method:Alternative, .before = W) -> dataframe
+  }
+  if(!missing(report)) {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "CI_low" ~ "CI_lower",
+          . == "CI_high" ~ "CI_upper",
+          . == "df_error" ~ "df",
+          TRUE ~ .)) %>%
+      relocate(CI, .after = p) -> dataframe
+  }
+  if(report == "cor.test") {
+    dataframe %>%
+      relocate(Method:Alternative) -> dataframe
+  }
+  if(report == "t.test") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "CI_lower" ~ "CI_low",
+          . == "CI_upper" ~ "CI_high",
+          . == "Cohens_d_CI_low" ~ "CI_lower",
+          . == "Cohens_d_CI_high" ~ "CI_upper",
+          TRUE ~ .)) %>%
+      relocate(CI, .after = p) %>%
+      relocate(Method:Alternative) -> dataframe
+  }
+  if(report == "lm") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "Coefficient" ~ "b",
+          . == "Std_Coefficient" ~ "B",
+          . == "CI_lower" ~ "CI_low",
+          . == "CI_upper" ~ "CI_high",
+          . == "Std_Coefficient_CI_low" ~ "CI_lower",
+          . == "Std_Coefficient_CI_high" ~ "CI_upper",
+          TRUE ~ .)) %>%
+      relocate(Fit, .after = Parameter) %>%
+      relocate(CI, .after = p) -> dataframe
   }
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
