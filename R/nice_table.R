@@ -136,6 +136,8 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           . == "CI_upper" ~ "CI_high",
           . == "Cohens_d_CI_low" ~ "CI_lower",
           . == "Cohens_d_CI_high" ~ "CI_upper",
+          . == "d_CI_low" ~ "CI_lower",
+          . == "d_CI_high" ~ "CI_upper",
           TRUE ~ .)) %>%
       relocate(CI, .after = p) %>%
       relocate(Method:Alternative) -> dataframe
