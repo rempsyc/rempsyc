@@ -35,6 +35,8 @@
 
 nice_normality <- function(data, variable, group, colours, groups.labels,
                     grid=TRUE, shapiro=FALSE, title=NULL, ...) {
+  rlang::check_installed("see", reason = "for this function.")
+  rlang::check_installed("patchwork", reason = "for this function.")
   plot.a <- nice_density(data = data, variable = variable, group = group, colours = colours,
                          groups.labels = groups.labels, grid = grid, shapiro = shapiro,
                          title = title, ...)

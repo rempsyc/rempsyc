@@ -32,6 +32,7 @@ overlap_circle <- function(response, categories = c("Self", "Other")){
   if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7!
                                         (scoring system of the Inclusion of the
                                         Other in the Self Scale...)')}
+  rlang::check_installed("VennDiagram", reason = "for this function.")
   grid::grid.newpage()
   scale <- c(1,2,3,4,5,6,7)
   overlap <- c(0,10,20,30,55,65,85)

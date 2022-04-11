@@ -17,7 +17,7 @@
 
 cormatrix_excel <- function(data, filename = "mycormatrix", overwrite = TRUE) {
 
-  check_namespace("openxlsx")
+  rlang::check_installed("openxlsx", reason = "for this function.")
   my.cor.matrix <- stats::cor(data, use = "na.or.complete")
   my.cor.matrix <- as.data.frame(my.cor.matrix)
 
