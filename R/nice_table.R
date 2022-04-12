@@ -54,7 +54,7 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' @importFrom dplyr mutate %>% select matches case_when relocate
+#' @importFrom dplyr mutate %>% select matches case_when relocate across contains
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
 #' @export
@@ -155,13 +155,29 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           TRUE ~ .)) %>%
       relocate(Fit, .after = Parameter) %>%
       relocate(CI, .after = p) -> dataframe
-  }
+
+    dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
+      dataframe[,c("CI_low", "CI_high")], as.numeric), round, 2)
+    dataframe["95% CI (b)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
+                                 function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
+      relocate(`95% CI (b)`, .after = b)
+
+    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+    dataframe["95% CI (B)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
+                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
+    }
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
       dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
-    dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1, function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
+                                 function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
   }
+  dataframe %>%
+    mutate(across(contains("95% CI"), ~ ifelse(.x == "[NA, NA]", "", .x))) -> dataframe
   if(highlight == TRUE) {
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
@@ -196,7 +212,8 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
     table %>%
       italic(j = "p", part = "header") %>%
       set_formatter(p = function(x) {
-        format_p(x)}) -> table
+        my.p <- format_p(x)
+        my.p <- ifelse(my.p == "  NA", "", my.p)}) -> table
   }
   if("r" %in% names(dataframe)) {
     table %>%
