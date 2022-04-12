@@ -167,7 +167,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
     dataframe["95% CI (B)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
                                      function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
+    dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
     }
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
@@ -251,6 +251,11 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       italic(j = "b", part = "header") %>%
       colformat_double(j = "b", big.mark=",", digits = 2) -> table
   }
+  if("95% CI (b)" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "95% CI (b)", part = "header",
+              value = as_paragraph("95% CI (", as_i("b"), ")")) -> table
+  }
   if("M" %in% names(dataframe)) {
     table %>%
       italic(j = "M", part = "header") %>%
@@ -266,6 +271,11 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       compose(i = 1, j = "B", part = "header",
               value = as_paragraph("\u03B2")) %>%
       colformat_double(j = "B", big.mark=",", digits = 2) -> table
+  }
+  if("95% CI (B)" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "95% CI (B)", part = "header",
+              value = as_paragraph("95% CI (", "\u03B2", ")")) -> table
   }
   if("R2" %in% names(dataframe)) {
     table %>%
