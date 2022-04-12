@@ -9,7 +9,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.6-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.9-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -173,7 +173,7 @@ t_table <- nice_table(t.tests, width = .75)
 t_table
 ```
 
-<img src="man/figures/t_table.png" width="90%" />
+<img src="man/figures/README-t_table-1.png" width="90%" />
 
 ``` r
 # Save to word
@@ -186,7 +186,7 @@ mod_table <- nice_table(moderations, highlight = TRUE, width = .75)
 mod_table
 ```
 
-<img src="man/figures/mod_table.png" width="90%" />
+<img src="man/figures/README-mod_table-1.png" width="90%" />
 
 ``` r
 # Format simple slopes results
@@ -194,7 +194,7 @@ slopes_table <- nice_table(simple.slopes, width = .75)
 slopes_table
 ```
 
-<img src="man/figures/slopes_table.png" width="90%" />
+<img src="man/figures/README-slopes_table-1.png" width="90%" />
 
 Full tutorial: <https://remi-theriault.com/blog_table.html>
 
@@ -258,28 +258,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        BP
-#> 2  2        PZ
+#> 1  1        ZL
+#> 2  2        BP
 #> 3  3        CX
-#> 4  4        ZL
-#> 5  5        ZL
-#> 6  6        BP
-#> 7  7        PZ
-#> 8  8        CX
+#> 4  4        PZ
+#> 5  5        BP
+#> 6  6        CX
+#> 7  7        ZL
+#> 8  8        PZ
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
 #> 1  1        ST
-#> 2  1        AV
-#> 3  1        SV
+#> 2  1        SV
+#> 3  1        AV
 #> 4  2        AV
 #> 5  2        SV
 #> 6  2        ST
-#> 7  3        SV
-#> 8  3        ST
-#> 9  3        AV
+#> 7  3        ST
+#> 8  3        AV
+#> 9  3        SV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
