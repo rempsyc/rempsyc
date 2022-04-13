@@ -78,7 +78,8 @@ nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
   predictor.names <- gsub(".*\\.", "", predictor.names)
   table.stats <- cbind(response.names, predictor.names, table.stats)
   names(table.stats) <- c("Dependent Variable", "Predictor", "df", "b", "t", "p", "sr2")
-  table.stats["Dependent Variable"] <- gsub("*\\_t_t_", ".", table.stats$Predictor)
+  table.stats["Dependent Variable"] <- lapply(table.stats["Dependent Variable"], function(x) {
+    gsub("*\\_t_t_", ".", x)})
   table.stats$Predictor <- gsub("*\\_t_t_", ".", table.stats$Predictor)
   table.stats
 }
