@@ -10,6 +10,7 @@
 #' @param moderator The moderating variable.
 #' @param moderator2 The second moderating variable, if applicable.
 #' @param covariates The desired covariates in the model.
+#' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
 #' @param ... Further arguments to be passed to the `lm` function for the models.
 #'
 #' @keywords simple slopes, moderation, interaction, regression
@@ -46,7 +47,8 @@
 #'
 #' @importFrom stats lm sd
 
-nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, covariates=NULL, ...) {
+nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
+                        covariates=NULL, ..., b.label) {
 
   names(data) <- gsub("*\\.", "_t_t_", names(data))
   response <- gsub("*\\.", "_t_t_", response)
@@ -125,6 +127,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, c
       gsub("*\\_t_t_", ".", x)})
     table.stats["Predictor (+/-1 SD)"] <- lapply(table.stats["Predictor (+/-1 SD)"], function(x) {
       gsub("*\\_t_t_", ".", x)})
+    if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
     return(table.stats)
     }
 
@@ -210,6 +213,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, c
       gsub("*\\_t_t_", ".", x)})
     final.table["Predictor (+/-1 SD)"] <- lapply(final.table["Predictor (+/-1 SD)"], function(x) {
       gsub("*\\_t_t_", ".", x)})
+    if(!missing(b.label)) { names(final.table)[names(final.table) == "b"] <- b.label}
     final.table
 
   }

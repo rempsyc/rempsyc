@@ -11,7 +11,8 @@ nice_slopes(
   moderator,
   moderator2 = NULL,
   covariates = NULL,
-  ...
+  ...,
+  b.label
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ nice_slopes(
 \item{covariates}{The desired covariates in the model.}
 
 \item{...}{Further arguments to be passed to the \code{lm} function for the models.}
+
+\item{b.label}{What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the \code{nice_table} function).}
 }
 \description{
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format.

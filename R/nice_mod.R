@@ -10,6 +10,7 @@
 #' @param moderator The moderating variable.
 #' @param moderator2 The second moderating variable, if applicable.
 #' @param covariates The desired covariates in the model.
+#' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
 #' @param ... Further arguments to be passed to the `lm` function for the models.
 #'
 #' @keywords moderation, interaction, regression
@@ -45,8 +46,8 @@
 #' Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
 #'
 
-nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
-                     covariates=NULL, ...) {
+nice_mod <- function(data, response, predictor, moderator, moderator2 = NULL,
+                     covariates = NULL, b.label = "b", ...) {
 
   names(data) <- gsub("*\\.", "_t_t_", names(data))
   response <- gsub("*\\.", "_t_t_", response)
@@ -81,5 +82,6 @@ nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
   table.stats["Dependent Variable"] <- lapply(table.stats["Dependent Variable"], function(x) {
     gsub("*\\_t_t_", ".", x)})
   table.stats$Predictor <- gsub("*\\_t_t_", ".", table.stats$Predictor)
+  if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
   table.stats
 }

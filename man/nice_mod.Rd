@@ -11,6 +11,7 @@ nice_mod(
   moderator,
   moderator2 = NULL,
   covariates = NULL,
+  b.label = "b",
   ...
 )
 }
@@ -26,6 +27,8 @@ nice_mod(
 \item{moderator2}{The second moderating variable, if applicable.}
 
 \item{covariates}{The desired covariates in the model.}
+
+\item{b.label}{What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the \code{nice_table} function).}
 
 \item{...}{Further arguments to be passed to the \code{lm} function for the models.}
 }
