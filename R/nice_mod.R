@@ -48,10 +48,17 @@
 nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
                      covariates=NULL, ...) {
 
+  names(data) <- gsub("*\\.", "_t_t_", names(data))
+  response <- gsub("*\\.", "_t_t_", response)
+  predictor <- gsub("*\\.", "_t_t_", predictor)
+  moderator <- gsub("*\\.", "_t_t_", moderator)
+
   if(!missing(covariates)) {
+    covariates <- gsub("*\\.", "_t_t_", covariates)
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
+    moderator2 <- gsub("*\\.", "_t_t_", moderator2)
     moderator2.term <- paste("*", moderator2, collapse = " ")
   } else {moderator2.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator,
@@ -71,5 +78,7 @@ nice_mod <- function(data, response, predictor, moderator, moderator2=NULL,
   predictor.names <- gsub(".*\\.", "", predictor.names)
   table.stats <- cbind(response.names, predictor.names, table.stats)
   names(table.stats) <- c("Dependent Variable", "Predictor", "df", "b", "t", "p", "sr2")
+  table.stats["Dependent Variable"] <- gsub("*\\_t_t_", ".", table.stats$Predictor)
+  table.stats$Predictor <- gsub("*\\_t_t_", ".", table.stats$Predictor)
   table.stats
 }

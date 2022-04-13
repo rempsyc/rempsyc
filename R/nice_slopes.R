@@ -48,10 +48,17 @@
 
 nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, covariates=NULL, ...) {
 
+  names(data) <- gsub("*\\.", "_t_t_", names(data))
+  response <- gsub("*\\.", "_t_t_", response)
+  predictor <- gsub("*\\.", "_t_t_", predictor)
+  moderator <- gsub("*\\.", "_t_t_", moderator)
+
   if(!missing(covariates)) {
+    covariates <- gsub("*\\.", "_t_t_", covariates)
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
+    moderator2 <- gsub("*\\.", "_t_t_", moderator2)
     moderator2.term <- paste("*", moderator2, collapse = " ")
   } else {moderator2.term <- ""}
 
@@ -113,7 +120,13 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, c
                            c(1,3,2)))
   table.stats <- table.stats[correct.order,] # 1, 4, 7, 2, 5, 8, 3, 6, 9
 
-  if(missing(moderator2)){ return(table.stats) }
+  if(missing(moderator2)){
+    table.stats["Dependent Variable"] <- lapply(table.stats["Dependent Variable"], function(x) {
+      gsub("*\\_t_t_", ".", x)})
+    table.stats["Predictor (+/-1 SD)"] <- lapply(table.stats["Predictor (+/-1 SD)"], function(x) {
+      gsub("*\\_t_t_", ".", x)})
+    return(table.stats)
+    }
 
   if(!missing(moderator2)) { # Repeat steps for other level of the moderator
 
@@ -192,6 +205,11 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL, c
 
     # Merge with the first table
     final.table <- rbind(table.stats, table2.stats)
+    names(final.table) <- gsub("*\\_t_t_", ".", names(final.table))
+    final.table["Dependent Variable"] <- lapply(final.table["Dependent Variable"], function(x) {
+      gsub("*\\_t_t_", ".", x)})
+    final.table["Predictor (+/-1 SD)"] <- lapply(final.table["Predictor (+/-1 SD)"], function(x) {
+      gsub("*\\_t_t_", ".", x)})
     final.table
 
   }

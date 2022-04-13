@@ -1,3 +1,6 @@
+### rempsyc 0.0.2.0
+* nice_mod and nice_slopes: Corrected a bug whereas having column names with periods would cut off the variable names before the dots because of the automatic correction of the interaction term row names which contain periods as well.
+
 ### rempsyc 0.0.1.9
 * Added a `NEWS.md` file to track changes to the package.
 * Improved `report` package integration with `nice_table`
