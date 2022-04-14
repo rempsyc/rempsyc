@@ -12,9 +12,11 @@
 * `nice_qq`
     * Add support for only 1 group like for nice_violin
 * `nice_table`
+    * Add the ability to pass a model instead of individual arguments
     * Add the ability to pass existing flextables
     * Tutorial: show how to add different levels of headers, etc.
     * Add optional arguments for table header and footnote
+    * Remove redundant code in flextable formatters by making it a function
 * `nice_varplot`
     * Add option to standardize or not
     * Also add option to annotate Levene test on the plot
