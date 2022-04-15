@@ -9,7 +9,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.2.2-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -270,23 +270,23 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 #> 3  3        PZ
 #> 4  4        CX
 #> 5  5        PZ
-#> 6  6        ZL
-#> 7  7        CX
+#> 6  6        CX
+#> 7  7        ZL
 #> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
-#> 2  1        SV
+#> 1  1        SV
+#> 2  1        AV
 #> 3  1        ST
-#> 4  2        ST
-#> 5  2        SV
-#> 6  2        AV
-#> 7  3        ST
-#> 8  3        AV
-#> 9  3        SV
+#> 4  2        AV
+#> 5  2        ST
+#> 6  2        SV
+#> 7  3        SV
+#> 8  3        ST
+#> 9  3        AV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
