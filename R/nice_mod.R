@@ -11,6 +11,7 @@
 #' @param moderator2 The second moderating variable, if applicable.
 #' @param covariates The desired covariates in the model.
 #' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
+#' @param mod.id Logical. Whether to display the model number, when there is more than one model.
 #' @param ... Further arguments to be passed to the `lm` function for the models.
 #'
 #' @keywords moderation, interaction, regression
@@ -47,19 +48,11 @@
 #'
 
 nice_mod <- function(data, response, predictor, moderator, moderator2 = NULL,
-                     covariates = NULL, b.label = "b", ...) {
-
-  names(data) <- gsub("*\\.", "_t_t_", names(data))
-  response <- gsub("*\\.", "_t_t_", response)
-  predictor <- gsub("*\\.", "_t_t_", predictor)
-  moderator <- gsub("*\\.", "_t_t_", moderator)
-
+                     covariates = NULL, b.label = "b", mod.id = TRUE, ...) {
   if(!missing(covariates)) {
-    covariates <- gsub("*\\.", "_t_t_", covariates)
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
-    moderator2 <- gsub("*\\.", "_t_t_", moderator2)
     moderator2.term <- paste("*", moderator2, collapse = " ")
   } else {moderator2.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator,
@@ -72,16 +65,23 @@ nice_mod <- function(data, response, predictor, moderator, moderator2 = NULL,
     lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
   })
   stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
+  stats.list <- lapply(stats.list, function(x) {
+    x <- as.data.frame(x)
+    IV <- row.names(x)
+    x <- cbind(IV, x)
+  })
   table.stats <- do.call(rbind.data.frame, stats.list)
   response.names <- rep(response, each=nrow(sums.list[[1]]))
-  predictor.names <- row.names(table.stats)
   row.names(table.stats) <- NULL
-  predictor.names <- gsub(".*\\.", "", predictor.names)
-  table.stats <- cbind(response.names, predictor.names, table.stats)
-  names(table.stats) <- c("Dependent Variable", "Predictor", "df", "b", "t", "p", "sr2")
-  table.stats["Dependent Variable"] <- lapply(table.stats["Dependent Variable"], function(x) {
-    gsub("*\\_t_t_", ".", x)})
-  table.stats$Predictor <- gsub("*\\_t_t_", ".", table.stats$Predictor)
+  table.stats <- cbind(response.names, table.stats)
+  good.names <- c("Dependent Variable", "Predictor",
+                  "df", "b", "t", "p", "sr2")
+  if(length(models.list) > 1 & mod.id == TRUE) {
+    model.number <- rep(1:length(models.list), times = lapply(sums.list, nrow))
+    table.stats <- cbind(model.number, table.stats)
+    names(table.stats) <- c("Model Number", good.names)
+  } else {
+    names(table.stats) <- good.names}
   if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
   table.stats
 }

@@ -1,3 +1,13 @@
+### rempsyc 0.0.2.2
+
+* new function: `nice_lm` to format any existing `lm` model object in a proper format for `nice_table`, including sr2
+* new function: `nice_lm_slopes` to format simple slopes for any existing `lm` model object in a proper format for `nice_table`, including sr2
+* `nice_mod` and `nice_slopes`: 
+    * Added model number when more then one model.
+    * Also added an optional `mod.id = TRUE` argument, to display the model number, when there is more than one model.
+    * Also reordered default order of rows when there is a second moderator present as it makes more sense to group the same models completely together for different levels of the second moderator.
+    * By combining the row names within the list object rather than in the combined dataframed, we also don't have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.
+
 ### rempsyc 0.0.2.1
 * `nice_mod` and `nice_slopes`: Added an argument `b.label` to rename b, e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol automatically in the `nice_table` function.
 

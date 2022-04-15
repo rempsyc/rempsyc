@@ -12,6 +12,7 @@ nice_mod(
   moderator2 = NULL,
   covariates = NULL,
   b.label = "b",
+  mod.id = TRUE,
   ...
 )
 }
@@ -29,6 +30,8 @@ nice_mod(
 \item{covariates}{The desired covariates in the model.}
 
 \item{b.label}{What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the \code{nice_table} function).}
+
+\item{mod.id}{Logical. Whether to display the model number, when there is more than one model.}
 
 \item{...}{Further arguments to be passed to the \code{lm} function for the models.}
 }

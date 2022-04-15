@@ -11,6 +11,7 @@
 #' @param moderator2 The second moderating variable, if applicable.
 #' @param covariates The desired covariates in the model.
 #' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
+#' @param mod.id Logical. Whether to display the model number, when there is more than one model.
 #' @param ... Further arguments to be passed to the `lm` function for the models.
 #'
 #' @keywords simple slopes, moderation, interaction, regression
@@ -48,21 +49,17 @@
 #' @importFrom stats lm sd
 
 nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
-                        covariates=NULL, ..., b.label) {
-
-  names(data) <- gsub("*\\.", "_t_t_", names(data))
-  response <- gsub("*\\.", "_t_t_", response)
-  predictor <- gsub("*\\.", "_t_t_", predictor)
-  moderator <- gsub("*\\.", "_t_t_", moderator)
+                        covariates=NULL, ..., b.label, mod.id = TRUE) {
 
   if(!missing(covariates)) {
-    covariates <- gsub("*\\.", "_t_t_", covariates)
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {covariates.term <- ""}
   if(!missing(moderator2)) {
-    moderator2 <- gsub("*\\.", "_t_t_", moderator2)
     moderator2.term <- paste("*", moderator2, collapse = " ")
   } else {moderator2.term <- ""}
+
+  good.names <- c("Dependent Variable", "Predictor (+/-1 SD)",
+                  "df", "b", "t", "p", "sr2")
 
   # Calculate simple slopes for LOWS
   data$lows <- unlist(data[,moderator]+sd(unlist(data[,moderator])))
@@ -78,8 +75,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
   table.stats1 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (LOW-", moderator, ")")
   table.stats1 <- cbind(response, predictor.names, table.stats1)
-  names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                           "df", "b", "t", "p", "sr2")
+  names(table.stats1) <- good.names
 
   # Calculate simple slopes for mean-level
   formulas <- paste(response, "~", predictor, "*", moderator,
@@ -95,8 +91,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
   table.stats2 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (MEAN-", moderator, ")")
   table.stats2 <- cbind(response, predictor.names, table.stats2)
-  names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                           "df", "b", "t", "p", "sr2")
+  names(table.stats2) <- good.names
 
   # Calculate simple slopes for HIGHS
   data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
@@ -112,8 +107,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
   table.stats3 <- do.call(rbind.data.frame, stats.list)
   predictor.names <- paste0(predictor, " (HIGH-", moderator, ")")
   table.stats3 <- cbind(response, predictor.names, table.stats3)
-  names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                           "df", "b", "t", "p", "sr2")
+  names(table.stats3) <- good.names
 
   # Combine both dataframes for both LOWS and HIGHS
   table.stats <- rbind(table.stats1,table.stats2,table.stats3)
@@ -123,11 +117,13 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
   table.stats <- table.stats[correct.order,] # 1, 4, 7, 2, 5, 8, 3, 6, 9
 
   if(missing(moderator2)){
-    table.stats["Dependent Variable"] <- lapply(table.stats["Dependent Variable"], function(x) {
-      gsub("*\\_t_t_", ".", x)})
-    table.stats["Predictor (+/-1 SD)"] <- lapply(table.stats["Predictor (+/-1 SD)"], function(x) {
-      gsub("*\\_t_t_", ".", x)})
     if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
+    if(length(models.list) > 1 & mod.id == TRUE) {
+      model.number <- rep(1:3, each = length(response))
+      table.stats <- cbind(model.number, table.stats)
+      names(table.stats) <- c("Model Number", good.names)
+    }
+    row.names(table.stats) <- NULL
     return(table.stats)
     }
 
@@ -156,8 +152,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
     table.stats1 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (LOW-", moderator, ")")
     table.stats1 <- cbind(response, predictor.names, table.stats1)
-    names(table.stats1) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                             "df", "b", "t", "p", "sr2")
+    names(table.stats1) <- good.names
 
     # Calculate simple slopes for mean-level
     formulas <- paste(response, "~", predictor, "*", moderator,
@@ -174,8 +169,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
     table.stats2 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (MEAN-", moderator, ")")
     table.stats2 <- cbind(response, predictor.names, table.stats2)
-    names(table.stats2) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                             "df", "b", "t", "p", "sr2")
+    names(table.stats2) <- good.names
 
     # Calculate simple slopes for HIGHS
     data$highs <- unlist(data[,moderator]-sd(unlist(data[,moderator])))
@@ -192,8 +186,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
     table.stats3 <- do.call(rbind.data.frame, stats.list)
     predictor.names <- paste0(predictor, " (HIGH-", moderator, ")")
     table.stats3 <- cbind(response, predictor.names, table.stats3)
-    names(table.stats3) <- c("Dependent Variable", "Predictor (+/-1 SD)",
-                             "df", "b", "t", "p", "sr2")
+    names(table.stats3) <- good.names
 
     # Combine both dataframes for both LOWS and HIGHS
     table2.stats <- rbind(table.stats1,table.stats2,table.stats3)
@@ -208,12 +201,14 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
 
     # Merge with the first table
     final.table <- rbind(table.stats, table2.stats)
-    names(final.table) <- gsub("*\\_t_t_", ".", names(final.table))
-    final.table["Dependent Variable"] <- lapply(final.table["Dependent Variable"], function(x) {
-      gsub("*\\_t_t_", ".", x)})
-    final.table["Predictor (+/-1 SD)"] <- lapply(final.table["Predictor (+/-1 SD)"], function(x) {
-      gsub("*\\_t_t_", ".", x)})
+    final.table <- final.table %>% dplyr::arrange(dplyr::desc(`Dependent Variable`))
     if(!missing(b.label)) { names(final.table)[names(final.table) == "b"] <- b.label}
+    if(length(models.list) > 1 & mod.id == TRUE) {
+      model.number <- rep(1:3, each = length(response)*2)
+      final.table <- cbind(model.number, final.table)
+      names(final.table)[1] <- "Model Number"
+      row.names(final.table) <- NULL
+    }
     final.table
 
   }

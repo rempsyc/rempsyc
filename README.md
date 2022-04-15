@@ -9,7 +9,7 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.0.1.9-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.0.2.2-orange.svg?style=flat-square)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -107,13 +107,20 @@ nice_mod(data = mtcars,
          predictor = "gear",
          moderator = "wt") -> moderations
 moderations
-#>   Dependent Variable Predictor df          b          t          p         sr2
-#> 1                mpg      gear 28   5.615951  1.9437108 0.06204275 0.028488305
-#> 2                mpg        wt 28   1.403861  0.4301493 0.67037970 0.001395217
-#> 3                mpg   gear:wt 28  -1.966931 -2.1551077 0.03989970 0.035022025
-#> 4               disp      gear 28  35.797623  0.6121820 0.54535707 0.002737218
-#> 5               disp        wt 28 160.930043  2.4364098 0.02144867 0.043355972
-#> 6               disp   gear:wt 28 -15.037022 -0.8140664 0.42247646 0.004840251
+#>   Model Number Dependent Variable Predictor df          b          t          p
+#> 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275
+#> 2            1                mpg        wt 28   1.403861  0.4301493 0.67037970
+#> 3            1                mpg   gear:wt 28  -1.966931 -2.1551077 0.03989970
+#> 4            2               disp      gear 28  35.797623  0.6121820 0.54535707
+#> 5            2               disp        wt 28 160.930043  2.4364098 0.02144867
+#> 6            2               disp   gear:wt 28 -15.037022 -0.8140664 0.42247646
+#>           sr2
+#> 1 0.028488305
+#> 2 0.001395217
+#> 3 0.035022025
+#> 4 0.002737218
+#> 5 0.043355972
+#> 6 0.004840251
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
@@ -130,20 +137,20 @@ nice_slopes(data = mtcars,
             predictor = "gear",
             moderator = "wt") -> simple.slopes
 simple.slopes
-#>   Dependent Variable Predictor (+/-1 SD) df         b         t          p
-#> 1                mpg       gear (LOW-wt) 28  7.540509 2.0106560 0.05408136
-#> 3                mpg      gear (MEAN-wt) 28  5.615951 1.9437108 0.06204275
-#> 5                mpg      gear (HIGH-wt) 28  3.691393 1.7955678 0.08336403
-#> 2               disp       gear (LOW-wt) 28 50.510710 0.6654856 0.51118526
-#> 4               disp      gear (MEAN-wt) 28 35.797623 0.6121820 0.54535707
-#> 6               disp      gear (HIGH-wt) 28 21.084536 0.5067498 0.61629796
-#>           sr2
-#> 1 0.030484485
-#> 3 0.028488305
-#> 5 0.024311231
-#> 2 0.003234637
-#> 4 0.002737218
-#> 6 0.001875579
+#>   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t
+#> 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560
+#> 2            1                mpg      gear (MEAN-wt) 28  5.615951 1.9437108
+#> 3            2                mpg      gear (HIGH-wt) 28  3.691393 1.7955678
+#> 4            2               disp       gear (LOW-wt) 28 50.510710 0.6654856
+#> 5            3               disp      gear (MEAN-wt) 28 35.797623 0.6121820
+#> 6            3               disp      gear (HIGH-wt) 28 21.084536 0.5067498
+#>            p         sr2
+#> 1 0.05408136 0.030484485
+#> 2 0.06204275 0.028488305
+#> 3 0.08336403 0.024311231
+#> 4 0.51118526 0.003234637
+#> 5 0.54535707 0.002737218
+#> 6 0.61629796 0.001875579
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
@@ -260,23 +267,23 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 #>   id Condition
 #> 1  1        ZL
 #> 2  2        BP
-#> 3  3        CX
-#> 4  4        PZ
-#> 5  5        BP
-#> 6  6        CX
-#> 7  7        ZL
-#> 8  8        PZ
+#> 3  3        PZ
+#> 4  4        CX
+#> 5  5        PZ
+#> 6  6        ZL
+#> 7  7        CX
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
+#> 1  1        AV
 #> 2  1        SV
-#> 3  1        AV
-#> 4  2        AV
+#> 3  1        ST
+#> 4  2        ST
 #> 5  2        SV
-#> 6  2        ST
+#> 6  2        AV
 #> 7  3        ST
 #> 8  3        AV
 #> 9  3        SV
