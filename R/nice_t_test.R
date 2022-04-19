@@ -29,7 +29,7 @@
 #'             group = "am",
 #'             alternative = "less") # to make it one-sided instead of two-sided
 
-nice_t_test <- function(data, response, group, paired = FALSE, warning = TRUE, ...) {
+nice_t_test <- function(data, response, group, warning = TRUE, ...) {
   if (warning == TRUE) {
     cat("Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). \nFor the Student t-test, use `var.equal = TRUE`. \n \n ")
   }

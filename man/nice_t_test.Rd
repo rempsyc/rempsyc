@@ -4,7 +4,7 @@
 \alias{nice_t_test}
 \title{Easy t-tests}
 \usage{
-nice_t_test(data, response, group, paired = FALSE, warning = TRUE, ...)
+nice_t_test(data, response, group, warning = TRUE, ...)
 }
 \arguments{
 \item{data}{The data frame.}
