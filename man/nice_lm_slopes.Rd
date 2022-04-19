@@ -36,7 +36,7 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 
 }
 \seealso{
-Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
+Checking for moderation before checking simple slopes: \code{\link{nice_lm}}
 }
 \keyword{interaction,}
 \keyword{moderation,}

@@ -1,3 +1,6 @@
+### rempsyc 0.0.2.3
+* Added warning to `nice_t_test` informing users about the Welch t-test being used per default (through base R `t.test`'s default) and how to change it. Also added option to turn off this warning.
+
 ### rempsyc 0.0.2.2
 
 * new function: `nice_lm` to format any existing `lm` model object in a proper format for `nice_table`, including sr2

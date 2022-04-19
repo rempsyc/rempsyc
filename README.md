@@ -75,6 +75,13 @@ nice_reverse(-3:3, 3, min = -3)
 
 Easily compute t-test analyses, with effect sizes, and format in
 publication-ready format. Supports multiple dependent variables at once.
+The 95% confidence interval is for the effect size (Cohen’s d).
+
+This function relies on the base R `t.test` function, which uses the
+Welch t-test per default (see why here:
+<https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html>).
+To use the Student t-test, simply add the following argument:
+`var.equal = TRUE`.
 
 ``` r
 nice_t_test(data = mtcars,
@@ -265,28 +272,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
-#> 2  2        BP
+#> 1  1        BP
+#> 2  2        CX
 #> 3  3        PZ
-#> 4  4        CX
-#> 5  5        PZ
-#> 6  6        CX
-#> 7  7        ZL
-#> 8  8        BP
+#> 4  4        ZL
+#> 5  5        ZL
+#> 6  6        PZ
+#> 7  7        BP
+#> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
+#> 1  1        ST
 #> 2  1        AV
-#> 3  1        ST
-#> 4  2        AV
+#> 3  1        SV
+#> 4  2        SV
 #> 5  2        ST
-#> 6  2        SV
+#> 6  2        AV
 #> 7  3        SV
-#> 8  3        ST
-#> 9  3        AV
+#> 8  3        AV
+#> 9  3        ST
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>

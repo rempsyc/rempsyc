@@ -1,10 +1,13 @@
 #' @title Easy t-tests
 #'
-#' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
+#' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95% confidence interval is for the effect size (Cohen's d).
+#'
+#' This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
 #'
 #' @param data The data frame.
 #' @param response The dependent variable.
 #' @param group The group for the comparison.
+#' @param warning Whether to display the Welch test warning or not.
 #' @param ... Further arguments to be passed to the `t.test` function (e.g., to change from two-tail to one-tail).
 #'
 #' @keywords t-test, group differences
@@ -26,8 +29,10 @@
 #'             group = "am",
 #'             alternative = "less") # to make it one-sided instead of two-sided
 
-nice_t_test <- function(data, response, group, ...) {
-
+nice_t_test <- function(data, response, group, paired = FALSE, warning = TRUE, ...) {
+  if (warning == TRUE) {
+    cat("Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). \nFor the Student t-test, use `var.equal = TRUE`. \n \n ")
+  }
   data[[group]] <- as.factor(data[[group]])
   formulas <- paste0(response, " ~ ", group)
   formulas <- sapply(formulas, stats::as.formula)

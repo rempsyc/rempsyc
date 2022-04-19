@@ -4,7 +4,7 @@
 \alias{nice_t_test}
 \title{Easy t-tests}
 \usage{
-nice_t_test(data, response, group, ...)
+nice_t_test(data, response, group, paired = FALSE, warning = TRUE, ...)
 }
 \arguments{
 \item{data}{The data frame.}
@@ -13,10 +13,14 @@ nice_t_test(data, response, group, ...)
 
 \item{group}{The group for the comparison.}
 
+\item{warning}{Whether to display the Welch test warning or not.}
+
 \item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to change from two-tail to one-tail).}
 }
 \description{
-Easily compute t-test analyses, with effect sizes, and format in publication-ready format.
+Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95\% confidence interval is for the effect size (Cohen's d).
+
+This function relies on the base R \code{t.test} function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: \code{var.equal = TRUE}.
 }
 \examples{
 # Make the basic table

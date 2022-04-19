@@ -75,7 +75,9 @@ nice_reverse(-3:3, 3, min = -3)
 
 ## `nice_t_test`
 
-Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once.
+Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once. The 95% confidence interval is for the effect size (Cohen's d).
+
+This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
 
 ```{r nice_t_test, warning = FALSE, message = FALSE}
 nice_t_test(data = mtcars,
