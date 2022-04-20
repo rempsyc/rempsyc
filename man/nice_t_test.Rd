@@ -15,7 +15,7 @@ nice_t_test(data, response, group, warning = TRUE, ...)
 
 \item{warning}{Whether to display the Welch test warning or not.}
 
-\item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to change from two-tail to one-tail).}
+\item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to use Student instead of Welch test, to change from two-tail to one-tail, or to do a paired-sample t-test instead of independent samples).}
 }
 \description{
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95\% confidence interval is for the effect size (Cohen's d).
@@ -30,14 +30,29 @@ nice_t_test(data = mtcars,
 
 # Multiple dependent variables at once
 nice_t_test(data = mtcars,
-            response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
+            response = names(mtcars)[-9],
             group = "am")
 
 # Can be passed some of the regular arguments of base `t.test()`
+
+# Student t-test (instead of Welch)
 nice_t_test(data = mtcars,
             response = "mpg",
             group = "am",
-            alternative = "less") # to make it one-sided instead of two-sided
+            var.equal = TRUE)
+
+# One-sided instead of two-sided
+nice_t_test(data = mtcars,
+            response = "mpg",
+            group = "am",
+            alternative = "less")
+
+# Paired t-test instead of independent samples
+nice_t_test(data = ToothGrowth,
+            response = "len",
+            group = "supp",
+            paired = TRUE)
+# Make sure cases appear in the same order for both levels of the grouping factor
 }
 \keyword{differences}
 \keyword{group}

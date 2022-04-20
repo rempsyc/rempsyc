@@ -3,7 +3,6 @@
     * Make my own `ggplot2` theme to reuse in my functions and shorten the code
 * `nice_t_test`
     * Add optional Bonferroni correction argument (and other corrections if possible)
-    * Add option for paired-samples t-test
     * Add option to specify `var.equal` argument for each test separately(?)
     * Add option to specify `robust.d` for a robust version of Cohen's D
     * Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI

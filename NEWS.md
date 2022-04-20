@@ -1,3 +1,6 @@
+### rempsyc 0.0.2.4
+* Added support for paired t-tests (only adaptation of Cohen's d was necessary) and updated documentation to give multiple examples of t-test customization.
+
 ### rempsyc 0.0.2.3
 * Added warning to `nice_t_test` informing users about the Welch t-test being used per default (through base R `t.test`'s default) and how to change it. Also added option to turn off this warning.
 

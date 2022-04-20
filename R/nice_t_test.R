@@ -8,7 +8,7 @@
 #' @param response The dependent variable.
 #' @param group The group for the comparison.
 #' @param warning Whether to display the Welch test warning or not.
-#' @param ... Further arguments to be passed to the `t.test` function (e.g., to change from two-tail to one-tail).
+#' @param ... Further arguments to be passed to the `t.test` function (e.g., to use Student instead of Welch test, to change from two-tail to one-tail, or to do a paired-sample t-test instead of independent samples).
 #'
 #' @keywords t-test, group differences
 #' @export
@@ -20,18 +20,44 @@
 #'
 #' # Multiple dependent variables at once
 #' nice_t_test(data = mtcars,
-#'             response = c("mpg", "disp", "drat", "wt", "qsec", "gear", "carb"),
+#'             response = names(mtcars)[-9],
 #'             group = "am")
 #'
 #' # Can be passed some of the regular arguments of base `t.test()`
+#'
+#' # Student t-test (instead of Welch)
 #' nice_t_test(data = mtcars,
 #'             response = "mpg",
 #'             group = "am",
-#'             alternative = "less") # to make it one-sided instead of two-sided
+#'             var.equal = TRUE)
+#'
+#' # One-sided instead of two-sided
+#' nice_t_test(data = mtcars,
+#'             response = "mpg",
+#'             group = "am",
+#'             alternative = "less")
+#'
+#' # Paired t-test instead of independent samples
+#' nice_t_test(data = ToothGrowth,
+#'             response = "len",
+#'             group = "supp",
+#'             paired = TRUE)
+#' # Make sure cases appear in the same order for both levels of the grouping factor
+#' @importFrom methods hasArg
 
 nice_t_test <- function(data, response, group, warning = TRUE, ...) {
-  if (warning == TRUE) {
-    cat("Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). \nFor the Student t-test, use `var.equal = TRUE`. \n \n ")
+  args <- list(...)
+  if (hasArg(var.equal)) {
+    if(args$var.equal == TRUE) cat("Using Student t-test. \n \n ")
+    if(args$var.equal == FALSE) cat("Using Welch t-test. \n \n ")
+  }
+  if (hasArg(paired)) {
+    paired <- args$paired
+    if(paired == TRUE) cat("Using paired t-test. \n \n ")
+    if(paired == FALSE) cat("Using independent samples t-test. \n \n ")
+  } else paired <- FALSE
+  if (!hasArg(var.equal) & paired == FALSE & warning == TRUE) {
+    cat("Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). \nFor the Student t-test, use `var.equal = TRUE`. \n \n ")
   }
   data[[group]] <- as.factor(data[[group]])
   formulas <- paste0(response, " ~ ", group)
@@ -42,7 +68,8 @@ nice_t_test <- function(data, response, group, warning = TRUE, ...) {
   sums.list <- lapply(mod.list, function(x) {(x)[list.names]})
   sapply(formulas, function (x) {
     effsize::cohen.d(x,
-                     data = data)},
+                     data = data,
+                     paired = paired)},
     simplify = FALSE,
     USE.NAMES = TRUE) -> boot.lists
   list.stats <- list()
