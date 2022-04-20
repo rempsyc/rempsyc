@@ -1,3 +1,6 @@
+### rempsyc 0.0.2.5
+* Fixed a slight model number mix-up in `nice_slopes`.
+
 ### rempsyc 0.0.2.4
 * Added support for paired t-tests (only adaptation of Cohen's d was necessary) and updated documentation to give multiple examples of t-test customization.
 

@@ -119,7 +119,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
   if(missing(moderator2)){
     if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
     if(length(models.list) > 1 & mod.id == TRUE) {
-      model.number <- rep(1:3, each = length(response))
+      model.number <- rep(1:length(response), each = 3)
       table.stats <- cbind(model.number, table.stats)
       names(table.stats) <- c("Model Number", good.names)
     }
@@ -204,7 +204,7 @@ nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
     final.table <- final.table %>% dplyr::arrange(dplyr::desc(`Dependent Variable`))
     if(!missing(b.label)) { names(final.table)[names(final.table) == "b"] <- b.label}
     if(length(models.list) > 1 & mod.id == TRUE) {
-      model.number <- rep(1:3, each = length(response)*2)
+      model.number <- rep(1:length(response), each = 3*2)
       final.table <- cbind(model.number, final.table)
       names(final.table)[1] <- "Model Number"
       row.names(final.table) <- NULL
