@@ -20,6 +20,8 @@ version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
 version <- gsub('-', '.', version)   
 
 flextable::set_flextable_defaults(background.color = "white")
+
+library(rempsyc)
 ```
 
 <!-- badges: start -->
@@ -52,34 +54,15 @@ library(rempsyc)
 ?rempsyc
 ```
 
-## Features
-
-All plots can be saved with the `ggsave()` function. They are `ggplot` objects so can be modified as such. The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such.
-
-## `nice_reverse`
-
-Easily recode scores (reverse-score), typically for questionnaire answers.
-
-```{r nice_reverse, warning = FALSE, message = FALSE}
-library(rempsyc)
-
-# Reverse score of 5 with a maximum score of 5
-nice_reverse(5, 5)
-
-# Reverse scores with maximum = 4 and minimum = 0
-nice_reverse(1:4, 4, min = 0)
-
-# Reverse scores with maximum = 3 and minimum = -3
-nice_reverse(-3:3, 3, min = -3)
-```
+## T-test, regression, moderation, simple slopes
 
 ## `nice_t_test`
 
 Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once. The 95% confidence interval is for the effect size (Cohen's d).
 
-This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
-
 ```{r nice_t_test, warning = FALSE, message = FALSE}
+library(rempsyc)
+
 nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
@@ -102,6 +85,20 @@ moderations
 
 Full tutorial: https://remi-theriault.com/blog_moderation
 
+## `nice_lm`
+
+For more complicated models not supported by `nice_mod`, one can define the model in the traditional way and feed it to `nice_lm` instead. Supports multiple `lm` models as well.
+
+```{r nice_lm, warning = FALSE, message = FALSE}
+
+model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
+model2 <- lm(qsec ~ disp + drat * carb, mtcars)
+nice_lm(list(model1, model2))
+
+```
+
+Full tutorial: https://remi-theriault.com/blog_moderation
+
 ## `nice_slopes`
 
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
@@ -116,19 +113,26 @@ simple.slopes
 
 Full tutorial: https://remi-theriault.com/blog_moderation
 
-## `format_value`
+## `nice_lm_slopes`
 
-Easily format *p* or *r* values. Note: converts to `character` class for use in figures or manuscripts to accommodate e.g., "< .001".
+For more complicated models not supported by `nice_slopes`, one can define the model in the traditional way and feed it to `nice_lm_slopes` instead. Supports multiple `lm` models as well, but the predictor and moderator needs to be the same for these models (the dependent variable can change).
 
-```{r format_value, warning = FALSE, message = FALSE}
-format_p(0.0041231)
-format_p(t.tests$p)
-format_r(moderations$sr2)
+```{r nice_lm_slopes, warning = FALSE, message = FALSE}
+
+model1 <- lm(mpg ~ gear * wt, mtcars)
+model2 <- lm(disp ~ gear * wt, mtcars)
+my.models <- list(model1, model2)
+nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+
 ```
+
+Full tutorial: https://remi-theriault.com/blog_moderation
 
 ## `nice_table`
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
+
+The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such.
 
 ```{r t_table, warning = FALSE, message = FALSE}
 # Format t-test results
@@ -159,7 +163,11 @@ slopes_table
 
 <img src="man/figures/README-slopes_table-1.png" width="90%" />
 
-Full tutorial: https://remi-theriault.com/blog_table.html
+It also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
+
+## Visualization
+
+All plots can be saved with the `ggsave()` function. They are `ggplot2` objects so can be modified as such. 
 
 ## `nice_violin`
 
@@ -201,23 +209,6 @@ nice_scatter(data = mtcars,
 
 Full tutorial: https://remi-theriault.com/blog_scatter.html
 
-## `nice_randomize`
-
-Randomize easily with different designs.
-
-```{r nice_randomize, warning = FALSE, message = FALSE}
-
-# Specify design, number of conditions, number of participants, and names of conditions:
-nice_randomize(design = "between", Ncondition = 4, n = 8,
-               condition.names = c("BP","CX","PZ","ZL"))
-
-# Within-Group Design
-nice_randomize(design = "within", Ncondition = 3, n = 3,
-               condition.names = c("SV","AV","ST"))
-```
-
-Full tutorial: https://remi-theriault.com/blog_randomize.html
-
 ## `overlap_circle `
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
@@ -245,9 +236,51 @@ cormatrix_excel(mtcars)
 
 <img src="man/figures/cormatrix.png" width="100%" />
 
-## Testing assumptions
+## Utility functions
 
-Full tutorial: https://remi-theriault.com/blog_assumptions
+## `nice_reverse`
+
+Easily recode scores (reverse-score), typically for questionnaire answers.
+
+```{r nice_reverse, warning = FALSE, message = FALSE}
+# Reverse score of 5 with a maximum score of 5
+nice_reverse(5, 5)
+
+# Reverse scores with maximum = 4 and minimum = 0
+nice_reverse(1:4, 4, min = 0)
+
+# Reverse scores with maximum = 3 and minimum = -3
+nice_reverse(-3:3, 3, min = -3)
+```
+
+## `format_value`
+
+Easily format *p* or *r* values. Note: converts to `character` class for use in figures or manuscripts to accommodate e.g., "< .001".
+
+```{r format_value, warning = FALSE, message = FALSE}
+format_p(0.0041231)
+format_p(t.tests$p)
+format_r(moderations$sr2)
+```
+
+## `nice_randomize`
+
+Randomize easily with different designs.
+
+```{r nice_randomize, warning = FALSE, message = FALSE}
+
+# Specify design, number of conditions, number of participants, and names of conditions:
+nice_randomize(design = "between", Ncondition = 4, n = 8,
+               condition.names = c("BP","CX","PZ","ZL"))
+
+# Within-Group Design
+nice_randomize(design = "within", Ncondition = 3, n = 3,
+               condition.names = c("SV","AV","ST"))
+```
+
+Full tutorial: https://remi-theriault.com/blog_randomize.html
+
+## Testing assumptions
 
 ## `nice_assumptions `
 
@@ -263,6 +296,8 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
+Full tutorial: https://remi-theriault.com/blog_assumptions
+
 ## `nice_normality `
 
 Easily make nice density and QQ plots per-group.
@@ -275,6 +310,7 @@ nice_normality(data = iris,
                shapiro = TRUE)
 ```
 
+Full tutorial: https://remi-theriault.com/blog_assumptions
 
 ## `nice_var `
 
@@ -286,6 +322,8 @@ nice_var(data = iris,
          group = "Species")
 ```
 
+Full tutorial: https://remi-theriault.com/blog_assumptions
+
 ## `nice_varplot `
 
 Attempt to visualize variance per group.
@@ -295,6 +333,8 @@ nice_varplot(data = iris,
              variable = "Sepal.Length",
              group = "Species")
 ```
+
+Full tutorial: https://remi-theriault.com/blog_assumptions
 
 ## Support me and this package
 

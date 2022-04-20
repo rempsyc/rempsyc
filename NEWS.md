@@ -1,3 +1,7 @@
+### rempsyc 0.0.2.6
+* Integration with `report` package: combined CI_low and CI_high for method `t.test` (just like for method `lm`)
+* Added an optional `short` argument to get a more concise table output from the `report` package integration
+
 ### rempsyc 0.0.2.5
 * Fixed a slight model number mix-up in `nice_slopes`.
 

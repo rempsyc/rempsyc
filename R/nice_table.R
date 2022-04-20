@@ -12,6 +12,7 @@
 #' @param width Width of the table, in percentage of the total width, when exported e.g., to Word.
 #' @param broom If providing a tidy table produced with the `broom` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").
 #' @param report If providing an object produced with the `report` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", and "cor.test").
+#' @param short Logical. Whether to return an abbreviated version of the tables made by the `report` package.
 #'
 #' @keywords APA style table
 #' @examples
@@ -54,14 +55,14 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' @importFrom dplyr mutate %>% select matches case_when relocate across contains
+#' @importFrom dplyr mutate %>% select matches case_when relocate across contains select_if
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
 #' @export
 nice_table <- function (data, italics = NULL, highlight = FALSE,
                         col.format.p = NULL, col.format.r, format.custom,
                         col.format.custom, width = 1, broom = "",
-                        report = "") {
+                        report = "", short = FALSE) {
   dataframe <- data
   if(!missing(broom)) {
     dataframe %>%
@@ -141,6 +142,26 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           TRUE ~ .)) %>%
       relocate(CI, .after = p) %>%
       relocate(Method:Alternative) -> dataframe
+
+    dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
+      dataframe[,c("CI_low", "CI_high")], as.numeric), round, 2)
+    dataframe["95% CI (t)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
+                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
+      relocate(`95% CI (t)`, .after = t)
+
+    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+    dataframe["95% CI (d)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
+                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
+    dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
+
+    if(short == TRUE) {
+      dataframe <- dataframe %>%
+        select_if(!names(.) %in% c("Method", "Alternative", "Mean_Group1",
+                                   "Mean_Group2", "Difference", "95% CI (t)"))
+    }
+
   }
   if(report == "lm") {
     dataframe %>%
@@ -168,7 +189,14 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
     dataframe["95% CI (B)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
                                      function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
+
+    if(short == TRUE) {
+      dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
+
+      dataframe <- dataframe[-(which(is.na(dataframe$Parameter)):nrow(dataframe)),]
     }
+    }
+
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
       dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
@@ -276,6 +304,16 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
     table %>%
       compose(i = 1, j = "95% CI (B)", part = "header",
               value = as_paragraph("95% CI (", "\u03B2", ")")) -> table
+  }
+  if("95% CI (t)" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "95% CI (t)", part = "header",
+              value = as_paragraph("95% CI (", as_i("t"), ")")) -> table
+  }
+  if("95% CI (d)" %in% names(dataframe)) {
+    table %>%
+      compose(i = 1, j = "95% CI (d)", part = "header",
+              value = as_paragraph("95% CI (", as_i("d"), ")")) -> table
   }
   if("R2" %in% names(dataframe)) {
     table %>%
