@@ -1,3 +1,9 @@
+### rempsyc 0.0.2.8
+* `nice_table` 
+    * integration with `broom` package: moved columns Method and Alternative to beginning for consistency with treatment of the `report` package.
+    * Fixed appropriate decimals display for degrees of freedom with actual decimals (e.g., for Welch t-test).
+* `nice_t_test`: Added optional Bonferroni correction argument (and other corrections if possible). Other corrections to be implemented in the future.
+
 ### rempsyc 0.0.2.7
 * `nice_t_test`: changed from package `effsize` to `effectsize` for effect size because the Cohen's d value for paired samples wasn't consistent with other packages.
 

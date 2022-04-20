@@ -6,7 +6,9 @@
 #'
 #' @param data The data frame.
 #' @param response The dependent variable.
+#' @param correction What correction for multiple comparison to apply, if any. Default is "none" and the only other option (for now) is "bonferroni".
 #' @param group The group for the comparison.
+
 #' @param warning Whether to display the Welch test warning or not.
 #' @param ... Further arguments to be passed to the `t.test` function (e.g., to use Student instead of Welch test, to change from two-tail to one-tail, or to do a paired-sample t-test instead of independent samples).
 #'
@@ -45,7 +47,7 @@
 #' # Make sure cases appear in the same order for both levels of the grouping factor
 #' @importFrom methods hasArg
 
-nice_t_test <- function(data, response, group, warning = TRUE, ...) {
+nice_t_test <- function(data, response, group, correction = "none", warning = TRUE, ...) {
   args <- list(...)
   if (hasArg(var.equal)) {
     if(args$var.equal == TRUE) cat("Using Student t-test. \n \n ")
@@ -86,5 +88,8 @@ nice_t_test <- function(data, response, group, warning = TRUE, ...) {
                             CI_higher)
   row.names(table.stats) <- NULL
   names(table.stats) <- c("Dependent Variable", "t", "df", "p", "d", "CI_lower", "CI_upper")
+  if(correction == "bonferroni") {
+    table.stats$p <- table.stats$p * nrow(table.stats)
+  }
   table.stats
 }

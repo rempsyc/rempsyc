@@ -4,7 +4,7 @@
 \alias{nice_t_test}
 \title{Easy t-tests}
 \usage{
-nice_t_test(data, response, group, warning = TRUE, ...)
+nice_t_test(data, response, group, correction = "none", warning = TRUE, ...)
 }
 \arguments{
 \item{data}{The data frame.}
@@ -12,6 +12,8 @@ nice_t_test(data, response, group, warning = TRUE, ...)
 \item{response}{The dependent variable.}
 
 \item{group}{The group for the comparison.}
+
+\item{correction}{What correction for multiple comparison to apply, if any. Default is "none" and the only other option (for now) is "bonferroni".}
 
 \item{warning}{Whether to display the Welch test warning or not.}
 

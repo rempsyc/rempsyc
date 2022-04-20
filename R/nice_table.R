@@ -89,7 +89,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
           . == "estimate2" ~ "Mean 2",
           TRUE ~ .)) %>%
       relocate(df, .before = p) %>%
-      relocate(Method:Alternative, .before = t) -> dataframe
+      relocate(Method:Alternative) -> dataframe
   }
   if(broom == "lm") {
     dataframe %>%
@@ -270,9 +270,12 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       colformat_double(j = "F", big.mark=",", digits = 2) -> table
   }
   if("df" %in% names(dataframe)) {
+    df.digits <- ifelse(any(dataframe$df %% 1==0),
+                        0,
+                        2)
     table %>%
       italic(j = "df", part = "header") %>%
-      colformat_double(j = "df", big.mark=",", digits = 0) -> table
+      colformat_double(j = "df", big.mark=",", digits = df.digits) -> table
   }
   if("b" %in% names(dataframe)) {
     table %>%

@@ -1,11 +1,10 @@
 # Development objectives (to-do list)
 * `nice_t_test`
-    * Add optional Bonferroni correction argument (and other corrections if possible)
+    * Add other optional corrections argument (other than Bonferroni)
     * Add option to specify `var.equal` argument for each test separately(?)
     * Add option to specify `robust.d` for a robust version of Cohen's D
     * Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 * `nice_table`
-    * Fix appropriate decimals display for degrees of freedom with actual decimals (e.g., for Welch t-test). [use `x%%1==0`?]
     * `nice_lm`/`nice_slopes` integration: add meaningful error messages when using `lm` or `t.test`
     * Remove redundant code in flextable formatters by making it a function
     * Add optional arguments for table header and footnote
