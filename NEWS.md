@@ -1,3 +1,6 @@
+### rempsyc 0.0.2.7
+* `nice_t_test`: changed from package `effsize` to `effectsize` for effect size because the Cohen's d value for paired samples wasn't consistent with other packages.
+
 ### rempsyc 0.0.2.6
 * Integration with `report` package: combined CI_low and CI_high for method `t.test` (just like for method `lm`)
 * Added an optional `short` argument to get a more concise table output from the `report` package integration

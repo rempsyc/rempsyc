@@ -18,7 +18,7 @@ nice_t_test(data, response, group, warning = TRUE, ...)
 \item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to use Student instead of Welch test, to change from two-tail to one-tail, or to do a paired-sample t-test instead of independent samples).}
 }
 \description{
-Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95\% confidence interval is for the effect size (Cohen's d).
+Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95\% confidence interval is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
 
 This function relies on the base R \code{t.test} function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: \code{var.equal = TRUE}.
 }
@@ -30,7 +30,7 @@ nice_t_test(data = mtcars,
 
 # Multiple dependent variables at once
 nice_t_test(data = mtcars,
-            response = names(mtcars)[-9],
+            response = names(mtcars)[1:7],
             group = "am")
 
 # Can be passed some of the regular arguments of base `t.test()`

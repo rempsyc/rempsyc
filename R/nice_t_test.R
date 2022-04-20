@@ -1,6 +1,6 @@
 #' @title Easy t-tests
 #'
-#' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95% confidence interval is for the effect size (Cohen's d).
+#' @description Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95% confidence interval is for the effect size, Cohen's d, both provided by the `effectsize` package.
 #'
 #' This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
 #'
@@ -20,7 +20,7 @@
 #'
 #' # Multiple dependent variables at once
 #' nice_t_test(data = mtcars,
-#'             response = names(mtcars)[-9],
+#'             response = names(mtcars)[1:7],
 #'             group = "am")
 #'
 #' # Can be passed some of the regular arguments of base `t.test()`
@@ -67,19 +67,18 @@ nice_t_test <- function(data, response, group, warning = TRUE, ...) {
   list.names <- c("statistic", "parameter", "p.value")
   sums.list <- lapply(mod.list, function(x) {(x)[list.names]})
   sapply(formulas, function (x) {
-    effsize::cohen.d(x,
-                     data = data,
-                     paired = paired)},
+    effectsize::cohens_d(x,
+                         data = data,
+                         paired = paired)},
     simplify = FALSE,
     USE.NAMES = TRUE) -> boot.lists
   list.stats <- list()
   for (i in 1:length(list.names)) {
     list.stats[[list.names[i]]] <- c(t((sapply(sums.list, `[[`, i))))
   }
-  d <- unlist(sapply(boot.lists, function(x) {(x)["estimate"]}))
-  ci <- sapply(boot.lists, function(x) {(x)["conf.int"]})
-  CI_lower <- sapply(ci, `[`, "lower")
-  CI_higher <- sapply(ci, `[`, "upper")
+  d <- unlist(sapply(boot.lists, function(x) {(x)["Cohens_d"]}))
+  CI_lower <- sapply(boot.lists, `[[`, "CI_low")
+  CI_higher <- sapply(boot.lists, `[[`, "CI_high")
   table.stats <- data.frame(response,
                             list.stats,
                             d,
