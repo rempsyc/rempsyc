@@ -43,6 +43,6 @@ nice_normality <- function(data, variable, group, colours, groups.labels,
   plot.a
   plot.b <- nice_qq(data = data, variable = variable, group = group, colours = colours,
                     groups.labels = groups.labels, grid = grid, shapiro = shapiro,
-                    title = title, ...)
+                    title = NULL, ...)
   see::plots(plot.a, plot.b)
 }

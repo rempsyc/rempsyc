@@ -38,7 +38,7 @@
 #'
 #' # Test different column names
 #' test <- head(mtcars)
-#' names(test) <- c("dR", "df", "M", "SD", "b", "np2",
+#' names(test) <- c("dR", "N", "M", "SD", "b", "np2",
 #'                  "ges", "p", "r", "R2", "sr2")
 #' test[, 10:11] <- test[, 10:11]/10
 #' nice_table(test)
@@ -292,6 +292,11 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       italic(j = "M", part = "header") %>%
       colformat_double(j = "M", big.mark=",", digits = 2) -> table
   }
+  if("N" %in% names(dataframe)) {
+    table %>%
+      italic(j = "N", part = "header") %>%
+      colformat_double(j = "N", big.mark=",", digits = 0) -> table
+  }
   if("W" %in% names(dataframe)) {
     table %>%
       italic(j = "W", part = "header") %>%
@@ -366,7 +371,7 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
   table %>%
     colformat_double(j = (select(dataframe, where(is.numeric)) %>%
                             select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
-                                    ^b$|^M$|^B$|^R2$|^sr2$|^np2$|^dR$",
+                                    ^b$|^M$|^N$|^B$|^R2$|^sr2$|^np2$|^dR$",
                                             ignore.case = FALSE)) %>% names),
                      big.mark=",", digits = 2) -> table
   if(!missing(col.format.p)) {

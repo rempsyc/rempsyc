@@ -1,3 +1,7 @@
+### rempsyc 0.0.2.9
+* `nice_normality`: improved implementation of the `title` argument
+* `nice_table`: added *N* as italic in header
+
 ### rempsyc 0.0.2.8
 * `nice_table` 
     * integration with `broom` package: moved columns Method and Alternative to beginning for consistency with treatment of the `report` package.

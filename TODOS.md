@@ -1,14 +1,13 @@
 # Development objectives (to-do list)
 * `nice_t_test`
     * Add other optional corrections argument (other than Bonferroni)
-    * Add option to specify `var.equal` argument for each test separately(?)
-    * Add option to specify `robust.d` for a robust version of Cohen's D
+    * Add option to specify `robust.d` for a robust version of Cohen's d
     * Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 * `nice_table`
-    * `nice_lm`/`nice_slopes` integration: add meaningful error messages when using `lm` or `t.test`
+    * `nice_lm`/`nice_slopes` integration: add meaningful error messages when using `lm` or `t.test` with wrong model type
     * Remove redundant code in flextable formatters by making it a function
     * Add optional arguments for table header and footnote
-    * Tutorial: show how to add different levels of headers, etc.method with wrong model type
+    * Tutorial: show how to add different levels of headers, etc.
 * `nice_slopes`
     * Add support for multiple moderators (like for `nice_mod`)
 * `nice_qq`
