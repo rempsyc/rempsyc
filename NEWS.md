@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.0
+* `nice_table`: brought a correction to the automatic 95% CI so that when numbers are rounded to 0, the zeros still show (e.g., 0.20 instead of 0.2).
+
 ### rempsyc 0.0.2.9
 * `nice_normality`: improved implementation of the `title` argument
 * `nice_table`: added *N* as italic in header

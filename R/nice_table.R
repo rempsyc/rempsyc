@@ -144,14 +144,18 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       relocate(Method:Alternative) -> dataframe
 
     dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
-      dataframe[,c("CI_low", "CI_high")], as.numeric), round, 2)
+      dataframe[,c("CI_low", "CI_high")], as.numeric), function(x) {
+        formatC(round(x, 2), 2, format="f")
+      })
     dataframe["95% CI (t)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
                                      function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
       relocate(`95% CI (t)`, .after = t)
 
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
+        formatC(round(x, 2), 2, format="f")
+      })
     dataframe["95% CI (d)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
                                      function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
@@ -178,14 +182,18 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
       relocate(CI, .after = p) -> dataframe
 
     dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
-      dataframe[,c("CI_low", "CI_high")], as.numeric), round, 2)
+      dataframe[,c("CI_low", "CI_high")], as.numeric), function(x) {
+        formatC(round(x, 2), 2, format="f")
+      })
     dataframe["95% CI (b)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
                                  function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
       relocate(`95% CI (b)`, .after = b)
 
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
+        formatC(round(x, 2), 2, format="f")
+      })
     dataframe["95% CI (B)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
                                      function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
@@ -199,13 +207,15 @@ nice_table <- function (data, italics = NULL, highlight = FALSE,
 
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), round, 2)
+      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
+        formatC(round(x, 2), 2, format="f")
+      })
     dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
                                  function(x) paste0("[", x[1], ", ", x[2], "]"))
     dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
   }
   dataframe %>%
-    mutate(across(contains("95% CI"), ~ ifelse(.x == "[NA, NA]", "", .x))) -> dataframe
+    mutate(across(contains("95% CI"), ~ ifelse(.x == "[ NA,  NA]", "", .x))) -> dataframe
   if(highlight == TRUE) {
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
