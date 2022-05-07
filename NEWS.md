@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.1
+* new functions for the median absolute deviation (MAD): `find_mad` to find outliers based on the MAD, `scale_mad` to scale (standardize) data based on the MAD, and winsorize_mad to winsorize (bring outliers in +/3 SD) based on the MAD.
+
 ### rempsyc 0.0.3.0
 * `nice_table`: brought a correction to the automatic 95% CI so that when numbers are rounded to 0, the zeros still show (e.g., 0.20 instead of 0.2).
 
