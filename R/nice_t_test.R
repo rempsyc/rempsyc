@@ -39,6 +39,11 @@
 #'             group = "am",
 #'             alternative = "less")
 #'
+#' # One-sample t-test
+#' nice_t_test(data = mtcars,
+#'             response = "mpg",
+#'             mu = 10)
+#'
 #' # Paired t-test instead of independent samples
 #' nice_t_test(data = ToothGrowth,
 #'             response = "len",
@@ -47,7 +52,7 @@
 #' # Make sure cases appear in the same order for both levels of the grouping factor
 #' @importFrom methods hasArg
 
-nice_t_test <- function(data, response, group, correction = "none", warning = TRUE, ...) {
+nice_t_test <- function(data, response, group = NULL, correction = "none", warning = TRUE, ...) {
   args <- list(...)
   if (hasArg(var.equal)) {
     if(args$var.equal == TRUE) cat("Using Student t-test. \n \n ")
@@ -61,9 +66,13 @@ nice_t_test <- function(data, response, group, correction = "none", warning = TR
   if (!hasArg(var.equal) & paired == FALSE & warning == TRUE) {
     cat("Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). \nFor the Student t-test, use `var.equal = TRUE`. \n \n ")
   }
-  data[[group]] <- as.factor(data[[group]])
-  formulas <- paste0(response, " ~ ", group)
+  if(!missing(group)) {
+    data[[group]] <- as.factor(data[[group]])
+    formulas <- paste0(response, " ~ ", group)
   formulas <- sapply(formulas, stats::as.formula)
+  } else {
+    formulas <- lapply(data[response], as.numeric)
+  }
   mod.list <- sapply(formulas, stats::t.test, data = data, ...,
                      simplify = FALSE, USE.NAMES = TRUE)
   list.names <- c("statistic", "parameter", "p.value")

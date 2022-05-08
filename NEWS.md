@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.2
+* `nice_t_test`: Added support for one-sample t-test.
+
 ### rempsyc 0.0.3.1
 * new functions for the median absolute deviation (MAD): `find_mad` to find outliers based on the MAD, `scale_mad` to scale (standardize) data based on the MAD, and winsorize_mad to winsorize (bring outliers in +/3 SD) based on the MAD.
 

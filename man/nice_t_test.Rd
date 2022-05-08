@@ -4,7 +4,14 @@
 \alias{nice_t_test}
 \title{Easy t-tests}
 \usage{
-nice_t_test(data, response, group, correction = "none", warning = TRUE, ...)
+nice_t_test(
+  data,
+  response,
+  group = NULL,
+  correction = "none",
+  warning = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{The data frame.}
@@ -48,6 +55,11 @@ nice_t_test(data = mtcars,
             response = "mpg",
             group = "am",
             alternative = "less")
+
+# One-sample t-test
+nice_t_test(data = mtcars,
+            response = "mpg",
+            mu = 10)
 
 # Paired t-test instead of independent samples
 nice_t_test(data = ToothGrowth,
