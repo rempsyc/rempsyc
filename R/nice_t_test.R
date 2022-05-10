@@ -25,7 +25,8 @@
 #'             response = names(mtcars)[1:7],
 #'             group = "am")
 #'
-#' # Can be passed some of the regular arguments of base `t.test()`
+#' # Can be passed some of the regular arguments
+#' # of base `t.test()`
 #'
 #' # Student t-test (instead of Welch)
 #' nice_t_test(data = mtcars,
@@ -49,10 +50,16 @@
 #'             response = "len",
 #'             group = "supp",
 #'             paired = TRUE)
-#' # Make sure cases appear in the same order for both levels of the grouping factor
+#' # Make sure cases appear in the same order for
+#' # both levels of the grouping factor
 #' @importFrom methods hasArg
 
-nice_t_test <- function(data, response, group = NULL, correction = "none", warning = TRUE, ...) {
+nice_t_test <- function(data,
+                        response,
+                        group = NULL,
+                        correction = "none",
+                        warning = TRUE,
+                        ...) {
   args <- list(...)
   if (hasArg(var.equal)) {
     if(args$var.equal == TRUE) cat("Using Student t-test. \n \n ")

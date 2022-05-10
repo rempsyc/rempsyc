@@ -38,8 +38,16 @@
 #' @importFrom stats reformulate dnorm
 
 #' @export
-nice_density <- function(data, variable, group, colours, ytitle="Density", xtitle=variable,
-                         groups.labels=NULL, grid=TRUE, shapiro=FALSE, title=variable) {
+nice_density <- function(data,
+                         variable,
+                         group,
+                         colours,
+                         ytitle="Density",
+                         xtitle=variable,
+                         groups.labels=NULL,
+                         grid=TRUE,
+                         shapiro=FALSE,
+                         title=variable) {
   options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)

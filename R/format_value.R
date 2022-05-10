@@ -22,14 +22,20 @@
 #' format_r(0.41231)
 #' format_r(0.041231)
 #' @name format_value
-format_value <- function(value, type, ...) {
+format_value <- function(value,
+                         type,
+                         ...) {
   if(type == "r") {format_r(value, ...)}
   else if(type == "p") {format_p(value, ...)}
 }
 
 #' @export
 #' @rdname format_value
-format_p <- function(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = FALSE) {
+format_p <- function(p,
+                     precision = 0.001,
+                     prefix = NULL,
+                     suffix = NULL,
+                     sign = FALSE) {
   digits <- -log(precision, base = 10)
   p <- formatC(p, format = 'f', digits = digits)
   if(sign == TRUE) {
@@ -46,7 +52,8 @@ format_p <- function(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = 
 
 #' @export
 #' @rdname format_value
-format_r <- function(r, precision = 0.01) {
+format_r <- function(r,
+                     precision = 0.01) {
   digits <- -log(precision, base = 10)
   r <- formatC(r, format = 'f', digits = digits)
   sub("0", "", r)}

@@ -25,7 +25,8 @@
 #' Other functions useful in assumption testing: \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}
 #'
 
-nice_assumptions <- function(model, interpretation = TRUE) {
+nice_assumptions <- function(model,
+                             interpretation = TRUE) {
   model.name <- format(model$terms)
   shapiro <- round(stats::shapiro.test(model$residuals)$p.value, 3)
   bp <- round(lmtest::bptest(model)$p.value, 3)

@@ -28,7 +28,8 @@
 #'
 #' @import graphics
 
-overlap_circle <- function(response, categories = c("Self", "Other")){
+overlap_circle <- function(response,
+                           categories = c("Self", "Other")){
   if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7!
                                         (scoring system of the Inclusion of the
                                         Other in the Self Scale...)')}

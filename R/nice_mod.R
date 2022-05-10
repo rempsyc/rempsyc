@@ -47,8 +47,15 @@
 #' Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}
 #'
 
-nice_mod <- function(data, response, predictor, moderator, moderator2 = NULL,
-                     covariates = NULL, b.label = "b", mod.id = TRUE, ...) {
+nice_mod <- function(data,
+                     response,
+                     predictor,
+                     moderator,
+                     moderator2 = NULL,
+                     covariates = NULL,
+                     b.label = "b",
+                     mod.id = TRUE,
+                     ...) {
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {covariates.term <- ""}

@@ -16,7 +16,9 @@
 #' lmSupport_modelEffectSizes(m)
 #' }
 
-lmSupport_modelEffectSizes <- function (Model, Print = TRUE, Digits = 4)
+lmSupport_modelEffectSizes <- function (Model,
+                                        Print = TRUE,
+                                        Digits = 4)
 {
   HasIntercept <- (attr(Model$terms, "intercept"))
   tANOVA <- car::Anova(Model, type = 3)

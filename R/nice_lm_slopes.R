@@ -27,7 +27,12 @@
 #' Checking for moderation before checking simple slopes: \code{\link{nice_lm}}
 #'
 
-nice_lm_slopes <- function(model, predictor, moderator, b.label = "b", mod.id = TRUE, ...) {
+nice_lm_slopes <- function(model,
+                           predictor,
+                           moderator,
+                           b.label = "b",
+                           mod.id = TRUE,
+                           ...) {
   ifelse(class(model) == "list",
          models.list <- model,
          models.list <- list(model))

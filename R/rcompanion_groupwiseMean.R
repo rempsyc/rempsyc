@@ -93,11 +93,22 @@
 #' @importFrom boot boot boot.ci
 #' @importFrom dplyr syms cur_data group_by summarize rename all_of across
 
-rcompanion_groupwiseMean <- function (formula = NULL, data = NULL, var = NULL, group = NULL,
-                                      trim = 0, na.rm = FALSE, conf = 0.95, R = 5000,
-                                      boot = FALSE, traditional = TRUE, normal = FALSE,
-                                      basic = FALSE, percentile = FALSE, bca = FALSE,
-                                      digits = 3, ...)
+rcompanion_groupwiseMean <- function (formula = NULL,
+                                      data = NULL,
+                                      var = NULL,
+                                      group = NULL,
+                                      trim = 0,
+                                      na.rm = FALSE,
+                                      conf = 0.95,
+                                      R = 5000,
+                                      boot = FALSE,
+                                      traditional = TRUE,
+                                      normal = FALSE,
+                                      basic = FALSE,
+                                      percentile = FALSE,
+                                      bca = FALSE,
+                                      digits = 3,
+                                      ...)
 {
 
   ddply <- function(.data, .variables, var, .fun, ...) {

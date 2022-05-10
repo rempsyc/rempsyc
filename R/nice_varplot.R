@@ -34,8 +34,14 @@
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
 #' @importFrom stats var median
 
-nice_varplot <- function(data, variable, group, colours, groups.labels,
-                         grid=TRUE, shapiro=FALSE, ytitle=ggplot2::waiver()) {
+nice_varplot <- function(data,
+                         variable,
+                         group,
+                         colours,
+                         groups.labels,
+                         grid = TRUE,
+                         shapiro = FALSE,
+                         ytitle = ggplot2::waiver()) {
   data[[group]] <- as.factor(data[[group]])
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
   # Calculate variance

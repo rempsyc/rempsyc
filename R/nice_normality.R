@@ -33,8 +33,15 @@
 #' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}, \code{\link{nice_varplot}}
 #'
 
-nice_normality <- function(data, variable, group, colours, groups.labels,
-                    grid=TRUE, shapiro=FALSE, title=NULL, ...) {
+nice_normality <- function(data,
+                           variable,
+                           group,
+                           colours,
+                           groups.labels,
+                           grid=TRUE,
+                           shapiro=FALSE,
+                           title=NULL,
+                           ...) {
   rlang::check_installed("see", reason = "for this function.")
   rlang::check_installed("patchwork", reason = "for this function.")
   plot.a <- nice_density(data = data, variable = variable, group = group, colours = colours,

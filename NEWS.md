@@ -1,3 +1,7 @@
+### rempsyc 0.0.3.3
+* `find_mad`: Now only prints individual variables that do have outliers. However, it now lists all variables checked at the top to avoid possible confusion.
+* Also reformatted arguments vertically instead of horizontally within functions for clarity (doesn't affect users or documentation proper).
+
 ### rempsyc 0.0.3.2
 * `nice_t_test`: Added support for one-sample t-test.
 

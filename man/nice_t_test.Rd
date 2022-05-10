@@ -42,7 +42,8 @@ nice_t_test(data = mtcars,
             response = names(mtcars)[1:7],
             group = "am")
 
-# Can be passed some of the regular arguments of base `t.test()`
+# Can be passed some of the regular arguments
+# of base `t.test()`
 
 # Student t-test (instead of Welch)
 nice_t_test(data = mtcars,
@@ -66,7 +67,8 @@ nice_t_test(data = ToothGrowth,
             response = "len",
             group = "supp",
             paired = TRUE)
-# Make sure cases appear in the same order for both levels of the grouping factor
+# Make sure cases appear in the same order for
+# both levels of the grouping factor
 }
 \keyword{differences}
 \keyword{group}

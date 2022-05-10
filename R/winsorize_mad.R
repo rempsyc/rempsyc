@@ -13,7 +13,8 @@
 #' winsorize_mad(mtcars$qsec, criteria = 2)
 #' @importFrom stats mad
 
-winsorize_mad <- function (x, criteria = 3) {
+winsorize_mad <- function (x,
+                           criteria = 3) {
   if(criteria <= 0) {
     stop("bad value for 'criteria'")
   }

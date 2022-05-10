@@ -124,12 +124,30 @@
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
 #' @importFrom rlang .data
 
-nice_violin <- function (data, group, response, boot=TRUE, bootstraps=2000,
-                         colours, xlabels=NULL, ytitle=ggplot2::waiver(), xtitle=NULL,
-                         has.ylabels=TRUE, has.xlabels=TRUE, comp1=1, comp2=2,
-                         signif_annotation=NULL, signif_yposition=NULL, signif_xmin=NULL,
-                         signif_xmax=NULL, ymin, ymax, yby=1, CIcap.width=0.1, obs=FALSE,
-                         alpha=.70, border.colour="white") {
+nice_violin <- function (data,
+                         group,
+                         response,
+                         boot = TRUE,
+                         bootstraps = 2000,
+                         colours,
+                         xlabels = NULL,
+                         ytitle = ggplot2::waiver(),
+                         xtitle = NULL,
+                         has.ylabels = TRUE,
+                         has.xlabels = TRUE,
+                         comp1 = 1,
+                         comp2 = 2,
+                         signif_annotation = NULL,
+                         signif_yposition = NULL,
+                         signif_xmin = NULL,
+                         signif_xmax = NULL,
+                         ymin,
+                         ymax,
+                         yby = 1,
+                         CIcap.width = 0.1,
+                         obs = FALSE,
+                         alpha = .70,
+                         border.colour = "white") {
   data[[group]] <- as.factor(data[[group]])
   gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"

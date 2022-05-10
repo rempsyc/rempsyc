@@ -59,10 +59,17 @@
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
 
 #' @export
-nice_table <- function (data, italics = NULL, highlight = FALSE,
-                        col.format.p = NULL, col.format.r, format.custom,
-                        col.format.custom, width = 1, broom = "",
-                        report = "", short = FALSE) {
+nice_table <- function (data,
+                        italics = NULL,
+                        highlight = FALSE,
+                        col.format.p = NULL,
+                        col.format.r,
+                        format.custom,
+                        col.format.custom,
+                        width = 1,
+                        broom = "",
+                        report = "",
+                        short = FALSE) {
   dataframe <- data
   if(!missing(broom)) {
     dataframe %>%

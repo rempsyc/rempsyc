@@ -15,7 +15,9 @@
 #' }
 #'
 
-cormatrix_excel <- function(data, filename = "mycormatrix", overwrite = TRUE) {
+cormatrix_excel <- function(data,
+                            filename = "mycormatrix",
+                            overwrite = TRUE) {
 
   rlang::check_installed("openxlsx", reason = "for this function.")
   my.cor.matrix <- stats::cor(data, use = "na.or.complete")

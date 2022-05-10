@@ -48,8 +48,15 @@
 #'
 #' @importFrom stats lm sd
 
-nice_slopes <- function(data, response, predictor, moderator, moderator2=NULL,
-                        covariates=NULL, ..., b.label, mod.id = TRUE) {
+nice_slopes <- function(data,
+                        response,
+                        predictor,
+                        moderator,
+                        moderator2 = NULL,
+                        covariates = NULL,
+                        b.label,
+                        mod.id = TRUE,
+                        ...) {
 
   if(!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")

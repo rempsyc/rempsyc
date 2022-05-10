@@ -17,20 +17,24 @@
 #'          criteria = 3)
 #' @importFrom dplyr mutate %>% select ends_with across all_of if_any filter bind_rows count n
 
-find_mad <- function(data, col.list, ID = NULL, criteria = 3) {
+find_mad <- function(data,
+                     col.list,
+                     ID = NULL,
+                     criteria = 3) {
   if(missing(ID)) {
     data$ID <- rownames(data)
   }
   mad0 <- find_mad0(data, col.list, ID = ID, criteria = criteria)
   mad0.list <- sapply(col.list, function(x) find_mad0(data, x, ID = ID, criteria = criteria),
                       USE.NAMES = TRUE, simplify = FALSE)
+  mad0.list <- mad0.list[lapply(mad0.list, nrow) > 0]
   duplicates.df <- bind_rows(mad0.list) %>%
     select(where(~!all(is.na(.x))))
   duplicates.df <- duplicates.df %>%
     count(Row) %>%
     filter(n > 1)
   if(nrow(mad0) > 0) {
-    cat(nrow(mad0), "outliers based on", criteria, "median absolute deviations. \n\n")
+    cat(nrow(mad0), "outlier(s) based on", criteria, "median absolute deviations for variable(s): \n", col.list, "\n\n")
     if(nrow(duplicates.df) > 0) {
       cat("The following participants were considered outliers for more than one variable: \n\n")
       print(duplicates.df)

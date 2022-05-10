@@ -36,8 +36,14 @@
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
 #' @importFrom stats reformulate shapiro.test
 
-nice_qq <- function(data, variable, group, colours, groups.labels=NULL,
-                    grid=TRUE, shapiro=FALSE, title=variable) {
+nice_qq <- function(data,
+                    variable,
+                    group,
+                    colours,
+                    groups.labels=NULL,
+                    grid=TRUE,
+                    shapiro=FALSE,
+                    title=variable) {
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}

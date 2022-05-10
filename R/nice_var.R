@@ -26,7 +26,10 @@
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
 
 #' @export
-nice_var <- function(data, variable, group, criteria = 4) {
+nice_var <- function(data,
+                     variable,
+                     group,
+                     criteria = 4) {
   # Make group as factor
   data[[group]] <- as.factor(data[[group]])
   # Make basic frame
