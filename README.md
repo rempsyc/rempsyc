@@ -5,17 +5,17 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/RemPsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/RemPsyc/rempsyc/actions)
+[![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
-[![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/RemPsyc/rempsyc/commits/main)
+[![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
+[![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://paypal.me/rempsyc)
-[![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/RemPsyc?tab=followers)
-[![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/RemPsyc/rempsyc/network/members)
+[![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
+[![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
 ![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)
 <!-- badges: end -->
 
@@ -43,7 +43,21 @@ library(rempsyc)
 ?rempsyc
 ```
 
-## T-test, regression, moderation, simple slopes
+## Overview
+
+[T-tests, regressions, moderations, simple
+slopes](#t-tests-regressions-moderations-simple-slopes)<a name = 'T-tests, regressions, moderations, simple slopes'/>
+
+[Nice APA tables](#nice-apa-tables)<a name = 'Nice APA tables'/>
+
+[Visualization](#visualization)<a name = 'Visualization'/>
+
+[Utility functions](#utility-functions)<a name = 'Utility functions'/>
+
+[Testing
+assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
+
+## T-tests, regressions, moderations, simple slopes
 
 ## `nice_t_test`
 
@@ -62,16 +76,16 @@ nice_t_test(data = mtcars,
 #>  
 #> 
 t.tests
-#>   Dependent Variable         t       df            p         d   CI_lower
-#> 1                mpg -3.767123 18.33225 1.373638e-03 -1.477947 -2.3042092
-#> 2               disp  4.197727 29.25845 2.300413e-04  1.445221  0.6227403
-#> 3               drat -5.646088 27.19780 5.266742e-06 -2.003084 -2.8985400
-#> 4                 wt  5.493905 29.23352 6.272020e-06  1.892406  1.0127792
-#>    CI_upper
-#> 1 -0.651685
-#> 2  2.267702
-#> 3 -1.107629
-#> 4  2.772033
+#>   Dependent Variable         t       df              p         d   CI_lower
+#> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
+#> 2               disp  4.197727 29.25845 0.000230041299  1.445221  0.6417834
+#> 3               drat -5.646088 27.19780 0.000005266742 -2.003084 -2.8592770
+#> 4                 wt  5.493905 29.23352 0.000006272020  1.892406  1.0300224
+#>     CI_upper
+#> 1 -0.6705686
+#> 2  2.2295592
+#> 3 -1.1245498
+#> 4  2.7329218
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -125,15 +139,15 @@ nice_lm(list(model1, model2))
 #> 6            2               qsec      drat 27  0.227692395  0.1968842
 #> 7            2               qsec      carb 27  1.154106215  0.7179431
 #> 8            2               qsec drat:carb 27 -0.477539959 -1.0825727
-#>              p          sr2
-#> 1 4.788652e-01 0.0021596150
-#> 2 2.928375e-05 0.1053130854
-#> 3 1.136403e-03 0.0555024045
-#> 4 3.221753e-03 0.0437733438
-#> 5 5.861684e-02 0.0702566891
-#> 6 8.453927e-01 0.0006984424
-#> 7 4.789590e-01 0.0092872897
-#> 8 2.885720e-01 0.0211165564
+#>               p          sr2
+#> 1 0.47886516037 0.0021596150
+#> 2 0.00002928375 0.1053130854
+#> 3 0.00113640283 0.0555024045
+#> 4 0.00322175341 0.0437733438
+#> 5 0.05861684483 0.0702566891
+#> 6 0.84539274511 0.0006984424
+#> 7 0.47895897531 0.0092872897
+#> 8 0.28857203297 0.0211165564
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
@@ -173,7 +187,7 @@ Full tutorial: <https://remi-theriault.com/blog_moderation>
 For more complicated models not supported by `nice_slopes`, one can
 define the model in the traditional way and feed it to `nice_lm_slopes`
 instead. Supports multiple `lm` models as well, but the predictor and
-moderator needs to be the same for these models (the dependent variable
+moderator need to be the same for these models (the dependent variable
 can change).
 
 ``` r
@@ -198,6 +212,8 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
+
+## Nice APA tables
 
 ## `nice_table`
 
@@ -391,23 +407,23 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 #> 2  2        PZ
 #> 3  3        ZL
 #> 4  4        BP
-#> 5  5        PZ
-#> 6  6        BP
-#> 7  7        ZL
+#> 5  5        BP
+#> 6  6        ZL
+#> 7  7        PZ
 #> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
-#> 2  1        SV
-#> 3  1        AV
-#> 4  2        SV
-#> 5  2        ST
-#> 6  2        AV
-#> 7  3        SV
-#> 8  3        AV
+#> 1  1        AV
+#> 2  1        ST
+#> 3  1        SV
+#> 4  2        ST
+#> 5  2        AV
+#> 6  2        SV
+#> 7  3        AV
+#> 8  3        SV
 #> 9  3        ST
 ```
 
@@ -458,11 +474,11 @@ group having variance four times bigger than any of the other groups.
 nice_var(data = iris,
          variable = "Sepal.Length",
          group = "Species")
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #> # Rowwise: 
 #>   Variable   Setosa Versicolor Virginica Variance.ratio Criteria Heteroscedastic
 #>   <chr>       <dbl>      <dbl>     <dbl>          <dbl>    <dbl> <lgl>          
-#> 1 Sepal.Len~  0.124      0.266     0.404            3.3        4 FALSE
+#> 1 Sepal.Len…  0.124      0.266     0.404            3.3        4 FALSE
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_assumptions>

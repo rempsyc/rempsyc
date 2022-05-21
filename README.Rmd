@@ -1,5 +1,6 @@
 ---
-output: github_document
+output: 
+  github_document
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -22,6 +23,7 @@ version <- gsub('-', '.', version)
 flextable::set_flextable_defaults(background.color = "white")
 
 library(rempsyc)
+
 ```
 
 <!-- badges: start -->
@@ -54,7 +56,38 @@ library(rempsyc)
 ?rempsyc
 ```
 
-## T-test, regression, moderation, simple slopes
+## Overview
+
+```{r headers, results = "asis", echo = FALSE}
+
+section.1 <- "T-tests, regressions, moderations, simple slopes"
+section.2 <- "Nice APA tables"
+section.3 <- "Visualization"
+section.4 <- "Utility functions"
+section.5 <- "Testing assumptions"
+
+cute_cat <- function(x, header.level = 1){ 
+  cat(rep("#", header.level), " ", x, sep = "")
+}
+
+cute_TOC <- function(section) {
+  cat("[", section, "]",
+      "(#", tolower(gsub(" ", "-", gsub(",", "", section))), ")",
+      "<a name = '", section, "'/>",
+      "\n \n",
+      sep = "")
+}
+
+invisible(lapply(list(
+  section.1, section.2, section.3, section.4, section.5), 
+  cute_TOC))
+
+```
+
+
+```{r, results = "asis", echo = FALSE}
+cute_cat(section.1, 2)
+```
 
 ## `nice_t_test`
 
@@ -128,6 +161,10 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 
 Full tutorial: https://remi-theriault.com/blog_moderation
 
+```{r Nice Tables, results = "asis", echo = FALSE}
+cute_cat(section.2, 2)
+```
+
 ## `nice_table`
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
@@ -165,7 +202,9 @@ slopes_table
 
 It also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
 
-## Visualization
+```{r Visualization, results = "asis", echo = FALSE}
+cute_cat(section.3, 2)
+```
 
 All plots can be saved with the `ggsave()` function. They are `ggplot2` objects so can be modified as such. 
 
@@ -236,7 +275,9 @@ cormatrix_excel(mtcars)
 
 <img src="man/figures/cormatrix.png" width="100%" />
 
-## Utility functions
+```{r Utility, results = "asis", echo = FALSE}
+cute_cat(section.4, 2)
+```
 
 ## `nice_reverse`
 
@@ -280,7 +321,10 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
 
 Full tutorial: https://remi-theriault.com/blog_randomize.html
 
-## Testing assumptions
+
+```{r Assumptions, results = "asis", echo = FALSE}
+cute_cat(section.5, 2)
+```
 
 ## `nice_assumptions `
 

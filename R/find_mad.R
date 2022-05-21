@@ -34,7 +34,7 @@ find_mad <- function(data,
     count(Row) %>%
     filter(n > 1)
   if(nrow(mad0) > 0) {
-    cat(nrow(mad0), "outlier(s) based on", criteria, "median absolute deviations for variable(s): \n", col.list, "\n\n")
+    cat(nrow(mad0), "outlier(s) based on", criteria, "median absolute deviations for variable(s): \n", paste0(col.list, ", "), "\n\n")
     if(nrow(duplicates.df) > 0) {
       cat("The following participants were considered outliers for more than one variable: \n\n")
       print(duplicates.df)
