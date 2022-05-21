@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.6
+* New function: `nice_contrasts` for planned contrasts (multiple group pairwise comparisons)
+
 ### rempsyc 0.0.3.5
 * `nice_t_test`: Fixed `mu` value for one-sample t-test
 
