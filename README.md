@@ -403,14 +403,14 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        CX
+#> 1  1        ZL
 #> 2  2        PZ
-#> 3  3        ZL
+#> 3  3        CX
 #> 4  4        BP
-#> 5  5        BP
-#> 6  6        ZL
-#> 7  7        PZ
-#> 8  8        CX
+#> 5  5        ZL
+#> 6  6        PZ
+#> 7  7        CX
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
@@ -420,8 +420,8 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
 #> 2  1        ST
 #> 3  1        SV
 #> 4  2        ST
-#> 5  2        AV
-#> 6  2        SV
+#> 5  2        SV
+#> 6  2        AV
 #> 7  3        AV
 #> 8  3        SV
 #> 9  3        ST

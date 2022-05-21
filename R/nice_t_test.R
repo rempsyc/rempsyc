@@ -78,8 +78,12 @@ nice_t_test <- function(data,
     formulas <- paste0(response, " ~ ", group)
   formulas <- sapply(formulas, stats::as.formula)
   } else {
+    cat("Using one-sample t-test. \n \n ")
     formulas <- lapply(data[response], as.numeric)
   }
+  if(hasArg(mu)) {
+    mu = args$mu
+  } else {mu = 0}
   mod.list <- sapply(formulas, stats::t.test, data = data, ...,
                      simplify = FALSE, USE.NAMES = TRUE)
   list.names <- c("statistic", "parameter", "p.value")
@@ -87,7 +91,8 @@ nice_t_test <- function(data,
   sapply(formulas, function (x) {
     effectsize::cohens_d(x,
                          data = data,
-                         paired = paired)},
+                         paired = paired,
+                         mu = mu)},
     simplify = FALSE,
     USE.NAMES = TRUE) -> boot.lists
   list.stats <- list()

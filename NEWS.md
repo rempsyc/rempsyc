@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.5
+* `nice_t_test`: Fixed `mu` value for one-sample t-test
+
 ### rempsyc 0.0.3.4
 * Added `ggplot2::waiver` to reexports
 * Added table of content to readme
