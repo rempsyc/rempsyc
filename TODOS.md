@@ -21,10 +21,10 @@
 -   Plot functions
     -   Make my own `ggplot2` theme to reuse in my functions and shorten the code
 -   `nice_contrasts`
-    -   Publish function
-    -   Check error with `iris` dataset
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
+    -   Add option to use not robust Cohen's d
+    -   Add option to not use bootstrapping
 -   Fix recommended practices
     -   Change for `vapply` instead of `sapply`
 -   All functions
