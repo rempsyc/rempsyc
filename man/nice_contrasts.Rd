@@ -19,8 +19,9 @@ nice_contrasts(response, group, covariates = NULL, data, bootstraps = 2000)
 }
 \description{
 Easily compute planned contrast analyses (pairwise comparisons similar to t-tests but more powerful when more than 2 groups), and format in publication-ready format. Supports only three groups for the moment. In this particular case, the confidence intervals are bootstraped on the Robust Cohen's d.
-
-Statistical power is lower with the standard \emph{t} test compared than it is with the planned contrast version for two reasons: a) the sample size is smaller with the \emph{t} test, because only the cases in the two groups are selected; and b) in the planned contrast the error term is smaller than it is with the standard \emph{t} test because it is based on all the cases (\href{http://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source})
+}
+\details{
+Statistical power is lower with the standard \emph{t} test compared than it is with the planned contrast version for two reasons: a) the sample size is smaller with the \emph{t} test, because only the cases in the two groups are selected; and b) in the planned contrast the error term is smaller than it is with the standard \emph{t} test because it is based on all the cases (\href{http://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
 }
 \examples{
 
