@@ -66,9 +66,9 @@
 #'             group = "dose",
 #'             response = "len",
 #'             signif_annotation = c("*","**","***"), # manually enter the number of stars
-#'             signif_yposition = c(30,35,40), # What height (y) should the stars appear?
-#'             signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)?
-#'             signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)?
+#'             signif_yposition = c(30,35,40), # What height (y) should the stars appear
+#'             signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)
+#'             signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)
 #'
 #' # Set the colours manually
 #' nice_violin(data = ToothGrowth,
@@ -115,8 +115,8 @@
 #'             group = "dose",
 #'             response = "len",
 #'             CIcap.width = 0,
-#'             alpha = 1,
-#'             border.colour = "black")
+#'             alpha = .70,
+#'             border.colour = "white")
 #'
 #' @seealso
 #' Visualize group differences via scatter plots: \code{\link{nice_scatter}}
@@ -146,8 +146,8 @@ nice_violin <- function (data,
                          yby = 1,
                          CIcap.width = 0.1,
                          obs = FALSE,
-                         alpha = .70,
-                         border.colour = "white") {
+                         alpha = 1,
+                         border.colour = "black") {
   data[[group]] <- as.factor(data[[group]])
   gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"

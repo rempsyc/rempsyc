@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.7
+* `nice_violin`: reverted theme to original default (alpha = 1 and black border) from modified theme some time ago (alpha = .70, white border). Users wishing to keep the original style can simply specify these options in their script.
+
 ### rempsyc 0.0.3.6
 * New function: `nice_contrasts` for planned contrasts (multiple group pairwise comparisons)
 
