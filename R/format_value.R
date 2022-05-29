@@ -47,7 +47,9 @@ format_p <- function(p,
                                                               digits = digits)])}
   p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
   p <- sub("0", "", p)
-  paste0(prefix, p, suffix)
+  p <- paste0(prefix, p, suffix)
+  p <- ifelse(p == "  NA", "", p)
+  p
 }
 
 #' @export

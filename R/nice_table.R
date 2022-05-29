@@ -60,9 +60,9 @@
 
 #' @export
 nice_table <- function (data,
-                        italics = NULL,
                         highlight = FALSE,
-                        col.format.p = NULL,
+                        italics,
+                        col.format.p,
                         col.format.r,
                         format.custom,
                         col.format.custom,
@@ -71,6 +71,10 @@ nice_table <- function (data,
                         report = "",
                         short = FALSE) {
   dataframe <- data
+
+#   ____________________________________________________________________________
+#   Broom integration                                                       ####
+
   if(!missing(broom)) {
     dataframe %>%
       rename_with(
@@ -122,6 +126,10 @@ nice_table <- function (data,
           TRUE ~ .)) %>%
       relocate(Method:Alternative, .before = W) -> dataframe
   }
+
+#   ____________________________________________________________________________
+#   Report integration                                                      ####
+
   if(!missing(report)) {
     dataframe %>%
       rename_with(
@@ -130,7 +138,7 @@ nice_table <- function (data,
           . == "CI_high" ~ "CI_upper",
           . == "df_error" ~ "df",
           TRUE ~ .)) %>%
-      relocate(CI, .after = p) -> dataframe
+      select(-CI) -> dataframe
   }
   if(report == "cor.test") {
     dataframe %>%
@@ -140,32 +148,19 @@ nice_table <- function (data,
     dataframe %>%
       rename_with(
         ~ case_when(
-          . == "CI_lower" ~ "CI_low",
-          . == "CI_upper" ~ "CI_high",
-          . == "Cohens_d_CI_low" ~ "CI_lower",
-          . == "Cohens_d_CI_high" ~ "CI_upper",
-          . == "d_CI_low" ~ "CI_lower",
-          . == "d_CI_high" ~ "CI_upper",
+          . == "Cohens_d_CI_low" ~ "d_CI_low",
+          . == "Cohens_d_CI_high" ~ "d_CI_high",
+          . == "Cohens_d" ~ "d",
           TRUE ~ .)) %>%
-      relocate(CI, .after = p) %>%
       relocate(Method:Alternative) -> dataframe
 
-    dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
-      dataframe[,c("CI_low", "CI_high")], as.numeric), function(x) {
-        formatC(round(x, 2), 2, format="f")
-      })
-    dataframe["95% CI (t)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
-                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
-      relocate(`95% CI (t)`, .after = t)
+    dataframe %>%
+      format_CI(col.name = "95% CI (t)") %>%
+      relocate(`95% CI (t)`, .after = t) -> dataframe
 
-    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
-        formatC(round(x, 2), 2, format="f")
-      })
-    dataframe["95% CI (d)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
-                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
+    dataframe %>%
+      format_CI(c("d_CI_low", "d_CI_high"),
+                col.name = "95% CI (d)") -> dataframe
 
     if(short == TRUE) {
       dataframe <- dataframe %>%
@@ -180,46 +175,29 @@ nice_table <- function (data,
         ~ case_when(
           . == "Coefficient" ~ "b",
           . == "Std_Coefficient" ~ "B",
-          . == "CI_lower" ~ "CI_low",
-          . == "CI_upper" ~ "CI_high",
-          . == "Std_Coefficient_CI_low" ~ "CI_lower",
-          . == "Std_Coefficient_CI_high" ~ "CI_upper",
           TRUE ~ .)) %>%
-      relocate(Fit, .after = Parameter) %>%
-      relocate(CI, .after = p) -> dataframe
+      relocate(Fit, .after = Parameter) -> dataframe
 
-    dataframe[,c("CI_low", "CI_high")] <- lapply(lapply(
-      dataframe[,c("CI_low", "CI_high")], as.numeric), function(x) {
-        formatC(round(x, 2), 2, format="f")
-      })
-    dataframe["95% CI (b)"] <- apply(dataframe[,c("CI_low", "CI_high")], 1,
-                                 function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_low", "CI_high")) %>%
-      relocate(`95% CI (b)`, .after = b)
+    dataframe %>%
+      format_CI(col.name = "95% CI (b)") %>%
+      relocate(`95% CI (b)`, .after = b) -> dataframe
 
-    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
-        formatC(round(x, 2), 2, format="f")
-      })
-    dataframe["95% CI (B)"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
-                                     function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_lower", "CI_upper", "CI"))
+    dataframe %>%
+      format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
+                col.name = "95% CI (B)") -> dataframe
 
     if(short == TRUE) {
       dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
+      dataframe <- dataframe[-(
+        which(is.na(dataframe$Parameter)):nrow(dataframe)),]
+      }
+    }
 
-      dataframe <- dataframe[-(which(is.na(dataframe$Parameter)):nrow(dataframe)),]
-    }
-    }
+#   ____________________________________________________________________________
+#   Formatting                                                              ####
 
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
-    dataframe[,c("CI_lower", "CI_upper")] <- lapply(lapply(
-      dataframe[,c("CI_lower", "CI_upper")], as.numeric), function(x) {
-        formatC(round(x, 2), 2, format="f")
-      })
-    dataframe["95% CI"] <- apply(dataframe[,c("CI_lower", "CI_upper")], 1,
-                                 function(x) paste0("[", x[1], ", ", x[2], "]"))
-    dataframe <- select(dataframe, -c("CI_lower", "CI_upper"))
+    dataframe <- format_CI(dataframe)
   }
   dataframe %>%
     mutate(across(contains("95% CI"), ~ ifelse(.x == "[ NA,  NA]", "", .x))) -> dataframe
@@ -232,6 +210,10 @@ nice_table <- function (data,
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
+
+#   ____________________________________________________________________________
+#   Flextable                                                               ####
+
   dataframe %>%
     {if(highlight == TRUE | is.numeric(highlight))
       flextable(., col_keys = names(dataframe)[-length(dataframe)])
@@ -249,133 +231,85 @@ nice_table <- function (data,
     height(height = 0.55, part = "head") %>%
     hrule(rule = "exact", part = "all") %>%
     set_table_properties(layout = "autofit", width = width) -> table
+
+#   ____________________________________________________________________________
+#   Column formatting                                                       ####
+
+##  ............................................................................
+##  Special cases                                                           ####
   if(!missing(italics)) {
     table %>%
       italic(j = italics, part = "header") -> table
   }
-  if("p" %in% names(dataframe)) {
-    table %>%
-      italic(j = "p", part = "header") %>%
-      set_formatter(p = function(x) {
-        my.p <- format_p(x)
-        my.p <- ifelse(my.p == "  NA", "", my.p)}) -> table
-  }
-  if("r" %in% names(dataframe)) {
-    table %>%
-      italic(j = "r", part = "header") %>%
-      set_formatter(r = function(x)
-        format_r(x)) -> table
-  }
-  if("t" %in% names(dataframe)) {
-    table %>%
-      italic(j = "t", part = "header") %>%
-      colformat_double(j = "t", big.mark=",", digits = 2) -> table
-  }
-  if("SE" %in% names(dataframe)) {
-    table %>%
-      italic(j = "SE", part = "header") %>%
-      colformat_double(j = "SE", big.mark=",", digits = 2) -> table
-  }
-  if("SD" %in% names(dataframe)) {
-    table %>%
-      italic(j = "SD", part = "header") %>%
-      colformat_double(j = "SD", big.mark=",", digits = 2) -> table
-  }
-  if("F" %in% names(dataframe)) {
-    table %>%
-      italic(j = "F", part = "header") %>%
-      colformat_double(j = "F", big.mark=",", digits = 2) -> table
-  }
   if("df" %in% names(dataframe)) {
-    df.digits <- ifelse(any(dataframe$df %% 1==0),
-                        0,
-                        2)
+    df.digits <- ifelse(any(dataframe$df %% 1 == 0), 0, 2)
     table %>%
-      italic(j = "df", part = "header") %>%
-      colformat_double(j = "df", big.mark=",", digits = df.digits) -> table
+      format_flex(j = "df", digits = df.digits) -> table
   }
-  if("b" %in% names(dataframe)) {
-    table %>%
-      italic(j = "b", part = "header") %>%
-      colformat_double(j = "b", big.mark=",", digits = 2) -> table
+
+##  ............................................................................
+##  2-digit columns                                                         ####
+    cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d")
+  for(i in cols.2digits) {
+    if(i %in% names(dataframe)) {
+      table %>%
+        format_flex(j = i) -> table
+    }
   }
-  if("95% CI (b)" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "95% CI (b)", part = "header",
-              value = as_paragraph("95% CI (", as_i("b"), ")")) -> table
+
+##  ............................................................................
+##  0-digit columns                                                         ####
+      cols.0digits <- c("N", "n", "z")
+  for(i in cols.0digits) {
+    if(i %in% names(dataframe)) {
+      table %>%
+        format_flex(j = i, digits = 0) -> table
+    }
   }
-  if("M" %in% names(dataframe)) {
-    table %>%
-      italic(j = "M", part = "header") %>%
-      colformat_double(j = "M", big.mark=",", digits = 2) -> table
+
+##  ............................................................................
+##  Formatting functions                                                    ####
+  compose.table0 <- data.frame(
+    col = c("r", "p"),
+    fun = c("format_r", "format_p"))
+  for(i in seq(nrow(compose.table0))) {
+    if(compose.table0[i, "col"] %in% names(dataframe)) {
+      table %>%
+        format_flex(j = compose.table0[i, "col"],
+                    fun = compose.table0[i, "fun"]) -> table
+    }
   }
-  if("N" %in% names(dataframe)) {
-    table %>%
-      italic(j = "N", part = "header") %>%
-      colformat_double(j = "N", big.mark=",", digits = 0) -> table
+
+##  ............................................................................
+##  Special symbols                                                         ####
+    compose.table1 <- data.frame(
+    col = c("95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)", "B",
+            "np2", "ges", "dR"),
+    value = c('"95% CI (", as_i("b"), ")"',
+              '"95% CI (", "\u03B2", ")"',
+              '"95% CI (", as_i("t"), ")"',
+              '"95% CI (", as_i("d"), ")"',
+              '"\u03B2"',
+              '"\u03b7", as_sub("p"), as_sup("2")',
+              '"\u03b7", as_sub("G"), as_sup("2")',
+              'as_i("d"), as_sub("R")'))
+  for(i in seq(nrow(compose.table1))) {
+    if(compose.table1[i, "col"] %in% names(dataframe)) {
+      table %>%
+        format_flex(j = compose.table1[i, "col"],
+                    value = compose.table1[i, "value"]) -> table
+    }
   }
-  if("W" %in% names(dataframe)) {
-    table %>%
-      italic(j = "W", part = "header") %>%
-      colformat_double(j = "W", big.mark=",", digits = 2) -> table
-  }
-  if("B" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "B", part = "header",
-              value = as_paragraph("\u03B2")) %>%
-      colformat_double(j = "B", big.mark=",", digits = 2) -> table
-  }
-  if("95% CI (B)" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "95% CI (B)", part = "header",
-              value = as_paragraph("95% CI (", "\u03B2", ")")) -> table
-  }
-  if("95% CI (t)" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "95% CI (t)", part = "header",
-              value = as_paragraph("95% CI (", as_i("t"), ")")) -> table
-  }
-  if("95% CI (d)" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "95% CI (d)", part = "header",
-              value = as_paragraph("95% CI (", as_i("d"), ")")) -> table
-  }
-  if("R2" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "R2", part = "header",
-              value = as_paragraph(as_i("R"), as_sup("2"))) %>%
-      set_formatter(R2 = function(x)
-        format_r(x)) -> table
-  }
-  if("sr2" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "sr2", part = "header",
-              value = as_paragraph(as_i("sr"), as_sup("2"))) %>%
-      set_formatter(sr2 = function(x)
-        format_r(x)) -> table
-  }
-  if("np2" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "np2", part = "header",
-              value = as_paragraph("\u03b7", as_sub("p"), as_sup("2"))) %>%
-      colformat_double(j = "np2", big.mark=",", digits = 2) -> table
-  }
-  if("ges" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "ges", part = "header",
-              value = as_paragraph("\u03b7", as_sub("G"), as_sup("2"))) %>%
-      colformat_double(j = "ges", big.mark=",", digits = 2) -> table
-  }
-  if("dR" %in% names(dataframe)) {
-    table %>%
-      compose(i = 1, j = "dR", part = "header",
-              value = as_paragraph(as_i("d"), as_sub("R"))) %>%
-      colformat_double(j = "dR", big.mark=",", digits = 2) -> table
-  }
-  if("d" %in% names(dataframe)) {
-    table %>%
-      italic(j = "d", part = "header") %>%
-      colformat_double(j = "d", big.mark=",", digits = 2) -> table
+  compose.table2 <- data.frame(
+    col = c("R2", "sr2"),
+    value = c('as_i("R"), as_sup("2")', 'as_i("sr"), as_sup("2")'))
+  for(i in seq(nrow(compose.table2))) {
+    if(compose.table2[i, "col"] %in% names(dataframe)) {
+      table %>%
+        format_flex(j = compose.table2[i, "col"],
+                    value = compose.table2[i, "value"],
+                    fun = "format_r") -> table
+    }
   }
   if(!missing(highlight)) {
     table %>%
@@ -385,26 +319,74 @@ nice_table <- function (data,
          j = table$col_keys,
          bg = "#D9D9D9") -> table
   }
+
+#   ____________________________________________________________________________
+#   Extra features                                                          ####
+
   table %>%
     colformat_double(j = (select(dataframe, where(is.numeric)) %>%
                             select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
-                                    ^b$|^M$|^N$|^B$|^R2$|^sr2$|^np2$|^dR$",
+                            ^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|^sr2$",
                                             ignore.case = FALSE)) %>% names),
                      big.mark=",", digits = 2) -> table
   if(!missing(col.format.p)) {
-    rExpression <- paste0("table <- table %>% set_formatter(table,`",
-                          table$col_keys[col.format.p], "` = ", "format_p", ")")
-    eval(parse(text = rExpression))
+    table %>%
+      parse_formatter(column = table$col_keys[col.format.p],
+                      fun = "format_p") -> table
   }
   if(!missing(col.format.r)) {
-    rExpression <- paste0("table <- table %>% set_formatter(table,`",
-                          table$col_keys[col.format.r], "` = ", "format_r", ")")
-    eval(parse(text = rExpression))
+    table %>%
+      parse_formatter(column = table$col_keys[col.format.r],
+                      fun = "format_r") -> table
   }
   if(!missing(format.custom) & !missing(col.format.custom)) {
-    rExpression <- paste0("table <- table %>% set_formatter(table,`",
-                          table$col_keys[col.format.custom], "` = ", format.custom, ")")
+    # table %>%
+    #   parse_formatter(column = table$col_keys[col.format.custom],
+    #                   fun = "format.custom") -> table
+    # Error in set_formatter: object 'format.custom' not found
+    rExpression <- paste0("table <- table %>% set_formatter(`",
+                          table$col_keys[col.format.custom], "` = ",
+                          format.custom, ")")
     eval(parse(text = rExpression))
   }
   table
+}
+
+#   ____________________________________________________________________________
+#   Other functions                                                         ####
+
+format_CI <- function(dataframe, CI_low_high = c("CI_lower", "CI_upper"),
+                      col.name = "95% CI") {
+  dataframe %>%
+    mutate(across(all_of(CI_low_high), function(x) {
+             x %>% as.numeric %>% round(2) %>% formatC(2, format="f")
+             })) %>%
+    mutate(!!col.name := paste0("[", .[[CI_low_high[1]]],
+                             ", ", .[[CI_low_high[2]]], "]")) %>%
+    select(-all_of(CI_low_high))
+}
+
+format_flex <- function(table, j, digits = 2, value, fun) {
+  if(missing(value)) {
+    table %>%
+    italic(j = j, part = "header") %>%
+    colformat_double(j = j, big.mark = ",", digits = digits) -> table
+  }
+  if(!missing(value)) {
+  rExpression <- paste0("as_paragraph(", value, ")")
+  table %>%
+    compose(i = 1, j = j, part = "header",
+            value = eval(parse(text = rExpression))) -> table
+  }
+  if(!missing(fun)) {
+    table %>%
+      parse_formatter(column = j, fun = fun) -> table
+  }
+  table
+}
+
+parse_formatter <- function(table, call = "table <- table %>% set_formatter",
+                            column, fun) {
+  rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
+  eval(parse(text = rExpression))
 }
