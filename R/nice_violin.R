@@ -165,7 +165,6 @@ nice_violin <- function (data,
   ggplot(data, aes(x = .data[[group]],
                    y = .data[[response]],
                    fill = .data[[group]])) +
-    theme_bw(base_size = 24) +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
@@ -182,14 +181,7 @@ nice_violin <- function (data,
                   size = 1,
                   width = CIcap.width,
                   data = dataSummary) +
-    theme(legend.position = "none",
-          axis.text.x = element_text(colour="black"),
-          axis.text.y = element_text(colour="black"),
-          panel.grid.major=element_blank(),
-          panel.grid.minor=element_blank(),
-          panel.border=element_blank(),
-          axis.line=element_line(colour = "black"),
-          axis.ticks=element_line(colour = "black")) +
+    theme_apa +
     {if (obs == TRUE) geom_dotplot(binaxis = "y",
                                    stackdir = "center",
                                    position = "dodge",

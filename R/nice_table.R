@@ -57,6 +57,7 @@
 #'
 #' @importFrom dplyr mutate %>% select matches case_when relocate across contains select_if
 #' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
+#' @importFrom rlang :=
 
 #' @export
 nice_table <- function (data,

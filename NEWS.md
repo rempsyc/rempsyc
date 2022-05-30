@@ -1,3 +1,6 @@
+### rempsyc 0.0.3.9
+* Created an internal ggplot2 APA "theme" to avoid code redundancy across plots
+
 ### rempsyc 0.0.3.8
 * `nice_table`: greatly improved underlying code: more clarity (dplyr) and less repetition (with added internal functions)
 

@@ -284,7 +284,6 @@ nice_scatter <- function(data,
              alpha = switch(!is.null(groups.alpha), .data[[group]]))) +
     xlab(xtitle) +
     ylab(ytitle) +
-    theme_bw(base_size = 24) +
     {if (has.line == TRUE) smooth} +
     {if (has.confband == TRUE) band} +
     {if (exists("observations")) observations} +
@@ -320,11 +319,5 @@ nice_scatter <- function(data,
                                  hjust=1,
                                  vjust=-1,
                                  size=7)} +
-    theme(axis.text.x = element_text(colour="black"),
-          axis.text.y = element_text(colour="black"),
-          panel.grid.major=element_blank(),
-          panel.grid.minor=element_blank(),
-          panel.border=element_blank(),
-          axis.line=element_line(colour = "black"),
-          axis.ticks=element_line(colour = "black"))
+    theme_apa
 }

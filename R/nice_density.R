@@ -90,13 +90,7 @@ nice_density <- function(data,
                                                    force = 0,
                                                    parse = TRUE)} +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
-    {if (grid == FALSE) theme(panel.grid.major=element_blank(),
-                              panel.grid.minor=element_blank())} +
-    theme(plot.title = element_text(hjust = 0.5),
-          legend.position = "none",
-          axis.text.x = element_text(colour="black"),
-          axis.text.y = element_text(colour="black"),
-          panel.border=element_blank(),
-          axis.line=element_line(colour = "black"),
-          axis.ticks=element_line(colour = "black"))
+    theme_apa +
+    {if (grid == TRUE) theme(panel.grid.major=element_line(),
+                             panel.grid.minor=element_line(size = 0.5))}
 }

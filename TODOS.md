@@ -1,5 +1,11 @@
 # Development objectives (to-do list)
 
+-   `winsorize_mad`
+    -   Add documentation
+-   `scale_mad`
+    -   Add documentation
+-   `find_mad`
+    -   Add documentation
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d

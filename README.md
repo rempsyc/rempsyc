@@ -23,7 +23,9 @@ R package of convenience functions to make your workflow faster and
 easier. Easily customizable plots (via `ggplot2`), nice APA tables
 exportable to Word (via `flextable`), easily run statistical tests or
 check assumptions, and automatize various other tasks. Mostly geared at
-researchers in the psychological sciences.
+researchers in the psychological sciences. The package is still under
+active development. Feel free to open an issue to ask for help, report a
+bug, or request a feature.
 
 ## Installation
 
@@ -404,23 +406,23 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
 #> 1  1        ZL
-#> 2  2        PZ
-#> 3  3        CX
-#> 4  4        BP
-#> 5  5        ZL
-#> 6  6        PZ
-#> 7  7        CX
-#> 8  8        BP
+#> 2  2        CX
+#> 3  3        BP
+#> 4  4        PZ
+#> 5  5        CX
+#> 6  6        BP
+#> 7  7        PZ
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
-#> 2  1        ST
+#> 1  1        ST
+#> 2  1        AV
 #> 3  1        SV
-#> 4  2        ST
-#> 5  2        SV
+#> 4  2        SV
+#> 5  2        ST
 #> 6  2        AV
 #> 7  3        AV
 #> 8  3        SV

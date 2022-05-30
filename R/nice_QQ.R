@@ -40,10 +40,10 @@ nice_qq <- function(data,
                     variable,
                     group,
                     colours,
-                    groups.labels=NULL,
-                    grid=TRUE,
-                    shapiro=FALSE,
-                    title=variable) {
+                    groups.labels = NULL,
+                    grid = TRUE,
+                    shapiro = FALSE,
+                    title = variable) {
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
@@ -64,7 +64,6 @@ nice_qq <- function(data,
     labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
     facet_grid(gform) +
     ggtitle(title) +
-    theme_bw(base_size = 24) +
     {if (shapiro == TRUE) ggrepel::geom_text_repel(data = dat_text,
                                                    mapping = aes(x = Inf,
                                                                  y = -Inf,
@@ -74,13 +73,7 @@ nice_qq <- function(data,
                                                    force = 0,
                                                    parse = TRUE)} +
     {if (!missing(colours)) scale_fill_manual(values=colours)} +
-    {if (grid == FALSE) theme(panel.grid.major=element_blank(),
-                              panel.grid.minor=element_blank())} +
-    theme(plot.title = element_text(hjust = 0.5),
-          legend.position = "none",
-          axis.text.x = element_text(colour="black"),
-          axis.text.y = element_text(colour="black"),
-          panel.border=element_blank(),
-          axis.line=element_line(colour = "black"),
-          axis.ticks=element_line(colour = "black"))
+    theme_apa +
+    {if (grid == TRUE) theme(panel.grid.major=element_line(),
+                              panel.grid.minor=element_line(size = 0.5))}
 }
