@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.0
+* `nice_density` and `nice_normality`: added the `histogram` option to add an histogram to the density plot.
+
 ### rempsyc 0.0.3.9
 * Created an internal ggplot2 APA "theme" to avoid code redundancy across plots
 

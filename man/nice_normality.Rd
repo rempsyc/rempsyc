@@ -13,6 +13,7 @@ nice_normality(
   grid = TRUE,
   shapiro = FALSE,
   title = NULL,
+  histogram = FALSE,
   ...
 )
 }
@@ -32,6 +33,8 @@ nice_normality(
 \item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
 
 \item{title}{An optional title, if desired.}
+
+\item{histogram}{Logical, whether to add an histogram on top of the density plot.}
 
 \item{...}{Further arguments from \code{nice_qq()} and \code{nice_density()} to be passed to \code{nice_normality()}}
 }

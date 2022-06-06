@@ -12,6 +12,7 @@
 #' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
 #' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
 #' @param title The desired title of the plot. Can be put to `NULL` to remove.
+#' @param histogram Logical, whether to add an histogram on top of the density plot.
 #'
 #' @keywords density, normality
 #'
@@ -34,7 +35,7 @@
 #'              title = "Density (Sepal Length)")
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text geom_histogram
 #' @importFrom stats reformulate dnorm
 
 #' @export
@@ -42,12 +43,13 @@ nice_density <- function(data,
                          variable,
                          group,
                          colours,
-                         ytitle="Density",
-                         xtitle=variable,
-                         groups.labels=NULL,
-                         grid=TRUE,
-                         shapiro=FALSE,
-                         title=variable) {
+                         ytitle = "Density",
+                         xtitle = variable,
+                         groups.labels = NULL,
+                         grid = TRUE,
+                         shapiro = FALSE,
+                         title = variable,
+                         histogram = FALSE) {
   options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
@@ -73,6 +75,8 @@ nice_density <- function(data,
   }
   # Make plot
   ggplot(data, aes_string(x=variable, fill=group)) +
+    {if (histogram == TRUE) geom_histogram(aes(y = ..density.., alpha = 0.5),
+                                           colour = "black")} +
     geom_density(alpha=0.6, size=1, colour="gray25") +
     theme_bw(base_size = 24) +
     ggtitle(title) +

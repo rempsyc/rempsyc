@@ -1,4 +1,4 @@
-#' @title Normalize based on the absolute median deviation
+#' @title Standardize based on the absolute median deviation
 #'
 #' @description Scale and center ("standardize") data based on the median absolute deviation.
 #'

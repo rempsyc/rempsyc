@@ -10,6 +10,7 @@
 #' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
 #' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.
+#' @param histogram Logical, whether to add an histogram on top of the density plot.
 #' @param ... Further arguments from `nice_qq()` and `nice_density()` to be passed to `nice_normality()`
 #'
 #' @keywords QQ plots, normality, density, distribution
@@ -38,15 +39,16 @@ nice_normality <- function(data,
                            group,
                            colours,
                            groups.labels,
-                           grid=TRUE,
-                           shapiro=FALSE,
-                           title=NULL,
+                           grid = TRUE,
+                           shapiro = FALSE,
+                           title = NULL,
+                           histogram = FALSE,
                            ...) {
   rlang::check_installed("see", reason = "for this function.")
   rlang::check_installed("patchwork", reason = "for this function.")
   plot.a <- nice_density(data = data, variable = variable, group = group, colours = colours,
                          groups.labels = groups.labels, grid = grid, shapiro = shapiro,
-                         title = title, ...)
+                         title = title, histogram = histogram, ...)
   plot.a
   plot.b <- nice_qq(data = data, variable = variable, group = group, colours = colours,
                     groups.labels = groups.labels, grid = grid, shapiro = shapiro,

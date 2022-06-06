@@ -23,8 +23,6 @@
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
--   Plot functions
-    -   Make my own `ggplot2` theme to reuse in my functions and shorten the code
 -   `nice_contrasts`
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually

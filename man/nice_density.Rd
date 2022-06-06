@@ -14,7 +14,8 @@ nice_density(
   groups.labels = NULL,
   grid = TRUE,
   shapiro = FALSE,
-  title = variable
+  title = variable,
+  histogram = FALSE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ nice_density(
 \item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
 
 \item{title}{The desired title of the plot. Can be put to \code{NULL} to remove.}
+
+\item{histogram}{Logical, whether to add an histogram on top of the density plot.}
 }
 \description{
 Make nice density plots easily.
