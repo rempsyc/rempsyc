@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_mad.R
 \name{scale_mad}
 \alias{scale_mad}
-\title{Normalize based on the absolute median deviation}
+\title{Standardize based on the absolute median deviation}
 \usage{
 scale_mad(x)
 }

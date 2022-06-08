@@ -73,8 +73,8 @@ nice_table <- function (data,
                         short = FALSE) {
   dataframe <- data
 
-#   ____________________________________________________________________________
-#   Broom integration                                                       ####
+  #   ____________________________________________________________________________
+  #   Broom integration                                                       ####
 
   if(!missing(broom)) {
     dataframe %>%
@@ -128,8 +128,8 @@ nice_table <- function (data,
       relocate(Method:Alternative, .before = W) -> dataframe
   }
 
-#   ____________________________________________________________________________
-#   Report integration                                                      ####
+  #   ____________________________________________________________________________
+  #   Report integration                                                      ####
 
   if(!missing(report)) {
     dataframe %>%
@@ -191,11 +191,11 @@ nice_table <- function (data,
       dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
       dataframe <- dataframe[-(
         which(is.na(dataframe$Parameter)):nrow(dataframe)),]
-      }
     }
+  }
 
-#   ____________________________________________________________________________
-#   Formatting                                                              ####
+  #   ____________________________________________________________________________
+  #   Formatting                                                              ####
 
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
@@ -212,8 +212,8 @@ nice_table <- function (data,
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 
-#   ____________________________________________________________________________
-#   Flextable                                                               ####
+  #   ____________________________________________________________________________
+  #   Flextable                                                               ####
 
   dataframe %>%
     {if(highlight == TRUE | is.numeric(highlight))
@@ -233,11 +233,11 @@ nice_table <- function (data,
     hrule(rule = "exact", part = "all") %>%
     set_table_properties(layout = "autofit", width = width) -> table
 
-#   ____________________________________________________________________________
-#   Column formatting                                                       ####
+  #   ____________________________________________________________________________
+  #   Column formatting                                                       ####
 
-##  ............................................................................
-##  Special cases                                                           ####
+  ##  ............................................................................
+  ##  Special cases                                                           ####
   if(!missing(italics)) {
     table %>%
       italic(j = italics, part = "header") -> table
@@ -248,9 +248,9 @@ nice_table <- function (data,
       format_flex(j = "df", digits = df.digits) -> table
   }
 
-##  ............................................................................
-##  2-digit columns                                                         ####
-    cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d")
+  ##  ............................................................................
+  ##  2-digit columns                                                         ####
+  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d")
   for(i in cols.2digits) {
     if(i %in% names(dataframe)) {
       table %>%
@@ -258,9 +258,9 @@ nice_table <- function (data,
     }
   }
 
-##  ............................................................................
-##  0-digit columns                                                         ####
-      cols.0digits <- c("N", "n", "z")
+  ##  ............................................................................
+  ##  0-digit columns                                                         ####
+  cols.0digits <- c("N", "n", "z")
   for(i in cols.0digits) {
     if(i %in% names(dataframe)) {
       table %>%
@@ -268,8 +268,8 @@ nice_table <- function (data,
     }
   }
 
-##  ............................................................................
-##  Formatting functions                                                    ####
+  ##  ............................................................................
+  ##  Formatting functions                                                    ####
   compose.table0 <- data.frame(
     col = c("r", "p"),
     fun = c("format_r", "format_p"))
@@ -281,11 +281,11 @@ nice_table <- function (data,
     }
   }
 
-##  ............................................................................
-##  Special symbols                                                         ####
-    compose.table1 <- data.frame(
+  ##  ............................................................................
+  ##  Special symbols                                                         ####
+  compose.table1 <- data.frame(
     col = c("95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)", "B",
-            "np2", "ges", "dR"),
+            "np2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2"),
     value = c('"95% CI (", as_i("b"), ")"',
               '"95% CI (", "\u03B2", ")"',
               '"95% CI (", as_i("t"), ")"',
@@ -293,7 +293,9 @@ nice_table <- function (data,
               '"\u03B2"',
               '"\u03b7", as_sub("p"), as_sup("2")',
               '"\u03b7", as_sub("G"), as_sup("2")',
-              'as_i("d"), as_sub("R")'))
+              'as_i("d"), as_sub("R")',
+              '"Predictor (+/-1 ", as_i("SD"), ")"',
+              'as_i("M"), as_sub("1"), " - ", as_i("M"), as_sub("2")'))
   for(i in seq(nrow(compose.table1))) {
     if(compose.table1[i, "col"] %in% names(dataframe)) {
       table %>%
@@ -321,8 +323,8 @@ nice_table <- function (data,
          bg = "#D9D9D9") -> table
   }
 
-#   ____________________________________________________________________________
-#   Extra features                                                          ####
+  #   ____________________________________________________________________________
+  #   Extra features                                                          ####
 
   table %>%
     colformat_double(j = (select(dataframe, where(is.numeric)) %>%
@@ -360,24 +362,24 @@ format_CI <- function(dataframe, CI_low_high = c("CI_lower", "CI_upper"),
                       col.name = "95% CI") {
   dataframe %>%
     mutate(across(all_of(CI_low_high), function(x) {
-             x %>% as.numeric %>% round(2) %>% formatC(2, format="f")
-             })) %>%
+      x %>% as.numeric %>% round(2) %>% formatC(2, format="f")
+    })) %>%
     mutate(!!col.name := paste0("[", .[[CI_low_high[1]]],
-                             ", ", .[[CI_low_high[2]]], "]")) %>%
+                                ", ", .[[CI_low_high[2]]], "]")) %>%
     select(-all_of(CI_low_high))
 }
 
 format_flex <- function(table, j, digits = 2, value, fun) {
   if(missing(value)) {
     table %>%
-    italic(j = j, part = "header") %>%
-    colformat_double(j = j, big.mark = ",", digits = digits) -> table
+      italic(j = j, part = "header") %>%
+      colformat_double(j = j, big.mark = ",", digits = digits) -> table
   }
   if(!missing(value)) {
-  rExpression <- paste0("as_paragraph(", value, ")")
-  table %>%
-    compose(i = 1, j = j, part = "header",
-            value = eval(parse(text = rExpression))) -> table
+    rExpression <- paste0("as_paragraph(", value, ")")
+    table %>%
+      compose(i = 1, j = j, part = "header",
+              value = eval(parse(text = rExpression))) -> table
   }
   if(!missing(fun)) {
     table %>%
