@@ -15,6 +15,11 @@
 #' find_mad(data = mtcars,
 #'          col.list = names(mtcars),
 #'          criteria = 3)
+#'
+#' find_mad(data = sleep,
+#'          col.list = "extra",
+#'          ID = "ID",
+#'          criteria = 2)
 #' @importFrom dplyr mutate %>% select ends_with across all_of if_any filter bind_rows count n
 
 find_mad <- function(data,

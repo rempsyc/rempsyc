@@ -24,6 +24,11 @@ See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting o
 find_mad(data = mtcars,
          col.list = names(mtcars),
          criteria = 3)
+
+find_mad(data = sleep,
+         col.list = "extra",
+         ID = "ID",
+         criteria = 2)
 }
 \author{
 Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
