@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.1
+* `find_mad`: corrected a bug whereas having a dataframe with no outliers in certain situations generated an error
+
 ### rempsyc 0.0.4.0
 * `nice_density` and `nice_normality`: added the `histogram` option to add an histogram to the density plot.
 

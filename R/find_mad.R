@@ -30,9 +30,11 @@ find_mad <- function(data,
   mad0.list <- mad0.list[lapply(mad0.list, nrow) > 0]
   duplicates.df <- bind_rows(mad0.list) %>%
     select(where(~!all(is.na(.x))))
-  duplicates.df <- duplicates.df %>%
-    count(Row) %>%
-    filter(n > 1)
+  if(nrow(duplicates.df) > 0) {
+    duplicates.df <- duplicates.df %>%
+      count(Row) %>%
+      filter(n > 1)
+  }
   if(nrow(mad0) > 0) {
     cat(nrow(mad0), "outlier(s) based on", criteria, "median absolute deviations for variable(s): \n", paste0(col.list, ", "), "\n\n")
     if(nrow(duplicates.df) > 0) {
@@ -49,7 +51,7 @@ find_mad <- function(data,
 
 find_mad0 <- function(data, col.list, ID = ID, criteria = 3) {
   if(criteria <= 0) { stop("Criteria needs to be greater than one.")}
-  my.mad <- data %>%
+  data %>%
     tibble::rownames_to_column(var = "Row") %>%
     select(-ends_with("xxxmad")) %>%
     mutate(across(all_of(col.list), rempsyc::scale_mad, .names="{col}xxxmad")) %>%
