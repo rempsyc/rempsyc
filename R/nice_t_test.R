@@ -53,6 +53,10 @@
 #' # Make sure cases appear in the same order for
 #' # both levels of the grouping factor
 #' @importFrom methods hasArg
+#'
+#' @seealso
+#' Tutorial: https://remi-theriault.com/blog_t-test
+#'
 
 nice_t_test <- function(data,
                         response,

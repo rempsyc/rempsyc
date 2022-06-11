@@ -190,7 +190,7 @@
 #'              has.shape = TRUE)
 #'
 #' @seealso
-#' Visualize group differences via violin plots: \code{\link{nice_violin}}. The tutorial for `nice_scatter` is available here: https://remi-theriault.com/blog_scatter.
+#' Visualize group differences via violin plots: \code{\link{nice_violin}}. Tutorial: https://remi-theriault.com/blog_scatter.
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text guide_legend
 #' @importFrom stats cor.test

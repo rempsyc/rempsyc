@@ -28,7 +28,10 @@
 #' head(randomized)
 #'
 #' @importFrom dplyr arrange %>%
-
+#'
+#' @seealso
+#' Tutorial: https://remi-theriault.com/blog_randomize
+#'
 
 nice_randomize <- function(design = "between",
                            Ncondition = 3,

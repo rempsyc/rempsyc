@@ -34,6 +34,9 @@ overlap_circle(3.12, categories = c("Humans","Animals"))
 # Change for your own desired path
 
 }
+\seealso{
+Tutorial: https://remi-theriault.com/blog_circles
+}
 \keyword{Venn}
 \keyword{diagrams,}
 \keyword{merging,}

@@ -70,6 +70,9 @@ nice_t_test(data = ToothGrowth,
 # Make sure cases appear in the same order for
 # both levels of the grouping factor
 }
+\seealso{
+Tutorial: https://remi-theriault.com/blog_t-test
+}
 \keyword{differences}
 \keyword{group}
 \keyword{t-test,}

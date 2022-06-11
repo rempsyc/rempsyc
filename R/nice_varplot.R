@@ -28,7 +28,7 @@
 #'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}
+#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_var}}. Tutorial: https://remi-theriault.com/blog_assumptions
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes

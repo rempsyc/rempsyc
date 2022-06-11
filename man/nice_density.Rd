@@ -63,5 +63,8 @@ nice_density(data = iris,
              title = "Density (Sepal Length)")
 
 }
+\seealso{
+Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}. Tutorial: https://remi-theriault.com/blog_assumptions
+}
 \keyword{density,}
 \keyword{normality}

@@ -33,6 +33,9 @@
 #'                group = "cyl",
 #'                covariates = c("disp", "hp"))
 #'
+#' @seealso
+#' Tutorial: https://remi-theriault.com/blog_contrasts
+#'
 
 nice_contrasts <- function(response, group, covariates=NULL, data, bootstraps = 2000) {
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")

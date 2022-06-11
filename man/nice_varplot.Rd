@@ -51,6 +51,6 @@ nice_varplot(data = iris,
 
 }
 \seealso{
-Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}
+Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_var}}. Tutorial: https://remi-theriault.com/blog_assumptions
 }
 \keyword{variance}

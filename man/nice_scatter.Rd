@@ -261,7 +261,7 @@ nice_scatter(data = mtcars,
 
 }
 \seealso{
-Visualize group differences via violin plots: \code{\link{nice_violin}}. The tutorial for \code{nice_scatter} is available here: https://remi-theriault.com/blog_scatter.
+Visualize group differences via violin plots: \code{\link{nice_violin}}. Tutorial: https://remi-theriault.com/blog_scatter.
 }
 \keyword{plots}
 \keyword{scatter}

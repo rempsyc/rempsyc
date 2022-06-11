@@ -44,6 +44,9 @@ randomized <- nice_randomize(design = "within", Ncondition = 4, n = 128,
 head(randomized)
 
 }
+\seealso{
+Tutorial: https://remi-theriault.com/blog_randomize
+}
 \keyword{allocation,}
 \keyword{conditions,}
 \keyword{design}

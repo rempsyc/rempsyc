@@ -46,6 +46,9 @@ nice_contrasts(data = mtcars,
                covariates = c("disp", "hp"))
 
 }
+\seealso{
+Tutorial: https://remi-theriault.com/blog_contrasts
+}
 \keyword{comparisons,}
 \keyword{contrasts,}
 \keyword{differences,}

@@ -27,6 +27,10 @@
 #' # Change for your own desired path
 #'
 #' @import graphics
+#'
+#' @seealso
+#' Tutorial: https://remi-theriault.com/blog_circles
+#'
 
 overlap_circle <- function(response,
                            categories = c("Self", "Other")){
