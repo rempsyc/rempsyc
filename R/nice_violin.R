@@ -119,7 +119,7 @@
 #'             border.colour = "white")
 #'
 #' @seealso
-#' Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: https://remi-theriault.com/blog_violin
+#' Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: \url{https://remi-theriault.com/blog_violin}
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
 #' @importFrom rlang .data

@@ -32,7 +32,7 @@ nice_lm(my.models)
 
 }
 \seealso{
-Checking simple slopes after testing for moderation: \code{\link{nice_lm_slopes}}, \code{\link{nice_mod}}, \code{\link{nice_slopes}}. Tutorial: https://remi-theriault.com/blog_moderation
+Checking simple slopes after testing for moderation: \code{\link{nice_lm_slopes}}, \code{\link{nice_mod}}, \code{\link{nice_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
 }
 \keyword{interaction,}
 \keyword{moderation,}

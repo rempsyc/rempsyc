@@ -71,7 +71,7 @@ nice_t_test(data = ToothGrowth,
 # both levels of the grouping factor
 }
 \seealso{
-Tutorial: https://remi-theriault.com/blog_t-test
+Tutorial: \url{https://remi-theriault.com/blog_t-test}
 }
 \keyword{differences}
 \keyword{group}

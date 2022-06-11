@@ -45,7 +45,7 @@ head(randomized)
 
 }
 \seealso{
-Tutorial: https://remi-theriault.com/blog_randomize
+Tutorial: \url{https://remi-theriault.com/blog_randomize}
 }
 \keyword{allocation,}
 \keyword{conditions,}

@@ -44,7 +44,7 @@
 #'             moderator2 = "am")
 #'
 #' @seealso
-#' Checking for moderation before checking simple slopes: \code{\link{nice_mod}}, \code{\link{nice_lm}}, \code{\link{nice_lm_slopes}}. Tutorial: https://remi-theriault.com/blog_moderation
+#' Checking for moderation before checking simple slopes: \code{\link{nice_mod}}, \code{\link{nice_lm}}, \code{\link{nice_lm_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
 #'
 #' @importFrom stats lm sd
 

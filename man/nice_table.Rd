@@ -86,7 +86,7 @@ nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
 }
 \seealso{
-Tutorial: https://remi-theriault.com/blog_table
+Tutorial: \url{https://remi-theriault.com/blog_table}
 }
 \keyword{APA}
 \keyword{style}

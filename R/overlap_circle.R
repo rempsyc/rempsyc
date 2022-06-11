@@ -29,7 +29,7 @@
 #' @import graphics
 #'
 #' @seealso
-#' Tutorial: https://remi-theriault.com/blog_circles
+#' Tutorial: \url{https://remi-theriault.com/blog_circles}
 #'
 
 overlap_circle <- function(response,

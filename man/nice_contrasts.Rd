@@ -47,7 +47,7 @@ nice_contrasts(data = mtcars,
 
 }
 \seealso{
-Tutorial: https://remi-theriault.com/blog_contrasts
+Tutorial: \url{https://remi-theriault.com/blog_contrasts}
 }
 \keyword{comparisons,}
 \keyword{contrasts,}

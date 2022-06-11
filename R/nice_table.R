@@ -60,7 +60,7 @@
 #' @importFrom rlang :=
 #'
 #' @seealso
-#' Tutorial: https://remi-theriault.com/blog_table
+#' Tutorial: \url{https://remi-theriault.com/blog_table}
 #'
 
 #' @export

@@ -174,7 +174,7 @@ nice_violin(data = ToothGrowth,
 
 }
 \seealso{
-Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: https://remi-theriault.com/blog_violin
+Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: \url{https://remi-theriault.com/blog_violin}
 }
 \keyword{plots}
 \keyword{violin}

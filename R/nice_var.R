@@ -21,7 +21,7 @@
 #' var.table
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}. Tutorial: https://remi-theriault.com/blog_assumptions
+#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
 
