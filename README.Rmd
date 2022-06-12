@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r version, echo = FALSE                                  }
+```{r version, echo = FALSE, message = FALSE}
 version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                                  
 version <- gsub('-', '.', version)   
 
@@ -40,6 +40,9 @@ library(rempsyc)
 <!-- badges: end -->
 
 R package of convenience functions to make your workflow faster and easier. Easily customizable plots (via `ggplot2`), nice APA tables exportable to Word (via `flextable`), easily run statistical tests or check assumptions, and automatize various other tasks. Mostly geared at researchers in the psychological sciences. The package is still under active development. Feel free to open an issue to ask for help, report a bug, or request a feature.
+
+Release notes: https://github.com/rempsyc/rempsyc/blob/main/NEWS.md
+Development objectives (to-do list): https://github.com/rempsyc/rempsyc/blob/main/TODOS.md
 
 ## Installation
 
@@ -173,11 +176,11 @@ The tables can be saved with the `save_as_docx` function, and are `flextable` ob
 
 ```{r t_table, warning = FALSE, message = FALSE}
 # Format t-test results
-t_table <- nice_table(t.tests, width = .75)
+t_table <- nice_table(t.tests)
 t_table
 ```
 
-<img src="man/figures/README-t_table-1.png" width="90%" />
+<img src="man/figures/README-t_table-1.png" width="50%" />
 
 ```{r table_save, warning = FALSE, message = FALSE}
 # Save to word
@@ -186,19 +189,19 @@ save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 
 ```{r mod_table, warning = FALSE, message = FALSE}
 # Format moderation results
-mod_table <- nice_table(moderations, highlight = TRUE, width = .75)
+mod_table <- nice_table(moderations, highlight = TRUE)
 mod_table
 ```
 
-<img src="man/figures/README-mod_table-1.png" width="90%" />
+<img src="man/figures/README-mod_table-1.png" width="60%" />
 
 ```{r slopes_table, warning = FALSE, message = FALSE}
 # Format simple slopes results
-slopes_table <- nice_table(simple.slopes, width = .75)
+slopes_table <- nice_table(simple.slopes)
 slopes_table
 ```
 
-<img src="man/figures/README-slopes_table-1.png" width="90%" />
+<img src="man/figures/README-slopes_table-1.png" width="70%" />
 
 It also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
 

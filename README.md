@@ -27,6 +27,10 @@ researchers in the psychological sciences. The package is still under
 active development. Feel free to open an issue to ask for help, report a
 bug, or request a feature.
 
+Release notes: <https://github.com/rempsyc/rempsyc/blob/main/NEWS.md>
+Development objectives (to-do list):
+<https://github.com/rempsyc/rempsyc/blob/main/TODOS.md>
+
 ## Installation
 
 You can install the development version (the only version currently
@@ -227,11 +231,11 @@ The tables can be saved with the `save_as_docx` function, and are
 
 ``` r
 # Format t-test results
-t_table <- nice_table(t.tests, width = .75)
+t_table <- nice_table(t.tests)
 t_table
 ```
 
-<img src="man/figures/README-t_table-1.png" width="90%" />
+<img src="man/figures/README-t_table-1.png" width="50%" />
 
 ``` r
 # Save to word
@@ -240,19 +244,19 @@ save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 
 ``` r
 # Format moderation results
-mod_table <- nice_table(moderations, highlight = TRUE, width = .75)
+mod_table <- nice_table(moderations, highlight = TRUE)
 mod_table
 ```
 
-<img src="man/figures/README-mod_table-1.png" width="90%" />
+<img src="man/figures/README-mod_table-1.png" width="60%" />
 
 ``` r
 # Format simple slopes results
-slopes_table <- nice_table(simple.slopes, width = .75)
+slopes_table <- nice_table(simple.slopes)
 slopes_table
 ```
 
-<img src="man/figures/README-slopes_table-1.png" width="90%" />
+<img src="man/figures/README-slopes_table-1.png" width="70%" />
 
 It also integrates with objects from the `broom` and `report` packages.
 Full tutorial: <https://remi-theriault.com/blog_table.html>
@@ -405,28 +409,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        PZ
-#> 2  2        CX
+#> 1  1        CX
+#> 2  2        ZL
 #> 3  3        BP
-#> 4  4        ZL
-#> 5  5        CX
-#> 6  6        BP
-#> 7  7        ZL
-#> 8  8        PZ
+#> 4  4        PZ
+#> 5  5        BP
+#> 6  6        ZL
+#> 7  7        PZ
+#> 8  8        CX
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        SV
 #> 2  1        ST
-#> 3  1        SV
+#> 3  1        AV
 #> 4  2        AV
 #> 5  2        ST
 #> 6  2        SV
-#> 7  3        SV
-#> 8  3        ST
-#> 9  3        AV
+#> 7  3        ST
+#> 8  3        AV
+#> 9  3        SV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
