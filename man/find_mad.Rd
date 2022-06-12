@@ -25,10 +25,12 @@ find_mad(data = mtcars,
          col.list = names(mtcars),
          criteria = 3)
 
-find_mad(data = sleep,
-         col.list = "extra",
-         ID = "ID",
-         criteria = 2)
+mtcars2 <- mtcars
+mtcars2$car <- row.names(mtcars)
+find_mad(data = mtcars2,
+         col.list = names(mtcars),
+         ID = "car",
+         criteria = 3)
 }
 \author{
 Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault

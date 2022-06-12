@@ -16,10 +16,12 @@
 #'          col.list = names(mtcars),
 #'          criteria = 3)
 #'
-#' find_mad(data = sleep,
-#'          col.list = "extra",
-#'          ID = "ID",
-#'          criteria = 2)
+#' mtcars2 <- mtcars
+#' mtcars2$car <- row.names(mtcars)
+#' find_mad(data = mtcars2,
+#'          col.list = names(mtcars),
+#'          ID = "car",
+#'          criteria = 3)
 #' @importFrom dplyr mutate %>% select ends_with across all_of if_any filter bind_rows count n
 
 find_mad <- function(data,
@@ -29,6 +31,7 @@ find_mad <- function(data,
   if(missing(ID)) {
     data$ID <- rownames(data)
   }
+  row.names(data) <- NULL
   mad0 <- find_mad0(data, col.list, ID = ID, criteria = criteria)
   mad0.list <- sapply(col.list, function(x) find_mad0(data, x, ID = ID, criteria = criteria),
                       USE.NAMES = TRUE, simplify = FALSE)
@@ -36,8 +39,15 @@ find_mad <- function(data,
   duplicates.df <- bind_rows(mad0.list) %>%
     select(where(~!all(is.na(.x))))
   if(nrow(duplicates.df) > 0) {
+    if(!missing(ID)) {
+      duplicates.df <- duplicates.df %>%
+        count(Row, .[[ID]]) %>%
+        rename({{ID}} := ".[[ID]]")
+    } else {
     duplicates.df <- duplicates.df %>%
-      count(Row) %>%
+      count(Row)
+    }
+    duplicates.df <- duplicates.df %>%
       filter(n > 1)
   }
   if(nrow(mad0) > 0) {
@@ -57,9 +67,10 @@ find_mad <- function(data,
 find_mad0 <- function(data, col.list, ID = ID, criteria = 3) {
   if(criteria <= 0) { stop("Criteria needs to be greater than one.")}
   data %>%
-    tibble::rownames_to_column(var = "Row") %>%
     select(-ends_with("xxxmad")) %>%
-    mutate(across(all_of(col.list), rempsyc::scale_mad, .names="{col}xxxmad")) %>%
+    mutate(Row = row(.[1]),
+           across(all_of(col.list), rempsyc::scale_mad, .names="{col}xxxmad")) %>%
     filter(if_any(ends_with("xxxmad"), ~ . > criteria | . < -criteria)) %>%
     select(Row, all_of(ID), all_of(col.list))
 }
+

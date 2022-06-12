@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.4
+* `find_mad`: improved reporting of ID and row number
+
 ### rempsyc 0.0.4.3
 * `nice_table`: changed default table width (again)
 
