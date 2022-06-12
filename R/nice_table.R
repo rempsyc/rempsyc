@@ -239,6 +239,9 @@ nice_table <- function (data,
   if(!missing(width)) {
     table %>%
     set_table_properties(layout = "autofit", width = width) -> table
+  } else {
+    table %>%
+      set_table_properties(layout = "autofit") -> table
   }
 
   #   ____________________________________________________________________________

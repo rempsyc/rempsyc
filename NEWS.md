@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.3
+* `nice_table`: changed default table width (again)
+
 ### rempsyc 0.0.4.2
 * `nice_table`: changed default table width
 
