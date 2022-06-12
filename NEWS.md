@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.2
+* `nice_table`: changed default table width
+
 ### rempsyc 0.0.4.1
 * `find_mad`: corrected a bug whereas having a dataframe with no outliers in certain situations generated an error
 

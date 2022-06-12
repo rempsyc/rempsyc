@@ -234,8 +234,12 @@ nice_table <- function (data,
     #line_spacing(space = 2, part = "all") %>%
     height(height = 0.55, part = "body") %>%
     height(height = 0.55, part = "head") %>%
-    hrule(rule = "exact", part = "all") %>%
+    hrule(rule = "exact", part = "all") -> table
+
+  if(!missing(width)) {
+    table %>%
     set_table_properties(layout = "autofit", width = width) -> table
+  }
 
   #   ____________________________________________________________________________
   #   Column formatting                                                       ####
