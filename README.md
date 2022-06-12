@@ -236,7 +236,7 @@ t_table <- nice_table(t.tests)
 t_table
 ```
 
-<img src="man/figures/README-t_table-1.png" width="50%" />
+<img src="man/figures/README-t_table-1.png" width="60%" />
 
 ``` r
 # Save to word
@@ -249,7 +249,7 @@ mod_table <- nice_table(moderations, highlight = TRUE)
 mod_table
 ```
 
-<img src="man/figures/README-mod_table-1.png" width="60%" />
+<img src="man/figures/README-mod_table-1.png" width="70%" />
 
 ``` r
 # Format simple slopes results
@@ -257,7 +257,7 @@ slopes_table <- nice_table(simple.slopes)
 slopes_table
 ```
 
-<img src="man/figures/README-slopes_table-1.png" width="70%" />
+<img src="man/figures/README-slopes_table-1.png" width="80%" />
 
 It also integrates with objects from the `broom` and `report` packages.
 Full tutorial: <https://remi-theriault.com/blog_table.html>
@@ -411,26 +411,26 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
 #> 1  1        ZL
-#> 2  2        CX
-#> 3  3        PZ
-#> 4  4        BP
-#> 5  5        ZL
-#> 6  6        BP
-#> 7  7        PZ
-#> 8  8        CX
+#> 2  2        BP
+#> 3  3        CX
+#> 4  4        PZ
+#> 5  5        BP
+#> 6  6        PZ
+#> 7  7        CX
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
+#> 1  1        ST
 #> 2  1        AV
-#> 3  1        ST
-#> 4  2        AV
-#> 5  2        SV
-#> 6  2        ST
-#> 7  3        SV
-#> 8  3        ST
+#> 3  1        SV
+#> 4  2        ST
+#> 5  2        AV
+#> 6  2        SV
+#> 7  3        ST
+#> 8  3        SV
 #> 9  3        AV
 ```
 
