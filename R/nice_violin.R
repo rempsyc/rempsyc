@@ -26,6 +26,9 @@
 #' @param obs Logical, whether to plot individual observations or not.
 #' @param alpha The transparency of the plot.
 #' @param border.colour The colour of the plot border.
+#' @param has.d Whether to display the d-value.
+#' @param d.x The x-axis coordinates for the d-value.
+#' @param d.y The y-axis coordinates for the d-value.
 #'
 #' @keywords violin plots
 #' @export
@@ -116,13 +119,16 @@
 #'             response = "len",
 #'             CIcap.width = 0,
 #'             alpha = .70,
-#'             border.colour = "white")
+#'             border.colour = "white",
+#'             comp1 = 1,
+#'             comp2 = 2,
+#'             has.d = TRUE)
 #'
 #' @seealso
 #' Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: \url{https://remi-theriault.com/blog_violin}
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
-#' @importFrom rlang .data
+#' @importFrom rlang .data UQ
 
 nice_violin <- function (data,
                          group,
@@ -147,7 +153,10 @@ nice_violin <- function (data,
                          CIcap.width = 0.1,
                          obs = FALSE,
                          alpha = 1,
-                         border.colour = "black") {
+                         border.colour = "black",
+                         has.d = FALSE,
+                         d.x = mean(c(comp1, comp2)) * 1.1,
+                         d.y = mean(data[[response]]) * 1.3) {
   data[[group]] <- as.factor(data[[group]])
   gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"
@@ -162,6 +171,13 @@ nice_violin <- function (data,
                                           basic = FALSE,
                                           percentile = FALSE,
                                           bca = boot)
+  if (has.d == TRUE) {
+    data.d <- data %>%
+      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(data[[group]])[c(comp1, comp2)]) %>%
+      droplevels()
+    d <- round(effectsize::cohens_d(response, y = group, data = data.d)$Cohens_d, 2)
+    d <- paste("=", abs(d))
+  }
   ggplot(data, aes(x = .data[[group]],
                    y = .data[[response]],
                    fill = .data[[group]])) +
@@ -204,5 +220,14 @@ nice_violin <- function (data,
                                                             xmin=signif_xmin,
                                                             xmax=signif_xmax,
                                                             size=1.3,
-                                                            textsize=8)}
+                                                            textsize=8)} +
+    {if (has.d == TRUE & !missing(comp1)) annotate(geom = "text",
+                                                   x = d.x,
+                                                   y = d.y,
+                                                   label = sprintf("italic('d')~'%s'", d),
+                                                   parse = TRUE,
+                                                   hjust = 1,
+                                                   vjust = -1,
+                                                   size = 7)}
+
 }

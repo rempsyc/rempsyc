@@ -28,7 +28,10 @@ nice_violin(
   CIcap.width = 0.1,
   obs = FALSE,
   alpha = 1,
-  border.colour = "black"
+  border.colour = "black",
+  has.d = FALSE,
+  d.x = mean(c(comp1, comp2)) * 1.1,
+  d.y = mean(data[[response]]) * 1.3
 )
 }
 \arguments{
@@ -79,6 +82,12 @@ nice_violin(
 \item{alpha}{The transparency of the plot.}
 
 \item{border.colour}{The colour of the plot border.}
+
+\item{has.d}{Whether to display the d-value.}
+
+\item{d.x}{The x-axis coordinates for the d-value.}
+
+\item{d.y}{The y-axis coordinates for the d-value.}
 }
 \description{
 Make nice violin plots easily with 95\% bootstrapped confidence intervals.
@@ -170,7 +179,10 @@ nice_violin(data = ToothGrowth,
             response = "len",
             CIcap.width = 0,
             alpha = .70,
-            border.colour = "white")
+            border.colour = "white",
+            comp1 = 1,
+            comp2 = 2,
+            has.d = TRUE)
 
 }
 \seealso{

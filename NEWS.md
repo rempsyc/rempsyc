@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.5
+* `nice_violin`: Added the ability to add the cohen's d to the plot
+
 ### rempsyc 0.0.4.4
 * `find_mad`: improved reporting of ID and row number
 

@@ -18,6 +18,8 @@
     -   Support second moderator
 -   `nice_slopes`
     -   Add support for multiple moderators (like for `nice_mod`)
+-   `nice_normality`
+    -   Add support for NA missing values
 -   `nice_qq`
     -   Add support for only 1 group (like for nice_violin)
 -   `nice_varplot`
@@ -34,6 +36,7 @@
     -   Check for consistency among argument names like response/variable
         -   Check at other functions to see what's most typically used
     -   Add documentation for outputs
+    -   Add support for NA missing values
 -   Finish writing all function tests
 -   Write a manual
 -   Write a vignette
