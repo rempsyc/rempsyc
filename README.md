@@ -52,8 +52,8 @@ library(rempsyc)
 
 ## Overview
 
-[T-tests, regressions, moderations, simple
-slopes](#t-tests-regressions-moderations-simple-slopes)<a name = 'T-tests, regressions, moderations, simple slopes'/>
+[T-tests, planned contrasts, regressions, moderations, simple
+slopes](#t-tests-planned-contrasts-regressions-moderations-simple-slopes)<a name = 'T-tests, planned contrasts, regressions, moderations, simple slopes'/>
 
 [Nice APA tables](#nice-apa-tables)<a name = 'Nice APA tables'/>
 
@@ -64,7 +64,7 @@ slopes](#t-tests-regressions-moderations-simple-slopes)<a name = 'T-tests, regre
 [Testing
 assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
 
-## T-tests, regressions, moderations, simple slopes
+## T-tests, planned contrasts, regressions, moderations, simple slopes
 
 ## `nice_t_test`
 
@@ -93,6 +93,39 @@ t.tests
 #> 2  2.2295592
 #> 3 -1.1245498
 #> 4  2.7329218
+```
+
+Full tutorial: <https://remi-theriault.com/blog_t-test>
+
+## `nice_contrasts`
+
+Easily compute regression with planned contrast analyses (pairwise
+comparisons similar to t-tests but more powerful when more than 2
+groups), and format in publication-ready format. Supports multiple
+dependent variables at once (but supports only three groups for the
+moment). In this particular case, the confidence intervals are
+bootstraped around the Robust Cohen’s d.
+
+``` r
+nice_contrasts(data = mtcars,
+               response = c("mpg", "disp"),
+               group = "cyl",
+               covariates = "hp") -> contrasts
+contrasts
+#>   Dependent Variable Comparison df         t              p        dR
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
+#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144
+#> 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630
+#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937
+#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
+#>     CI_lower   CI_upper
+#> 1  2.0935833  5.5759091
+#> 2  0.6963197  2.3443098
+#> 3  1.0669147  4.0226243
+#> 4 -4.9189743 -2.3927432
+#> 5 -3.7868158 -1.4365751
+#> 6 -1.7813173 -0.5114086
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -242,6 +275,14 @@ t_table
 # Save to word
 save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
+
+``` r
+# Format contrasts results
+contrasts_table <- nice_table(contrasts, highlight = .001)
+contrasts_table
+```
+
+<img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
 ``` r
 # Format moderation results
@@ -410,25 +451,25 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        ZL
-#> 2  2        BP
-#> 3  3        CX
-#> 4  4        PZ
-#> 5  5        BP
-#> 6  6        PZ
-#> 7  7        CX
+#> 1  1        PZ
+#> 2  2        CX
+#> 3  3        BP
+#> 4  4        ZL
+#> 5  5        PZ
+#> 6  6        CX
+#> 7  7        BP
 #> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
-#> 2  1        AV
+#> 1  1        AV
+#> 2  1        ST
 #> 3  1        SV
-#> 4  2        ST
-#> 5  2        AV
-#> 6  2        SV
+#> 4  2        SV
+#> 5  2        ST
+#> 6  2        AV
 #> 7  3        ST
 #> 8  3        SV
 #> 9  3        AV

@@ -63,7 +63,7 @@ library(rempsyc)
 
 ```{r headers, results = "asis", echo = FALSE}
 
-section.1 <- "T-tests, regressions, moderations, simple slopes"
+section.1 <- "T-tests, planned contrasts, regressions, moderations, simple slopes"
 section.2 <- "Nice APA tables"
 section.3 <- "Visualization"
 section.4 <- "Utility functions"
@@ -103,6 +103,20 @@ nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
 t.tests
+```
+
+Full tutorial: https://remi-theriault.com/blog_t-test
+
+## `nice_contrasts `
+
+Easily compute regression with planned contrast analyses (pairwise comparisons similar to t-tests but more powerful when more than 2 groups), and format in publication-ready format. Supports multiple dependent variables at once (but supports only three groups for the moment). In this particular case, the confidence intervals are bootstraped around the Robust Cohen's d.
+
+```{r nice_contrasts, warning = FALSE, message = FALSE}
+nice_contrasts(data = mtcars,
+               response = c("mpg", "disp"),
+               group = "cyl",
+               covariates = "hp") -> contrasts
+contrasts
 ```
 
 Full tutorial: https://remi-theriault.com/blog_t-test
@@ -186,6 +200,14 @@ t_table
 # Save to word
 save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
+
+```{r contrasts_table, warning = FALSE, message = FALSE}
+# Format contrasts results
+contrasts_table <- nice_table(contrasts, highlight = .001)
+contrasts_table
+```
+
+<img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
 ```{r mod_table, warning = FALSE, message = FALSE}
 # Format moderation results
