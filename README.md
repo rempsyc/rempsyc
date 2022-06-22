@@ -16,7 +16,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://paypal.me/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
-![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)
+[![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/stargazers)
 <!-- badges: end -->
 
 R package of convenience functions to make your workflow faster and
@@ -120,12 +120,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0935833  5.5759091
-#> 2  0.6963197  2.3443098
-#> 3  1.0669147  4.0226243
-#> 4 -4.9189743 -2.3927432
-#> 5 -3.7868158 -1.4365751
-#> 6 -1.7813173 -0.5114086
+#> 1  2.1204885  5.8048025
+#> 2  0.6918721  2.4820243
+#> 3  1.0615089  3.8546130
+#> 4 -4.9955833 -2.4383493
+#> 5 -3.8385949 -1.4387339
+#> 6 -1.7415866 -0.4730437
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -451,28 +451,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        PZ
-#> 2  2        CX
-#> 3  3        BP
-#> 4  4        ZL
+#> 1  1        BP
+#> 2  2        ZL
+#> 3  3        CX
+#> 4  4        PZ
 #> 5  5        PZ
-#> 6  6        CX
-#> 7  7        BP
-#> 8  8        ZL
+#> 6  6        ZL
+#> 7  7        CX
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        SV
 #> 2  1        ST
-#> 3  1        SV
-#> 4  2        SV
-#> 5  2        ST
-#> 6  2        AV
+#> 3  1        AV
+#> 4  2        AV
+#> 5  2        SV
+#> 6  2        ST
 #> 7  3        ST
-#> 8  3        SV
-#> 9  3        AV
+#> 8  3        AV
+#> 9  3        SV
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
