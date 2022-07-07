@@ -4,13 +4,16 @@
 \alias{format_value}
 \alias{format_p}
 \alias{format_r}
+\alias{format_d}
 \title{Easily format p or r values}
 \usage{
-format_value(value, type, ...)
+format_value(value, type = "d", ...)
 
 format_p(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = FALSE)
 
 format_r(r, precision = 0.01)
+
+format_d(d, precision = 0.01)
 }
 \arguments{
 \item{value}{Value to be formatted, when using the generic \code{format_value()}.}

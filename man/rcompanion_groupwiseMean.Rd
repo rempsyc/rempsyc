@@ -90,15 +90,19 @@ Author: Salvatore Mangiafico, mangiafico@njaes.rutgers.edu
 }
 \details{
 The input should include either \code{formula} and \code{data};
-or \code{data}, \code{var}, and \code{group}. (See examples).\preformatted{     Results for ungrouped (one-sample) data can be obtained by either
+or \code{data}, \code{var}, and \code{group}. (See examples).
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     Results for ungrouped (one-sample) data can be obtained by either
      setting the right side of the formula to 1, e.g.  y ~ 1, or by
      setting \code{group=NULL} when using \code{var}.
-}
+}\if{html}{\out{</div>}}
 }
 \note{
 The parsing of the formula is simplistic. The first variable on the
 left side is used as the measurement variable.  The variables on the
-right side are used for the grouping variables.\preformatted{     In general, it is advisable to handle \code{NA} values before
+right side are used for the grouping variables.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     In general, it is advisable to handle \code{NA} values before
      using this function.
      With some options, the function may not handle missing values well,
      or in the manner desired by the user.
@@ -109,7 +113,7 @@ right side are used for the grouping variables.\preformatted{     In general, it
      on trimmed means,
      see Rand Wilcox, Introduction to Robust Estimation and
      Hypothesis Testing.
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 \dontrun{

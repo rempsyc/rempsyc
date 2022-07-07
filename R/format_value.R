@@ -23,10 +23,11 @@
 #' format_r(0.041231)
 #' @name format_value
 format_value <- function(value,
-                         type,
+                         type = "d",
                          ...) {
   if(type == "r") {format_r(value, ...)}
   else if(type == "p") {format_p(value, ...)}
+  else if(type == "d") {format_d(value, ...)}
 }
 
 #' @export
@@ -59,3 +60,10 @@ format_r <- function(r,
   digits <- -log(precision, base = 10)
   r <- formatC(r, format = 'f', digits = digits)
   sub("0", "", r)}
+
+#' @export
+#' @rdname format_value
+format_d <- function(d,
+                     precision = 0.01) {
+  digits <- 2
+  formatC(d, format = 'f', digits = digits)}

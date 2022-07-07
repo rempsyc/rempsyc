@@ -171,12 +171,20 @@ nice_violin <- function (data,
                                           basic = FALSE,
                                           percentile = FALSE,
                                           bca = boot)
-  if (has.d == TRUE) {
+  if (has.d == TRUE & any(!missing(comp1), !missing(comp2), !missing(signif_xmin))) {
+    if(missing(comp1) & missing(comp2) & !missing(signif_xmin)) {
+      comp1.temp <- signif_xmin[1]
+      comp2.temp <- signif_xmax[1]
+    } else {
+      comp1.temp <- comp1
+      comp2.temp <- comp2
+    }
     data.d <- data %>%
-      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(data[[group]])[c(comp1, comp2)]) %>%
+      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(data[[group]])[c(comp1.temp, comp2.temp)]) %>%
       droplevels()
     d <- round(effectsize::cohens_d(response, y = group, data = data.d)$Cohens_d, 2)
-    d <- paste("=", abs(d))
+    d <- format_d(abs(d))
+    d <- paste("=", d)
   }
   ggplot(data, aes(x = .data[[group]],
                    y = .data[[response]],
@@ -185,7 +193,7 @@ nice_violin <- function (data,
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
-    geom_violin(color = border.colour, alpha = alpha) +
+    geom_violin(color = border.colour, alpha = alpha, size = 1) +
     geom_point(aes(y = .data$Mean),
                color = "black",
                size = 4,
@@ -212,6 +220,7 @@ nice_violin <- function (data,
     {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax),
                                             breaks = seq(ymin, ymax, by = yby))} +
     {if (!missing(comp1)) ggsignif::geom_signif(comparisons = list(c(comp1, comp2)),
+                                                test = "t.test",
                                                 map_signif_level=TRUE,
                                                 size= 1.3,
                                                 textsize=8)} +
@@ -221,13 +230,14 @@ nice_violin <- function (data,
                                                             xmax=signif_xmax,
                                                             size=1.3,
                                                             textsize=8)} +
-    {if (has.d == TRUE & !missing(comp1)) annotate(geom = "text",
-                                                   x = d.x,
-                                                   y = d.y,
-                                                   label = sprintf("italic('d')~'%s'", d),
-                                                   parse = TRUE,
-                                                   hjust = 1,
-                                                   vjust = -1,
-                                                   size = 7)}
+    if (has.d == TRUE & any(!missing(comp1), !missing(comp2), !missing(signif_xmin))) {
+      annotate(geom = "text",
+               x = d.x,
+               y = d.y,
+               label = sprintf("italic('d')~'%s'", d),
+               parse = TRUE,
+               hjust = 1,
+               vjust = -1,
+               size = 7)}
 
 }
