@@ -243,7 +243,9 @@ nice_violin(data = ToothGrowth,
             response = "len",
             xlabels = c("Low", "Medium", "High"),
             comp1 = 1,
-            comp2 = 3)
+            comp2 = 3,
+            has.d = TRUE,
+            d.y = 30)
 
 # Save plot
 ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
@@ -327,6 +329,7 @@ Easily format *p* or *r* values. Note: converts to `character` class for use in 
 format_p(0.0041231)
 format_p(t.tests$p)
 format_r(moderations$sr2)
+format_d(t.tests$d)
 ```
 
 ## `nice_randomize`

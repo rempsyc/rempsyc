@@ -120,12 +120,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1204885  5.8048025
-#> 2  0.6918721  2.4820243
-#> 3  1.0615089  3.8546130
-#> 4 -4.9955833 -2.4383493
-#> 5 -3.8385949 -1.4387339
-#> 6 -1.7415866 -0.4730437
+#> 1  2.1302614  5.8605689
+#> 2  0.7315252  2.3060633
+#> 3  1.0386186  3.6470470
+#> 4 -5.1216747 -2.5331513
+#> 5 -3.7785930 -1.3997289
+#> 6 -1.7693441 -0.4930406
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -319,7 +319,9 @@ nice_violin(data = ToothGrowth,
             response = "len",
             xlabels = c("Low", "Medium", "High"),
             comp1 = 1,
-            comp2 = 3)
+            comp2 = 3,
+            has.d = TRUE,
+            d.y = 30)
 ```
 
 <img src="man/figures/README-nice_violin-1.png" width="60%" />
@@ -440,6 +442,8 @@ format_p(t.tests$p)
 #> [1] ".001"   "< .001" "< .001" "< .001"
 format_r(moderations$sr2)
 #> [1] ".03" ".00" ".04" ".00" ".04" ".00"
+format_d(t.tests$d)
+#> [1] "-1.48" "1.45"  "-2.00" "1.89"
 ```
 
 ## `nice_randomize`
@@ -451,28 +455,28 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        BP
-#> 2  2        ZL
-#> 3  3        CX
-#> 4  4        PZ
+#> 1  1        CX
+#> 2  2        PZ
+#> 3  3        BP
+#> 4  4        ZL
 #> 5  5        PZ
-#> 6  6        ZL
-#> 7  7        CX
-#> 8  8        BP
+#> 6  6        CX
+#> 7  7        BP
+#> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        SV
-#> 2  1        ST
-#> 3  1        AV
+#> 1  1        AV
+#> 2  1        SV
+#> 3  1        ST
 #> 4  2        AV
-#> 5  2        SV
-#> 6  2        ST
-#> 7  3        ST
-#> 8  3        AV
-#> 9  3        SV
+#> 5  2        ST
+#> 6  2        SV
+#> 7  3        AV
+#> 8  3        SV
+#> 9  3        ST
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_randomize.html>
