@@ -33,6 +33,8 @@ format_d(d, precision = 0.01)
 \item{sign}{Logical. Whether to add an equal sign for p-values higher or equal to .001.}
 
 \item{r}{r-value to format.}
+
+\item{d}{d-value to format.}
 }
 \description{
 Easily format p or r values. Note: converts to character class for use in figures or manuscripts to accommodate e.g., "< .001".

@@ -4,6 +4,7 @@
 #'
 #' @param p p-value to format.
 #' @param r r-value to format.
+#' @param d d-value to format.
 #' @param precision Level of precision desired, if necessary.
 #' @param type Specify r or p value.
 #' @param value Value to be formatted, when using the generic `format_value()`.
