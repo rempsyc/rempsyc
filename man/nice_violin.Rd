@@ -29,6 +29,7 @@ nice_violin(
   obs = FALSE,
   alpha = 1,
   border.colour = "black",
+  border.size = 2,
   has.d = FALSE,
   d.x = mean(c(comp1, comp2)) * 1.1,
   d.y = mean(data[[response]]) * 1.3
@@ -81,7 +82,9 @@ nice_violin(
 
 \item{alpha}{The transparency of the plot.}
 
-\item{border.colour}{The colour of the plot border.}
+\item{border.colour}{The colour of the violins border.}
+
+\item{border.size}{The size of the violins border.}
 
 \item{has.d}{Whether to display the d-value.}
 
@@ -179,6 +182,7 @@ nice_violin(data = ToothGrowth,
             response = "len",
             CIcap.width = 0,
             alpha = .70,
+            border.size = 1,
             border.colour = "white",
             comp1 = 1,
             comp2 = 2,

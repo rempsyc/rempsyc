@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.7
+* `nice_violin`: made default contour lines thicker, but also added argument `border.size` to allow customization.
+
 ### rempsyc 0.0.4.6
 * `nice_violin`: Corrected a bug whereas the Cohen's *d* wasn't added to the plot if manual annotation (as opposed to automatic) comparisons were made. Also, the default test used in `geom_signif::geom_signif()` was the Wilcox test. It has been changed to the t-test to avoid confusion when results mismatch. Finally, the contour lines were made thicker since at high resolution they appeared too thin.
 * New function: `format_d` to format d values as e.g., `0.30` instead of `0.3` e.g., on violin plots.

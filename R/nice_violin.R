@@ -25,7 +25,8 @@
 #' @param CIcap.width The width of the confidence interval cap.
 #' @param obs Logical, whether to plot individual observations or not.
 #' @param alpha The transparency of the plot.
-#' @param border.colour The colour of the plot border.
+#' @param border.colour The colour of the violins border.
+#' @param border.size The size of the violins border.
 #' @param has.d Whether to display the d-value.
 #' @param d.x The x-axis coordinates for the d-value.
 #' @param d.y The y-axis coordinates for the d-value.
@@ -119,6 +120,7 @@
 #'             response = "len",
 #'             CIcap.width = 0,
 #'             alpha = .70,
+#'             border.size = 1,
 #'             border.colour = "white",
 #'             comp1 = 1,
 #'             comp2 = 2,
@@ -154,6 +156,7 @@ nice_violin <- function (data,
                          obs = FALSE,
                          alpha = 1,
                          border.colour = "black",
+                         border.size = 2,
                          has.d = FALSE,
                          d.x = mean(c(comp1, comp2)) * 1.1,
                          d.y = mean(data[[response]]) * 1.3) {
@@ -193,7 +196,7 @@ nice_violin <- function (data,
     {if (!missing(xlabels)) scale_x_discrete(labels=c(xlabels))} +
     ylab(ytitle) +
     xlab(xtitle) +
-    geom_violin(color = border.colour, alpha = alpha, size = 1) +
+    geom_violin(color = border.colour, alpha = alpha, size = border.size) +
     geom_point(aes(y = .data$Mean),
                color = "black",
                size = 4,
@@ -240,4 +243,4 @@ nice_violin <- function (data,
                vjust = -1,
                size = 7)}
 
-}
+  }
