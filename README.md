@@ -120,12 +120,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1302614  5.8605689
-#> 2  0.7315252  2.3060633
-#> 3  1.0386186  3.6470470
-#> 4 -5.1216747 -2.5331513
-#> 5 -3.7785930 -1.3997289
-#> 6 -1.7693441 -0.4930406
+#> 1  2.1326591  6.1214532
+#> 2  0.6973206  2.4217057
+#> 3  1.0605333  3.8300687
+#> 4 -4.9707253 -2.4294980
+#> 5 -3.8414374 -1.4503019
+#> 6 -1.7556662 -0.5042269
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -455,25 +455,25 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        CX
-#> 2  2        PZ
+#> 1  1        PZ
+#> 2  2        ZL
 #> 3  3        BP
-#> 4  4        ZL
-#> 5  5        PZ
-#> 6  6        CX
-#> 7  7        BP
+#> 4  4        CX
+#> 5  5        CX
+#> 6  6        BP
+#> 7  7        PZ
 #> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        AV
+#> 1  1        ST
 #> 2  1        SV
-#> 3  1        ST
-#> 4  2        AV
+#> 3  1        AV
+#> 4  2        SV
 #> 5  2        ST
-#> 6  2        SV
+#> 6  2        AV
 #> 7  3        AV
 #> 8  3        SV
 #> 9  3        ST
