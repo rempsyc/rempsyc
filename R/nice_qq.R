@@ -44,6 +44,10 @@ nice_qq <- function(data,
                     grid = TRUE,
                     shapiro = FALSE,
                     title = variable) {
+  if(missing(group)) {
+    group <- "All"
+    data[[group]] <- group
+  }
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)
   {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}

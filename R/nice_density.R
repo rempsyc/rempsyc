@@ -54,6 +54,10 @@ nice_density <- function(data,
                          shapiro = FALSE,
                          title = variable,
                          histogram = FALSE) {
+  if(missing(group)) {
+    group <- "All"
+    data[[group]] <- group
+  }
   options(dplyr.summarize.inform = FALSE)
   data[[group]] <- as.factor(data[[group]])
   gform <- reformulate(".", response=group)

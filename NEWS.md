@@ -1,3 +1,6 @@
+### rempsyc 0.0.4.8
+* `nice_density` and `nice_normality`: added the possibility to provide no group argument so as to have a plot of all data.
+
 ### rempsyc 0.0.4.7
 * `nice_violin`: made default contour lines thicker, but also added argument `border.size` to allow customization.
 
