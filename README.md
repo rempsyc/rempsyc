@@ -120,12 +120,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1326591  6.1214532
-#> 2  0.6973206  2.4217057
-#> 3  1.0605333  3.8300687
-#> 4 -4.9707253 -2.4294980
-#> 5 -3.8414374 -1.4503019
-#> 6 -1.7556662 -0.5042269
+#> 1  2.0938658  5.9815546
+#> 2  0.6961971  2.4894639
+#> 3  1.0196196  3.8796247
+#> 4 -4.9424840 -2.4927456
+#> 5 -3.8213684 -1.5014334
+#> 6 -1.7625936 -0.4760643
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -411,6 +411,42 @@ cormatrix_excel(mtcars)
 
 ## Utility functions
 
+## `nice_na`
+
+Nicely reports NA values according to existing guidelines (i.e,
+reporting absolute or percentage of item-based missing values, plus each
+scale’s maximum amount of missing values for a given participant).
+Accordingly, allows specifying a list of columns representing
+questionnaire items to produce a questionnaire-based report of missing
+values.
+
+``` r
+set.seed(50)
+df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
+list.variables <- list(paste0("scale1_Q", 1:3),
+                       paste0("scale2_Q", 1:3),
+                       paste0("scale3_Q", 1:3))
+nice_na(df, list.variables)
+#>                   var na cells na_percent na_max na_max_percent
+#> 1 scale1_Q1:scale1_Q3  0    21       0.00      0           0.00
+#> 2 scale2_Q1:scale2_Q3  3    21      14.29      1          33.33
+#> 3 scale3_Q1:scale3_Q3  2    21       9.52      1          33.33
+#> 4               Total  5    63       7.94      2          22.22
+
+# Or whole dataframe
+nice_na(df)
+#>                   var na cells na_percent na_max na_max_percent
+#> 1 scale1_Q1:scale3_Q3  5    63       7.94      2          22.22
+```
+
 ## `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire
@@ -455,25 +491,25 @@ Randomize easily with different designs.
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 #>   id Condition
-#> 1  1        PZ
-#> 2  2        ZL
-#> 3  3        BP
+#> 1  1        ZL
+#> 2  2        BP
+#> 3  3        PZ
 #> 4  4        CX
 #> 5  5        CX
-#> 6  6        BP
-#> 7  7        PZ
+#> 6  6        PZ
+#> 7  7        BP
 #> 8  8        ZL
 
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 #>   id Condition
-#> 1  1        ST
-#> 2  1        SV
-#> 3  1        AV
-#> 4  2        SV
+#> 1  1        SV
+#> 2  1        AV
+#> 3  1        ST
+#> 4  2        AV
 #> 5  2        ST
-#> 6  2        AV
+#> 6  2        SV
 #> 7  3        AV
 #> 8  3        SV
 #> 9  3        ST

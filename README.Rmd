@@ -306,6 +306,31 @@ cormatrix_excel(mtcars)
 cute_cat(section.4, 2)
 ```
 
+## `nice_na`
+
+Nicely reports NA values according to existing guidelines (i.e, reporting absolute or percentage of item-based missing values, plus each scale's maximum amount of missing values for a given participant). Accordingly, allows specifying a list of columns representing questionnaire items to produce a questionnaire-based report of missing values.
+
+```{r}
+set.seed(50)
+df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
+                 scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
+list.variables <- list(paste0("scale1_Q", 1:3),
+                       paste0("scale2_Q", 1:3),
+                       paste0("scale3_Q", 1:3))
+nice_na(df, list.variables)
+
+# Or whole dataframe
+nice_na(df)
+
+```
+
 ## `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire answers.
@@ -348,7 +373,6 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
 ```
 
 Full tutorial: https://remi-theriault.com/blog_randomize.html
-
 
 ```{r Assumptions, results = "asis", echo = FALSE}
 cute_cat(section.5, 2)
