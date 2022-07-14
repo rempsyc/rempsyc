@@ -52,10 +52,10 @@ library(rempsyc)
 
 ## Overview
 
+[Nice APA tables](#nice-apa-tables)<a name = 'Nice APA tables'/>
+
 [T-tests, planned contrasts, regressions, moderations, simple
 slopes](#t-tests-planned-contrasts-regressions-moderations-simple-slopes)<a name = 'T-tests, planned contrasts, regressions, moderations, simple slopes'/>
-
-[Nice APA tables](#nice-apa-tables)<a name = 'Nice APA tables'/>
 
 [Visualization](#visualization)<a name = 'Visualization'/>
 
@@ -63,6 +63,21 @@ slopes](#t-tests-planned-contrasts-regressions-moderations-simple-slopes)<a name
 
 [Testing
 assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
+
+## Nice APA tables
+
+## `nice_table`
+
+Make nice APA tables easily through a wrapper around the `flextable`
+package with sensical defaults and automatic formatting features.
+
+The tables can be saved with the `save_as_docx` function, and are
+`flextable` objects, and can be modified as such. The function also
+integrates with objects from the `broom` and `report` packages. Full
+tutorial: <https://remi-theriault.com/blog_table.html>
+
+Note: For a smoother and more integrated presentation flow, this
+function is now featured along the other functions.
 
 ## T-tests, planned contrasts, regressions, moderations, simple slopes
 
@@ -93,6 +108,17 @@ t.tests
 #> 2  2.2295592
 #> 3 -1.1245498
 #> 4  2.7329218
+
+# Format t-test results
+t_table <- nice_table(t.tests)
+t_table
+```
+
+<img src="man/figures/README-t_table-1.png" width="60%" />
+
+``` r
+# Save to word
+save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
@@ -120,13 +146,18 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0938658  5.9815546
-#> 2  0.6961971  2.4894639
-#> 3  1.0196196  3.8796247
-#> 4 -4.9424840 -2.4927456
-#> 5 -3.8213684 -1.5014334
-#> 6 -1.7625936 -0.4760643
+#> 1  2.0989456  5.5340895
+#> 2  0.7260813  2.4571544
+#> 3  1.0294312  3.6513951
+#> 4 -5.0080730 -2.4680340
+#> 5 -3.6743842 -1.3722105
+#> 6 -1.8229787 -0.4839586
+
+# Format contrasts results
+nice_table(contrasts, highlight = .001)
 ```
+
+<img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
 Full tutorial: <https://remi-theriault.com/blog_t-test>
 
@@ -156,7 +187,12 @@ moderations
 #> 4 0.002737218
 #> 5 0.043355972
 #> 6 0.004840251
+
+# Format moderation results
+nice_table(moderations, highlight = TRUE)
 ```
+
+<img src="man/figures/README-mod_table-1.png" width="70%" />
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
 
@@ -218,7 +254,12 @@ simple.slopes
 #> 4 0.51118526 0.003234637
 #> 5 0.54535707 0.002737218
 #> 6 0.61629796 0.001875579
+
+# Format simple slopes results1
+nice_table(simple.slopes)
 ```
+
+<img src="man/figures/README-slopes_table-1.png" width="80%" />
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
 
@@ -252,56 +293,6 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 ```
 
 Full tutorial: <https://remi-theriault.com/blog_moderation>
-
-## Nice APA tables
-
-## `nice_table`
-
-Make nice APA tables easily through a wrapper around the `flextable`
-package with sensical defaults and automatic formatting features.
-
-The tables can be saved with the `save_as_docx` function, and are
-`flextable` objects, and can be modified as such.
-
-``` r
-# Format t-test results
-t_table <- nice_table(t.tests)
-t_table
-```
-
-<img src="man/figures/README-t_table-1.png" width="60%" />
-
-``` r
-# Save to word
-save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
-```
-
-``` r
-# Format contrasts results
-contrasts_table <- nice_table(contrasts, highlight = .001)
-contrasts_table
-```
-
-<img src="man/figures/README-contrasts_table-1.png" width="70%" />
-
-``` r
-# Format moderation results
-mod_table <- nice_table(moderations, highlight = TRUE)
-mod_table
-```
-
-<img src="man/figures/README-mod_table-1.png" width="70%" />
-
-``` r
-# Format simple slopes results
-slopes_table <- nice_table(simple.slopes)
-slopes_table
-```
-
-<img src="man/figures/README-slopes_table-1.png" width="80%" />
-
-It also integrates with objects from the `broom` and `report` packages.
-Full tutorial: <https://remi-theriault.com/blog_table.html>
 
 ## Visualization
 
@@ -421,6 +412,7 @@ questionnaire items to produce a questionnaire-based report of missing
 values.
 
 ``` r
+# Create synthetic data frame for the demonstration
 set.seed(50)
 df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
@@ -431,10 +423,9 @@ df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
-list.variables <- list(paste0("scale1_Q", 1:3),
-                       paste0("scale2_Q", 1:3),
-                       paste0("scale3_Q", 1:3))
-nice_na(df, list.variables)
+
+# Then select your scales by name
+nice_na(df, scales = c("scale1", "scale2", "scale3"))
 #>                   var na cells na_percent na_max na_max_percent
 #> 1 scale1_Q1:scale1_Q3  0    21       0.00      0           0.00
 #> 2 scale2_Q1:scale2_Q3  3    21      14.29      1          33.33

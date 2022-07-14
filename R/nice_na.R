@@ -7,7 +7,8 @@
 #' See: Parent, M. C. (2013). Handling item-level missing data: Simpler is just as good. The *Counseling Psychologist*, *41*(4), 568-600. https://doi.org/10.1177%2F0011000012445176
 #'
 #' @param data The data frame.
-#' @param vars Variable (or list of variables) to check for NAs.
+#' @param vars Variable (or lists of variables) to check for NAs.
+#' @param scales The scale names to check for NAs (single character string).
 #' @keywords missing values, NA, guidelines
 #' @export
 #' @examples
@@ -19,32 +20,29 @@
 #'           vars = list(c("Ozone", "Solar.R", "Wind"),
 #'                       c("Temp", "Month", "Day")))
 #'
-#' # This might make more sense with questionnaire items
-#' set.seed(50)
-#' df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
-#'                  scale3_Q3 = sample(c(NA, 1:6), replace = TRUE)
-#' )
-#' list.variables <- list(paste0("scale1_Q", 1:3),
-#'                        paste0("scale2_Q", 1:3),
-#'                        paste0("scale3_Q", 1:3))
-#' nice_na(df, list.variables)
-#'
+#' # If the questionnaire items start with the same name, e.g.,
+#' set.seed(15)
+#' fun <- function() {sample(c(NA, 1:10), replace = TRUE)}
+#' df <- data.frame(scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
+#'                  scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
+#'                  scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun())
+#' # One can list the scale names directly:
+#' nice_na(df, scales = c("scale1", "scale2", "scale3"))
 #'
 #' @importFrom dplyr select all_of bind_rows summarize %>% first last
 
-nice_na <- function(data, vars) {
-  if(missing(vars)) {vars <- names(data)}
-  if(!is.list(vars)) {vars <- list(vars)}
+nice_na <- function(data, vars, scales) {
+  if(missing(vars) & missing(scales)) {vars.internal <- names(data)
+  } else if(!missing(scales)) {
+    vars.internal <- lapply(scales, function(x) {
+      grep(paste0("^", x), names(data), value = TRUE)
+    })
+  }
+  if(!missing(vars)) { vars.internal <- vars }
+  if(!is.list(vars.internal)) {vars.internal <- list(vars.internal)}
   na_df <- nice_na_internal(data)
-  if(length(vars) > 1) {
-    na_list <- lapply(vars, function(x) {
+  if(!missing(vars) | !missing(scales)) {
+    na_list <- lapply(vars.internal, function(x) {
       data <- data %>%
         select(all_of(x)) %>%
         nice_na_internal

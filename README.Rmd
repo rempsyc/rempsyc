@@ -63,8 +63,8 @@ library(rempsyc)
 
 ```{r headers, results = "asis", echo = FALSE}
 
-section.1 <- "T-tests, planned contrasts, regressions, moderations, simple slopes"
-section.2 <- "Nice APA tables"
+section.1 <- "Nice APA tables"
+section.2 <- "T-tests, planned contrasts, regressions, moderations, simple slopes"
 section.3 <- "Visualization"
 section.4 <- "Utility functions"
 section.5 <- "Testing assumptions"
@@ -87,9 +87,20 @@ invisible(lapply(list(
 
 ```
 
-
-```{r, results = "asis", echo = FALSE}
+```{r Nice Tables, results = "asis", echo = FALSE}
 cute_cat(section.1, 2)
+```
+
+## `nice_table`
+
+Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
+
+The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
+
+Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.
+
+```{r tests, results = "asis", echo = FALSE}
+cute_cat(section.2, 2)
 ```
 
 ## `nice_t_test`
@@ -103,6 +114,17 @@ nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
 t.tests
+
+# Format t-test results
+t_table <- nice_table(t.tests)
+t_table
+```
+
+<img src="man/figures/README-t_table-1.png" width="60%" />
+
+```{r table_save, warning = FALSE, message = FALSE}
+# Save to word
+save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
 Full tutorial: https://remi-theriault.com/blog_t-test
@@ -117,7 +139,12 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
+
+# Format contrasts results
+nice_table(contrasts, highlight = .001)
 ```
+
+<img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
 Full tutorial: https://remi-theriault.com/blog_t-test
 
@@ -131,7 +158,12 @@ nice_mod(data = mtcars,
          predictor = "gear",
          moderator = "wt") -> moderations
 moderations
+
+# Format moderation results
+nice_table(moderations, highlight = TRUE)
 ```
+
+<img src="man/figures/README-mod_table-1.png" width="70%" />
 
 Full tutorial: https://remi-theriault.com/blog_moderation
 
@@ -159,7 +191,12 @@ nice_slopes(data = mtcars,
             predictor = "gear",
             moderator = "wt") -> simple.slopes
 simple.slopes
+
+# Format simple slopes results1
+nice_table(simple.slopes)
 ```
+
+<img src="man/figures/README-slopes_table-1.png" width="80%" />
 
 Full tutorial: https://remi-theriault.com/blog_moderation
 
@@ -168,64 +205,13 @@ Full tutorial: https://remi-theriault.com/blog_moderation
 For more complicated models not supported by `nice_slopes`, one can define the model in the traditional way and feed it to `nice_lm_slopes` instead. Supports multiple `lm` models as well, but the predictor and moderator need to be the same for these models (the dependent variable can change).
 
 ```{r nice_lm_slopes, warning = FALSE, message = FALSE}
-
 model1 <- lm(mpg ~ gear * wt, mtcars)
 model2 <- lm(disp ~ gear * wt, mtcars)
 my.models <- list(model1, model2)
 nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
-
 ```
 
 Full tutorial: https://remi-theriault.com/blog_moderation
-
-```{r Nice Tables, results = "asis", echo = FALSE}
-cute_cat(section.2, 2)
-```
-
-## `nice_table`
-
-Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
-
-The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such.
-
-```{r t_table, warning = FALSE, message = FALSE}
-# Format t-test results
-t_table <- nice_table(t.tests)
-t_table
-```
-
-<img src="man/figures/README-t_table-1.png" width="60%" />
-
-```{r table_save, warning = FALSE, message = FALSE}
-# Save to word
-save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
-```
-
-```{r contrasts_table, warning = FALSE, message = FALSE}
-# Format contrasts results
-contrasts_table <- nice_table(contrasts, highlight = .001)
-contrasts_table
-```
-
-<img src="man/figures/README-contrasts_table-1.png" width="70%" />
-
-```{r mod_table, warning = FALSE, message = FALSE}
-# Format moderation results
-mod_table <- nice_table(moderations, highlight = TRUE)
-mod_table
-```
-
-<img src="man/figures/README-mod_table-1.png" width="70%" />
-
-```{r slopes_table, warning = FALSE, message = FALSE}
-# Format simple slopes results
-slopes_table <- nice_table(simple.slopes)
-slopes_table
-```
-
-<img src="man/figures/README-slopes_table-1.png" width="80%" />
-
-It also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
 
 ```{r Visualization, results = "asis", echo = FALSE}
 cute_cat(section.3, 2)
@@ -311,6 +297,7 @@ cute_cat(section.4, 2)
 Nicely reports NA values according to existing guidelines (i.e, reporting absolute or percentage of item-based missing values, plus each scale's maximum amount of missing values for a given participant). Accordingly, allows specifying a list of columns representing questionnaire items to produce a questionnaire-based report of missing values.
 
 ```{r}
+# Create synthetic data frame for the demonstration
 set.seed(50)
 df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
@@ -321,10 +308,9 @@ df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
                  scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
-list.variables <- list(paste0("scale1_Q", 1:3),
-                       paste0("scale2_Q", 1:3),
-                       paste0("scale3_Q", 1:3))
-nice_na(df, list.variables)
+
+# Then select your scales by name
+nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 # Or whole dataframe
 nice_na(df)

@@ -1,3 +1,6 @@
+### rempsyc 0.0.5.0
+* `nice_na`: added scales argument to specify specific scales
+
 ### rempsyc 0.0.4.9
 * New function: `nice_NA`; nicely reports NA values according to existing guidelines. This function reports both absolute and percentage values of specified column lists.
 

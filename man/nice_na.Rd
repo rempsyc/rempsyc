@@ -4,12 +4,14 @@
 \alias{nice_na}
 \title{Report missing values according to guidelines}
 \usage{
-nice_na(data, vars)
+nice_na(data, vars, scales)
 }
 \arguments{
 \item{data}{The data frame.}
 
-\item{vars}{Variable (or list of variables) to check for NAs.}
+\item{vars}{Variable (or lists of variables) to check for NAs.}
+
+\item{scales}{The scale names to check for NAs (single character string).}
 }
 \description{
 Nicely reports NA values according to existing guidelines. This function reports both absolute and percentage values of specified column lists. Some authors recommend reporting item-level missing item per scale, as well as participant’s maximum number of missing items by scale. For example, Parent (2013) writes:
@@ -27,23 +29,14 @@ nice_na(airquality,
           vars = list(c("Ozone", "Solar.R", "Wind"),
                       c("Temp", "Month", "Day")))
 
-# This might make more sense with questionnaire items
-set.seed(50)
-df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q3 = sample(c(NA, 1:6), replace = TRUE)
-)
-list.variables <- list(paste0("scale1_Q", 1:3),
-                       paste0("scale2_Q", 1:3),
-                       paste0("scale3_Q", 1:3))
-nice_na(df, list.variables)
-
+# If the questionnaire items start with the same name, e.g.,
+set.seed(15)
+fun <- function() {sample(c(NA, 1:10), replace = TRUE)}
+df <- data.frame(scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
+                 scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
+                 scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun())
+# One can list the scale names directly:
+nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 }
 \keyword{NA,}
