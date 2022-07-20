@@ -52,19 +52,25 @@ nice_scatter(
 
 \item{has.points}{Whether to plot the individual observations or not.}
 
-\item{has.jitter}{Alternative to \code{has.points}. "Jitters" the observations to avoid overlap (overplotting). Use one or the other, not both.}
+\item{has.jitter}{Alternative to \code{has.points}. "Jitters"
+the observations to avoid overlap (overplotting). Use one
+or the other, not both.}
 
 \item{alpha}{The desired level of transparency.}
 
 \item{has.line}{Whether to plot the regression line(s).}
 
-\item{has.confband}{Logical. Whether to display the confidence band around the slope.}
+\item{has.confband}{Logical. Whether to display the
+confidence band around the slope.}
 
-\item{has.fullrange}{Logical. Whether to extend the slope beyond the range of observations.}
+\item{has.fullrange}{Logical. Whether to extend the slope
+beyond the range of observations.}
 
-\item{has.linetype}{Logical. Whether to change line types as a function of group.}
+\item{has.linetype}{Logical. Whether to change line types
+as a function of group.}
 
-\item{has.shape}{Logical. Whether to change shape of observations as a function of group.}
+\item{has.shape}{Logical. Whether to change shape of
+observations as a function of group.}
 
 \item{xmin}{The minimum score on the x-axis scale.}
 
@@ -88,9 +94,12 @@ nice_scatter(
 
 \item{groups.order}{Specifies the desired display order of the groups.}
 
-\item{groups.labels}{Changes groups names (labels). Note: This applies after changing order of level.}
+\item{groups.labels}{Changes groups names (labels).
+Note: This applies after changing order of level.}
 
-\item{groups.alpha}{The manually specified transparency desired for the groups slopes. Use only when plotting groups separately.}
+\item{groups.alpha}{The manually specified transparency
+desired for the groups slopes. Use only when plotting groups
+separately.}
 
 \item{has.r}{Whether to display the correlation coefficient, the r-value.}
 
@@ -261,7 +270,9 @@ nice_scatter(data = mtcars,
 
 }
 \seealso{
-Visualize group differences via violin plots: \code{\link{nice_violin}}. Tutorial: \url{https://remi-theriault.com/blog_scatter}
+Visualize group differences via violin plots:
+\code{\link{nice_violin}}. Tutorial:
+\url{https://remi-theriault.com/blog_scatter}
 }
 \keyword{plots}
 \keyword{scatter}

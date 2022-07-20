@@ -2,16 +2,19 @@
 #'
 #' @description Randomize easily with different designs.
 #'
-#' @param design The design: either between-subject (different groups) or within-subject (repeated-measures on same people).
+#' @param design The design: either between-subject (different groups)
+#' or within-subject (repeated-measures on same people).
 #' @param Ncondition The number of conditions you want to randomize.
-#' @param n The desired sample size. Note that it needs to be a multiple of your number of groups if you are using`between`.
+#' @param n The desired sample size. Note that it needs to
+#' be a multiple of your number of groups if you are using`between`.
 #' @param condition.names The names of the randomized conditions.
 #' @param col.names The desired additional column names for a runsheet.
 #'
 #' @keywords randomization, conditions, random allocation, experimental design
 #' @export
 #' @examples
-#' # Specify design, number of conditions, number of participants, and names of conditions:
+#' # Specify design, number of conditions, number of
+#' # participants, and names of conditions:
 #' nice_randomize(design = "between", Ncondition = 4, n = 8,
 #'                condition.names = c("BP","CX","PZ","ZL"))
 #'
@@ -42,29 +45,38 @@ nice_randomize <- function(design = "between",
   if (design=="between") {
     if (!n%%Ncondition==0) {cat("Warning(!): sample size needs to be a multiple
                                 of your number of groups if using 'between'!")}
-    for (i in 1:(n/Ncondition)){ # Repeat this for number of participants divided by Ncondition (number of complete combinations)
-      x <- sample(1:Ncondition, replace=FALSE) # (Choose a number between 1 and Ncondition; repeat this Ncondition times with no replacement)
+    for (i in 1:(n/Ncondition)){ # Repeat this for number of
+      # participants divided by Ncondition (number of complete combinations)
+      x <- sample(1:Ncondition, replace=FALSE)
+      # (Choose a number between 1 and Ncondition;
+      # repeat this Ncondition times with no replacement)
       Condition <- rbind(Condition, t(t(x)), # Add new stats to dataframe
                          stringsAsFactors = FALSE)
     }
   }
   if (design=="within") {
     Condition <- Condition
-    for (i in 1:n){ # Generate the random values for n participants and Nconditions
-      x <- sample(1:Ncondition, replace=FALSE) # Choose a number between 1 and Nconditions; repeat this Nconditions times with no replacement
-      Condition <- rbind(Condition, x, # Adds new conditions to dataframe row by row
-                         stringsAsFactors = FALSE) # Not as factors as this can create problems
+    for (i in 1:n){
+      # Generate the random values for n participants and Nconditions
+      x <- sample(1:Ncondition, replace=FALSE)
+      # Choose a number between 1 and Nconditions;
+      # repeat this Nconditions times with no replacement
+      Condition <- rbind(Condition, x, stringsAsFactors = FALSE)
+      # Adds new conditions to dataframe row by row
+      # Not as factors as this can create problems
     }
   }
-  Condition <- as.matrix(dplyr::recode(as.matrix(Condition),
-                                       !!!stats::setNames(condition.names, 1:Ncondition)))
+  Condition <- as.matrix(dplyr::recode(
+    as.matrix(Condition), !!!stats::setNames(condition.names, 1:Ncondition)))
   for (i in 1:n) {
-    Condition[i,1] <- paste(Condition[i,], collapse=" - ") # Adds hyphen between conditions for easier read
+    Condition[i,1] <- paste(Condition[i,], collapse=" - ")
+    # Adds hyphen between conditions for easier read
   }
   if(ncol(Condition) > 2) { Condition[,2:ncol(Condition)] <- NA}
   Condition <- as.data.frame(Condition)
   id <- t(t(1:n))
-  final_table <- data.frame(id, Condition, matrix(NA, ncol = length(col.names)))[,1:length(col.names)]
+  final_table <- data.frame(id, Condition, matrix(
+    NA, ncol = length(col.names)))[,seq_along(col.names)]
   names(final_table) <- col.names
   final_table %>%
     arrange(id) -> final_table

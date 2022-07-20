@@ -8,13 +8,19 @@
 #' @param xtitle An optional y-axis label, if desired.
 #' @param ytitle An optional x-axis label, if desired.
 #' @param has.points Whether to plot the individual observations or not.
-#' @param has.jitter Alternative to `has.points`. "Jitters" the observations to avoid overlap (overplotting). Use one or the other, not both.
+#' @param has.jitter Alternative to `has.points`. "Jitters"
+#' the observations to avoid overlap (overplotting). Use one
+#' or the other, not both.
 #' @param alpha The desired level of transparency.
 #' @param has.line Whether to plot the regression line(s).
-#' @param has.confband Logical. Whether to display the confidence band around the slope.
-#' @param has.fullrange Logical. Whether to extend the slope beyond the range of observations.
-#' @param has.linetype Logical. Whether to change line types as a function of group.
-#' @param has.shape Logical. Whether to change shape of observations as a function of group.
+#' @param has.confband Logical. Whether to display the
+#' confidence band around the slope.
+#' @param has.fullrange Logical. Whether to extend the slope
+#' beyond the range of observations.
+#' @param has.linetype Logical. Whether to change line types
+#' as a function of group.
+#' @param has.shape Logical. Whether to change shape of
+#' observations as a function of group.
 #' @param xmin The minimum score on the x-axis scale.
 #' @param xmax The maximum score on the x-axis scale.
 #' @param xby How much to increase on each "tick" on the x-axis scale.
@@ -26,8 +32,11 @@
 #' @param group The group by which to plot the variable
 #' @param colours Desired colours for the plot, if desired.
 #' @param groups.order Specifies the desired display order of the groups.
-#' @param groups.labels Changes groups names (labels). Note: This applies after changing order of level.
-#' @param groups.alpha The manually specified transparency desired for the groups slopes. Use only when plotting groups separately.
+#' @param groups.labels Changes groups names (labels).
+#' Note: This applies after changing order of level.
+#' @param groups.alpha The manually specified transparency
+#' desired for the groups slopes. Use only when plotting groups
+#' separately.
 #' @param has.r Whether to display the correlation coefficient, the r-value.
 #' @param r.x The x-axis coordinates for the r-value.
 #' @param r.y The y-axis coordinates for the r-value.
@@ -190,9 +199,16 @@
 #'              has.shape = TRUE)
 #'
 #' @seealso
-#' Visualize group differences via violin plots: \code{\link{nice_violin}}. Tutorial: \url{https://remi-theriault.com/blog_scatter}
+#' Visualize group differences via violin plots:
+#' \code{\link{nice_violin}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_scatter}
 #'
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual aes_string aes element_blank element_line element_text guide_legend
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
+#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
+#' geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous
+#' stat_smooth geom_smooth geom_jitter scale_x_continuous
+#' scale_color_manual guides scale_alpha_manual aes_string aes
+#' element_blank element_line element_text guide_legend
 #' @importFrom stats cor.test
 
 nice_scatter <- function(data,
@@ -258,7 +274,8 @@ nice_scatter <- function(data,
   if (has.points == TRUE & !missing(group) & has.shape == FALSE) {
     observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
   if (has.points == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_point(size = 2, alpha = alpha, colour = colours, shape = 16)}
+    observations <- geom_point(size = 2, alpha = alpha,
+                               colour = colours, shape = 16)}
   if (has.points == TRUE & !missing(group) & has.shape == TRUE) {
     observations <- geom_point(size = 2, alpha = alpha)}
   if (has.jitter == TRUE & missing(group) & missing(colours)) {
@@ -268,7 +285,8 @@ nice_scatter <- function(data,
     observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
     has.points <- FALSE}
   if (has.jitter == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_jitter(size = 2, alpha = alpha, colour = colours, shape = 16)
+    observations <- geom_jitter(size = 2, alpha = alpha,
+                                colour = colours, shape = 16)
     has.points <- FALSE}
   if (has.jitter == TRUE & !missing(group) & has.shape == TRUE) {
     observations <- geom_jitter(size = 2, alpha = alpha)
@@ -287,16 +305,16 @@ nice_scatter <- function(data,
     {if (has.line == TRUE) smooth} +
     {if (has.confband == TRUE) band} +
     {if (exists("observations")) observations} +
-    {if (!missing(xmin)) scale_x_continuous(limits=c(xmin, xmax),
-                                            breaks = seq(xmin, xmax, by = xby))} +
-    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax),
-                                            breaks = seq(ymin, ymax, by = yby))} +
+    {if (!missing(xmin)) scale_x_continuous(
+      limits = c(xmin, xmax), breaks = seq(xmin, xmax, by = xby))} +
+    {if (!missing(ymin)) scale_y_continuous(
+      limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
     {if (!missing(colours) & !missing(group))
       scale_color_manual(values=colours, name = legend.title)} +
     {if (!missing(colours) & !missing(group))
       scale_fill_manual(values=colours, name = legend.title)} +
-    {if (!missing(colours)) guides(fill = guide_legend(override.aes=
-                                                         list(colour = colours)))} +
+    {if (!missing(colours)) guides(fill = guide_legend(
+      override.aes = list(colour = colours)))} +
     {if (has.legend == FALSE) theme(legend.position = "none")} +
     labs(legend.title = legend.title, colour = legend.title,
          fill = legend.title, linetype = legend.title, shape = legend.title) +

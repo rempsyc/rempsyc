@@ -1,6 +1,7 @@
 #' @title Easily format p or r values
 #'
-#' @description Easily format p or r values. Note: converts to character class for use in figures or manuscripts to accommodate e.g., "< .001".
+#' @description Easily format p or r values. Note: converts to character class
+#' for use in figures or manuscripts to accommodate e.g., "< .001".
 #'
 #' @param p p-value to format.
 #' @param r r-value to format.
@@ -10,8 +11,10 @@
 #' @param value Value to be formatted, when using the generic `format_value()`.
 #' @param prefix To add a prefix before the value.
 #' @param suffix To add a suffix after the value.
-#' @param sign Logical. Whether to add an equal sign for p-values higher or equal to .001.
-#' @param ... To specify precision level, if necessary, when using the generic `format_value()`. Simply add the `precision` argument.
+#' @param sign Logical. Whether to add an equal sign for p-values higher or
+#' equal to .001.
+#' @param ... To specify precision level, if necessary, when using the
+#' generic `format_value()`. Simply add the `precision` argument.
 #'
 #' @keywords formatting, p-value, r-value, correlation
 #' @export
@@ -41,13 +44,10 @@ format_p <- function(p,
   digits <- -log(precision, base = 10)
   p <- formatC(p, format = 'f', digits = digits)
   if(sign == TRUE) {
-    p[p != formatC(0,
-                   format = 'f',
-                   digits = digits)] <- paste0('= ',
-                                               p[p != formatC(0,
-                                                              format = 'f',
-                                                              digits = digits)])}
-  p[p == formatC(0, format = 'f', digits = digits)] <- paste0('< ', precision)
+    p[p != formatC(0, format = 'f', digits = digits)] <- paste0(
+      '= ', p[p != formatC(0, format = 'f', digits = digits)])}
+  p[p == formatC(0, format = 'f', digits = digits)] <-
+    paste0('< ', precision)
   p <- sub("0", "", p)
   p <- paste0(prefix, p, suffix)
   p <- ifelse(p == "  NA", "", p)

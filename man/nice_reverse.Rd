@@ -13,10 +13,12 @@ nice_reverse(x, max, min = 1, warning = TRUE)
 
 \item{min}{The miminum score on the scale (optional unless it isn't 1).}
 
-\item{warning}{Logical. Whether to show the warning about the minimum not being 1.}
+\item{warning}{Logical. Whether to show the warning
+about the minimum not being 1.}
 }
 \description{
-Easily recode scores (reverse-score), typically for questionnaire answers.
+Easily recode scores (reverse-score),
+typically for questionnaire answers.
 }
 \examples{
 # Reverse score of 5 with a maximum score of 5

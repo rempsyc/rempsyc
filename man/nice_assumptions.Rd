@@ -12,7 +12,8 @@ nice_assumptions(model, interpretation = TRUE)
 \item{interpretation}{Whether to display the interpretation helper or not.}
 }
 \description{
-Test linear regression assumptions easily with a nice summary table.
+Test linear regression assumptions easily with a
+nice summary table.
 }
 \examples{
 # Create a regression model (using data available in R by default)
@@ -22,15 +23,18 @@ nice_assumptions(model)
 # Multiple dependent variables at once
 DV <- names(mtcars[-1])
 formulas <- paste(DV, "~ mpg")
-models.list <- sapply(X = formulas, FUN = lm, data = mtcars,
-                      simplify = FALSE, USE.NAMES = TRUE)
+models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
                                              interpretation = FALSE))
 assumptions.table
 
 }
 \seealso{
-Other functions useful in assumption testing: \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+Other functions useful in assumption testing:
+\code{\link{nice_density}}, \code{\link{nice_normality}},
+\code{\link{nice_qq}}, \code{\link{nice_varplot}},
+\code{\link{nice_var}}. Tutorial:
+\url{https://remi-theriault.com/blog_assumptions}
 }
 \keyword{assumptions,}
 \keyword{linear}

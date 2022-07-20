@@ -31,15 +31,21 @@ nice_density(
 
 \item{xtitle}{An optional x-axis label, if desired.}
 
-\item{groups.labels}{The groups.labels (might rename to \code{xlabels} for consistency with other functions)}
+\item{groups.labels}{The groups.labels (might rename to
+\code{xlabels} for consistency with other functions)}
 
-\item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
+\item{grid}{Logical, whether to keep the default background
+grid or not. APA style suggests not using a grid in the background,
+though in this case some may find it useful to more easily estimate
+the slopes of the different groups.}
 
-\item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
+\item{shapiro}{Logical, whether to include the p-value
+from the Shapiro-Wilk test on the plot.}
 
 \item{title}{The desired title of the plot. Can be put to \code{NULL} to remove.}
 
-\item{histogram}{Logical, whether to add an histogram on top of the density plot.}
+\item{histogram}{Logical, whether to add an histogram
+on top of the density plot.}
 }
 \description{
 Make nice density plots easily.
@@ -57,14 +63,20 @@ nice_density(data = iris,
              colours = c("#00BA38", "#619CFF", "#F8766D"),
              xtitle = "Sepal Length",
              ytitle = "Density (vs. Normal Distribution)",
-             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+             groups.labels = c("(a) Setosa",
+                               "(b) Versicolor",
+                               "(c) Virginica"),
              grid = FALSE,
              shapiro = TRUE,
              title = "Density (Sepal Length)")
 
 }
 \seealso{
-Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+Other functions useful in assumption testing:
+\code{\link{nice_assumptions}}, \code{\link{nice_normality}},
+\code{\link{nice_qq}}, \code{\link{nice_varplot}},
+\code{\link{nice_var}}. Tutorial:
+\url{https://remi-theriault.com/blog_assumptions}
 }
 \keyword{density,}
 \keyword{normality}

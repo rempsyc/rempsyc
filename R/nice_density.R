@@ -8,11 +8,17 @@
 #' @param colours Desired colours for the plot, if desired.
 #' @param ytitle An optional y-axis label, if desired.
 #' @param xtitle An optional x-axis label, if desired.
-#' @param groups.labels The groups.labels (might rename to `xlabels` for consistency with other functions)
-#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
-#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param groups.labels The groups.labels (might rename to
+#' `xlabels` for consistency with other functions)
+#' @param grid Logical, whether to keep the default background
+#' grid or not. APA style suggests not using a grid in the background,
+#' though in this case some may find it useful to more easily estimate
+#' the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value
+#' from the Shapiro-Wilk test on the plot.
 #' @param title The desired title of the plot. Can be put to `NULL` to remove.
-#' @param histogram Logical, whether to add an histogram on top of the density plot.
+#' @param histogram Logical, whether to add an histogram
+#' on top of the density plot.
 #'
 #' @keywords density, normality
 #'
@@ -29,17 +35,29 @@
 #'              colours = c("#00BA38", "#619CFF", "#F8766D"),
 #'              xtitle = "Sepal Length",
 #'              ytitle = "Density (vs. Normal Distribution)",
-#'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+#'              groups.labels = c("(a) Setosa",
+#'                                "(b) Versicolor",
+#'                                "(c) Virginica"),
 #'              grid = FALSE,
 #'              shapiro = TRUE,
 #'              title = "Density (Sepal Length)")
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous stat_smooth geom_smooth geom_jitter scale_x_continuous scale_color_manual guides scale_alpha_manual geom_density geom_line aes_string aes element_blank element_line element_text geom_histogram
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
+#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
+#' geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous
+#' stat_smooth geom_smooth geom_jitter scale_x_continuous
+#' scale_color_manual guides scale_alpha_manual geom_density
+#' geom_line aes_string aes element_blank element_line
+#' element_text geom_histogram
 #' @importFrom stats reformulate dnorm
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_assumptions}}, \code{\link{nice_normality}},
+#' \code{\link{nice_qq}}, \code{\link{nice_varplot}},
+#' \code{\link{nice_var}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
 
 #' @export
@@ -77,9 +95,8 @@ nice_density <- function(data,
     dat_text <- data %>% group_by(.data[[group]]) %>%
       summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
       rowwise() %>%
-      mutate(text=sprintf("italic('p')~'%s'", format_p(text,
-                                                       sign = TRUE,
-                                                       suffix = " (Shapiro-Wilk)")))
+      mutate(text=sprintf("italic('p')~'%s'", format_p(
+        text, sign = TRUE, suffix = " (Shapiro-Wilk)")))
   }
   # Make plot
   ggplot(data, aes_string(x=variable, fill=group)) +

@@ -1,6 +1,7 @@
 #' @title Easy assumptions checks
 #'
-#' @description Test linear regression assumptions easily with a nice summary table.
+#' @description Test linear regression assumptions easily with a
+#' nice summary table.
 #'
 #' @param model The `lm` object to be passed to the function.
 #' @param interpretation Whether to display the interpretation helper or not.
@@ -15,14 +16,17 @@
 #' # Multiple dependent variables at once
 #' DV <- names(mtcars[-1])
 #' formulas <- paste(DV, "~ mpg")
-#' models.list <- sapply(X = formulas, FUN = lm, data = mtcars,
-#'                       simplify = FALSE, USE.NAMES = TRUE)
+#' models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 #' assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
 #'                                              interpretation = FALSE))
 #' assumptions.table
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_density}}, \code{\link{nice_normality}},
+#' \code{\link{nice_qq}}, \code{\link{nice_varplot}},
+#' \code{\link{nice_var}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
 
 nice_assumptions <- function(model,
@@ -39,6 +43,9 @@ nice_assumptions <- function(model,
                    "Diagnostic..." = dg,
                    check.names = FALSE)
   row.names(df) <- NULL
-  if(interpretation == TRUE) { cat("Interpretation: (p) values < .05 imply assumptions are not respected. \nDiagnostic is how many assumptions are not respected for a given model or variable. \n  \n") }
+  if(interpretation == TRUE) { cat(
+  "Interpretation: (p) values < .05 imply assumptions are not respected. ",
+  "Diagnostic is how many assumptions are not respected for a given model ",
+  "or variable. \n\n", sep = "") }
   df
 }

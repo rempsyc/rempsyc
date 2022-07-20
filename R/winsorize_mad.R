@@ -1,11 +1,18 @@
 #' @title Winsorize based on the absolute median deviation
 #'
-#' @description Winsorize (bring extreme observations to usually +/- 3 standard deviations) data based on median absolute deviations instead of standard deviations.
+#' @description Winsorize (bring extreme observations to usually
+#' +/- 3 standard deviations) data based on median absolute
+#' deviations instead of standard deviations.
 #'
-#' See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. Journal of Experimental Social Psychology, 49(4), 764–766. https://doi.org/10.1016/j.jesp.2013.03.013
+#' See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
+#' Detecting outliers: Do not use standard deviation around the mean,
+#' use absolute deviation around the median. *Journal of Experimental
+#' Social Psychology*, *49*(4), 764–766.
+#' https://doi.org/10.1016/j.jesp.2013.03.013
 #'
 #' @param x The vector to be winsorized based on the MAD.
-#' @param criteria How many MAD to use as threshold (similar to standard deviations)
+#' @param criteria How many MAD to use as threshold
+#' (similar to standard deviations)
 #' @keywords standardization, normalization, median, MAD, mean, outliers
 #' @author Hugues Leduc, Charles-Étienne Lavoie
 #' @export

@@ -14,9 +14,17 @@ lmSupport_modelEffectSizes(Model, Print = TRUE, Digits = 4)
 \item{Digits}{Number of digits for printing effect sizes}
 }
 \description{
-Get effect sizes from the \code{lmSupport} package and \code{modelEffectSizes} function. The function had to be taken separately from the package as the package was removed from CRAN and the dependency was failing.
+Get effect sizes from the \code{lmSupport} package
+and \code{modelEffectSizes} function. The function had to be taken
+separately from the package as the package was removed from
+CRAN and the dependency was failing.
 
-From the original documentation: "Calculates unique SSRs, SSE, SST. Based on these SSs, it calculates partial eta2 and delta R2 for all effects in a linear model object. For categorical variables coded as factors, it calculates these for multi-df effect. Manually code regressors to get 1 df effects Uses car::Anova() with Type 3 error"
+From the original documentation: "Calculates unique SSRs, SSE,
+SST. Based on these SSs, it calculates partial eta2 and delta
+R2 for all effects in a linear model object. For categorical
+variables coded as factors, it calculates these for multi-df
+effect. Manually code regressors to get 1 df effects Uses
+car::Anova() with Type 3 error"
 }
 \examples{
 \dontrun{

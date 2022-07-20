@@ -26,9 +26,13 @@ nice_varplot(
 
 \item{groups.labels}{How to label the groups.}
 
-\item{grid}{Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.}
+\item{grid}{Logical, whether to keep the default background
+grid or not. APA style suggests not using a grid in the
+background, though in this case some may find it useful to
+more easily estimate the slopes of the different groups.}
 
-\item{shapiro}{Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.}
+\item{shapiro}{Logical, whether to include the p-value from
+the Shapiro-Wilk test on the plot.}
 
 \item{ytitle}{An optional y-axis label, if desired.}
 }
@@ -45,12 +49,20 @@ nice_varplot(data = iris,
 nice_varplot(data = iris,
              variable = "Sepal.Length",
              group = "Species",
-             colours = c("#00BA38", "#619CFF", "#F8766D"),
+             colours = c("#00BA38",
+                         "#619CFF",
+                         "#F8766D"),
              ytitle = "Sepal Length",
-             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
+             groups.labels = c("(a) Setosa",
+                               "(b) Versicolor",
+                               "(c) Virginica"))
 
 }
 \seealso{
-Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+Other functions useful in assumption testing:
+\code{\link{nice_assumptions}}, \code{\link{nice_density}},
+\code{\link{nice_normality}}, \code{\link{nice_qq}},
+\code{\link{nice_var}}. Tutorial:
+\url{https://remi-theriault.com/blog_assumptions}
 }
 \keyword{variance}

@@ -1,11 +1,13 @@
 #' @title Interpolate the Inclusion of the Other in the Self Scale
 #'
-#' @description Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
+#' @description Interpolating the Inclusion of the Other in
+#' the Self Scale (self-other merging) easily.
 #'
 #' @param response The variable to plot.
 #' @param categories The desired categories of the two overlapping circles.
 #'
-#' @keywords self-other merging, self-other overlap, Venn diagrams, social psychology
+#' @keywords self-other merging, self-other overlap, Venn
+#' diagrams, social psychology
 #' @export
 #' @examples
 #' # Score of 1 (0% overlap)
@@ -55,7 +57,9 @@ overlap_circle <- function(response,
                                             ext.pos = 0,
                                             ext.dist = -5,
                                             sep.dist = 0.02,
-                                            label.col = c("white","black","white")))
+                                            label.col = c("white",
+                                                          "black",
+                                                          "white")))
 
 }
 nice_circle <- overlap_circle

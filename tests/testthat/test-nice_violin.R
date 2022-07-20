@@ -30,10 +30,14 @@ nice_violin(data = ToothGrowth,
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
-            signif_annotation = c("*","**","***"), # manually enter the number of stars
-            signif_yposition = c(30,35,40), # What height (y) should the stars appear?
-            signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)?
-            signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)?
+            signif_annotation = c("*","**","***"),
+                  # manually enter the number of stars
+            signif_yposition = c(30,35,40),
+                  # What height (y) should the stars appear?
+            signif_xmin = c(1,2,1),
+                  # Where should the left-sided brackets start (x)?
+            signif_xmax = c(2,3,3))
+                  # Where should the right-sided brackets end (x)?
 
 # Set the colours manually
 nice_violin(data = ToothGrowth,

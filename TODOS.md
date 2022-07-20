@@ -1,18 +1,17 @@
 # Development objectives (to-do list)
 
 -   `winsorize_mad`
-    -   Add documentation
--   `scale_mad`
+    -   Add documentation (or not given it has been integrated to the `easystats::datawizard` package)
+-   `scale_mad` (or not given it has been integrated to the `easystats::datawizard` package)
     -   Add documentation
 -   `find_mad`
-    -   Add documentation
+    -   Add documentation (or not given it is in the process to be integrated to the `easystats::datawizard` package)
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 -   `nice_table`
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
-    -   Add optional arguments for table header and footnote
     -   Tutorial: show how to add different levels of headers, etc.
 -   `nice_lm_slopes`
     -   Support second moderator
@@ -26,18 +25,15 @@
 -   `nice_contrasts`
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
-    -   Add option to use not robust Cohen's d
+    -   Add option to not use robust Cohen's d
     -   Add option to not use bootstrapping
--   Fix recommended practices
-    -   Change for `vapply` instead of `sapply`
 -   All functions
     -   Check for consistency among argument names like response/variable
         -   Check at other functions to see what's most typically used
     -   Add documentation for outputs
     -   Add support for NA missing values
 -   Finish writing all function tests
--   Write a manual
--   Write a vignette
--   Make a website
+-   Make intro vignette + home index vignette
+-   Transforms tutorials into vignettes
 -   Suggest collaboration with easystats
 -   Submit to CRAN

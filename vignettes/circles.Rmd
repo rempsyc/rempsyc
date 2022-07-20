@@ -1,0 +1,100 @@
+---
+title: "Interpolating the Inclusion of the Other in the Self Scale"
+author: "Rémi Thériault"
+date: "February 28, 2020"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+resource_files:
+  - images/IOS.png
+  - images/blog_circles/IOS.png
+  - images/blog_circles/IOS.png
+  - images/blog_circles/overlap.png
+  - images/blog_circles/figure.png
+vignette: >
+  %\VignetteIndexEntry{Interpolating the Inclusion of the Other in the Self Scale}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=6, warning=FALSE, message=FALSE, results='hide', out.width="30%")
+```
+
+For anyone in social psychology using the Inclusion of the Other in the Self (IOS) Scale to measure self-other merging, you might have wished that you could know for sure how much self-other overlap there is between your participant and a target group or individual.
+
+Indeed, the IOS response choices go from 1 to 7 only, and unfortunately these don't match the percentage overlap from the circle images (i.e., 1/7 is not 14% overlap, and 7/7 is not 100% overlap). You can observe this on the original IOS scale below.
+
+![](IOS.png)
+
+![](images/IOS.png)
+
+![](images/blog_circles/IOS.png)
+
+So through trial and error (using the `VennDiagram` package), I was able to determine the approximate actual overlap from the pictures (below).
+
+![](images/blog_circles/overlap.png)
+
+I feel like the overlap is pretty close to the original scale. Based on this, I used the `approx()` function to interpolate any responses so that 1 = 0% (overlap), 2 = 10%, 3 = 20%, 4 = 30%, 5 = 55%, 6 = 65%, and 7 (the maximum) = 85%.
+
+But that also means that a continuous response (for example based on a group average) can also be plotted accurately (e.g., a score of 6.84 would turn into 81.8 % overlap). Let's see a few examples.
+
+
+### Getting started
+
+Load the `rempsyc` package:
+
+```{r}
+library(rempsyc)
+```
+
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+
+### Score of 1 (0% overlap)
+
+```{r}
+overlap_circle(1)
+```
+
+### Score of 3.5 (25% overlap)
+
+```{r}
+overlap_circle(3.5)
+```
+
+### Score of 6.84 (81.8% overlap)
+
+```{r}
+overlap_circle(6.84)
+```
+
+## Changing labels
+
+You can also change group labels with the `categories` argument, although 'Self' and 'Other' are the defaults.
+
+```{r}
+overlap_circle(3.12, categories = c("Humans","Animals"))
+```
+
+## Saving to file (PDF or PNG)
+First save the plot to an object:
+
+```{r}
+plot <- overlap_circle(3.5)
+```
+
+Then you can use the ggplot2 save command directly with the object name:
+
+```{r}
+ggsave(plot, file="overlap.pdf", width=7, height=7, unit='in', dpi=300)
+# Change the path to where you would like to save it.
+# If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').
+# Also remember to specify the .pdf extension of the file.
+```
+
+## Example figure
+This allowed me for instance, [for one study](https://doi.org/10.1177/17470218211024826), to compare three of my groups side-by-side following an intervention:
+
+![](images/blog_circles/figure.png)
+
+```{r, results="asis", echo = FALSE}
+source("conclusion.R")
+```

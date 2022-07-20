@@ -9,12 +9,19 @@ winsorize_mad(x, criteria = 3)
 \arguments{
 \item{x}{The vector to be winsorized based on the MAD.}
 
-\item{criteria}{How many MAD to use as threshold (similar to standard deviations)}
+\item{criteria}{How many MAD to use as threshold
+(similar to standard deviations)}
 }
 \description{
-Winsorize (bring extreme observations to usually +/- 3 standard deviations) data based on median absolute deviations instead of standard deviations.
+Winsorize (bring extreme observations to usually
++/- 3 standard deviations) data based on median absolute
+deviations instead of standard deviations.
 
-See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. Journal of Experimental Social Psychology, 49(4), 764–766. https://doi.org/10.1016/j.jesp.2013.03.013
+See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
+Detecting outliers: Do not use standard deviation around the mean,
+use absolute deviation around the median. \emph{Journal of Experimental
+Social Psychology}, \emph{49}(4), 764–766.
+https://doi.org/10.1016/j.jesp.2013.03.013
 }
 \examples{
 winsorize_mad(mtcars$qsec, criteria = 2)

@@ -1,6 +1,7 @@
 #' @title Easy violin plots
 #'
-#' @description Make nice violin plots easily with 95% bootstrapped confidence intervals.
+#' @description Make nice violin plots easily with 95% bootstrapped
+#' confidence intervals.
 #'
 #' @param data The data frame.
 #' @param group The group by which to plot the variable.
@@ -13,12 +14,32 @@
 #' @param xtitle An optional x-axis label, if desired.
 #' @param has.ylabels Logical, whether the x-axis should have labels or not.
 #' @param has.xlabels Logical, whether the y-axis should have labels or not.
-#' @param comp1 The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays `*`, `**`, or `***` depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp2`.
-#' @param comp2 The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "*", "**", or "***" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument `comp1`.
-#' @param signif_annotation Manually provide the required annotations/numbers of stars (as character strings). Useful if the automatic pairwise comparison annotation does not work as expected, or yet if one wants more than one pairwise comparison. Must be provided along with arguments `signif_yposition`, `signif_xmin`, and `signif_xmax`.
-#' @param signif_yposition Manually provide the vertical position of the annotations/stars, based on the y-scale.
-#' @param signif_xmin Manually provide the first part of the horizontal position of the annotations/stars (start of the left-sided bracket), based on the x-scale.
-#' @param signif_xmax Manually provide the second part of the horizontal position of the annotations/stars (end of the right-sided bracket), based on the x-scale.
+#' @param comp1 The first unit of a pairwise comparison, if the
+#' goal is to compare two groups. Automatically displays `*`,
+#' `**`, or `***` depending on significance of the difference.
+#' Can take either a numeric value (based on the group number)
+#' or the name of the group directly. Must be provided along
+#' with argument `comp2`.
+#' @param comp2 The second unit of a pairwise comparison, if
+#' the goal is to compare two groups. Automatically displays
+#' "*", "**", or "***" depending on significance of the
+#' difference. Can take either a numeric value (based on the
+#' group number) or the name of the group directly. Must be
+#' provided along with argument `comp1`.
+#' @param signif_annotation Manually provide the required
+#' annotations/numbers of stars (as character strings).
+#' Useful if the automatic pairwise comparison annotation
+#' does not work as expected, or yet if one wants more than
+#' one pairwise comparison. Must be provided along with
+#' arguments `signif_yposition`, `signif_xmin`, and `signif_xmax`.
+#' @param signif_yposition Manually provide the vertical
+#' position of the annotations/stars, based on the y-scale.
+#' @param signif_xmin Manually provide the first part of
+#' the horizontal position of the annotations/stars (start
+#' of the left-sided bracket), based on the x-scale.
+#' @param signif_xmax Manually provide the second part
+#' of the horizontal position of the annotations/stars
+#' (end of the right-sided bracket), based on the x-scale.
 #' @param ymin The minimum score on the y-axis scale.
 #' @param ymax The maximum score on the y-axis scale.
 #' @param yby How much to increase on each "tick" on the y-axis scale.
@@ -69,10 +90,14 @@
 #' nice_violin(data = ToothGrowth,
 #'             group = "dose",
 #'             response = "len",
-#'             signif_annotation = c("*","**","***"), # manually enter the number of stars
-#'             signif_yposition = c(30,35,40), # What height (y) should the stars appear
-#'             signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)
-#'             signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)
+#'             signif_annotation = c("*","**","***"),
+#'                 # manually enter the number of stars
+#'             signif_yposition = c(30,35,40),
+#'                 # What height (y) should the stars appear
+#'             signif_xmin = c(1,2,1),
+#'                 # Where should the left-sided brackets start (x)
+#'             signif_xmax = c(2,3,3))
+#'                 # Where should the right-sided brackets end (x)
 #'
 #' # Set the colours manually
 #' nice_violin(data = ToothGrowth,
@@ -127,9 +152,15 @@
 #'             has.d = TRUE)
 #'
 #' @seealso
-#' Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: \url{https://remi-theriault.com/blog_violin}
+#' Visualize group differences via scatter plots:
+#' \code{\link{nice_scatter}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_violin}
 #'
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate scale_x_discrete ylab xlab geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous aes_string aes element_blank element_line element_text
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
+#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
+#' geom_violin geom_point geom_errorbar geom_dotplot
+#' scale_y_continuous aes_string aes element_blank element_line
+#' element_text
 #' @importFrom rlang .data UQ
 
 nice_violin <- function (data,
@@ -174,7 +205,8 @@ nice_violin <- function (data,
                                           basic = FALSE,
                                           percentile = FALSE,
                                           bca = boot)
-  if (has.d == TRUE & any(!missing(comp1), !missing(comp2), !missing(signif_xmin))) {
+  if (has.d == TRUE & any(!missing(comp1), !missing(comp2),
+                          !missing(signif_xmin))) {
     if(missing(comp1) & missing(comp2) & !missing(signif_xmin)) {
       comp1.temp <- signif_xmin[1]
       comp2.temp <- signif_xmax[1]
@@ -183,9 +215,11 @@ nice_violin <- function (data,
       comp2.temp <- comp2
     }
     data.d <- data %>%
-      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(data[[group]])[c(comp1.temp, comp2.temp)]) %>%
+      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(
+        data[[group]])[c(comp1.temp, comp2.temp)]) %>%
       droplevels()
-    d <- round(effectsize::cohens_d(response, y = group, data = data.d)$Cohens_d, 2)
+    d <- round(effectsize::cohens_d(response, y = group,
+                                    data = data.d)$Cohens_d, 2)
     d <- format_d(abs(d))
     d <- paste("=", d)
   }
@@ -220,20 +254,16 @@ nice_violin <- function (data,
                                      axis.ticks.y=element_blank())} +
     {if (has.xlabels == FALSE) theme(axis.text.x=element_blank(),
                                      axis.ticks.x=element_blank())} +
-    {if (!missing(ymin)) scale_y_continuous(limits=c(ymin, ymax),
-                                            breaks = seq(ymin, ymax, by = yby))} +
-    {if (!missing(comp1)) ggsignif::geom_signif(comparisons = list(c(comp1, comp2)),
-                                                test = "t.test",
-                                                map_signif_level=TRUE,
-                                                size= 1.3,
-                                                textsize=8)} +
-    {if (!missing(signif_annotation)) ggsignif::geom_signif(annotation=signif_annotation,
-                                                            y_position=signif_yposition,
-                                                            xmin=signif_xmin,
-                                                            xmax=signif_xmax,
-                                                            size=1.3,
-                                                            textsize=8)} +
-    if (has.d == TRUE & any(!missing(comp1), !missing(comp2), !missing(signif_xmin))) {
+    {if (!missing(ymin)) scale_y_continuous(
+      limits=c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
+    {if (!missing(comp1)) ggsignif::geom_signif(
+      comparisons = list(c(comp1, comp2)), test = "t.test",
+      map_signif_level=TRUE, size= 1.3, textsize=8)} +
+    {if (!missing(signif_annotation)) ggsignif::geom_signif(
+      annotation=signif_annotation, y_position=signif_yposition,
+      xmin=signif_xmin, xmax=signif_xmax, size=1.3, textsize=8)} +
+    if (has.d == TRUE & any(!missing(comp1), !missing(comp2),
+                            !missing(signif_xmin))) {
       annotate(geom = "text",
                x = d.x,
                y = d.y,

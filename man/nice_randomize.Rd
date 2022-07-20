@@ -13,11 +13,13 @@ nice_randomize(
 )
 }
 \arguments{
-\item{design}{The design: either between-subject (different groups) or within-subject (repeated-measures on same people).}
+\item{design}{The design: either between-subject (different groups)
+or within-subject (repeated-measures on same people).}
 
 \item{Ncondition}{The number of conditions you want to randomize.}
 
-\item{n}{The desired sample size. Note that it needs to be a multiple of your number of groups if you are using\code{between}.}
+\item{n}{The desired sample size. Note that it needs to
+be a multiple of your number of groups if you are using\code{between}.}
 
 \item{condition.names}{The names of the randomized conditions.}
 
@@ -27,7 +29,8 @@ nice_randomize(
 Randomize easily with different designs.
 }
 \examples{
-# Specify design, number of conditions, number of participants, and names of conditions:
+# Specify design, number of conditions, number of
+# participants, and names of conditions:
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
 

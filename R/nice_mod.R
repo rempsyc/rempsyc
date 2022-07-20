@@ -1,8 +1,10 @@
 #' @title Easy moderations
 #'
-#' @description Easily compute moderation analyses, with effect sizes, and format in publication-ready format.
+#' @description Easily compute moderation analyses, with effect
+#' sizes, and format in publication-ready format.
 #'
-#' Note: this function uses the `modelEffectSizes` function from the `lmSupport` package to get the sr2 effect sizes.
+#' Note: this function uses the `modelEffectSizes` function from
+#' the `lmSupport` package to get the sr2 effect sizes.
 #'
 #' @param data The data frame
 #' @param response The dependent variable.
@@ -10,9 +12,13 @@
 #' @param moderator The moderating variable.
 #' @param moderator2 The second moderating variable, if applicable.
 #' @param covariates The desired covariates in the model.
-#' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
-#' @param mod.id Logical. Whether to display the model number, when there is more than one model.
-#' @param ... Further arguments to be passed to the `lm` function for the models.
+#' @param b.label What to rename the default "b" column (e.g.,
+#' to capital B if using standardized data for it to be converted
+#' to the Greek beta symbol in the `nice_table` function).
+#' @param mod.id Logical. Whether to display the model number,
+#' when there is more than one model.
+#' @param ... Further arguments to be passed to the `lm`
+#' function for the models.
 #'
 #' @keywords moderation, interaction, regression
 #' @export
@@ -44,7 +50,10 @@
 #'          moderator2 = "am")
 #'
 #' @seealso
-#' Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}, \code{\link{nice_lm}}, \code{\link{nice_lm_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
+#' Checking simple slopes after testing for moderation:
+#' \code{\link{nice_slopes}}, \code{\link{nice_lm}},
+#' \code{\link{nice_lm_slopes}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_moderation}
 #'
 
 nice_mod <- function(data,
@@ -64,8 +73,7 @@ nice_mod <- function(data,
   } else {moderator2.term <- ""}
   formulas <- paste(response, "~", predictor, "*", moderator,
                     moderator2.term, covariates.term)
-  models.list <- sapply(formulas, stats::lm, data = data, ...,
-                        simplify = FALSE, USE.NAMES = TRUE)
+  models.list <- lapply(formulas, stats::lm, data = data, ...)
   sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
@@ -84,11 +92,12 @@ nice_mod <- function(data,
   good.names <- c("Dependent Variable", "Predictor",
                   "df", "b", "t", "p", "sr2")
   if(length(models.list) > 1 & mod.id == TRUE) {
-    model.number <- rep(1:length(models.list), times = lapply(sums.list, nrow))
+    model.number <- rep(seq_along(models.list), times = lapply(sums.list, nrow))
     table.stats <- cbind(model.number, table.stats)
     names(table.stats) <- c("Model Number", good.names)
   } else {
     names(table.stats) <- good.names}
-  if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
+  if(!missing(b.label)) { names(table.stats)[names(
+    table.stats) == "b"] <- b.label}
   table.stats
 }

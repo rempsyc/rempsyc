@@ -1,0 +1,247 @@
+---
+title: "Planned Contrasts Analyses (Group Comparisons)"
+author: "Rémi Thériault"
+date: "July 25, 2021"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Planned Contrasts Analyses (Group Comparisons)}
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=7, warning=FALSE, message=FALSE, out.width="70%")
+```
+
+## Basic Idea
+
+In this post, I will document how I conduct planned contrasts analyses to test whether experimental groups differ from each other. Planned contrasts are similar to *t* tests, but provide more power when you have several groups:
+
+> Statistical power is lower with the standard *t* test compared than it is with the planned contrast version for two reasons: a) the sample size is smaller with the *t* test, because only the cases in the two groups are selected; and b) in the planned contrast the error term is smaller than it is with the standard *t* test because it is based on all the cases ([source](http://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf))
+
+I will first demonstrate a simple example for conducting the analysis, exporting the table of results to Microsoft Word, and producing the figure. After demonstrating it for a single variable, we will then look at a full workflow, i.e., how we can automatize the process for several variables simultaneously.
+
+### Getting started
+
+For the minimal example, we will use the `iris` dataset, which is installed with `R` by default.
+
+### Using `nice_contrasts()`
+
+*Load the `rempsyc` package:*
+
+```{r}
+library(rempsyc)
+```
+
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+
+
+Let's test out the function on existing data
+
+```{r}
+table.stats <- nice_contrasts(response = "Sepal.Length",
+                              group = "Species",
+                              data = iris)
+table.stats
+```
+
+This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviations from parametric assumptions). It will also provide us with bootstrapped 95% confidence intervals of that effect size.
+
+### Make it publication-ready using [`nice_table()`](https://remi-theriault.com/blog_table).
+
+```{r}
+(my_table <- nice_table(table.stats))
+```
+
+*Save the table to Word*
+
+```{r}
+save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
+```
+
+### Make a violin plot comparing groups through [`nice_violin()`](https://remi-theriault.com/blog_violin).
+
+```{r fig.width=7, fig.height=7}
+(figure <- nice_violin(group = "Species", 
+                       response = "Sepal.Length", 
+                       data = iris,
+                       ytitle = "Length of Sepal", 
+                       signif_annotation=c("***", "***", "***"),
+                       signif_yposition=c(8.7, 7.3, 8.2),
+                       signif_xmin=c("setosa","setosa","versicolor"),
+                       signif_xmax=c("virginica","versicolor","virginica")))
+```
+
+Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
+
+```{r}
+ggsave('Figure 1.pdf', figure, width=7, height=7, unit='in', 
+       dpi=300, path = "D:/R treasures/")
+```
+
+Congratulations for making it that far! You've done it! From A to Z, you now know how to make things work! If you would like to integrate this with a broader workflow, read on for the next part!
+
+## Full Workflow
+
+For the full workflow, we will use the dataset from one of my studies published at the [Quaterly Journal of Experimental Psychology](https://journals.sagepub.com/doi/10.1177/17470218211024826) and available on the Open Science Framework.
+
+*Load the data file from the Open Science Framework*
+
+```{r}
+data <- read.csv("https://osf.io/qkmnp//?action=download", header=TRUE)
+```
+
+*Specify the order of factor levels for "Group"* (otherwise R will alphabetize them)
+
+```{r}
+(data$Group <- factor(data$Group, levels = c("Embodied", "Mental", "Control")))
+```
+
+
+*Define our dependent variables*
+
+```{r}
+library(dplyr)
+(DV <- data %>% select(QCAEPR:IOS) %>% names)
+```
+
+```{r}
+table.stats <- nice_contrasts(response = DV,
+                              group = "Group",
+                              data = data)
+table.stats
+```
+
+*Add more meaningful names for measures*
+
+```{r}
+table.stats[1] <- rep(c("Peripheral Responsivity (QCAE)",
+                        "Perspective-Taking (IRI)", 
+                        "Fantasy (IRI)", "Empathic Concern (IRI)", 
+                        "Personal Distress (IRI)",
+                        "Inclusion of Other in the Self (IOS)"), each = 3)
+```
+
+### Make it publication-ready using [nice_table()](https://remi-theriault.com/blog_table).
+
+Note that with option `highlight = TRUE`, it will automatically highlight significant results.
+
+```{r}
+(my_table <- nice_table(table.stats, highlight = TRUE))
+```
+
+*Save the table to Word*
+
+```{r}
+save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
+```
+
+### Make violin plots comparing groups through [`nice_violin`](https://remi-theriault.com/blog_violin).
+
+We will have to make the four figures for which comparisons were significant and then combine them in one plot.
+
+This function will throw an error if your dataset contains missing data. We will omit those rows missing data for now.
+
+```{r}
+Data <- na.omit(data)
+```
+
+*Make figure panel 1*
+
+```{r}
+(EC <- nice_violin(group = "Group",
+                   response = "IRIEC", 
+                   data = Data,
+                   colours = c("#00BA38", "#619CFF", "#F8766D"), 
+                   ytitle = "Empathic Concern (from IRI)", 
+                   signif_annotation = "*", 
+                   signif_yposition = 5.2, 
+                   signif_xmin = 1, 
+                   signif_xmax = 3))
+```
+
+*Make figure panel 2*
+
+```{r}
+(PD <- nice_violin(group = "Group", 
+                   response = "IRIPD", 
+                   data = Data,
+                   colours = c("#00BA38", "#619CFF", "#F8766D"), 
+                   ytitle = "Personal Distress (from IRI)", 
+                   signif_annotation = "*", 
+                   signif_yposition = 5, 
+                   signif_xmin = 1,
+                   signif_xmax = 3))
+```
+
+*Make figure panel 3*
+
+```{r}
+(PR <- nice_violin(group = "Group", 
+                   response = "QCAEPR", 
+                   data = Data,
+                   colours = c("#00BA38", "#619CFF", "#F8766D"), 
+                   ytitle = "Peripheral Responsivity (from QCAE)", 
+                   signif_annotation="*",
+                   signif_yposition=4.2,
+                   signif_xmin=1,
+                   signif_xmax=3))
+```
+
+*Make figure panel 4*
+
+```{r}
+(IOS <- nice_violin(group = "Group", 
+                    response = "IOS", 
+                    data = Data,
+                    colours = c("#00BA38", "#619CFF", "#F8766D"), 
+                    ytitle = "Self-Other Merging (from IOS)", 
+                    signif_annotation=c("***", "*", "*"),
+                    signif_yposition=c(8.25, 7.5, 6.75),
+                    signif_xmin=c(1,1,2),
+                    signif_xmax=c(3,2,3)))
+```
+
+It's now time to combine our four plots into one figure! Yeah!
+
+```{r fig.width=14, fig.height=14, out.width="100%"}
+library(ggpubr)
+(figure <- ggarrange(EC, PD, PR, IOS,
+                     labels = "AUTO",
+                     ncol = 2, nrow = 2))
+```
+
+Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
+
+```{r}
+ggsave('Figure 1.pdf', figure, width=14, height=14, unit='in', 
+       dpi=300, path = "D:/R treasures/")
+```
+
+$~$
+
+```{r, results="asis", echo = FALSE}
+source("conclusion.R")
+```
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+---
+
+*Updated 2022-06-07 (Updated theme)*
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$

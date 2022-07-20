@@ -20,16 +20,27 @@ nice_t_test(
 
 \item{group}{The group for the comparison.}
 
-\item{correction}{What correction for multiple comparison to apply, if any. Default is "none" and the only other option (for now) is "bonferroni".}
+\item{correction}{What correction for multiple comparison
+to apply, if any. Default is "none" and the only other option
+(for now) is "bonferroni".}
 
 \item{warning}{Whether to display the Welch test warning or not.}
 
-\item{...}{Further arguments to be passed to the \code{t.test} function (e.g., to use Student instead of Welch test, to change from two-tail to one-tail, or to do a paired-sample t-test instead of independent samples).}
+\item{...}{Further arguments to be passed to the \code{t.test}
+function (e.g., to use Student instead of Welch test, to
+change from two-tail to one-tail, or to do a paired-sample
+t-test instead of independent samples).}
 }
 \description{
-Easily compute t-test analyses, with effect sizes, and format in publication-ready format. The 95\% confidence interval is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
+Easily compute t-test analyses, with effect sizes,
+and format in publication-ready format. The 95\% confidence interval
+is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
 
-This function relies on the base R \code{t.test} function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: \code{var.equal = TRUE}.
+This function relies on the base R \code{t.test} function, which
+uses the Welch t-test per default (see why here:
+\url{https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html}).
+To use the Student t-test, simply add the following
+argument: \code{var.equal = TRUE}.
 }
 \examples{
 # Make the basic table

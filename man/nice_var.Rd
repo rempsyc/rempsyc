@@ -13,10 +13,14 @@ nice_var(data, variable, group, criteria = 4)
 
 \item{group}{The group by which to plot the variable.}
 
-\item{criteria}{Desired threshold if one wants something different than four times the variance.}
+\item{criteria}{Desired threshold if one wants something
+different than four times the variance.}
 }
 \description{
-Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups. Variance ratio is calculated as Max / Min.
+Obtain variance per group as well as check for
+the rule of thumb of one group having variance four times
+bigger than any of the other groups. Variance ratio is
+calculated as Max / Min.
 }
 \examples{
 # Make the basic table
@@ -26,11 +30,16 @@ nice_var(data = iris,
 
 # Try on multiple variables
 DV <- names(iris[1:4])
-var.table <- do.call("rbind", lapply(DV, nice_var, data = iris, group = "Species"))
+var.table <- do.call("rbind", lapply(DV, nice_var,
+                     data = iris, group = "Species"))
 var.table
 
 }
 \seealso{
-Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+Other functions useful in assumption testing:
+\code{\link{nice_assumptions}}, \code{\link{nice_density}},
+\code{\link{nice_normality}}, \code{\link{nice_qq}},
+\code{\link{nice_varplot}}. Tutorial:
+\url{https://remi-theriault.com/blog_assumptions}
 }
 \keyword{variance}

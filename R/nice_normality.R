@@ -1,17 +1,24 @@
 #' @title Easy normality check per group
 #'
-#' @description Easily make nice per-group density and QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
+#' @description Easily make nice per-group density and QQ plots
+#' through a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
 #' @param data The data frame.
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
 #' @param colours Desired colours for the plot, if desired.
 #' @param groups.labels How to label the groups.
-#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
-#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param grid Logical, whether to keep the default background grid
+#' or not. APA style suggests not using a grid in the background,
+#' though in this case some may find it useful to more easily
+#' estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value from
+#' the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.
-#' @param histogram Logical, whether to add an histogram on top of the density plot.
-#' @param ... Further arguments from `nice_qq()` and `nice_density()` to be passed to `nice_normality()`
+#' @param histogram Logical, whether to add an histogram
+#' on top of the density plot.
+#' @param ... Further arguments from `nice_qq()` and
+#' `nice_density()` to be passed to `nice_normality()`
 #'
 #' @keywords QQ plots, normality, density, distribution
 #' @export
@@ -25,13 +32,21 @@
 #' nice_normality(data = iris,
 #'                variable = "Sepal.Length",
 #'                group = "Species",
-#'                colours = c("#00BA38", "#619CFF", "#F8766D"),
-#'                groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+#'                colours = c("#00BA38",
+#'                            "#619CFF",
+#'                            "#F8766D"),
+#'                groups.labels = c("(a) Setosa",
+#'                                  "(b) Versicolor",
+#'                                  "(c) Virginica"),
 #'                grid = FALSE,
 #'                shapiro = TRUE)
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_qq}}, \code{\link{nice_var}}, \code{\link{nice_varplot}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
+#' \code{\link{nice_qq}}, \code{\link{nice_var}},
+#' \code{\link{nice_varplot}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
 
 nice_normality <- function(data,
@@ -46,12 +61,13 @@ nice_normality <- function(data,
                            ...) {
   rlang::check_installed("see", reason = "for this function.")
   rlang::check_installed("patchwork", reason = "for this function.")
-  plot.a <- nice_density(data = data, variable = variable, group = group, colours = colours,
-                         groups.labels = groups.labels, grid = grid, shapiro = shapiro,
-                         title = title, histogram = histogram, ...)
+  plot.a <- nice_density(data = data, variable = variable, group = group,
+                         colours = colours, groups.labels = groups.labels,
+                         grid = grid, shapiro = shapiro, title = title,
+                         histogram = histogram, ...)
   plot.a
-  plot.b <- nice_qq(data = data, variable = variable, group = group, colours = colours,
-                    groups.labels = groups.labels, grid = grid, shapiro = shapiro,
-                    title = NULL, ...)
+  plot.b <- nice_qq(data = data, variable = variable, group = group,
+                    colours = colours, groups.labels = groups.labels,
+                    grid = grid, shapiro = shapiro, title = NULL, ...)
   see::plots(plot.a, plot.b)
 }

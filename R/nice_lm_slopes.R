@@ -1,15 +1,21 @@
 #' @title Nice formatting of simple slopes for lm models
 #'
-#' @description Extracts simple slopes from `lm` model object and format for a publication-ready format.
+#' @description Extracts simple slopes from `lm` model
+#' object and format for a publication-ready format.
 #'
-#' Note: this function uses the `modelEffectSizes` function from the `lmSupport` package to get the sr2 effect sizes.
+#' Note: this function uses the `modelEffectSizes` function
+#' from the `lmSupport` package to get the sr2 effect sizes.
 #'
 #' @param model The model to be formatted.
 #' @param predictor The independent variable.
 #' @param moderator The moderating variable.
-#' @param b.label What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the `nice_table` function).
-#' @param mod.id Logical. Whether to display the model number, when there is more than one model.
-#' @param ... Further arguments to be passed to the `lm` function for the models.
+#' @param b.label What to rename the default "b" column (e.g.,
+#' to capital B if using standardized data for it to be converted
+#' to the Greek beta symbol in the `nice_table` function).
+#' @param mod.id Logical. Whether to display the model number,
+#' when there is more than one model.
+#' @param ... Further arguments to be passed to the `lm`
+#' function for the models.
 #'
 #' @keywords moderation, interaction, regression
 #' @export
@@ -24,7 +30,10 @@
 #' nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 #'
 #' @seealso
-#' Checking for moderation before checking simple slopes: \code{\link{nice_lm}}, \code{\link{nice_mod}}, \code{\link{nice_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
+#' Checking for moderation before checking simple slopes:
+#' \code{\link{nice_lm}}, \code{\link{nice_mod}},
+#' \code{\link{nice_slopes}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_moderation}
 #'
 
 nice_lm_slopes <- function(model,
@@ -44,9 +53,9 @@ nice_lm_slopes <- function(model,
     x$model
   })
 
-  DV.list <- sapply(models.list, function(x) {
+  DV.list <- unlist(lapply(models.list, function(x) {
     as.character(x$terms[[2]])
-  })
+  }))
 
   # Calculate simple slopes for LOWS
   data.list.lows <- lapply(data.list, function(x) {
@@ -56,10 +65,10 @@ nice_lm_slopes <- function(model,
   formulas.lows <- lapply(models.list, function(x) {
     gsub(moderator, "lows", list(x$terms))
   })
-  models.list.lows <- sapply(seq(length(formulas.lows)), function(x) {
-    lm(formulas.lows[[x]],  data = data.list.lows[[x]], ...)
-  }, simplify = FALSE, USE.NAMES = TRUE)
-  sums.list <- lapply(models.list.lows, function(x) {summary(x)$coefficients[-1,-2]})
+  models.list.lows <- lapply(seq(length(formulas.lows)), function(x) {
+    lm(formulas.lows[[x]],  data = data.list.lows[[x]], ...)})
+  sums.list <- lapply(models.list.lows, function(x) {
+    summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list.lows, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list.lows, function(x) {
     lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
@@ -92,10 +101,10 @@ nice_lm_slopes <- function(model,
   formulas.highs <- lapply(models.list, function(x) {
     gsub(moderator, "highs", list(x$terms))
   })
-  models.list.highs <- sapply(seq(length(formulas.highs)), function(x) {
-    lm(formulas.highs[[x]],  data = data.list.highs[[x]], ...)
-  }, simplify = FALSE, USE.NAMES = TRUE)
-  sums.list <- lapply(models.list.highs, function(x) {summary(x)$coefficients[-1,-2]})
+  models.list.highs <- lapply(seq(length(formulas.highs)), function(x) {
+    lm(formulas.highs[[x]],  data = data.list.highs[[x]], ...)})
+  sums.list <- lapply(models.list.highs, function(x) {
+    summary(x)$coefficients[-1,-2]})
   df.list <- lapply(models.list.highs, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list.highs, function(x) {
     lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
@@ -109,14 +118,15 @@ nice_lm_slopes <- function(model,
 
   # Combine both dataframes for both LOWS and HIGHS
   table.stats <- rbind(table.stats1,table.stats2,table.stats3)
-  correct.order <- c(aperm(array(1:nrow(table.stats),
+  correct.order <- c(aperm(array(seq(nrow(table.stats)),
                                  c(1,nrow(table.stats)/3,3)),
                            c(1,3,2)))
   table.stats <- table.stats[correct.order,] # 1, 4, 7, 2, 5, 8, 3, 6, 9
 
-  if(!missing(b.label)) { names(table.stats)[names(table.stats) == "b"] <- b.label}
+  if(!missing(b.label)) { names(table.stats)[names(
+    table.stats) == "b"] <- b.label}
   if(length(models.list) > 1 & mod.id == TRUE) {
-    model.number <- rep(1:length(models.list), times = lapply(sums.list, nrow))
+    model.number <- rep(seq_along(models.list), times = lapply(sums.list, nrow))
     table.stats <- cbind(model.number, table.stats)
     names(table.stats) <- c("Model Number", good.names)
     }

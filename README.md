@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" />
+# rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" style="float:right; height:200px;" />
 
 <!-- badges: start -->
 
@@ -93,7 +93,7 @@ library(rempsyc)
 nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
-#> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82). 
+#> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
 #> For the Student t-test, use `var.equal = TRUE`. 
 #>  
 #> 
@@ -140,18 +140,18 @@ nice_contrasts(data = mtcars,
 contrasts
 #>   Dependent Variable Comparison df         t              p        dR
 #> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
-#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144
-#> 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630
-#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937
-#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
+#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144
+#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630
+#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
+#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0989456  5.5340895
-#> 2  0.7260813  2.4571544
-#> 3  1.0294312  3.6513951
-#> 4 -5.0080730 -2.4680340
-#> 5 -3.6743842 -1.3722105
-#> 6 -1.8229787 -0.4839586
+#> 1  2.1112335  5.9118647
+#> 2  0.7283489  2.2581400
+#> 3  1.0513435  3.8497796
+#> 4 -4.9728235 -2.4364800
+#> 5 -3.9189827 -1.4630114
+#> 6 -1.8539604 -0.5044816
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -446,6 +446,7 @@ answers.
 ``` r
 # Reverse score of 5 with a maximum score of 5
 nice_reverse(5, 5)
+#> Note: If your scale minimum score is not '1', please specify it in the 'min' argument
 #> [1] 1
 
 # Reverse scores with maximum = 4 and minimum = 0
@@ -519,9 +520,7 @@ Test linear regression assumptions easily with a nice summary table.
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 # View results
 View(nice_assumptions(model))
-#> Interpretation: (p) values < .05 imply assumptions are not respected. 
-#> Diagnostic is how many assumptions are not respected for a given model or variable. 
-#> 
+#> Interpretation: (p) values < .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.
 ```
 
 <img src="man/figures/assumptions_table.png" width="70%" />

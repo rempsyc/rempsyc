@@ -14,11 +14,26 @@ nice_na(data, vars, scales)
 \item{scales}{The scale names to check for NAs (single character string).}
 }
 \description{
-Nicely reports NA values according to existing guidelines. This function reports both absolute and percentage values of specified column lists. Some authors recommend reporting item-level missing item per scale, as well as participant’s maximum number of missing items by scale. For example, Parent (2013) writes:
+Nicely reports NA values according to existing
+guidelines. This function reports both absolute and percentage
+values of specified column lists. Some authors recommend
+reporting item-level missing item per scale, as well as
+participant’s maximum number of missing items by scale.
+For example, Parent (2013) writes:
 
-\emph{I recommend that authors (a) state their tolerance level for missing data by scale or subscale (e.g., “We calculated means for all subscales on which participants gave at least 75\% complete data”) and then (b) report the individual missingness rates by scale per data point (i.e., the number of missing values out of all data points on that scale for all participants) and the maximum by participant (e.g., “For Attachment Anxiety, a total of 4 missing data points out of 100 were observed, with no participant missing more than a single data point”).}
+\emph{I recommend that authors (a) state their tolerance level for
+missing data by scale or subscale (e.g., “We calculated means
+for all subscales on which participants gave at least 75\%
+complete data”) and then (b) report the individual missingness
+rates by scale per data point (i.e., the number of missing
+values out of all data points on that scale for all participants)
+and the maximum by participant (e.g., “For Attachment Anxiety,
+a total of 4 missing data points out of 100 were observed,
+with no participant missing more than a single data point”).}
 
-See: Parent, M. C. (2013). Handling item-level missing data: Simpler is just as good. The \emph{Counseling Psychologist}, \emph{41}(4), 568-600. https://doi.org/10.1177\%2F0011000012445176
+See: Parent, M. C. (2013). Handling item-level missing
+data: Simpler is just as good. The \emph{Counseling Psychologist},
+\emph{41}(4), 568-600. https://doi.org/10.1177\%2F0011000012445176
 }
 \examples{
 # Use whole data frame

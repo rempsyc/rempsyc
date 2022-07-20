@@ -1,14 +1,19 @@
 #' @title Easy QQ plots per group
 #'
-#' @description Easily make nice per-group QQ plots through a wrapper around the `ggplot2` and `qqplotr` packages.
+#' @description Easily make nice per-group QQ plots through
+#' a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
 #' @param data The data frame.
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
 #' @param colours Desired colours for the plot, if desired.
 #' @param groups.labels How to label the groups.
-#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
-#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param grid Logical, whether to keep the default background
+#' grid or not. APA style suggests not using a grid in the
+#' background, though in this case some may find it useful
+#' to more easily estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value
+#' from the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.
 #'
 #' @keywords QQ plots, normality, distribution
@@ -30,10 +35,16 @@
 #'         title = NULL)
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_var}}, \code{\link{nice_varplot}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
+#' \code{\link{nice_normality}}, \code{\link{nice_var}},
+#' \code{\link{nice_varplot}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme aes_string aes element_text element_line element_blank
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle
+#' theme_bw scale_fill_manual theme aes_string aes element_text
+#' element_line element_blank
 #' @importFrom stats reformulate shapiro.test
 
 nice_qq <- function(data,
@@ -56,9 +67,8 @@ nice_qq <- function(data,
     dat_text <- data %>% group_by(.data[[group]]) %>%
         summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
         rowwise() %>%
-        mutate(text=sprintf("italic('p')~'%s'", format_p(text,
-                                                         sign = TRUE,
-                                                         suffix = " (Shapiro-Wilk)")))
+        mutate(text=sprintf("italic('p')~'%s'", format_p(
+          text, sign = TRUE, suffix = " (Shapiro-Wilk)")))
     }
   # Make plot
   ggplot(data = data, mapping = aes_string(fill=group, sample=variable)) +

@@ -58,17 +58,37 @@ nice_violin(
 
 \item{has.xlabels}{Logical, whether the y-axis should have labels or not.}
 
-\item{comp1}{The first unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays \code{*}, \verb{**}, or \verb{***} depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp2}.}
+\item{comp1}{The first unit of a pairwise comparison, if the
+goal is to compare two groups. Automatically displays \code{*},
+\verb{**}, or \verb{***} depending on significance of the difference.
+Can take either a numeric value (based on the group number)
+or the name of the group directly. Must be provided along
+with argument \code{comp2}.}
 
-\item{comp2}{The second unit of a pairwise comparison, if the goal is to compare two groups. Automatically displays "\emph{", "\strong{", or "}}" depending on significance of the difference. Can take either a numeric value (based on the group number) or the name of the group directly. Must be provided along with argument \code{comp1}.}
+\item{comp2}{The second unit of a pairwise comparison, if
+the goal is to compare two groups. Automatically displays
+"\emph{", "\strong{", or "}}" depending on significance of the
+difference. Can take either a numeric value (based on the
+group number) or the name of the group directly. Must be
+provided along with argument \code{comp1}.}
 
-\item{signif_annotation}{Manually provide the required annotations/numbers of stars (as character strings). Useful if the automatic pairwise comparison annotation does not work as expected, or yet if one wants more than one pairwise comparison. Must be provided along with arguments \code{signif_yposition}, \code{signif_xmin}, and \code{signif_xmax}.}
+\item{signif_annotation}{Manually provide the required
+annotations/numbers of stars (as character strings).
+Useful if the automatic pairwise comparison annotation
+does not work as expected, or yet if one wants more than
+one pairwise comparison. Must be provided along with
+arguments \code{signif_yposition}, \code{signif_xmin}, and \code{signif_xmax}.}
 
-\item{signif_yposition}{Manually provide the vertical position of the annotations/stars, based on the y-scale.}
+\item{signif_yposition}{Manually provide the vertical
+position of the annotations/stars, based on the y-scale.}
 
-\item{signif_xmin}{Manually provide the first part of the horizontal position of the annotations/stars (start of the left-sided bracket), based on the x-scale.}
+\item{signif_xmin}{Manually provide the first part of
+the horizontal position of the annotations/stars (start
+of the left-sided bracket), based on the x-scale.}
 
-\item{signif_xmax}{Manually provide the second part of the horizontal position of the annotations/stars (end of the right-sided bracket), based on the x-scale.}
+\item{signif_xmax}{Manually provide the second part
+of the horizontal position of the annotations/stars
+(end of the right-sided bracket), based on the x-scale.}
 
 \item{ymin}{The minimum score on the y-axis scale.}
 
@@ -93,7 +113,8 @@ nice_violin(
 \item{d.y}{The y-axis coordinates for the d-value.}
 }
 \description{
-Make nice violin plots easily with 95\% bootstrapped confidence intervals.
+Make nice violin plots easily with 95\% bootstrapped
+confidence intervals.
 }
 \examples{
 # Make the basic plot
@@ -131,10 +152,14 @@ nice_violin(data = ToothGrowth,
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
-            signif_annotation = c("*","**","***"), # manually enter the number of stars
-            signif_yposition = c(30,35,40), # What height (y) should the stars appear
-            signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)
-            signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)
+            signif_annotation = c("*","**","***"),
+                # manually enter the number of stars
+            signif_yposition = c(30,35,40),
+                # What height (y) should the stars appear
+            signif_xmin = c(1,2,1),
+                # Where should the left-sided brackets start (x)
+            signif_xmax = c(2,3,3))
+                # Where should the right-sided brackets end (x)
 
 # Set the colours manually
 nice_violin(data = ToothGrowth,
@@ -190,7 +215,9 @@ nice_violin(data = ToothGrowth,
 
 }
 \seealso{
-Visualize group differences via scatter plots: \code{\link{nice_scatter}}. Tutorial: \url{https://remi-theriault.com/blog_violin}
+Visualize group differences via scatter plots:
+\code{\link{nice_scatter}}. Tutorial:
+\url{https://remi-theriault.com/blog_violin}
 }
 \keyword{plots}
 \keyword{violin}

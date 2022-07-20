@@ -1,0 +1,199 @@
+---
+title: "Publication-ready moderations with simple slopes in R"
+author: "Rémi Thériault"
+date: "February 8, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Publication-ready moderations with simple slopes in R}
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=5, fig.height=3, warning=FALSE, message=FALSE, out.width="70%")
+```
+
+## Getting started
+
+Let's first load the demo data. This data set comes with base `R` (meaning you have it too and can directly type this command into your `R` console).
+
+```{r}
+head(mtcars)
+```
+
+Load the `rempsyc` package:
+
+```{r}
+library(rempsyc)
+```
+
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+
+For moderations and simple slopes, we usually want to standardize (or at least center) our variables.
+
+```{r}
+mtcars2 <- lapply(mtcars, scale) |> as.data.frame()
+```
+
+## Simple moderation: `nice_mod`
+
+```{r}
+nice_mod(data = mtcars2,
+         response = "mpg",
+         predictor = "gear",
+         moderator = "wt") -> moderations
+moderations
+```
+
+If we want it to look nice
+
+```{r}
+(my_table <- nice_table(moderations, highlight = TRUE))
+```
+
+> ***Note:*** The sr2 (semi-partial correlation squared, [also known as delta R-square](https://rdrr.io/cran/rockchalk/man/getDeltaRsquare.html)) allows us to quantify the unique contribution (proportion of variance explained) of an independent variable on the dependent variable, over and above the other variables in the model. sr2 is often considered a better indicator of the practical relevance of a variable.
+
+### Save table to Word
+
+Let's save it to word for use in a publication (optional).
+
+```{r}
+save_as_docx(my_table, path = "D:/R treasures/moderations.docx")
+```
+
+## Simple slopes: `nice_slopes`
+
+Let's extract the simple slopes now, including the sr2.
+
+```{r}
+nice_slopes(data = mtcars2,
+            response = "mpg",
+            predictor = "gear",
+            moderator = "wt") -> slopes
+slopes
+nice_table(slopes, highlight = TRUE)
+```
+
+In this specific case, the interaction is significant but none of the simple slopes. This means that although the two slopes are significantly different from each other, taken individually, the slopes aren't significantly different from a straight line.
+
+The neat thing is that you can add as many dependent variables at once as you want.
+
+```{r}
+# Moderations
+nice_mod(data = mtcars2,
+         response = c("mpg", "disp", "hp"),
+         predictor = "gear",
+         moderator = "wt") |>
+  nice_table(highlight = TRUE)
+
+# Simple slopes
+nice_slopes(data = mtcars2,
+            response = c("mpg", "disp", "hp"),
+            predictor = "gear",
+            moderator = "wt") |> 
+  nice_table(highlight = TRUE)
+```
+
+> **Pro tip**: Both the `nice_mod()` and `nice_slopes()` functions take the same argument, so you can just copy-paste the first and change the function call to save time!
+
+## Special cases
+
+### Covariates
+
+You can also have more complicated models, like with added covariates.
+
+#### Moderations
+
+```{r}
+nice_mod(data = mtcars2,
+         response = "mpg",
+         predictor = "gear",
+         moderator = "wt",
+         covariates = c("am", "vs")) |> 
+  nice_table(highlight = TRUE)
+```
+
+#### Simple slopes
+
+```{r}
+nice_slopes(data = mtcars2,
+            response = "mpg",
+            predictor = "gear",
+            moderator = "wt",
+            covariates = c("am", "vs")) |> 
+  nice_table(highlight = TRUE)
+```
+
+In this case, only the third row is significant, which means that those who are high on the `wt` variable (above one standard deviation) have significantly lower `mpg` the higher their gear. We can plot this in the more traditional way:
+
+```{r}
+# First need to define model for plot function
+mod <- lm(mpg ~ gear * wt + am + vs, data = mtcars2)
+
+# Plot the model
+library(interactions)
+interact_plot(mod, pred = "gear", modx = "wt", interval = TRUE)
+```
+
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages(interactions)`. Furthermore, know that this plot can be heavily customized with available arguments for publication purposes, but I won't be going into these details here.
+
+### Three-way interaction
+
+Let's make a three-way interaction for example.
+
+Note that for the simple slopes, for now, the second moderator needs to be a dichotomic variable (and the first moderator a continuous variable). We'll reset the am variable for this purpose for now.
+
+```{r}
+mtcars2$am <- mtcars$am
+```
+
+#### Moderations
+
+```{r}
+nice_mod(response = "mpg",
+         predictor = "gear",
+         moderator = "disp",
+         moderator2 = "am",
+         data = mtcars2) |> 
+  nice_table(highlight = TRUE)
+```
+
+#### Simple slopes
+
+```{r}
+nice_slopes(data = mtcars2,
+            response = "mpg",
+            predictor = "gear",
+            moderator = "disp",
+            moderator2 = "am") |> 
+  nice_table(highlight = TRUE)
+```
+
+## Complex models: `nice_lm`
+For more complicated models not supported by `nice_mod`, one can define the model in the traditional way and feed it to `nice_lm` and `nice_lm_slopes` instead. They support multiple `lm` models as well.
+
+### `nice_lm`
+
+```{r}
+model1 <- lm(mpg ~ cyl + wt * hp, mtcars2)
+model2 <- lm(qsec ~ disp + drat * carb, mtcars2)
+my.models <- list(model1, model2)
+nice_lm(my.models) |> 
+  nice_table(highlight = TRUE)
+```
+
+The same applies to simple slopes, this time we use the `nice_lm_slopes` function. It supports multiple `lm` models as well, but the predictor and moderator need to be the same for these models (the dependent variable can change).
+
+### `nice_lm_slopes`
+
+```{r}
+model1 <- lm(mpg ~ gear * wt, mtcars2)
+model2 <- lm(disp ~ gear * wt, mtcars2)
+my.models <- list(model1, model2)
+nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |> 
+  nice_table(highlight = TRUE)
+```
+
+```{r, results="asis", echo = FALSE}
+source("conclusion.R")
+```

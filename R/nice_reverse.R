@@ -1,11 +1,13 @@
 #' @title Easily recode scores
 #'
-#' @description Easily recode scores (reverse-score), typically for questionnaire answers.
+#' @description Easily recode scores (reverse-score),
+#' typically for questionnaire answers.
 #'
 #' @param x The score to reverse.
 #' @param max The maximum score on the scale.
 #' @param min The miminum score on the scale (optional unless it isn't 1).
-#' @param warning Logical. Whether to show the warning about the minimum not being 1.
+#' @param warning Logical. Whether to show the warning
+#' about the minimum not being 1.
 #'
 #' @keywords reverse scoring
 #' @export
@@ -27,6 +29,8 @@ nice_reverse <- function(x,
                          max,
                          min = 1,
                          warning = TRUE) {
-  if(missing(min) & warning == TRUE) { message("Note: If your scale minimum score is not '1', please specify it in the 'min' argument")}
+  if(missing(min) & warning == TRUE) { cat(
+    "Note: If your scale minimum score is not '1', ",
+    "please specify it in the 'min' argument\n", sep = "")}
   max - as.numeric(x) + min
 }

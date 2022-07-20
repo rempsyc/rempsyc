@@ -20,7 +20,8 @@ format_d(d, precision = 0.01)
 
 \item{type}{Specify r or p value.}
 
-\item{...}{To specify precision level, if necessary, when using the generic \code{format_value()}. Simply add the \code{precision} argument.}
+\item{...}{To specify precision level, if necessary, when using the
+generic \code{format_value()}. Simply add the \code{precision} argument.}
 
 \item{p}{p-value to format.}
 
@@ -30,14 +31,16 @@ format_d(d, precision = 0.01)
 
 \item{suffix}{To add a suffix after the value.}
 
-\item{sign}{Logical. Whether to add an equal sign for p-values higher or equal to .001.}
+\item{sign}{Logical. Whether to add an equal sign for p-values higher or
+equal to .001.}
 
 \item{r}{r-value to format.}
 
 \item{d}{d-value to format.}
 }
 \description{
-Easily format p or r values. Note: converts to character class for use in figures or manuscripts to accommodate e.g., "< .001".
+Easily format p or r values. Note: converts to character class
+for use in figures or manuscripts to accommodate e.g., "< .001".
 }
 \examples{
 format_value(0.00041231, "p")

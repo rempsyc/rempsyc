@@ -7,8 +7,12 @@
 #' @param data The data frame
 #' @param colours Desired colours for the plot, if desired.
 #' @param groups.labels How to label the groups.
-#' @param grid Logical, whether to keep the default background grid or not. APA style suggests not using a grid in the background, though in this case some may find it useful to more easily estimate the slopes of the different groups.
-#' @param shapiro Logical, whether to include the p-value from the Shapiro-Wilk test on the plot.
+#' @param grid Logical, whether to keep the default background
+#' grid or not. APA style suggests not using a grid in the
+#' background, though in this case some may find it useful to
+#' more easily estimate the slopes of the different groups.
+#' @param shapiro Logical, whether to include the p-value from
+#' the Shapiro-Wilk test on the plot.
 #' @param ytitle An optional y-axis label, if desired.
 #'
 #' @keywords variance
@@ -23,15 +27,24 @@
 #' nice_varplot(data = iris,
 #'              variable = "Sepal.Length",
 #'              group = "Species",
-#'              colours = c("#00BA38", "#619CFF", "#F8766D"),
+#'              colours = c("#00BA38",
+#'                          "#619CFF",
+#'                          "#F8766D"),
 #'              ytitle = "Sepal Length",
-#'              groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
+#'              groups.labels = c("(a) Setosa",
+#'                                "(b) Versicolor",
+#'                                "(c) Virginica"))
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_var}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
+#' \code{\link{nice_normality}}, \code{\link{nice_qq}},
+#' \code{\link{nice_var}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw scale_fill_manual theme annotate aes
+#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
+#' scale_fill_manual theme annotate aes
 #' @importFrom stats var median
 
 nice_varplot <- function(data,
@@ -65,7 +78,7 @@ nice_varplot <- function(data,
                has.jitter = FALSE) +
     geom_jitter(size = 2, width = 0.10) +
     annotate(geom="text",
-             x=median(1:length(levels(data[[group]]))),
+             x=median(seq_along(levels(data[[group]]))),
              y=max(data[[variable]]),
              label=paste0("max/min = ",
                           round(diff, 2),

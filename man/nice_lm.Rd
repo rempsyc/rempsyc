@@ -9,16 +9,22 @@ nice_lm(model, b.label = "b", mod.id = TRUE, ...)
 \arguments{
 \item{model}{The model to be formatted.}
 
-\item{b.label}{What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the \code{nice_table} function).}
+\item{b.label}{What to rename the default "b" column (e.g.,
+to capital B if using standardized data for it to be converted
+to the Greek beta symbol in the \code{nice_table} function).}
 
-\item{mod.id}{Logical. Whether to display the model number, when there is more than one model.}
+\item{mod.id}{Logical. Whether to display the model number,
+when there is more than one model.}
 
-\item{...}{Further arguments to be passed to the \code{lm} function for the models.}
+\item{...}{Further arguments to be passed to the
+\code{lm} function for the models.}
 }
 \description{
-Formats output of \code{lm} model object for a publication-ready format.
+Formats output of \code{lm} model object for a
+publication-ready format.
 
-Note: this function uses the \code{modelEffectSizes} function from the \code{lmSupport} package to get the sr2 effect sizes.
+Note: this function uses the \code{modelEffectSizes} function
+from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make and format model
@@ -32,7 +38,10 @@ nice_lm(my.models)
 
 }
 \seealso{
-Checking simple slopes after testing for moderation: \code{\link{nice_lm_slopes}}, \code{\link{nice_mod}}, \code{\link{nice_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
+Checking simple slopes after testing for moderation:
+\code{\link{nice_lm_slopes}}, \code{\link{nice_mod}},
+\code{\link{nice_slopes}}. Tutorial:
+\url{https://remi-theriault.com/blog_moderation}
 }
 \keyword{interaction,}
 \keyword{moderation,}

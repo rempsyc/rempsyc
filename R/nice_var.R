@@ -1,11 +1,15 @@
 #' @title Obtain variance per group
 #'
-#' @description Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups. Variance ratio is calculated as Max / Min.
+#' @description Obtain variance per group as well as check for
+#' the rule of thumb of one group having variance four times
+#' bigger than any of the other groups. Variance ratio is
+#' calculated as Max / Min.
 #'
 #' @param data The data frame
 #' @param variable The dependent variable to be plotted.
 #' @param group The group by which to plot the variable.
-#' @param criteria Desired threshold if one wants something different than four times the variance.
+#' @param criteria Desired threshold if one wants something
+#' different than four times the variance.
 #'
 #' @keywords variance
 #'
@@ -17,13 +21,19 @@
 #'
 #' # Try on multiple variables
 #' DV <- names(iris[1:4])
-#' var.table <- do.call("rbind", lapply(DV, nice_var, data = iris, group = "Species"))
+#' var.table <- do.call("rbind", lapply(DV, nice_var,
+#'                      data = iris, group = "Species"))
 #' var.table
 #'
 #' @seealso
-#' Other functions useful in assumption testing: \code{\link{nice_assumptions}}, \code{\link{nice_density}}, \code{\link{nice_normality}}, \code{\link{nice_qq}}, \code{\link{nice_varplot}}. Tutorial: \url{https://remi-theriault.com/blog_assumptions}
+#' Other functions useful in assumption testing:
+#' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
+#' \code{\link{nice_normality}}, \code{\link{nice_qq}},
+#' \code{\link{nice_varplot}}. Tutorial:
+#' \url{https://remi-theriault.com/blog_assumptions}
 #'
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename_with across everything
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise
+#' do rename_with across everything
 
 #' @export
 nice_var <- function(data,
@@ -48,11 +58,11 @@ nice_var <- function(data,
   # Add the ratio and hetero columns
   var.table %>%
     rowwise() %>%
-    mutate(variance.ratio = round(max(select(., -variable))/min(select(., -variable)), 1),
-           criteria = criteria,
-           heteroscedastic = variance.ratio > criteria) -> var.table
+    mutate(variance.ratio = round(max(select(., -variable))/min(
+      select(., -variable)), 1), criteria = criteria,
+      heteroscedastic = variance.ratio > criteria) -> var.table
   # Change names to something meaningful
-  for (i in 1:length(levels(data[[group]]))) {
+  for (i in seq_along(levels(data[[group]]))) {
     names(var.table)[1+i] <- levels(data[[group]])[i]
   }
   # Capitalize first letters

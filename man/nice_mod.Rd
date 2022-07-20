@@ -29,16 +29,22 @@ nice_mod(
 
 \item{covariates}{The desired covariates in the model.}
 
-\item{b.label}{What to rename the default "b" column (e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol in the \code{nice_table} function).}
+\item{b.label}{What to rename the default "b" column (e.g.,
+to capital B if using standardized data for it to be converted
+to the Greek beta symbol in the \code{nice_table} function).}
 
-\item{mod.id}{Logical. Whether to display the model number, when there is more than one model.}
+\item{mod.id}{Logical. Whether to display the model number,
+when there is more than one model.}
 
-\item{...}{Further arguments to be passed to the \code{lm} function for the models.}
+\item{...}{Further arguments to be passed to the \code{lm}
+function for the models.}
 }
 \description{
-Easily compute moderation analyses, with effect sizes, and format in publication-ready format.
+Easily compute moderation analyses, with effect
+sizes, and format in publication-ready format.
 
-Note: this function uses the \code{modelEffectSizes} function from the \code{lmSupport} package to get the sr2 effect sizes.
+Note: this function uses the \code{modelEffectSizes} function from
+the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make the basic table
@@ -69,7 +75,10 @@ nice_mod(data = mtcars,
 
 }
 \seealso{
-Checking simple slopes after testing for moderation: \code{\link{nice_slopes}}, \code{\link{nice_lm}}, \code{\link{nice_lm_slopes}}. Tutorial: \url{https://remi-theriault.com/blog_moderation}
+Checking simple slopes after testing for moderation:
+\code{\link{nice_slopes}}, \code{\link{nice_lm}},
+\code{\link{nice_lm_slopes}}. Tutorial:
+\url{https://remi-theriault.com/blog_moderation}
 }
 \keyword{interaction,}
 \keyword{moderation,}

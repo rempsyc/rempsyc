@@ -1,18 +1,46 @@
 #' @title Easily make nice APA tables
 #'
-#' @description Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
+#' @description Make nice APA tables easily through a wrapper
+#' around the `flextable` package with sensical defaults and
+#' automatic formatting features.
 #'
-#' @param data The data frame, to be converted to a flextable. The data frame cannot have duplicate column names.
-#' @param italics Which columns headers should be italic? Useful for column names that should be italic but that are not picked up automatically by the function. Select with numerical range, e.g., 1:3.
-#' @param highlight Highlight rows with statistically significant results? Requires a column named "p" containing p-values. Can either accept logical (TRUE/FALSE) OR a numeric value for a custom critical p-value threshold (e.g., 0.10 or 0.001).
-#' @param col.format.p Applies p-value formatting to columns that cannot be named "p" (for example for a data frame full of p-values, also because it is not possible to have more than one column named "p"). Select with numerical range, e.g., 1:3.
-#' @param col.format.r Applies r-value formatting to columns that cannot be named "r" (for example for a data frame full of r-values, also because it is not possible to have more than one column named "r"). Select with numerical range, e.g., 1:3.
-#' @param format.custom Applies custom formatting to columns selected via the `col.format.custom` argument. This is useful if one wants custom formatting other than for p- or r-values. It can also be used to transform (e.g., multiply) certain values or print a specific symbol along the values for instance.
-#' @param col.format.custom Which columns to apply the custom function to. Select with numerical range, e.g., 1:3.
-#' @param width Width of the table, in percentage of the total width, when exported e.g., to Word.
-#' @param broom If providing a tidy table produced with the `broom` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", "cor.test", and "wilcox.test").
-#' @param report If providing an object produced with the `report` package, which model type to use if one wants automatic formatting (options are "t.test", "lm", and "cor.test").
-#' @param short Logical. Whether to return an abbreviated version of the tables made by the `report` package.
+#' @param data The data frame, to be converted to a flextable.
+#' The data frame cannot have duplicate column names.
+#' @param italics Which columns headers should be italic? Useful
+#' for column names that should be italic but that are not picked
+#' up automatically by the function. Select with numerical range, e.g., 1:3.
+#' @param highlight Highlight rows with statistically significant
+#'  results? Requires a column named "p" containing p-values.
+#'  Can either accept logical (TRUE/FALSE) OR a numeric value for
+#'  a custom critical p-value threshold (e.g., 0.10 or 0.001).
+#' @param col.format.p Applies p-value formatting to columns
+#' that cannot be named "p" (for example for a data frame full
+#' of p-values, also because it is not possible to have more
+#' than one column named "p"). Select with numerical range, e.g., 1:3.
+#' @param col.format.r Applies r-value formatting to columns
+#' that cannot be named "r" (for example for a data frame full
+#' of r-values, also because it is not possible to have more
+#' than one column named "r"). Select with numerical range, e.g., 1:3.
+#' @param format.custom Applies custom formatting to columns
+#' selected via the `col.format.custom` argument. This is useful
+#' if one wants custom formatting other than for p- or r-values.
+#' It can also be used to transform (e.g., multiply) certain values
+#' or print a specific symbol along the values for instance.
+#' @param col.format.custom Which columns to apply the custom
+#' function to. Select with numerical range, e.g., 1:3.
+#' @param width Width of the table, in percentage of the
+#' total width, when exported e.g., to Word.
+#' @param broom If providing a tidy table produced with the
+#' `broom` package, which model type to use if one wants
+#' automatic formatting (options are "t.test", "lm", "cor.test",
+#' and "wilcox.test").
+#' @param report If providing an object produced with the
+#' `report` package, which model type to use if one wants
+#' automatic formatting (options are "t.test", "lm", and "cor.test").
+#' @param short Logical. Whether to return an abbreviated
+#' version of the tables made by the `report` package.
+#' @param title Optional, to add a table header, if desired.
+#' @param footnote Optional, to add a table footnote (or more), if desired.
 #'
 #' @keywords APA style table
 #' @examples
@@ -55,8 +83,13 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
-#' @importFrom dplyr mutate %>% select matches case_when relocate across contains select_if
-#' @importFrom flextable "flextable" theme_booktabs hline_top hline_bottom fontsize font align height hrule set_table_properties italic set_formatter colformat_double compose bold bg as_paragraph as_i as_sub as_sup
+#' @importFrom dplyr mutate %>% select matches
+#' case_when relocate across contains select_if any_of
+#' @importFrom flextable "flextable" theme_booktabs hline_top
+#' hline_bottom fontsize font align height hrule
+#' set_table_properties italic set_formatter colformat_double
+#' compose bold bg as_paragraph as_i as_sub as_sup set_caption
+#' add_footer_lines
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -74,11 +107,13 @@ nice_table <- function (data,
                         width = 1,
                         broom = "",
                         report = "",
-                        short = FALSE) {
+                        short = FALSE,
+                        title,
+                        footnote) {
   dataframe <- data
 
-  #   ____________________________________________________________________________
-  #   Broom integration                                                       ####
+  #   __________________________________
+  #   Broom integration            ####
 
   if(!missing(broom)) {
     dataframe %>%
@@ -132,9 +167,33 @@ nice_table <- function (data,
       relocate(Method:Alternative, .before = W) -> dataframe
   }
 
-  #   ____________________________________________________________________________
-  #   Report integration                                                      ####
+  #   __________________________________
+  #   Report integration           ####
 
+
+  if(any(class(dataframe) == "report_table")) {
+    # t.test, aov, and wilcox need to be done separately
+    # because they have no model_class attribute
+    if("Method" %in% names(dataframe)) {
+      if(grepl("t-test", dataframe$Method)) {
+        report <- "t.test"
+      }
+      if(grepl("Wilcox", dataframe$Method)) {
+        report <- "wilcox"
+      }
+    }
+    if("Sum_Squares" %in% names(dataframe)) {
+      report <- "aov"
+    }
+    if(length(attr(dataframe, "model_class")) > 0) {
+      if("lm" %in% attr(dataframe, "model_class")) {
+      report <- "lm"
+      }
+    if(grepl("correlation", attr(dataframe, "title"))) {
+      report <- "cor.test"
+      }
+    }
+  }
   if(!missing(report)) {
     dataframe %>%
       rename_with(
@@ -143,11 +202,8 @@ nice_table <- function (data,
           . == "CI_high" ~ "CI_upper",
           . == "df_error" ~ "df",
           TRUE ~ .)) %>%
-      select(-CI) -> dataframe
-  }
-  if(report == "cor.test") {
-    dataframe %>%
-      relocate(Method:Alternative) -> dataframe
+      relocate(any_of(c("Method", "Alternative"))) %>%
+      select(-any_of("CI")) -> dataframe
   }
   if(report == "t.test") {
     dataframe %>%
@@ -156,8 +212,8 @@ nice_table <- function (data,
           . == "Cohens_d_CI_low" ~ "d_CI_low",
           . == "Cohens_d_CI_high" ~ "d_CI_high",
           . == "Cohens_d" ~ "d",
-          TRUE ~ .)) %>%
-      relocate(Method:Alternative) -> dataframe
+          . == "mu" ~ "Mu",
+          TRUE ~ .)) -> dataframe
 
     dataframe %>%
       format_CI(col.name = "95% CI (t)") %>%
@@ -172,7 +228,6 @@ nice_table <- function (data,
         select_if(!names(.) %in% c("Method", "Alternative", "Mean_Group1",
                                    "Mean_Group2", "Difference", "95% CI (t)"))
     }
-
   }
   if(report == "lm") {
     dataframe %>%
@@ -197,15 +252,44 @@ nice_table <- function (data,
         which(is.na(dataframe$Parameter)):nrow(dataframe)),]
     }
   }
+  if(report == "aov") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "Eta2" ~ "n2",
+          . == "Eta2_partial" ~ "np2",
+          TRUE ~ .)) -> dataframe
+    if("Eta2_CI_low" %in% names(dataframe)) {
+      dataframe %>%
+        format_CI(c("Eta2_CI_low", "Eta2_CI_high"),
+                  col.name = "95% CI (n2)") -> dataframe
+    }
+    if("Eta2_partial_CI_low" %in% names(dataframe)) {
+      dataframe %>%
+        format_CI(c("Eta2_partial_CI_low", "Eta2_partial_CI_high"),
+                  col.name = "95% CI (np2)") -> dataframe
+    }
+  }
+  if(report == "wilcox") {
+    dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "r_rank_biserial" ~ "rrb",
+          TRUE ~ .)) -> dataframe
+    dataframe %>%
+      format_CI(c("rank_biserial_CI_low", "rank_biserial_CI_high"),
+                col.name = "95% CI (rrb)") -> dataframe
+  }
 
-  #   ____________________________________________________________________________
-  #   Formatting                                                              ####
+  #   _________________________________
+  #   Formatting                   ####
 
   if("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
   }
   dataframe %>%
-    mutate(across(contains("95% CI"), ~ ifelse(.x == "[ NA,  NA]", "", .x))) -> dataframe
+    mutate(across(contains("95% CI"), ~ ifelse(
+      .x == "[ NA,  NA]", "", .x))) -> dataframe
   if(highlight == TRUE) {
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
@@ -216,8 +300,8 @@ nice_table <- function (data,
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 
-  #   ____________________________________________________________________________
-  #   Flextable                                                               ####
+  #   __________________________________
+  #   Flextable                     ####
 
   dataframe %>%
     {if(highlight == TRUE | is.numeric(highlight))
@@ -228,8 +312,6 @@ nice_table <- function (data,
     hline_bottom(part="head", border = nice.borders) %>%
     hline_top(part="body", border = nice.borders) %>%
     hline_bottom(part="body", border = nice.borders) %>%
-    fontsize(part = "all", size = 12) %>%
-    font(part = "all", fontname = "Times New Roman") %>%
     align(align = "center", part = "all") %>%
     #line_spacing(space = 2, part = "all") %>%
     height(height = 0.55, part = "body") %>%
@@ -244,11 +326,11 @@ nice_table <- function (data,
       set_table_properties(layout = "autofit") -> table
   }
 
-  #   ____________________________________________________________________________
-  #   Column formatting                                                       ####
+  #   ___________________________________
+  #   Column formatting              ####
 
-  ##  ............................................................................
-  ##  Special cases                                                           ####
+  ##  ....................................
+  ##  Special cases                  ####
   if(!missing(italics)) {
     table %>%
       italic(j = italics, part = "header") -> table
@@ -259,9 +341,9 @@ nice_table <- function (data,
       format_flex(j = "df", digits = df.digits) -> table
   }
 
-  ##  ............................................................................
-  ##  2-digit columns                                                         ####
-  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d")
+  ##  .....................................
+  ##  2-digit columns                 ####
+  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "Mu", "S")
   for(i in cols.2digits) {
     if(i %in% names(dataframe)) {
       table %>%
@@ -269,8 +351,8 @@ nice_table <- function (data,
     }
   }
 
-  ##  ............................................................................
-  ##  0-digit columns                                                         ####
+  ##  .....................................
+  ##  0-digit columns                 ####
   cols.0digits <- c("N", "n", "z")
   for(i in cols.0digits) {
     if(i %in% names(dataframe)) {
@@ -279,8 +361,8 @@ nice_table <- function (data,
     }
   }
 
-  ##  ............................................................................
-  ##  Formatting functions                                                    ####
+  ##  .....................................
+  ##  Formatting functions            ####
   compose.table0 <- data.frame(
     col = c("r", "p"),
     fun = c("format_r", "format_p"))
@@ -292,21 +374,30 @@ nice_table <- function (data,
     }
   }
 
-  ##  ............................................................................
-  ##  Special symbols                                                         ####
+  ##  .....................................
+  ##  Special symbols                 ####
   compose.table1 <- data.frame(
-    col = c("95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)", "B",
-            "np2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2"),
+    col = c("95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)",
+            "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "B", "np2",
+            "n2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2", "tau",
+            "rho", "rrb"),
     value = c('"95% CI (", as_i("b"), ")"',
               '"95% CI (", "\u03B2", ")"',
               '"95% CI (", as_i("t"), ")"',
               '"95% CI (", as_i("d"), ")"',
+              '"95% CI (", "\u03b7", as_sub("p"), as_sup("2"), ")"',
+              '"95% CI (", "\u03b7", as_sup("2"), ")"',
+              '"95% CI (", as_i("r"), as_i(as_sub("rb")), ")"',
               '"\u03B2"',
               '"\u03b7", as_sub("p"), as_sup("2")',
+              '"\u03b7", as_sup("2")',
               '"\u03b7", as_sub("G"), as_sup("2")',
               'as_i("d"), as_sub("R")',
               '"Predictor (+/-1 ", as_i("SD"), ")"',
-              'as_i("M"), as_sub("1"), " - ", as_i("M"), as_sub("2")'))
+              'as_i("M"), as_sub("1"), " - ", as_i("M"), as_sub("2")',
+              '"\u03C4"',
+              '"\u03C1"',
+              'as_i("r"), as_i(as_sub("rb"))'))
   for(i in seq(nrow(compose.table1))) {
     if(compose.table1[i, "col"] %in% names(dataframe)) {
       table %>%
@@ -334,8 +425,8 @@ nice_table <- function (data,
          bg = "#D9D9D9") -> table
   }
 
-  #   ____________________________________________________________________________
-  #   Extra features                                                          ####
+  #   _____________________________________________
+  #   Extra features                           ####
 
   table %>%
     colformat_double(j = (select(dataframe, where(is.numeric)) %>%
@@ -363,6 +454,17 @@ nice_table <- function (data,
                           format.custom, ")")
     eval(parse(text = rExpression))
   }
+  if(!missing(title)) {
+    table <- table %>%
+      set_caption(table, caption = title)
+  }
+  if(!missing(footnote)) {
+    table <- table %>%
+      add_footer_lines(footnote)
+  }
+  table <- table %>%
+    fontsize(part = "all", size = 12) %>%
+    font(part = "all", fontname = "Times New Roman")
   table
 }
 

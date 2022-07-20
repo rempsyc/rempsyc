@@ -11,14 +11,20 @@ find_mad(data, col.list, ID = NULL, criteria = 3)
 
 \item{col.list}{List of variables to check for outliers.}
 
-\item{ID}{ID variable if you would like the outliers to be identified as such.}
+\item{ID}{ID variable if you would like the outliers to be identified
+as such.}
 
-\item{criteria}{How many MAD to use as threshold (similar to standard deviations)}
+\item{criteria}{How many MAD to use as threshold (similar to standard
+deviations)}
 }
 \description{
 Identify outliers based on 3 median absolute deviations.
 
-See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. Journal of Experimental Social Psychology, 49(4), 764–766. https://doi.org/10.1016/j.jesp.2013.03.013
+See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
+Detecting outliers: Do not use standard deviation around the mean,
+use absolute deviation around the median. \emph{Journal of Experimental
+Social Psychology}, \emph{49}(4), 764–766.
+https://doi.org/10.1016/j.jesp.2013.03.013
 }
 \examples{
 find_mad(data = mtcars,

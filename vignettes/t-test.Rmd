@@ -1,0 +1,163 @@
+---
+title: "Publication-ready t-tests in R"
+author: "Rémi Thériault"
+date: "February 3, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Publication-ready t-tests in R}
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=7, warning=FALSE, message=FALSE)
+```
+
+## Getting started
+
+This function makes it really easy to get all all your *t*-test results in one simple, publication-ready table.
+
+Let's first load the demo data. This data set comes with base `R` (meaning you have it too and can directly type this command into your `R` console).
+
+```{r}
+head(mtcars)
+```
+
+Load the `rempsyc` package:
+
+```{r}
+library(rempsyc)
+```
+
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+
+```{r}
+nice_t_test(data = mtcars,
+            response = "mpg",
+            group = "am",
+            warning = FALSE)
+```
+
+> ***Note:*** This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
+
+Now the best thing about this function is that you can put all your dependent variables of interest in the function call and it will output a sweet, pre-formatted table for your convenience.
+
+```{r}
+nice_t_test(data = mtcars,
+            response = names(mtcars)[1:6],
+            group = "am",
+            warning = FALSE) -> t.test.results
+t.test.results
+```
+
+If we want it to look nice
+
+```{r}
+my_table <- nice_table(t.test.results)
+my_table
+```
+
+> ***Note:*** The *d* is Cohen's *d*, and the 95% CI is the confidence interval of the effect size (Cohen's *d*). *p* is the *p*-value, *df* is degrees of freedom, and *t* is the *t*-value.
+
+### Save table to Word
+
+Let's save it to word for use in a publication (optional).
+
+```{r}
+save_as_docx(my_table, path = "D:/R treasures/t-tests.docx")
+```
+
+## Special cases
+
+The function can be passed some of the regular arguments of the base `t.test()` function. For example:
+
+### Student t-test (instead of Welch)
+
+```{r}
+nice_t_test(data = mtcars,
+            response = "mpg",
+            group = "am",
+            var.equal = TRUE) |> 
+  nice_table()
+```
+
+### One-sided (instead of two-sided)
+
+```{r}
+nice_t_test(data = mtcars,
+            response = "mpg",
+            group = "am",
+            alternative = "less",
+            warning = FALSE) |> 
+  nice_table()
+```
+
+### One-sample (instead of two-sample)
+
+```{r}
+nice_t_test(data = mtcars,
+            response = "mpg",
+            mu = 17,
+            warning = FALSE) |> 
+  nice_table()
+```
+
+### Paired t-test (instead of independent samples)
+
+```{r}
+nice_t_test(data = ToothGrowth,
+            response = "len",
+            group = "supp",
+            paired = TRUE) |> 
+  nice_table()
+```
+
+### Multiple comparison corrections
+
+It is also possible to correct for multiple comparisons. Note that only a Bonferroni correction is supported at this time (which simply multiplies the *p*-value by the number of tests). Bonferroni will automatically correct for the number of tests.
+
+```{r}
+nice_t_test(data = mtcars,
+            response = names(mtcars)[1:6],
+            group = "am",
+            correction = "bonferroni",
+            warning = FALSE) |> 
+  nice_table()
+```
+
+## Integrations
+
+There are other ways to do *t*-tests and format the results properly, should you wish—for example through the `broom` and `report` packages. Examples below.
+
+```{r}
+model <- t.test(mpg ~ am, data = mtcars)
+```
+
+### `broom` table
+
+```{r}
+library(broom)
+(stats.table <- tidy(model, conf.int = TRUE))
+nice_table(stats.table, broom = "t.test")
+```
+
+### `report` table
+
+```{r}
+library(report)
+(stats.table <- as.data.frame(report(model)))
+nice_table(stats.table, report = "t.test")
+
+```
+
+The `report` package provides quite comprehensive tables, so one may request an abbreviated table with the `short` argument.
+
+```{r}
+nice_table(stats.table, report = "t.test", short = TRUE)
+```
+
+And there you go!
+
+```{r, results="asis", echo = FALSE}
+source("conclusion.R")
+```
