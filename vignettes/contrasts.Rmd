@@ -7,7 +7,7 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Planned Contrasts Analyses (Group Comparisons)}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
 ---
 
 ```{r global_options, include=FALSE}
@@ -56,7 +56,7 @@ This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviation
 
 *Save the table to Word*
 
-```{r}
+```{r, eval = FALSE}
 save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
 ```
 
@@ -75,7 +75,7 @@ save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
 
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
-```{r}
+```{r, eval = FALSE}
 ggsave('Figure 1.pdf', figure, width=7, height=7, unit='in', 
        dpi=300, path = "D:/R treasures/")
 ```
@@ -133,7 +133,7 @@ Note that with option `highlight = TRUE`, it will automatically highlight signif
 
 *Save the table to Word*
 
-```{r}
+```{r, eval = FALSE}
 save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
 ```
 
@@ -214,7 +214,7 @@ library(ggpubr)
 
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
-```{r}
+```{r, eval = FALSE}
 ggsave('Figure 1.pdf', figure, width=14, height=14, unit='in', 
        dpi=300, path = "D:/R treasures/")
 ```

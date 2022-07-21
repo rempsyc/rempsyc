@@ -53,7 +53,7 @@ This is cool because it gives you a 95% bootstrapped confidence interval (with 2
 
 > ***Note:*** bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I've added an option to specify a specific number of bootstraps with the option `bootstraps = 2000` (change default to your desired value). But because I've recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead; just add `boot = FALSE` as one of the argument.
 
-```{r}
+```{r, eval = FALSE}
 ### Save a high-resolution image file to specified directory
 ggsave('nice_violinplothere.tiff', width = 7, height = 7, unit = 'in', dpi = 300,
        path = "D:/R treasures/")
