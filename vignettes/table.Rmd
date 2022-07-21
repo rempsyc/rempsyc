@@ -234,14 +234,14 @@ my_table %>%
                     p = "p-value")
 ```
 
-## Special situation: multiple headers
+## Special situation: multilevel headers
 
 Some people have asked how to make multilevel descriptive level tables with `nice_table`. There are several other ways than using this package. It is not straightforward, but here's my attempt for multiple time measurements, multiple groups, and multiple dependent variables.
 
 So assuming we have a study with several time measurements, we will make a copy of the iris data set and pretend this is the "Time 2". Species will be our grouping variable.
 
 ```{r}
-# Setup test dataset
+# Setup example dataset
 data <- cbind(iris[c(5, 1:3)], iris[1:3]+1)
 names(data)[-1] <- c(paste0("T1.", names(data[2:4])),
                      paste0("T2.", names(data[2:4])))
@@ -283,10 +283,10 @@ T2 <- rbind(T2.disp, T2.hp, T2.drat)
 wide.data <- cbind(Variable = names(iris[1:3]), T1, T2)
 
 # Rename variables to avoid duplicate names not allowed
-names(wide.data)[-1] <- paste0(rep(c("T1.", "T2."), each=6),
-                               rep(descriptive.data$Species, 
-                                   times=2, each=2),
-                               paste0(c(".M",".SD")))
+names(wide.data)[-1] <- paste0(
+  rep(c("T1.", "T2."), each = 6), 
+  rep(descriptive.data$Species, times = 2, each = 2),
+  paste0(c(".M", ".SD")))
 
 # Make preliminary nice_table
 my.table <- nice_table(wide.data)
@@ -294,26 +294,19 @@ my.table
 
 ```
 
-So far so good; we've managed to tranform the data in a suitable format for the next step, but it's not over yet. We need an extra package to do this, `ftExtra`. We're only really interested in the `span_header` function, but because it doesn't use the same theme/style as we do, we have to add back some of it manually.
+So far so good; we've managed to tranform the data in a suitable format for the next step, but it's not over yet. We need to use the `flextable::separate_header` function, which will produce multilevel headings like we want, based on the periods, and depending on the position of the terms in the column names. We also have to add back some formatting to get a perfect result.
 
 ```{r}
-library(ftExtra)
-nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 my.table %>%
-  span_header() %>%
-  fontsize(part = "all", size = 12) %>%
-  font(part = "all", fontname = "Times New Roman") %>%
-  hline_top(part="head", border = nice.borders) %>%
-  hline_bottom(part="body", border = nice.borders) %>%
-  align(align = "center", part = "all")  %>%
-  line_spacing(space = 2, part = "all") %>%
+  separate_header %>%
+  valign(valign = "center", part = "all")  %>%
+  align(align = "center", part = "all") %>% 
   italic(i = 3, part = "header") -> my.table
 my.table
-
 ```
 
 If you find a more efficient way to do this (especially the data wrangling part), please let me know. Nice result though!
 
-```{r, results="asis", echo = FALSE}
-source("conclusion.R")
-```
+### Thanks for checking in
+    
+Make sure to check out this page again if you use the code after a time or if you encounter errors, as I periodically update or improve the code. Feel free to contact me for comments, questions, or requests to improve this function at https://github.com/rempsyc/rempsyc/issues. See all tutorials here: https://remi-theriault.com/tutorials.
