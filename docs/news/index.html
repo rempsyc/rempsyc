@@ -25,20 +25,27 @@
   </a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/blog_contrasts.html">Planned Contrasts</a>
-    <a class="dropdown-item" href="../articles/blog_circles.html">Overlapping Circles</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <a class="dropdown-item" href="../articles/table.html">APA tables</a>
+    <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
+    <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
+    <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
+    <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
+    <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
+    <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
+    <a class="dropdown-item" href="../articles/assumptions.html">Assumptions</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="active nav-item">
-  <a class="nav-link" href="../news/index.html">News</a>
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../TODOS.html">Release Map</a>
+  <a class="nav-link" href="../TODOS.html">To-dos</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -79,9 +86,15 @@
 <h2 class="pkg-version" data-toc-text="0.0.5.1" id="rempsyc-0051">rempsyc 0.0.5.1<a class="anchor" aria-label="anchor" href="#rempsyc-0051"></a></h2>
 <ul><li>New package site, hooray!</li>
 <li>
-<code>cormatrix_excel</code>: changed default method of base <code>cor</code> function from “na.or.complete” to the most liberal one to match SPSS: “pairwise.complete.obs”. Also added a <code>use</code> argument to specify which one to use in case a user wants a different option.</li>
+<code>cormatrix_excel</code>:
+<ul><li>Changed default method of base <code>cor</code> function from “na.or.complete” to the most liberal one to match SPSS: “pairwise.complete.obs”.</li>
+<li>Added a <code>use</code> argument to specify which one to use in case a user wants a different option.</li>
+</ul></li>
 <li>
-<code>nice_table</code>: automatized integration with the <code>report</code> package so we don’t have to specify the e.g. <code>report = "lm"</code> argument manually.</li>
+<code>nice_table</code>:
+<ul><li>Automatized integration with the <code>report</code> package so we don’t have to specify the e.g. <code>report = "lm"</code> argument manually.</li>
+<li>Added optional arguments for table title and footnote.</li>
+</ul></li>
 <li>Many functions (based on <code>goodpractice</code> package recommendations):
 <ul><li>Changed <code>sapply</code> for <code>lapply</code> since <code>sapply</code> is not recommended and using <code>vapply</code> with list outputs was too complicated.</li>
 <li>Shortened line codes to &lt; 80 characters.</li>
