@@ -238,7 +238,7 @@ my_table %>%
 
 Some people have asked how to make multilevel descriptive level tables with `nice_table`. There are several other ways than using this package. It is not straightforward, but here's my attempt for multiple time measurements, multiple groups, and multiple dependent variables.
 
-So assuming we have a study with several time measurements, we will make a copy of the iris data set and pretend this is the "Time 2". Species will be our grouping variable.
+So assuming we have a study with several time measurements, we will make a copy of the iris data set and pretend this is the "Time 2". Species will be our grouping variable. Before we can apply our simple function, however, we have to (painstakingly) reshape the data to the proper format.
 
 ```{r}
 # Setup example dataset
@@ -289,28 +289,17 @@ names(wide.data)[-1] <- paste0(
   paste0(c(".M", ".SD")))
 
 # Make preliminary nice_table
-my.table <- nice_table(wide.data)
-my.table
+nice_table(wide.data)
 
 ```
 
-So far so good; we've managed to tranform the data in a suitable format for the next step, but it's not over yet. We need to use the `flextable::separate_header` function, which will produce multilevel headings like we want, based on the periods, and depending on the position of the terms in the column names. We also have to add back some formatting to get a perfect result.
+So far so good; we've managed to tranform the data in a suitable format for the next step. Once the data is in the right shape (header components separated by dots), we can apply our magic:
 
 ```{r}
-nice.borders <- list("width" = 0.5, color = "black", style = "solid")
-my.table %>%
-  separate_header %>%
-  valign(valign = "center", part = "all")  %>%
-  align(align = "center", part = "all") %>% 
-  hline_bottom(part="head", border = nice.borders) %>%
-  hline_top(part="body", border = nice.borders) %>%
-  hline_top(part="head", border = nice.borders) %>%
-  fix_border_issues %>% 
-  italic(i = 3, part = "header") -> my.table
-my.table
+nice_table(wide.data, separate.header = TRUE, italics = 2:ncol(wide.data))
 ```
 
-If you find a more efficient way to do this (especially the data wrangling part), please let me know. Nice result though!
+If you find a more efficient way to do this (the data wrangling part), please let me know. Nice result though!
 
 ### Thanks for checking in
     

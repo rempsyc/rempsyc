@@ -30,7 +30,7 @@
 #' # Use whole data frame
 #' nice_na(airquality)
 #'
-#' # Use selected columns
+#' # Use selected columns explicitly
 #' nice_na(airquality,
 #'           vars = list(c("Ozone", "Solar.R", "Wind"),
 #'                       c("Temp", "Month", "Day")))
@@ -71,6 +71,7 @@ nice_na <- function(data, vars, scales) {
 nice_na_internal <- function(data) {
   data %>%
     summarize(var = paste0(first(names(.)), ":", last(names(.))),
+              items = ncol(.),
               na = sum(is.na(.)),
               cells = prod(dim(.)),
               na_percent = round(na/cells * 100, 2),

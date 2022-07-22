@@ -39,7 +39,7 @@ data: Simpler is just as good. The \emph{Counseling Psychologist},
 # Use whole data frame
 nice_na(airquality)
 
-# Use selected columns
+# Use selected columns explicitly
 nice_na(airquality,
           vars = list(c("Ozone", "Solar.R", "Wind"),
                       c("Temp", "Month", "Day")))

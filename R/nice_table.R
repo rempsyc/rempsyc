@@ -41,11 +41,14 @@
 #' version of the tables made by the `report` package.
 #' @param title Optional, to add a table header, if desired.
 #' @param footnote Optional, to add a table footnote (or more), if desired.
+#' @param separate.header Logical, whether to separate headers based on name delimiters (i.e., periods ".").
 #'
 #' @keywords APA style table
 #' @examples
 #' # Make the basic table
-#' my_table <- nice_table(head(mtcars))
+#' my_table <- nice_table(mtcars[1:3,],
+#'   title = "Motor Trend Car Road Tests",
+#'   footnote = "Note: 1974 Motor Trend US magazine.")
 #' my_table
 #'
 #' \dontrun{
@@ -83,13 +86,22 @@
 #' fun <- function(x) {paste("x", x)}
 #' nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 #'
+#' # Separate headers based on periods
+#' header.data <- structure(list(Variable = c("Sepal.Length",
+#' "Sepal.Width", "Petal.Length"), setosa.M = c(5.01, 3.43,
+#' 1.46), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
+#' c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)),
+#' row.names = c(NA, -3L), class = "data.frame")
+#' nice_table(header.data, separate.header = TRUE,
+#'            italics = 2:4)
+#'
 #' @importFrom dplyr mutate %>% select matches
 #' case_when relocate across contains select_if any_of
-#' @importFrom flextable "flextable" theme_booktabs hline_top
-#' hline_bottom fontsize font align height hrule
-#' set_table_properties italic set_formatter colformat_double
-#' compose bold bg as_paragraph as_i as_sub as_sup set_caption
-#' add_footer_lines
+#' @importFrom flextable "flextable" hline_top hline_bottom
+#' fontsize font align set_table_properties italic
+#' set_formatter colformat_double compose bold bg
+#' as_paragraph as_i as_sub as_sup set_caption
+#' add_footer_lines line_spacing valign separate_header
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -109,7 +121,8 @@ nice_table <- function (data,
                         report = "",
                         short = FALSE,
                         title,
-                        footnote) {
+                        footnote,
+                        separate.header) {
   dataframe <- data
 
   #   __________________________________
@@ -306,17 +319,27 @@ nice_table <- function (data,
   dataframe %>%
     {if(highlight == TRUE | is.numeric(highlight))
       flextable(., col_keys = names(dataframe)[-length(dataframe)])
-      else flextable(.)} %>%
-    theme_booktabs %>%
+      else flextable(.)} -> table
+
+  if(!missing(title)) {
+    table <- table %>%
+      set_caption(table, caption = title)
+  }
+  if(!missing(footnote)) {
+    table <- table %>%
+      add_footer_lines(footnote)
+  }
+
+  table %>%
+    fontsize(part = "all", size = 12) %>%
+    font(part = "all", fontname = "Times New Roman") %>%
     hline_top(part="head", border = nice.borders) %>%
     hline_bottom(part="head", border = nice.borders) %>%
     hline_top(part="body", border = nice.borders) %>%
     hline_bottom(part="body", border = nice.borders) %>%
     align(align = "center", part = "all") %>%
-    #line_spacing(space = 2, part = "all") %>%
-    height(height = 0.55, part = "body") %>%
-    height(height = 0.55, part = "head") %>%
-    hrule(rule = "exact", part = "all") -> table
+    valign(valign = "center", part = "all") %>%
+    line_spacing(space = 2, part = "all") -> table
 
   if(!missing(width)) {
     table %>%
@@ -326,14 +349,23 @@ nice_table <- function (data,
       set_table_properties(layout = "autofit") -> table
   }
 
+  if(!missing(separate.header)) {
+    table <- table %>%
+      separate_header("span-top")
+  }
+
   #   ___________________________________
   #   Column formatting              ####
 
   ##  ....................................
   ##  Special cases                  ####
-  if(!missing(italics)) {
+  if(!missing(italics) & missing(separate.header)) {
     table %>%
       italic(j = italics, part = "header") -> table
+  } else if (!missing(italics) & !missing(separate.header)) {
+    level.number <- sum(charToRaw(names(dataframe[2])) == charToRaw('.')) + 1
+    table %>%
+      italic(j = italics, i = level.number, part = "header") -> table
   }
   if("df" %in% names(dataframe)) {
     df.digits <- ifelse(any(dataframe$df %% 1 == 0), 0, 2)
@@ -454,17 +486,6 @@ nice_table <- function (data,
                           format.custom, ")")
     eval(parse(text = rExpression))
   }
-  if(!missing(title)) {
-    table <- table %>%
-      set_caption(table, caption = title)
-  }
-  if(!missing(footnote)) {
-    table <- table %>%
-      add_footer_lines(footnote)
-  }
-  table <- table %>%
-    fontsize(part = "all", size = 12) %>%
-    font(part = "all", fontname = "Times New Roman")
   table
 }
 

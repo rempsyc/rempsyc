@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.2
+* `nice_table`: added new argument, `separate.header`, a logical (and simplified) form of the `flextable::separate_header` argument.
+
 ## rempsyc 0.0.5.1
 * New package site, hooray!
 * `cormatrix_excel`: 

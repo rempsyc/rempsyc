@@ -17,7 +17,8 @@ nice_table(
   report = "",
   short = FALSE,
   title,
-  footnote
+  footnote,
+  separate.header
 )
 }
 \arguments{
@@ -70,6 +71,8 @@ version of the tables made by the \code{report} package.}
 \item{title}{Optional, to add a table header, if desired.}
 
 \item{footnote}{Optional, to add a table footnote (or more), if desired.}
+
+\item{separate.header}{Logical, whether to separate headers based on name delimiters (i.e., periods ".").}
 }
 \description{
 Make nice APA tables easily through a wrapper
@@ -78,7 +81,9 @@ automatic formatting features.
 }
 \examples{
 # Make the basic table
-my_table <- nice_table(head(mtcars))
+my_table <- nice_table(mtcars[1:3,],
+  title = "Motor Trend Car Road Tests",
+  footnote = "Note: 1974 Motor Trend US magazine.")
 my_table
 
 \dontrun{
@@ -115,6 +120,15 @@ nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
 fun <- function(x) {paste("x", x)}
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
+
+# Separate headers based on periods
+header.data <- structure(list(Variable = c("Sepal.Length",
+"Sepal.Width", "Petal.Length"), setosa.M = c(5.01, 3.43,
+1.46), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
+c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)),
+row.names = c(NA, -3L), class = "data.frame")
+nice_table(header.data, separate.header = TRUE,
+           italics = 2:4)
 
 }
 \seealso{

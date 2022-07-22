@@ -138,20 +138,20 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
-#>   Dependent Variable Comparison df         t              p        dR
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
-#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144
-#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630
-#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
-#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1112335  5.9118647
-#> 2  0.7283489  2.2581400
-#> 3  1.0513435  3.8497796
-#> 4 -4.9728235 -2.4364800
-#> 5 -3.9189827 -1.4630114
-#> 6 -1.8539604 -0.5044816
+#>   Dependent Variable Comparison df         t              p        dR  CI_lower
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.126110
+#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.691824
+#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.069028
+#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -4.995863
+#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.801244
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.777304
+#>     CI_upper
+#> 1  5.9294509
+#> 2  2.3723183
+#> 3  3.6207437
+#> 4 -2.4353711
+#> 5 -1.3221562
+#> 6 -0.4408298
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -426,16 +426,16 @@ df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
-#>                   var na cells na_percent na_max na_max_percent
-#> 1 scale1_Q1:scale1_Q3  0    21       0.00      0           0.00
-#> 2 scale2_Q1:scale2_Q3  3    21      14.29      1          33.33
-#> 3 scale3_Q1:scale3_Q3  2    21       9.52      1          33.33
-#> 4               Total  5    63       7.94      2          22.22
+#>                   var items na cells na_percent na_max na_max_percent
+#> 1 scale1_Q1:scale1_Q3     3  0    21       0.00      0           0.00
+#> 2 scale2_Q1:scale2_Q3     3  3    21      14.29      1          33.33
+#> 3 scale3_Q1:scale3_Q3     3  2    21       9.52      1          33.33
+#> 4               Total     9  5    63       7.94      2          22.22
 
 # Or whole dataframe
 nice_na(df)
-#>                   var na cells na_percent na_max na_max_percent
-#> 1 scale1_Q1:scale3_Q3  5    63       7.94      2          22.22
+#>                   var items na cells na_percent na_max na_max_percent
+#> 1 scale1_Q1:scale3_Q3     9  5    63       7.94      2          22.22
 ```
 
 ## `nice_reverse`
