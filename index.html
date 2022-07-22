@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -202,20 +202,20 @@
 <span>               group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
 <span>               covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">contrasts</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
-<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1112335  5.9118647</span></span>
-<span><span class="co">#&gt; 2  0.7283489  2.2581400</span></span>
-<span><span class="co">#&gt; 3  1.0513435  3.8497796</span></span>
-<span><span class="co">#&gt; 4 -4.9728235 -2.4364800</span></span>
-<span><span class="co">#&gt; 5 -3.9189827 -1.4630114</span></span>
-<span><span class="co">#&gt; 6 -1.8539604 -0.5044816</span></span>
+<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR  CI_lower</span></span>
+<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.126110</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.691824</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.069028</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -4.995863</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.801244</span></span>
+<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.777304</span></span>
+<span><span class="co">#&gt;     CI_upper</span></span>
+<span><span class="co">#&gt; 1  5.9294509</span></span>
+<span><span class="co">#&gt; 2  2.3723183</span></span>
+<span><span class="co">#&gt; 3  3.6207437</span></span>
+<span><span class="co">#&gt; 4 -2.4353711</span></span>
+<span><span class="co">#&gt; 5 -1.3221562</span></span>
+<span><span class="co">#&gt; 6 -0.4408298</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -447,16 +447,16 @@
 <span></span>
 <span><span class="co"># Then select your scales by name</span></span>
 <span><span class="fu"><a href="reference/nice_na.html">nice_na</a></span><span class="op">(</span><span class="va">df</span>, scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scale1"</span>, <span class="st">"scale2"</span>, <span class="st">"scale3"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   var na cells na_percent na_max na_max_percent</span></span>
-<span><span class="co">#&gt; 1 scale1_Q1:scale1_Q3  0    21       0.00      0           0.00</span></span>
-<span><span class="co">#&gt; 2 scale2_Q1:scale2_Q3  3    21      14.29      1          33.33</span></span>
-<span><span class="co">#&gt; 3 scale3_Q1:scale3_Q3  2    21       9.52      1          33.33</span></span>
-<span><span class="co">#&gt; 4               Total  5    63       7.94      2          22.22</span></span>
+<span><span class="co">#&gt;                   var items na cells na_percent na_max na_max_percent</span></span>
+<span><span class="co">#&gt; 1 scale1_Q1:scale1_Q3     3  0    21       0.00      0           0.00</span></span>
+<span><span class="co">#&gt; 2 scale2_Q1:scale2_Q3     3  3    21      14.29      1          33.33</span></span>
+<span><span class="co">#&gt; 3 scale3_Q1:scale3_Q3     3  2    21       9.52      1          33.33</span></span>
+<span><span class="co">#&gt; 4               Total     9  5    63       7.94      2          22.22</span></span>
 <span></span>
 <span><span class="co"># Or whole dataframe</span></span>
 <span><span class="fu"><a href="reference/nice_na.html">nice_na</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   var na cells na_percent na_max na_max_percent</span></span>
-<span><span class="co">#&gt; 1 scale1_Q1:scale3_Q3  5    63       7.94      2          22.22</span></span></code></pre></div>
+<span><span class="co">#&gt;                   var items na cells na_percent na_max na_max_percent</span></span>
+<span><span class="co">#&gt; 1 scale1_Q1:scale3_Q3     9  5    63       7.94      2          22.22</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="nice_reverse">

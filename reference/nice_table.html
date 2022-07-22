@@ -14,7 +14,7 @@ automatic formatting features."><meta property="og:image" content="https://remps
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +108,8 @@ automatic formatting features.</p>
 <span>  report <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  short <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">title</span>,</span>
-<span>  <span class="va">footnote</span></span>
+<span>  <span class="va">footnote</span>,</span>
+<span>  <span class="va">separate.header</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -189,6 +190,10 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <dt>footnote</dt>
 <dd><p>Optional, to add a table footnote (or more), if desired.</p></dd>
 
+
+<dt>separate.header</dt>
+<dd><p>Logical, whether to separate headers based on name delimiters (i.e., periods ".").</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -198,19 +203,19 @@ version of the tables made by the <code>report</code> package.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic table</span></span></span>
-<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>,</span></span>
+<span class="r-in"><span>  footnote <span class="op">=</span> <span class="st">"Note: 1974 Motor Trend US magazine."</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_table</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `mpg`, `cyl`, `disp`, `hp`, `drat`, `wt`, `qsec`, `vs`, `am`, `gear`, `carb` </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> header has 1 row(s) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> body has 6 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 3 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Save table to word</span></span></span>
@@ -298,6 +303,24 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">test</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span>, col.format.custom <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, format.custom <span class="op">=</span> <span class="st">"fun"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_formatter(., r = fun):</span> object 'fun' not found</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Separate headers based on periods</span></span></span>
+<span class="r-in"><span><span class="va">header.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>,</span></span>
+<span class="r-in"><span><span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span>, setosa.M <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.01</span>, <span class="fl">3.43</span>,</span></span>
+<span class="r-in"><span><span class="fl">1.46</span><span class="op">)</span>, setosa.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.35</span>, <span class="fl">0.38</span>, <span class="fl">0.17</span><span class="op">)</span>, versicolor.M <span class="op">=</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.94</span>, <span class="fl">2.77</span>, <span class="fl">4.26</span><span class="op">)</span>, versicolor.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.52</span>, <span class="fl">0.31</span>, <span class="fl">0.47</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">3L</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"data.frame"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">header.data</span>, separate.header <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>           italics <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `Variable`, `setosa.M`, `setosa.SD`, `versicolor.M`, `versicolor.SD` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> body has 3 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Variable setosa.M setosa.SD versicolor.M versicolor.SD</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Sepal.Length     5.01      0.35         5.94          0.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Sepal.Width     3.43      0.38         2.77          0.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Petal.Length     1.46      0.17         4.26          0.47</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
