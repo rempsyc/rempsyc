@@ -27,11 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>√ STATISTICS</h6>
     <a class="dropdown-item" href="articles/table.html">APA tables</a>
     <a class="dropdown-item" href="articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>📊 VISUALIZATION</h6>
     <a class="dropdown-item" href="articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="articles/circles.html">Overlapping circles</a>
@@ -85,7 +87,7 @@
 <div id="development-objectives-to-do-list" class="section level1"><ul><li>
 <code>winsorize_mad</code><ul><li>Add documentation (or not given it has been integrated to the <code>easystats::datawizard</code> package)</li></ul></li>
 <li>
-<code>scale_mad</code> (or not given it has been integrated to the <code>easystats::datawizard</code> package)<ul><li>Add documentation</li></ul></li>
+<code>scale_mad</code> (or not given it is already available from the <code>easystats::datawizard</code> package)<ul><li>Add documentation</li></ul></li>
 <li>
 <code>find_mad</code><ul><li>Add documentation (or not given it is in the process to be integrated to the <code>easystats::datawizard</code> package)</li></ul></li>
 <li>
@@ -94,9 +96,7 @@
 <li>Add option <code>bootstrapped.CI</code> to use a bootstrapped version of the 95% CI</li>
 </ul></li>
 <li>
-<code>nice_table</code><ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li>
-<li>Tutorial: show how to add different levels of headers, etc.</li>
-</ul></li>
+<code>nice_table</code><ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li></ul></li>
 <li>
 <code>nice_lm_slopes</code><ul><li>Support second moderator</li></ul></li>
 <li>
@@ -110,7 +110,8 @@
 <li>
 <code>nice_contrasts</code><ul><li>Need to accommodate: interactions/moderations in the models</li>
 <li>Also add option to specify contrasts manually</li>
-<li>Add option to not use robust Cohen’s d</li>
+<li>Add option to not use robust Cohen’s <em>d</em>
+</li>
 <li>Add option to not use bootstrapping</li>
 </ul></li>
 <li>All functions<ul><li>Check for consistency among argument names like response/variable<ul><li>Check at other functions to see what’s most typically used</li></ul></li>
@@ -118,8 +119,6 @@
 <li>Add support for NA missing values</li>
 </ul></li>
 <li>Finish writing all function tests</li>
-<li>Make intro vignette + home index vignette</li>
-<li>Transforms tutorials into vignettes</li>
 <li>Suggest collaboration with easystats</li>
 <li>Submit to CRAN</li>
 </ul></div>

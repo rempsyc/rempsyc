@@ -31,11 +31,13 @@ automatic formatting features."><meta property="og:image" content="https://remps
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>√ STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>📊 VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -203,13 +205,14 @@ version of the tables made by the <code>report</code> package.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic table</span></span></span>
-<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span>,</span></span>
+<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,</span></span>
 <span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>,</span></span>
-<span class="r-in"><span>  footnote <span class="op">=</span> <span class="st">"Note: 1974 Motor Trend US magazine."</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  footnote <span class="op">=</span> <span class="st">"Note: 1974 Motor Trend US magazine."</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_table</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `mpg`, `cyl`, `disp`, `hp`, `drat`, `wt`, `qsec`, `vs`, `am`, `gear`, `carb` </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> header has 1 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> body has 3 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
@@ -227,10 +230,14 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars.std</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">stats.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">CI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">stats.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">stats.table</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                     <span class="va">stats.table</span>, <span class="va">CI</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">stats.table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Term"</span>, <span class="st">"B"</span>, <span class="st">"SE"</span>, <span class="st">"t"</span>, <span class="st">"p"</span>,</span></span>
-<span class="r-in"><span>                        <span class="st">"CI_lower"</span>, <span class="st">"CI_upper"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">stats.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">stats.table</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">stats.table</span>, <span class="va">CI</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">stats.table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Term"</span>, <span class="st">"B"</span>, <span class="st">"SE"</span>, <span class="st">"t"</span>, <span class="st">"p"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"CI_lower"</span>, <span class="st">"CI_upper"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">stats.table</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `Term`, `B`, `SE`, `t`, `p`, `95% CI` </span>
@@ -252,9 +259,11 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Test different column names</span></span></span>
 <span class="r-in"><span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dR"</span>, <span class="st">"N"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>, <span class="st">"b"</span>, <span class="st">"np2"</span>,</span></span>
-<span class="r-in"><span>                 <span class="st">"ges"</span>, <span class="st">"p"</span>, <span class="st">"r"</span>, <span class="st">"R2"</span>, <span class="st">"sr2"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">test</span><span class="op">[</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">test</span><span class="op">[</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">/</span><span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"dR"</span>, <span class="st">"N"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>, <span class="st">"b"</span>, <span class="st">"np2"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"ges"</span>, <span class="st">"p"</span>, <span class="st">"r"</span>, <span class="st">"R2"</span>, <span class="st">"sr2"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">test</span><span class="op">[</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">test</span><span class="op">[</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span> <span class="op">/</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">test</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `dR`, `N`, `M`, `SD`, `b`, `np2`, `ges`, `p`, `r`, `R2`, `sr2` </span>
@@ -296,22 +305,35 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 0 0 0.3 0.2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Apply custom functions to cells</span></span></span>
-<span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="va">x</span><span class="op">+</span><span class="fl">11.1</span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">+</span> <span class="fl">11.1</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">test</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span>, col.format.custom <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, format.custom <span class="op">=</span> <span class="st">"fun"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_formatter(., r = fun):</span> object 'fun' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="va">x</span><span class="op">)</span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">test</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span>, col.format.custom <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, format.custom <span class="op">=</span> <span class="st">"fun"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_formatter(., r = fun):</span> object 'fun' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Separate headers based on periods</span></span></span>
-<span class="r-in"><span><span class="va">header.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>,</span></span>
-<span class="r-in"><span><span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span><span class="op">)</span>, setosa.M <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.01</span>, <span class="fl">3.43</span>,</span></span>
-<span class="r-in"><span><span class="fl">1.46</span><span class="op">)</span>, setosa.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.35</span>, <span class="fl">0.38</span>, <span class="fl">0.17</span><span class="op">)</span>, versicolor.M <span class="op">=</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.94</span>, <span class="fl">2.77</span>, <span class="fl">4.26</span><span class="op">)</span>, versicolor.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.52</span>, <span class="fl">0.31</span>, <span class="fl">0.47</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">3L</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"data.frame"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">header.data</span>, separate.header <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>           italics <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">header.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"Sepal.Length"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Sepal.Width"</span>, <span class="st">"Petal.Length"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>, setosa.M <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fl">5.01</span>, <span class="fl">3.43</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">1.46</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>, setosa.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.35</span>, <span class="fl">0.38</span>, <span class="fl">0.17</span><span class="op">)</span>, versicolor.M <span class="op">=</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.94</span>, <span class="fl">2.77</span>, <span class="fl">4.26</span><span class="op">)</span>, versicolor.SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.52</span>, <span class="fl">0.31</span>, <span class="fl">0.47</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">3L</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"data.frame"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_table</span><span class="op">(</span><span class="va">header.data</span>,</span></span>
+<span class="r-in"><span>  separate.header <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  italics <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `Variable`, `setosa.M`, `setosa.SD`, `versicolor.M`, `versicolor.SD` </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>

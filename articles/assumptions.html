@@ -51,11 +51,13 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>√ STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>📊 VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -158,7 +160,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="fu"><a href="../reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>, col.format.p <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Interpretation: (p) values &lt; .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.</span></span></code></pre>
-<template id="0ba32160-898b-4bce-ad17-455fb9b08ae8"><style>
+<template id="1eb7d40e-d835-469b-877a-3c62abfb7ed9"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -194,27 +196,27 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-dcbe191a{table-layout:auto;width:0%;}.cl-dcb7dcf8{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dcb7f4fe{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-dcb82578{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dcb82582{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-dcbe191a">
+<style>.cl-dd7af154{table-layout:auto;width:0%;}.cl-dd7357b4{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd73762c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-dd73ae30{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd73ae3a{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-dd7af154">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-dcb82582"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">Model...</span></p></td>
-<td class="cl-dcb82582"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">Normality (Shapiro-Wilk)...</span></p></td>
-<td class="cl-dcb82582"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">Homoscedasticity (Breusch-Pagan)...</span></p></td>
-<td class="cl-dcb82582"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
-<td class="cl-dcb82582"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">Diagnostic...</span></p></td>
+<td class="cl-dd73ae3a"><p class="cl-dd73762c"><span class="cl-dd7357b4">Model...</span></p></td>
+<td class="cl-dd73ae3a"><p class="cl-dd73762c"><span class="cl-dd7357b4">Normality (Shapiro-Wilk)...</span></p></td>
+<td class="cl-dd73ae3a"><p class="cl-dd73762c"><span class="cl-dd7357b4">Homoscedasticity (Breusch-Pagan)...</span></p></td>
+<td class="cl-dd73ae3a"><p class="cl-dd73762c"><span class="cl-dd7357b4">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
+<td class="cl-dd73ae3a"><p class="cl-dd73762c"><span class="cl-dd7357b4">Diagnostic...</span></p></td>
 </tr></thead>
 <tbody><tr style="overflow-wrap:break-word;">
-<td class="cl-dcb82578"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">mpg ~ wt * cyl + gear</span></p></td>
-<td class="cl-dcb82578"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">.615</span></p></td>
-<td class="cl-dcb82578"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">.054</span></p></td>
-<td class="cl-dcb82578"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">.525</span></p></td>
-<td class="cl-dcb82578"><p class="cl-dcb7f4fe"><span class="cl-dcb7dcf8">0</span></p></td>
+<td class="cl-dd73ae30"><p class="cl-dd73762c"><span class="cl-dd7357b4">mpg ~ wt * cyl + gear</span></p></td>
+<td class="cl-dd73ae30"><p class="cl-dd73762c"><span class="cl-dd7357b4">.615</span></p></td>
+<td class="cl-dd73ae30"><p class="cl-dd73762c"><span class="cl-dd7357b4">.054</span></p></td>
+<td class="cl-dd73ae30"><p class="cl-dd73762c"><span class="cl-dd7357b4">.525</span></p></td>
+<td class="cl-dd73ae30"><p class="cl-dd73762c"><span class="cl-dd7357b4">0</span></p></td>
 </tr></tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="4c8d2d5e-add4-443e-8fc9-f6f1862682a5"></div>
+</div></template><div class="flextable-shadow-host" id="c62d7495-2c9b-4dcf-969b-bfda77b11c11"></div>
 <script>
-var dest = document.getElementById("4c8d2d5e-add4-443e-8fc9-f6f1862682a5");
-var template = document.getElementById("0ba32160-898b-4bce-ad17-455fb9b08ae8");
+var dest = document.getElementById("c62d7495-2c9b-4dcf-969b-bfda77b11c11");
+var template = document.getElementById("1eb7d40e-d835-469b-877a-3c62abfb7ed9");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -242,7 +244,7 @@ fantome.appendChild(templateContent);
 <p>Or alternatively with the <a href="https://remi-theriault.com/blog_table" class="external-link">nice_table() function</a></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">assumptions.table</span>, col.format.p <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<template id="2fa8b964-e1af-486b-a937-bf4c55327307"><style>
+<template id="0134d1af-be05-4917-b78a-32da7021d39c"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -278,92 +280,92 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-dd123108{table-layout:auto;width:0%;}.cl-dd0c39ce{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd0c4c52{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-dd0c8960{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd0c896a{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd0c8974{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-dd123108">
+<style>.cl-dddf63c8{table-layout:auto;width:0%;}.cl-ddd87450{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ddd88b3e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-ddd8d0f8{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ddd8d102{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ddd8d10c{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-dddf63c8">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8974"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">Model...</span></p></td>
-<td class="cl-dd0c8974"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">Normality (Shapiro-Wilk)...</span></p></td>
-<td class="cl-dd0c8974"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">Homoscedasticity (Breusch-Pagan)...</span></p></td>
-<td class="cl-dd0c8974"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
-<td class="cl-dd0c8974"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">Diagnostic...</span></p></td>
+<td class="cl-ddd8d10c"><p class="cl-ddd88b3e"><span class="cl-ddd87450">Model...</span></p></td>
+<td class="cl-ddd8d10c"><p class="cl-ddd88b3e"><span class="cl-ddd87450">Normality (Shapiro-Wilk)...</span></p></td>
+<td class="cl-ddd8d10c"><p class="cl-ddd88b3e"><span class="cl-ddd87450">Homoscedasticity (Breusch-Pagan)...</span></p></td>
+<td class="cl-ddd8d10c"><p class="cl-ddd88b3e"><span class="cl-ddd87450">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
+<td class="cl-ddd8d10c"><p class="cl-ddd88b3e"><span class="cl-ddd87450">Diagnostic...</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">cyl ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.361</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.282</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.460</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">0</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">cyl ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.361</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.282</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.460</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">disp ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.506</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.831</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.077</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">0</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">disp ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.506</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.831</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.077</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">hp ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.004</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.351</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.198</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">1</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">hp ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.004</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.351</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.198</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">drat ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.939</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.887</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.505</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">0</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">drat ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.939</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.887</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.505</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">wt ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.020</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.270</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.002</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">2</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">wt ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.020</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.270</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.002</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">2</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">qsec ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.427</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.944</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.011</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">1</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">qsec ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.427</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.944</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.011</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">vs ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.142</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.568</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.238</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">0</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">vs ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.142</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.568</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.238</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">am ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.074</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.650</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">&lt; .001</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">1</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">am ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.074</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.650</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">&lt; .001</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">gear ~ mpg</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.001</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.528</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">&lt; .001</span></p></td>
-<td class="cl-dd0c8960"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">2</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">gear ~ mpg</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.001</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.528</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">&lt; .001</span></p></td>
+<td class="cl-ddd8d0f8"><p class="cl-ddd88b3e"><span class="cl-ddd87450">2</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-dd0c896a"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">carb ~ mpg</span></p></td>
-<td class="cl-dd0c896a"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.008</span></p></td>
-<td class="cl-dd0c896a"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.362</span></p></td>
-<td class="cl-dd0c896a"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">.003</span></p></td>
-<td class="cl-dd0c896a"><p class="cl-dd0c4c52"><span class="cl-dd0c39ce">2</span></p></td>
+<td class="cl-ddd8d102"><p class="cl-ddd88b3e"><span class="cl-ddd87450">carb ~ mpg</span></p></td>
+<td class="cl-ddd8d102"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.008</span></p></td>
+<td class="cl-ddd8d102"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.362</span></p></td>
+<td class="cl-ddd8d102"><p class="cl-ddd88b3e"><span class="cl-ddd87450">.003</span></p></td>
+<td class="cl-ddd8d102"><p class="cl-ddd88b3e"><span class="cl-ddd87450">2</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="a46568c7-05fa-40ab-ae50-8645ae0f1d1b"></div>
+</div></template><div class="flextable-shadow-host" id="0129f8c4-4352-4d01-af8c-e93ec7df8f32"></div>
 <script>
-var dest = document.getElementById("a46568c7-05fa-40ab-ae50-8645ae0f1d1b");
-var template = document.getElementById("2fa8b964-e1af-486b-a937-bf4c55327307");
+var dest = document.getElementById("0129f8c4-4352-4d01-af8c-e93ec7df8f32");
+var template = document.getElementById("0134d1af-be05-4917-b78a-32da7021d39c");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";

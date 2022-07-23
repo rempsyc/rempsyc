@@ -37,11 +37,13 @@ https://doi.org/10.1016/j.jesp.2013.03.013"><meta property="og:image" content="h
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>√ STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>📊 VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -134,9 +136,11 @@ deviations)</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">find_mad</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>         col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>         criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">find_mad</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  criteria <span class="op">=</span> <span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20 outlier(s) based on 3 median absolute deviations for variable(s): </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  mpg,  cyl,  disp,  hp,  drat,  wt,  qsec,  vs,  am,  gear,  carb,  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -199,10 +203,12 @@ deviations)</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mtcars2</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span></span>
 <span class="r-in"><span><span class="va">mtcars2</span><span class="op">$</span><span class="va">car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">find_mad</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars2</span>,</span></span>
-<span class="r-in"><span>         col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>         ID <span class="op">=</span> <span class="st">"car"</span>,</span></span>
-<span class="r-in"><span>         criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">find_mad</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars2</span>,</span></span>
+<span class="r-in"><span>  col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ID <span class="op">=</span> <span class="st">"car"</span>,</span></span>
+<span class="r-in"><span>  criteria <span class="op">=</span> <span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20 outlier(s) based on 3 median absolute deviations for variable(s): </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  mpg,  cyl,  disp,  hp,  drat,  wt,  qsec,  vs,  am,  gear,  carb,  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

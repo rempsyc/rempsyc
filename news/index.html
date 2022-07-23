@@ -27,11 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>√ STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>📊 VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -83,6 +85,15 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.5.3" id="rempsyc-0053">rempsyc 0.0.5.3<a class="anchor" aria-label="anchor" href="#rempsyc-0053"></a></h2>
+<ul><li>Corrected spelling of all code with <code>devtools::spell_check()</code>
+</li>
+<li>Restyled all code according to the tidyverse guidelines with <code>styler::style_pkg()</code>
+</li>
+<li>
+<code>nice_table</code>: greatly improved APA title feature thanks to <a href="https://github.com/Buedenbender" class="external-link">@Buedenbender</a> (and shoot out to his package <a href="https://buedenbender.github.io/datscience/" class="external-link">datscience</a> and function <a href="https://buedenbender.github.io/datscience/reference/format_flextable.html" class="external-link">flex_table1</a> on which this improvement was based!)</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5.2" id="rempsyc-0052">rempsyc 0.0.5.2<a class="anchor" aria-label="anchor" href="#rempsyc-0052"></a></h2>
 <ul><li>
 <code>nice_table</code>: added new argument, <code>separate.header</code>, a logical (and simplified) form of the <code><a href="https://davidgohel.github.io/flextable/reference/separate_header.html" class="external-link">flextable::separate_header</a></code> argument.</li></ul></div>
@@ -126,7 +137,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.4.5" id="rempsyc-0045">rempsyc 0.0.4.5<a class="anchor" aria-label="anchor" href="#rempsyc-0045"></a></h2>
 <ul><li>
-<code>nice_violin</code>: Added the ability to add the cohen’s d to the plot</li></ul></div>
+<code>nice_violin</code>: Added the ability to add the Cohen’s d to the plot</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.4.4" id="rempsyc-0044">rempsyc 0.0.4.4<a class="anchor" aria-label="anchor" href="#rempsyc-0044"></a></h2>
 <ul><li>
@@ -229,7 +240,7 @@
 <code>nice_mod</code> and <code>nice_slopes</code>:<ul><li>Added model number when more then one model.</li>
 <li>Also added an optional <code>mod.id = TRUE</code> argument, to display the model number, when there is more than one model.</li>
 <li>Also reordered default order of rows when there is a second moderator present as it makes more sense to group the same models completely together for different levels of the second moderator.</li>
-<li>By combining the row names within the list object rather than in the combined dataframed, we also don’t have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.</li>
+<li>By combining the row names within the list object rather than in the combined dataframe, we also don’t have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
