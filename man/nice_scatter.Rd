@@ -118,155 +118,197 @@ Make nice scatter plots easily.
 }
 \examples{
 # Make the basic plot
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg")
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg"
+)
 
 \dontrun{
 # Save a high-resolution image file to specified directory
-ggsave('nicescatterplothere.pdf', width = 7, height = 7, unit = 'in',
-       dpi = 300, path = "/") # change for your own desired path
+ggsave("nicescatterplothere.pdf",
+  width = 7, height = 7, unit = "in",
+  dpi = 300, path = "/"
+) # change for your own desired path
 }
 
 # Change x- and y- axis labels
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             ytitle = "Miles/(US) gallon",
-             xtitle = "Weight (1000 lbs)")
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  ytitle = "Miles/(US) gallon",
+  xtitle = "Weight (1000 lbs)"
+)
 
 # Have points "jittered"
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.jitter = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.jitter = TRUE
+)
 
 # Change the transparency of the points
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             alpha = 1)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  alpha = 1
+)
 
 # Remove points
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.points = FALSE,
-             has.jitter = FALSE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.points = FALSE,
+  has.jitter = FALSE
+)
 
 # Add confidence band
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.confband = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.confband = TRUE
+)
 
 # Set x- and y- scales manually
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             xmin = 1,
-             xmax = 6,
-             xby = 1,
-             ymin = 10,
-             ymax = 35,
-             yby = 5)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  xmin = 1,
+  xmax = 6,
+  xby = 1,
+  ymin = 10,
+  ymax = 35,
+  yby = 5
+)
 
 # Change plot colour
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             colours = "blueviolet")
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  colours = "blueviolet"
+)
 
 # Add correlation coefficient to plot and p-value
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.r = TRUE,
-             has.p = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.r = TRUE,
+  has.p = TRUE
+)
 
 # Change location of correlation coefficient or p-value
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.r = TRUE,
-             r.x = 4,
-             r.y = 25,
-             has.p = TRUE,
-             p.x = 5,
-             p.y = 20)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.r = TRUE,
+  r.x = 4,
+  r.y = 25,
+  has.p = TRUE,
+  p.x = 5,
+  p.y = 20
+)
 
 # Plot by group
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl")
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl"
+)
 
 # Use full range on the slope/confidence band
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.fullrange = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.fullrange = TRUE
+)
 
 # Remove lines
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.line = FALSE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.line = FALSE
+)
 
 # Add a legend
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.legend = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.legend = TRUE
+)
 
 # Change order of labels on the legend
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.legend = TRUE,
-             groups.order = c(8,4,6))
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.legend = TRUE,
+  groups.order = c(8, 4, 6)
+)
 
 # Change legend labels
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.legend = TRUE,
-             groups.labels = c("Weak","Average","Powerful"))
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.legend = TRUE,
+  groups.labels = c("Weak", "Average", "Powerful")
+)
 # Warning: This applies after changing order of level
 
 # Add a title to legend
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.legend = TRUE,
-             legend.title = "cylinders")
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.legend = TRUE,
+  legend.title = "cylinders"
+)
 
 # Plot by group + manually specify colours
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             colours = c("burlywood", "darkgoldenrod", "chocolate"))
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  colours = c("burlywood", "darkgoldenrod", "chocolate")
+)
 
 # Plot by group + use different line types for each group
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.linetype = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.linetype = TRUE
+)
 
 # Plot by group + use different point shapes for each group
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.shape = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.shape = TRUE
+)
 
 }
 \seealso{

@@ -20,12 +20,12 @@
 #' winsorize_mad(mtcars$qsec, criteria = 2)
 #' @importFrom stats mad
 
-winsorize_mad <- function (x,
-                           criteria = 3) {
-  if(criteria <= 0) {
+winsorize_mad <- function(x,
+                          criteria = 3) {
+  if (criteria <= 0) {
     stop("bad value for 'criteria'")
   }
-  med <- median(x,na.rm=TRUE)
+  med <- median(x, na.rm = TRUE)
   y <- x - med
   sc <- mad(y, center = 0, na.rm = TRUE) * criteria
   y[y > sc] <- sc

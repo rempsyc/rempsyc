@@ -24,14 +24,17 @@ calculated as Max / Min.
 }
 \examples{
 # Make the basic table
-nice_var(data = iris,
-         variable = "Sepal.Length",
-         group = "Species")
+nice_var(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 
 # Try on multiple variables
 DV <- names(iris[1:4])
 var.table <- do.call("rbind", lapply(DV, nice_var,
-                     data = iris, group = "Species"))
+  data = iris, group = "Species"
+))
 var.table
 
 }

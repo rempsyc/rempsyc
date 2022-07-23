@@ -49,31 +49,39 @@ from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make the basic table
-nice_slopes(data = mtcars,
-            response = "mpg",
-            predictor = "gear",
-            moderator = "wt")
+nice_slopes(
+  data = mtcars,
+  response = "mpg",
+  predictor = "gear",
+  moderator = "wt"
+)
 
 # Multiple dependent variables at once
-nice_slopes(data = mtcars,
-            response = c("mpg", "disp", "hp"),
-            predictor = "gear",
-            moderator = "wt")
+nice_slopes(
+  data = mtcars,
+  response = c("mpg", "disp", "hp"),
+  predictor = "gear",
+  moderator = "wt"
+)
 
 # Add covariates
-nice_slopes(data = mtcars,
-            response = "mpg",
-            predictor = "gear",
-            moderator = "wt",
-            covariates = c("am", "vs"))
+nice_slopes(
+  data = mtcars,
+  response = "mpg",
+  predictor = "gear",
+  moderator = "wt",
+  covariates = c("am", "vs")
+)
 
 # Three-way interaction (continuous moderator and binary
 # second moderator required)
-nice_slopes(data = mtcars,
-            response = "mpg",
-            predictor = "gear",
-            moderator = "wt",
-            moderator2 = "am")
+nice_slopes(
+  data = mtcars,
+  response = "mpg",
+  predictor = "gear",
+  moderator = "wt",
+  moderator2 = "am"
+)
 
 }
 \seealso{

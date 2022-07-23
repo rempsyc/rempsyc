@@ -24,13 +24,16 @@
 #' # Reverse scores with maximum = 3 and minimum = -3
 #' nice_reverse(-3:3, 3, min = -3)
 #'
-
 nice_reverse <- function(x,
                          max,
                          min = 1,
                          warning = TRUE) {
-  if(missing(min) & warning == TRUE) { cat(
-    "Note: If your scale minimum score is not '1', ",
-    "please specify it in the 'min' argument\n", sep = "")}
+  if (missing(min) & warning == TRUE) {
+    cat(
+      "Note: If your scale minimum score is not '1', ",
+      "please specify it in the 'min' argument\n",
+      sep = ""
+    )
+  }
   max - as.numeric(x) + min
 }

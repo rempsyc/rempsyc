@@ -44,40 +44,52 @@ argument: \code{var.equal = TRUE}.
 }
 \examples{
 # Make the basic table
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am")
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am"
+)
 
 # Multiple dependent variables at once
-nice_t_test(data = mtcars,
-            response = names(mtcars)[1:7],
-            group = "am")
+nice_t_test(
+  data = mtcars,
+  response = names(mtcars)[1:7],
+  group = "am"
+)
 
 # Can be passed some of the regular arguments
 # of base `t.test()`
 
 # Student t-test (instead of Welch)
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am",
-            var.equal = TRUE)
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am",
+  var.equal = TRUE
+)
 
 # One-sided instead of two-sided
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am",
-            alternative = "less")
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am",
+  alternative = "less"
+)
 
 # One-sample t-test
-nice_t_test(data = mtcars,
-            response = "mpg",
-            mu = 10)
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  mu = 10
+)
 
 # Paired t-test instead of independent samples
-nice_t_test(data = ToothGrowth,
-            response = "len",
-            group = "supp",
-            paired = TRUE)
+nice_t_test(
+  data = ToothGrowth,
+  response = "len",
+  group = "supp",
+  paired = TRUE
+)
 # Make sure cases appear in the same order for
 # both levels of the grouping factor
 }

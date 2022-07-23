@@ -41,21 +41,29 @@ Attempt to visualize variance per group.
 }
 \examples{
 # Make the basic plot
-nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 
 # Further customization
-nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
-             colours = c("#00BA38",
-                         "#619CFF",
-                         "#F8766D"),
-             ytitle = "Sepal Length",
-             groups.labels = c("(a) Setosa",
-                               "(b) Versicolor",
-                               "(c) Virginica"))
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c(
+    "#00BA38",
+    "#619CFF",
+    "#F8766D"
+  ),
+  ytitle = "Sepal Length",
+  groups.labels = c(
+    "(a) Setosa",
+    "(b) Versicolor",
+    "(c) Virginica"
+  )
+)
 
 }
 \seealso{

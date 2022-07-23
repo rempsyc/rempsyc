@@ -52,23 +52,29 @@ Make nice density plots easily.
 }
 \examples{
 # Make the basic plot
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_density(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 
 # Further customization
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
-             colours = c("#00BA38", "#619CFF", "#F8766D"),
-             xtitle = "Sepal Length",
-             ytitle = "Density (vs. Normal Distribution)",
-             groups.labels = c("(a) Setosa",
-                               "(b) Versicolor",
-                               "(c) Virginica"),
-             grid = FALSE,
-             shapiro = TRUE,
-             title = "Density (Sepal Length)")
+nice_density(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c("#00BA38", "#619CFF", "#F8766D"),
+  xtitle = "Sepal Length",
+  ytitle = "Density (vs. Normal Distribution)",
+  groups.labels = c(
+    "(a) Setosa",
+    "(b) Versicolor",
+    "(c) Virginica"
+  ),
+  grid = FALSE,
+  shapiro = TRUE,
+  title = "Density (Sepal Length)"
+)
 
 }
 \seealso{

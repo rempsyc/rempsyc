@@ -17,9 +17,9 @@
 #' scale_mad(mtcars$mpg)
 #' @importFrom stats mad median
 
-scale_mad <- function (x) {
+scale_mad <- function(x) {
   median.x <- median(x, na.rm = TRUE)
   mad.x <- mad(x, na.rm = TRUE)
-  y <- (x - median.x)/mad.x
+  y <- (x - median.x) / mad.x
   y
 }

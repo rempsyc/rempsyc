@@ -1,5 +1,6 @@
 ## rempsyc 0.0.5.3
 * Corrected spelling with `devtools::spell_check()`
+* Restyled code with `styler::style_pkg()`
 
 ## rempsyc 0.0.5.2
 * `nice_table`: added new argument, `separate.header`, a logical (and simplified) form of the `flextable::separate_header` argument.

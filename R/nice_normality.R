@@ -24,22 +24,30 @@
 #' @export
 #' @examples
 #' # Make the basic plot
-#' nice_normality(data = iris,
-#'                variable = "Sepal.Length",
-#'                group = "Species")
+#' nice_normality(
+#'   data = iris,
+#'   variable = "Sepal.Length",
+#'   group = "Species"
+#' )
 #'
 #' # Further customization
-#' nice_normality(data = iris,
-#'                variable = "Sepal.Length",
-#'                group = "Species",
-#'                colours = c("#00BA38",
-#'                            "#619CFF",
-#'                            "#F8766D"),
-#'                groups.labels = c("(a) Setosa",
-#'                                  "(b) Versicolor",
-#'                                  "(c) Virginica"),
-#'                grid = FALSE,
-#'                shapiro = TRUE)
+#' nice_normality(
+#'   data = iris,
+#'   variable = "Sepal.Length",
+#'   group = "Species",
+#'   colours = c(
+#'     "#00BA38",
+#'     "#619CFF",
+#'     "#F8766D"
+#'   ),
+#'   groups.labels = c(
+#'     "(a) Setosa",
+#'     "(b) Versicolor",
+#'     "(c) Virginica"
+#'   ),
+#'   grid = FALSE,
+#'   shapiro = TRUE
+#' )
 #'
 #' @seealso
 #' Other functions useful in assumption testing:
@@ -61,13 +69,17 @@ nice_normality <- function(data,
                            ...) {
   rlang::check_installed("see", reason = "for this function.")
   rlang::check_installed("patchwork", reason = "for this function.")
-  plot.a <- nice_density(data = data, variable = variable, group = group,
-                         colours = colours, groups.labels = groups.labels,
-                         grid = grid, shapiro = shapiro, title = title,
-                         histogram = histogram, ...)
+  plot.a <- nice_density(
+    data = data, variable = variable, group = group,
+    colours = colours, groups.labels = groups.labels,
+    grid = grid, shapiro = shapiro, title = title,
+    histogram = histogram, ...
+  )
   plot.a
-  plot.b <- nice_qq(data = data, variable = variable, group = group,
-                    colours = colours, groups.labels = groups.labels,
-                    grid = grid, shapiro = shapiro, title = NULL, ...)
+  plot.b <- nice_qq(
+    data = data, variable = variable, group = group,
+    colours = colours, groups.labels = groups.labels,
+    grid = grid, shapiro = shapiro, title = NULL, ...
+  )
   see::plots(plot.a, plot.b)
 }

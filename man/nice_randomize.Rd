@@ -31,19 +31,27 @@ Randomize easily with different designs.
 \examples{
 # Specify design, number of conditions, number of
 # participants, and names of conditions:
-nice_randomize(design = "between", Ncondition = 4, n = 8,
-               condition.names = c("BP","CX","PZ","ZL"))
+nice_randomize(
+  design = "between", Ncondition = 4, n = 8,
+  condition.names = c("BP", "CX", "PZ", "ZL")
+)
 
 # Within-Group Design
-nice_randomize(design = "within", Ncondition = 4, n = 6,
-               condition.names = c("SV","AV","ST","AT"))
+nice_randomize(
+  design = "within", Ncondition = 4, n = 6,
+  condition.names = c("SV", "AV", "ST", "AT")
+)
 
 # Make a quick runsheet
-randomized <- nice_randomize(design = "within", Ncondition = 4, n = 128,
-                             condition.names = c("SV","AV","ST","AT"),
-                             col.names = c("id", "Condition", "Date/Time",
-                             "SONA ID", "Age/Gd.", "Handedness",
-                             "Tester", "Notes"))
+randomized <- nice_randomize(
+  design = "within", Ncondition = 4, n = 128,
+  condition.names = c("SV", "AV", "ST", "AT"),
+  col.names = c(
+    "id", "Condition", "Date/Time",
+    "SONA ID", "Age/Gd.", "Handedness",
+    "Tester", "Notes"
+  )
+)
 head(randomized)
 
 }

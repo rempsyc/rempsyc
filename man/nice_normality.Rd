@@ -50,22 +50,30 @@ through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
 }
 \examples{
 # Make the basic plot
-nice_normality(data = iris,
-               variable = "Sepal.Length",
-               group = "Species")
+nice_normality(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 
 # Further customization
-nice_normality(data = iris,
-               variable = "Sepal.Length",
-               group = "Species",
-               colours = c("#00BA38",
-                           "#619CFF",
-                           "#F8766D"),
-               groups.labels = c("(a) Setosa",
-                                 "(b) Versicolor",
-                                 "(c) Virginica"),
-               grid = FALSE,
-               shapiro = TRUE)
+nice_normality(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c(
+    "#00BA38",
+    "#619CFF",
+    "#F8766D"
+  ),
+  groups.labels = c(
+    "(a) Setosa",
+    "(b) Versicolor",
+    "(c) Virginica"
+  ),
+  grid = FALSE,
+  shapiro = TRUE
+)
 
 }
 \seealso{

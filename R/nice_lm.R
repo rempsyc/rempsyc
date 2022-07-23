@@ -39,34 +39,43 @@ nice_lm <- function(model,
                     mod.id = TRUE,
                     ...) {
   ifelse(class(model) == "list",
-         models.list <- model,
-         models.list <- list(model))
-  sums.list <- lapply(models.list, function(x) {summary(x)$coefficients[-1,-2]})
+    models.list <- model,
+    models.list <- list(model)
+  )
+  sums.list <- lapply(models.list, function(x) {
+    summary(x)$coefficients[-1, -2]
+  })
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    lmSupport_modelEffectSizes(x, Print=FALSE)$Effects[-1,4]
+    lmSupport_modelEffectSizes(x, Print = FALSE)$Effects[-1, 4]
   })
-  stats.list <- mapply(cbind,df.list,sums.list,ES.list,SIMPLIFY=FALSE)
+  stats.list <- mapply(cbind, df.list, sums.list, ES.list, SIMPLIFY = FALSE)
   stats.list <- lapply(stats.list, function(x) {
     x <- as.data.frame(x)
     IV <- row.names(x)
     x <- cbind(IV, x)
-    })
+  })
   table.stats <- do.call(rbind.data.frame, stats.list)
   response.names <- unlist(lapply(models.list, function(x) {
-    rep(as.character(x$terms[[2]]), each=length(x$assign)-1)}))
+    rep(as.character(x$terms[[2]]), each = length(x$assign) - 1)
+  }))
   row.names(table.stats) <- NULL
   table.stats <- cbind(response.names, table.stats)
-  good.names <- c("Dependent Variable", "Predictor",
-                  "df", "b", "t", "p", "sr2")
-  if(length(models.list) > 1 & mod.id == TRUE) {
+  good.names <- c(
+    "Dependent Variable", "Predictor",
+    "df", "b", "t", "p", "sr2"
+  )
+  if (length(models.list) > 1 & mod.id == TRUE) {
     model.number <- rep(seq_along(models.list), times = lapply(sums.list, nrow))
     table.stats <- cbind(model.number, table.stats)
     names(table.stats) <- c("Model Number", good.names)
   } else {
     names(table.stats) <- good.names
   }
-  if(!missing(b.label)) { names(table.stats)[names(
-    table.stats) == "b"] <- b.label}
+  if (!missing(b.label)) {
+    names(table.stats)[names(
+      table.stats
+    ) == "b"] <- b.label
+  }
   table.stats
 }

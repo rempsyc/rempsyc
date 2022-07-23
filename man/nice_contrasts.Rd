@@ -36,24 +36,32 @@ with the standard \emph{t} test because it is based on all the cases
 \examples{
 
 # Basic example
-nice_contrasts(data = mtcars,
-               response = "mpg",
-               group = "cyl")
+nice_contrasts(
+  data = mtcars,
+  response = "mpg",
+  group = "cyl"
+)
 
-nice_contrasts(data = mtcars,
-               response = "disp",
-               group = "gear")
+nice_contrasts(
+  data = mtcars,
+  response = "disp",
+  group = "gear"
+)
 
 # Multiple dependent variables
-nice_contrasts(data = mtcars,
-               response = c("mpg", "disp", "hp"),
-               group = "cyl")
+nice_contrasts(
+  data = mtcars,
+  response = c("mpg", "disp", "hp"),
+  group = "cyl"
+)
 
 # Adding covariates
-nice_contrasts(data = mtcars,
-               response = "mpg",
-               group = "cyl",
-               covariates = c("disp", "hp"))
+nice_contrasts(
+  data = mtcars,
+  response = "mpg",
+  group = "cyl",
+  covariates = c("disp", "hp")
+)
 
 }
 \seealso{

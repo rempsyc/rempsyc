@@ -27,16 +27,20 @@ Social Psychology}, \emph{49}(4), 764–766.
 https://doi.org/10.1016/j.jesp.2013.03.013
 }
 \examples{
-find_mad(data = mtcars,
-         col.list = names(mtcars),
-         criteria = 3)
+find_mad(
+  data = mtcars,
+  col.list = names(mtcars),
+  criteria = 3
+)
 
 mtcars2 <- mtcars
 mtcars2$car <- row.names(mtcars)
-find_mad(data = mtcars2,
-         col.list = names(mtcars),
-         ID = "car",
-         criteria = 3)
+find_mad(
+  data = mtcars2,
+  col.list = names(mtcars),
+  ID = "car",
+  criteria = 3
+)
 }
 \author{
 Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault

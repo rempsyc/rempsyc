@@ -25,40 +25,52 @@
 #' @examples
 #'
 #' # Basic example
-#' nice_contrasts(data = mtcars,
-#'                response = "mpg",
-#'                group = "cyl")
+#' nice_contrasts(
+#'   data = mtcars,
+#'   response = "mpg",
+#'   group = "cyl"
+#' )
 #'
-#' nice_contrasts(data = mtcars,
-#'                response = "disp",
-#'                group = "gear")
+#' nice_contrasts(
+#'   data = mtcars,
+#'   response = "disp",
+#'   group = "gear"
+#' )
 #'
 #' # Multiple dependent variables
-#' nice_contrasts(data = mtcars,
-#'                response = c("mpg", "disp", "hp"),
-#'                group = "cyl")
+#' nice_contrasts(
+#'   data = mtcars,
+#'   response = c("mpg", "disp", "hp"),
+#'   group = "cyl"
+#' )
 #'
 #' # Adding covariates
-#' nice_contrasts(data = mtcars,
-#'                response = "mpg",
-#'                group = "cyl",
-#'                covariates = c("disp", "hp"))
+#' nice_contrasts(
+#'   data = mtcars,
+#'   response = "mpg",
+#'   group = "cyl",
+#'   covariates = c("disp", "hp")
+#' )
 #'
 #' @seealso
 #' Tutorial: \url{https://remi-theriault.com/blog_contrasts}
 #'
 
-nice_contrasts <- function(response, group, covariates=NULL,
+nice_contrasts <- function(response, group, covariates = NULL,
                            data, bootstraps = 2000) {
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   data[response] <- lapply(data[response], as.numeric)
-  if(!missing(covariates)) {
+  if (!missing(covariates)) {
     data[covariates] <- lapply(data[covariates], as.numeric)
     covariates.term <- paste("+", covariates, collapse = " ")
-  } else {covariates.term <- ""}
-  formulas <- paste(response, "~", group,
-                    covariates.term) ### Add support for moderator(s)
+  } else {
+    covariates.term <- ""
+  }
+  formulas <- paste(
+    response, "~", group,
+    covariates.term
+  ) ### Add support for moderator(s)
   models.list <- lapply(formulas, lm, data = data)
   leastsquare.list <- lapply(models.list, emmeans::emmeans, group, data = data)
   groups.contrasts <- list(
@@ -66,46 +78,67 @@ nice_contrasts <- function(response, group, covariates=NULL,
     # Add support x groups
     comp2 = stats::setNames(c(0, 1, -1), levels(data[[group]])),
     # Add support x groups
-    comp3 = stats::setNames(c(1, -1, 0), levels(data[[group]])))
-    # Add support x groups
-  boot.lists <- lapply(groups.contrasts, function (y) {
-    lapply(response, function (x) {
-      bootES::bootES(data = stats::na.omit(data),
-                     R = bootstraps,
-                     data.col = x,
-                     group.col = group,
-                     contrast = y,
-                     effect.type = "akp.robust.d")})})
+    comp3 = stats::setNames(c(1, -1, 0), levels(data[[group]]))
+  )
+  # Add support x groups
+  boot.lists <- lapply(groups.contrasts, function(y) {
+    lapply(response, function(x) {
+      bootES::bootES(
+        data = stats::na.omit(data),
+        R = bootstraps,
+        data.col = x,
+        group.col = group,
+        contrast = y,
+        effect.type = "akp.robust.d"
+      )
+    })
+  })
   contrval.list <- lapply(leastsquare.list, emmeans::contrast,
-                          groups.contrasts, adjust = "none")
+    groups.contrasts,
+    adjust = "none"
+  )
   contrval.sums <- lapply(contrval.list, summary)
   boot.sums <- lapply(unlist(boot.lists, recursive = FALSE), summary)
   list.names <- c("estimates", "SE", "df", "tratio", "pvalue")
   stats.list <- list()
   for (i in seq_along(list.names)) {
     stats.list[[list.names[i]]] <- unlist(c(t((
-      lapply(contrval.sums, `[[`, i+1)))))
+      lapply(contrval.sums, `[[`, i + 1)))))
   }
-  list.names2 <- c("cohenD","cohenDL","cohenDH")
+  list.names2 <- c("cohenD", "cohenDL", "cohenDH")
   for (i in seq_along(list.names2)) {
     stats.list[[list.names2[i]]] <- unlist(lapply(boot.sums, `[[`, i))
   }
-  response.names <- rep(response, times=length(contrval.sums[[1]]$contrast))
+  response.names <- rep(response, times = length(contrval.sums[[1]]$contrast))
   comparisons.names <- rep(
-    c(paste(levels(data[[group]])[1], "-",
-            levels(data[[group]])[3]), ###### support x groups
-      paste(levels(data[[group]])[2], "-",
-            levels(data[[group]])[3]), ###### support x groups
-      paste(levels(data[[group]])[1], "-",
-            levels(data[[group]])[2])), ###### support x groups
-    each = length(response))
-  table.stats <- data.frame(response.names,
-                            comparisons.names,
-                            stats.list[-c(1:2)])
+    c(
+      paste(
+        levels(data[[group]])[1], "-",
+        levels(data[[group]])[3]
+      ), ###### support x groups
+      paste(
+        levels(data[[group]])[2], "-",
+        levels(data[[group]])[3]
+      ), ###### support x groups
+      paste(
+        levels(data[[group]])[1], "-",
+        levels(data[[group]])[2]
+      )
+    ), ###### support x groups
+    each = length(response)
+  )
+  table.stats <- data.frame(
+    response.names,
+    comparisons.names,
+    stats.list[-c(1:2)]
+  )
   table.stats <- table.stats[order(factor(table.stats$response.names,
-                                          levels = response)),]
-  names(table.stats) <- c("Dependent Variable", "Comparison", "df",
-                          "t", "p", "dR", "CI_lower", "CI_upper")
+    levels = response
+  )), ]
+  names(table.stats) <- c(
+    "Dependent Variable", "Comparison", "df",
+    "t", "p", "dR", "CI_lower", "CI_upper"
+  )
   row.names(table.stats) <- NULL
   table.stats
 }

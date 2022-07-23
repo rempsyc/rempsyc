@@ -81,45 +81,46 @@
 #' ### Example with formula notation
 #' data(mtcars)
 #' rcompanion_groupwiseMean(mpg ~ factor(cyl),
-#'                          data         = mtcars,
-#'                          traditional  = FALSE,
-#'                          percentile   = TRUE)
+#'   data         = mtcars,
+#'   traditional  = FALSE,
+#'   percentile   = TRUE
+#' )
 #'
 #' # Example with variable notation
 #' data(mtcars)
-#' rcompanion_groupwiseMean(data        = mtcars,
-#'                          var         = "mpg",
-#'                          group       = c("cyl", "am"),
-#'                          traditional = FALSE,
-#'                          percentile  = TRUE)
+#' rcompanion_groupwiseMean(
+#'   data = mtcars,
+#'   var = "mpg",
+#'   group = c("cyl", "am"),
+#'   traditional = FALSE,
+#'   percentile = TRUE
+#' )
 #' }
 #'
 #' @importFrom boot boot boot.ci
 #' @importFrom dplyr syms cur_data group_by summarize rename all_of across
 
-rcompanion_groupwiseMean <- function (formula = NULL,
-                                      data = NULL,
-                                      var = NULL,
-                                      group = NULL,
-                                      trim = 0,
-                                      na.rm = FALSE,
-                                      conf = 0.95,
-                                      R = 5000,
-                                      boot = FALSE,
-                                      traditional = TRUE,
-                                      normal = FALSE,
-                                      basic = FALSE,
-                                      percentile = FALSE,
-                                      bca = FALSE,
-                                      digits = 3,
-                                      ...)
-{
-
+rcompanion_groupwiseMean <- function(formula = NULL,
+                                     data = NULL,
+                                     var = NULL,
+                                     group = NULL,
+                                     trim = 0,
+                                     na.rm = FALSE,
+                                     conf = 0.95,
+                                     R = 5000,
+                                     boot = FALSE,
+                                     traditional = TRUE,
+                                     normal = FALSE,
+                                     basic = FALSE,
+                                     percentile = FALSE,
+                                     bca = FALSE,
+                                     digits = 3,
+                                     ...) {
   ddply <- function(.data, .variables, var, .fun, ...) {
     .data %>%
       group_by(across(all_of(.variables))) %>%
       summarize(V1 = .fun(as.data.frame(cur_data()), var), .groups = "drop") %>%
-      as.data.frame
+      as.data.frame()
   }
 
   if (!is.null(formula)) {
@@ -128,13 +129,13 @@ rcompanion_groupwiseMean <- function (formula = NULL,
   }
   if (na.rm) {
     DF <- ddply(.data = data, .variables = group, var, .fun = function(x,
-                                                                      idx) {
+                                                                       idx) {
       sum(!is.na(x[, idx]))
     })
   }
   if (!na.rm) {
     DF <- ddply(.data = data, .variables = group, var, .fun = function(x,
-                                                                      idx) {
+                                                                       idx) {
       length(x[, idx])
     })
   }
@@ -144,63 +145,88 @@ rcompanion_groupwiseMean <- function (formula = NULL,
   D1 <- ddply(.data = data, .variables = group, var, .fun = fun1)
   if (boot == TRUE) {
     fun2 <- function(x, idx) {
-      mean(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...)$t[, 1])
+      mean(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...)$t[, 1])
     }
     D2 <- ddply(.data = data, .variables = group, var, .fun = fun2)
   }
   if (basic == TRUE) {
     fun4 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "basic", ...)$basic[4]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "basic", ...
+      )$basic[4]
     }
     fun5 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim), R = R, ...), conf = conf, type = "basic",
-        ...)$basic[5]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim)
+      }, R = R, ...),
+      conf = conf, type = "basic",
+      ...
+      )$basic[5]
     }
     D4 <- ddply(.data = data, .variables = group, var, .fun = fun4)
     D5 <- ddply(.data = data, .variables = group, var, .fun = fun5)
   }
   if (normal == TRUE) {
     fun6 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "norm", ...)$normal[2]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "norm", ...
+      )$normal[2]
     }
     fun7 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "norm", ...)$normal[3]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "norm", ...
+      )$normal[3]
     }
     D6 <- ddply(.data = data, .variables = group, var, .fun = fun6)
     D7 <- ddply(.data = data, .variables = group, var, .fun = fun7)
   }
   if (percentile == TRUE) {
     fun8 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "perc", ...)$percent[4]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "perc", ...
+      )$percent[4]
     }
     fun9 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "perc", ...)$percent[5]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "perc", ...
+      )$percent[5]
     }
     D8 <- ddply(.data = data, .variables = group, var, .fun = fun8)
     D9 <- ddply(.data = data, .variables = group, var, .fun = fun9)
   }
   if (bca == TRUE) {
     fun10 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "bca", ...)$bca[4]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "bca", ...
+      )$bca[4]
     }
     fun11 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j)
-        mean(y[j], trim = trim, na.rm = na.rm), R = R, ...), conf = conf,
-        type = "bca", ...)$bca[5]
+      boot.ci(boot(x[, idx], function(y, j) {
+        mean(y[j], trim = trim, na.rm = na.rm)
+      }, R = R, ...),
+      conf = conf,
+      type = "bca", ...
+      )$bca[5]
     }
     D10 <- ddply(.data = data, .variables = group, var, .fun = fun10)
     D11 <- ddply(.data = data, .variables = group, var, .fun = fun11)
@@ -214,8 +240,8 @@ rcompanion_groupwiseMean <- function (formula = NULL,
       if (!na.rm) {
         N <- length(x)
       }
-      Dist <- conf + (1 - conf)/2
-      Inty <- stats::qt(Dist, df = (N - 1)) * S/sqrt(N)
+      Dist <- conf + (1 - conf) / 2
+      Inty <- stats::qt(Dist, df = (N - 1)) * S / sqrt(N)
       if (trim == 0) {
         return(Inty)
       }

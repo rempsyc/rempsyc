@@ -28,9 +28,10 @@ car::Anova() with Type 3 error"
 }
 \examples{
 \dontrun{
-m = lm(mpg~cyl+disp, data=mtcars)
+m <- lm(mpg ~ cyl + disp, data = mtcars)
 lmSupport_modelEffectSizes(m)
 }
+
 }
 \author{
 John J. Curtin, \email{jjcurtin@wisc.edu}

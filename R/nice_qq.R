@@ -20,19 +20,23 @@
 #' @export
 #' @examples
 #' # Make the basic plot
-#' nice_qq(data = iris,
-#'         variable = "Sepal.Length",
-#'         group = "Species")
+#' nice_qq(
+#'   data = iris,
+#'   variable = "Sepal.Length",
+#'   group = "Species"
+#' )
 #'
 #' # Further customization
-#' nice_qq(data = iris,
-#'         variable = "Sepal.Length",
-#'         group = "Species",
-#'         colours = c("#00BA38", "#619CFF", "#F8766D"),
-#'         groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-#'         grid = FALSE,
-#'         shapiro = TRUE,
-#'         title = NULL)
+#' nice_qq(
+#'   data = iris,
+#'   variable = "Sepal.Length",
+#'   group = "Species",
+#'   colours = c("#00BA38", "#619CFF", "#F8766D"),
+#'   groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+#'   grid = FALSE,
+#'   shapiro = TRUE,
+#'   title = NULL
+#' )
 #'
 #' @seealso
 #' Other functions useful in assumption testing:
@@ -55,39 +59,60 @@ nice_qq <- function(data,
                     grid = TRUE,
                     shapiro = FALSE,
                     title = variable) {
-  if(missing(group)) {
+  if (missing(group)) {
     group <- "All"
     data[[group]] <- group
   }
   data[[group]] <- as.factor(data[[group]])
-  gform <- reformulate(".", response=group)
-  {if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels}
+  gform <- reformulate(".", response = group)
+  {
+    if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels
+  }
   # Make data for the Shapiro-Wilk tests
   if (shapiro == TRUE) {
-    dat_text <- data %>% group_by(.data[[group]]) %>%
-        summarize(text=shapiro.test(.data[[variable]])$p.value) %>%
-        rowwise() %>%
-        mutate(text=sprintf("italic('p')~'%s'", format_p(
-          text, sign = TRUE, suffix = " (Shapiro-Wilk)")))
-    }
+    dat_text <- data %>%
+      group_by(.data[[group]]) %>%
+      summarize(text = shapiro.test(.data[[variable]])$p.value) %>%
+      rowwise() %>%
+      mutate(text = sprintf("italic('p')~'%s'", format_p(
+        text,
+        sign = TRUE, suffix = " (Shapiro-Wilk)"
+      )))
+  }
   # Make plot
-  ggplot(data = data, mapping = aes_string(fill=group, sample=variable)) +
+  ggplot(data = data, mapping = aes_string(fill = group, sample = variable)) +
     qqplotr::stat_qq_band() +
     qqplotr::stat_qq_line() +
     qqplotr::stat_qq_point() +
     labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
     facet_grid(gform) +
     ggtitle(title) +
-    {if (shapiro == TRUE) ggrepel::geom_text_repel(data = dat_text,
-                                                   mapping = aes(x = Inf,
-                                                                 y = -Inf,
-                                                                 label = text),
-                                                   inherit.aes = FALSE,
-                                                   size = 6,
-                                                   force = 0,
-                                                   parse = TRUE)} +
-    {if (!missing(colours)) scale_fill_manual(values=colours)} +
+    {
+      if (shapiro == TRUE) {
+        ggrepel::geom_text_repel(
+          data = dat_text,
+          mapping = aes(
+            x = Inf,
+            y = -Inf,
+            label = text
+          ),
+          inherit.aes = FALSE,
+          size = 6,
+          force = 0,
+          parse = TRUE
+        )
+      }
+    } +
+    {
+      if (!missing(colours)) scale_fill_manual(values = colours)
+    } +
     theme_apa +
-    {if (grid == TRUE) theme(panel.grid.major=element_line(),
-                              panel.grid.minor=element_line(size = 0.5))}
+    {
+      if (grid == TRUE) {
+        theme(
+          panel.grid.major = element_line(),
+          panel.grid.minor = element_line(size = 0.5)
+        )
+      }
+    }
 }

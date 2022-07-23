@@ -20,12 +20,10 @@
 #' cormatrix_excel(mtcars)
 #' }
 #'
-
 cormatrix_excel <- function(data,
                             filename = "mycormatrix",
                             overwrite = TRUE,
                             use = "pairwise.complete.obs") {
-
   rlang::check_installed("openxlsx", reason = "for this function.")
   my.cor.matrix <- stats::cor(data, use = use)
   my.cor.matrix <- as.data.frame(my.cor.matrix)
@@ -36,64 +34,69 @@ cormatrix_excel <- function(data,
   openxlsx::addWorksheet(wb, "Sheet 1")
   openxlsx::writeData(wb, sheet = 1, my.cor.matrix, rowNames = TRUE)
 
-  all.columns <- 1:(ncol(my.cor.matrix)+1)
+  all.columns <- 1:(ncol(my.cor.matrix) + 1)
 
   my.style <- openxlsx::createStyle(numFmt = "0.00")
   openxlsx::addStyle(wb,
-                     sheet = 1,
-                     style = my.style,
-                     rows = all.columns,
-                     cols = all.columns,
-                     gridExpand = TRUE)
+    sheet = 1,
+    style = my.style,
+    rows = all.columns,
+    cols = all.columns,
+    gridExpand = TRUE
+  )
 
   diagonalStyle <- openxlsx::createStyle(bgFill = "gray")
   mediumStyle <- openxlsx::createStyle(bgFill = "#FBCAC0")
   largeStyle <- openxlsx::createStyle(bgFill = "#F65534")
 
   openxlsx::conditionalFormatting(wb,
-                                  "Sheet 1",
-                                  cols = all.columns,
-                                  rows = all.columns,
-                                  rule = "==1",
-                                  style = diagonalStyle
+    "Sheet 1",
+    cols = all.columns,
+    rows = all.columns,
+    rule = "==1",
+    style = diagonalStyle
   )
   openxlsx::conditionalFormatting(wb,
-                                  "Sheet 1",
-                                  cols = all.columns,
-                                  rows = all.columns,
-                                  rule = c(0.3, 0.59999999),
-                                  style = mediumStyle,
-                                  type = "between"
+    "Sheet 1",
+    cols = all.columns,
+    rows = all.columns,
+    rule = c(0.3, 0.59999999),
+    style = mediumStyle,
+    type = "between"
   )
   openxlsx::conditionalFormatting(wb,
-                        "Sheet 1",
-                        cols = all.columns,
-                        rows = all.columns,
-                        rule = c(-0.3, -0.59999999),
-                        style = mediumStyle,
-                        type = "between"
+    "Sheet 1",
+    cols = all.columns,
+    rows = all.columns,
+    rule = c(-0.3, -0.59999999),
+    style = mediumStyle,
+    type = "between"
   )
   openxlsx::conditionalFormatting(wb,
-                                  "Sheet 1",
-                                  cols = all.columns,
-                                  rows = all.columns,
-                                  rule = c(0.6, 0.9999999),
-                                  style = largeStyle,
-                                  type = "between"
+    "Sheet 1",
+    cols = all.columns,
+    rows = all.columns,
+    rule = c(0.6, 0.9999999),
+    style = largeStyle,
+    type = "between"
   )
   openxlsx::conditionalFormatting(wb,
-                                  "Sheet 1",
-                                  cols = all.columns,
-                                  rows = all.columns,
-                                  rule = c(-0.6, -0.9999999),
-                                  style = largeStyle,
-                                  type = "between"
+    "Sheet 1",
+    cols = all.columns,
+    rows = all.columns,
+    rule = c(-0.6, -0.9999999),
+    style = largeStyle,
+    type = "between"
   )
   openxlsx::freezePane(wb, "Sheet 1", firstCol = TRUE, firstRow = TRUE)
 
   openxlsx::saveWorkbook(
-    wb, file = paste0(filename, ".xlsx"),
-    overwrite = overwrite)
-  cat(paste0("\n [Correlation matrix '", filename,
-".xlsx' has been saved to working directory (or where specified).]"))
+    wb,
+    file = paste0(filename, ".xlsx"),
+    overwrite = overwrite
+  )
+  cat(paste0(
+    "\n [Correlation matrix '", filename,
+    ".xlsx' has been saved to working directory (or where specified).]"
+  ))
 }

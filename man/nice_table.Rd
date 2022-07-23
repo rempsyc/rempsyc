@@ -81,9 +81,10 @@ automatic formatting features.
 }
 \examples{
 # Make the basic table
-my_table <- nice_table(mtcars[1:3,],
+my_table <- nice_table(mtcars[1:3, ],
   title = "Motor Trend Car Road Tests",
-  footnote = "Note: 1974 Motor Trend US magazine.")
+  footnote = "Note: 1974 Motor Trend US magazine."
+)
 my_table
 
 \dontrun{
@@ -96,17 +97,23 @@ mtcars.std <- lapply(mtcars, scale)
 model <- lm(mpg ~ cyl + wt * hp, mtcars.std)
 stats.table <- as.data.frame(summary(model)$coefficients)
 CI <- confint(model)
-stats.table <- cbind(row.names(stats.table),
-                     stats.table, CI)
-names(stats.table) <- c("Term", "B", "SE", "t", "p",
-                        "CI_lower", "CI_upper")
+stats.table <- cbind(
+  row.names(stats.table),
+  stats.table, CI
+)
+names(stats.table) <- c(
+  "Term", "B", "SE", "t", "p",
+  "CI_lower", "CI_upper"
+)
 nice_table(stats.table, highlight = TRUE)
 
 # Test different column names
 test <- head(mtcars)
-names(test) <- c("dR", "N", "M", "SD", "b", "np2",
-                 "ges", "p", "r", "R2", "sr2")
-test[, 10:11] <- test[, 10:11]/10
+names(test) <- c(
+  "dR", "N", "M", "SD", "b", "np2",
+  "ges", "p", "r", "R2", "sr2"
+)
+test[, 10:11] <- test[, 10:11] / 10
 nice_table(test)
 
 # Custom cell formatting (such as p or r)
@@ -115,20 +122,33 @@ nice_table(test[8:11], col.format.p = 2:4, highlight = .001)
 nice_table(test[8:11], col.format.r = 1:4)
 
 # Apply custom functions to cells
-fun <- function(x) {x+11.1}
+fun <- function(x) {
+  x + 11.1
+}
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
-fun <- function(x) {paste("x", x)}
+fun <- function(x) {
+  paste("x", x)
+}
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
 # Separate headers based on periods
-header.data <- structure(list(Variable = c("Sepal.Length",
-"Sepal.Width", "Petal.Length"), setosa.M = c(5.01, 3.43,
-1.46), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
-c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)),
-row.names = c(NA, -3L), class = "data.frame")
-nice_table(header.data, separate.header = TRUE,
-           italics = 2:4)
+header.data <- structure(list(
+  Variable = c(
+    "Sepal.Length",
+    "Sepal.Width", "Petal.Length"
+  ), setosa.M = c(
+    5.01, 3.43,
+    1.46
+  ), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
+    c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)
+),
+row.names = c(NA, -3L), class = "data.frame"
+)
+nice_table(header.data,
+  separate.header = TRUE,
+  italics = 2:4
+)
 
 }
 \seealso{

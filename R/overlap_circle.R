@@ -20,7 +20,7 @@
 #' overlap_circle(6.84)
 #'
 #' # Changing labels
-#' overlap_circle(3.12, categories = c("Humans","Animals"))
+#' overlap_circle(3.12, categories = c("Humans", "Animals"))
 #'
 #' ##  NOT RUN
 #' # Saving to file (PDF or PNG)
@@ -35,31 +35,36 @@
 #'
 
 overlap_circle <- function(response,
-                           categories = c("Self", "Other")){
-  if(response < 1 | response > 7) {stop('Overlap score must be between 1 and 7!
+                           categories = c("Self", "Other")) {
+  if (response < 1 | response > 7) {
+    stop("Overlap score must be between 1 and 7!
                                         (scoring system of the Inclusion of the
-                                        Other in the Self Scale...)')}
+                                        Other in the Self Scale...)")
+  }
   rlang::check_installed("VennDiagram", reason = "for this function.")
   grid::grid.newpage()
-  scale <- c(1,2,3,4,5,6,7)
-  overlap <- c(0,10,20,30,55,65,85)
-  po <- round(stats::approx(scale, overlap, xout = response)$y, digits=2)
+  scale <- c(1, 2, 3, 4, 5, 6, 7)
+  overlap <- c(0, 10, 20, 30, 55, 65, 85)
+  po <- round(stats::approx(scale, overlap, xout = response)$y, digits = 2)
   # po = Percentage overlap
-  invisible(VennDiagram::draw.pairwise.venn(area1 = 100,
-                                            area2 = 100,
-                                            cross.area = po,
-                                            category = categories,
-                                            cat.cex = 4,
-                                            cex = 2,
-                                            cat.pos = c(330, 30),
-                                            cat.dist = -.09,
-                                            lwd = 10,
-                                            ext.pos = 0,
-                                            ext.dist = -5,
-                                            sep.dist = 0.02,
-                                            label.col = c("white",
-                                                          "black",
-                                                          "white")))
-
+  invisible(VennDiagram::draw.pairwise.venn(
+    area1 = 100,
+    area2 = 100,
+    cross.area = po,
+    category = categories,
+    cat.cex = 4,
+    cex = 2,
+    cat.pos = c(330, 30),
+    cat.dist = -.09,
+    lwd = 10,
+    ext.pos = 0,
+    ext.dist = -5,
+    sep.dist = 0.02,
+    label.col = c(
+      "white",
+      "black",
+      "white"
+    )
+  ))
 }
 nice_circle <- overlap_circle

@@ -29,9 +29,13 @@
 format_value <- function(value,
                          type = "d",
                          ...) {
-  if(type == "r") {format_r(value, ...)}
-  else if(type == "p") {format_p(value, ...)}
-  else if(type == "d") {format_d(value, ...)}
+  if (type == "r") {
+    format_r(value, ...)
+  } else if (type == "p") {
+    format_p(value, ...)
+  } else if (type == "d") {
+    format_d(value, ...)
+  }
 }
 
 #' @export
@@ -42,12 +46,14 @@ format_p <- function(p,
                      suffix = NULL,
                      sign = FALSE) {
   digits <- -log(precision, base = 10)
-  p <- formatC(p, format = 'f', digits = digits)
-  if(sign == TRUE) {
-    p[p != formatC(0, format = 'f', digits = digits)] <- paste0(
-      '= ', p[p != formatC(0, format = 'f', digits = digits)])}
-  p[p == formatC(0, format = 'f', digits = digits)] <-
-    paste0('< ', precision)
+  p <- formatC(p, format = "f", digits = digits)
+  if (sign == TRUE) {
+    p[p != formatC(0, format = "f", digits = digits)] <- paste0(
+      "= ", p[p != formatC(0, format = "f", digits = digits)]
+    )
+  }
+  p[p == formatC(0, format = "f", digits = digits)] <-
+    paste0("< ", precision)
   p <- sub("0", "", p)
   p <- paste0(prefix, p, suffix)
   p <- ifelse(p == "  NA", "", p)
@@ -59,12 +65,14 @@ format_p <- function(p,
 format_r <- function(r,
                      precision = 0.01) {
   digits <- -log(precision, base = 10)
-  r <- formatC(r, format = 'f', digits = digits)
-  sub("0", "", r)}
+  r <- formatC(r, format = "f", digits = digits)
+  sub("0", "", r)
+}
 
 #' @export
 #' @rdname format_value
 format_d <- function(d,
                      precision = 0.01) {
   digits <- 2
-  formatC(d, format = 'f', digits = digits)}
+  formatC(d, format = "f", digits = digits)
+}

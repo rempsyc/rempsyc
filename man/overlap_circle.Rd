@@ -26,7 +26,7 @@ overlap_circle(3.5)
 overlap_circle(6.84)
 
 # Changing labels
-overlap_circle(3.12, categories = c("Humans","Animals"))
+overlap_circle(3.12, categories = c("Humans", "Animals"))
 
 ##  NOT RUN
 # Saving to file (PDF or PNG)

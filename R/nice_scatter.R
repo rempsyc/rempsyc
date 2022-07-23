@@ -48,155 +48,197 @@
 #' @export
 #' @examples
 #' # Make the basic plot
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg")
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg"
+#' )
 #'
 #' \dontrun{
 #' # Save a high-resolution image file to specified directory
-#' ggsave('nicescatterplothere.pdf', width = 7, height = 7, unit = 'in',
-#'        dpi = 300, path = "/") # change for your own desired path
+#' ggsave("nicescatterplothere.pdf",
+#'   width = 7, height = 7, unit = "in",
+#'   dpi = 300, path = "/"
+#' ) # change for your own desired path
 #' }
 #'
 #' # Change x- and y- axis labels
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              ytitle = "Miles/(US) gallon",
-#'              xtitle = "Weight (1000 lbs)")
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   ytitle = "Miles/(US) gallon",
+#'   xtitle = "Weight (1000 lbs)"
+#' )
 #'
 #' # Have points "jittered"
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              has.jitter = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.jitter = TRUE
+#' )
 #'
 #' # Change the transparency of the points
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              alpha = 1)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   alpha = 1
+#' )
 #'
 #' # Remove points
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              has.points = FALSE,
-#'              has.jitter = FALSE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.points = FALSE,
+#'   has.jitter = FALSE
+#' )
 #'
 #' # Add confidence band
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              has.confband = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.confband = TRUE
+#' )
 #'
 #' # Set x- and y- scales manually
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              xmin = 1,
-#'              xmax = 6,
-#'              xby = 1,
-#'              ymin = 10,
-#'              ymax = 35,
-#'              yby = 5)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   xmin = 1,
+#'   xmax = 6,
+#'   xby = 1,
+#'   ymin = 10,
+#'   ymax = 35,
+#'   yby = 5
+#' )
 #'
 #' # Change plot colour
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              colours = "blueviolet")
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   colours = "blueviolet"
+#' )
 #'
 #' # Add correlation coefficient to plot and p-value
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              has.r = TRUE,
-#'              has.p = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.r = TRUE,
+#'   has.p = TRUE
+#' )
 #'
 #' # Change location of correlation coefficient or p-value
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              has.r = TRUE,
-#'              r.x = 4,
-#'              r.y = 25,
-#'              has.p = TRUE,
-#'              p.x = 5,
-#'              p.y = 20)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.r = TRUE,
+#'   r.x = 4,
+#'   r.y = 25,
+#'   has.p = TRUE,
+#'   p.x = 5,
+#'   p.y = 20
+#' )
 #'
 #' # Plot by group
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl")
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl"
+#' )
 #'
 #' # Use full range on the slope/confidence band
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.fullrange = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.fullrange = TRUE
+#' )
 #'
 #' # Remove lines
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.line = FALSE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.line = FALSE
+#' )
 #'
 #' # Add a legend
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.legend = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.legend = TRUE
+#' )
 #'
 #' # Change order of labels on the legend
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.legend = TRUE,
-#'              groups.order = c(8,4,6))
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.legend = TRUE,
+#'   groups.order = c(8, 4, 6)
+#' )
 #'
 #' # Change legend labels
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.legend = TRUE,
-#'              groups.labels = c("Weak","Average","Powerful"))
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.legend = TRUE,
+#'   groups.labels = c("Weak", "Average", "Powerful")
+#' )
 #' # Warning: This applies after changing order of level
 #'
 #' # Add a title to legend
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.legend = TRUE,
-#'              legend.title = "cylinders")
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.legend = TRUE,
+#'   legend.title = "cylinders"
+#' )
 #'
 #' # Plot by group + manually specify colours
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              colours = c("burlywood", "darkgoldenrod", "chocolate"))
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   colours = c("burlywood", "darkgoldenrod", "chocolate")
+#' )
 #'
 #' # Plot by group + use different line types for each group
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.linetype = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.linetype = TRUE
+#' )
 #'
 #' # Plot by group + use different point shapes for each group
-#' nice_scatter(data = mtcars,
-#'              predictor = "wt",
-#'              response = "mpg",
-#'              group = "cyl",
-#'              has.shape = TRUE)
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.shape = TRUE
+#' )
 #'
 #' @seealso
 #' Visualize group differences via violin plots:
@@ -214,8 +256,8 @@
 nice_scatter <- function(data,
                          predictor,
                          response,
-                         xtitle=ggplot2::waiver(),
-                         ytitle=ggplot2::waiver(),
+                         xtitle = ggplot2::waiver(),
+                         ytitle = ggplot2::waiver(),
                          has.points = TRUE,
                          has.jitter = FALSE,
                          alpha = 0.7,
@@ -246,96 +288,180 @@ nice_scatter <- function(data,
   has.groups <- !missing(group)
   if (has.r == TRUE) {
     r <- format_r(cor.test(data[[predictor]],
-                           data[[response]],
-                           use="complete.obs",)$estimate)
+      data[[response]],
+      use = "complete.obs",
+    )$estimate)
   }
   if (has.p == TRUE) {
     p <- format_p(cor.test(data[[predictor]],
-                           data[[response]],
-                           use="complete.obs",)$p.value,
-                  sign = TRUE)
+      data[[response]],
+      use = "complete.obs",
+    )$p.value,
+    sign = TRUE
+    )
   }
   if (missing(group)) {
-    smooth <- stat_smooth(formula = y ~ x, geom="line", method="lm",
-                          fullrange=has.fullrange, color = colours, size = 1)}
+    smooth <- stat_smooth(
+      formula = y ~ x, geom = "line", method = "lm",
+      fullrange = has.fullrange, color = colours, size = 1
+    )
+  }
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
-    smooth <- stat_smooth(formula = y ~ x, geom="line", method="lm",
-                          fullrange=has.fullrange, size = 1)}
+    smooth <- stat_smooth(
+      formula = y ~ x, geom = "line", method = "lm",
+      fullrange = has.fullrange, size = 1
+    )
+  }
   if (!missing(groups.order)) {
-    data[[group]] <- factor(data[[group]], levels=groups.order)}
-  if (!missing(groups.labels)) {levels(data[[group]]) <- groups.labels}
+    data[[group]] <- factor(data[[group]], levels = groups.order)
+  }
+  if (!missing(groups.labels)) {
+    levels(data[[group]]) <- groups.labels
+  }
   if (has.confband == TRUE & missing(group)) {
-    band <- geom_smooth(formula = y ~ x, method="lm",colour=NA,fill=colours)}
+    band <- geom_smooth(formula = y ~ x, method = "lm", colour = NA, fill = colours)
+  }
   if (has.confband == TRUE & !missing(group)) {
-    band <- geom_smooth(formula = y ~ x, method="lm",colour=NA)}
+    band <- geom_smooth(formula = y ~ x, method = "lm", colour = NA)
+  }
   if (has.points == TRUE & missing(group) & missing(colours)) {
-    observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
+    observations <- geom_point(size = 2, alpha = alpha, shape = 16)
+  }
   if (has.points == TRUE & !missing(group) & has.shape == FALSE) {
-    observations <- geom_point(size = 2, alpha = alpha, shape = 16)}
+    observations <- geom_point(size = 2, alpha = alpha, shape = 16)
+  }
   if (has.points == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_point(size = 2, alpha = alpha,
-                               colour = colours, shape = 16)}
+    observations <- geom_point(
+      size = 2, alpha = alpha,
+      colour = colours, shape = 16
+    )
+  }
   if (has.points == TRUE & !missing(group) & has.shape == TRUE) {
-    observations <- geom_point(size = 2, alpha = alpha)}
+    observations <- geom_point(size = 2, alpha = alpha)
+  }
   if (has.jitter == TRUE & missing(group) & missing(colours)) {
     observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
-    has.points <- FALSE}
+    has.points <- FALSE
+  }
   if (has.jitter == TRUE & !missing(group) & has.shape == FALSE) {
     observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
-    has.points <- FALSE}
+    has.points <- FALSE
+  }
   if (has.jitter == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_jitter(size = 2, alpha = alpha,
-                                colour = colours, shape = 16)
-    has.points <- FALSE}
+    observations <- geom_jitter(
+      size = 2, alpha = alpha,
+      colour = colours, shape = 16
+    )
+    has.points <- FALSE
+  }
   if (has.jitter == TRUE & !missing(group) & has.shape == TRUE) {
     observations <- geom_jitter(size = 2, alpha = alpha)
-    has.points <- FALSE}
-  ggplot(data,
-         aes(x=.data[[predictor]],
-             y=.data[[response]],
-             colour = switch(has.groups==TRUE, .data[[group]]),
-             fill = switch(has.groups==TRUE, .data[[group]]),
-             linetype = switch(has.groups==TRUE & has.linetype==TRUE,
-                               .data[[group]]),
-             shape = switch(has.groups==TRUE & has.shape==TRUE, .data[[group]]),
-             alpha = switch(!is.null(groups.alpha), .data[[group]]))) +
+    has.points <- FALSE
+  }
+  ggplot(
+    data,
+    aes(
+      x = .data[[predictor]],
+      y = .data[[response]],
+      colour = switch(has.groups == TRUE,
+        .data[[group]]
+      ),
+      fill = switch(has.groups == TRUE,
+        .data[[group]]
+      ),
+      linetype = switch(has.groups == TRUE & has.linetype == TRUE,
+        .data[[group]]
+      ),
+      shape = switch(has.groups == TRUE & has.shape == TRUE,
+        .data[[group]]
+      ),
+      alpha = switch(!is.null(groups.alpha),
+        .data[[group]]
+      )
+    )
+  ) +
     xlab(xtitle) +
     ylab(ytitle) +
-    {if (has.line == TRUE) smooth} +
-    {if (has.confband == TRUE) band} +
-    {if (exists("observations")) observations} +
-    {if (!missing(xmin)) scale_x_continuous(
-      limits = c(xmin, xmax), breaks = seq(xmin, xmax, by = xby))} +
-    {if (!missing(ymin)) scale_y_continuous(
-      limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby))} +
-    {if (!missing(colours) & !missing(group))
-      scale_color_manual(values=colours, name = legend.title)} +
-    {if (!missing(colours) & !missing(group))
-      scale_fill_manual(values=colours, name = legend.title)} +
-    {if (!missing(colours)) guides(fill = guide_legend(
-      override.aes = list(colour = colours)))} +
-    {if (has.legend == FALSE) theme(legend.position = "none")} +
-    labs(legend.title = legend.title, colour = legend.title,
-         fill = legend.title, linetype = legend.title, shape = legend.title) +
-    {if (!missing(groups.alpha))
-      scale_alpha_manual(values=groups.alpha, guide="none")} +
-    {if (has.r == TRUE)
-      annotate(geom="text",
-               x=r.x,
-               y=r.y,
-               label=sprintf("italic('r =')~'%s'", r),
-               parse = TRUE,
-               hjust=1,
-               vjust=-3,
-               size=7)} +
-    {if (has.p == TRUE) annotate(geom="text",
-                                 x=p.x,
-                                 y=p.y,
-                                 label=sprintf("italic('p')~'%s'", p),
-                                 parse = TRUE,
-                                 hjust=1,
-                                 vjust=-1,
-                                 size=7)} +
+    {
+      if (has.line == TRUE) smooth
+    } +
+    {
+      if (has.confband == TRUE) band
+    } +
+    {
+      if (exists("observations")) observations
+    } +
+    {
+      if (!missing(xmin)) {
+        scale_x_continuous(
+          limits = c(xmin, xmax), breaks = seq(xmin, xmax, by = xby)
+        )
+      }
+    } +
+    {
+      if (!missing(ymin)) {
+        scale_y_continuous(
+          limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby)
+        )
+      }
+    } +
+    {
+      if (!missing(colours) & !missing(group)) {
+        scale_color_manual(values = colours, name = legend.title)
+      }
+    } +
+    {
+      if (!missing(colours) & !missing(group)) {
+        scale_fill_manual(values = colours, name = legend.title)
+      }
+    } +
+    {
+      if (!missing(colours)) {
+        guides(fill = guide_legend(
+          override.aes = list(colour = colours)
+        ))
+      }
+    } +
+    {
+      if (has.legend == FALSE) theme(legend.position = "none")
+    } +
+    labs(
+      legend.title = legend.title, colour = legend.title,
+      fill = legend.title, linetype = legend.title, shape = legend.title
+    ) +
+    {
+      if (!missing(groups.alpha)) {
+        scale_alpha_manual(values = groups.alpha, guide = "none")
+      }
+    } +
+    {
+      if (has.r == TRUE) {
+        annotate(
+          geom = "text",
+          x = r.x,
+          y = r.y,
+          label = sprintf("italic('r =')~'%s'", r),
+          parse = TRUE,
+          hjust = 1,
+          vjust = -3,
+          size = 7
+        )
+      }
+    } +
+    {
+      if (has.p == TRUE) {
+        annotate(
+          geom = "text",
+          x = p.x,
+          y = p.y,
+          label = sprintf("italic('p')~'%s'", p),
+          parse = TRUE,
+          hjust = 1,
+          vjust = -1,
+          size = 7
+        )
+      }
+    } +
     theme_apa
 }

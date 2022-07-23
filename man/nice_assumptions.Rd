@@ -25,7 +25,8 @@ DV <- names(mtcars[-1])
 formulas <- paste(DV, "~ mpg")
 models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
-                                             interpretation = FALSE))
+  interpretation = FALSE
+))
 assumptions.table
 
 }

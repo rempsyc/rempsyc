@@ -32,35 +32,47 @@
 #'
 #' # Use selected columns explicitly
 #' nice_na(airquality,
-#'           vars = list(c("Ozone", "Solar.R", "Wind"),
-#'                       c("Temp", "Month", "Day")))
+#'   vars = list(
+#'     c("Ozone", "Solar.R", "Wind"),
+#'     c("Temp", "Month", "Day")
+#'   )
+#' )
 #'
 #' # If the questionnaire items start with the same name, e.g.,
 #' set.seed(15)
-#' fun <- function() {sample(c(NA, 1:10), replace = TRUE)}
-#' df <- data.frame(scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
-#'                  scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
-#'                  scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun())
+#' fun <- function() {
+#'   sample(c(NA, 1:10), replace = TRUE)
+#' }
+#' df <- data.frame(
+#'   scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
+#'   scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
+#'   scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun()
+#' )
 #' # One can list the scale names directly:
 #' nice_na(df, scales = c("scale1", "scale2", "scale3"))
 #'
 #' @importFrom dplyr select all_of bind_rows summarize %>% first last
 
 nice_na <- function(data, vars, scales) {
-  if(missing(vars) & missing(scales)) {vars.internal <- names(data)
-  } else if(!missing(scales)) {
+  if (missing(vars) & missing(scales)) {
+    vars.internal <- names(data)
+  } else if (!missing(scales)) {
     vars.internal <- lapply(scales, function(x) {
       grep(paste0("^", x), names(data), value = TRUE)
     })
   }
-  if(!missing(vars)) { vars.internal <- vars }
-  if(!is.list(vars.internal)) {vars.internal <- list(vars.internal)}
+  if (!missing(vars)) {
+    vars.internal <- vars
+  }
+  if (!is.list(vars.internal)) {
+    vars.internal <- list(vars.internal)
+  }
   na_df <- nice_na_internal(data)
-  if(!missing(vars) | !missing(scales)) {
+  if (!missing(vars) | !missing(scales)) {
     na_list <- lapply(vars.internal, function(x) {
       data <- data %>%
         select(all_of(x)) %>%
-        nice_na_internal
+        nice_na_internal()
     })
     na_df$var <- "Total"
     na_df <- bind_rows(na_list, na_df)
@@ -70,11 +82,13 @@ nice_na <- function(data, vars, scales) {
 
 nice_na_internal <- function(data) {
   data %>%
-    summarize(var = paste0(first(names(.)), ":", last(names(.))),
-              items = ncol(.),
-              na = sum(is.na(.)),
-              cells = prod(dim(.)),
-              na_percent = round(na/cells * 100, 2),
-              na_max = max(rowSums(is.na(.))),
-              na_max_percent = round(na_max/ncol(.) * 100, 2))
+    summarize(
+      var = paste0(first(names(.)), ":", last(names(.))),
+      items = ncol(.),
+      na = sum(is.na(.)),
+      cells = prod(dim(.)),
+      na_percent = round(na / cells * 100, 2),
+      na_max = max(rowSums(is.na(.))),
+      na_max_percent = round(na_max / ncol(.) * 100, 2)
+    )
 }
