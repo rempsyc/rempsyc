@@ -1,6 +1,7 @@
 ## rempsyc 0.0.5.3
-* Corrected spelling with `devtools::spell_check()`
-* Restyled code with `styler::style_pkg()`
+* Corrected spelling of all code with `devtools::spell_check()`
+* Restyled all code according to the tidyverse guidelines with `styler::style_pkg()`
+* `nice_table`: greatly improved APA title feature thanks to @Buedenbender (and shoot out to his package [datscience](https://buedenbender.github.io/datscience/) and function [flex_table1](https://buedenbender.github.io/datscience/reference/format_flextable.html) on which this improvement was based!)
 
 ## rempsyc 0.0.5.2
 * `nice_table`: added new argument, `separate.header`, a logical (and simplified) form of the `flextable::separate_header` argument.

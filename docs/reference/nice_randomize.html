@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,11 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -131,8 +133,10 @@ be a multiple of your number of groups if you are using<code>between</code>.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Specify design, number of conditions, number of</span></span></span>
 <span class="r-in"><span><span class="co"># participants, and names of conditions:</span></span></span>
-<span class="r-in"><span><span class="fu">nice_randomize</span><span class="op">(</span>design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span></span>
-<span class="r-in"><span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_randomize</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span></span>
+<span class="r-in"><span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>, <span class="st">"CX"</span>, <span class="st">"PZ"</span>, <span class="st">"ZL"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id Condition</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1        PZ</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2        CX</span>
@@ -144,8 +148,10 @@ be a multiple of your number of groups if you are using<code>between</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  8        CX</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Within-Group Design</span></span></span>
-<span class="r-in"><span><span class="fu">nice_randomize</span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">6</span>,</span></span>
-<span class="r-in"><span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_randomize</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>, <span class="st">"AV"</span>, <span class="st">"ST"</span>, <span class="st">"AT"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id Condition</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   1        SV</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   1        ST</span>
@@ -173,11 +179,15 @@ be a multiple of your number of groups if you are using<code>between</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24  6        SV</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make a quick runsheet</span></span></span>
-<span class="r-in"><span><span class="va">randomized</span> <span class="op">&lt;-</span> <span class="fu">nice_randomize</span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">128</span>,</span></span>
-<span class="r-in"><span>                             condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                             col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"Condition"</span>, <span class="st">"Date/Time"</span>,</span></span>
-<span class="r-in"><span>                             <span class="st">"SONA ID"</span>, <span class="st">"Age/Gd."</span>, <span class="st">"Handedness"</span>,</span></span>
-<span class="r-in"><span>                             <span class="st">"Tester"</span>, <span class="st">"Notes"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">randomized</span> <span class="op">&lt;-</span> <span class="fu">nice_randomize</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">128</span>,</span></span>
+<span class="r-in"><span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>, <span class="st">"AV"</span>, <span class="st">"ST"</span>, <span class="st">"AT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"id"</span>, <span class="st">"Condition"</span>, <span class="st">"Date/Time"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"SONA ID"</span>, <span class="st">"Age/Gd."</span>, <span class="st">"Handedness"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Tester"</span>, <span class="st">"Notes"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">randomized</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1        SV        NA      NA      NA         NA     NA    NA</span>

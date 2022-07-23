@@ -22,7 +22,7 @@ Author: Salvatore Mangiafico, mangiafico@njaes.rutgers.edu'><meta property="og:i
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,11 +39,13 @@ Author: Salvatore Mangiafico, mangiafico@njaes.rutgers.edu'><meta property="og:i
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -261,17 +263,20 @@ right side are used for the grouping variables.</p>
 <span class="r-in"><span><span class="co">### Example with formula notation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">rcompanion_groupwiseMean</span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                         data         <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>                         traditional  <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                         percentile   <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  data         <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  traditional  <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  percentile   <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example with variable notation</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">rcompanion_groupwiseMean</span><span class="op">(</span>data        <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>                         var         <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>                         group       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"am"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                         traditional <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>                         percentile  <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rcompanion_groupwiseMean</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  var <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl"</span>, <span class="st">"am"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  traditional <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  percentile <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

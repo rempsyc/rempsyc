@@ -24,7 +24,7 @@ argument: var.equal = TRUE."><meta property="og:image" content="https://rempsyc.
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,11 +41,13 @@ argument: var.equal = TRUE."><meta property="og:image" content="https://rempsyc.
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -159,9 +161,11 @@ t-test instead of independent samples).</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic table</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
@@ -172,9 +176,11 @@ t-test instead of independent samples).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.6705686</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables at once</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
@@ -200,10 +206,12 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span><span class="co"># of base `t.test()`</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Student t-test (instead of Welch)</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
-<span class="r-in"><span>            var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
+<span class="r-in"><span>  var.equal <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using Student t-test. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
@@ -211,10 +219,12 @@ t-test instead of independent samples).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -4.106127 30 0.0002850207 -1.477947 -2.265973 -0.6705686</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One-sided instead of two-sided</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
-<span class="r-in"><span>            alternative <span class="op">=</span> <span class="st">"less"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
+<span class="r-in"><span>  alternative <span class="op">=</span> <span class="st">"less"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
@@ -225,9 +235,11 @@ t-test instead of independent samples).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.6705686</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One-sample t-test</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>            mu <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  mu <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
@@ -238,10 +250,12 @@ t-test instead of independent samples).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg 9.470995 31 1.154598e-10 1.674251 1.146018 2.244341</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Paired t-test instead of independent samples</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"supp"</span>,</span></span>
-<span class="r-in"><span>            paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"supp"</span>,</span></span>
+<span class="r-in"><span>  paired <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using paired t-test. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>

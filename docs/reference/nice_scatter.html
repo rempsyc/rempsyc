@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,11 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -274,175 +276,217 @@ separately.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic plot</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Save a high-resolution image file to specified directory</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nicescatterplothere.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>,</span></span>
-<span class="r-in"><span>       dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span> <span class="co"># change for your own desired path</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"nicescatterplothere.pdf"</span>,</span></span>
+<span class="r-in"><span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">"in"</span>,</span></span>
+<span class="r-in"><span>  dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"/"</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="co"># change for your own desired path</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change x- and y- axis labels</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             ytitle <span class="op">=</span> <span class="st">"Miles/(US) gallon"</span>,</span></span>
-<span class="r-in"><span>             xtitle <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  ytitle <span class="op">=</span> <span class="st">"Miles/(US) gallon"</span>,</span></span>
+<span class="r-in"><span>  xtitle <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Have points "jittered"</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             has.jitter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  has.jitter <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change the transparency of the points</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  alpha <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Remove points</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             has.points <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>             has.jitter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  has.points <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  has.jitter <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add confidence band</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             has.confband <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  has.confband <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set x- and y- scales manually</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             xmin <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>             xmax <span class="op">=</span> <span class="fl">6</span>,</span></span>
-<span class="r-in"><span>             xby <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>             ymin <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>             ymax <span class="op">=</span> <span class="fl">35</span>,</span></span>
-<span class="r-in"><span>             yby <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  xmin <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  xmax <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>  xby <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  ymin <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  ymax <span class="op">=</span> <span class="fl">35</span>,</span></span>
+<span class="r-in"><span>  yby <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 7 row(s) containing missing values (geom_path).</span>
 <span class="r-plt img"><img src="nice_scatter-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change plot colour</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             colours <span class="op">=</span> <span class="st">"blueviolet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  colours <span class="op">=</span> <span class="st">"blueviolet"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add correlation coefficient to plot and p-value</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             has.p <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  has.p <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change location of correlation coefficient or p-value</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             r.x <span class="op">=</span> <span class="fl">4</span>,</span></span>
-<span class="r-in"><span>             r.y <span class="op">=</span> <span class="fl">25</span>,</span></span>
-<span class="r-in"><span>             has.p <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             p.x <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>             p.y <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  r.x <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>  r.y <span class="op">=</span> <span class="fl">25</span>,</span></span>
+<span class="r-in"><span>  has.p <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  p.x <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  p.y <span class="op">=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot by group</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-11.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use full range on the slope/confidence band</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.fullrange <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.fullrange <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-12.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Remove lines</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.line <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.line <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-13.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add a legend</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.legend <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-14.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change order of labels on the legend</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             groups.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  groups.order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-15.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change legend labels</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             groups.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Weak"</span>,<span class="st">"Average"</span>,<span class="st">"Powerful"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  groups.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Weak"</span>, <span class="st">"Average"</span>, <span class="st">"Powerful"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-16.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># Warning: This applies after changing order of level</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add a title to legend</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>             legend.title <span class="op">=</span> <span class="st">"cylinders"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.legend <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  legend.title <span class="op">=</span> <span class="st">"cylinders"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-17.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot by group + manually specify colours</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"burlywood"</span>, <span class="st">"darkgoldenrod"</span>, <span class="st">"chocolate"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"burlywood"</span>, <span class="st">"darkgoldenrod"</span>, <span class="st">"chocolate"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-18.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot by group + use different line types for each group</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.linetype <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.linetype <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-19.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot by group + use different point shapes for each group</span></span></span>
-<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>             has.shape <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  has.shape <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter-20.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

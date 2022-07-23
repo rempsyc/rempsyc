@@ -16,7 +16,7 @@ the lmSupport package to get the sr2 effect sizes."><meta property="og:image" co
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,11 +33,13 @@ the lmSupport package to get the sr2 effect sizes."><meta property="og:image" co
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -164,20 +166,24 @@ function for the models.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic table</span></span></span>
-<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>         response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
-<span class="r-in"><span>         moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
+<span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df         b          t          p         sr2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 28  5.615951  1.9437108 0.06204275 0.028488305</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 28  1.403861  0.4301493 0.67037970 0.001395217</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg   gear:wt 28 -1.966931 -2.1551077 0.03989970 0.035022025</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables at once</span></span></span>
-<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>         response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
-<span class="r-in"><span>         moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
+<span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Model Number Dependent Variable Predictor df          b          t          p</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2            1                mpg        wt 28   1.403861  0.4301493 0.67037970</span>
@@ -200,11 +206,13 @@ function for the models.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9 0.0147871391</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add covariates</span></span></span>
-<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>         response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
-<span class="r-in"><span>         moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>         covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"vs"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
+<span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"vs"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df         b          t           p         sr2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 26  5.840594  2.0773482 0.047786602 0.024922116</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 26  3.433057  1.1692031 0.252929701 0.007894893</span>
@@ -213,11 +221,13 @@ function for the models.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg   gear:wt 26 -2.096457 -2.5615471 0.016567730 0.037894048</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Three-way interaction</span></span></span>
-<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>         response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
-<span class="r-in"><span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
-<span class="r-in"><span>         moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>         moderator2 <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
+<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
+<span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
+<span class="r-in"><span>  moderator2 <span class="op">=</span> <span class="st">"am"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable  Predictor df         b         t          p        sr2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg       gear 24  52.97009  1.831564 0.07945785 0.01660219</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg         wt 24  42.12157  1.603869 0.12182331 0.01273090</span>

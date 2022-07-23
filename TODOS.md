@@ -2,7 +2,7 @@
 
 -   `winsorize_mad`
     -   Add documentation (or not given it has been integrated to the `easystats::datawizard` package)
--   `scale_mad` (or not given it has been integrated to the `easystats::datawizard` package)
+-   `scale_mad` (or not given it is already available from the `easystats::datawizard` package)
     -   Add documentation
 -   `find_mad`
     -   Add documentation (or not given it is in the process to be integrated to the `easystats::datawizard` package)
@@ -24,7 +24,7 @@
 -   `nice_contrasts`
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
-    -   Add option to not use robust Cohen's d
+    -   Add option to not use robust Cohen's *d*
     -   Add option to not use bootstrapping
 -   All functions
     -   Check for consistency among argument names like response/variable
@@ -32,6 +32,5 @@
     -   Add documentation for outputs
     -   Add support for NA missing values
 -   Finish writing all function tests
--   Transforms tutorials into vignettes
 -   Suggest collaboration with easystats
 -   Submit to CRAN

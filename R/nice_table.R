@@ -122,6 +122,7 @@
 #' set_formatter colformat_double compose bold bg
 #' as_paragraph as_i as_sub as_sup set_caption
 #' add_footer_lines line_spacing valign separate_header
+#' border add_header_lines
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -268,7 +269,7 @@ nice_table <- function(data,
 
     dataframe %>%
       format_CI(c("d_CI_low", "d_CI_high"),
-        col.name = "95% CI (d)"
+                col.name = "95% CI (d)"
       ) -> dataframe
 
     if (short == TRUE) {
@@ -296,7 +297,7 @@ nice_table <- function(data,
 
     dataframe %>%
       format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
-        col.name = "95% CI (B)"
+                col.name = "95% CI (B)"
       ) -> dataframe
 
     if (short == TRUE) {
@@ -317,13 +318,13 @@ nice_table <- function(data,
     if ("Eta2_CI_low" %in% names(dataframe)) {
       dataframe %>%
         format_CI(c("Eta2_CI_low", "Eta2_CI_high"),
-          col.name = "95% CI (n2)"
+                  col.name = "95% CI (n2)"
         ) -> dataframe
     }
     if ("Eta2_partial_CI_low" %in% names(dataframe)) {
       dataframe %>%
         format_CI(c("Eta2_partial_CI_low", "Eta2_partial_CI_high"),
-          col.name = "95% CI (np2)"
+                  col.name = "95% CI (np2)"
         ) -> dataframe
     }
   }
@@ -337,7 +338,7 @@ nice_table <- function(data,
       ) -> dataframe
     dataframe %>%
       format_CI(c("rank_biserial_CI_low", "rank_biserial_CI_high"),
-        col.name = "95% CI (rrb)"
+                col.name = "95% CI (rrb)"
       ) -> dataframe
   }
 
@@ -360,6 +361,7 @@ nice_table <- function(data,
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
+  invisible.borders <- list("width" = 0, color = "black", style = "solid")
 
   #   __________________________________
   #   Flextable                     ####
@@ -373,18 +375,7 @@ nice_table <- function(data,
       }
     } -> table
 
-  if (!missing(title)) {
-    table <- table %>%
-      set_caption(table, caption = title)
-  }
-  if (!missing(footnote)) {
-    table <- table %>%
-      add_footer_lines(footnote)
-  }
-
   table %>%
-    fontsize(part = "all", size = 12) %>%
-    font(part = "all", fontname = "Times New Roman") %>%
     hline_top(part = "head", border = nice.borders) %>%
     hline_bottom(part = "head", border = nice.borders) %>%
     hline_top(part = "body", border = nice.borders) %>%
@@ -401,10 +392,31 @@ nice_table <- function(data,
       set_table_properties(layout = "autofit") -> table
   }
 
+  if (!missing(footnote)) {
+
+    footnote.list <- as.list(footnote)
+
+    table <- table %>%
+      add_footer_lines("") %>%
+      compose(i = 1, j = 1, value = as_paragraph(
+        as_i("Note. "), footnote[[1]]), part = "footer") %>%
+      align(part = "footer", align = "left") %>%
+      add_footer_lines("")
+
+    if (length(footnote.list) > 1) {
+      table <- table %>%
+        add_footer_lines(footnote.list[-1])
+    }
+  }
+
   if (!missing(separate.header)) {
     table <- table %>%
       separate_header("span-top")
   }
+
+  table <- table %>%
+    fontsize(part = "all", size = 12) %>%
+    font(part = "all", fontname = "Times New Roman")
 
   #   ___________________________________
   #   Column formatting              ####
@@ -415,7 +427,8 @@ nice_table <- function(data,
     table %>%
       italic(j = italics, part = "header") -> table
   } else if (!missing(italics) & !missing(separate.header)) {
-    level.number <- sum(charToRaw(names(dataframe[2])) == charToRaw(".")) + 1
+    level.number <- sum(charToRaw(names(
+      dataframe[2])) == charToRaw(".")) + 1
     table %>%
       italic(j = italics, i = level.number, part = "header") -> table
   }
@@ -532,10 +545,10 @@ nice_table <- function(data,
   table %>%
     colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
-        select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
+             select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
                             ^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|^sr2$",
-          ignore.case = FALSE
-        )) %>% names()),
+                             ignore.case = FALSE
+             )) %>% names()),
       big.mark = ",", digits = 2
     ) -> table
   if (!missing(col.format.p)) {
@@ -564,6 +577,23 @@ nice_table <- function(data,
     )
     eval(parse(text = rExpression))
   }
+
+  #   ____________________________________________________________________________
+  #   Final touch up (title)                                                  ####
+
+  if (!missing(title)) {
+    italic.lvl <- ifelse(length(title) == 1, 1, 2)
+    bold.decision <- ifelse(length(title) == 1, FALSE, TRUE)
+
+    table <- table %>%
+      add_header_lines(values = rev(title)) %>%
+      align(part = "header", i = 1:length(title), align = "left") %>%
+      border(part = "header", i = 1:length(title),
+             border = invisible.borders) %>%
+      italic(part = "header", i = italic.lvl) %>%
+      bold(., part = "header", i = 1, bold = bold.decision)
+  }
+
   table
 }
 

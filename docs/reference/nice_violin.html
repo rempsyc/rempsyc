@@ -12,7 +12,7 @@ confidence intervals."><meta property="og:image" content="https://rempsyc.github
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,11 +29,13 @@ confidence intervals."><meta property="og:image" content="https://rempsyc.github
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -268,113 +270,139 @@ of the horizontal position of the annotations/stars
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic plot</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>           group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>           response <span class="op">=</span> <span class="st">"len"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Save a high-resolution image file to specified directory</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceviolinplothere.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>,</span></span>
-<span class="r-in"><span>       dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span> <span class="co"># change for your own desired path</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"niceviolinplothere.pdf"</span>,</span></span>
+<span class="r-in"><span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">"in"</span>,</span></span>
+<span class="r-in"><span>  dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"/"</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="co"># change for your own desired path</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change x- and y- axes labels</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,</span></span>
-<span class="r-in"><span>            xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,</span></span>
+<span class="r-in"><span>  xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># See difference between two groups</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            comp1 <span class="op">=</span> <span class="st">"0.5"</span>,</span></span>
-<span class="r-in"><span>            comp2 <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  comp1 <span class="op">=</span> <span class="st">"0.5"</span>,</span></span>
+<span class="r-in"><span>  comp2 <span class="op">=</span> <span class="st">"2"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            comp1 <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>            comp2 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  comp1 <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  comp2 <span class="op">=</span> <span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compare all three groups</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"**"</span>,<span class="st">"***"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                <span class="co"># manually enter the number of stars</span></span></span>
-<span class="r-in"><span>            signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">35</span>,<span class="fl">40</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                <span class="co"># What height (y) should the stars appear</span></span></span>
-<span class="r-in"><span>            signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                <span class="co"># Where should the left-sided brackets start (x)</span></span></span>
-<span class="r-in"><span>            signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"**"</span>, <span class="st">"***"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># manually enter the number of stars</span></span></span>
+<span class="r-in"><span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">35</span>, <span class="fl">40</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># What height (y) should the stars appear</span></span></span>
+<span class="r-in"><span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># Where should the left-sided brackets start (x)</span></span></span>
+<span class="r-in"><span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span>                <span class="co"># Where should the right-sided brackets end (x)</span></span></span>
+<span class="r-in"><span><span class="co"># Where should the right-sided brackets end (x)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set the colours manually</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>,<span class="st">"cadetblue"</span>,<span class="st">"darkslateblue"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>, <span class="st">"cadetblue"</span>, <span class="st">"darkslateblue"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Changing the names of the x-axis labels</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Removing the x-axis or y-axis titles</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
-<span class="r-in"><span>            xtitle <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  xtitle <span class="op">=</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Removing the x-axis or y-axis labels (for whatever purpose)</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            has.ylabels <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>            has.xlabels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  has.ylabels <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  has.xlabels <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set y-scale manually</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            ymin <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>            ymax <span class="op">=</span> <span class="fl">35</span>,</span></span>
-<span class="r-in"><span>            yby <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  ymin <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  ymax <span class="op">=</span> <span class="fl">35</span>,</span></span>
+<span class="r-in"><span>  yby <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 1 rows containing non-finite values (stat_ydensity).</span>
 <span class="r-plt img"><img src="nice_violin-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plotting individual observations</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            obs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  obs <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.</span>
 <span class="r-plt img"><img src="nice_violin-11.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Micro-customizations</span></span></span>
-<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
-<span class="r-in"><span>            response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>            CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span></span>
-<span class="r-in"><span>            alpha <span class="op">=</span> <span class="fl">.70</span>,</span></span>
-<span class="r-in"><span>            border.size <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>            border.colour <span class="op">=</span> <span class="st">"white"</span>,</span></span>
-<span class="r-in"><span>            comp1 <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>            comp2 <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>            has.d <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_violin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
+<span class="r-in"><span>  CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span></span>
+<span class="r-in"><span>  alpha <span class="op">=</span> <span class="fl">.70</span>,</span></span>
+<span class="r-in"><span>  border.size <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  border.colour <span class="op">=</span> <span class="st">"white"</span>,</span></span>
+<span class="r-in"><span>  comp1 <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  comp2 <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  has.d <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_violin-12.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,11 +27,13 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+    <h6 class="dropdown-header" data-toc-skip>STATISTICS</h6>
     <a class="dropdown-item" href="../articles/table.html">APA tables</a>
     <a class="dropdown-item" href="../articles/t-test.html">t tests</a>
     <a class="dropdown-item" href="../articles/contrasts.html">Planned contrasts</a>
     <a class="dropdown-item" href="../articles/moderation.html">Moderations</a>
     <a class="dropdown-item" href="../articles/randomize.html">Randomization</a>
+    <h6 class="dropdown-header" data-toc-skip>VISUALIZATION</h6>
     <a class="dropdown-item" href="../articles/violin.html">Violin plots</a>
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
@@ -151,22 +153,30 @@ the Shapiro-Wilk test on the plot.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic plot</span></span></span>
-<span class="r-in"><span><span class="fu">nice_varplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span></span>
-<span class="r-in"><span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_varplot</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
+<span class="r-in"><span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"Species"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_varplot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Further customization</span></span></span>
-<span class="r-in"><span><span class="fu">nice_varplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span></span>
-<span class="r-in"><span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span></span>
-<span class="r-in"><span>             group <span class="op">=</span> <span class="st">"Species"</span>,</span></span>
-<span class="r-in"><span>             colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>,</span></span>
-<span class="r-in"><span>                         <span class="st">"#619CFF"</span>,</span></span>
-<span class="r-in"><span>                         <span class="st">"#F8766D"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>             ytitle <span class="op">=</span> <span class="st">"Sepal Length"</span>,</span></span>
-<span class="r-in"><span>             groups.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(a) Setosa"</span>,</span></span>
-<span class="r-in"><span>                               <span class="st">"(b) Versicolor"</span>,</span></span>
-<span class="r-in"><span>                               <span class="st">"(c) Virginica"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nice_varplot</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
+<span class="r-in"><span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"Species"</span>,</span></span>
+<span class="r-in"><span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"#00BA38"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"#619CFF"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"#F8766D"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ytitle <span class="op">=</span> <span class="st">"Sepal Length"</span>,</span></span>
+<span class="r-in"><span>  groups.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"(a) Setosa"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"(b) Versicolor"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"(c) Virginica"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_varplot-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
