@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.3
+* Corrected spelling with `devtools::spell_check()`
+
 ## rempsyc 0.0.5.2
 * `nice_table`: added new argument, `separate.header`, a logical (and simplified) form of the `flextable::separate_header` argument.
 
@@ -31,7 +34,7 @@
 * New function: `format_d` to format d values as e.g., `0.30` instead of `0.3` e.g., on violin plots.
 
 ## rempsyc 0.0.4.5
-* `nice_violin`: Added the ability to add the cohen's d to the plot
+* `nice_violin`: Added the ability to add the Cohen's d to the plot
 
 ## rempsyc 0.0.4.4
 * `find_mad`: improved reporting of ID and row number
@@ -114,7 +117,7 @@
     * Added model number when more then one model.
     * Also added an optional `mod.id = TRUE` argument, to display the model number, when there is more than one model.
     * Also reordered default order of rows when there is a second moderator present as it makes more sense to group the same models completely together for different levels of the second moderator.
-    * By combining the row names within the list object rather than in the combined dataframed, we also don't have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.
+    * By combining the row names within the list object rather than in the combined dataframe, we also don't have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.
 
 ## rempsyc 0.0.2.1
 * `nice_mod` and `nice_slopes`: Added an argument `b.label` to rename b, e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol automatically in the `nice_table` function.

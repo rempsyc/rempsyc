@@ -12,7 +12,6 @@
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 -   `nice_table`
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
-    -   Tutorial: show how to add different levels of headers, etc.
 -   `nice_lm_slopes`
     -   Support second moderator
 -   `nice_slopes`
@@ -33,7 +32,6 @@
     -   Add documentation for outputs
     -   Add support for NA missing values
 -   Finish writing all function tests
--   Make intro vignette + home index vignette
 -   Transforms tutorials into vignettes
 -   Suggest collaboration with easystats
 -   Submit to CRAN
