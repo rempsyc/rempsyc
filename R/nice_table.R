@@ -122,7 +122,7 @@
 #' set_formatter colformat_double compose bold bg
 #' as_paragraph as_i as_sub as_sup set_caption
 #' add_footer_lines line_spacing valign separate_header
-#' border add_header_lines
+#' border add_header_lines autofit
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -387,9 +387,10 @@ nice_table <- function(data,
   if (!missing(width)) {
     table %>%
       set_table_properties(layout = "autofit", width = width) -> table
-  } else {
+   } else {
     table %>%
-      set_table_properties(layout = "autofit") -> table
+      autofit() -> table
+      #set_table_properties(layout = "fixed") -> table
   }
 
   if (!missing(footnote)) {
