@@ -48,7 +48,7 @@ table.stats
 
 This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviations from parametric assumptions). It will also provide us with bootstrapped 95% confidence intervals of that effect size.
 
-### Make it publication-ready using [`nice_table()`](https://remi-theriault.com/blog_table).
+### Make it publication-ready using [`nice_table()`](../articles/table.html).
 
 ```{r}
 (my_table <- nice_table(table.stats))
@@ -60,7 +60,7 @@ This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviation
 save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
 ```
 
-### Make a violin plot comparing groups through [`nice_violin()`](https://remi-theriault.com/blog_violin).
+### Make a violin plot comparing groups through [`nice_violin()`](../articles/violin.html).
 
 ```{r fig.width=7, fig.height=7}
 (figure <- nice_violin(group = "Species", 
@@ -123,7 +123,7 @@ table.stats[1] <- rep(c("Peripheral Responsivity (QCAE)",
                         "Inclusion of Other in the Self (IOS)"), each = 3)
 ```
 
-### Make it publication-ready using [nice_table()](https://remi-theriault.com/blog_table).
+### Make it publication-ready using [nice_table()](../articles/table.html).
 
 Note that with option `highlight = TRUE`, it will automatically highlight significant results.
 
@@ -137,7 +137,7 @@ Note that with option `highlight = TRUE`, it will automatically highlight signif
 save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
 ```
 
-### Make violin plots comparing groups through [`nice_violin`](https://remi-theriault.com/blog_violin).
+### Make violin plots comparing groups through [`nice_violin`](../articles/violin.html).
 
 We will have to make the four figures for which comparisons were significant and then combine them in one plot.
 
