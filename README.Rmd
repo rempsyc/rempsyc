@@ -41,8 +41,8 @@ library(rempsyc)
 
 R package of convenience functions to make your workflow faster and easier. Easily customizable plots (via `ggplot2`), nice APA tables exportable to Word (via `flextable`), easily run statistical tests or check assumptions, and automatize various other tasks. Mostly geared at researchers in the psychological sciences. The package is still under active development. Feel free to open an issue to ask for help, report a bug, or request a feature.
 
-- [Release notes](https://github.com/rempsyc/rempsyc/blob/main/NEWS.md)
-- [Development objectives (to-do list)](https://github.com/rempsyc/rempsyc/blob/main/TODOS.md)
+- [Release notes](https://rempsyc.remi-theriault.com/news/index.html)
+- [Development objectives (to-do list)](https://rempsyc.remi-theriault.com/TODOS.html)
 
 ## Installation
 
@@ -95,7 +95,7 @@ cute_cat(section.1, 2)
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 
-The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://remi-theriault.com/blog_table.html
+The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://rempsyc.remi-theriault.com/articles/table
 
 Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.
 
@@ -127,7 +127,7 @@ t_table
 save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
-Full tutorial: https://remi-theriault.com/blog_t-test
+Full tutorial: https://rempsyc.remi-theriault.com/articles/t-test
 
 ## `nice_contrasts `
 
@@ -146,7 +146,7 @@ nice_table(contrasts, highlight = .001)
 
 <img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
-Full tutorial: https://remi-theriault.com/blog_t-test
+Full tutorial: https://rempsyc.remi-theriault.com/articles/contrasts
 
 ## `nice_mod`
 
@@ -165,7 +165,7 @@ nice_table(moderations, highlight = TRUE)
 
 <img src="man/figures/README-mod_table-1.png" width="70%" />
 
-Full tutorial: https://remi-theriault.com/blog_moderation
+Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
 ## `nice_lm`
 
@@ -179,7 +179,7 @@ nice_lm(list(model1, model2))
 
 ```
 
-Full tutorial: https://remi-theriault.com/blog_moderation
+Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
 ## `nice_slopes`
 
@@ -198,7 +198,7 @@ nice_table(simple.slopes)
 
 <img src="man/figures/README-slopes_table-1.png" width="80%" />
 
-Full tutorial: https://remi-theriault.com/blog_moderation
+Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
 ## `nice_lm_slopes`
 
@@ -211,7 +211,7 @@ my.models <- list(model1, model2)
 nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 ```
 
-Full tutorial: https://remi-theriault.com/blog_moderation
+Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
 ```{r Visualization, results = "asis", echo = FALSE}
 cute_cat(section.3, 2)
@@ -238,7 +238,7 @@ ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in',
        dpi = 300, path = "D:/R treasures/")
 ```
 
-Full tutorial: https://remi-theriault.com/blog_violin.html
+Full tutorial: https://rempsyc.remi-theriault.com/articles/violin
 
 ## `nice_scatter`
 
@@ -259,7 +259,7 @@ nice_scatter(data = mtcars,
              has.confband = TRUE)
 ```
 
-Full tutorial: https://remi-theriault.com/blog_scatter.html
+Full tutorial: https://rempsyc.remi-theriault.com/articles/scatter
 
 ## `overlap_circle `
 
@@ -274,7 +274,7 @@ overlap_circle(3.5)
 overlap_circle(6.84)
 ```
 
-Full tutorial: https://remi-theriault.com/blog_circles.html
+Full tutorial: https://rempsyc.remi-theriault.com/articles/circles
 
 ## `cormatrix_excel`
 
@@ -358,7 +358,7 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
 ```
 
-Full tutorial: https://remi-theriault.com/blog_randomize.html
+Full tutorial: https://rempsyc.remi-theriault.com/articles/randomize
 
 ```{r Assumptions, results = "asis", echo = FALSE}
 cute_cat(section.5, 2)
@@ -378,7 +378,7 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
-Full tutorial: https://remi-theriault.com/blog_assumptions
+Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
 ## `nice_normality `
 
@@ -393,7 +393,7 @@ nice_normality(data = iris,
                histogram = TRUE)
 ```
 
-Full tutorial: https://remi-theriault.com/blog_assumptions
+Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
 ## `nice_var `
 
@@ -405,7 +405,7 @@ nice_var(data = iris,
          group = "Species")
 ```
 
-Full tutorial: https://remi-theriault.com/blog_assumptions
+Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
 ## `nice_varplot `
 
@@ -417,7 +417,7 @@ nice_varplot(data = iris,
              group = "Species")
 ```
 
-Full tutorial: https://remi-theriault.com/blog_assumptions
+Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
 ## Support me and this package
 

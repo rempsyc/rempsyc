@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,7 +137,7 @@ contain each group once, in a random order, which you would then repeat.
 Let’s see this.</p>
 <p>Load the <code>rempsyc</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.github.io/rempsyc/">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com/" class="external-link">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p><strong><em>Note:</em></strong> If you haven’t installed this package
 yet, you will need to install it via the following command:
@@ -155,8 +155,8 @@ between-group design):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1         a</span></span>
-<span><span class="co">## 2  2         c</span></span>
+<span><span class="co">## 1  1         c</span></span>
+<span><span class="co">## 2  2         a</span></span>
 <span><span class="co">## 3  3         b</span></span>
 <span><span class="co">## 4  4         a</span></span>
 <span><span class="co">## 5  5         b</span></span>
@@ -172,14 +172,14 @@ names of conditions:</p>
 <span>               n <span class="op">=</span> <span class="fl">8</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1        PZ</span></span>
+<span><span class="co">## 1  1        BP</span></span>
 <span><span class="co">## 2  2        CX</span></span>
-<span><span class="co">## 3  3        BP</span></span>
+<span><span class="co">## 3  3        PZ</span></span>
 <span><span class="co">## 4  4        ZL</span></span>
-<span><span class="co">## 5  5        CX</span></span>
-<span><span class="co">## 6  6        ZL</span></span>
-<span><span class="co">## 7  7        PZ</span></span>
-<span><span class="co">## 8  8        BP</span></span></code></pre>
+<span><span class="co">## 5  5        BP</span></span>
+<span><span class="co">## 6  6        PZ</span></span>
+<span><span class="co">## 7  7        ZL</span></span>
+<span><span class="co">## 8  8        CX</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your number of groups if using "between"!</span></span>
 <span><span class="co"># FYI: condition names stand for popular antidepressants:</span></span>
@@ -205,24 +205,24 @@ but with within-subject design specified</p>
 <span><span class="co">## 4   2         a</span></span>
 <span><span class="co">## 5   2         c</span></span>
 <span><span class="co">## 6   2         b</span></span>
-<span><span class="co">## 7   3         b</span></span>
-<span><span class="co">## 8   3         a</span></span>
-<span><span class="co">## 9   3         c</span></span>
-<span><span class="co">## 10  4         c</span></span>
-<span><span class="co">## 11  4         a</span></span>
+<span><span class="co">## 7   3         c</span></span>
+<span><span class="co">## 8   3         b</span></span>
+<span><span class="co">## 9   3         a</span></span>
+<span><span class="co">## 10  4         a</span></span>
+<span><span class="co">## 11  4         c</span></span>
 <span><span class="co">## 12  4         b</span></span>
 <span><span class="co">## 13  5         b</span></span>
-<span><span class="co">## 14  5         c</span></span>
-<span><span class="co">## 15  5         a</span></span>
+<span><span class="co">## 14  5         a</span></span>
+<span><span class="co">## 15  5         c</span></span>
 <span><span class="co">## 16  6         a</span></span>
 <span><span class="co">## 17  6         b</span></span>
 <span><span class="co">## 18  6         c</span></span>
 <span><span class="co">## 19  7         a</span></span>
 <span><span class="co">## 20  7         c</span></span>
 <span><span class="co">## 21  7         b</span></span>
-<span><span class="co">## 22  8         a</span></span>
+<span><span class="co">## 22  8         b</span></span>
 <span><span class="co">## 23  8         c</span></span>
-<span><span class="co">## 24  8         b</span></span>
+<span><span class="co">## 24  8         a</span></span>
 <span><span class="co">## 25  9         c</span></span>
 <span><span class="co">## 26  9         b</span></span>
 <span><span class="co">## 27  9         a</span></span></code></pre>
@@ -237,29 +237,29 @@ etc.).</p>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    id Condition</span></span>
 <span><span class="co">## 1   1        SV</span></span>
-<span><span class="co">## 2   1        AV</span></span>
+<span><span class="co">## 2   1        ST</span></span>
 <span><span class="co">## 3   1        AT</span></span>
-<span><span class="co">## 4   1        ST</span></span>
+<span><span class="co">## 4   1        AV</span></span>
 <span><span class="co">## 5   2        AV</span></span>
-<span><span class="co">## 6   2        AT</span></span>
-<span><span class="co">## 7   2        SV</span></span>
-<span><span class="co">## 8   2        ST</span></span>
+<span><span class="co">## 6   2        ST</span></span>
+<span><span class="co">## 7   2        AT</span></span>
+<span><span class="co">## 8   2        SV</span></span>
 <span><span class="co">## 9   3        SV</span></span>
 <span><span class="co">## 10  3        ST</span></span>
-<span><span class="co">## 11  3        AT</span></span>
-<span><span class="co">## 12  3        AV</span></span>
+<span><span class="co">## 11  3        AV</span></span>
+<span><span class="co">## 12  3        AT</span></span>
 <span><span class="co">## 13  4        AV</span></span>
 <span><span class="co">## 14  4        SV</span></span>
 <span><span class="co">## 15  4        AT</span></span>
 <span><span class="co">## 16  4        ST</span></span>
-<span><span class="co">## 17  5        AT</span></span>
-<span><span class="co">## 18  5        ST</span></span>
-<span><span class="co">## 19  5        AV</span></span>
-<span><span class="co">## 20  5        SV</span></span>
+<span><span class="co">## 17  5        ST</span></span>
+<span><span class="co">## 18  5        SV</span></span>
+<span><span class="co">## 19  5        AT</span></span>
+<span><span class="co">## 20  5        AV</span></span>
 <span><span class="co">## 21  6        AV</span></span>
 <span><span class="co">## 22  6        SV</span></span>
-<span><span class="co">## 23  6        ST</span></span>
-<span><span class="co">## 24  6        AT</span></span></code></pre>
+<span><span class="co">## 23  6        AT</span></span>
+<span><span class="co">## 24  6        ST</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># FYI: condition names stand for forms of multisensory stimulation:</span></span>
 <span><span class="co"># SV = Synchronous Visual, AV = Asynchronous Visual, </span></span>
@@ -283,10 +283,10 @@ argument:</p>
 <pre><code><span><span class="co">##   id Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span></span>
 <span><span class="co">## 1  1        SV        NA      NA      NA         NA     NA    NA</span></span>
 <span><span class="co">## 2  1        AT        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 3  1        ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 4  1        AV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 5  2        ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 6  2        AT        NA      NA      NA         NA     NA    NA</span></span></code></pre>
+<span><span class="co">## 3  1        AV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 4  1        ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 5  2        SV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 6  2        ST        NA      NA      NA         NA     NA    NA</span></span></code></pre>
 <div class="section level3">
 <h3 id="save-data-frame-as-csv-file">Save data frame as CSV file<a class="anchor" aria-label="anchor" href="#save-data-frame-as-csv-file"></a>
 </h3>

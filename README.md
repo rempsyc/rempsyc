@@ -27,10 +27,9 @@ researchers in the psychological sciences. The package is still under
 active development. Feel free to open an issue to ask for help, report a
 bug, or request a feature.
 
--   [Release
-    notes](https://github.com/rempsyc/rempsyc/blob/main/NEWS.md)
+-   [Release notes](https://rempsyc.remi-theriault.com/news/index.html)
 -   [Development objectives (to-do
-    list)](https://github.com/rempsyc/rempsyc/blob/main/TODOS.md)
+    list)](https://rempsyc.remi-theriault.com/TODOS.html)
 
 ## Installation
 
@@ -74,7 +73,7 @@ package with sensical defaults and automatic formatting features.
 The tables can be saved with the `save_as_docx` function, and are
 `flextable` objects, and can be modified as such. The function also
 integrates with objects from the `broom` and `report` packages. Full
-tutorial: <https://remi-theriault.com/blog_table.html>
+tutorial: <https://rempsyc.remi-theriault.com/articles/table>
 
 Note: For a smoother and more integrated presentation flow, this
 function is now featured along the other functions.
@@ -121,7 +120,7 @@ t_table
 save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_t-test>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/t-test>
 
 ## `nice_contrasts`
 
@@ -138,20 +137,20 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
-#>   Dependent Variable Comparison df         t              p        dR  CI_lower
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.126110
-#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.691824
-#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.069028
-#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -4.995863
-#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.801244
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.777304
-#>     CI_upper
-#> 1  5.9294509
-#> 2  2.3723183
-#> 3  3.6207437
-#> 4 -2.4353711
-#> 5 -1.3221562
-#> 6 -0.4408298
+#>   Dependent Variable Comparison df         t              p        dR
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
+#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144
+#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630
+#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
+#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
+#>     CI_lower   CI_upper
+#> 1  2.0956152  5.6832125
+#> 2  0.6905693  2.3735168
+#> 3  1.0287572  3.7751685
+#> 4 -4.8634553 -2.3980402
+#> 5 -3.8319905 -1.5142612
+#> 6 -1.8597834 -0.5155134
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -159,7 +158,7 @@ nice_table(contrasts, highlight = .001)
 
 <img src="man/figures/README-contrasts_table-1.png" width="70%" />
 
-Full tutorial: <https://remi-theriault.com/blog_t-test>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/contrasts>
 
 ## `nice_mod`
 
@@ -194,7 +193,7 @@ nice_table(moderations, highlight = TRUE)
 
 <img src="man/figures/README-mod_table-1.png" width="70%" />
 
-Full tutorial: <https://remi-theriault.com/blog_moderation>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
 ## `nice_lm`
 
@@ -203,6 +202,7 @@ the model in the traditional way and feed it to `nice_lm` instead.
 Supports multiple `lm` models as well.
 
 ``` r
+
 model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
 model2 <- lm(qsec ~ disp + drat * carb, mtcars)
 nice_lm(list(model1, model2))
@@ -226,7 +226,7 @@ nice_lm(list(model1, model2))
 #> 8 0.28857203297 0.0211165564
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_moderation>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
 ## `nice_slopes`
 
@@ -261,7 +261,7 @@ nice_table(simple.slopes)
 
 <img src="man/figures/README-slopes_table-1.png" width="80%" />
 
-Full tutorial: <https://remi-theriault.com/blog_moderation>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
 ## `nice_lm_slopes`
 
@@ -292,7 +292,7 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 #> 6 0.61629796 0.001875579
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_moderation>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
 ## Visualization
 
@@ -318,12 +318,13 @@ nice_violin(data = ToothGrowth,
 <img src="man/figures/README-nice_violin-1.png" width="60%" />
 
 ``` r
+
 # Save plot
 ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
        dpi = 300, path = "D:/R treasures/")
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_violin.html>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/violin>
 
 ## `nice_scatter`
 
@@ -341,6 +342,7 @@ nice_scatter(data = mtcars,
 <img src="man/figures/README-nice_scatter-1.png" width="60%" />
 
 ``` r
+
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
@@ -350,7 +352,7 @@ nice_scatter(data = mtcars,
 
 <img src="man/figures/README-nice_scatter-2.png" width="60%" />
 
-Full tutorial: <https://remi-theriault.com/blog_scatter.html>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/scatter>
 
 ## `overlap_circle`
 
@@ -358,6 +360,7 @@ Interpolating the Inclusion of the Other in the Self Scale (self-other
 merging) easily.
 
 ``` r
+
 # Score of 3.5 (25% overlap)
 overlap_circle(3.5)
 ```
@@ -365,13 +368,14 @@ overlap_circle(3.5)
 <img src="man/figures/README-overlap_circle-1.png" width="30%" />
 
 ``` r
+
 # Score of 6.84 (81.8% overlap)
 overlap_circle(6.84)
 ```
 
 <img src="man/figures/README-overlap_circle-2.png" width="30%" />
 
-Full tutorial: <https://remi-theriault.com/blog_circles.html>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 
 ## `cormatrix_excel`
 
@@ -381,6 +385,7 @@ colour-coded based on their effect size (0.0-0.3: small (no colour);
 0.3-0.6: medium (pink); 0.6-1.0: large (red)).
 
 ``` r
+
 cormatrix_excel(mtcars)
 #>        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #> mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
@@ -479,6 +484,7 @@ format_d(t.tests$d)
 Randomize easily with different designs.
 
 ``` r
+
 # Specify design, number of conditions, number of participants, and names of conditions:
 nice_randomize(design = "between", Ncondition = 4, n = 8,
                condition.names = c("BP","CX","PZ","ZL"))
@@ -507,7 +513,7 @@ nice_randomize(design = "within", Ncondition = 3, n = 3,
 #> 9  3        ST
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_randomize.html>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/randomize>
 
 ## Testing assumptions
 
@@ -516,6 +522,7 @@ Full tutorial: <https://remi-theriault.com/blog_randomize.html>
 Test linear regression assumptions easily with a nice summary table.
 
 ``` r
+
 # Create regression model
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 # View results
@@ -525,7 +532,7 @@ View(nice_assumptions(model))
 
 <img src="man/figures/assumptions_table.png" width="70%" />
 
-Full tutorial: <https://remi-theriault.com/blog_assumptions>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
 ## `nice_normality`
 
@@ -542,7 +549,7 @@ nice_normality(data = iris,
 
 <img src="man/figures/README-nice_normality-1.png" width="80%" />
 
-Full tutorial: <https://remi-theriault.com/blog_assumptions>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
 ## `nice_var`
 
@@ -560,7 +567,7 @@ nice_var(data = iris,
 #> 1 Sepal.Len…  0.124      0.266     0.404            3.3        4 FALSE
 ```
 
-Full tutorial: <https://remi-theriault.com/blog_assumptions>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
 ## `nice_varplot`
 
@@ -574,7 +581,7 @@ nice_varplot(data = iris,
 
 <img src="man/figures/README-nice_varplot-1.png" width="70%" />
 
-Full tutorial: <https://remi-theriault.com/blog_assumptions>
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
 ## Support me and this package
 
