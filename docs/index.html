@@ -122,8 +122,8 @@
 
 <p>R package of convenience functions to make your workflow faster and easier. Easily customizable plots (via <code>ggplot2</code>), nice APA tables exportable to Word (via <code>flextable</code>), easily run statistical tests or check assumptions, and automatize various other tasks. Mostly geared at researchers in the psychological sciences. The package is still under active development. Feel free to open an issue to ask for help, report a bug, or request a feature.</p>
 <ul>
-<li><a href="https://github.com/rempsyc/rempsyc/blob/main/NEWS.md" class="external-link">Release notes</a></li>
-<li><a href="https://github.com/rempsyc/rempsyc/blob/main/TODOS.md" class="external-link">Development objectives (to-do list)</a></li>
+<li><a href="https://rempsyc.remi-theriault.com/news/index.html" class="external-link">Release notes</a></li>
+<li><a href="https://rempsyc.remi-theriault.com/TODOS.html" class="external-link">Development objectives (to-do list)</a></li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -155,7 +155,7 @@
 <code>nice_table</code><a class="anchor" aria-label="anchor" href="#nice_table"></a>
 </h2>
 <p>Make nice APA tables easily through a wrapper around the <code>flextable</code> package with sensical defaults and automatic formatting features.</p>
-<p>The tables can be saved with the <code>save_as_docx</code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://remi-theriault.com/blog_table.html" class="external-link uri">https://remi-theriault.com/blog_table.html</a></p>
+<p>The tables can be saved with the <code>save_as_docx</code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="external-link uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
 <p>Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.</p>
 </div>
 <div class="section level2">
@@ -196,7 +196,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save to word</span></span>
 <span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_t-test" class="external-link uri">https://remi-theriault.com/blog_t-test</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/t-test" class="external-link uri">https://rempsyc.remi-theriault.com/articles/t-test</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_contrasts">
@@ -209,25 +209,25 @@
 <span>               group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
 <span>               covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">contrasts</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR  CI_lower</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.126110</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.691824</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.069028</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -4.995863</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.801244</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.777304</span></span>
-<span><span class="co">#&gt;     CI_upper</span></span>
-<span><span class="co">#&gt; 1  5.9294509</span></span>
-<span><span class="co">#&gt; 2  2.3723183</span></span>
-<span><span class="co">#&gt; 3  3.6207437</span></span>
-<span><span class="co">#&gt; 4 -2.4353711</span></span>
-<span><span class="co">#&gt; 5 -1.3221562</span></span>
-<span><span class="co">#&gt; 6 -0.4408298</span></span>
+<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
+<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
+<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
+<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1  2.0956152  5.6832125</span></span>
+<span><span class="co">#&gt; 2  0.6905693  2.3735168</span></span>
+<span><span class="co">#&gt; 3  1.0287572  3.7751685</span></span>
+<span><span class="co">#&gt; 4 -4.8634553 -2.3980402</span></span>
+<span><span class="co">#&gt; 5 -3.8319905 -1.5142612</span></span>
+<span><span class="co">#&gt; 6 -1.8597834 -0.5155134</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-contrasts_table-1.png" width="70%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_t-test" class="external-link uri">https://remi-theriault.com/blog_t-test</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts" class="external-link uri">https://rempsyc.remi-theriault.com/articles/contrasts</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_mod">
@@ -258,7 +258,7 @@
 <span><span class="co"># Format moderation results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">moderations</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-mod_table-1.png" width="70%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_moderation" class="external-link uri">https://remi-theriault.com/blog_moderation</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="external-link uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_lm">
@@ -266,7 +266,8 @@
 </h2>
 <p>For more complicated models not supported by <code>nice_mod</code>, one can define the model in the traditional way and feed it to <code>nice_lm</code> instead. Supports multiple <code>lm</code> models as well.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">*</span> <span class="va">carb</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df            b          t</span></span>
@@ -287,7 +288,7 @@
 <span><span class="co">#&gt; 6 0.84539274511 0.0006984424</span></span>
 <span><span class="co">#&gt; 7 0.47895897531 0.0092872897</span></span>
 <span><span class="co">#&gt; 8 0.28857203297 0.0211165564</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_moderation" class="external-link uri">https://remi-theriault.com/blog_moderation</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="external-link uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_slopes">
@@ -318,7 +319,7 @@
 <span><span class="co"># Format simple slopes results1</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-slopes_table-1.png" width="80%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_moderation" class="external-link uri">https://remi-theriault.com/blog_moderation</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="external-link uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_lm_slopes">
@@ -344,7 +345,7 @@
 <span><span class="co">#&gt; 4 0.51118526 0.003234637</span></span>
 <span><span class="co">#&gt; 5 0.54535707 0.002737218</span></span>
 <span><span class="co">#&gt; 6 0.61629796 0.001875579</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_moderation" class="external-link uri">https://remi-theriault.com/blog_moderation</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="external-link uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
@@ -367,10 +368,11 @@
 <span>            d.y <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_violin-1.png" width="60%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Save plot</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Save plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceplot.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, </span>
 <span>       dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_violin.html" class="external-link uri">https://remi-theriault.com/blog_violin.html</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/violin" class="external-link uri">https://rempsyc.remi-theriault.com/articles/violin</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_scatter">
@@ -386,13 +388,14 @@
 <span>             has.p <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_scatter-1.png" width="60%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
 <span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
 <span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
 <span>             has.confband <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_scatter-2.png" width="60%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_scatter.html" class="external-link uri">https://remi-theriault.com/blog_scatter.html</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/scatter" class="external-link uri">https://rempsyc.remi-theriault.com/articles/scatter</a></p>
 </div>
 <div class="section level2">
 <h2 id="overlap_circle">
@@ -400,14 +403,16 @@
 </h2>
 <p>Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Score of 3.5 (25% overlap)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Score of 3.5 (25% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-overlap_circle-1.png" width="30%"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Score of 6.84 (81.8% overlap)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Score of 6.84 (81.8% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">6.84</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-overlap_circle-2.png" width="30%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_circles.html" class="external-link uri">https://remi-theriault.com/blog_circles.html</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/circles" class="external-link uri">https://rempsyc.remi-theriault.com/articles/circles</a></p>
 </div>
 <div class="section level2">
 <h2 id="cormatrix_excel">
@@ -415,7 +420,8 @@
 </h2>
 <p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0: large (red)).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
 <span><span class="co">#&gt; mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55</span></span>
 <span><span class="co">#&gt; cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53</span></span>
@@ -507,7 +513,8 @@
 </h2>
 <p>Randomize easily with different designs.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
 <span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id Condition</span></span>
@@ -533,7 +540,7 @@
 <span><span class="co">#&gt; 7  3        AV</span></span>
 <span><span class="co">#&gt; 8  3        SV</span></span>
 <span><span class="co">#&gt; 9  3        ST</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_randomize.html" class="external-link uri">https://remi-theriault.com/blog_randomize.html</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/randomize" class="external-link uri">https://rempsyc.remi-theriault.com/articles/randomize</a></p>
 </div>
 <div class="section level2">
 <h2 id="testing-assumptions">Testing assumptions<a class="anchor" aria-label="anchor" href="#testing-assumptions"></a>
@@ -545,13 +552,14 @@
 </h2>
 <p>Test linear regression assumptions easily with a nice summary table.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create regression model</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Create regression model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co"># View results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Interpretation: (p) values &lt; .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.</span></span></code></pre></div>
 <p><img src="reference/figures/assumptions_table.png" width="70%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_assumptions" class="external-link uri">https://remi-theriault.com/blog_assumptions</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="external-link uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_normality">
@@ -566,7 +574,7 @@
 <span>               shapiro <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>               histogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_normality-1.png" width="80%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_assumptions" class="external-link uri">https://remi-theriault.com/blog_assumptions</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="external-link uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_var">
@@ -582,7 +590,7 @@
 <span><span class="co">#&gt;   Variable   Setosa Versicolor Virginica Variance.ratio Criteria Heteroscedastic</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;          </span></span>
 <span><span class="co">#&gt; 1 Sepal.Len…  0.124      0.266     0.404            3.3        4 FALSE</span></span></code></pre></div>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_assumptions" class="external-link uri">https://remi-theriault.com/blog_assumptions</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="external-link uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
 <h2 id="nice_varplot">
@@ -594,7 +602,7 @@
 <span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_varplot-1.png" width="70%"></p>
-<p>Full tutorial: <a href="https://remi-theriault.com/blog_assumptions" class="external-link uri">https://remi-theriault.com/blog_assumptions</a></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="external-link uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
 <h2 id="support-me-and-this-package">Support me and this package<a class="anchor" aria-label="anchor" href="#support-me-and-this-package"></a>
