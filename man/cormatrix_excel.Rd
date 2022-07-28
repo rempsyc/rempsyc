@@ -25,7 +25,7 @@ but no need to specify extension).}
 Easily output a correlation matrix and export it to
 Microsoft Excel, with the first row and column frozen, and
 correlation coefficients colour-coded based on their effect size
-(0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0:
+(0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
 large (red)).
 }
 \examples{

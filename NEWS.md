@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.4
+* `cormatrix_excel`: corrected values for small, medium, large correlations (from 0.0-0.3: small; 0.3-0.6: medium; 0.6-1.0: large to 0.0-0.2: small; 0.2-0.4: medium; 0.4-1.0: large).
+
 ## rempsyc 0.0.5.3
 * Corrected spelling of all code with `devtools::spell_check()`
 * Restyled all code according to the tidyverse guidelines with `styler::style_pkg()`

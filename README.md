@@ -145,12 +145,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0956152  5.6832125
-#> 2  0.6905693  2.3735168
-#> 3  1.0287572  3.7751685
-#> 4 -4.8634553 -2.3980402
-#> 5 -3.8319905 -1.5142612
-#> 6 -1.8597834 -0.5155134
+#> 1  2.1236811  5.7599298
+#> 2  0.7123733  2.4192344
+#> 3  1.0289063  3.8552569
+#> 4 -5.1517795 -2.4814141
+#> 5 -3.7214002 -1.3927598
+#> 6 -1.7699757 -0.4501557
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -381,8 +381,8 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 
 Easily output a correlation matrix and export it to Microsoft Excel,
 with the first row and column frozen, and correlation coefficients
-colour-coded based on their effect size (0.0-0.3: small (no colour);
-0.3-0.6: medium (pink); 0.6-1.0: large (red)).
+colour-coded based on their effect size (0.0-0.2: small (no colour);
+0.2-0.4: medium (pink); 0.4-1.0: \#’ large (red)).
 
 ``` r
 

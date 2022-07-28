@@ -3,7 +3,7 @@
 #' @description Easily output a correlation matrix and export it to
 #' Microsoft Excel, with the first row and column frozen, and
 #' correlation coefficients colour-coded based on their effect size
-#' (0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0:
+#' (0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
 #' large (red)).
 #'
 #' @param data The data frame
@@ -60,7 +60,7 @@ cormatrix_excel <- function(data,
     "Sheet 1",
     cols = all.columns,
     rows = all.columns,
-    rule = c(0.3, 0.59999999),
+    rule = c(0.2, 0.39999999),
     style = mediumStyle,
     type = "between"
   )
@@ -68,7 +68,7 @@ cormatrix_excel <- function(data,
     "Sheet 1",
     cols = all.columns,
     rows = all.columns,
-    rule = c(-0.3, -0.59999999),
+    rule = c(-0.2, -0.39999999),
     style = mediumStyle,
     type = "between"
   )
@@ -76,7 +76,7 @@ cormatrix_excel <- function(data,
     "Sheet 1",
     cols = all.columns,
     rows = all.columns,
-    rule = c(0.6, 0.9999999),
+    rule = c(0.4, 0.9999999),
     style = largeStyle,
     type = "between"
   )
@@ -84,7 +84,7 @@ cormatrix_excel <- function(data,
     "Sheet 1",
     cols = all.columns,
     rows = all.columns,
-    rule = c(-0.6, -0.9999999),
+    rule = c(-0.4, -0.9999999),
     style = largeStyle,
     type = "between"
   )
@@ -100,3 +100,4 @@ cormatrix_excel <- function(data,
     ".xlsx' has been saved to working directory (or where specified).]"
   ))
 }
+

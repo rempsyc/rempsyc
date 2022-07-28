@@ -67,7 +67,7 @@ nice_contrasts(
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 }
-\keyword{comparisons,}
+\keyword{comparisons}
 \keyword{contrasts,}
 \keyword{differences,}
 \keyword{group}

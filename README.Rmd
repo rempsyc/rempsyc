@@ -278,7 +278,8 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/circles
 
 ## `cormatrix_excel`
 
-Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.3: small (no colour); 0.3-0.6: medium (pink); 0.6-1.0: large (red)).
+Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
+#' large (red)).
 
 ```{r cormatrix_excel}
 
@@ -368,7 +369,7 @@ cute_cat(section.5, 2)
 
 Test linear regression assumptions easily with a nice summary table.
 
-```{r nice_assumptions, warning = FALSE, message = FALSE}
+```{r nice_assumptions, eval = FALSE, warning = FALSE, message = FALSE}
 
 # Create regression model
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
