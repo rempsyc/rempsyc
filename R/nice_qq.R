@@ -43,7 +43,7 @@
 #' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
 #' \code{\link{nice_normality}}, \code{\link{nice_var}},
 #' \code{\link{nice_varplot}}. Tutorial:
-#' \url{https://remi-theriault.com/blog_assumptions}
+#' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle

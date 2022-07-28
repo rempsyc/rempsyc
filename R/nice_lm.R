@@ -31,7 +31,7 @@
 #' Checking simple slopes after testing for moderation:
 #' \code{\link{nice_lm_slopes}}, \code{\link{nice_mod}},
 #' \code{\link{nice_slopes}}. Tutorial:
-#' \url{https://remi-theriault.com/blog_moderation}
+#' \url{https://rempsyc.remi-theriault.com/articles/moderation}
 #'
 
 nice_lm <- function(model,

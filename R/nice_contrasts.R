@@ -19,7 +19,7 @@
 #' @param covariates The desired covariates in the model.
 #' @param data The data frame.
 #' @param bootstraps The number of bootstraps to use for the confidence interval
-#' @keywords planned contrasts, pairwise comparisons,
+#' @keywords planned contrasts, pairwise comparisons
 #' group differences, internal
 #' @export
 #' @examples
@@ -53,7 +53,7 @@
 #' )
 #'
 #' @seealso
-#' Tutorial: \url{https://remi-theriault.com/blog_contrasts}
+#' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
 
 nice_contrasts <- function(response, group, covariates = NULL,

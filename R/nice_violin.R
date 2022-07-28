@@ -180,7 +180,7 @@
 #' @seealso
 #' Visualize group differences via scatter plots:
 #' \code{\link{nice_scatter}}. Tutorial:
-#' \url{https://remi-theriault.com/blog_violin}
+#' \url{https://rempsyc.remi-theriault.com/articles/violin}
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
 #' scale_fill_manual theme annotate scale_x_discrete ylab xlab

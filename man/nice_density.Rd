@@ -82,7 +82,7 @@ Other functions useful in assumption testing:
 \code{\link{nice_assumptions}}, \code{\link{nice_normality}},
 \code{\link{nice_qq}}, \code{\link{nice_varplot}},
 \code{\link{nice_var}}. Tutorial:
-\url{https://remi-theriault.com/blog_assumptions}
+\url{https://rempsyc.remi-theriault.com/articles/assumptions}
 }
 \keyword{density,}
 \keyword{normality}

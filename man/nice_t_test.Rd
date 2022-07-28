@@ -94,7 +94,7 @@ nice_t_test(
 # both levels of the grouping factor
 }
 \seealso{
-Tutorial: \url{https://remi-theriault.com/blog_t-test}
+Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 }
 \keyword{differences}
 \keyword{group}

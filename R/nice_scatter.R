@@ -243,7 +243,7 @@
 #' @seealso
 #' Visualize group differences via violin plots:
 #' \code{\link{nice_violin}}. Tutorial:
-#' \url{https://remi-theriault.com/blog_scatter}
+#' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
 #' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
 #' scale_fill_manual theme annotate scale_x_discrete ylab xlab

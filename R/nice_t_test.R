@@ -78,7 +78,7 @@
 #' @importFrom methods hasArg
 #'
 #' @seealso
-#' Tutorial: \url{https://remi-theriault.com/blog_t-test}
+#' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 #'
 
 nice_t_test <- function(data,

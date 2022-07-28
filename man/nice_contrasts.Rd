@@ -65,7 +65,7 @@ nice_contrasts(
 
 }
 \seealso{
-Tutorial: \url{https://remi-theriault.com/blog_contrasts}
+Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 }
 \keyword{comparisons,}
 \keyword{contrasts,}

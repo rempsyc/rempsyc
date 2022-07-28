@@ -152,7 +152,7 @@ nice_table(header.data,
 
 }
 \seealso{
-Tutorial: \url{https://remi-theriault.com/blog_table}
+Tutorial: \url{https://rempsyc.remi-theriault.com/articles/table}
 }
 \keyword{APA}
 \keyword{style}

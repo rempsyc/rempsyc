@@ -243,7 +243,7 @@ nice_violin(
 \seealso{
 Visualize group differences via scatter plots:
 \code{\link{nice_scatter}}. Tutorial:
-\url{https://remi-theriault.com/blog_violin}
+\url{https://rempsyc.remi-theriault.com/articles/violin}
 }
 \keyword{plots}
 \keyword{violin}

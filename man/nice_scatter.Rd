@@ -314,7 +314,7 @@ nice_scatter(
 \seealso{
 Visualize group differences via violin plots:
 \code{\link{nice_violin}}. Tutorial:
-\url{https://remi-theriault.com/blog_scatter}
+\url{https://rempsyc.remi-theriault.com/articles/scatter}
 }
 \keyword{plots}
 \keyword{scatter}

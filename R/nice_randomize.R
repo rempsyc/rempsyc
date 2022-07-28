@@ -41,7 +41,7 @@
 #' @importFrom dplyr arrange %>%
 #'
 #' @seealso
-#' Tutorial: \url{https://remi-theriault.com/blog_randomize}
+#' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/randomize}
 #'
 
 nice_randomize <- function(design = "between",

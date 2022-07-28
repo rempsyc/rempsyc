@@ -86,7 +86,7 @@ nice_mod(
 Checking simple slopes after testing for moderation:
 \code{\link{nice_slopes}}, \code{\link{nice_lm}},
 \code{\link{nice_lm_slopes}}. Tutorial:
-\url{https://remi-theriault.com/blog_moderation}
+\url{https://rempsyc.remi-theriault.com/articles/moderation}
 }
 \keyword{interaction,}
 \keyword{moderation,}

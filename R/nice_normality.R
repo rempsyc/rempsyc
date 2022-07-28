@@ -54,7 +54,7 @@
 #' \code{\link{nice_assumptions}}, \code{\link{nice_density}},
 #' \code{\link{nice_qq}}, \code{\link{nice_var}},
 #' \code{\link{nice_varplot}}. Tutorial:
-#' \url{https://remi-theriault.com/blog_assumptions}
+#' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 
 nice_normality <- function(data,

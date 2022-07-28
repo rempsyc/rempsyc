@@ -4,7 +4,7 @@
 \name{rempsyc-package}
 \alias{rempsyc}
 \alias{rempsyc-package}
-\title{rempsyc: Convenience functions for psychology}
+\title{rempsyc: Convenience Functions for Psychology}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
@@ -13,7 +13,7 @@ Convenience functions to make your workflow faster and easier. Easily customizab
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://rempsyc.github.io/rempsyc/}
+  \item \url{https://rempsyc.remi-theriault.com/}
   \item Report bugs at \url{https://github.com/rempsyc/rempsyc/issues}
 }
 

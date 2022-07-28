@@ -126,7 +126,7 @@
 #' @importFrom rlang :=
 #'
 #' @seealso
-#' Tutorial: \url{https://remi-theriault.com/blog_table}
+#' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/table}
 #'
 
 #' @export
@@ -389,8 +389,9 @@ nice_table <- function(data,
       set_table_properties(layout = "autofit", width = width) -> table
    } else {
     table %>%
-      autofit() -> table
-      #set_table_properties(layout = "fixed") -> table
+     #autofit() -> table
+     set_table_properties(layout = "fixed") -> table
+     #set_table_properties(layout = "autofit") -> table
   }
 
   if (!missing(footnote)) {

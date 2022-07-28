@@ -36,7 +36,7 @@ overlap_circle(3.12, categories = c("Humans", "Animals"))
 
 }
 \seealso{
-Tutorial: \url{https://remi-theriault.com/blog_circles}
+Tutorial: \url{https://rempsyc.remi-theriault.com/articles/circles}
 }
 \keyword{Venn}
 \keyword{diagrams,}
