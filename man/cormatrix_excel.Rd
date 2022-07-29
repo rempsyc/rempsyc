@@ -19,7 +19,7 @@ but no need to specify extension).}
 
 \item{overwrite}{Whether to allow overwriting previous file.}
 
-\item{use}{How to handle NA (see ?cor for options).}
+\item{use}{How to handle NA (see \code{?cor} for options).}
 }
 \description{
 Easily output a correlation matrix and export it to

@@ -10,7 +10,7 @@
 #' @param filename Desired filename (path can be added before hand
 #' but no need to specify extension).
 #' @param overwrite Whether to allow overwriting previous file.
-#' @param use How to handle NA (see ?cor for options).
+#' @param use How to handle NA (see `?cor` for options).
 #'
 #' @keywords correlation, matrix, Excel
 #' @export
