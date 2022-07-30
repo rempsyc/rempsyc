@@ -1,5 +1,5 @@
 ## rempsyc 0.0.5.5
-* Fixed `nice_randomize` as it had been outputting the wrong output format for within-subject designs when moving from plyr to dplyr.
+* Fixed `nice_randomize` as it had been outputting the wrong output format for within-subject designs when moving from plyr to dplyr (+ updated runsheet tutorial).
 
 ## rempsyc 0.0.5.4
 * `cormatrix_excel`: corrected values for small, medium, large correlations (from 0.0-0.3: small; 0.3-0.6: medium; 0.6-1.0: large to 0.0-0.2: small; 0.2-0.4: medium; 0.4-1.0: large).

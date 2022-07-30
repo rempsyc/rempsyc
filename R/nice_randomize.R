@@ -38,7 +38,7 @@
 #' )
 #' head(randomized)
 #'
-#' @importFrom dplyr arrange %>%
+#' @importFrom dplyr arrange %>% mutate across everything recode
 #'
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/randomize}
@@ -66,7 +66,6 @@ nice_randomize <- function(design = "between",
     }
   }
   if (design == "within") {
-    Condition <- Condition
     for (i in 1:n) {
       # Generate the random values for n participants and Nconditions
       x <- sample(1:Ncondition, replace = FALSE)
@@ -77,9 +76,10 @@ nice_randomize <- function(design = "between",
       # Not as factors as this can create problems
     }
   }
-  Condition <- as.matrix(dplyr::recode(
-    as.matrix(Condition), !!!stats::setNames(condition.names, 1:Ncondition)
-  ))
+  Condition <- Condition %>%
+    mutate(across(everything(), function(x) {
+      recode(x, !!!stats::setNames(condition.names, 1:Ncondition))
+    }))
   for (i in 1:n) {
     Condition[i, 1] <- paste(Condition[i, ], collapse = " - ")
     # Adds hyphen between conditions for easier read
@@ -87,14 +87,11 @@ nice_randomize <- function(design = "between",
   if (ncol(Condition) > 2) {
     Condition[, 2:ncol(Condition)] <- NA
   }
-  Condition <- as.data.frame(Condition)
   id <- t(t(1:n))
   final_table <- data.frame(id, Condition, matrix(
     NA,
     ncol = length(col.names)
   ))[, seq_along(col.names)]
   names(final_table) <- col.names
-  final_table %>%
-    arrange(id) -> final_table
   final_table
 }
