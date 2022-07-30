@@ -141,15 +141,15 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1         a</span></span>
-<span><span class="co">## 2  2         b</span></span>
-<span><span class="co">## 3  3         c</span></span>
-<span><span class="co">## 4  4         c</span></span>
+<span><span class="co">## 1  1         b</span></span>
+<span><span class="co">## 2  2         c</span></span>
+<span><span class="co">## 3  3         a</span></span>
+<span><span class="co">## 4  4         a</span></span>
 <span><span class="co">## 5  5         b</span></span>
-<span><span class="co">## 6  6         a</span></span>
+<span><span class="co">## 6  6         c</span></span>
 <span><span class="co">## 7  7         b</span></span>
-<span><span class="co">## 8  8         a</span></span>
-<span><span class="co">## 9  9         c</span></span></code></pre>
+<span><span class="co">## 8  8         c</span></span>
+<span><span class="co">## 9  9         a</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and names of conditions:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"between"</span>, </span>
@@ -157,14 +157,14 @@
 <span>               n <span class="op">=</span> <span class="fl">8</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1        ZL</span></span>
+<span><span class="co">## 1  1        CX</span></span>
 <span><span class="co">## 2  2        BP</span></span>
 <span><span class="co">## 3  3        PZ</span></span>
-<span><span class="co">## 4  4        CX</span></span>
-<span><span class="co">## 5  5        CX</span></span>
-<span><span class="co">## 6  6        ZL</span></span>
+<span><span class="co">## 4  4        ZL</span></span>
+<span><span class="co">## 5  5        ZL</span></span>
+<span><span class="co">## 6  6        BP</span></span>
 <span><span class="co">## 7  7        PZ</span></span>
-<span><span class="co">## 8  8        BP</span></span></code></pre>
+<span><span class="co">## 8  8        CX</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your number of groups if using "between"!</span></span>
 <span><span class="co"># FYI: condition names stand for popular antidepressants:</span></span>
@@ -177,34 +177,16 @@
 <p>Basic output with default options (3 conditions and 9 participants) but with within-subject design specified</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##    id Condition</span></span>
-<span><span class="co">## 1   1         b</span></span>
-<span><span class="co">## 2   1         c</span></span>
-<span><span class="co">## 3   1         a</span></span>
-<span><span class="co">## 4   2         b</span></span>
-<span><span class="co">## 5   2         c</span></span>
-<span><span class="co">## 6   2         a</span></span>
-<span><span class="co">## 7   3         c</span></span>
-<span><span class="co">## 8   3         b</span></span>
-<span><span class="co">## 9   3         a</span></span>
-<span><span class="co">## 10  4         c</span></span>
-<span><span class="co">## 11  4         a</span></span>
-<span><span class="co">## 12  4         b</span></span>
-<span><span class="co">## 13  5         b</span></span>
-<span><span class="co">## 14  5         c</span></span>
-<span><span class="co">## 15  5         a</span></span>
-<span><span class="co">## 16  6         b</span></span>
-<span><span class="co">## 17  6         c</span></span>
-<span><span class="co">## 18  6         a</span></span>
-<span><span class="co">## 19  7         c</span></span>
-<span><span class="co">## 20  7         b</span></span>
-<span><span class="co">## 21  7         a</span></span>
-<span><span class="co">## 22  8         b</span></span>
-<span><span class="co">## 23  8         c</span></span>
-<span><span class="co">## 24  8         a</span></span>
-<span><span class="co">## 25  9         b</span></span>
-<span><span class="co">## 26  9         c</span></span>
-<span><span class="co">## 27  9         a</span></span></code></pre>
+<pre><code><span><span class="co">##   id Condition</span></span>
+<span><span class="co">## 1  1 a - b - c</span></span>
+<span><span class="co">## 2  2 a - c - b</span></span>
+<span><span class="co">## 3  3 a - c - b</span></span>
+<span><span class="co">## 4  4 a - b - c</span></span>
+<span><span class="co">## 5  5 c - b - a</span></span>
+<span><span class="co">## 6  6 a - b - c</span></span>
+<span><span class="co">## 7  7 c - b - a</span></span>
+<span><span class="co">## 8  8 a - b - c</span></span>
+<span><span class="co">## 9  9 a - b - c</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and names of conditions:</p>
 <p>Note that you could call your conditions anything (like a, b, c, etc.).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -212,31 +194,13 @@
 <span>               Ncondition <span class="op">=</span> <span class="fl">4</span>, </span>
 <span>               n <span class="op">=</span> <span class="fl">6</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##    id Condition</span></span>
-<span><span class="co">## 1   1        AV</span></span>
-<span><span class="co">## 2   1        ST</span></span>
-<span><span class="co">## 3   1        AT</span></span>
-<span><span class="co">## 4   1        SV</span></span>
-<span><span class="co">## 5   2        ST</span></span>
-<span><span class="co">## 6   2        SV</span></span>
-<span><span class="co">## 7   2        AT</span></span>
-<span><span class="co">## 8   2        AV</span></span>
-<span><span class="co">## 9   3        AV</span></span>
-<span><span class="co">## 10  3        AT</span></span>
-<span><span class="co">## 11  3        SV</span></span>
-<span><span class="co">## 12  3        ST</span></span>
-<span><span class="co">## 13  4        SV</span></span>
-<span><span class="co">## 14  4        AT</span></span>
-<span><span class="co">## 15  4        AV</span></span>
-<span><span class="co">## 16  4        ST</span></span>
-<span><span class="co">## 17  5        AV</span></span>
-<span><span class="co">## 18  5        SV</span></span>
-<span><span class="co">## 19  5        ST</span></span>
-<span><span class="co">## 20  5        AT</span></span>
-<span><span class="co">## 21  6        AV</span></span>
-<span><span class="co">## 22  6        AT</span></span>
-<span><span class="co">## 23  6        ST</span></span>
-<span><span class="co">## 24  6        SV</span></span></code></pre>
+<pre><code><span><span class="co">##   id         Condition</span></span>
+<span><span class="co">## 1  1 SV - AV - ST - AT</span></span>
+<span><span class="co">## 2  2 SV - AV - AT - ST</span></span>
+<span><span class="co">## 3  3 AT - SV - ST - AV</span></span>
+<span><span class="co">## 4  4 ST - AV - AT - SV</span></span>
+<span><span class="co">## 5  5 AT - AV - ST - SV</span></span>
+<span><span class="co">## 6  6 SV - AV - ST - AT</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># FYI: condition names stand for forms of multisensory stimulation:</span></span>
 <span><span class="co"># SV = Synchronous Visual, AV = Asynchronous Visual, </span></span>
@@ -255,90 +219,71 @@
 <span>                                                         <span class="st">"SONA ID"</span>, <span class="st">"Age/Gd."</span>, <span class="st">"Handedness"</span>,</span>
 <span>                                                         <span class="st">"Tester"</span>, <span class="st">"Notes"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   id Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span></span>
-<span><span class="co">## 1  1        AT        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 2  1        SV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 3  1        ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 4  1        AV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 5  2        SV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 6  2        AV        NA      NA      NA         NA     NA    NA</span></span></code></pre>
+<pre><code><span><span class="co">##   id         Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span></span>
+<span><span class="co">## 1  1 AV - ST - AT - SV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 2  2 AV - ST - SV - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 3  3 AV - AT - ST - SV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 4  4 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 5  5 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 6  6 SV - AT - ST - AV        NA      NA      NA         NA     NA    NA</span></span></code></pre>
 <div class="section level3">
-<h3 id="save-data-frame-as-csv-file">Save data frame as CSV file<a class="anchor" aria-label="anchor" href="#save-data-frame-as-csv-file"></a>
+<h3 id="save-data-frame-to-word">Save data frame to Word<a class="anchor" aria-label="anchor" href="#save-data-frame-to-word"></a>
 </h3>
-<p>These steps apply no matter what design you have used. Below, you have to specify where you want to save the table as <code>.csv</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Save the resulting dataframe as a <code>nice_table</code>, and then to Word:</li>
+</ol>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.table</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span>,  <span class="co"># Save data frame to .csv file for later use</span></span>
-<span>            file <span class="op">=</span> <span class="st">"D:/R treasures/randomization.csv"</span>, <span class="co"># Specify own path</span></span>
-<span>            sep <span class="op">=</span> <span class="st">','</span>, <span class="co"># This indicates it's a CSV (comma separated values) file</span></span>
-<span>            row.names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>            col.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            na <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="co"># replaces NA's with empty cells</span></span>
+<code class="sourceCode R"><span><span class="va">runsheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">runsheet</span>, path <span class="op">=</span> <span class="st">"runsheet.docx"</span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
 <span><span class="co"># If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').</span></span>
-<span><span class="co"># Also remember to specify the .csv extension of the file.</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="export-to-wordpdf">Export to Word/PDF<a class="anchor" aria-label="anchor" href="#export-to-wordpdf"></a>
-</h3>
-<p>After saving your <code>.csv</code> file:</p>
-<ol style="list-style-type: decimal">
-<li>Navigate to your newly created file, and open it in your dedicated spreadsheet program (e.g., Excel).</li>
-<li>Double click on column separator of “Condition” (column B) to make it large enough to see all conditions without them overlapping over the next column (otherwise it might create problems later on when copying over to Word).</li>
+<span><span class="co"># Also remember to specify the .docx extension of the file.</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>After saving your dataframe to Word, open it in Word.</p></li>
+<li><p>Make your document horizontal by going to the Layout tab, Page Setup section, then clicking on the “Orientation” button and selecting the <em>Landscape</em> option.</p></li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step2.png"></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Select columns A to H (or whichever columns you have).</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step3.png"></p>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step4.png"></p>
 <ol start="4" style="list-style-type: decimal">
-<li>Then copy selection (press CTR+C).</li>
-<li>Open your dedicated text-processing program (e.g., Word).</li>
-<li>Make your document horizontal by going to the Layout tab, Page Setup section, then clicking on the “Orientation” button and selecting the <em>Landscape</em> option.</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step4.png"></p>
-<ol start="7" style="list-style-type: decimal">
-<li>Paste selection (press CTR+V).</li>
 <li>Select whole table.</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step5.png"></p>
-<ol start="9" style="list-style-type: decimal">
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step5.png"></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Left align table.</li>
+</ol>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/flextable2.png"></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Turn off preferred width in table properties.</li>
+</ol>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/flextable3.png"></p>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/flextable4.png"></p>
+<ol start="7" style="list-style-type: decimal">
 <li>Make required formatting arrangements: In the Home tab, Paragraph section, click on the Borders button, then click <em>All Borders</em>.</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step6.png"></p>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step6.png"></p>
+<ol start="8" style="list-style-type: decimal">
+<li>Next adjust the columns width to fit your page (especially the “Notes” column, which should be wider).</li>
+</ol>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step8.png"></p>
+<ol start="9" style="list-style-type: decimal">
+<li>If necessary, pull the table left with the little square pound <em>Move Table Column</em> button in top margin to create more space (note that the table should be selected first).</li>
+</ol>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step9.png"></p>
 <ol start="10" style="list-style-type: decimal">
-<li>Center all text by going to the table ‘Layout’ tab, Alignment section, then clicking on the <em>Align Center</em> button.</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step7.png"></p>
-<ol start="11" style="list-style-type: decimal">
-<li>Next adjust the columns width to fit your page (especially the “Notes” column, which should be wider)</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step8.png"></p>
-<ol start="12" style="list-style-type: decimal">
-<li>If necessary, pull the table left with the little square pound <em>Move Table Column</em> button in top margin to create more space.</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step9.png"></p>
-<ol start="13" style="list-style-type: decimal">
-<li>Increase the height of cells by selecting the table again then going to the table ‘Layout’ tab, Cell Size section, and pressing the <em>Table Row Height</em> arrow until there is about 8 participants per page (suggested height: 1.7 cm).</li>
-</ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step10.png"></p>
-<ol start="14" style="list-style-type: decimal">
 <li>Double-click on the header to edit it and add a title (e.g., “Study 3 Runsheet”); center and bold (suggested font size: 14).</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step11.png"></p>
-<ol start="15" style="list-style-type: decimal">
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step11.png"></p>
+<ol start="11" style="list-style-type: decimal">
 <li>Under the title in smaller font (not bold; suggested size: 12), add the legend for the conditions (e.g., “SV = Synchronous Visual, AV = Asynchronous Visual, ST = Synchronous Tactile, AT = Asynchronous Tactile”).</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step12.png"></p>
-<p><strong>16. Important(!):</strong> Make sure that your column names appear on every page by going to the table ‘Layout’ tab, Data section, and selecting <em>Repeat Header Rows</em>. Else you’ll always need to go back to the first page to remember what you should write where!</p>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step13.png"></p>
-<ol start="17" style="list-style-type: decimal">
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step12.png"></p>
+<ol start="12" style="list-style-type: decimal">
 <li>Add a page number at the bottom of the page by going to the Insert tab, Header &amp; Footer section, and click on the “Page Number” button, then selecting “Bottom of Page”, then <em>Plain Number 3</em> (which is bottom right).</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step14.png"></p>
-<ol start="18" style="list-style-type: decimal">
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step14.png"></p>
+<ol start="13" style="list-style-type: decimal">
 <li>Now ‘Save As’ using the F12 keyboard key, then select save as .pdf, and you’re done! :)</li>
 </ol>
-<p><img src="https://rempsyc.github.io/rempsyc/articles/images/blog_randomize/step15.png"></p>
+<p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_randomize/step15.png"></p>
 <p>You can now use this runsheet yourself, print it, or send it to your research assistants!</p>
 <p>Note: you might want to save that word document as you work on it to not lose it and perhaps reuse it in the future!</p>
 </div>
