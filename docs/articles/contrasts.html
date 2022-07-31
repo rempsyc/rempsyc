@@ -19,11 +19,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Planned Contrasts Analyses (Group Comparisons)">
 <meta property="og:description" content="rempsyc">
-<meta property="og:image" content="https://rempsyc.github.io/rempsyc/logo.png">
+<meta property="og:image" content="https://rempsyc.remi-theriault.com/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-274QZTFL23"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-274QZTFL23');
+</script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -156,7 +162,7 @@ which is installed with <code>R</code> by default.</p>
 </h3>
 <p><em>Load the <code>rempsyc</code> package:</em></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com/" class="external-link">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com/">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p><strong><em>Note:</em></strong> If you haven’t installed this package
 yet, you will need to install it via the following command:
@@ -175,10 +181,10 @@ installed <code>devtools</code> yet, install it via
 <span><span class="co">## 1       Sepal.Length     setosa - virginica 147 -15.365506 2.214821e-32</span></span>
 <span><span class="co">## 2       Sepal.Length versicolor - virginica 147  -6.332686 2.765638e-09</span></span>
 <span><span class="co">## 3       Sepal.Length    setosa - versicolor 147  -9.032819 8.770194e-16</span></span>
-<span><span class="co">##          dR  CI_lower   CI_upper</span></span>
-<span><span class="co">## 1 -2.929466 -3.553550 -2.2216666</span></span>
-<span><span class="co">## 2 -1.205879 -1.702155 -0.6647106</span></span>
-<span><span class="co">## 3 -1.723587 -2.140742 -1.1913411</span></span></code></pre>
+<span><span class="co">##          dR  CI_lower  CI_upper</span></span>
+<span><span class="co">## 1 -2.929466 -3.554122 -2.241409</span></span>
+<span><span class="co">## 2 -1.205879 -1.712233 -0.655156</span></span>
+<span><span class="co">## 3 -1.723587 -2.160656 -1.202875</span></span></code></pre>
 <p>This will give us the ‘robust’ version of Cohen’s <em>d</em> (i.e.,
 robust to deviations from parametric assumptions). It will also provide
 us with bootstrapped 95% confidence intervals of that effect size.</p>
@@ -188,7 +194,7 @@ us with bootstrapped 95% confidence intervals of that effect size.</p>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<template id="abb5e7fe-f758-4a59-98e5-f3659a1c20bf"><style>
+<template id="97530032-a7a9-46d7-84af-1f260ff5e4be"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -224,51 +230,51 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-1b88689e{}.cl-1b585f82{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-1b585f83{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-1b585f84{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;top:3.6pt;}.cl-1b588688{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-1b76df2a{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1b76df2b{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1b76df2c{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-1b88689e">
+<style>.cl-893eecba{}.cl-8905965e{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-8905965f{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-89059660{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;top:3.6pt;}.cl-8905e46a{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-890680a0{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-890680a1{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-890680a2{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-893eecba">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f82">Dependent Variable</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f82">Comparison</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f83">df</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f83">t</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f83">p</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f83">d</span><span class="cl-1b585f84">R</span></p></td>
-<td class="cl-1b76df2c"><p class="cl-1b588688"><span class="cl-1b585f82">95% CI</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965e">Dependent Variable</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965e">Comparison</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965f">df</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965f">t</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965f">p</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965f">d</span><span class="cl-89059660">R</span></p></td>
+<td class="cl-890680a2"><p class="cl-8905e46a"><span class="cl-8905965e">95% CI</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">Sepal.Length</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">setosa - virginica</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">147</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">-15.37</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">&lt; .001</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">-2.93</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">[-3.55, -2.22]</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">Sepal.Length</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">setosa - virginica</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">147</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">-15.37</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">&lt; .001</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">-2.93</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">[-3.55, -2.24]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">Sepal.Length</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">versicolor - virginica</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">147</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">-6.33</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">&lt; .001</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">-1.21</span></p></td>
-<td class="cl-1b76df2a"><p class="cl-1b588688"><span class="cl-1b585f82">[-1.70, -0.66]</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">Sepal.Length</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">versicolor - virginica</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">147</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">-6.33</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">&lt; .001</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">-1.21</span></p></td>
+<td class="cl-890680a0"><p class="cl-8905e46a"><span class="cl-8905965e">[-1.71, -0.66]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">Sepal.Length</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">setosa - versicolor</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">147</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">-9.03</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">&lt; .001</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">-1.72</span></p></td>
-<td class="cl-1b76df2b"><p class="cl-1b588688"><span class="cl-1b585f82">[-2.14, -1.19]</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">Sepal.Length</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">setosa - versicolor</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">147</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">-9.03</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">&lt; .001</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">-1.72</span></p></td>
+<td class="cl-890680a1"><p class="cl-8905e46a"><span class="cl-8905965e">[-2.16, -1.20]</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="167deac1-757f-44ba-ae97-f42a19e2ec05"></div>
+</div></template><div class="flextable-shadow-host" id="c4d997bb-5445-4208-89f0-93d4ef96e5ac"></div>
 <script>
-var dest = document.getElementById("167deac1-757f-44ba-ae97-f42a19e2ec05");
-var template = document.getElementById("abb5e7fe-f758-4a59-98e5-f3659a1c20bf");
+var dest = document.getElementById("c4d997bb-5445-4208-89f0-93d4ef96e5ac");
+var template = document.getElementById("97530032-a7a9-46d7-84af-1f260ff5e4be");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
@@ -362,25 +368,25 @@ will alphabetize them)</p>
 <span><span class="co">## 16                IOS Embodied - Control 86  0.10212396 9.188960e-01</span></span>
 <span><span class="co">## 17                IOS   Mental - Control 86  0.83396371 4.066119e-01</span></span>
 <span><span class="co">## 18                IOS  Embodied - Mental 87  2.58466812 1.141344e-02</span></span>
-<span><span class="co">##             dR     CI_lower  CI_upper</span></span>
-<span><span class="co">## 1   0.52518512 -0.040840758 1.1328469</span></span>
-<span><span class="co">## 2   0.03643629 -0.564292456 0.5798497</span></span>
-<span><span class="co">## 3   0.48874884 -0.010155859 1.0185456</span></span>
-<span><span class="co">## 4  -0.06831227 -0.732435829 0.4980987</span></span>
-<span><span class="co">## 5  -0.17448179 -0.692413079 0.3167405</span></span>
-<span><span class="co">## 6   0.10616953 -0.438932628 0.7424053</span></span>
-<span><span class="co">## 7   0.09489742 -0.469111540 0.6603120</span></span>
-<span><span class="co">## 8  -0.35461669 -0.891722418 0.1713259</span></span>
-<span><span class="co">## 9   0.44951412 -0.102274272 1.1112508</span></span>
-<span><span class="co">## 10  0.58908525 -0.001083630 1.2205227</span></span>
-<span><span class="co">## 11  0.42094553 -0.070719123 0.9623849</span></span>
-<span><span class="co">## 12  0.16813972 -0.396100158 0.7186667</span></span>
-<span><span class="co">## 13  0.47999336 -0.053400052 1.1188371</span></span>
-<span><span class="co">## 14  0.18562672 -0.250946812 0.7173238</span></span>
-<span><span class="co">## 15  0.29436664 -0.308526853 0.9344656</span></span>
-<span><span class="co">## 16  1.08839542  0.447919649 1.8468838</span></span>
-<span><span class="co">## 17  0.49918888 -0.073973125 0.9866679</span></span>
-<span><span class="co">## 18  0.58920655  0.008449158 1.2155195</span></span></code></pre>
+<span><span class="co">##             dR    CI_lower  CI_upper</span></span>
+<span><span class="co">## 1   0.52518512 -0.10204650 1.1090211</span></span>
+<span><span class="co">## 2   0.03643629 -0.58641977 0.5971943</span></span>
+<span><span class="co">## 3   0.48874884 -0.01929834 1.0143596</span></span>
+<span><span class="co">## 4  -0.06831227 -0.69080741 0.5339692</span></span>
+<span><span class="co">## 5  -0.17448179 -0.76198130 0.2639078</span></span>
+<span><span class="co">## 6   0.10616953 -0.44641509 0.7024480</span></span>
+<span><span class="co">## 7   0.09489742 -0.44361179 0.6674713</span></span>
+<span><span class="co">## 8  -0.35461669 -0.88846084 0.1679789</span></span>
+<span><span class="co">## 9   0.44951412 -0.11600956 1.0895802</span></span>
+<span><span class="co">## 10  0.58908525 -0.02427258 1.2021222</span></span>
+<span><span class="co">## 11  0.42094553 -0.09650832 0.9764117</span></span>
+<span><span class="co">## 12  0.16813972 -0.39862259 0.7732519</span></span>
+<span><span class="co">## 13  0.47999336 -0.05397128 1.0960650</span></span>
+<span><span class="co">## 14  0.18562672 -0.24163572 0.6966512</span></span>
+<span><span class="co">## 15  0.29436664 -0.28721489 0.9402476</span></span>
+<span><span class="co">## 16  1.08839542  0.48535230 1.8555332</span></span>
+<span><span class="co">## 17  0.49918888 -0.06440810 0.9963457</span></span>
+<span><span class="co">## 18  0.58920655  0.04315255 1.2399964</span></span></code></pre>
 <p><em>Add more meaningful names for measures</em></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">table.stats</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Peripheral Responsivity (QCAE)"</span>,</span>
@@ -395,7 +401,7 @@ will alphabetize them)</p>
 automatically highlight significant results.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<template id="bb1692f8-1b8a-4978-aabe-177b9185e2f6"><style>
+<template id="490cfe65-4214-418e-a410-512d5a3a35d4"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -431,186 +437,186 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-38ac16b4{}.cl-38955dc0{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-38955dc1{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-38955dc2{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;top:3.6pt;}.cl-38955dc3{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-389584bc{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-3895f9ec{width:54pt;background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3895f9ed{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3895f9ee{width:54pt;background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3895f9ef{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-38ac16b4">
+<style>.cl-a49612ea{}.cl-a4830326{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a4830327{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a4830328{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;top:3.6pt;}.cl-a4830329{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a4832a2c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-a483c64e{width:54pt;background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a483c64f{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a483c650{width:54pt;background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a483c651{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-a49612ea">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc0">Dependent Variable</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc0">Comparison</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc1">df</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc1">t</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc1">p</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc1">d</span><span class="cl-38955dc2">R</span></p></td>
-<td class="cl-3895f9ef"><p class="cl-389584bc"><span class="cl-38955dc0">95% CI</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830326">Dependent Variable</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830326">Comparison</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830327">df</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830327">t</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830327">p</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830327">d</span><span class="cl-a4830328">R</span></p></td>
+<td class="cl-a483c651"><p class="cl-a4832a2c"><span class="cl-a4830326">95% CI</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Peripheral Responsivity (QCAE)</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Embodied - Control</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">87</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">2.20</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">.031</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">0.53</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">[-0.04, 1.13]</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Peripheral Responsivity (QCAE)</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Embodied - Control</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">87</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">2.20</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">.031</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">0.53</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">[-0.10, 1.11]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Peripheral Responsivity (QCAE)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Mental - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.15</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.880</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.04</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.56, 0.58]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Peripheral Responsivity (QCAE)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Mental - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.15</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.880</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.04</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.59, 0.60]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Peripheral Responsivity (QCAE)</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">86</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">2.13</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">.036</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">0.49</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">[-0.01, 1.02]</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Peripheral Responsivity (QCAE)</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Embodied - Mental</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">86</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">2.13</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">.036</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">0.49</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">[-0.02, 1.01]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Perspective-Taking (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">87</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.24</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.813</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">-0.07</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.73, 0.50]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Perspective-Taking (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">87</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.24</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.813</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">-0.07</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.69, 0.53]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Perspective-Taking (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Mental - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">-1.39</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.169</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">-0.17</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.69, 0.32]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Perspective-Taking (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Mental - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">-1.39</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.169</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">-0.17</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.76, 0.26]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Perspective-Taking (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.393</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.11</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.44, 0.74]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Perspective-Taking (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Mental</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.393</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.11</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.45, 0.70]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Fantasy (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">87</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">1.96</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.053</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.09</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.47, 0.66]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Fantasy (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">87</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">1.96</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.053</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.09</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.44, 0.67]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Fantasy (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Mental - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">1.54</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.128</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">-0.35</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.89, 0.17]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Fantasy (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Mental - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">1.54</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.128</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">-0.35</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.89, 0.17]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Fantasy (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">1.25</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.213</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.45</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.10, 1.11]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Fantasy (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Mental</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">1.25</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.213</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.45</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.12, 1.09]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Empathic Concern (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.12</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.903</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.59</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.00, 1.22]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Empathic Concern (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.12</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.903</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.59</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.02, 1.20]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Empathic Concern (IRI)</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Mental - Control</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">86</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">2.30</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">.024</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">0.42</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">[-0.07, 0.96]</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Empathic Concern (IRI)</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Mental - Control</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">86</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">2.30</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">.024</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">0.42</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">[-0.10, 0.98]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Empathic Concern (IRI)</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">87</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">4.71</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">&lt; .001</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">0.17</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">[-0.40, 0.72]</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Empathic Concern (IRI)</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Embodied - Mental</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">87</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">4.71</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">&lt; .001</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">0.17</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">[-0.40, 0.77]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Personal Distress (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.02</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.985</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.48</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.05, 1.12]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Personal Distress (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.02</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.985</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.48</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.05, 1.10]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Personal Distress (IRI)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Mental - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">1.45</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.151</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.19</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.25, 0.72]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Personal Distress (IRI)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Mental - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">1.45</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.151</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.19</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.24, 0.70]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Personal Distress (IRI)</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">87</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">2.12</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">.037</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">0.29</span></p></td>
-<td class="cl-3895f9ec"><p class="cl-389584bc"><span class="cl-38955dc3">[-0.31, 0.93]</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Personal Distress (IRI)</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">Embodied - Mental</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">87</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">2.12</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">.037</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">0.29</span></p></td>
+<td class="cl-a483c64e"><p class="cl-a4832a2c"><span class="cl-a4830329">[-0.29, 0.94]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Inclusion of Other in the Self (IOS)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Embodied - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.10</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.919</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">1.09</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[0.45, 1.85]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Inclusion of Other in the Self (IOS)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Embodied - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.10</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.919</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">1.09</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[0.49, 1.86]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Inclusion of Other in the Self (IOS)</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">Mental - Control</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">86</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.83</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">.407</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">0.50</span></p></td>
-<td class="cl-3895f9ed"><p class="cl-389584bc"><span class="cl-38955dc0">[-0.07, 0.99]</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Inclusion of Other in the Self (IOS)</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">Mental - Control</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">86</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.83</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">.407</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">0.50</span></p></td>
+<td class="cl-a483c64f"><p class="cl-a4832a2c"><span class="cl-a4830326">[-0.06, 1.00]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">Inclusion of Other in the Self (IOS)</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">Embodied - Mental</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">87</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">2.58</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">.011</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">0.59</span></p></td>
-<td class="cl-3895f9ee"><p class="cl-389584bc"><span class="cl-38955dc3">[0.01, 1.22]</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">Inclusion of Other in the Self (IOS)</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">Embodied - Mental</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">87</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">2.58</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">.011</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">0.59</span></p></td>
+<td class="cl-a483c650"><p class="cl-a4832a2c"><span class="cl-a4830329">[0.04, 1.24]</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="ccbd7754-a1b0-4406-a0c5-3b5535c6fa99"></div>
+</div></template><div class="flextable-shadow-host" id="559b3c17-f8fb-4dd1-a5c2-12176ab5edfd"></div>
 <script>
-var dest = document.getElementById("ccbd7754-a1b0-4406-a0c5-3b5535c6fa99");
-var template = document.getElementById("bb1692f8-1b8a-4978-aabe-177b9185e2f6");
+var dest = document.getElementById("559b3c17-f8fb-4dd1-a5c2-12176ab5edfd");
+var template = document.getElementById("490cfe65-4214-418e-a410-512d5a3a35d4");
 var caption = template.content.querySelector("caption");
 if(caption) {
   caption.style.cssText = "display:block;text-align:center;";
