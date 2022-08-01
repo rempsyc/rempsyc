@@ -390,8 +390,8 @@ nice_table <- function(data,
    } else {
     table %>%
      #autofit() -> table
-     set_table_properties(layout = "fixed") -> table
-     #set_table_properties(layout = "autofit") -> table
+     #set_table_properties(layout = "fixed") -> table
+     set_table_properties(layout = "autofit") -> table
   }
 
   if (!missing(footnote)) {
