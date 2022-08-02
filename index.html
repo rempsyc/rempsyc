@@ -45,7 +45,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -218,12 +218,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1236811  5.7599298</span></span>
-<span><span class="co">#&gt; 2  0.7123733  2.4192344</span></span>
-<span><span class="co">#&gt; 3  1.0289063  3.8552569</span></span>
-<span><span class="co">#&gt; 4 -5.1517795 -2.4814141</span></span>
-<span><span class="co">#&gt; 5 -3.7214002 -1.3927598</span></span>
-<span><span class="co">#&gt; 6 -1.7699757 -0.4501557</span></span>
+<span><span class="co">#&gt; 1  2.0893389  5.6458254</span></span>
+<span><span class="co">#&gt; 2  0.6967375  2.4384578</span></span>
+<span><span class="co">#&gt; 3  1.0664480  3.9764053</span></span>
+<span><span class="co">#&gt; 4 -4.9029469 -2.4630567</span></span>
+<span><span class="co">#&gt; 5 -3.7741414 -1.4621804</span></span>
+<span><span class="co">#&gt; 6 -1.8013535 -0.4548355</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -416,28 +416,34 @@
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/circles" class="uri">https://rempsyc.remi-theriault.com/articles/circles</a></p>
 </div>
 <div class="section level2">
-<h2 id="cormatrix_excel">
-<code>cormatrix_excel</code><a class="anchor" aria-label="anchor" href="#cormatrix_excel"></a>
+<h2 id="cormatrix_excel2">
+<code>cormatrix_excel2</code><a class="anchor" aria-label="anchor" href="#cormatrix_excel2"></a>
 </h2>
-<p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0: #’ large (red)).</p>
+<p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0: large (red)).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
-<span><span class="co">#&gt; mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55</span></span>
-<span><span class="co">#&gt; cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53</span></span>
-<span><span class="co">#&gt; disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39</span></span>
-<span><span class="co">#&gt; hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75</span></span>
-<span><span class="co">#&gt; drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09</span></span>
-<span><span class="co">#&gt; wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43</span></span>
-<span><span class="co">#&gt; qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66</span></span>
-<span><span class="co">#&gt; vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57</span></span>
-<span><span class="co">#&gt; am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06</span></span>
-<span><span class="co">#&gt; gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27</span></span>
-<span><span class="co">#&gt; carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00</span></span>
+<span><span class="fu"><a href="reference/cormatrix_excel2.html">cormatrix_excel2</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  [Correlation matrix 'mycormatrix.xlsx' has been saved to working directory (or where specified).]</span></span></code></pre></div>
-<p><img src="reference/figures/cormatrix.png" width="100%"></p>
+<span><span class="co">#&gt; Parameter |      mpg |      cyl |     disp |       hp |     drat |       wt |     qsec |       vs |       am |    gear |    carb</span></span>
+<span><span class="co">#&gt; --------------------------------------------------------------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; mpg       |  1.00*** | -0.85*** | -0.85*** | -0.78*** |  0.68*** | -0.87*** |     0.42 |   0.66** |   0.60** |    0.48 |  -0.55*</span></span>
+<span><span class="co">#&gt; cyl       | -0.85*** |  1.00*** |  0.90*** |  0.83*** | -0.70*** |  0.78*** |   -0.59* | -0.81*** |   -0.52* |   -0.49 |   0.53*</span></span>
+<span><span class="co">#&gt; disp      | -0.85*** |  0.90*** |  1.00*** |  0.79*** | -0.71*** |  0.89*** |    -0.43 | -0.71*** |   -0.59* |  -0.56* |    0.39</span></span>
+<span><span class="co">#&gt; hp        | -0.78*** |  0.83*** |  0.79*** |  1.00*** |    -0.45 |   0.66** | -0.71*** | -0.72*** |    -0.24 |   -0.13 | 0.75***</span></span>
+<span><span class="co">#&gt; drat      |  0.68*** | -0.70*** | -0.71*** |    -0.45 |  1.00*** | -0.71*** |     0.09 |     0.44 |  0.71*** | 0.70*** |   -0.09</span></span>
+<span><span class="co">#&gt; wt        | -0.87*** |  0.78*** |  0.89*** |   0.66** | -0.71*** |  1.00*** |    -0.17 |   -0.55* | -0.69*** |  -0.58* |    0.43</span></span>
+<span><span class="co">#&gt; qsec      |     0.42 |   -0.59* |    -0.43 | -0.71*** |     0.09 |    -0.17 |  1.00*** |  0.74*** |    -0.23 |   -0.21 | -0.66**</span></span>
+<span><span class="co">#&gt; vs        |   0.66** | -0.81*** | -0.71*** | -0.72*** |     0.44 |   -0.55* |  0.74*** |  1.00*** |     0.17 |    0.21 |  -0.57*</span></span>
+<span><span class="co">#&gt; am        |   0.60** |   -0.52* |   -0.59* |    -0.24 |  0.71*** | -0.69*** |    -0.23 |     0.17 |  1.00*** | 0.79*** |    0.06</span></span>
+<span><span class="co">#&gt; gear      |     0.48 |    -0.49 |   -0.56* |    -0.13 |  0.70*** |   -0.58* |    -0.21 |     0.21 |  0.79*** | 1.00*** |    0.27</span></span>
+<span><span class="co">#&gt; carb      |   -0.55* |    0.53* |     0.39 |  0.75*** |    -0.09 |     0.43 |  -0.66** |   -0.57* |     0.06 |    0.27 | 1.00***</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; p-value adjustment method: Holm (1979)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  [Correlation matrix 'cormatrix.xlsx' has been saved to working directory (or where specified).]</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p><img src="reference/figures/cormatrix.png" width="80%"><img src="reference/figures/cormatrix2.png" width="80%"></p>
 </div>
 <div class="section level2"><h2 id="utility-functions">Utility functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
 </h2></div>
@@ -529,16 +535,10 @@
 <span><span class="co"># Within-Group Design</span></span>
 <span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id Condition</span></span>
-<span><span class="co">#&gt; 1  1        SV</span></span>
-<span><span class="co">#&gt; 2  1        AV</span></span>
-<span><span class="co">#&gt; 3  1        ST</span></span>
-<span><span class="co">#&gt; 4  2        AV</span></span>
-<span><span class="co">#&gt; 5  2        ST</span></span>
-<span><span class="co">#&gt; 6  2        SV</span></span>
-<span><span class="co">#&gt; 7  3        AV</span></span>
-<span><span class="co">#&gt; 8  3        SV</span></span>
-<span><span class="co">#&gt; 9  3        ST</span></span></code></pre></div>
+<span><span class="co">#&gt;   id    Condition</span></span>
+<span><span class="co">#&gt; 1  1 SV - AV - ST</span></span>
+<span><span class="co">#&gt; 2  2 AV - ST - SV</span></span>
+<span><span class="co">#&gt; 3  3 AV - SV - ST</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/randomize" class="uri">https://rempsyc.remi-theriault.com/articles/randomize</a></p>
 </div>
 <div class="section level2"><h2 id="testing-assumptions">Testing assumptions<a class="anchor" aria-label="anchor" href="#testing-assumptions"></a>
@@ -553,8 +553,7 @@
 <span><span class="co"># Create regression model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Interpretation: (p) values &lt; .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/assumptions_table.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
@@ -584,9 +583,10 @@
 <span>         group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 7</span></span>
 <span><span class="co">#&gt; # Rowwise: </span></span>
-<span><span class="co">#&gt;   Variable   Setosa Versicolor Virginica Variance.ratio Criteria Heteroscedastic</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;          </span></span>
-<span><span class="co">#&gt; 1 Sepal.Len…  0.124      0.266     0.404            3.3        4 FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt;   Variable     Setosa Versicolor Virginica Variance.ratio Criteria Heterosceda…¹</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;        </span></span>
+<span><span class="co">#&gt; 1 Sepal.Length  0.124      0.266     0.404            3.3        4 FALSE        </span></span>
+<span><span class="co">#&gt; # … with abbreviated variable name ¹​Heteroscedastic</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
