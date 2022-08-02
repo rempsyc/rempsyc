@@ -145,12 +145,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1236811  5.7599298
-#> 2  0.7123733  2.4192344
-#> 3  1.0289063  3.8552569
-#> 4 -5.1517795 -2.4814141
-#> 5 -3.7214002 -1.3927598
-#> 6 -1.7699757 -0.4501557
+#> 1  2.0893389  5.6458254
+#> 2  0.6967375  2.4384578
+#> 3  1.0664480  3.9764053
+#> 4 -4.9029469 -2.4630567
+#> 5 -3.7741414 -1.4621804
+#> 6 -1.8013535 -0.4548355
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -377,33 +377,40 @@ overlap_circle(6.84)
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 
-## `cormatrix_excel`
+## `cormatrix_excel2`
 
 Easily output a correlation matrix and export it to Microsoft Excel,
 with the first row and column frozen, and correlation coefficients
 colour-coded based on their effect size (0.0-0.2: small (no colour);
-0.2-0.4: medium (pink); 0.4-1.0: \#’ large (red)).
+0.2-0.4: medium (pink); 0.4-1.0: large (red)).
 
 ``` r
 
-cormatrix_excel(mtcars)
-#>        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#> mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
-#> cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
-#> disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
-#> hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
-#> drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
-#> wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
-#> qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
-#> vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
-#> am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
-#> gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
-#> carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+cormatrix_excel2(mtcars)
+#> # Correlation Matrix (pearson-method)
 #> 
-#>  [Correlation matrix 'mycormatrix.xlsx' has been saved to working directory (or where specified).]
+#> Parameter |      mpg |      cyl |     disp |       hp |     drat |       wt |     qsec |       vs |       am |    gear |    carb
+#> --------------------------------------------------------------------------------------------------------------------------------
+#> mpg       |  1.00*** | -0.85*** | -0.85*** | -0.78*** |  0.68*** | -0.87*** |     0.42 |   0.66** |   0.60** |    0.48 |  -0.55*
+#> cyl       | -0.85*** |  1.00*** |  0.90*** |  0.83*** | -0.70*** |  0.78*** |   -0.59* | -0.81*** |   -0.52* |   -0.49 |   0.53*
+#> disp      | -0.85*** |  0.90*** |  1.00*** |  0.79*** | -0.71*** |  0.89*** |    -0.43 | -0.71*** |   -0.59* |  -0.56* |    0.39
+#> hp        | -0.78*** |  0.83*** |  0.79*** |  1.00*** |    -0.45 |   0.66** | -0.71*** | -0.72*** |    -0.24 |   -0.13 | 0.75***
+#> drat      |  0.68*** | -0.70*** | -0.71*** |    -0.45 |  1.00*** | -0.71*** |     0.09 |     0.44 |  0.71*** | 0.70*** |   -0.09
+#> wt        | -0.87*** |  0.78*** |  0.89*** |   0.66** | -0.71*** |  1.00*** |    -0.17 |   -0.55* | -0.69*** |  -0.58* |    0.43
+#> qsec      |     0.42 |   -0.59* |    -0.43 | -0.71*** |     0.09 |    -0.17 |  1.00*** |  0.74*** |    -0.23 |   -0.21 | -0.66**
+#> vs        |   0.66** | -0.81*** | -0.71*** | -0.72*** |     0.44 |   -0.55* |  0.74*** |  1.00*** |     0.17 |    0.21 |  -0.57*
+#> am        |   0.60** |   -0.52* |   -0.59* |    -0.24 |  0.71*** | -0.69*** |    -0.23 |     0.17 |  1.00*** | 0.79*** |    0.06
+#> gear      |     0.48 |    -0.49 |   -0.56* |    -0.13 |  0.70*** |   -0.58* |    -0.21 |     0.21 |  0.79*** | 1.00*** |    0.27
+#> carb      |   -0.55* |    0.53* |     0.39 |  0.75*** |    -0.09 |     0.43 |  -0.66** |   -0.57* |     0.06 |    0.27 | 1.00***
+#> 
+#> p-value adjustment method: Holm (1979)
+#> 
+#>  [Correlation matrix 'cormatrix.xlsx' has been saved to working directory (or where specified).]
+#> NULL
 ```
 
-<img src="man/figures/cormatrix.png" width="100%" />
+<img src="man/figures/cormatrix.png" width="80%" />
+<img src="man/figures/cormatrix2.png" width="80%" />
 
 ## Utility functions
 
@@ -501,16 +508,10 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 # Within-Group Design
 nice_randomize(design = "within", Ncondition = 3, n = 3,
                condition.names = c("SV","AV","ST"))
-#>   id Condition
-#> 1  1        SV
-#> 2  1        AV
-#> 3  1        ST
-#> 4  2        AV
-#> 5  2        ST
-#> 6  2        SV
-#> 7  3        AV
-#> 8  3        SV
-#> 9  3        ST
+#>   id    Condition
+#> 1  1 SV - AV - ST
+#> 2  2 AV - ST - SV
+#> 3  3 AV - SV - ST
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/randomize>
@@ -527,7 +528,6 @@ Test linear regression assumptions easily with a nice summary table.
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 # View results
 View(nice_assumptions(model))
-#> Interpretation: (p) values < .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.
 ```
 
 <img src="man/figures/assumptions_table.png" width="70%" />
@@ -562,9 +562,10 @@ nice_var(data = iris,
          group = "Species")
 #> # A tibble: 1 × 7
 #> # Rowwise: 
-#>   Variable   Setosa Versicolor Virginica Variance.ratio Criteria Heteroscedastic
-#>   <chr>       <dbl>      <dbl>     <dbl>          <dbl>    <dbl> <lgl>          
-#> 1 Sepal.Len…  0.124      0.266     0.404            3.3        4 FALSE
+#>   Variable     Setosa Versicolor Virginica Variance.ratio Criteria Heterosceda…¹
+#>   <chr>         <dbl>      <dbl>     <dbl>          <dbl>    <dbl> <lgl>        
+#> 1 Sepal.Length  0.124      0.266     0.404            3.3        4 FALSE        
+#> # … with abbreviated variable name ¹​Heteroscedastic
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>

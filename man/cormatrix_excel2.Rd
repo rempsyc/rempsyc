@@ -21,11 +21,16 @@ but no need to specify extension).}
 Easily output a correlation matrix and export it to
 Microsoft Excel, with the first row and column frozen, and
 correlation coefficients colour-coded based on effect size
-(0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
-large (red)), following Cohen's suggestions for small (.10),
-medium (.30), and large (.50) correlation effect sizes.
+(0.0-0.2: small (no colour); 0.2-0.4: medium (pink/light blue);
+0.4-1.0: large (red/dark blue)), following Cohen's suggestions
+for small (.10), medium (.30), and large (.50) correlation sizes.
 
-Based on the \code{correlation} and \code{openxlsx} packages.
+Based on the \code{correlation} and \code{openxlsx2} packages.
+
+WARNING: This function will replace \code{cormatrix_excel} (the
+original one) as soon as \code{openxlsx2} is available from CRAN.
+In the meanwhile, it is experimental and subject to change.
+Use with care.
 }
 \examples{
 \dontrun{
@@ -37,7 +42,8 @@ cormatrix_excel2(airquality, method = "spearman")
 
 }
 \author{
-Original author: @JanMarvin
+Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
+the original rempsyc::cormatrix_excel
 }
 \keyword{Excel}
 \keyword{correlation,}

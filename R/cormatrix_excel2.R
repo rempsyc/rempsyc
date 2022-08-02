@@ -3,11 +3,16 @@
 #' @description Easily output a correlation matrix and export it to
 #' Microsoft Excel, with the first row and column frozen, and
 #' correlation coefficients colour-coded based on effect size
-#' (0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
-#' large (red)), following Cohen's suggestions for small (.10),
-#' medium (.30), and large (.50) correlation effect sizes.
+#' (0.0-0.2: small (no colour); 0.2-0.4: medium (pink/light blue);
+#' 0.4-1.0: large (red/dark blue)), following Cohen's suggestions
+#' for small (.10), medium (.30), and large (.50) correlation sizes.
 #'
-#' Based on the `correlation` and `openxlsx` packages.
+#' Based on the `correlation` and `openxlsx2` packages.
+#'
+#' WARNING: This function will replace `cormatrix_excel` (the
+#' original one) as soon as `openxlsx2` is available from CRAN.
+#' In the meanwhile, it is experimental and subject to change.
+#' Use with care.
 #'
 #' @param data The data frame
 #' @param filename Desired filename (path can be added before hand
@@ -17,7 +22,8 @@
 #' (see `?correlation::correlation`)
 #'
 #' @keywords correlation, matrix, Excel
-#' @author Original author: @JanMarvin
+#' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
+#' the original rempsyc::cormatrix_excel
 #' @export
 #' @examples
 #' \dontrun{
@@ -32,7 +38,24 @@ cormatrix_excel2 <- function(data,
                              filename = "cormatrix",
                              overwrite = TRUE,
                              ...) {
-  rlang::check_installed("openxlsx2", reason = "for this function.")
+  rlang::check_installed("correlation", reason = "for this function.")
+  #  rlang::check_installed("openxlsx2", reason = "for this function.")
+  # This guy is not working so we have to use a custom solution
+
+if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
+  rlang::check_installed(
+    "remotes",
+    reason = "to install the required dependency for this function (openxlsx2)."
+  )
+  cat("The package `openxlsx2` is required for this function\n",
+      "Would you like to install it?")
+  if (utils::menu(c("Yes", "No")) == 1) {
+    remotes::install_github('JanMarvin/openxlsx2')
+  } else (stop(
+    "The cormatrix_excel2 function relies on the `openxlsx2` package.
+    You can install it manually with:
+    remotes::install_github('JanMarvin/openxlsx2')"))
+  }
 
 # create correlation matrix with p values
 cm <- data %>%
@@ -45,7 +68,6 @@ pf <- attr(cm, "p")
 # Define colours
 style_gray <- c(rgb = "C1CDCD")
 style_black <- c(rgb = "000000")
-style_white <- c(rgb = "FFFFFF")
 style_red <- c(rgb = "F65534")
 style_orange <- c(rgb = "FFA500")
 style_pink <- c(rgb = "FBCAC0")
@@ -59,36 +81,29 @@ style_darkblue <- c(rgb = "00BFFF")
 gray_style <- openxlsx2::create_dxfs_style(bgFill = style_gray,
                                            font_color = style_black,
                                            numFmt = "#.#0 _*_*_*")
-red_style <- openxlsx2::create_dxfs_style(bgFill = style_green3,
-                                          font_color = style_black,
-                                          numFmt = "#.#0 _*_*_*")
-pink_style <- openxlsx2::create_dxfs_style(bgFill = style_pink,
-                                           font_color = style_black,
-                                           numFmt = "#.#0 _*_*_*")
 
-p_style <- openxlsx2::create_dxfs_style(bgFill = style_white,
+p_style <- openxlsx2::create_dxfs_style(bgFill = "",
                                         font_color = style_black,
-                                        numFmt = "#.##0")
+                                        numFmt = "#.##0 _*_*_*")
 p_style1 <- openxlsx2::create_dxfs_style(bgFill = style_green1,
                                          font_color = style_black,
-                                         numFmt = "#.##0")
+                                         numFmt = "#.##0 _*_*_*")
 p_style2 <- openxlsx2::create_dxfs_style(bgFill = style_green2,
                                          font_color = style_black,
-                                         numFmt = "#.##0")
+                                         numFmt = "#.##0 _*_*_*")
 p_style3 <- openxlsx2::create_dxfs_style(bgFill = style_green3,
                                          font_color = style_black,
-                                         numFmt = "#.##0")
+                                         numFmt = "#.##0 _*_*_*")
 
-
-# Stars
+# no star
 no_star    <- openxlsx2::create_dxfs_style(numFmt = "#.#0 _*_*_*",
                                              font_color = style_black,
-                                             bgFill = style_white)
+                                             bgFill = "")
 
 # one star
 one_star <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                              font_color = style_black,
-                                             bgFill = style_white)
+                                             bgFill = "")
 one_star_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                               font_color = style_black,
                                               bgFill = style_pink)
@@ -105,7 +120,7 @@ one_star_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
 # two stars
 two_stars <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                           font_color = style_black,
-                                          bgFill = style_white)
+                                          bgFill = "")
 two_stars_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                                font_color = style_black,
                                                bgFill = style_pink)
@@ -122,7 +137,7 @@ two_stars_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
 # three stars
 three_stars <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                             font_color = style_black,
-                                            bgFill = style_white)
+                                            bgFill = "")
 three_stars_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                                  font_color = style_black,
                                                  bgFill = style_pink)
@@ -140,29 +155,27 @@ three_stars_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
 wb <- openxlsx2::wb_workbook()
 
 # assign all the required styles to the workbook
-wb$styles_mgr$add(red_style, "red_style")
-wb$styles_mgr$add(red_style, "pink_style")
-wb$styles_mgr$add(gray_style, "gray_style")
-wb$styles_mgr$add(no_star, "no_star")
-wb$styles_mgr$add(one_star, "one_star")
-wb$styles_mgr$add(one_star_pink, "one_star_pink")
-wb$styles_mgr$add(one_star_red, "one_star_red")
-wb$styles_mgr$add(one_star_lightblue, "one_star_lightblue")
-wb$styles_mgr$add(one_star_darkblue, "one_star_darkblue")
-wb$styles_mgr$add(two_stars, "two_stars")
-wb$styles_mgr$add(two_stars_pink, "two_stars_pink")
-wb$styles_mgr$add(two_stars_red, "two_stars_red")
-wb$styles_mgr$add(two_stars_lightblue, "two_stars_lightblue")
-wb$styles_mgr$add(two_stars_darkblue, "two_stars_darkblue")
-wb$styles_mgr$add(three_stars, "three_stars")
-wb$styles_mgr$add(three_stars_pink, "three_stars_pink")
-wb$styles_mgr$add(three_stars_red, "three_stars_red")
-wb$styles_mgr$add(three_stars_lightblue, "three_stars_lightblue")
-wb$styles_mgr$add(three_stars_darkblue, "three_stars_darkblue")
-wb$styles_mgr$add(p_style, "p_style")
-wb$styles_mgr$add(p_style1, "p_style1")
-wb$styles_mgr$add(p_style2, "p_style2")
-wb$styles_mgr$add(p_style3, "p_style3")
+wb$add_style(gray_style)
+wb$add_style(no_star)
+wb$add_style(one_star)
+wb$add_style(one_star_pink)
+wb$add_style(one_star_red)
+wb$add_style(one_star_lightblue)
+wb$add_style(one_star_darkblue)
+wb$add_style(two_stars)
+wb$add_style(two_stars_pink)
+wb$add_style(two_stars_red)
+wb$add_style(two_stars_lightblue)
+wb$add_style(two_stars_darkblue)
+wb$add_style(three_stars)
+wb$add_style(three_stars_pink)
+wb$add_style(three_stars_red)
+wb$add_style(three_stars_lightblue)
+wb$add_style(three_stars_darkblue)
+wb$add_style(p_style)
+wb$add_style(p_style1)
+wb$add_style(p_style2)
+wb$add_style(p_style3)
 wb$styles_mgr$styles$dxfs
 wb$styles_mgr$dxf
 
