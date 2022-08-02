@@ -248,6 +248,7 @@ names(data)[-1] <- c(paste0("T1.", names(data[2:4])),
                      paste0("T2.", names(data[2:4])))
 
 # Get descriptive statistics
+library(dplyr)
 data %>%
   group_by(Species) %>% 
   summarize(across(T1.Sepal.Length:T2.Petal.Length, 
