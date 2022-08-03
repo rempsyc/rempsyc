@@ -6,8 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
+![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc) [![Project
+Status: Active – The project has reached a stable, usable state and is
+being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
@@ -145,12 +146,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0893389  5.6458254
-#> 2  0.6967375  2.4384578
-#> 3  1.0664480  3.9764053
-#> 4 -4.9029469 -2.4630567
-#> 5 -3.7741414 -1.4621804
-#> 6 -1.8013535 -0.4548355
+#> 1  2.1326257  5.6970855
+#> 2  0.7210052  2.5135681
+#> 3  1.0276530  3.7615971
+#> 4 -5.2097274 -2.4598670
+#> 5 -3.7224794 -1.2980730
+#> 6 -1.8144133 -0.4540627
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -382,7 +383,7 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 Easily output a correlation matrix and export it to Microsoft Excel,
 with the first row and column frozen, and correlation coefficients
 colour-coded based on their effect size (0.0-0.2: small (no colour);
-0.2-0.4: medium (pink); 0.4-1.0: large (red)).
+0.2-0.4: medium (pink/light blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
 
