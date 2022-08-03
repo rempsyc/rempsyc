@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
-![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc) [![Project
-Status: Active – The project has reached a stable, usable state and is
-being actively
+[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui#package:rempsyc)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -151,12 +151,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1423720  5.7142289
-#> 2  0.7216241  2.3798751
-#> 3  1.0288185  3.9167271
-#> 4 -5.0694546 -2.4468533
-#> 5 -3.7545504 -1.3812247
-#> 6 -1.8255723 -0.5035742
+#> 1  2.1167339  5.7721369
+#> 2  0.7177755  2.4273371
+#> 3  1.0581388  3.4822965
+#> 4 -5.0089553 -2.4156022
+#> 5 -3.7516121 -1.4192303
+#> 6 -1.7970534 -0.4762163
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
