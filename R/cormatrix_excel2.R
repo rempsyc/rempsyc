@@ -39,8 +39,8 @@ cormatrix_excel2 <- function(data,
                              overwrite = TRUE,
                              ...) {
   rlang::check_installed("correlation", reason = "for this function.")
-  #  rlang::check_installed("openxlsx2", reason = "for this function.")
-  # This guy is not working so we have to use a custom solution
+  # rlang::check_installed("openxlsx2", reason = "for this function.")
+  # check_installed is not working here so we have to use a custom solution
 
 if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
   rlang::check_installed(
