@@ -43,18 +43,14 @@ cormatrix_excel2 <- function(data,
   # check_installed is not working here so we have to use a custom solution
 
 if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
-  rlang::check_installed(
-    "remotes",
-    reason = "to install the required dependency for this function (openxlsx2)."
-  )
   cat("The package `openxlsx2` is required for this function\n",
       "Would you like to install it?")
   if (utils::menu(c("Yes", "No")) == 1) {
-    remotes::install_github('JanMarvin/openxlsx2')
+    install.packages('openxlsx2', repos = "https://janmarvin.r-universe.dev")
   } else (stop(
-    "The cormatrix_excel2 function relies on the `openxlsx2` package.
+    'The cormatrix_excel2 function relies on the `openxlsx2` package.
     You can install it manually with:
-    remotes::install_github('JanMarvin/openxlsx2')"))
+    install.packages("openxlsx2", repos = "https://janmarvin.r-universe.dev")'))
   }
 
 # create correlation matrix with p values
