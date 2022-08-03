@@ -46,7 +46,7 @@ if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
   cat("The package `openxlsx2` is required for this function\n",
       "Would you like to install it?")
   if (utils::menu(c("Yes", "No")) == 1) {
-    install.packages('openxlsx2', repos = "https://janmarvin.r-universe.dev")
+    utils::install.packages('openxlsx2', repos = "https://janmarvin.r-universe.dev")
   } else (stop(
     'The cormatrix_excel2 function relies on the `openxlsx2` package.
     You can install it manually with:

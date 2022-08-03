@@ -10,7 +10,6 @@
 Status: Active – The project has reached a stable, usable state and is
 being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -35,7 +34,13 @@ bug, or request a feature.
 ## Installation
 
 You can install the development version (the only version currently
-available) of the `rempsyc` package from GitHub with:
+available) of the `rempsyc` package from the r-universe:
+
+``` r
+install.packages("rempsyc", repos = "https://rempsyc.r-universe.dev")
+```
+
+Or from GitHub:
 
 ``` r
 # If devtools isn't already installed, install it with install.packages("devtools")
@@ -146,12 +151,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1326257  5.6970855
-#> 2  0.7210052  2.5135681
-#> 3  1.0276530  3.7615971
-#> 4 -5.2097274 -2.4598670
-#> 5 -3.7224794 -1.2980730
-#> 6 -1.8144133 -0.4540627
+#> 1  2.1423720  5.7142289
+#> 2  0.7216241  2.3798751
+#> 3  1.0288185  3.9167271
+#> 4 -5.0694546 -2.4468533
+#> 5 -3.7545504 -1.3812247
+#> 6 -1.8255723 -0.5035742
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)

@@ -16,10 +16,7 @@ knitr::opts_chunk$set(
 
 # rempsyc: Convenience functions for psychology <img src='man/figures/logo.png' align="right" height="139" style="float:right; height:200px;" />
 
-```{r version, echo = FALSE, message = FALSE}
-version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])                                  
-version <- gsub('-', '.', version)   
-
+```{r version, echo = FALSE, message = FALSE, warning = FALSE}
 flextable::set_flextable_defaults(background.color = "white")
 
 library(rempsyc)
@@ -30,7 +27,6 @@ library(rempsyc)
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
 ![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/github/r-package/v/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -47,7 +43,13 @@ R package of convenience functions to make your workflow faster and easier. Easi
 
 ## Installation
 
-You can install the development version (the only version currently available) of the `rempsyc` package from GitHub with:
+You can install the development version (the only version currently available) of the `rempsyc` package from the r-universe:
+
+``` r
+install.packages("rempsyc", repos = "https://rempsyc.r-universe.dev")
+```
+
+Or from GitHub:
 
 ``` r
 # If devtools isn't already installed, install it with install.packages("devtools")
