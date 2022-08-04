@@ -6,7 +6,7 @@
 \usage{
 cormatrix_excel(
   data,
-  filename = "mycormatrix",
+  filename = "cormatrix",
   overwrite = TRUE,
   use = "pairwise.complete.obs"
 )

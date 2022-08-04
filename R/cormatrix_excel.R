@@ -21,7 +21,7 @@
 #' }
 #'
 cormatrix_excel <- function(data,
-                            filename = "mycormatrix",
+                            filename = "cormatrix",
                             overwrite = TRUE,
                             use = "pairwise.complete.obs") {
   rlang::check_installed("openxlsx", reason = "for this function.")

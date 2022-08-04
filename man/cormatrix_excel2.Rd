@@ -4,7 +4,13 @@
 \alias{cormatrix_excel2}
 \title{Easy export of correlation matrix to Excel}
 \usage{
-cormatrix_excel2(data, filename = "cormatrix", overwrite = TRUE, ...)
+cormatrix_excel2(
+  data,
+  filename = "cormatrix",
+  overwrite = TRUE,
+  p_adjust = "none",
+  ...
+)
 }
 \arguments{
 \item{data}{The data frame}
@@ -13,6 +19,9 @@ cormatrix_excel2(data, filename = "cormatrix", overwrite = TRUE, ...)
 but no need to specify extension).}
 
 \item{overwrite}{Whether to allow overwriting previous file.}
+
+\item{p_adjust}{Default p-value adjustment method (default is "none",
+although \code{correlation::correlation}'s default is "holm")}
 
 \item{...}{Parameters to be passed to the \code{correlation} package
 (see \code{?correlation::correlation})}

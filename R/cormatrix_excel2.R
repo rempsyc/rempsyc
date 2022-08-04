@@ -18,6 +18,8 @@
 #' @param filename Desired filename (path can be added before hand
 #' but no need to specify extension).
 #' @param overwrite Whether to allow overwriting previous file.
+#' @param p_adjust Default p-value adjustment method (default is "none",
+#' although `correlation::correlation`'s default is "holm")
 #' @param ... Parameters to be passed to the `correlation` package
 #' (see `?correlation::correlation`)
 #'
@@ -37,6 +39,7 @@
 cormatrix_excel2 <- function(data,
                              filename = "cormatrix",
                              overwrite = TRUE,
+                             p_adjust = "none",
                              ...) {
   rlang::check_installed("correlation", reason = "for this function.")
   # rlang::check_installed("openxlsx2", reason = "for this function.")
@@ -55,7 +58,7 @@ if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
 
 # create correlation matrix with p values
 cm <- data %>%
-  correlation::correlation(...) %>%
+  correlation::correlation(p_adjust = p_adjust, ...) %>%
   summary(redundant = TRUE)
 all.columns <- 2:(ncol(cm))
 print(cm)
