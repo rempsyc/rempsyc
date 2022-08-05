@@ -38,10 +38,7 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
-
-      - name: Define repo options
-        run: options(repos = c(janmarvin = "https://janmarvin.r-universe.dev", CRAN = "https://cloud.r-project.org"))
-        shell: Rscript {0}
+          extra-repositories: "https://janmarvin.r-universe.dev"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
