@@ -1,4 +1,4 @@
-#' @title Easy export of correlation matrix to Excel
+#' @title Easy export of correlation matrix to Excel (improved version)
 #'
 #' @description Easily output a correlation matrix and export it to
 #' Microsoft Excel, with the first row and column frozen, and

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cormatrix_excel2.R
 \name{cormatrix_excel2}
 \alias{cormatrix_excel2}
-\title{Easy export of correlation matrix to Excel}
+\title{Easy export of correlation matrix to Excel (improved version)}
 \usage{
 cormatrix_excel2(
   data,
