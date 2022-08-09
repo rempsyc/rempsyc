@@ -41,13 +41,14 @@
 #' # If the questionnaire items start with the same name, e.g.,
 #' set.seed(15)
 #' fun <- function() {
-#'   sample(c(NA, 1:10), replace = TRUE)
+#'   c(sample(c(NA, 1:10), replace = TRUE), NA, NA, NA)
 #' }
 #' df <- data.frame(
 #'   scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
 #'   scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
 #'   scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun()
 #' )
+#'
 #' # One can list the scale names directly:
 #' nice_na(df, scales = c("scale1", "scale2", "scale3"))
 #'
@@ -89,6 +90,6 @@ nice_na_internal <- function(data) {
       cells = prod(dim(.)),
       na_percent = round(na / cells * 100, 2),
       na_max = max(rowSums(is.na(.))),
-      na_max_percent = round(na_max / ncol(.) * 100, 2)
-    )
+      na_max_percent = round(na_max / ncol(.) * 100, 2),
+      all_na = sum(is.na(rowMeans(., na.rm = TRUE))))
 }

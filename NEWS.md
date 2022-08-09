@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.7
+* `nice_na`: integrated a feature request to include the number of rows that were all NAs.
+
 ## rempsyc 0.0.5.6
 * New function: `cormatrix_excel2`: a new version of `cormatrix_excel` relying on the `openxlsx2` package and that allows incorporating significance stars along the correlation matrix, as well as a second sheet containing the matrix of p-values. Experimental until `openxlsx2` reaches CRAN.
 
