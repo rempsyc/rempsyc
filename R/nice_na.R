@@ -55,6 +55,11 @@
 #' @importFrom dplyr select all_of bind_rows summarize %>% first last
 
 nice_na <- function(data, vars, scales) {
+  classes <- lapply(data, class)
+  if (any(!(classes %in% "numeric"))) {
+    warning("Some variables are not numeric. ",
+            "They are ignored for calculating the `all_na` column.")
+  }
   if (missing(vars) & missing(scales)) {
     vars.internal <- names(data)
   } else if (!missing(scales)) {
@@ -91,5 +96,5 @@ nice_na_internal <- function(data) {
       na_percent = round(na / cells * 100, 2),
       na_max = max(rowSums(is.na(.))),
       na_max_percent = round(na_max / ncol(.) * 100, 2),
-      all_na = sum(is.na(rowMeans(., na.rm = TRUE))))
+      all_na = sum(is.na(rowMeans(select(., where(is.numeric)), na.rm = TRUE))))
 }
