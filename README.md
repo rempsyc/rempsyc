@@ -151,12 +151,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1167339  5.7721369
-#> 2  0.7177755  2.4273371
-#> 3  1.0581388  3.4822965
-#> 4 -5.0089553 -2.4156022
-#> 5 -3.7516121 -1.4192303
-#> 6 -1.7970534 -0.4762163
+#> 1  2.1513600  5.7058713
+#> 2  0.6590285  2.2612367
+#> 3  1.0303149  3.8536137
+#> 4 -5.1944379 -2.4871820
+#> 5 -3.7938728 -1.4197249
+#> 6 -1.7772116 -0.4865449
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -395,21 +395,21 @@ colour-coded based on their effect size (0.0-0.2: small (no colour);
 cormatrix_excel2(mtcars)
 #> # Correlation Matrix (pearson-method)
 #> 
-#> Parameter |      mpg |      cyl |     disp |       hp |     drat |       wt |     qsec |       vs |       am |    gear |    carb
-#> --------------------------------------------------------------------------------------------------------------------------------
-#> mpg       |  1.00*** | -0.85*** | -0.85*** | -0.78*** |  0.68*** | -0.87*** |     0.42 |   0.66** |   0.60** |    0.48 |  -0.55*
-#> cyl       | -0.85*** |  1.00*** |  0.90*** |  0.83*** | -0.70*** |  0.78*** |   -0.59* | -0.81*** |   -0.52* |   -0.49 |   0.53*
-#> disp      | -0.85*** |  0.90*** |  1.00*** |  0.79*** | -0.71*** |  0.89*** |    -0.43 | -0.71*** |   -0.59* |  -0.56* |    0.39
-#> hp        | -0.78*** |  0.83*** |  0.79*** |  1.00*** |    -0.45 |   0.66** | -0.71*** | -0.72*** |    -0.24 |   -0.13 | 0.75***
-#> drat      |  0.68*** | -0.70*** | -0.71*** |    -0.45 |  1.00*** | -0.71*** |     0.09 |     0.44 |  0.71*** | 0.70*** |   -0.09
-#> wt        | -0.87*** |  0.78*** |  0.89*** |   0.66** | -0.71*** |  1.00*** |    -0.17 |   -0.55* | -0.69*** |  -0.58* |    0.43
-#> qsec      |     0.42 |   -0.59* |    -0.43 | -0.71*** |     0.09 |    -0.17 |  1.00*** |  0.74*** |    -0.23 |   -0.21 | -0.66**
-#> vs        |   0.66** | -0.81*** | -0.71*** | -0.72*** |     0.44 |   -0.55* |  0.74*** |  1.00*** |     0.17 |    0.21 |  -0.57*
-#> am        |   0.60** |   -0.52* |   -0.59* |    -0.24 |  0.71*** | -0.69*** |    -0.23 |     0.17 |  1.00*** | 0.79*** |    0.06
-#> gear      |     0.48 |    -0.49 |   -0.56* |    -0.13 |  0.70*** |   -0.58* |    -0.21 |     0.21 |  0.79*** | 1.00*** |    0.27
-#> carb      |   -0.55* |    0.53* |     0.39 |  0.75*** |    -0.09 |     0.43 |  -0.66** |   -0.57* |     0.06 |    0.27 | 1.00***
+#> Parameter |      mpg |      cyl |     disp |       hp |     drat |       wt |     qsec |       vs |       am |     gear |     carb
+#> ----------------------------------------------------------------------------------------------------------------------------------
+#> mpg       |  1.00*** | -0.85*** | -0.85*** | -0.78*** |  0.68*** | -0.87*** |    0.42* |  0.66*** |  0.60*** |   0.48** |  -0.55**
+#> cyl       | -0.85*** |  1.00*** |  0.90*** |  0.83*** | -0.70*** |  0.78*** | -0.59*** | -0.81*** |  -0.52** |  -0.49** |   0.53**
+#> disp      | -0.85*** |  0.90*** |  1.00*** |  0.79*** | -0.71*** |  0.89*** |   -0.43* | -0.71*** | -0.59*** | -0.56*** |    0.39*
+#> hp        | -0.78*** |  0.83*** |  0.79*** |  1.00*** |  -0.45** |  0.66*** | -0.71*** | -0.72*** |    -0.24 |    -0.13 |  0.75***
+#> drat      |  0.68*** | -0.70*** | -0.71*** |  -0.45** |  1.00*** | -0.71*** |     0.09 |    0.44* |  0.71*** |  0.70*** |    -0.09
+#> wt        | -0.87*** |  0.78*** |  0.89*** |  0.66*** | -0.71*** |  1.00*** |    -0.17 | -0.55*** | -0.69*** | -0.58*** |    0.43*
+#> qsec      |    0.42* | -0.59*** |   -0.43* | -0.71*** |     0.09 |    -0.17 |  1.00*** |  0.74*** |    -0.23 |    -0.21 | -0.66***
+#> vs        |  0.66*** | -0.81*** | -0.71*** | -0.72*** |    0.44* | -0.55*** |  0.74*** |  1.00*** |     0.17 |     0.21 | -0.57***
+#> am        |  0.60*** |  -0.52** | -0.59*** |    -0.24 |  0.71*** | -0.69*** |    -0.23 |     0.17 |  1.00*** |  0.79*** |     0.06
+#> gear      |   0.48** |  -0.49** | -0.56*** |    -0.13 |  0.70*** | -0.58*** |    -0.21 |     0.21 |  0.79*** |  1.00*** |     0.27
+#> carb      |  -0.55** |   0.53** |    0.39* |  0.75*** |    -0.09 |    0.43* | -0.66*** | -0.57*** |     0.06 |     0.27 |  1.00***
 #> 
-#> p-value adjustment method: Holm (1979)
+#> p-value adjustment method: none
 #> 
 #>  [Correlation matrix 'cormatrix.xlsx' has been saved to working directory (or where specified).]
 #> NULL
@@ -432,28 +432,28 @@ values.
 ``` r
 # Create synthetic data frame for the demonstration
 set.seed(50)
-df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
+df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA))
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
-#>                   var items na cells na_percent na_max na_max_percent
-#> 1 scale1_Q1:scale1_Q3     3  0    21       0.00      0           0.00
-#> 2 scale2_Q1:scale2_Q3     3  3    21      14.29      1          33.33
-#> 3 scale3_Q1:scale3_Q3     3  2    21       9.52      1          33.33
-#> 4               Total     9  5    63       7.94      2          22.22
+#>                   var items na cells na_percent na_max na_max_percent all_na
+#> 1 scale1_Q1:scale1_Q3     3  6    27      22.22      3            100      2
+#> 2 scale2_Q1:scale2_Q3     3  9    27      33.33      3            100      2
+#> 3 scale3_Q1:scale3_Q3     3  8    27      29.63      3            100      2
+#> 4               Total     9 23    81      28.40      9            100      2
 
 # Or whole dataframe
 nice_na(df)
-#>                   var items na cells na_percent na_max na_max_percent
-#> 1 scale1_Q1:scale3_Q3     9  5    63       7.94      2          22.22
+#>                   var items na cells na_percent na_max na_max_percent all_na
+#> 1 scale1_Q1:scale3_Q3     9 23    81       28.4      9            100      2
 ```
 
 ## `nice_reverse`

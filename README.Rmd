@@ -303,15 +303,15 @@ Nicely reports NA values according to existing guidelines (i.e, reporting absolu
 ```{r}
 # Create synthetic data frame for the demonstration
 set.seed(50)
-df <- data.frame(scale1_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale1_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale2_Q3 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q1 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q2 = sample(c(NA, 1:6), replace = TRUE),
-                 scale3_Q3 = sample(c(NA, 1:6), replace = TRUE))
+df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+                 scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA))
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
