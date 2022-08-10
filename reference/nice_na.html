@@ -50,7 +50,7 @@ data: Simpler is just as good. The Counseling Psychologist,
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,8 +170,9 @@ data: Simpler is just as good. The <em>Counseling Psychologist</em>,
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Use whole data frame</span></span></span>
 <span class="r-in"><span><span class="fu">nice_na</span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         var items na cells na_percent na_max na_max_percent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ozone:Day     6 44   918       4.79      2          33.33</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some variables are not numeric. They are ignored for calculating the `all_na` column.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         var items na cells na_percent na_max na_max_percent all_na</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ozone:Day     6 44   918       4.79      2          33.33      0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use selected columns explicitly</span></span></span>
 <span class="r-in"><span><span class="fu">nice_na</span><span class="op">(</span><span class="va">airquality</span>,</span></span>
@@ -180,28 +181,31 @@ data: Simpler is just as good. The <em>Counseling Psychologist</em>,
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Temp"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          var items na cells na_percent na_max na_max_percent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ozone:Wind     3 44   459       9.59      2          66.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   Temp:Day     3  0   459       0.00      0           0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Total     6 44   918       4.79      2          33.33</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some variables are not numeric. They are ignored for calculating the `all_na` column.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          var items na cells na_percent na_max na_max_percent all_na</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Ozone:Wind     3 44   459       9.59      2          66.67      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   Temp:Day     3  0   459       0.00      0           0.00      0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Total     6 44   918       4.79      2          33.33      0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># If the questionnaire items start with the same name, e.g.,</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  scale1_Q1 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale1_Q2 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale1_Q3 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  scale2_Q1 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale2_Q2 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale2_Q3 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  scale3_Q1 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale3_Q2 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span>, scale3_Q3 <span class="op">=</span> <span class="fu">fun</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One can list the scale names directly:</span></span></span>
 <span class="r-in"><span><span class="fu">nice_na</span><span class="op">(</span><span class="va">df</span>, scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scale1"</span>, <span class="st">"scale2"</span>, <span class="st">"scale3"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   var items na cells na_percent na_max na_max_percent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 scale1_Q1:scale1_Q3     3  2    33       6.06      1          33.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 scale2_Q1:scale2_Q3     3  8    33      24.24      2          66.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 scale3_Q1:scale3_Q3     3  1    33       3.03      1          33.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4               Total     9 11    99      11.11      3          33.33</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some variables are not numeric. They are ignored for calculating the `all_na` column.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   var items na cells na_percent na_max na_max_percent all_na</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 scale1_Q1:scale1_Q3     3 11    42      26.19      3            100      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 scale2_Q1:scale2_Q3     3 17    42      40.48      3            100      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 scale3_Q1:scale3_Q3     3 10    42      23.81      3            100      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4               Total     9 38   126      30.16      9            100      3</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
