@@ -136,11 +136,13 @@
 </h2>
 <p>You can install the development version (the only version currently available) of the <code>rempsyc</code> package from the r-universe:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rempsyc"</span>, repos <span class="op">=</span> <span class="st">"https://rempsyc.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rempsyc"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  rempsyc <span class="op">=</span> <span class="st">"https://rempsyc.r-universe.dev"</span>,</span>
+<span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Or from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># If devtools isn't already installed, install it with install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rempsyc/rempsyc"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># If package `remotes` isn't already installed, install it with `install.packages("remotes")`</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rempsyc/rempsyc"</span><span class="op">)</span></span></code></pre></div>
 <p>You can load the package and open the help file, and click “Index” at the bottom. You will see all the available functions listed.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com/">rempsyc</a></span><span class="op">)</span></span>
@@ -226,12 +228,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1513600  5.7058713</span></span>
-<span><span class="co">#&gt; 2  0.6590285  2.2612367</span></span>
-<span><span class="co">#&gt; 3  1.0303149  3.8536137</span></span>
-<span><span class="co">#&gt; 4 -5.1944379 -2.4871820</span></span>
-<span><span class="co">#&gt; 5 -3.7938728 -1.4197249</span></span>
-<span><span class="co">#&gt; 6 -1.7772116 -0.4865449</span></span>
+<span><span class="co">#&gt; 1  2.0833808  5.9116332</span></span>
+<span><span class="co">#&gt; 2  0.6987661  2.4522292</span></span>
+<span><span class="co">#&gt; 3  1.0255904  3.8558097</span></span>
+<span><span class="co">#&gt; 4 -5.0985071 -2.4417507</span></span>
+<span><span class="co">#&gt; 5 -3.8551099 -1.5116339</span></span>
+<span><span class="co">#&gt; 6 -1.7634725 -0.4912883</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>

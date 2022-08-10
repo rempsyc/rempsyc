@@ -37,14 +37,16 @@ You can install the development version (the only version currently
 available) of the `rempsyc` package from the r-universe:
 
 ``` r
-install.packages("rempsyc", repos = "https://rempsyc.r-universe.dev")
+install.packages("rempsyc", repos = c(
+  rempsyc = "https://rempsyc.r-universe.dev",
+  CRAN = "https://cloud.r-project.org"))
 ```
 
 Or from GitHub:
 
 ``` r
-# If devtools isn't already installed, install it with install.packages("devtools")
-devtools::install_github("rempsyc/rempsyc")
+# If package `remotes` isn't already installed, install it with `install.packages("remotes")`
+remotes::install_github("rempsyc/rempsyc")
 ```
 
 You can load the package and open the help file, and click “Index” at
@@ -151,12 +153,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1513600  5.7058713
-#> 2  0.6590285  2.2612367
-#> 3  1.0303149  3.8536137
-#> 4 -5.1944379 -2.4871820
-#> 5 -3.7938728 -1.4197249
-#> 6 -1.7772116 -0.4865449
+#> 1  2.0833808  5.9116332
+#> 2  0.6987661  2.4522292
+#> 3  1.0255904  3.8558097
+#> 4 -5.0985071 -2.4417507
+#> 5 -3.8551099 -1.5116339
+#> 6 -1.7634725 -0.4912883
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)

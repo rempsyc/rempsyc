@@ -46,14 +46,16 @@ R package of convenience functions to make your workflow faster and easier. Easi
 You can install the development version (the only version currently available) of the `rempsyc` package from the r-universe:
 
 ``` r
-install.packages("rempsyc", repos = "https://rempsyc.r-universe.dev")
+install.packages("rempsyc", repos = c(
+  rempsyc = "https://rempsyc.r-universe.dev",
+  CRAN = "https://cloud.r-project.org"))
 ```
 
 Or from GitHub:
 
 ``` r
-# If devtools isn't already installed, install it with install.packages("devtools")
-devtools::install_github("rempsyc/rempsyc")
+# If package `remotes` isn't already installed, install it with `install.packages("remotes")`
+remotes::install_github("rempsyc/rempsyc")
 ```
 You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
 
