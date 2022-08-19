@@ -503,7 +503,7 @@ nice_table <- function(data,
       '"\u03C4"',
       '"\u03C1"',
       'as_i("r"), as_i(as_sub("rb"))',
-      '"\u03C7"'
+      '"\u03C7", as_sup("2")'
     )
   )
   for (i in seq(nrow(compose.table1))) {
