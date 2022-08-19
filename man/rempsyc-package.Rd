@@ -13,7 +13,7 @@ Convenience functions to make your workflow faster and easier. Easily customizab
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://rempsyc.remi-theriault.com/}
+  \item \url{https://rempsyc.remi-theriault.com}
   \item Report bugs at \url{https://github.com/rempsyc/rempsyc/issues}
 }
 

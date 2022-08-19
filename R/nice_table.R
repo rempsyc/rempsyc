@@ -483,7 +483,7 @@ nice_table <- function(data,
       "95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)",
       "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "B", "np2",
       "n2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2", "tau",
-      "rho", "rrb"
+      "rho", "rrb", "chi2"
     ),
     value = c(
       '"95% CI (", as_i("b"), ")"',
@@ -502,7 +502,8 @@ nice_table <- function(data,
       'as_i("M"), as_sub("1"), " - ", as_i("M"), as_sub("2")',
       '"\u03C4"',
       '"\u03C1"',
-      'as_i("r"), as_i(as_sub("rb"))'
+      'as_i("r"), as_i(as_sub("rb"))',
+      '"\u03C7"'
     )
   )
   for (i in seq(nrow(compose.table1))) {
@@ -548,7 +549,8 @@ nice_table <- function(data,
     colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
              select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
-                            ^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|^sr2$",
+                            ^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|
+                             ^sr2$",
                              ignore.case = FALSE
              )) %>% names()),
       big.mark = ",", digits = 2

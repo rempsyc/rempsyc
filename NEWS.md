@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.8
+* `nice_table`: Added `chi2` automatic formatting
+
 ## rempsyc 0.0.5.7
 * `nice_na`: integrated a feature request to include the number of rows that were all NAs.
 
