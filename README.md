@@ -13,7 +13,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
-[![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://paypal.me/rempsyc)
+[![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
 [![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/stargazers)
@@ -153,12 +153,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0833808  5.9116332
-#> 2  0.6987661  2.4522292
-#> 3  1.0255904  3.8558097
-#> 4 -5.0985071 -2.4417507
-#> 5 -3.8551099 -1.5116339
-#> 6 -1.7634725 -0.4912883
+#> 1  2.1369606  5.8345435
+#> 2  0.7100597  2.4483739
+#> 3  1.0752221  3.9199274
+#> 4 -5.0508760 -2.4580933
+#> 5 -3.7486573 -1.4268501
+#> 6 -1.7861931 -0.4759303
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -263,7 +263,7 @@ simple.slopes
 #> 5 0.54535707 0.002737218
 #> 6 0.61629796 0.001875579
 
-# Format simple slopes results1
+# Format simple slopes results
 nice_table(simple.slopes)
 ```
 
@@ -446,6 +446,8 @@ df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
+#> Warning in nice_na(df, scales = c("scale1", "scale2", "scale3")): Some variables
+#> are not numeric. They are ignored for calculating the `all_na` column.
 #>                   var items na cells na_percent na_max na_max_percent all_na
 #> 1 scale1_Q1:scale1_Q3     3  6    27      22.22      3            100      2
 #> 2 scale2_Q1:scale2_Q3     3  9    27      33.33      3            100      2
@@ -454,6 +456,8 @@ nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 # Or whole dataframe
 nice_na(df)
+#> Warning in nice_na(df): Some variables are not numeric. They are ignored for
+#> calculating the `all_na` column.
 #>                   var items na cells na_percent na_max na_max_percent all_na
 #> 1 scale1_Q1:scale3_Q3     9 23    81       28.4      9            100      2
 ```
