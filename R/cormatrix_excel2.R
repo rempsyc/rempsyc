@@ -49,11 +49,15 @@ if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
   cat("The package `openxlsx2` is required for this function\n",
       "Would you like to install it?")
   if (utils::menu(c("Yes", "No")) == 1) {
-    utils::install.packages('openxlsx2', repos = "https://janmarvin.r-universe.dev")
+    utils::install.packages('openxlsx2', repos = c(
+      janmarvin = "https://janmarvin.r-universe.dev",
+      CRAN = "https://cloud.r-project.org"))
   } else (stop(
     'The cormatrix_excel2 function relies on the `openxlsx2` package.
     You can install it manually with:
-    install.packages("openxlsx2", repos = "https://janmarvin.r-universe.dev")'))
+    install.packages("openxlsx2", repos = c(
+      janmarvin = "https://janmarvin.r-universe.dev",
+      CRAN = "https://cloud.r-project.org")'))
   }
 
 # create correlation matrix with p values

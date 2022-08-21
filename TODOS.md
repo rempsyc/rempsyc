@@ -1,5 +1,7 @@
 # Development objectives (to-do list)
 
+-   all `lm` functions
+    -   Add 95% confidence interval for sr2
 -   `winsorize_mad`
     -   Add documentation (or not given it has been integrated to the `easystats::datawizard` package)
 -   `scale_mad` (or not given it is already available from the `easystats::datawizard` package)
