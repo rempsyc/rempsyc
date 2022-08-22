@@ -71,6 +71,8 @@ slopes](#t-tests-planned-contrasts-regressions-moderations-simple-slopes)<a name
 [Testing
 assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
 
+[lavaanExtra](#lavaanextra)<a name = 'lavaanExtra'/>
+
 ## Nice APA tables
 
 ## `nice_table`
@@ -152,13 +154,13 @@ contrasts
 #> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1369606  5.8345435
-#> 2  0.7100597  2.4483739
-#> 3  1.0752221  3.9199274
-#> 4 -5.0508760 -2.4580933
-#> 5 -3.7486573 -1.4268501
-#> 6 -1.7861931 -0.4759303
+#>     CI_lower  CI_upper
+#> 1  2.1102510  5.883544
+#> 2  0.7066951  2.448052
+#> 3  1.0590041  3.920560
+#> 4 -4.9828810 -2.487858
+#> 5 -3.8515234 -1.512718
+#> 6 -1.8340615 -0.505554
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -595,6 +597,15 @@ nice_varplot(data = iris,
 <img src="man/figures/README-nice_varplot-1.png" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
+
+## `lavaanExtra`
+
+For an alternative, vector-based syntax to `lavaan` (a latent variable
+analysis/structural equation modeling package), as well as other
+convenience functions such as naming paths and defining indirect links
+automatically, see my other package, `lavaanExtra`.
+
+<https://lavaanExtra.remi-theriault.com/>
 
 ## Support me and this package
 

@@ -32,7 +32,7 @@ a total of 4 missing data points out of 100 were observed,
 with no participant missing more than a single data point”).}
 
 See: Parent, M. C. (2013). Handling item-level missing
-data: Simpler is just as good. The \emph{Counseling Psychologist},
+data: Simpler is just as good. \emph{The Counseling Psychologist},
 \emph{41}(4), 568-600. https://doi.org/10.1177\%2F0011000012445176
 }
 \examples{

@@ -73,6 +73,7 @@ section.2 <- "T-tests, planned contrasts, regressions, moderations, simple slope
 section.3 <- "Visualization"
 section.4 <- "Utility functions"
 section.5 <- "Testing assumptions"
+section.6 <- "lavaanExtra"
 
 cute_cat <- function(x, header.level = 1){ 
   cat(rep("#", header.level), " ", x, sep = "")
@@ -87,7 +88,7 @@ cute_TOC <- function(section) {
 }
 
 invisible(lapply(list(
-  section.1, section.2, section.3, section.4, section.5), 
+  section.1, section.2, section.3, section.4, section.5, section.6), 
   cute_TOC))
 
 ```
@@ -403,7 +404,7 @@ nice_var(data = iris,
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
-## `nice_varplot `
+## `nice_varplot`
 
 Attempt to visualize variance per group.
 
@@ -414,6 +415,12 @@ nice_varplot(data = iris,
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
+
+## `lavaanExtra`
+
+For an alternative, vector-based syntax to `lavaan` (a latent variable analysis/structural equation modeling package), as well as other convenience functions such as naming paths and defining indirect links automatically, see my other package, `lavaanExtra`.
+
+https://lavaanExtra.remi-theriault.com/
 
 ## Support me and this package
 
