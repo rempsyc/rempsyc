@@ -4,7 +4,11 @@
 \name{reexports}
 \alias{reexports}
 \alias{ggsave}
+\alias{waiver}
 \alias{save_as_docx}
+\alias{save_as_html}
+\alias{save_as_image}
+\alias{save_as_pptx}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,8 +16,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{flextable}{\code{\link[flextable]{save_as_docx}}}
+  \item{flextable}{\code{\link[flextable]{save_as_docx}}, \code{\link[flextable]{save_as_html}}, \code{\link[flextable]{save_as_image}}, \code{\link[flextable]{save_as_pptx}}}
 
-  \item{ggplot2}{\code{\link[ggplot2]{ggsave}}}
+  \item{ggplot2}{\code{\link[ggplot2]{ggsave}}, \code{\link[ggplot2]{waiver}}}
 }}
 
