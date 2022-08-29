@@ -1,3 +1,6 @@
+## rempsyc 0.0.5.9
+* `cormatrix_excel2`: Added a third (sixth) colour for one star significances (* = p < .05), and add an argument for printing the correlation matrix to the console too (or not), `print.mat`.
+
 ## rempsyc 0.0.5.8
 * `nice_table`: Added `chi2` automatic formatting (+ `chi2.df` formatting)
 

@@ -20,6 +20,8 @@
 #' @param overwrite Whether to allow overwriting previous file.
 #' @param p_adjust Default p-value adjustment method (default is "none",
 #' although `correlation::correlation`'s default is "holm")
+#' @param print.mat Logical, whether to also print the correlation matrix
+#'                  to console.
 #' @param ... Parameters to be passed to the `correlation` package
 #' (see `?correlation::correlation`)
 #'
@@ -40,6 +42,7 @@ cormatrix_excel2 <- function(data,
                              filename = "cormatrix",
                              overwrite = TRUE,
                              p_adjust = "none",
+                             print.mat = TRUE,
                              ...) {
   rlang::check_installed("correlation", reason = "for this function.")
   # rlang::check_installed("openxlsx2", reason = "for this function.")
@@ -65,20 +68,23 @@ cm <- data %>%
   correlation::correlation(p_adjust = p_adjust, ...) %>%
   summary(redundant = TRUE)
 all.columns <- 2:(ncol(cm))
-print(cm)
+if (isTRUE(print.mat)) {
+  print(cm)
+}
 pf <- attr(cm, "p")
 
 # Define colours
 style_gray <- c(rgb = "C1CDCD")
 style_black <- c(rgb = "000000")
-style_red <- c(rgb = "F65534")
-style_orange <- c(rgb = "FFA500")
 style_pink <- c(rgb = "FBCAC0")
+style_peach <- c(rgb = "F79681")
+style_red <- c(rgb = "F65534")
+style_lightblue <- c(rgb = "97FFFF")
+style_midblue <- c(rgb = "0AF3FF")
+style_darkblue <- c(rgb = "00BFFF")
 style_green1 <- c(rgb = "698B22")
 style_green2 <- c(rgb = "9ACD32")
 style_green3 <- c(rgb = "B3EE3A")
-style_lightblue <- c(rgb = "97FFFF")
-style_darkblue <- c(rgb = "00BFFF")
 
 # Colours
 gray_style <- openxlsx2::create_dxfs_style(bgFill = style_gray,
@@ -104,52 +110,61 @@ no_star    <- openxlsx2::create_dxfs_style(numFmt = "#.#0 _*_*_*",
                                              bgFill = "")
 
 # one star
-one_star <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
-                                             font_color = style_black,
-                                             bgFill = "")
 one_star_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                               font_color = style_black,
                                               bgFill = style_pink)
+one_star_peach <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
+                                               font_color = style_black,
+                                               bgFill = style_peach)
 one_star_red <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                              font_color = style_black,
                                              bgFill = style_red)
 one_star_lightblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                                    font_color = style_black,
                                                    bgFill = style_lightblue)
+one_star_midblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
+                                                 font_color = style_black,
+                                                 bgFill = style_midblue)
 one_star_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*_*_*",
                                                   font_color = style_black,
                                                   bgFill = style_darkblue)
 
 # two stars
-two_stars <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
-                                          font_color = style_black,
-                                          bgFill = "")
 two_stars_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                                font_color = style_black,
                                                bgFill = style_pink)
+two_stars_peach <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
+                                               font_color = style_black,
+                                               bgFill = style_peach)
 two_stars_red <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                               font_color = style_black,
                                               bgFill = style_red)
 two_stars_lightblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                                     font_color = style_black,
                                                     bgFill = style_lightblue)
+two_stars_midblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
+                                                  font_color = style_black,
+                                                  bgFill = style_midblue)
 two_stars_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*_*",
                                                    font_color = style_black,
                                                    bgFill = style_darkblue)
 
 # three stars
-three_stars <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
-                                            font_color = style_black,
-                                            bgFill = "")
 three_stars_pink <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                                  font_color = style_black,
                                                  bgFill = style_pink)
+three_stars_peach <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
+                                                 font_color = style_black,
+                                                 bgFill = style_peach)
 three_stars_red <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                                 font_color = style_black,
                                                 bgFill = style_red)
 three_stars_lightblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                                       font_color = style_black,
                                                       bgFill = style_lightblue)
+three_stars_midblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
+                                                    font_color = style_black,
+                                                    bgFill = style_midblue)
 three_stars_darkblue <- openxlsx2::create_dxfs_style(numFmt = "#.#0 \\*\\*\\*",
                                                      font_color = style_black,
                                                      bgFill = style_darkblue)
@@ -160,20 +175,23 @@ wb <- openxlsx2::wb_workbook()
 # assign all the required styles to the workbook
 wb$add_style(gray_style)
 wb$add_style(no_star)
-wb$add_style(one_star)
 wb$add_style(one_star_pink)
+wb$add_style(one_star_peach)
 wb$add_style(one_star_red)
 wb$add_style(one_star_lightblue)
+wb$add_style(one_star_midblue)
 wb$add_style(one_star_darkblue)
-wb$add_style(two_stars)
 wb$add_style(two_stars_pink)
+wb$add_style(two_stars_peach)
 wb$add_style(two_stars_red)
 wb$add_style(two_stars_lightblue)
+wb$add_style(two_stars_midblue)
 wb$add_style(two_stars_darkblue)
-wb$add_style(three_stars)
 wb$add_style(three_stars_pink)
+wb$add_style(three_stars_peach)
 wb$add_style(three_stars_red)
 wb$add_style(three_stars_lightblue)
+wb$add_style(three_stars_midblue)
 wb$add_style(three_stars_darkblue)
 wb$add_style(p_style)
 wb$add_style(p_style1)
@@ -192,31 +210,37 @@ wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.2, p_values!B2 < .05)",
+  rule = "AND(r_values!B2 <= .2, r_values!B2 > 0, p_values!B2 < .05)",
   style = "one_star_pink")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.4, p_values!B2 < .05)",
+  rule = "AND(r_values!B2 >= .2, p_values!B2 < .05)",
+  style = "one_star_peach")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 >= .4, p_values!B2 < .05)",
   style = "one_star_red")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 < 0.2, r_values!B2 > -0.2, p_values!B2 < .05)",
-  style = "one_star")
-wb$add_conditional_formatting(
-  "r_values",
-  cols = all.columns,
-  rows = all.columns,
-  rule = "AND(r_values!B2 <= -.02, p_values!B2 < .05)",
+  rule = "AND(r_values!B2 >= -.2, r_values!B2 < 0, p_values!B2 < .05)",
   style = "one_star_lightblue")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 <= -0.4, p_values!B2 < .05)",
+  rule = "AND(r_values!B2 <= -.2, p_values!B2 < .05)",
+  style = "one_star_midblue")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 <= -.4, p_values!B2 < .05)",
   style = "one_star_darkblue")
 
 # two stars
@@ -224,31 +248,37 @@ wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.2, p_values!B2 < .01)",
+  rule = "AND(r_values!B2 <= .2, r_values!B2 > 0, p_values!B2 < .01)",
   style = "two_stars_pink")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.4, p_values!B2 < .01)",
+  rule = "AND(r_values!B2 >= .2, p_values!B2 < .01)",
+  style = "two_stars_peach")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 >= .4, p_values!B2 < .01)",
   style = "two_stars_red")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 < 0.2, r_values!B2 > -0.2, p_values!B2 < .01)",
-  style = "two_stars")
-wb$add_conditional_formatting(
-  "r_values",
-  cols = all.columns,
-  rows = all.columns,
-  rule = "AND(r_values!B2 <= -.02, p_values!B2 < .01)",
+  rule = "AND(r_values!B2 >= -.02, r_values!B2 < 0, p_values!B2 < .01)",
   style = "two_stars_lightblue")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 <= -0.4, p_values!B2 < .01)",
+  rule = "AND(r_values!B2 <= -.2, p_values!B2 < .01)",
+  style = "two_stars_midblue")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 <= -.4, p_values!B2 < .01)",
   style = "two_stars_darkblue")
 
 # three stars
@@ -256,31 +286,37 @@ wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.2, p_values!B2 < .001)",
+  rule = "AND(r_values!B2 <= .2, r_values!B2 > 0, p_values!B2 < .001)",
   style = "three_stars_pink")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 >= 0.4, p_values!B2 < .001)",
+  rule = "AND(r_values!B2 >= .2, p_values!B2 < .001)",
+  style = "three_stars_peach")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 >= .4, p_values!B2 < .001)",
   style = "three_stars_red")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 < 0.2, r_values!B2 > -0.2, p_values!B2 < .001)",
-  style = "three_stars")
-wb$add_conditional_formatting(
-  "r_values",
-  cols = all.columns,
-  rows = all.columns,
-  rule = "AND(r_values!B2 <= -.02, p_values!B2 < .001)",
+  rule = "AND(r_values!B2 >= -.2, r_values!B2 < 0, p_values!B2 < .001)",
   style = "three_stars_lightblue")
 wb$add_conditional_formatting(
   "r_values",
   cols = all.columns,
   rows = all.columns,
-  rule = "AND(r_values!B2 <= -0.4, p_values!B2 < .001)",
+  rule = "AND(r_values!B2 <= -.2, p_values!B2 < .001)",
+  style = "three_stars_midblue")
+wb$add_conditional_formatting(
+  "r_values",
+  cols = all.columns,
+  rows = all.columns,
+  rule = "AND(r_values!B2 <= -.4, p_values!B2 < .001)",
   style = "three_stars_darkblue")
 
 # Other formatting

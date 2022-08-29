@@ -9,6 +9,7 @@ cormatrix_excel2(
   filename = "cormatrix",
   overwrite = TRUE,
   p_adjust = "none",
+  print.mat = TRUE,
   ...
 )
 }
@@ -22,6 +23,9 @@ but no need to specify extension).}
 
 \item{p_adjust}{Default p-value adjustment method (default is "none",
 although \code{correlation::correlation}'s default is "holm")}
+
+\item{print.mat}{Logical, whether to also print the correlation matrix
+to console.}
 
 \item{...}{Parameters to be passed to the \code{correlation} package
 (see \code{?correlation::correlation})}
