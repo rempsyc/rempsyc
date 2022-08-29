@@ -86,7 +86,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://remi-theriault.com" aria-label="Author">Author</a>
+  <a class="external-link nav-link" href="https://lavaanExtra.remi-theriault.com/" aria-label="lavaanExtra">lavaanExtra</a>
 </li>
 <li class="nav-item">
   <a class="external-link nav-link" href="https://twitter.com/rempsyc" aria-label="Twitter">
@@ -162,13 +162,13 @@ between-group design):</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
 <span><span class="co">## 1  1         a</span></span>
-<span><span class="co">## 2  2         c</span></span>
-<span><span class="co">## 3  3         b</span></span>
+<span><span class="co">## 2  2         b</span></span>
+<span><span class="co">## 3  3         c</span></span>
 <span><span class="co">## 4  4         a</span></span>
-<span><span class="co">## 5  5         c</span></span>
-<span><span class="co">## 6  6         b</span></span>
-<span><span class="co">## 7  7         c</span></span>
-<span><span class="co">## 8  8         b</span></span>
+<span><span class="co">## 5  5         b</span></span>
+<span><span class="co">## 6  6         c</span></span>
+<span><span class="co">## 7  7         b</span></span>
+<span><span class="co">## 8  8         c</span></span>
 <span><span class="co">## 9  9         a</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and
 names of conditions:</p>
@@ -179,13 +179,13 @@ names of conditions:</p>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
 <span><span class="co">## 1  1        PZ</span></span>
-<span><span class="co">## 2  2        ZL</span></span>
-<span><span class="co">## 3  3        BP</span></span>
-<span><span class="co">## 4  4        CX</span></span>
-<span><span class="co">## 5  5        ZL</span></span>
-<span><span class="co">## 6  6        CX</span></span>
-<span><span class="co">## 7  7        PZ</span></span>
-<span><span class="co">## 8  8        BP</span></span></code></pre>
+<span><span class="co">## 2  2        CX</span></span>
+<span><span class="co">## 3  3        ZL</span></span>
+<span><span class="co">## 4  4        BP</span></span>
+<span><span class="co">## 5  5        PZ</span></span>
+<span><span class="co">## 6  6        ZL</span></span>
+<span><span class="co">## 7  7        BP</span></span>
+<span><span class="co">## 8  8        CX</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your number of groups if using "between"!</span></span>
 <span><span class="co"># FYI: condition names stand for popular antidepressants:</span></span>
@@ -205,15 +205,15 @@ but with within-subject design specified</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1 c - a - b</span></span>
-<span><span class="co">## 2  2 b - c - a</span></span>
-<span><span class="co">## 3  3 a - b - c</span></span>
+<span><span class="co">## 1  1 b - c - a</span></span>
+<span><span class="co">## 2  2 c - a - b</span></span>
+<span><span class="co">## 3  3 b - c - a</span></span>
 <span><span class="co">## 4  4 b - c - a</span></span>
-<span><span class="co">## 5  5 a - b - c</span></span>
-<span><span class="co">## 6  6 a - b - c</span></span>
-<span><span class="co">## 7  7 c - a - b</span></span>
-<span><span class="co">## 8  8 a - c - b</span></span>
-<span><span class="co">## 9  9 b - c - a</span></span></code></pre>
+<span><span class="co">## 5  5 b - c - a</span></span>
+<span><span class="co">## 6  6 b - c - a</span></span>
+<span><span class="co">## 7  7 a - c - b</span></span>
+<span><span class="co">## 8  8 c - a - b</span></span>
+<span><span class="co">## 9  9 c - a - b</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and
 names of conditions:</p>
 <p>Note that you could call your conditions anything (like a, b, c,
@@ -224,12 +224,12 @@ etc.).</p>
 <span>               n <span class="op">=</span> <span class="fl">6</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id         Condition</span></span>
-<span><span class="co">## 1  1 ST - SV - AV - AT</span></span>
-<span><span class="co">## 2  2 AT - SV - ST - AV</span></span>
-<span><span class="co">## 3  3 AT - AV - ST - SV</span></span>
-<span><span class="co">## 4  4 SV - AV - AT - ST</span></span>
-<span><span class="co">## 5  5 ST - SV - AV - AT</span></span>
-<span><span class="co">## 6  6 SV - ST - AV - AT</span></span></code></pre>
+<span><span class="co">## 1  1 AV - AT - ST - SV</span></span>
+<span><span class="co">## 2  2 SV - ST - AV - AT</span></span>
+<span><span class="co">## 3  3 SV - AT - AV - ST</span></span>
+<span><span class="co">## 4  4 ST - SV - AT - AV</span></span>
+<span><span class="co">## 5  5 AT - AV - ST - SV</span></span>
+<span><span class="co">## 6  6 AV - SV - AT - ST</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># FYI: condition names stand for forms of multisensory stimulation:</span></span>
 <span><span class="co"># SV = Synchronous Visual, AV = Asynchronous Visual, </span></span>
@@ -251,12 +251,12 @@ argument:</p>
 <span>                                                         <span class="st">"Tester"</span>, <span class="st">"Notes"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id         Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span></span>
-<span><span class="co">## 1  1 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 2  2 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 3  3 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 4  4 SV - AV - AT - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 5  5 AV - AT - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 6  6 AV - SV - ST - AT        NA      NA      NA         NA     NA    NA</span></span></code></pre>
+<span><span class="co">## 1  1 ST - AT - SV - AV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 2  2 AV - SV - ST - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 3  3 SV - AV - AT - ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 4  4 SV - AT - AV - ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 5  5 ST - AV - SV - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 6  6 AV - SV - AT - ST        NA      NA      NA         NA     NA    NA</span></span></code></pre>
 <div class="section level3">
 <h3 id="save-data-frame-to-word">Save data frame to Word<a class="anchor" aria-label="anchor" href="#save-data-frame-to-word"></a>
 </h3>
