@@ -45,7 +45,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -224,12 +224,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1329870  5.9999223</span></span>
-<span><span class="co">#&gt; 2  0.7278994  2.5311325</span></span>
-<span><span class="co">#&gt; 3  1.0595148  4.0434193</span></span>
-<span><span class="co">#&gt; 4 -4.8998765 -2.4991751</span></span>
-<span><span class="co">#&gt; 5 -3.8681443 -1.4925231</span></span>
-<span><span class="co">#&gt; 6 -1.8285152 -0.5093649</span></span>
+<span><span class="co">#&gt; 1  2.1331717  5.5323281</span></span>
+<span><span class="co">#&gt; 2  0.7165226  2.4710445</span></span>
+<span><span class="co">#&gt; 3  1.0497070  3.8128256</span></span>
+<span><span class="co">#&gt; 4 -5.0656766 -2.5103544</span></span>
+<span><span class="co">#&gt; 5 -3.8457879 -1.4770012</span></span>
+<span><span class="co">#&gt; 6 -1.7914177 -0.4487781</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -425,25 +425,21 @@
 <h2 id="cormatrix_excel2">
 <code>cormatrix_excel2</code><a class="anchor" aria-label="anchor" href="#cormatrix_excel2"></a>
 </h2>
-<p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (no colour); 0.2-0.4: medium (pink/light blue); 0.4-1.0: large (red/dark blue)).</p>
+<p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (pink/light blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/cormatrix_excel2.html">cormatrix_excel2</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/cormatrix_excel2.html">cormatrix_excel2</a></span><span class="op">(</span><span class="va">infert</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Parameter |      mpg |      cyl |     disp |       hp |     drat |       wt |     qsec |       vs |       am |     gear |     carb</span></span>
-<span><span class="co">#&gt; ----------------------------------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; mpg       |  1.00*** | -0.85*** | -0.85*** | -0.78*** |  0.68*** | -0.87*** |    0.42* |  0.66*** |  0.60*** |   0.48** |  -0.55**</span></span>
-<span><span class="co">#&gt; cyl       | -0.85*** |  1.00*** |  0.90*** |  0.83*** | -0.70*** |  0.78*** | -0.59*** | -0.81*** |  -0.52** |  -0.49** |   0.53**</span></span>
-<span><span class="co">#&gt; disp      | -0.85*** |  0.90*** |  1.00*** |  0.79*** | -0.71*** |  0.89*** |   -0.43* | -0.71*** | -0.59*** | -0.56*** |    0.39*</span></span>
-<span><span class="co">#&gt; hp        | -0.78*** |  0.83*** |  0.79*** |  1.00*** |  -0.45** |  0.66*** | -0.71*** | -0.72*** |    -0.24 |    -0.13 |  0.75***</span></span>
-<span><span class="co">#&gt; drat      |  0.68*** | -0.70*** | -0.71*** |  -0.45** |  1.00*** | -0.71*** |     0.09 |    0.44* |  0.71*** |  0.70*** |    -0.09</span></span>
-<span><span class="co">#&gt; wt        | -0.87*** |  0.78*** |  0.89*** |  0.66*** | -0.71*** |  1.00*** |    -0.17 | -0.55*** | -0.69*** | -0.58*** |    0.43*</span></span>
-<span><span class="co">#&gt; qsec      |    0.42* | -0.59*** |   -0.43* | -0.71*** |     0.09 |    -0.17 |  1.00*** |  0.74*** |    -0.23 |    -0.21 | -0.66***</span></span>
-<span><span class="co">#&gt; vs        |  0.66*** | -0.81*** | -0.71*** | -0.72*** |    0.44* | -0.55*** |  0.74*** |  1.00*** |     0.17 |     0.21 | -0.57***</span></span>
-<span><span class="co">#&gt; am        |  0.60*** |  -0.52** | -0.59*** |    -0.24 |  0.71*** | -0.69*** |    -0.23 |     0.17 |  1.00*** |  0.79*** |     0.06</span></span>
-<span><span class="co">#&gt; gear      |   0.48** |  -0.49** | -0.56*** |    -0.13 |  0.70*** | -0.58*** |    -0.21 |     0.21 |  0.79*** |  1.00*** |     0.27</span></span>
-<span><span class="co">#&gt; carb      |  -0.55** |   0.53** |    0.39* |  0.75*** |    -0.09 |    0.43* | -0.66*** | -0.57*** |     0.06 |     0.27 |  1.00***</span></span>
+<span><span class="co">#&gt; Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum</span></span>
+<span><span class="co">#&gt; ----------------------------------------------------------------------------------------------------</span></span>
+<span><span class="co">#&gt; age            |  1.00*** |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**</span></span>
+<span><span class="co">#&gt; parity         |     0.08 |  1.00*** |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12</span></span>
+<span><span class="co">#&gt; induced        |    -0.10 |  0.45*** |  1.00*** |     0.02 |    -0.27*** |    -0.10 |          0.16*</span></span>
+<span><span class="co">#&gt; case           | 3.53e-03 | 8.91e-03 |     0.02 |  1.00*** |     0.36*** | 3.83e-03 |       4.86e-03</span></span>
+<span><span class="co">#&gt; spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |     1.00*** |     0.06 |        0.21***</span></span>
+<span><span class="co">#&gt; stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |  1.00*** |        0.75***</span></span>
+<span><span class="co">#&gt; pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |        1.00***</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; p-value adjustment method: none</span></span>
 <span><span class="co">#&gt; </span></span>
