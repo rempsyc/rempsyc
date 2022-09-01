@@ -18,8 +18,9 @@
 #' from the Shapiro-Wilk test on the plot.
 #' @param title The desired title of the plot. Can be put to `NULL` to remove.
 #' @param histogram Logical, whether to add an histogram
-#' on top of the density plot.
-#'
+#' @param breaks.auto If histogram = TRUE, then option to set bins/breaks automatically,
+#'                    mimicking the default behaviour of base R `hist()`. Defaults to `TRUE`.
+#' @param bins If histogram = TRUE, then option to change the default bin (30).
 #' @keywords density, normality
 #'
 #' @examples
@@ -77,7 +78,9 @@ nice_density <- function(data,
                          grid = TRUE,
                          shapiro = FALSE,
                          title = variable,
-                         histogram = FALSE) {
+                         histogram = FALSE,
+                         breaks.auto = TRUE,
+                         bins = 30) {
   if (missing(group)) {
     group <- "All"
     data[[group]] <- group
@@ -116,12 +119,22 @@ nice_density <- function(data,
         sign = TRUE, suffix = " (Shapiro-Wilk)"
       )))
   }
+
+  if (isTRUE(breaks.auto && isTRUE(histogram))) {
+    # Calculating the Sturges bins
+    breaks <- pretty(range(data[[variable]]),
+                     n = grDevices::nclass.Sturges(data[[variable]]),
+                     min.n = 1)
+  } else {
+    breaks <- NULL
+  }
+
   # Make plot
   ggplot(data, aes_string(x = variable, fill = group)) +
     {
-      if (histogram == TRUE) {
+      if (isTRUE(histogram)) {
         geom_histogram(aes(y = ..density.., alpha = 0.5),
-          colour = "black"
+          colour = "black", breaks = breaks, bins = bins
         )
       }
     } +

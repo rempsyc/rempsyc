@@ -15,7 +15,9 @@ nice_density(
   grid = TRUE,
   shapiro = FALSE,
   title = variable,
-  histogram = FALSE
+  histogram = FALSE,
+  breaks.auto = TRUE,
+  bins = 30
 )
 }
 \arguments{
@@ -44,8 +46,12 @@ from the Shapiro-Wilk test on the plot.}
 
 \item{title}{The desired title of the plot. Can be put to \code{NULL} to remove.}
 
-\item{histogram}{Logical, whether to add an histogram
-on top of the density plot.}
+\item{histogram}{Logical, whether to add an histogram}
+
+\item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks automatically,
+mimicking the default behaviour of base R \code{hist()}. Defaults to \code{TRUE}.}
+
+\item{bins}{If histogram = TRUE, then option to change the default bin (30).}
 }
 \description{
 Make nice density plots easily.

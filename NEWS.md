@@ -1,3 +1,6 @@
+## rempsyc 0.0.6.0
+* `nice_density`: Now uses the Sturges method to define the optimal number of bins automatically. Also adds two new arguments: `breaks.auto = TRUE`, if one does not want to use the Sturges method, and `bins = 30`, to define bins manually, if needed.
+
 ## rempsyc 0.0.5.9
 * `cormatrix_excel2`: Added a third (sixth) colour for one star significances (* = p < .05), and add an argument for printing the correlation matrix to the console too (or not), `print.mat`.
 
