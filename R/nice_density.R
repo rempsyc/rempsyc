@@ -1,6 +1,6 @@
 #' @title Easy density plots
 #'
-#' @description Make nice density plots easily.
+#' @description Make nice density plots easily. Internally, uses `na.rm = TRUE`.
 #'
 #' @param data The data frame
 #' @param variable The dependent variable to be plotted.
@@ -95,17 +95,17 @@ nice_density <- function(data,
   dat_norm <- data %>%
     group_by(.data[[group]]) %>%
     do(summarize(.,
-      x = seq(min(.[[variable]]),
-        max(.[[variable]]),
+      x = seq(min(.[[variable]], na.rm = TRUE),
+        max(.[[variable]], na.rm = TRUE),
         length.out = 100
       ),
       y = dnorm(
-        seq(min(.[[variable]]),
-          max(.[[variable]]),
+        seq(min(.[[variable]], na.rm = TRUE),
+          max(.[[variable]], na.rm = TRUE),
           length.out = 100
         ),
-        mean(.[[variable]]),
-        sd(.[[variable]])
+        mean(.[[variable]], na.rm = TRUE),
+        sd(.[[variable]], na.rm = TRUE)
       )
     ))
   # Make data for the Shapiro-Wilk tests

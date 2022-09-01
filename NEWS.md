@@ -1,3 +1,6 @@
+## rempsyc 0.0.6.2
+* `nice_density`: Now uses `na.rm = TRUE` internally to support data with missing values.
+
 ## rempsyc 0.0.6.1
 * `find_mad`: New argument `mad.scores` to return robust zscore (MAD) scores instead of raw scores (now default to TRUE).
 

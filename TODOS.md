@@ -18,8 +18,6 @@
     -   Support second moderator
 -   `nice_slopes`
     -   Add support for multiple moderators (like for `nice_mod`)
--   `nice_normality`/`nice_qq`
-    -   Add support for NA missing values
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot

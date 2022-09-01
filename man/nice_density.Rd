@@ -54,7 +54,7 @@ mimicking the default behaviour of base R \code{hist()}. Defaults to \code{TRUE}
 \item{bins}{If histogram = TRUE, then option to change the default bin (30).}
 }
 \description{
-Make nice density plots easily.
+Make nice density plots easily. Internally, uses \code{na.rm = TRUE}.
 }
 \examples{
 # Make the basic plot
