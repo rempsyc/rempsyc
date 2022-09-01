@@ -1,3 +1,6 @@
+## rempsyc 0.0.6.1
+* `find_mad`: New argument `mad.scores` to return robust zscore (MAD) scores instead of raw scores (now default to TRUE).
+
 ## rempsyc 0.0.6.0
 * `nice_density`: Now uses the Sturges method to define the optimal number of bins automatically. Also adds two new arguments: `breaks.auto = TRUE`, if one does not want to use the Sturges method, and `bins = 30`, to define bins manually, if needed.
 

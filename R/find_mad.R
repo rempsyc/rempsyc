@@ -14,6 +14,8 @@
 #' as such.
 #' @param criteria How many MAD to use as threshold (similar to standard
 #' deviations)
+#' @param mad.scores Logical, whether to output robust z (MAD) scores (default)
+#'                   or raw scores.
 #' @keywords standardization, normalization, median, MAD, mean, outliers
 #' @author Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
 #' @export
@@ -38,16 +40,19 @@
 find_mad <- function(data,
                      col.list,
                      ID = NULL,
-                     criteria = 3) {
+                     criteria = 3,
+                     mad.scores = TRUE) {
   if (missing(ID)) {
     data$ID <- rownames(data)
   }
   row.names(data) <- NULL
-  mad0 <- find_mad0(data, col.list, ID = ID, criteria = criteria)
+  mad0 <- find_mad0(data, col.list, ID = ID, criteria = criteria, mad.scores = mad.scores)
   mad0.list <- lapply(col.list, function(x) {
-    find_mad0(
-      data, x,
-      ID = ID, criteria = criteria
+    find_mad0(data,
+              x,
+              ID = ID,
+              criteria = criteria,
+              mad.scores = mad.scores
     )
   })
   names(mad0.list) <- col.list
@@ -91,18 +96,26 @@ find_mad <- function(data,
   }
 }
 
-find_mad0 <- function(data, col.list, ID = ID, criteria = 3) {
+find_mad0 <- function(data, col.list, ID = ID, criteria = 3, mad.scores) {
   if (criteria <= 0) {
     stop("Criteria needs to be greater than one.")
   }
-  data %>%
-    select(-ends_with("xxxmad")) %>%
+  data <- data %>%
+    select(-ends_with("_mad")) %>%
     mutate(
       Row = row(.[1]),
       across(all_of(col.list), rempsyc::scale_mad,
-        .names = "{col}xxxmad"
+        .names = "{col}_mad"
       )
     ) %>%
-    filter(if_any(ends_with("xxxmad"), ~ . > criteria | . < -criteria)) %>%
-    select(Row, all_of(ID), all_of(col.list))
+    filter(if_any(ends_with("_mad"), ~ . > criteria | . < -criteria))
+
+  if (isTRUE(mad.scores)) {
+    data <- data %>%
+      select(Row, all_of(ID), ends_with("_mad"))
+  } else {
+    data <- data %>%
+      select(Row, all_of(ID), all_of(col.list))
+  }
+  data
 }

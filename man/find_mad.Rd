@@ -4,7 +4,7 @@
 \alias{find_mad}
 \title{Identify outliers based on 3 MAD}
 \usage{
-find_mad(data, col.list, ID = NULL, criteria = 3)
+find_mad(data, col.list, ID = NULL, criteria = 3, mad.scores = TRUE)
 }
 \arguments{
 \item{data}{The data frame.}
@@ -16,6 +16,9 @@ as such.}
 
 \item{criteria}{How many MAD to use as threshold (similar to standard
 deviations)}
+
+\item{mad.scores}{Logical, whether to output robust z (MAD) scores (default)
+or raw scores.}
 }
 \description{
 Identify outliers based on 3 median absolute deviations.
