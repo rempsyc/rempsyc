@@ -83,7 +83,7 @@ automatic formatting features.
 # Make the basic table
 my_table <- nice_table(mtcars[1:3, ],
   title = "Motor Trend Car Road Tests",
-  footnote = "Note: 1974 Motor Trend US magazine."
+  footnote = "1974 Motor Trend US magazine."
 )
 my_table
 
