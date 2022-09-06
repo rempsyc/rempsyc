@@ -122,7 +122,7 @@
 #' set_formatter colformat_double compose bold bg
 #' as_paragraph as_i as_sub as_sup set_caption
 #' add_footer_lines line_spacing valign separate_header
-#' border add_header_lines autofit
+#' border add_header_lines autofit fp_border_default hline
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -361,7 +361,6 @@ nice_table <- function(data,
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
-  invisible.borders <- list("width" = 0, color = "black", style = "solid")
 
   #   __________________________________
   #   Flextable                     ####
@@ -389,8 +388,6 @@ nice_table <- function(data,
       set_table_properties(layout = "autofit", width = width) -> table
    } else {
     table %>%
-     #autofit() -> table
-     #set_table_properties(layout = "fixed") -> table
      set_table_properties(layout = "autofit") -> table
   }
 
@@ -587,16 +584,23 @@ nice_table <- function(data,
   #   Final touch up (title)                                                  ####
 
   if (!missing(title)) {
+    invisible.borders <- fp_border_default("width" = 0)
     italic.lvl <- ifelse(length(title) == 1, 1, 2)
     bold.decision <- ifelse(length(title) == 1, FALSE, TRUE)
 
     table <- table %>%
       add_header_lines(values = rev(title)) %>%
       align(part = "header", i = 1:length(title), align = "left") %>%
-      border(part = "header", i = 1:length(title),
-             border = invisible.borders) %>%
+      hline(part = "header", i = seq_len(length(title) - 1),
+            border = invisible.borders) %>%
+      hline(part = "header", i = length(title),
+            border = nice.borders) %>%
+      hline_top(border = invisible.borders, part = "header") %>%
+      # border(part = "header", i = 1:length(title),
+      #        border = invisible.borders) %>%
       italic(part = "header", i = italic.lvl) %>%
       bold(., part = "header", i = 1, bold = bold.decision)
+
   }
 
   table

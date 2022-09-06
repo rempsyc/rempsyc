@@ -19,7 +19,8 @@
 #' @param title The desired title of the plot. Can be put to `NULL` to remove.
 #' @param histogram Logical, whether to add an histogram
 #' @param breaks.auto If histogram = TRUE, then option to set bins/breaks automatically,
-#'                    mimicking the default behaviour of base R `hist()`. Defaults to `TRUE`.
+#'                    mimicking the default behaviour of base R `hist()` (the Sturges
+#'                    method). Defaults to `FALSE`.
 #' @param bins If histogram = TRUE, then option to change the default bin (30).
 #' @keywords density, normality
 #'
@@ -79,7 +80,7 @@ nice_density <- function(data,
                          shapiro = FALSE,
                          title = variable,
                          histogram = FALSE,
-                         breaks.auto = TRUE,
+                         breaks.auto = FALSE,
                          bins = 30) {
   if (missing(group)) {
     group <- "All"

@@ -1,3 +1,7 @@
+## rempsyc 0.0.6.3
+* `nice_density`: Switch back to not using the Sturges method per default.
+* `nice_table`: Internal change to stay compatible with new `flextable` version
+
 ## rempsyc 0.0.6.2
 * `nice_density`: Now uses `na.rm = TRUE` internally to support data with missing values.
 
