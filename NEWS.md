@@ -1,3 +1,6 @@
+## rempsyc 0.0.6.4
+* `nice_normality`: `breaks.auto` argument added to allow control of the density plot in this aspect.
+
 ## rempsyc 0.0.6.3
 * `nice_density`: Switch back to not using the Sturges method per default.
 * `nice_table`: Internal change to stay compatible with new `flextable` version
