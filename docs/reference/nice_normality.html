@@ -18,7 +18,7 @@ through a wrapper around the ggplot2 and qqplotr packages."><meta property="og:i
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,6 +110,7 @@ through a wrapper around the <code>ggplot2</code> and <code>qqplotr</code> packa
 <span>  shapiro <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  histogram <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  breaks.auto <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -155,6 +156,12 @@ the Shapiro-Wilk test on the plot.</p></dd>
 <dt>histogram</dt>
 <dd><p>Logical, whether to add an histogram
 on top of the density plot.</p></dd>
+
+
+<dt>breaks.auto</dt>
+<dd><p>If histogram = TRUE, then option to set bins/breaks automatically,
+mimicking the default behaviour of base R <code><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist()</a></code> (the Sturges
+method). Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt>...</dt>
