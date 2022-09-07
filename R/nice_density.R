@@ -123,7 +123,7 @@ nice_density <- function(data,
 
   if (isTRUE(breaks.auto && isTRUE(histogram))) {
     # Calculating the Sturges bins
-    breaks <- pretty(range(data[[variable]]),
+    breaks <- pretty(range(data[[variable]], na.rm = TRUE),
                      n = grDevices::nclass.Sturges(data[[variable]]),
                      min.n = 1)
   } else {
