@@ -1,13 +1,14 @@
 Package: rempsyc
 Title: Convenience Functions for Psychology
-Version: 0.0.6.5
+Version: 0.0.7
 Date: 2022-09-07
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))
 Description: Convenience functions to make your workflow faster and
-    easier. Easily customizable plots (via `ggplot2`), nice APA tables
-    exportable to Word (via `flextable`), easily run statistical tests or
+    easier. Easily customizable plots (via 'ggplot2'), nice APA tables
+    (following the style of the *American Psychological Association*)
+    exportable to Word (via 'flextable'), easily run statistical tests or
     check assumptions, and automatize various other tasks.
 License: GPL (>= 3) + file LICENSE
 URL: https://rempsyc.remi-theriault.com
@@ -24,34 +25,35 @@ Imports:
     ggrepel,
     ggsignif,
     lmtest,
+    methods,
     qqplotr,
-    rlang,
-    methods
+    rlang
 Suggests: 
-    see,
-    patchwork,
-    VennDiagram,
-    openxlsx,
     bootES,
-    emmeans,
-    testthat (>= 3.0.0),
-    knitr,
-    rmarkdown,
-    markdown,
-    performance (>= 0.9.1),
-    report (>= 0.5.1),
     broom,
+    correlation,
+    datawizard (>= 0.5.0),
+    emmeans,
     ftExtra,
     ggpubr,
     interactions,
-    psych,
-    correlation,
+    knitr,
+    markdown,
+    openxlsx,
     openxlsx2,
-    datawizard (>= 0.5.0),
+    patchwork,
+    performance (>= 0.9.1),
+    psych,
+    report (>= 0.5.1),
+    rmarkdown,
+    see,
+    testthat (>= 3.0.0),
+    VennDiagram
+VignetteBuilder: 
+    knitr
+Additional_repositories: https://janmarvin.r-universe.dev
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-VignetteBuilder: knitr
-Additional_repositories:  https://janmarvin.r-universe.dev

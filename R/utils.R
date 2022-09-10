@@ -11,3 +11,5 @@ theme_apa <-
     axis.line = element_line(colour = "black"),
     axis.ticks = element_line(colour = "black")
   )
+
+#' @noRd

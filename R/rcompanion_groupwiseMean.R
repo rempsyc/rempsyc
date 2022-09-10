@@ -70,6 +70,7 @@
 #'          see Rand Wilcox, Introduction to Robust Estimation and
 #'          Hypothesis Testing.
 #'
+#' @export
 #' @author Salvatore Mangiafico, \email{mangiafico@njaes.rutgers.edu}
 #' @references \url{http://rcompanion.org/handbook/C_03.html}
 #' @concept mean confidence interval bootstrap

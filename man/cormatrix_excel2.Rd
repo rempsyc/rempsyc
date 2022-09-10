@@ -56,7 +56,7 @@ cormatrix_excel2(airquality, method = "spearman")
 }
 \author{
 Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
-the original rempsyc::cormatrix_excel
+the original \code{rempsyc::cormatrix_excel}
 }
 \keyword{Excel}
 \keyword{correlation}

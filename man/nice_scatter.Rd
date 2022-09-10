@@ -130,7 +130,6 @@ ggsave("nicescatterplothere.pdf",
   width = 7, height = 7, unit = "in",
   dpi = 300, path = "/"
 ) # change for your own desired path
-}
 
 # Change x- and y- axis labels
 nice_scatter(
@@ -309,6 +308,7 @@ nice_scatter(
   group = "cyl",
   has.shape = TRUE
 )
+}
 
 }
 \seealso{

@@ -6,3 +6,5 @@ utils::packageVersion("rempsyc"),
 ") [Computer software]. https://rempsyc.remi-theriault.com "
   )
 }
+
+#' @noRd

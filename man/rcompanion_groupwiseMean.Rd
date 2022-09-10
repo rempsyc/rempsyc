@@ -89,8 +89,6 @@ the dependency is failing upon install of the current package.
 
 From the original documentation: "Calculates means and
 confidence intervals for groups."
-
-Author: Salvatore Mangiafico, mangiafico@njaes.rutgers.edu
 }
 \details{
 The input should include either \code{formula} and \code{data};
