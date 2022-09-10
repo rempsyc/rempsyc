@@ -8,7 +8,6 @@
 #' From the original documentation: "Calculates means and
 #' confidence intervals for groups."
 #'
-#' Author: Salvatore Mangiafico, mangiafico@njaes.rutgers.edu
 #' @param formula A formula indicating the measurement variable and
 #'                the grouping variables. e.g. y ~ x1 + x2.
 #' @param data The data frame to use.

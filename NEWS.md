@@ -207,7 +207,7 @@
 ## rempsyc 0.0.1.1
 * added new function: `nice_reverse()`
 
-## rempsyc 0.0.0.9000
+## rempsyc 0.0.0.9
 * integrated `rcompanion::groupwiseMean` internally with documentation
 * removed `lmSupport_modelEffectSizes` from exports to use as internal function only
 * removed `crayon` package dependency
