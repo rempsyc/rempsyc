@@ -36,5 +36,5 @@ cormatrix_excel(mtcars)
 
 }
 \keyword{Excel}
-\keyword{correlation,}
-\keyword{matrix,}
+\keyword{correlation}
+\keyword{matrix}

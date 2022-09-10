@@ -13,7 +13,7 @@
 #' @param x The vector to be winsorized based on the MAD.
 #' @param criteria How many MAD to use as threshold
 #' (similar to standard deviations)
-#' @keywords standardization, normalization, median, MAD, mean, outliers
+#' @keywords standardization normalization median MAD mean outliers
 #' @author Hugues Leduc, Charles-Étienne Lavoie
 #' @export
 #' @examples

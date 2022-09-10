@@ -37,8 +37,8 @@ lmSupport_modelEffectSizes(m)
 John J. Curtin, \email{jjcurtin@wisc.edu}
 }
 \keyword{effect}
-\keyword{interaction,}
+\keyword{interaction}
 \keyword{internal}
-\keyword{moderation,}
-\keyword{regression,}
-\keyword{size,}
+\keyword{moderation}
+\keyword{regression}
+\keyword{size}

@@ -12,15 +12,15 @@
 #' because only the cases in the two groups are selected; and b)
 #' in the planned contrast the error term is smaller than it is
 #' with the standard *t* test because it is based on all the cases
-#' ([source](http://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf)).
+#' ([source](https://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf)).
 #'
 #' @param response The dependent variable.
 #' @param group The group for the comparison.
 #' @param covariates The desired covariates in the model.
 #' @param data The data frame.
 #' @param bootstraps The number of bootstraps to use for the confidence interval
-#' @keywords planned contrasts, pairwise comparisons
-#' group differences, internal
+#' @keywords planned contrasts pairwise comparisons
+#' group differences internal
 #' @export
 #' @examples
 #'
@@ -28,9 +28,11 @@
 #' nice_contrasts(
 #'   data = mtcars,
 #'   response = "mpg",
-#'   group = "cyl"
+#'   group = "cyl",
+#'   bootstraps = 200
 #' )
 #'
+#' \dontrun{
 #' nice_contrasts(
 #'   data = mtcars,
 #'   response = "disp",
@@ -51,6 +53,7 @@
 #'   group = "cyl",
 #'   covariates = c("disp", "hp")
 #' )
+#' }
 #'
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}

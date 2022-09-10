@@ -1,3 +1,6 @@
+## rempsyc 0.0.6.6
+* Preparing for CRAN submission.
+
 ## rempsyc 0.0.6.5
 * `nice_normality`: `breaks.auto` argument now uses `na.rm = TRUE` to support missing values
 

@@ -16,7 +16,7 @@
 #' deviations)
 #' @param mad.scores Logical, whether to output robust z (MAD) scores (default)
 #'                   or raw scores.
-#' @keywords standardization, normalization, median, MAD, mean, outliers
+#' @keywords standardization normalization median MAD mean outliers
 #' @author Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
 #' @export
 #' @examples

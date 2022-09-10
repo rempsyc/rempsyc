@@ -70,5 +70,5 @@ Other functions useful in assumption testing:
 }
 \keyword{QQ}
 \keyword{distribution}
-\keyword{normality,}
-\keyword{plots,}
+\keyword{normality}
+\keyword{plots}

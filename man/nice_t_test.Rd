@@ -98,4 +98,4 @@ Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 }
 \keyword{differences}
 \keyword{group}
-\keyword{t-test,}
+\keyword{t-test}

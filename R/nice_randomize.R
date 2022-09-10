@@ -10,7 +10,7 @@
 #' @param condition.names The names of the randomized conditions.
 #' @param col.names The desired additional column names for a runsheet.
 #'
-#' @keywords randomization, conditions, random allocation, experimental design
+#' @keywords randomization conditions random allocation experimental design
 #' @export
 #' @examples
 #' # Specify design, number of conditions, number of

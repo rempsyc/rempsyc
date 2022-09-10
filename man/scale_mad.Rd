@@ -25,9 +25,9 @@ scale_mad(mtcars$mpg)
 \author{
 Hugues Leduc, Charles-Étienne Lavoie
 }
-\keyword{MAD,}
-\keyword{mean,}
-\keyword{median,}
-\keyword{normalization,}
+\keyword{MAD}
+\keyword{mean}
+\keyword{median}
+\keyword{normalization}
 \keyword{outliers}
-\keyword{standardization,}
+\keyword{standardization}

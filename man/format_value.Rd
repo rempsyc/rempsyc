@@ -51,6 +51,6 @@ format_r(0.41231)
 format_r(0.041231)
 }
 \keyword{correlation}
-\keyword{formatting,}
-\keyword{p-value,}
-\keyword{r-value,}
+\keyword{formatting}
+\keyword{p-value}
+\keyword{r-value}

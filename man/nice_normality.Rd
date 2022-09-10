@@ -89,7 +89,7 @@ Other functions useful in assumption testing:
 \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 }
 \keyword{QQ}
-\keyword{density,}
+\keyword{density}
 \keyword{distribution}
-\keyword{normality,}
-\keyword{plots,}
+\keyword{normality}
+\keyword{plots}

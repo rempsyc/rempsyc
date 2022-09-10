@@ -21,7 +21,7 @@
 #' @param ... Further arguments to be passed to the `lm`
 #' function for the models.
 #'
-#' @keywords simple slopes, moderation, interaction, regression
+#' @keywords simple slopes moderation interaction regression
 #' @export
 #' @examples
 #' # Make the basic table

@@ -24,7 +24,7 @@
 #' @param data The data frame.
 #' @param vars Variable (or lists of variables) to check for NAs.
 #' @param scales The scale names to check for NAs (single character string).
-#' @keywords missing values, NA, guidelines
+#' @keywords missing values NA guidelines
 #' @export
 #' @examples
 #' # Use whole data frame

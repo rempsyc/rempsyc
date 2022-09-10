@@ -16,7 +16,7 @@
 #' @param ... To specify precision level, if necessary, when using the
 #' generic `format_value()`. Simply add the `precision` argument.
 #'
-#' @keywords formatting, p-value, r-value, correlation
+#' @keywords formatting p-value r-value correlation
 #' @export
 #' @examples
 #' format_value(0.00041231, "p")

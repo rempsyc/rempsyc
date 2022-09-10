@@ -6,7 +6,7 @@
 #' @param model The `lm` object to be passed to the function.
 #' @param interpretation Whether to display the interpretation helper or not.
 #'
-#' @keywords assumptions, linear regression, statistical, violations
+#' @keywords assumptions linear regression statistical violations
 #' @export
 #' @examples
 #' # Create a regression model (using data available in R by default)

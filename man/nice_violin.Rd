@@ -121,7 +121,8 @@ confidence intervals.
 nice_violin(
   data = ToothGrowth,
   group = "dose",
-  response = "len"
+  response = "len",
+  bootstraps = 200,
 )
 
 \dontrun{
@@ -130,7 +131,7 @@ ggsave("niceviolinplothere.pdf",
   width = 7, height = 7, unit = "in",
   dpi = 300, path = "/"
 ) # change for your own desired path
-}
+
 
 # Change x- and y- axes labels
 nice_violin(
@@ -238,6 +239,7 @@ nice_violin(
   comp2 = 2,
   has.d = TRUE
 )
+}
 
 }
 \seealso{

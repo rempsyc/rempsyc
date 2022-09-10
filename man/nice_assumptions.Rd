@@ -37,8 +37,8 @@ Other functions useful in assumption testing:
 \code{\link{nice_var}}. Tutorial:
 \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 }
-\keyword{assumptions,}
+\keyword{assumptions}
 \keyword{linear}
-\keyword{regression,}
-\keyword{statistical,}
+\keyword{regression}
+\keyword{statistical}
 \keyword{violations}

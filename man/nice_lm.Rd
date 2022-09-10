@@ -43,6 +43,6 @@ Checking simple slopes after testing for moderation:
 \code{\link{nice_slopes}}. Tutorial:
 \url{https://rempsyc.remi-theriault.com/articles/moderation}
 }
-\keyword{interaction,}
-\keyword{moderation,}
+\keyword{interaction}
+\keyword{moderation}
 \keyword{regression}

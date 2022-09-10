@@ -148,9 +148,9 @@ rcompanion_groupwiseMean(
 Salvatore Mangiafico, \email{mangiafico@njaes.rutgers.edu}
 }
 \concept{mean confidence interval bootstrap}
-\keyword{bootstrapping,}
+\keyword{bootstrapping}
 \keyword{confidence}
 \keyword{group}
 \keyword{internal}
-\keyword{intervals,}
-\keyword{means,}
+\keyword{intervals}
+\keyword{means}

@@ -31,7 +31,7 @@ reasons: a) the sample size is smaller with the \emph{t} test,
 because only the cases in the two groups are selected; and b)
 in the planned contrast the error term is smaller than it is
 with the standard \emph{t} test because it is based on all the cases
-(\href{http://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
+(\href{https://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
 }
 \examples{
 
@@ -39,9 +39,11 @@ with the standard \emph{t} test because it is based on all the cases
 nice_contrasts(
   data = mtcars,
   response = "mpg",
-  group = "cyl"
+  group = "cyl",
+  bootstraps = 200
 )
 
+\dontrun{
 nice_contrasts(
   data = mtcars,
   response = "disp",
@@ -62,14 +64,15 @@ nice_contrasts(
   group = "cyl",
   covariates = c("disp", "hp")
 )
+}
 
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 }
 \keyword{comparisons}
-\keyword{contrasts,}
-\keyword{differences,}
+\keyword{contrasts}
+\keyword{differences}
 \keyword{group}
 \keyword{internal}
 \keyword{pairwise}

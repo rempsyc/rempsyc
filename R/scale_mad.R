@@ -10,7 +10,7 @@
 #' https://doi.org/10.1016/j.jesp.2013.03.013
 #'
 #' @param x The vector to be scaled.
-#' @keywords standardization, normalization, median, MAD, mean, outliers
+#' @keywords standardization normalization median MAD mean outliers
 #' @author Hugues Leduc, Charles-Étienne Lavoie
 #' @export
 #' @examples

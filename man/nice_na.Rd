@@ -62,7 +62,7 @@ df <- data.frame(
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 }
-\keyword{NA,}
+\keyword{NA}
 \keyword{guidelines}
 \keyword{missing}
-\keyword{values,}
+\keyword{values}

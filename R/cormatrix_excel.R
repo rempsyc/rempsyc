@@ -12,7 +12,7 @@
 #' @param overwrite Whether to allow overwriting previous file.
 #' @param use How to handle NA (see `?cor` for options).
 #'
-#' @keywords correlation, matrix, Excel
+#' @keywords correlation matrix Excel
 #' @export
 #' @examples
 #' \dontrun{

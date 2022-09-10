@@ -48,9 +48,9 @@ find_mad(
 \author{
 Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
 }
-\keyword{MAD,}
-\keyword{mean,}
-\keyword{median,}
-\keyword{normalization,}
+\keyword{MAD}
+\keyword{mean}
+\keyword{median}
+\keyword{normalization}
 \keyword{outliers}
-\keyword{standardization,}
+\keyword{standardization}

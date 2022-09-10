@@ -16,7 +16,7 @@
 #' from the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.
 #'
-#' @keywords QQ plots, normality, distribution
+#' @keywords QQ plots normality distribution
 #' @export
 #' @examples
 #' # Make the basic plot

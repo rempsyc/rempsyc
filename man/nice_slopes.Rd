@@ -90,8 +90,8 @@ Checking for moderation before checking simple slopes:
 \code{\link{nice_lm_slopes}}. Tutorial:
 \url{https://rempsyc.remi-theriault.com/articles/moderation}
 }
-\keyword{interaction,}
-\keyword{moderation,}
+\keyword{interaction}
+\keyword{moderation}
 \keyword{regression}
 \keyword{simple}
-\keyword{slopes,}
+\keyword{slopes}

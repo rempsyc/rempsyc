@@ -39,9 +39,9 @@ overlap_circle(3.12, categories = c("Humans", "Animals"))
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/circles}
 }
 \keyword{Venn}
-\keyword{diagrams,}
-\keyword{merging,}
-\keyword{overlap,}
+\keyword{diagrams}
+\keyword{merging}
+\keyword{overlap}
 \keyword{psychology}
 \keyword{self-other}
 \keyword{social}

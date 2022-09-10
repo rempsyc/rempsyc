@@ -23,7 +23,7 @@
 #' change from two-tail to one-tail, or to do a paired-sample
 #' t-test instead of independent samples).
 #'
-#' @keywords t-test, group differences
+#' @keywords t-test group differences
 #' @export
 #' @examples
 #' # Make the basic table

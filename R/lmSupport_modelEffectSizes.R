@@ -17,7 +17,7 @@
 #' @param Digits Number of digits for printing effect sizes
 #'
 #' @author John J. Curtin, \email{jjcurtin@wisc.edu}
-#' @keywords moderation, interaction, regression, effect size, internal
+#' @keywords moderation interaction regression effect size internal
 #' @examples
 #' \dontrun{
 #' m <- lm(mpg ~ cyl + disp, data = mtcars)

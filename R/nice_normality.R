@@ -23,7 +23,7 @@
 #' @param ... Further arguments from `nice_qq()` and
 #' `nice_density()` to be passed to `nice_normality()`
 #'
-#' @keywords QQ plots, normality, density, distribution
+#' @keywords QQ plots normality density distribution
 #' @export
 #' @examples
 #' # Make the basic plot

@@ -6,8 +6,7 @@
 #' @param response The variable to plot.
 #' @param categories The desired categories of the two overlapping circles.
 #'
-#' @keywords self-other merging, self-other overlap, Venn
-#' diagrams, social psychology
+#' @keywords self-other merging self-other overlap Venn diagrams social psychology
 #' @export
 #' @examples
 #' # Score of 1 (0% overlap)

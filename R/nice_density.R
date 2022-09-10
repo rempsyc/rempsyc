@@ -22,7 +22,7 @@
 #'                    mimicking the default behaviour of base R `hist()` (the Sturges
 #'                    method). Defaults to `FALSE`.
 #' @param bins If histogram = TRUE, then option to change the default bin (30).
-#' @keywords density, normality
+#' @keywords density normality
 #'
 #' @examples
 #' # Make the basic plot

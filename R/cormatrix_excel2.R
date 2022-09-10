@@ -25,7 +25,7 @@
 #' @param ... Parameters to be passed to the `correlation` package
 #' (see `?correlation::correlation`)
 #'
-#' @keywords correlation, matrix, Excel
+#' @keywords correlation matrix Excel
 #' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
 #' the original rempsyc::cormatrix_excel
 #' @export

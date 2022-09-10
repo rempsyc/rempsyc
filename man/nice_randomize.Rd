@@ -58,9 +58,9 @@ head(randomized)
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/randomize}
 }
-\keyword{allocation,}
-\keyword{conditions,}
+\keyword{allocation}
+\keyword{conditions}
 \keyword{design}
 \keyword{experimental}
 \keyword{random}
-\keyword{randomization,}
+\keyword{randomization}

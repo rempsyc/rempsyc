@@ -91,5 +91,5 @@ Other functions useful in assumption testing:
 \code{\link{nice_var}}. Tutorial:
 \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 }
-\keyword{density,}
+\keyword{density}
 \keyword{normality}

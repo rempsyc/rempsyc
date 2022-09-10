@@ -75,7 +75,7 @@
 #' @references \url{http://rcompanion.org/handbook/C_03.html}
 #' @concept mean confidence interval bootstrap
 #' @return A data frame of requested statistics by group.
-#' @keywords group means, confidence intervals, bootstrapping, internal
+#' @keywords group means confidence intervals bootstrapping internal
 #' @examples
 #' \dontrun{
 #' ### Example with formula notation
