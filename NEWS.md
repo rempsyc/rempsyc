@@ -1,3 +1,6 @@
+## rempsyc 0.0.8
+* CRAN resubmission!
+
 ## rempsyc 0.0.7
 * First CRAN submission!
 * This requires bumping the package version to 2 decimals only.
