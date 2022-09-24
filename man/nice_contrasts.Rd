@@ -17,6 +17,12 @@ nice_contrasts(response, group, covariates = NULL, data, bootstraps = 2000)
 
 \item{bootstraps}{The number of bootstraps to use for the confidence interval}
 }
+\value{
+A dataframe, with the selected dependent variable(s), comparisons of
+interest, degrees of freedom, t-values, p-values, robust Cohen's d
+(dR), and the lower and upper 95\% confidence intervals of the
+effect size (i.e., dR).
+}
 \description{
 Easily compute planned contrast analyses (pairwise
 comparisons similar to t-tests but more powerful when more than
@@ -34,7 +40,6 @@ with the standard \emph{t} test because it is based on all the cases
 (\href{https://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
 }
 \examples{
-
 # Basic example
 nice_contrasts(
   data = mtcars,
@@ -42,8 +47,7 @@ nice_contrasts(
   group = "cyl",
   bootstraps = 200
 )
-
-\dontrun{
+\donttest{
 nice_contrasts(
   data = mtcars,
   response = "disp",
@@ -65,7 +69,6 @@ nice_contrasts(
   covariates = c("disp", "hp")
 )
 }
-
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}

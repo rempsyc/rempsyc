@@ -13,9 +13,11 @@
 #' @param use How to handle NA (see `?cor` for options).
 #'
 #' @keywords correlation matrix Excel
+#' @return A Microsoft Excel document, containing the colour-coded
+#'         correlation matrix.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Basic example
 #' cormatrix_excel(mtcars)
 #' }

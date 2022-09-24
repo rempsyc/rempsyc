@@ -38,6 +38,9 @@ equal to .001.}
 
 \item{d}{d-value to format.}
 }
+\value{
+A formatted p, r, or d value.
+}
 \description{
 Easily format p or r values. Note: converts to character class
 for use in figures or manuscripts to accommodate e.g., "< .001".
@@ -45,10 +48,13 @@ for use in figures or manuscripts to accommodate e.g., "< .001".
 \examples{
 format_value(0.00041231, "p")
 format_value(0.00041231, "r")
+format_value(1.341231, "d")
 format_p(0.0041231)
 format_p(0.00041231)
 format_r(0.41231)
 format_r(0.041231)
+format_d(1.341231)
+format_d(0.341231)
 }
 \keyword{correlation}
 \keyword{formatting}

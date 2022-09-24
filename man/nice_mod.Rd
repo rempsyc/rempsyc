@@ -39,6 +39,11 @@ when there is more than one model.}
 \item{...}{Further arguments to be passed to the \code{lm}
 function for the models.}
 }
+\value{
+A formatted dataframe of the specified lm model, with DV, IV, degrees
+of freedom, regression coefficient, t-value, p-value, and the effect
+size, the semi-partial correlation squared.
+}
 \description{
 Easily compute moderation analyses, with effect
 sizes, and format in publication-ready format.

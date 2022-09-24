@@ -1,3 +1,4 @@
+#' @noRd
 theme_apa <-
   theme_bw(base_size = 24) +
   theme(
@@ -13,3 +14,7 @@ theme_apa <-
   )
 
 #' @noRd
+message_white <- function(...) {
+  message("\033[97m", ..., "\033[97m")
+}
+

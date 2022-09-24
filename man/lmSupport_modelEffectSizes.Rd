@@ -13,6 +13,9 @@ lmSupport_modelEffectSizes(Model, Print = TRUE, Digits = 4)
 
 \item{Digits}{Number of digits for printing effect sizes}
 }
+\value{
+Returns a list with fields for effect sizes, SSE, and SST.
+}
 \description{
 Get effect sizes from the \code{lmSupport} package
 and \code{modelEffectSizes} function. The function had to be taken
@@ -27,7 +30,7 @@ effect. Manually code regressors to get 1 df effects Uses
 car::Anova() with Type 3 error"
 }
 \examples{
-\dontrun{
+\donttest{
 m <- lm(mpg ~ cyl + disp, data = mtcars)
 lmSupport_modelEffectSizes(m)
 }

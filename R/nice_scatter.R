@@ -45,6 +45,7 @@
 #' @param p.y The y-axis coordinates for the p-value.
 #'
 #' @keywords scatter plots
+#' @return A scatter plot of class ggplot.
 #' @export
 #' @examples
 #' # Make the basic plot
@@ -54,7 +55,7 @@
 #'   response = "mpg"
 #' )
 #'
-#' \dontrun{
+#' \donttest{
 #' # Save a high-resolution image file to specified directory
 #' ggsave("nicescatterplothere.pdf",
 #'   width = 7, height = 7, unit = "in",

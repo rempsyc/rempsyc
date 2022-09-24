@@ -23,7 +23,8 @@
 #'                    method). Defaults to `FALSE`.
 #' @param bins If histogram = TRUE, then option to change the default bin (30).
 #' @keywords density normality
-#'
+#' @return A density plot of class ggplot, by group (if provided), along a
+#'         reference line representing a matched normal distribution.
 #' @examples
 #' # Make the basic plot
 #' nice_density(

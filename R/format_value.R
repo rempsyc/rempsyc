@@ -17,14 +17,18 @@
 #' generic `format_value()`. Simply add the `precision` argument.
 #'
 #' @keywords formatting p-value r-value correlation
+#' @return A formatted p, r, or d value.
 #' @export
 #' @examples
 #' format_value(0.00041231, "p")
 #' format_value(0.00041231, "r")
+#' format_value(1.341231, "d")
 #' format_p(0.0041231)
 #' format_p(0.00041231)
 #' format_r(0.41231)
 #' format_r(0.041231)
+#' format_d(1.341231)
+#' format_d(0.341231)
 #' @name format_value
 format_value <- function(value,
                          type = "d",

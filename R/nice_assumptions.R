@@ -4,9 +4,12 @@
 #' nice summary table.
 #'
 #' @param model The `lm` object to be passed to the function.
-#' @param interpretation Whether to display the interpretation helper or not.
 #'
 #' @keywords assumptions linear regression statistical violations
+#' @return A dataframe, with p-value results for the Shapiro-Wilk,
+#'         Breusch-Pagan, and Durbin-Watson tests, as well as a
+#'         diagnostic column reporting how many assumptions are
+#'         not respected for a given model.
 #' @export
 #' @examples
 #' # Create a regression model (using data available in R by default)
@@ -17,8 +20,7 @@
 #' DV <- names(mtcars[-1])
 #' formulas <- paste(DV, "~ mpg")
 #' models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
-#' assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions,
-#'   interpretation = FALSE
+#' assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions
 #' ))
 #' assumptions.table
 #'
@@ -30,8 +32,18 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 
-nice_assumptions <- function(model,
-                             interpretation = TRUE) {
+#' @export
+print.nice_assumptions <- function(x, ...) {
+  cat(
+    "Interpretation: (p) values < .05 imply assumptions are not respected. ",
+    "Diagnostic is how many assumptions are not respected for a given model ",
+    "or variable. \n\n",
+    sep = ""
+    )
+  print(as.data.frame(x))
+}
+
+nice_assumptions <- function(model) {
   model.name <- format(model$terms)
   shapiro <- round(stats::shapiro.test(model$residuals)$p.value, 3)
   bp <- round(lmtest::bptest(model)$p.value, 3)
@@ -46,13 +58,6 @@ nice_assumptions <- function(model,
     check.names = FALSE
   )
   row.names(df) <- NULL
-  if (interpretation == TRUE) {
-    cat(
-      "Interpretation: (p) values < .05 imply assumptions are not respected. ",
-      "Diagnostic is how many assumptions are not respected for a given model ",
-      "or variable. \n\n",
-      sep = ""
-    )
-  }
+  class(df) <- c("nice_assumptions", class(df))
   df
 }

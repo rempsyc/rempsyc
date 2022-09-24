@@ -23,6 +23,8 @@
 #' @param ... Further arguments from `nice_qq()` and
 #' `nice_density()` to be passed to `nice_normality()`
 #'
+#' @return A plot of classes patchwork and ggplot, containing two plots,
+#'         resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.
 #' @keywords QQ plots normality density distribution
 #' @export
 #' @examples

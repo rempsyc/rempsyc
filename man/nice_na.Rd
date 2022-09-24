@@ -13,6 +13,27 @@ nice_na(data, vars, scales)
 
 \item{scales}{The scale names to check for NAs (single character string).}
 }
+\value{
+A dataframe, with:
+\itemize{
+\item \code{var}: variables selected
+\item \code{items}: number of items for selected variables
+\item \code{na}: number of missing cell values for those variables (e.g., 2 missing
+values for first participant + 2 missing values for second participant
+= total of 4 missing values)
+\item \code{cells}: total number of cells (i.e., number of participants multiplied by
+number of variables, \code{items})
+\item \code{na_percent}: the percentage of missing values (number of missing cells,
+\code{na}, divided by total number of cells, \code{cells})
+\item \code{na_max}: The amount of missing values for the participant with the most
+missing values for the selected variables
+\item \code{na_max_percent}: The amount of missing values for the participant with
+the most missing values for the selected variables, in percentage
+(i.e., \code{na_max} divided by the number of selected variables, \code{items})
+\item \code{all_na}: the number of participants missing 100\% of items for that scale
+(the selected variables)
+}
+}
 \description{
 Nicely reports NA values according to existing
 guidelines. This function reports both absolute and percentage
@@ -30,10 +51,6 @@ values out of all data points on that scale for all participants)
 and the maximum by participant (e.g., “For Attachment Anxiety,
 a total of 4 missing data points out of 100 were observed,
 with no participant missing more than a single data point”).}
-
-See: Parent, M. C. (2013). Handling item-level missing
-data: Simpler is just as good. \emph{The Counseling Psychologist},
-\emph{41}(4), 568-600. https://doi.org/10.1177\%2F0011000012445176
 }
 \examples{
 # Use whole data frame
@@ -53,14 +70,20 @@ fun <- function() {
   c(sample(c(NA, 1:10), replace = TRUE), NA, NA, NA)
 }
 df <- data.frame(
+  ID = c("idz", NA),
   scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
   scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
   scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun()
 )
 
 # One can list the scale names directly:
-nice_na(df, scales = c("scale1", "scale2", "scale3"))
+nice_na(df, scales = c("ID", "scale1", "scale2", "scale3"))
 
+}
+\references{
+Parent, M. C. (2013). Handling item-level missing
+data: Simpler is just as good. \emph{The Counseling Psychologist},
+\emph{41}(4), 568-600. https://doi.org/10.1177\%2F0011000012445176
 }
 \keyword{NA}
 \keyword{guidelines}

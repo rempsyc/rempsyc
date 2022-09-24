@@ -16,11 +16,12 @@
 #' @param Print Display results to screen. Default = TRUE
 #' @param Digits Number of digits for printing effect sizes
 #'
+#' @return Returns a list with fields for effect sizes, SSE, and SST.
 #' @export
 #' @author John J. Curtin, \email{jjcurtin@wisc.edu}
 #' @keywords internal moderation interaction regression effect size internal
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' m <- lm(mpg ~ cyl + disp, data = mtcars)
 #' lmSupport_modelEffectSizes(m)
 #' }

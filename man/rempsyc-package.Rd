@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Convenience functions to make your workflow faster and easier. Easily customizable plots (via 'ggplot2'), nice APA tables (following the style of the *American Psychological Association*) exportable to Word (via 'flextable'), easily run statistical tests or check assumptions, and automatize various other tasks.
+Make your workflow faster and easier. Easily customizable plots (via 'ggplot2'), nice APA tables (following the style of the *American Psychological Association*) exportable to Word (via 'flextable'), easily run statistical tests or check assumptions, and automatize various other tasks.
 }
 \seealso{
 Useful links:

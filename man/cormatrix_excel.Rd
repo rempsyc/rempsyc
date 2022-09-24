@@ -21,6 +21,10 @@ but no need to specify extension).}
 
 \item{use}{How to handle NA (see \code{?cor} for options).}
 }
+\value{
+A Microsoft Excel document, containing the colour-coded
+correlation matrix.
+}
 \description{
 Easily output a correlation matrix and export it to
 Microsoft Excel, with the first row and column frozen, and
@@ -29,7 +33,7 @@ correlation coefficients colour-coded based on their effect size
 large (red)).
 }
 \examples{
-\dontrun{
+\donttest{
 # Basic example
 cormatrix_excel(mtcars)
 }

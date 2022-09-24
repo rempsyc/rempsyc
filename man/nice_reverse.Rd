@@ -16,6 +16,9 @@ nice_reverse(x, max, min = 1, warning = TRUE)
 \item{warning}{Logical. Whether to show the warning
 about the minimum not being 1.}
 }
+\value{
+A density plot of class ggplot, by group (if provided), along a
+}
 \description{
 Easily recode scores (reverse-score),
 typically for questionnaire answers.

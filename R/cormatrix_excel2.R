@@ -28,9 +28,12 @@
 #' @keywords correlation matrix Excel
 #' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
 #' the original `rempsyc::cormatrix_excel`
+#' @return A Microsoft Excel document, containing the colour-coded
+#'         correlation matrix with significance stars, on the first
+#'         sheet, and the colour-coded p-values on the second sheet.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Basic example
 #' cormatrix_excel2(mtcars)
 #' cormatrix_excel2(iris, p_adjust = "none")

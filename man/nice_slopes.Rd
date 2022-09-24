@@ -40,6 +40,11 @@ when there is more than one model.}
 \item{...}{Further arguments to be passed to the \code{lm}
 function for the models.}
 }
+\value{
+A formatted dataframe of the simple slopes of the specified lm model,
+with DV, levels of IV, degrees of freedom, regression coefficient, t-value,
+p-value, and the effect size, the semi-partial correlation squared.
+}
 \description{
 Easily compute simple slopes in moderation analysis,
 with effect sizes, and format in publication-ready format.

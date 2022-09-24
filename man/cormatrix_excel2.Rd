@@ -30,6 +30,11 @@ to console.}
 \item{...}{Parameters to be passed to the \code{correlation} package
 (see \code{?correlation::correlation})}
 }
+\value{
+A Microsoft Excel document, containing the colour-coded
+correlation matrix with significance stars, on the first
+sheet, and the colour-coded p-values on the second sheet.
+}
 \description{
 Easily output a correlation matrix and export it to
 Microsoft Excel, with the first row and column frozen, and
@@ -46,7 +51,7 @@ In the meanwhile, it is experimental and subject to change.
 Use with care.
 }
 \examples{
-\dontrun{
+\donttest{
 # Basic example
 cormatrix_excel2(mtcars)
 cormatrix_excel2(iris, p_adjust = "none")

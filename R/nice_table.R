@@ -360,20 +360,20 @@ nice_table <- function(data,
     dataframe %>%
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
-  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 
   #   __________________________________
   #   Flextable                     ####
 
   dataframe %>%
     {
-      if (highlight == TRUE | is.numeric(highlight)) {
+      if (highlight == TRUE || is.numeric(highlight)) {
         flextable(., col_keys = names(dataframe)[-length(dataframe)])
       } else {
         flextable(.)
       }
     } -> table
 
+  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   table %>%
     hline_top(part = "head", border = nice.borders) %>%
     hline_bottom(part = "head", border = nice.borders) %>%

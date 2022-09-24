@@ -16,6 +16,8 @@
 #' from the Shapiro-Wilk test on the plot.
 #' @param title An optional title, if desired.
 #'
+#' @return A qq plot of class ggplot, by group (if provided), along a
+#'         reference interpretation helper, the 95% confidence band.
 #' @keywords QQ plots normality distribution
 #' @export
 #' @examples

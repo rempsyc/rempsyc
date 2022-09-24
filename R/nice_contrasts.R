@@ -21,9 +21,12 @@
 #' @param bootstraps The number of bootstraps to use for the confidence interval
 #' @keywords planned contrasts pairwise comparisons
 #' group differences internal
+#' @return A dataframe, with the selected dependent variable(s), comparisons of
+#'         interest, degrees of freedom, t-values, p-values, robust Cohen's d
+#'         (dR), and the lower and upper 95% confidence intervals of the
+#'         effect size (i.e., dR).
 #' @export
 #' @examples
-#'
 #' # Basic example
 #' nice_contrasts(
 #'   data = mtcars,
@@ -31,8 +34,7 @@
 #'   group = "cyl",
 #'   bootstraps = 200
 #' )
-#'
-#' \dontrun{
+#' \donttest{
 #' nice_contrasts(
 #'   data = mtcars,
 #'   response = "disp",
@@ -54,7 +56,6 @@
 #'   covariates = c("disp", "hp")
 #' )
 #' }
-#'
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'

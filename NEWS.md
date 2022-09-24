@@ -1,3 +1,12 @@
+## 0.0.9 [in preparation]
+* CRAN resubmission!
+* Updated docs: all functions now have `value`/`return` fields describing the function's output.
+
+## rempsyc 0.0.8.1
+* New function: `extract_duplicates`, to extract all duplicates (including first one) for closer inspection
+* New function: `best_duplicate`, to keep only the best duplicate based on the number of missing values
+* nice_na: `all_na` output column now also counts non-numeric variables
+
 ## rempsyc 0.0.8
 * CRAN resubmission!
 

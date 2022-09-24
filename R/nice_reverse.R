@@ -10,6 +10,7 @@
 #' about the minimum not being 1.
 #'
 #' @keywords reverse scoring
+#' @return A numeric vector, of reversed scores.
 #' @export
 #' @examples
 #' # Reverse score of 5 with a maximum score of 5
@@ -28,12 +29,5 @@ nice_reverse <- function(x,
                          max,
                          min = 1,
                          warning = TRUE) {
-  if (missing(min) & warning == TRUE) {
-    cat(
-      "Note: If your scale minimum score is not '1', ",
-      "please specify it in the 'min' argument\n",
-      sep = ""
-    )
-  }
   max - as.numeric(x) + min
 }
