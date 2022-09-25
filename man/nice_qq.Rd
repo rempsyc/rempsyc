@@ -36,6 +36,10 @@ from the Shapiro-Wilk test on the plot.}
 
 \item{title}{An optional title, if desired.}
 }
+\value{
+A qq plot of class ggplot, by group (if provided), along a
+reference interpretation helper, the 95\% confidence band.
+}
 \description{
 Easily make nice per-group QQ plots through
 a wrapper around the \code{ggplot2} and \code{qqplotr} packages.

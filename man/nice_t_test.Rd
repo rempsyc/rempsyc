@@ -31,6 +31,11 @@ function (e.g., to use Student instead of Welch test, to
 change from two-tail to one-tail, or to do a paired-sample
 t-test instead of independent samples).}
 }
+\value{
+A formatted dataframe of the specified model, with DV, degrees of
+freedom, t-value, p-value, the effect size, Cohen's d, and its
+95\% confidence interval lower and upper bounds.
+}
 \description{
 Easily compute t-test analyses, with effect sizes,
 and format in publication-ready format. The 95\% confidence interval

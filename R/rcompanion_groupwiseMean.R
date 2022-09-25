@@ -77,7 +77,7 @@
 #' @return A data frame of requested statistics by group.
 #' @keywords group means confidence intervals bootstrapping internal
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ### Example with formula notation
 #' data(mtcars)
 #' rcompanion_groupwiseMean(mpg ~ factor(cyl),

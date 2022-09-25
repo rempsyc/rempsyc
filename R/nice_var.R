@@ -12,7 +12,11 @@
 #' different than four times the variance.
 #'
 #' @keywords variance
-#'
+#' @return A dataframe, with the values of the selected variables for
+#'         each group, their max variance ratio (maximum variance divided by
+#'         the minimum variance), the selected decision criterion, and whether
+#'         the data are considered heteroscedastic according to the decision
+#'         criterion.
 #' @examples
 #' # Make the basic table
 #' nice_var(
@@ -75,5 +79,5 @@ nice_var <- function(data,
   var.table <- var.table %>%
     rename_with(tools::toTitleCase, everything())
   # Get resulting table
-  var.table
+  as.data.frame(var.table)
 }

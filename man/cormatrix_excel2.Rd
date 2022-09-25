@@ -6,7 +6,7 @@
 \usage{
 cormatrix_excel2(
   data,
-  filename = "cormatrix",
+  filename,
   overwrite = TRUE,
   p_adjust = "none",
   print.mat = TRUE,
@@ -44,20 +44,20 @@ correlation coefficients colour-coded based on effect size
 for small (.10), medium (.30), and large (.50) correlation sizes.
 
 Based on the \code{correlation} and \code{openxlsx2} packages.
-
+}
+\details{
 WARNING: This function will replace \code{cormatrix_excel} (the
 original one) as soon as \code{openxlsx2} is available from CRAN.
 In the meanwhile, it is experimental and subject to change.
 Use with care.
 }
 \examples{
-\donttest{
+\dontshow{.old_wd <- setwd(tempdir())}
 # Basic example
-cormatrix_excel2(mtcars)
-cormatrix_excel2(iris, p_adjust = "none")
-cormatrix_excel2(airquality, method = "spearman")
-}
-
+cormatrix_excel2(mtcars, "cormatrix1")
+cormatrix_excel2(iris, p_adjust = "none", "cormatrix2")
+cormatrix_excel2(airquality, method = "spearman", "cormatrix3")
+\dontshow{setwd(.old_wd)}
 }
 \author{
 Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and

@@ -118,7 +118,7 @@ right side are used for the grouping variables.
 }\if{html}{\out{</div>}}
 }
 \examples{
-\dontrun{
+\donttest{
 ### Example with formula notation
 data(mtcars)
 rcompanion_groupwiseMean(mpg ~ factor(cyl),

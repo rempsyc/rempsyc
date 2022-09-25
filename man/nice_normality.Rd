@@ -49,6 +49,10 @@ method). Defaults to \code{FALSE}.}
 \item{...}{Further arguments from \code{nice_qq()} and
 \code{nice_density()} to be passed to \code{nice_normality()}}
 }
+\value{
+A plot of classes patchwork and ggplot, containing two plots,
+resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.
+}
 \description{
 Easily make nice per-group density and QQ plots
 through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.

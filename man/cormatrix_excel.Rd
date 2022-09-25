@@ -6,7 +6,7 @@
 \usage{
 cormatrix_excel(
   data,
-  filename = "cormatrix",
+  filename,
   overwrite = TRUE,
   use = "pairwise.complete.obs"
 )
@@ -33,11 +33,10 @@ correlation coefficients colour-coded based on their effect size
 large (red)).
 }
 \examples{
-\donttest{
+\dontshow{.old_wd <- setwd(tempdir())}
 # Basic example
-cormatrix_excel(mtcars)
-}
-
+cormatrix_excel(mtcars, "cormatrix")
+\dontshow{setwd(.old_wd)}
 }
 \keyword{Excel}
 \keyword{correlation}

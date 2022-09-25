@@ -1,6 +1,10 @@
 ## 0.0.9 [in preparation]
 * CRAN resubmission!
+
+## rempsyc 0.0.8.2
+* `nice_var`: now returns a dataframe instead of a tibble
 * Updated docs: all functions now have `value`/`return` fields describing the function's output.
+* `cormatrix_excel` and `cormatrix_excel2`: now require an explicit file name, as per CRAN policies.
 
 ## rempsyc 0.0.8.1
 * New function: `extract_duplicates`, to extract all duplicates (including first one) for closer inspection

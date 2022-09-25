@@ -70,9 +70,9 @@ DV <- names(mtcars[-1])
 # Make list of all formulas
 formulas <- paste(DV, "~ mpg")
 # Make list of all models
-models.list <- sapply(X = formulas, FUN = lm, data = mtcars, simplify = FALSE, USE.NAMES = TRUE)
+models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 # Make diagnostic table
-assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions, interpretation = FALSE))
+assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions))
 ```
 
 Use the Viewer for better results

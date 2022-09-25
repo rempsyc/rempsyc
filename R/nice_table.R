@@ -44,6 +44,7 @@
 #' @param separate.header Logical, whether to separate headers based on name delimiters (i.e., periods ".").
 #'
 #' @keywords APA style table
+#' @return An APA-formatted table of class "flextable" (and "nice_table").
 #' @examples
 #' # Make the basic table
 #' my_table <- nice_table(mtcars[1:3, ],
@@ -52,9 +53,10 @@
 #' )
 #' my_table
 #'
-#' \dontrun{
+#' \donttest{
 #' # Save table to word
-#' save_as_docx(my_table, path = "nicetablehere.docx")
+#' mypath <- tempfile(fileext = ".docx")
+#' save_as_docx(my_table, path = mypath)
 #' }
 #'
 #' # Publication-ready tables
@@ -590,7 +592,7 @@ nice_table <- function(data,
 
     table <- table %>%
       add_header_lines(values = rev(title)) %>%
-      align(part = "header", i = 1:length(title), align = "left") %>%
+      align(part = "header", i = seq(length(title)), align = "left") %>%
       hline(part = "header", i = seq_len(length(title) - 1),
             border = invisible.borders) %>%
       hline(part = "header", i = length(title),
@@ -602,6 +604,8 @@ nice_table <- function(data,
       bold(., part = "header", i = 1, bold = bold.decision)
 
   }
+
+  class(table) <- c("nice_table", class(table))
 
   table
 }

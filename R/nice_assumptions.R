@@ -33,16 +33,6 @@
 #'
 
 #' @export
-print.nice_assumptions <- function(x, ...) {
-  cat(
-    "Interpretation: (p) values < .05 imply assumptions are not respected. ",
-    "Diagnostic is how many assumptions are not respected for a given model ",
-    "or variable. \n\n",
-    sep = ""
-    )
-  print(as.data.frame(x))
-}
-
 nice_assumptions <- function(model) {
   model.name <- format(model$terms)
   shapiro <- round(stats::shapiro.test(model$residuals)$p.value, 3)
@@ -60,4 +50,15 @@ nice_assumptions <- function(model) {
   row.names(df) <- NULL
   class(df) <- c("nice_assumptions", class(df))
   df
+}
+
+#' @noRd
+print.nice_assumptions <- function(x, ...) {
+  cat(
+    "Interpretation: (p) values < .05 imply assumptions are not respected. ",
+    "Diagnostic is how many assumptions are not respected for a given model ",
+    "or variable. \n\n",
+    sep = ""
+  )
+  print(as.data.frame(x))
 }

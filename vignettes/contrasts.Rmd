@@ -11,7 +11,9 @@ vignette: >
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=7, fig.height=7, warning=FALSE, message=FALSE, out.width="70%")
+knitr::opts_chunk$set(fig.width = 7, fig.height = 7, warning = FALSE, 
+                      message = FALSE, out.width = "70%")
+.old_wd <- setwd(tempdir())
 ```
 
 ## Basic Idea
@@ -57,7 +59,7 @@ This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviation
 *Save the table to Word*
 
 ```{r, eval = FALSE}
-save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
+save_as_docx(my_table, path = "contrasts.docx")
 ```
 
 ### Make a violin plot comparing groups through [`nice_violin()`](../articles/violin.html).
@@ -67,24 +69,23 @@ save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
                        response = "Sepal.Length", 
                        data = iris,
                        ytitle = "Length of Sepal", 
-                       signif_annotation=c("***", "***", "***"),
-                       signif_yposition=c(8.7, 7.3, 8.2),
-                       signif_xmin=c("setosa","setosa","versicolor"),
-                       signif_xmax=c("virginica","versicolor","virginica")))
+                       signif_annotation = c("***", "***", "***"),
+                       signif_yposition = c(8.7, 7.3, 8.2),
+                       signif_xmin = c("setosa", "setosa", "versicolor"),
+                       signif_xmax = c("virginica", "versicolor", "virginica")))
 ```
 
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
 ```{r, eval = FALSE}
-ggsave('Figure 1.pdf', figure, width=7, height=7, unit='in', 
-       dpi=300, path = "D:/R treasures/")
+ggsave('Figure 1.pdf', figure, width = 7, height = 7, unit = 'in', dpi = 300)
 ```
 
 Congratulations for making it that far! You've done it! From A to Z, you now know how to make things work! If you would like to integrate this with a broader workflow, read on for the next part!
 
 ## Full Workflow
 
-For the full workflow, we will use the dataset from one of my studies published at the [Quaterly Journal of Experimental Psychology](https://doi.org/10.1177/17470218211024826) and available on the Open Science Framework.
+For the full workflow, we will use the dataset from one of my studies published at the [Quarterly Journal of Experimental Psychology](https://doi.org/10.1177/17470218211024826) and available on the Open Science Framework.
 
 *Load the data file from the Open Science Framework*
 
@@ -134,7 +135,7 @@ Note that with option `highlight = TRUE`, it will automatically highlight signif
 *Save the table to Word*
 
 ```{r, eval = FALSE}
-save_as_docx(my_table, path = "D:/R treasures/contrasts.docx")
+save_as_docx(my_table, path = "contrasts.docx")
 ```
 
 ### Make violin plots comparing groups through [`nice_violin`](../articles/violin.html).
@@ -215,8 +216,8 @@ library(ggpubr)
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
 ```{r, eval = FALSE}
-ggsave('Figure 1.pdf', figure, width=14, height=14, unit='in', 
-       dpi=300, path = "D:/R treasures/")
+ggsave('Figure 1.pdf', figure, width = 14, height = 14, 
+       unit = 'in', dpi = 300)
 ```
 
 ### Thanks for checking in

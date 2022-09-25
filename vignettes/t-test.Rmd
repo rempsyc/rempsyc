@@ -11,7 +11,8 @@ vignette: >
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=7, fig.height=7, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(fig.width = 7, fig.height = 7, warning = FALSE, message = FALSE)
+.old_wd <- setwd(tempdir())
 ```
 
 ## Getting started
@@ -65,7 +66,7 @@ my_table
 Let's save it to word for use in a publication (optional).
 
 ```{r, eval = FALSE}
-save_as_docx(my_table, path = "D:/R treasures/t-tests.docx")
+save_as_docx(my_table, path = "t-tests.docx")
 ```
 
 ## Special cases

@@ -17,15 +17,19 @@
 #'         correlation matrix.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Basic example
-#' cormatrix_excel(mtcars)
-#' }
-#'
+#' cormatrix_excel(mtcars, "cormatrix")
+#' \dontshow{setwd(.old_wd)}
 cormatrix_excel <- function(data,
-                            filename = "cormatrix",
+                            filename,
                             overwrite = TRUE,
                             use = "pairwise.complete.obs") {
+
+  if (missing(filename)) {
+    stop("Argument 'filename' now required (as per CRAN policies)")
+  }
+
   rlang::check_installed("openxlsx", reason = "for this function.")
   my.cor.matrix <- stats::cor(data, use = use)
   my.cor.matrix <- as.data.frame(my.cor.matrix)

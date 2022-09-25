@@ -4,7 +4,7 @@
 
 * Fixed.
 
-Please add \value to .Rd files regarding exported methods and explain the functions results in the documentation. Please write about the structure of the output (class) and also what the output means.
+> Please add \value to .Rd files regarding exported methods and explain the functions results in the documentation. Please write about the structure of the output (class) and also what the output means.
 (If a function does not return a value, please document that too, e.g.
 \value{No return value, called for side effects} or similar) Missing Rd-tags in up to 26 .Rd files, e.g.:
       cormatrix_excel.Rd: \value
@@ -15,23 +15,33 @@ Please add \value to .Rd files regarding exported methods and explain the functi
       nice_assumptions.Rd: \value
       ...
 
-Some code lines in examples are commented out.
+* Fixed.
+
+> Some code lines in examples are commented out.
 Please never do that. Ideally find toy examples that can be regularly executed and checked. Lengthy examples (> 5 sec), can be wrapped in \donttest{}.
 Examples in comments in:
        overlap_circle.Rd
 
-\dontrun{} should only be used if the example really cannot be executed (e.g. because of missing additional software, missing API keys, ...) by the user. That's why wrapping examples in \dontrun{} adds the comment ("# Not run:") as a warning for the user.
+* Fixed.
+
+> \dontrun{} should only be used if the example really cannot be executed (e.g. because of missing additional software, missing API keys, ...) by the user. That's why wrapping examples in \dontrun{} adds the comment ("# Not run:") as a warning for the user.
 Does not seem necessary.
 Please replace \dontrun with \donttest.
 
-You write information messages to the console that cannot be easily suppressed.
+* Fixed.
+
+> You write information messages to the console that cannot be easily suppressed.
 It is more R like to generate objects that can be used to extract the information a user is interested in, and then print() that object.
 Instead of print()/cat() rather use message()/warning() or
 if(verbose)cat(..) (or maybe stop()) if you really have to write text to the console.
 (except for print, summary, interactive functions)
 
-Please ensure that your functions do not write by default or in your examples/vignettes/tests in the user's home filespace (including the package directory and getwd()). This is not allowed by CRAN policies.
+* Fixed.
+
+> Please ensure that your functions do not write by default or in your examples/vignettes/tests in the user's home filespace (including the package directory and getwd()). This is not allowed by CRAN policies.
 Please omit any default path in writing functions. -> R/cormatrix_excel2.R In your examples/vignettes/tests you can write to tempdir(). -> man/nice_scatter.Rd; man/nice_violin.Rd
+
+* Fixed.
 
 ## Resubmission rempsyc 0.0.8
 

@@ -24,6 +24,9 @@
 #' t-test instead of independent samples).
 #'
 #' @keywords t-test group differences
+#' @return A formatted dataframe of the specified model, with DV, degrees of
+#'         freedom, t-value, p-value, the effect size, Cohen's d, and its
+#'         95% confidence interval lower and upper bounds.
 #' @export
 #' @examples
 #' # Make the basic table
@@ -89,20 +92,20 @@ nice_t_test <- function(data,
                         ...) {
   args <- list(...)
   if (hasArg(var.equal)) {
-    if (args$var.equal == TRUE) cat("Using Student t-test. \n \n ")
-    if (args$var.equal == FALSE) cat("Using Welch t-test. \n \n ")
+    if (args$var.equal == TRUE) message_white("Using Student t-test. \n ")
+    if (args$var.equal == FALSE) message_white("Using Welch t-test. \n ")
   }
   if (hasArg(paired)) {
     paired <- args$paired
-    if (paired == TRUE) cat("Using paired t-test. \n \n ")
-    if (paired == FALSE) cat("Using independent samples t-test. \n \n ")
+    if (paired == TRUE) message_white("Using paired t-test. \n ")
+    if (paired == FALSE) message_white("Using independent samples t-test. \n ")
   } else {
     paired <- FALSE
   }
   if (!hasArg(var.equal) & paired == FALSE & warning == TRUE) {
-    cat(
+    message_white(
       "Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-For the Student t-test, use `var.equal = TRUE`. \n \n "
+For the Student t-test, use `var.equal = TRUE`. \n "
     )
   }
   if (!missing(group)) {
@@ -110,7 +113,7 @@ For the Student t-test, use `var.equal = TRUE`. \n \n "
     formulas <- paste0(response, " ~ ", group)
     formulas <- lapply(formulas, stats::as.formula)
   } else {
-    cat("Using one-sample t-test. \n \n ")
+    message_white("Using one-sample t-test. \n ")
     formulas <- lapply(data[response], as.numeric)
   }
   if (hasArg(mu)) {

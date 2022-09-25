@@ -25,6 +25,10 @@ be a multiple of your number of groups if you are using\code{between}.}
 
 \item{col.names}{The desired additional column names for a runsheet.}
 }
+\value{
+A dataframe, with participant ID and randomized condition, based
+on selected design.
+}
 \description{
 Randomize easily with different designs.
 }

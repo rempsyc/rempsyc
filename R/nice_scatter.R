@@ -54,14 +54,13 @@
 #'   predictor = "wt",
 #'   response = "mpg"
 #' )
-#'
 #' \donttest{
+#' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Save a high-resolution image file to specified directory
-#' ggsave("nicescatterplothere.pdf",
-#'   width = 7, height = 7, unit = "in",
-#'   dpi = 300, path = "/"
+#' ggsave("nicescatterplothere.pdf", width = 7,
+#'   height = 7, unit = "in", dpi = 300
 #' ) # change for your own desired path
-#'
+#' \dontshow{setwd(.old_wd)}
 #' # Change x- and y- axis labels
 #' nice_scatter(
 #'   data = mtcars,

@@ -74,6 +74,9 @@ version of the tables made by the \code{report} package.}
 
 \item{separate.header}{Logical, whether to separate headers based on name delimiters (i.e., periods ".").}
 }
+\value{
+An APA-formatted table of class "flextable" (and "nice_table").
+}
 \description{
 Make nice APA tables easily through a wrapper
 around the \code{flextable} package with sensical defaults and
@@ -87,9 +90,10 @@ my_table <- nice_table(mtcars[1:3, ],
 )
 my_table
 
-\dontrun{
+\donttest{
 # Save table to word
-save_as_docx(my_table, path = "nicetablehere.docx")
+mypath <- tempfile(fileext = ".docx")
+save_as_docx(my_table, path = mypath)
 }
 
 # Publication-ready tables

@@ -7,6 +7,8 @@
 #' @param categories The desired categories of the two overlapping circles.
 #'
 #' @keywords self-other merging self-other overlap Venn diagrams social psychology
+#' @return A plot of class gList, displaying overlapping circles relative to the
+#'         selected score.
 #' @export
 #' @examples
 #' # Score of 1 (0% overlap)
@@ -21,12 +23,14 @@
 #' # Changing labels
 #' overlap_circle(3.12, categories = c("Humans", "Animals"))
 #'
-#' ##  NOT RUN
+#' \donttest{
 #' # Saving to file (PDF or PNG)
-#' ## plot <- overlap_circle(3.5)
-#' ## ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
+#' mypath <- tempfile(fileext = ".pdf")
+#' plot <- overlap_circle(3.5)
+#' ggplot2::ggsave(plot, file = mypath, width = 7,
+#'   height = 7, unit = 'in', dpi = 300)
 #' # Change for your own desired path
-#'
+#' }
 #' @import graphics
 #'
 #' @seealso
@@ -35,7 +39,7 @@
 
 overlap_circle <- function(response,
                            categories = c("Self", "Other")) {
-  if (response < 1 | response > 7) {
+  if (response < 1 || response > 7) {
     stop("Overlap score must be between 1 and 7!
                                         (scoring system of the Inclusion of the
                                         Other in the Self Scale...)")

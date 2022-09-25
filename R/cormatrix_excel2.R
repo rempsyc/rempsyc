@@ -9,7 +9,7 @@
 #'
 #' Based on the `correlation` and `openxlsx2` packages.
 #'
-#' WARNING: This function will replace `cormatrix_excel` (the
+#' @details WARNING: This function will replace `cormatrix_excel` (the
 #' original one) as soon as `openxlsx2` is available from CRAN.
 #' In the meanwhile, it is experimental and subject to change.
 #' Use with care.
@@ -33,23 +33,25 @@
 #'         sheet, and the colour-coded p-values on the second sheet.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Basic example
-#' cormatrix_excel2(mtcars)
-#' cormatrix_excel2(iris, p_adjust = "none")
-#' cormatrix_excel2(airquality, method = "spearman")
-#' }
-#'
+#' cormatrix_excel2(mtcars, "cormatrix1")
+#' cormatrix_excel2(iris, p_adjust = "none", "cormatrix2")
+#' cormatrix_excel2(airquality, method = "spearman", "cormatrix3")
+#' \dontshow{setwd(.old_wd)}
 
 cormatrix_excel2 <- function(data,
-                             filename = "cormatrix",
+                             filename,
                              overwrite = TRUE,
                              p_adjust = "none",
                              print.mat = TRUE,
                              ...) {
+
+  if (missing(filename)) {
+    stop("Argument 'filename' now required (as per CRAN policies)")
+  }
+
   rlang::check_installed("correlation", reason = "for this function.")
-  # rlang::check_installed("openxlsx2", reason = "for this function.")
-  # check_installed is not working here so we have to use a custom solution
 
 if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
   cat("The package `openxlsx2` is required for this function\n",
@@ -377,7 +379,5 @@ cat(paste0(
 ))
 openxlsx2::wb_save(wb, path = paste0(filename, ".xlsx"), overwrite = TRUE)
 openxlsx2::xl_open(paste0(filename, ".xlsx"))
-
-#openxlsx::openXL(paste0(filename, ".xlsx"))
 
 }

@@ -16,6 +16,9 @@
 #' @param ytitle An optional y-axis label, if desired.
 #'
 #' @keywords variance
+#' @return A scatter plot of class ggplot attempting to display the
+#'         group variances. Also includes the max variance ratio
+#'         (maximum variance divided by the minimum variance).
 #' @export
 #' @examples
 #' # Make the basic plot

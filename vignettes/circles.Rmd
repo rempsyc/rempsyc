@@ -11,7 +11,9 @@ vignette: >
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(fig.width=6, fig.height=6, warning=FALSE, message=FALSE, results='hide', out.width="30%")
+knitr::opts_chunk$set(fig.width = 6, fig.height = 6, warning = FALSE, 
+                      message = FALSE, results = 'hide', out.width = "30%")
+.old_wd <- setwd(tempdir())
 ```
 
 For anyone in social psychology using the Inclusion of the Other in the Self (IOS) Scale to measure self-other merging, you might have wished that you could know for sure how much self-other overlap there is between your participant and a target group or individual.
@@ -75,7 +77,7 @@ plot <- overlap_circle(3.5)
 Then you can use the ggplot2 save command directly with the object name:
 
 ```{r, eval = FALSE}
-ggsave(plot, file="overlap.pdf", width=7, height=7, unit='in', dpi=300)
+ggsave(plot, file = "overlap.pdf", width = 7, height = 7, unit = 'in', dpi = 300)
 # Change the path to where you would like to save it.
 # If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').
 # Also remember to specify the .pdf extension of the file.

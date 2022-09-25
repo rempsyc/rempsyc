@@ -43,39 +43,6 @@
 #' if_any filter bind_rows count n
 
 #' @export
-print.find_mad <- function(x, ...) {
-  mad0 <- attr(x, "outlier_total")
-  duplicates.df <- attr(x, "outlier_multiple")
-  criteria <- attr(x, "criteria")
-  col.list <- attr(x, "col.list")
-  mad0.list <- attr(x, "outlier_list")
-
-  if (isTRUE(nrow(mad0) > 0)) {
-    cat(
-      nrow(mad0), "outlier(s) based on", criteria,
-      "median absolute deviations for variable(s): \n",
-        paste0(col.list, collapse = ", "), "\n\n"
-    )
-    if (nrow(duplicates.df) > 0) {
-      cat(
-        "The following participants were considered outliers ",
-        "for more than one variable: \n\n",
-        sep = ""
-      )
-      print(duplicates.df)
-      cat("\n")
-    }
-    cat("Outliers per variable: \n\n")
-    print(mad0.list)
-  } else {
-    cat(
-      "There were no outlier based on", criteria,
-      "median absolute deviations.\n\n"
-    )
-  }
-}
-
-#' @export
 find_mad <- function(data,
                      col.list,
                      ID = NULL,
@@ -125,6 +92,7 @@ find_mad <- function(data,
 
 }
 
+#' @noRd
 find_mad0 <- function(data, col.list, ID = ID, criteria = 3, mad.scores) {
   if (criteria <= 0) {
     stop("Criteria needs to be greater than one.")
@@ -147,4 +115,37 @@ find_mad0 <- function(data, col.list, ID = ID, criteria = 3, mad.scores) {
       select(Row, all_of(ID), all_of(col.list))
   }
   data
+}
+
+#' @noRd
+print.find_mad <- function(x, ...) {
+  mad0 <- attr(x, "outlier_total")
+  duplicates.df <- attr(x, "outlier_multiple")
+  criteria <- attr(x, "criteria")
+  col.list <- attr(x, "col.list")
+  mad0.list <- attr(x, "outlier_list")
+
+  if (isTRUE(nrow(mad0) > 0)) {
+    cat(
+      nrow(mad0), "outlier(s) based on", criteria,
+      "median absolute deviations for variable(s): \n",
+      paste0(col.list, collapse = ", "), "\n\n"
+    )
+    if (nrow(duplicates.df) > 0) {
+      cat(
+        "The following participants were considered outliers ",
+        "for more than one variable: \n\n",
+        sep = ""
+      )
+      print(duplicates.df)
+      cat("\n")
+    }
+    cat("Outliers per variable: \n\n")
+    print(mad0.list)
+  } else {
+    cat(
+      "There were no outlier based on", criteria,
+      "median absolute deviations.\n\n"
+    )
+  }
 }

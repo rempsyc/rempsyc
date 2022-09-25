@@ -112,6 +112,9 @@ of the horizontal position of the annotations/stars
 
 \item{d.y}{The y-axis coordinates for the d-value.}
 }
+\value{
+A violin plot of class ggplot, by group.
+}
 \description{
 Make nice violin plots easily with 95\% bootstrapped
 confidence intervals.
@@ -124,15 +127,13 @@ nice_violin(
   response = "len",
   bootstraps = 200,
 )
-
-\dontrun{
+\donttest{
+\dontshow{.old_wd <- setwd(tempdir())}
 # Save a high-resolution image file to specified directory
-ggsave("niceviolinplothere.pdf",
-  width = 7, height = 7, unit = "in",
-  dpi = 300, path = "/"
+ggsave("niceviolinplothere.pdf", width = 7,
+  height = 7, unit = "in", dpi = 300
 ) # change for your own desired path
-
-
+\dontshow{setwd(.old_wd)}
 # Change x- and y- axes labels
 nice_violin(
   data = ToothGrowth,
@@ -240,7 +241,6 @@ nice_violin(
   has.d = TRUE
 )
 }
-
 }
 \seealso{
 Visualize group differences via scatter plots:

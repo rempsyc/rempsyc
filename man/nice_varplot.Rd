@@ -36,6 +36,11 @@ the Shapiro-Wilk test on the plot.}
 
 \item{ytitle}{An optional y-axis label, if desired.}
 }
+\value{
+A scatter plot of class ggplot attempting to display the
+group variances. Also includes the max variance ratio
+(maximum variance divided by the minimum variance).
+}
 \description{
 Attempt to visualize variance per group.
 }

@@ -113,6 +113,9 @@ separately.}
 
 \item{p.y}{The y-axis coordinates for the p-value.}
 }
+\value{
+A scatter plot of class ggplot.
+}
 \description{
 Make nice scatter plots easily.
 }
@@ -123,14 +126,13 @@ nice_scatter(
   predictor = "wt",
   response = "mpg"
 )
-
-\dontrun{
+\donttest{
+\dontshow{.old_wd <- setwd(tempdir())}
 # Save a high-resolution image file to specified directory
-ggsave("nicescatterplothere.pdf",
-  width = 7, height = 7, unit = "in",
-  dpi = 300, path = "/"
+ggsave("nicescatterplothere.pdf", width = 7,
+  height = 7, unit = "in", dpi = 300
 ) # change for your own desired path
-
+\dontshow{setwd(.old_wd)}
 # Change x- and y- axis labels
 nice_scatter(
   data = mtcars,

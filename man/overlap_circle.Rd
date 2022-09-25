@@ -11,6 +11,10 @@ overlap_circle(response, categories = c("Self", "Other"))
 
 \item{categories}{The desired categories of the two overlapping circles.}
 }
+\value{
+A plot of class gList, displaying overlapping circles relative to the
+selected score.
+}
 \description{
 Interpolating the Inclusion of the Other in
 the Self Scale (self-other merging) easily.
@@ -28,12 +32,14 @@ overlap_circle(6.84)
 # Changing labels
 overlap_circle(3.12, categories = c("Humans", "Animals"))
 
-##  NOT RUN
+\donttest{
 # Saving to file (PDF or PNG)
-## plot <- overlap_circle(3.5)
-## ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)
+mypath <- tempfile(fileext = ".pdf")
+plot <- overlap_circle(3.5)
+ggplot2::ggsave(plot, file = mypath, width = 7,
+  height = 7, unit = 'in', dpi = 300)
 # Change for your own desired path
-
+}
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/circles}

@@ -5,7 +5,7 @@
 #'
 #' @param x The score to reverse.
 #' @param max The maximum score on the scale.
-#' @param min The miminum score on the scale (optional unless it isn't 1).
+#' @param min The minimum score on the scale (optional unless it isn't 1).
 #' @param warning Logical. Whether to show the warning
 #' about the minimum not being 1.
 #'

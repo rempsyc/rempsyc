@@ -9,18 +9,22 @@ scale_mad(x)
 \arguments{
 \item{x}{The vector to be scaled.}
 }
+\value{
+A numeric vector of standardized data.
+}
 \description{
 Scale and center ("standardize") data based on
 the median absolute deviation.
-
-See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L.
+}
+\examples{
+scale_mad(mtcars$mpg)
+}
+\references{
+Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L.
 (2013). Detecting outliers: Do not use standard deviation
 around the mean, use absolute deviation around the median.
 \emph{Journal of Experimental Social Psychology}, \emph{49}(4), 764–766.
 https://doi.org/10.1016/j.jesp.2013.03.013
-}
-\examples{
-scale_mad(mtcars$mpg)
 }
 \author{
 Hugues Leduc, Charles-Étienne Lavoie

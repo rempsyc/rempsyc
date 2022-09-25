@@ -11,7 +11,9 @@ vignette: >
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=7, fig.height=7, warning=FALSE, message=FALSE, out.width="70%")
+knitr::opts_chunk$set(fig.width = 7, fig.height = 7, warning = FALSE, 
+                      message = FALSE, out.width = "70%")
+.old_wd <- setwd(tempdir())
 ```
 
 ## Getting started
@@ -55,8 +57,7 @@ This is cool because it gives you a 95% bootstrapped confidence interval (with 2
 
 ```{r, eval = FALSE}
 ### Save a high-resolution image file to specified directory
-ggsave('nice_violinplothere.tiff', width = 7, height = 7, unit = 'in', dpi = 300,
-       path = "D:/R treasures/")
+ggsave('nice_violinplothere.tiff', width = 7, height = 7, unit = 'in', dpi = 300)
 # Change the path to where you would like to save it.
 # If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').
 # Also remember to specify the .tiff extension of the file.
@@ -263,14 +264,14 @@ statsSummary <- describeBy(x = ToothGrowth$len, group = ToothGrowth$groups, mat 
 # Add our annotations! (Warning: a bit more complicated code ahead!)
 ##+ fig.width=8
 library(ggplot2)
-p + annotate(geom="text", # First annotation adds the average
-             x=1:length(levels(ToothGrowth$groups)), # Specifies annotations is for all groups/x-axis ticks
-             y=statsSummary$mean+2, # Puts mean at mean value on the y-axis (adds 2)
-             label=paste0("m=", round(statsSummary$mean,2))) + # That prints the mean on the plot
-  annotate(geom="text", # (Second annotation adds the sample size)
-           x=1:length(levels(ToothGrowth$groups)),
-           y=statsSummary$mean-2, # Puts sample size at mean value on the y-axis (substracts 2)
-           label=paste0("n=", round(statsSummary$n,2))) # That prints the sample size on the plot
+p + annotate(geom = "text", # First annotation adds the average
+             x = seq(length(levels(ToothGrowth$groups))), # Specifies annotations is for all groups/x-axis ticks
+             y = statsSummary$mean+2, # Puts mean at mean value on the y-axis (adds 2)
+             label = paste0("m =", round(statsSummary$mean, 2))) + # That prints the mean on the plot
+  annotate(geom = "text", # (Second annotation adds the sample size)
+           x = seq(length(levels(ToothGrowth$groups))),
+           y = statsSummary$mean-2, # Puts sample size at mean value on the y-axis (substracts 2)
+           label = paste0("n =", round(statsSummary$n, 2))) # That prints the sample size on the plot
 ```
 
 ### Thanks for checking in

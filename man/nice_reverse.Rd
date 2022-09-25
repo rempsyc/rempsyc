@@ -11,13 +11,13 @@ nice_reverse(x, max, min = 1, warning = TRUE)
 
 \item{max}{The maximum score on the scale.}
 
-\item{min}{The miminum score on the scale (optional unless it isn't 1).}
+\item{min}{The minimum score on the scale (optional unless it isn't 1).}
 
 \item{warning}{Logical. Whether to show the warning
 about the minimum not being 1.}
 }
 \value{
-A density plot of class ggplot, by group (if provided), along a
+A numeric vector, of reversed scores.
 }
 \description{
 Easily recode scores (reverse-score),

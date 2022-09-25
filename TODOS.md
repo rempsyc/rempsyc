@@ -1,5 +1,6 @@
 # Development objectives (to-do list)
 
+-   Update `README` with new util functions...
 -   all `lm` functions
     -   Add 95% confidence interval for sr2
 -   `winsorize_mad`

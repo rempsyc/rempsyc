@@ -53,6 +53,7 @@
 #' @param d.y The y-axis coordinates for the d-value.
 #'
 #' @keywords violin plots
+#' @return A violin plot of class ggplot, by group.
 #' @export
 #' @examples
 #' # Make the basic plot
@@ -62,15 +63,13 @@
 #'   response = "len",
 #'   bootstraps = 200,
 #' )
-#'
-#' \dontrun{
+#' \donttest{
+#' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Save a high-resolution image file to specified directory
-#' ggsave("niceviolinplothere.pdf",
-#'   width = 7, height = 7, unit = "in",
-#'   dpi = 300, path = "/"
+#' ggsave("niceviolinplothere.pdf", width = 7,
+#'   height = 7, unit = "in", dpi = 300
 #' ) # change for your own desired path
-#'
-#'
+#' \dontshow{setwd(.old_wd)}
 #' # Change x- and y- axes labels
 #' nice_violin(
 #'   data = ToothGrowth,
@@ -178,7 +177,6 @@
 #'   has.d = TRUE
 #' )
 #' }
-#'
 #' @seealso
 #' Visualize group differences via scatter plots:
 #' \code{\link{nice_scatter}}. Tutorial:

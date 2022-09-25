@@ -16,6 +16,13 @@ nice_var(data, variable, group, criteria = 4)
 \item{criteria}{Desired threshold if one wants something
 different than four times the variance.}
 }
+\value{
+A dataframe, with the values of the selected variables for
+each group, their max variance ratio (maximum variance divided by
+the minimum variance), the selected decision criterion, and whether
+the data are considered heteroscedastic according to the decision
+criterion.
+}
 \description{
 Obtain variance per group as well as check for
 the rule of thumb of one group having variance four times
