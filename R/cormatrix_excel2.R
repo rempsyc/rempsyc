@@ -33,12 +33,14 @@
 #'         sheet, and the colour-coded p-values on the second sheet.
 #' @export
 #' @examples
+#' \donttest{
 #' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Basic example
 #' cormatrix_excel2(mtcars, "cormatrix1")
 #' cormatrix_excel2(iris, p_adjust = "none", "cormatrix2")
 #' cormatrix_excel2(airquality, method = "spearman", "cormatrix3")
 #' \dontshow{setwd(.old_wd)}
+#' }
 
 cormatrix_excel2 <- function(data,
                              filename,

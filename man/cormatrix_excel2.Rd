@@ -52,12 +52,14 @@ In the meanwhile, it is experimental and subject to change.
 Use with care.
 }
 \examples{
+\donttest{
 \dontshow{.old_wd <- setwd(tempdir())}
 # Basic example
 cormatrix_excel2(mtcars, "cormatrix1")
 cormatrix_excel2(iris, p_adjust = "none", "cormatrix2")
 cormatrix_excel2(airquality, method = "spearman", "cormatrix3")
 \dontshow{setwd(.old_wd)}
+}
 }
 \author{
 Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
