@@ -1,4 +1,4 @@
-## 0.0.9 [in preparation]
+## 0.0.9
 * CRAN resubmission!
 
 ## rempsyc 0.0.8.2
