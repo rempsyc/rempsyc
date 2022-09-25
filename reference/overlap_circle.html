@@ -18,7 +18,7 @@ the Self Scale (self-other merging) easily."><meta property="og:image" content="
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,6 +114,13 @@ the Self Scale (self-other merging) easily.</p>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A plot of class gList, displaying overlapping circles relative to the
+selected score.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/circles">https://rempsyc.remi-theriault.com/articles/circles</a></p></div>
     </div>
@@ -136,12 +143,15 @@ the Self Scale (self-other merging) easily.</p>
 <span class="r-in"><span><span class="fu">overlap_circle</span><span class="op">(</span><span class="fl">3.12</span>, categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Humans"</span>, <span class="st">"Animals"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="overlap_circle-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">##  NOT RUN</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Saving to file (PDF or PNG)</span></span></span>
-<span class="r-in"><span><span class="co">## plot &lt;- overlap_circle(3.5)</span></span></span>
-<span class="r-in"><span><span class="co">## ggplot2::ggsave(plot, file=NULL, width=7, height=7, unit='in', dpi=300)</span></span></span>
+<span class="r-in"><span><span class="va">mypath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".pdf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu">overlap_circle</span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="overlap_circle-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">plot</span>, file <span class="op">=</span> <span class="va">mypath</span>, width <span class="op">=</span> <span class="fl">7</span>,</span></span>
+<span class="r-in"><span>  height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Change for your own desired path</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
