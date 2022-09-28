@@ -117,7 +117,7 @@ find_mad0 <- function(data, col.list, ID = ID, criteria = 3, mad.scores) {
   data
 }
 
-#' @noRd
+#' @export
 print.find_mad <- function(x, ...) {
   mad0 <- attr(x, "outlier_total")
   duplicates.df <- attr(x, "outlier_multiple")

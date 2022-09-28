@@ -112,6 +112,7 @@ nice_na_internal <- function(data) {
       na_percent = round(na / cells * 100, 2),
       na_max = max(rowSums(is.na(.))),
       na_max_percent = round(na_max / ncol(.) * 100, 2)) %>%
-    mutate(all_na = sum(apply(data, 1, function(x) sum(is.na(x))) == ncol(data)))
-
+    mutate(all_na = sum(apply(data, 1, function(x) {
+      sum(is.na(x)) == ncol(data)
+      })))
 }

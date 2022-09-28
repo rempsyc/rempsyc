@@ -52,7 +52,7 @@ nice_assumptions <- function(model) {
   df
 }
 
-#' @noRd
+#' @export
 print.nice_assumptions <- function(x, ...) {
   cat(
     "Interpretation: (p) values < .05 imply assumptions are not respected. ",

@@ -104,7 +104,8 @@ nice_t_test <- function(data,
   }
   if (!hasArg(var.equal) & paired == FALSE & warning == TRUE) {
     message_white(
-      "Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
+      "Using Welch t-test (base R's default; ",
+      "cf. https://doi.org/10.5334/irsp.82).
 For the Student t-test, use `var.equal = TRUE`. \n "
     )
   }

@@ -10,9 +10,9 @@
 #' for column names that should be italic but that are not picked
 #' up automatically by the function. Select with numerical range, e.g., 1:3.
 #' @param highlight Highlight rows with statistically significant
-#'  results? Requires a column named "p" containing p-values.
-#'  Can either accept logical (TRUE/FALSE) OR a numeric value for
-#'  a custom critical p-value threshold (e.g., 0.10 or 0.001).
+#' results? Requires a column named "p" containing p-values.
+#' Can either accept logical (TRUE/FALSE) OR a numeric value for
+#' a custom critical p-value threshold (e.g., 0.10 or 0.001).
 #' @param col.format.p Applies p-value formatting to columns
 #' that cannot be named "p" (for example for a data frame full
 #' of p-values, also because it is not possible to have more
@@ -21,6 +21,8 @@
 #' that cannot be named "r" (for example for a data frame full
 #' of r-values, also because it is not possible to have more
 #' than one column named "r"). Select with numerical range, e.g., 1:3.
+#' @param col.format.ci Applies 95% confidence interval formatting
+#' to selected columns (e.g., when reporting more than one interval).
 #' @param format.custom Applies custom formatting to columns
 #' selected via the `col.format.custom` argument. This is useful
 #' if one wants custom formatting other than for p- or r-values.
@@ -41,7 +43,8 @@
 #' version of the tables made by the `report` package.
 #' @param title Optional, to add a table header, if desired.
 #' @param footnote Optional, to add a table footnote (or more), if desired.
-#' @param separate.header Logical, whether to separate headers based on name delimiters (i.e., periods ".").
+#' @param separate.header Logical, whether to separate headers based
+#'                        on name delimiters (i.e., periods ".").
 #'
 #' @keywords APA style table
 #' @return An APA-formatted table of class "flextable" (and "nice_table").
@@ -137,6 +140,7 @@ nice_table <- function(data,
                        italics,
                        col.format.p,
                        col.format.r,
+                       col.format.ci,
                        format.custom,
                        col.format.custom,
                        width = 1,
@@ -350,10 +354,31 @@ nice_table <- function(data,
   if ("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
   }
+
+  if (!missing(col.format.ci)) {
+
+    if(class(col.format.ci) != "list") {
+      col.format.ci <- list(col.format.ci)
+    }
+
+    for (x in col.format.ci) {
+      ci.pattern <- gsub("\\..*", ".", x)[1]
+      ci.name <- paste0(ci.pattern, "95% CI")
+      dataframe <- format_CI(
+        dataframe, x, col.name =
+          ci.name) %>%
+        relocate(ci.name, .after = select(
+          ., contains(ci.pattern), -last_col()) %>%
+            select(last_col()) %>% names
+          )
+    }
+  }
+
   dataframe %>%
     mutate(across(contains("95% CI"), ~ ifelse(
       .x == "[ NA,  NA]", "", .x
     ))) -> dataframe
+
   if (highlight == TRUE) {
     dataframe %>%
       mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
@@ -412,7 +437,7 @@ nice_table <- function(data,
 
   if (!missing(separate.header)) {
     table <- table %>%
-      separate_header("span-top")
+      separate_header("span-top", split = "[.]")
   }
 
   table <- table %>%
@@ -424,6 +449,7 @@ nice_table <- function(data,
 
   ##  ....................................
   ##  Special cases                  ####
+  # Fix header
   if (!missing(italics) & missing(separate.header)) {
     table %>%
       italic(j = italics, part = "header") -> table
@@ -433,6 +459,7 @@ nice_table <- function(data,
     table %>%
       italic(j = italics, i = level.number, part = "header") -> table
   }
+  # Degrees of freedom
   if ("df" %in% names(dataframe)) {
     df.digits <- ifelse(any(dataframe$df %% 1 == 0), 0, 2)
     table %>%
@@ -548,9 +575,8 @@ nice_table <- function(data,
   table %>%
     colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
-             select(-matches("^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|
-                            ^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|
-                             ^sr2$",
+             select(-matches(
+"^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|^sr2$",
                              ignore.case = FALSE
              )) %>% names()),
       big.mark = ",", digits = 2
@@ -582,8 +608,8 @@ nice_table <- function(data,
     eval(parse(text = rExpression))
   }
 
-  #   ____________________________________________________________________________
-  #   Final touch up (title)                                                  ####
+  #   ___________________________
+  #   Final touch up (title) ####
 
   if (!missing(title)) {
     invisible.borders <- fp_border_default("width" = 0)

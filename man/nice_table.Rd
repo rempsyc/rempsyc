@@ -10,6 +10,7 @@ nice_table(
   italics,
   col.format.p,
   col.format.r,
+  col.format.ci,
   format.custom,
   col.format.custom,
   width = 1,
@@ -44,6 +45,9 @@ that cannot be named "r" (for example for a data frame full
 of r-values, also because it is not possible to have more
 than one column named "r"). Select with numerical range, e.g., 1:3.}
 
+\item{col.format.ci}{Applies 95\% confidence interval formatting
+to selected columns (e.g., when reporting more than one interval).}
+
 \item{format.custom}{Applies custom formatting to columns
 selected via the \code{col.format.custom} argument. This is useful
 if one wants custom formatting other than for p- or r-values.
@@ -72,7 +76,8 @@ version of the tables made by the \code{report} package.}
 
 \item{footnote}{Optional, to add a table footnote (or more), if desired.}
 
-\item{separate.header}{Logical, whether to separate headers based on name delimiters (i.e., periods ".").}
+\item{separate.header}{Logical, whether to separate headers based
+on name delimiters (i.e., periods ".").}
 }
 \value{
 An APA-formatted table of class "flextable" (and "nice_table").

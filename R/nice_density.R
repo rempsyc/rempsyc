@@ -18,9 +18,9 @@
 #' from the Shapiro-Wilk test on the plot.
 #' @param title The desired title of the plot. Can be put to `NULL` to remove.
 #' @param histogram Logical, whether to add an histogram
-#' @param breaks.auto If histogram = TRUE, then option to set bins/breaks automatically,
-#'                    mimicking the default behaviour of base R `hist()` (the Sturges
-#'                    method). Defaults to `FALSE`.
+#' @param breaks.auto If histogram = TRUE, then option to set bins/breaks
+#'                    automatically, mimicking the default behaviour of base
+#'                    R `hist()` (the Sturges method). Defaults to `FALSE`.
 #' @param bins If histogram = TRUE, then option to change the default bin (30).
 #' @keywords density normality
 #' @return A density plot of class ggplot, by group (if provided), along a

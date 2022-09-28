@@ -6,9 +6,10 @@
 #' @param response The variable to plot.
 #' @param categories The desired categories of the two overlapping circles.
 #'
-#' @keywords self-other merging self-other overlap Venn diagrams social psychology
-#' @return A plot of class gList, displaying overlapping circles relative to the
-#'         selected score.
+#' @keywords self-other merging self-other overlap Venn diagrams social
+#'           psychology
+#' @return A plot of class gList, displaying overlapping circles relative
+#'         to the selected score.
 #' @export
 #' @examples
 #' # Score of 1 (0% overlap)

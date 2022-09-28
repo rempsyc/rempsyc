@@ -17,9 +17,10 @@
 #' @param title An optional title, if desired.
 #' @param histogram Logical, whether to add an histogram
 #' on top of the density plot.
-#' @param breaks.auto If histogram = TRUE, then option to set bins/breaks automatically,
-#'                    mimicking the default behaviour of base R `hist()` (the Sturges
-#'                    method). Defaults to `FALSE`.
+#' @param breaks.auto If histogram = TRUE, then option to set bins/breaks
+#'                    automatically, mimicking the default behaviour of
+#'                    base R `hist()` (the Sturges method). Defaults to
+#'                    `FALSE`.
 #' @param ... Further arguments from `nice_qq()` and
 #' `nice_density()` to be passed to `nice_normality()`
 #'

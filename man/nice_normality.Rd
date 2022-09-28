@@ -42,9 +42,10 @@ the Shapiro-Wilk test on the plot.}
 \item{histogram}{Logical, whether to add an histogram
 on top of the density plot.}
 
-\item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks automatically,
-mimicking the default behaviour of base R \code{hist()} (the Sturges
-method). Defaults to \code{FALSE}.}
+\item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks
+automatically, mimicking the default behaviour of
+base R \code{hist()} (the Sturges method). Defaults to
+\code{FALSE}.}
 
 \item{...}{Further arguments from \code{nice_qq()} and
 \code{nice_density()} to be passed to \code{nice_normality()}}

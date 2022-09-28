@@ -320,7 +320,8 @@ nice_scatter <- function(data,
     levels(data[[group]]) <- groups.labels
   }
   if (has.confband == TRUE & missing(group)) {
-    band <- geom_smooth(formula = y ~ x, method = "lm", colour = NA, fill = colours)
+    band <- geom_smooth(formula = y ~ x, method = "lm",
+                        colour = NA, fill = colours)
   }
   if (has.confband == TRUE & !missing(group)) {
     band <- geom_smooth(formula = y ~ x, method = "lm", colour = NA)

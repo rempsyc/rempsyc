@@ -25,8 +25,9 @@ function for the models.}
 }
 \value{
 A formatted dataframe of the simple slopes of the specified lm model,
-with DV, levels of IV, degrees of freedom, regression coefficient, t-value,
-p-value, and the effect size, the semi-partial correlation squared.
+with DV, levels of IV, degrees of freedom, regression coefficient,
+t-value, p-value, and the effect size, the semi-partial correlation
+squared.
 }
 \description{
 Extracts simple slopes from \code{lm} model

@@ -48,9 +48,9 @@ from the Shapiro-Wilk test on the plot.}
 
 \item{histogram}{Logical, whether to add an histogram}
 
-\item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks automatically,
-mimicking the default behaviour of base R \code{hist()} (the Sturges
-method). Defaults to \code{FALSE}.}
+\item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks
+automatically, mimicking the default behaviour of base
+R \code{hist()} (the Sturges method). Defaults to \code{FALSE}.}
 
 \item{bins}{If histogram = TRUE, then option to change the default bin (30).}
 }

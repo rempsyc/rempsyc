@@ -12,8 +12,8 @@ overlap_circle(response, categories = c("Self", "Other"))
 \item{categories}{The desired categories of the two overlapping circles.}
 }
 \value{
-A plot of class gList, displaying overlapping circles relative to the
-selected score.
+A plot of class gList, displaying overlapping circles relative
+to the selected score.
 }
 \description{
 Interpolating the Inclusion of the Other in
