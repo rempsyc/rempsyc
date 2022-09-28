@@ -358,7 +358,7 @@ nice_table <- function(data,
 
   if (!missing(col.format.ci)) {
 
-    if(class(col.format.ci) != "list") {
+    if(!is(col.format.ci, "list")) {
       col.format.ci <- list(col.format.ci)
     }
 
