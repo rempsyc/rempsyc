@@ -162,135 +162,11 @@ by using the <code><a href="https://rdrr.io/r/base/attributes.html" class="exter
 <span class="r-in"><span>  col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  criteria <span class="op">=</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qsec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row qsec_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   9 3.665557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 outlier(s) based on 3 median absolute deviations for variable(s): </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $vs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row vs_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    6    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    8    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    9    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   10    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   11    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   18    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   19    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  20    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  21    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  26    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  28    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  32    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The following participants were considered outliers for more than one variable: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $am</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row am_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   18    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   19    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   20    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   26    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   27    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   28    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  29    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  30    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  31    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  32    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row carb_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  31 4.046945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "find_mad"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$qsec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row qsec_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   9 3.665557</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$vs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row vs_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    6    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    8    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    9    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   10    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   11    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   18    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   19    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  20    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  21    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  26    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  28    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  32    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$am</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row am_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   18    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   19    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   20    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   26    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   27    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   28    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  29    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  30    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  31    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  32    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row carb_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  31 4.046945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_total")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row     mpg_mad    cyl_mad   disp_mad     hp_mad     drat_mad     wt_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1  0.33262558  0.0000000 -0.2584065 -0.1686227  0.291096012 -0.9188715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2  0.33262558  0.0000000 -0.2584065 -0.1686227  0.291096012 -0.5865137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3  0.66525116 -0.6744908 -0.6285756 -0.3891293  0.220096985 -1.3098806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    4  0.40654238  0.0000000  0.4392198 -0.1686227 -0.873288036 -0.1433700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    6 -0.20327119  0.0000000  0.2043049 -0.2334776 -1.327681811  0.1759541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    8  0.96091834 -0.6744908 -0.3530843 -0.7912295 -0.007099903 -0.1759541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    9  0.66525116 -0.6744908 -0.3950843 -0.3631873  0.319495623 -0.2280887</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   10  0.00000000  0.0000000 -0.2043049  0.0000000  0.319495623  0.1498868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   11 -0.25870878  0.0000000 -0.2043049  0.0000000  0.319495623  0.1498868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  18  2.43925425 -0.6744908 -0.8371516 -0.7393456  0.546692510 -1.4662843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  19  2.06967028 -0.6744908 -0.8585075 -0.9209393  1.753675975 -2.2287521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  20  2.71644224 -0.6744908 -0.8912532 -0.7523166  0.745489787 -1.9420120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  21  0.42502157 -0.6744908 -0.5424401 -0.3372454  0.007099903 -1.1208929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  26  1.49681511 -0.6744908 -0.8350160 -0.7393456  0.546692510 -1.8116757</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  27  1.25658552 -0.6744908 -0.5410163 -0.4150712  1.043685702 -1.5444861</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  28  2.06967028 -0.6744908 -0.7204060 -0.1297098  0.106498541 -2.3616952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  29 -0.62829276  0.6744908  1.1012530  1.8289076  0.745489787 -0.2020214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  30  0.09239599  0.0000000 -0.3651860  0.6744908 -0.106498541 -0.7233669</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  31 -0.77612635  0.6744908  0.7453212  2.7498469 -0.220096985  0.3193241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  32  0.40654238 -0.6744908 -0.5360333 -0.1815937  0.589291927 -0.7103333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      qsec_mad vs_mad am_mad   gear_mad   carb_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  -0.8828413    NaN    Inf  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  -0.4873284    NaN    Inf  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   0.6356457    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1.2218524    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   1.7727453    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   1.6173653    Inf    NaN  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   3.6655571    Inf    NaN  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   0.4167011    Inf    NaN  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   0.8404649    Inf    NaN  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  1.2430406    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  0.5720812    Inf    Inf  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  1.5467380    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  1.6244280    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  0.8404649    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 -0.7133358    NaN    Inf  0.6744908  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 -0.5720812    Inf    Inf  0.6744908  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 -2.2671365    NaN    Inf  0.6744908  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 -1.5608634    NaN    Inf  0.6744908  2.6979630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 -2.1965092    NaN    Inf  0.6744908  4.0469446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  0.6285830    Inf    Inf  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_multiple")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Row n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   9 2</span>
@@ -301,11 +177,50 @@ by using the <code><a href="https://rdrr.io/r/base/attributes.html" class="exter
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7  28 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  31 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  32 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"criteria")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"col.list")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "carb"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers per variable: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $qsec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Row qsec_mad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   9 3.665557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $vs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Row vs_mad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    6    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    8    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    9    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   10    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   11    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   18    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   19    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  20    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  21    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  26    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  28    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  32    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $am</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Row am_mad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   18    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   19    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   20    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   26    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   27    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   28    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  29    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  30    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  31    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  32    Inf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Row carb_mad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  31 4.046945</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mtcars2</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span></span>
 <span class="r-in"><span><span class="va">mtcars2</span><span class="op">$</span><span class="va">car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
@@ -315,6 +230,24 @@ by using the <code><a href="https://rdrr.io/r/base/attributes.html" class="exter
 <span class="r-in"><span>  ID <span class="op">=</span> <span class="st">"car"</span>,</span></span>
 <span class="r-in"><span>  criteria <span class="op">=</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 outlier(s) based on 3 median absolute deviations for variable(s): </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The following participants were considered outliers for more than one variable: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Row            car n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   3     Datsun 710 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   9       Merc 230 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  18       Fiat 128 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  19    Honda Civic 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 Toyota Corolla 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  26      Fiat X1-9 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  28   Lotus Europa 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  31  Maserati Bora 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  32     Volvo 142E 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers per variable: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $qsec</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Row      car qsec_mad</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   9 Merc 230 3.665557</span>
@@ -356,109 +289,6 @@ by using the <code><a href="https://rdrr.io/r/base/attributes.html" class="exter
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Row           car carb_mad</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  31 Maserati Bora 4.046945</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "find_mad"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$qsec</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row      car qsec_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   9 Merc 230 3.665557</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$vs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row            car vs_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3     Datsun 710    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    4 Hornet 4 Drive    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    6        Valiant    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    8      Merc 240D    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    9       Merc 230    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   10       Merc 280    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   11      Merc 280C    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   18       Fiat 128    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   19    Honda Civic    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  20 Toyota Corolla    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  21  Toyota Corona    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  26      Fiat X1-9    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  28   Lotus Europa    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  32     Volvo 142E    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$am</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row            car am_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1      Mazda RX4    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2  Mazda RX4 Wag    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3     Datsun 710    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   18       Fiat 128    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   19    Honda Civic    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   20 Toyota Corolla    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   26      Fiat X1-9    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   27  Porsche 914-2    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   28   Lotus Europa    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  29 Ford Pantera L    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  30   Ferrari Dino    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  31  Maserati Bora    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  32     Volvo 142E    Inf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_list")$carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row           car carb_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  31 Maserati Bora 4.046945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_total")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Row            car     mpg_mad    cyl_mad   disp_mad     hp_mad     drat_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    1      Mazda RX4  0.33262558  0.0000000 -0.2584065 -0.1686227  0.291096012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    2  Mazda RX4 Wag  0.33262558  0.0000000 -0.2584065 -0.1686227  0.291096012</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    3     Datsun 710  0.66525116 -0.6744908 -0.6285756 -0.3891293  0.220096985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    4 Hornet 4 Drive  0.40654238  0.0000000  0.4392198 -0.1686227 -0.873288036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    6        Valiant -0.20327119  0.0000000  0.2043049 -0.2334776 -1.327681811</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    8      Merc 240D  0.96091834 -0.6744908 -0.3530843 -0.7912295 -0.007099903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    9       Merc 230  0.66525116 -0.6744908 -0.3950843 -0.3631873  0.319495623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   10       Merc 280  0.00000000  0.0000000 -0.2043049  0.0000000  0.319495623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   11      Merc 280C -0.25870878  0.0000000 -0.2043049  0.0000000  0.319495623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  18       Fiat 128  2.43925425 -0.6744908 -0.8371516 -0.7393456  0.546692510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  19    Honda Civic  2.06967028 -0.6744908 -0.8585075 -0.9209393  1.753675975</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  20 Toyota Corolla  2.71644224 -0.6744908 -0.8912532 -0.7523166  0.745489787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  21  Toyota Corona  0.42502157 -0.6744908 -0.5424401 -0.3372454  0.007099903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  26      Fiat X1-9  1.49681511 -0.6744908 -0.8350160 -0.7393456  0.546692510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  27  Porsche 914-2  1.25658552 -0.6744908 -0.5410163 -0.4150712  1.043685702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  28   Lotus Europa  2.06967028 -0.6744908 -0.7204060 -0.1297098  0.106498541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  29 Ford Pantera L -0.62829276  0.6744908  1.1012530  1.8289076  0.745489787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  30   Ferrari Dino  0.09239599  0.0000000 -0.3651860  0.6744908 -0.106498541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  31  Maserati Bora -0.77612635  0.6744908  0.7453212  2.7498469 -0.220096985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  32     Volvo 142E  0.40654238 -0.6744908 -0.5360333 -0.1815937  0.589291927</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        wt_mad   qsec_mad vs_mad am_mad   gear_mad   carb_mad</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  -0.9188715 -0.8828413    NaN    Inf  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  -0.5865137 -0.4873284    NaN    Inf  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  -1.3098806  0.6356457    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  -0.1433700  1.2218524    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   0.1759541  1.7727453    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  -0.1759541  1.6173653    Inf    NaN  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  -0.2280887  3.6655571    Inf    NaN  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   0.1498868  0.4167011    Inf    NaN  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   0.1498868  0.8404649    Inf    NaN  0.0000000  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 -1.4662843  1.2430406    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 -2.2287521  0.5720812    Inf    Inf  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 -1.9420120  1.5467380    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 -1.1208929  1.6244280    Inf    NaN -0.6744908 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 -1.8116757  0.8404649    Inf    Inf  0.0000000 -0.6744908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 -1.5444861 -0.7133358    NaN    Inf  0.6744908  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 -2.3616952 -0.5720812    Inf    Inf  0.6744908  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 -0.2020214 -2.2671365    NaN    Inf  0.6744908  1.3489815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 -0.7233669 -1.5608634    NaN    Inf  0.6744908  2.6979630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  0.3193241 -2.1965092    NaN    Inf  0.6744908  4.0469446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 -0.7103333  0.6285830    Inf    Inf  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"outlier_multiple")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Row            car n</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   3     Datsun 710 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   9       Merc 230 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  18       Fiat 128 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  19    Honda Civic 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 Toyota Corolla 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  26      Fiat X1-9 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  28   Lotus Europa 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  31  Maserati Bora 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  32     Volvo 142E 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"criteria")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"col.list")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "carb"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

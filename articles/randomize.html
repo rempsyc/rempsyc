@@ -147,15 +147,15 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1         c</span></span>
+<span><span class="co">## 1  1         b</span></span>
 <span><span class="co">## 2  2         a</span></span>
-<span><span class="co">## 3  3         b</span></span>
-<span><span class="co">## 4  4         c</span></span>
-<span><span class="co">## 5  5         a</span></span>
-<span><span class="co">## 6  6         b</span></span>
+<span><span class="co">## 3  3         c</span></span>
+<span><span class="co">## 4  4         b</span></span>
+<span><span class="co">## 5  5         c</span></span>
+<span><span class="co">## 6  6         a</span></span>
 <span><span class="co">## 7  7         b</span></span>
-<span><span class="co">## 8  8         a</span></span>
-<span><span class="co">## 9  9         c</span></span></code></pre>
+<span><span class="co">## 8  8         c</span></span>
+<span><span class="co">## 9  9         a</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and names of conditions:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"between"</span>, </span>
@@ -163,16 +163,17 @@
 <span>               n <span class="op">=</span> <span class="fl">8</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1        PZ</span></span>
-<span><span class="co">## 2  2        BP</span></span>
-<span><span class="co">## 3  3        ZL</span></span>
-<span><span class="co">## 4  4        CX</span></span>
-<span><span class="co">## 5  5        ZL</span></span>
+<span><span class="co">## 1  1        BP</span></span>
+<span><span class="co">## 2  2        PZ</span></span>
+<span><span class="co">## 3  3        CX</span></span>
+<span><span class="co">## 4  4        ZL</span></span>
+<span><span class="co">## 5  5        PZ</span></span>
 <span><span class="co">## 6  6        BP</span></span>
-<span><span class="co">## 7  7        PZ</span></span>
-<span><span class="co">## 8  8        CX</span></span></code></pre>
+<span><span class="co">## 7  7        CX</span></span>
+<span><span class="co">## 8  8        ZL</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your number of groups if using "between"!</span></span>
+<code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your </span></span>
+<span><span class="co"># number of groups if using "between"!</span></span>
 <span><span class="co"># FYI: condition names stand for popular antidepressants:</span></span>
 <span><span class="co"># BP = Bupropion, CX = Celexa, PZ = Prozac, ZL = Zoloft.</span></span></code></pre></div>
 <p>Be aware that this function won’t work for between-group designs unless your sample size is a multiple of your number of groups (so for 4 groups, sample size can’t be 5, 6, or 7, but you can have 4, 8, 12, etc., participants). You can still try otherwise but you will get an error and a warning message. That is because it works by “blocks” so some operations won’t be able to be completed otherwise.</p>
@@ -184,15 +185,15 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
-<span><span class="co">## 1  1 a - c - b</span></span>
-<span><span class="co">## 2  2 b - a - c</span></span>
-<span><span class="co">## 3  3 b - a - c</span></span>
-<span><span class="co">## 4  4 c - b - a</span></span>
-<span><span class="co">## 5  5 c - b - a</span></span>
-<span><span class="co">## 6  6 b - a - c</span></span>
-<span><span class="co">## 7  7 c - b - a</span></span>
-<span><span class="co">## 8  8 c - b - a</span></span>
-<span><span class="co">## 9  9 c - b - a</span></span></code></pre>
+<span><span class="co">## 1  1 b - c - a</span></span>
+<span><span class="co">## 2  2 c - a - b</span></span>
+<span><span class="co">## 3  3 c - b - a</span></span>
+<span><span class="co">## 4  4 c - a - b</span></span>
+<span><span class="co">## 5  5 b - c - a</span></span>
+<span><span class="co">## 6  6 c - a - b</span></span>
+<span><span class="co">## 7  7 c - a - b</span></span>
+<span><span class="co">## 8  8 a - b - c</span></span>
+<span><span class="co">## 9  9 a - b - c</span></span></code></pre>
 <p>Specify design, number of conditions, number of participants, and names of conditions:</p>
 <p>Note that you could call your conditions anything (like a, b, c, etc.).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -201,12 +202,12 @@
 <span>               n <span class="op">=</span> <span class="fl">6</span>, </span>
 <span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id         Condition</span></span>
-<span><span class="co">## 1  1 ST - AV - SV - AT</span></span>
-<span><span class="co">## 2  2 AV - ST - AT - SV</span></span>
-<span><span class="co">## 3  3 AV - ST - AT - SV</span></span>
-<span><span class="co">## 4  4 AT - ST - AV - SV</span></span>
-<span><span class="co">## 5  5 AT - SV - AV - ST</span></span>
-<span><span class="co">## 6  6 ST - SV - AV - AT</span></span></code></pre>
+<span><span class="co">## 1  1 SV - AT - ST - AV</span></span>
+<span><span class="co">## 2  2 SV - AV - ST - AT</span></span>
+<span><span class="co">## 3  3 ST - SV - AV - AT</span></span>
+<span><span class="co">## 4  4 AT - ST - SV - AV</span></span>
+<span><span class="co">## 5  5 ST - AT - AV - SV</span></span>
+<span><span class="co">## 6  6 AT - AV - SV - ST</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># FYI: condition names stand for forms of multisensory stimulation:</span></span>
 <span><span class="co"># SV = Synchronous Visual, AV = Asynchronous Visual, </span></span>
@@ -217,21 +218,22 @@
 </h2>
 <p>A nice way to make a run sheet quickly (regardless of design) is by adding column names in advance with the <code>col.names</code> argument:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nice_randomized_subjects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span>, </span>
-<span>                                           Ncondition <span class="op">=</span> <span class="fl">4</span>, </span>
-<span>                                           n <span class="op">=</span> <span class="fl">128</span>,</span>
-<span>                                           condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span>, </span>
-<span>                                           col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"Condition"</span>, <span class="st">"Date/Time"</span>,</span>
-<span>                                                         <span class="st">"SONA ID"</span>, <span class="st">"Age/Gd."</span>, <span class="st">"Handedness"</span>,</span>
-<span>                                                         <span class="st">"Tester"</span>, <span class="st">"Notes"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">nice_randomized_subjects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
+<span>  design <span class="op">=</span> <span class="st">"within"</span>, </span>
+<span>  Ncondition <span class="op">=</span> <span class="fl">4</span>, </span>
+<span>  n <span class="op">=</span> <span class="fl">128</span>,</span>
+<span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span>,<span class="st">"AT"</span><span class="op">)</span>, </span>
+<span>  col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"Condition"</span>, <span class="st">"Date/Time"</span>,</span>
+<span>                <span class="st">"SONA ID"</span>, <span class="st">"Age/Gd."</span>, <span class="st">"Handedness"</span>,</span>
+<span>                <span class="st">"Tester"</span>, <span class="st">"Notes"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id         Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes</span></span>
-<span><span class="co">## 1  1 SV - AT - AV - ST        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 2  2 AT - ST - SV - AV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 3  3 ST - AT - AV - SV        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 4  4 SV - AV - ST - AT        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 5  5 ST - SV - AV - AT        NA      NA      NA         NA     NA    NA</span></span>
-<span><span class="co">## 6  6 ST - SV - AT - AV        NA      NA      NA         NA     NA    NA</span></span></code></pre>
+<span><span class="co">## 1  1 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 2  2 SV - AV - AT - ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 3  3 SV - ST - AT - AV        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 4  4 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 5  5 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA</span></span>
+<span><span class="co">## 6  6 SV - AV - ST - AT        NA      NA      NA         NA     NA    NA</span></span></code></pre>
 <div class="section level3">
 <h3 id="save-data-frame-to-word">Save data frame to Word<a class="anchor" aria-label="anchor" href="#save-data-frame-to-word"></a>
 </h3>
@@ -242,7 +244,8 @@
 <code class="sourceCode R"><span><span class="va">runsheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">runsheet</span>, path <span class="op">=</span> <span class="st">"runsheet.docx"</span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
-<span><span class="co"># If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').</span></span>
+<span><span class="co"># If you copy-paste your path name, remember to </span></span>
+<span><span class="co"># use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .docx extension of the file.</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>After saving your dataframe to Word, open it in Word.</p></li>
