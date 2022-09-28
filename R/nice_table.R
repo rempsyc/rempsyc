@@ -122,6 +122,7 @@
 #'
 #' @importFrom dplyr mutate %>% select matches
 #' case_when relocate across contains select_if any_of
+#' last_col
 #' @importFrom flextable "flextable" hline_top hline_bottom
 #' fontsize font align set_table_properties italic
 #' set_formatter colformat_double compose bold bg
