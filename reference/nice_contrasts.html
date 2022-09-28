@@ -167,28 +167,28 @@ with the standard <em>t</em> test because it is based on all the cases
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
 <span class="r-in"><span>  bootstraps <span class="op">=</span> <span class="fl">200</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df        t            p       dR  CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29 8.904534 8.568209e-10 3.031774 2.2341355</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29 3.111825 4.152209e-03 1.245144 0.6929288</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29 4.441099 1.194696e-04 1.786630 1.0397759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df        t            p       dR CI_lower</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29 8.904534 8.568209e-10 3.031774 2.128758</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29 3.111825 4.152209e-03 1.245144 0.761717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29 4.441099 1.194696e-04 1.786630 1.065249</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 6.362425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.258520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.465155</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 7.059480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.467895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.520108</span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"disp"</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"gear"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t            p         dR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               disp      3 - 5 29  2.916870 6.759287e-03  1.5563371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2               disp      4 - 5 29 -1.816053 7.971420e-02 -0.7401368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3               disp      3 - 4 29  6.385087 5.569503e-07  2.2964738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      CI_lower  CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.02775238 4.1750408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -3.43800271 0.3392777</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1.22819420 3.7347089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t            p         dR   CI_lower</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               disp      3 - 5 29  2.916870 6.759287e-03  1.5563371 -0.1868027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2               disp      4 - 5 29 -1.816053 7.971420e-02 -0.7401368 -3.7516199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3               disp      3 - 4 29  6.385087 5.569503e-07  2.2964738  1.3464958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 3.9065395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.3442291</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.7102408</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
@@ -207,15 +207,15 @@ with the standard <em>t</em> test because it is based on all the cases
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8                 hp      6 - 8 29  -3.131986 3.945539e-03 -2.4530496</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9                 hp      4 - 6 29  -2.162695 3.894886e-02 -0.9315681</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     CI_lower   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2.1324807  5.9241348</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.6943559  2.4087309</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1.0645285  3.9956215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -4.9820195 -2.4779276</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -3.7444307 -1.4195853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.7408602 -0.4863272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 -6.7164194 -2.4047485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 -3.9585794 -1.5814243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9 -1.7776766 -0.3807500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2.1129777  5.9696563</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.7094658  2.3097686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1.0470000  3.9432673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -4.9283386 -2.4516149</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -3.8450369 -1.4282393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.7315776 -0.4669214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 -6.6569224 -2.5008597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 -4.3417392 -1.5975254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 -1.7923365 -0.4400036</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adding covariates</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
@@ -225,13 +225,13 @@ with the standard <em>t</em> test because it is based on all the cases
 <span class="r-in"><span>  covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df          t          p       dR  CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 27  0.7506447 0.45935889 3.031774 2.0976071</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 27 -0.6550186 0.51799786 1.245144 0.7192606</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 27  2.3955766 0.02379338 1.786630 1.0404635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 27  0.7506447 0.45935889 3.031774 2.1194594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 27 -0.6550186 0.51799786 1.245144 0.7023067</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 27  2.3955766 0.02379338 1.786630 1.0451005</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.658292</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.383559</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.765252</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.741308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.373101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.951967</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
