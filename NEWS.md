@@ -1,3 +1,6 @@
+# rempsyc 0.0.9.2
+* `nice_table`: Multilevel headings, with the `separate.header` argument, now supports automatic formatting (of p-values, confidence intervals, etc.).
+
 # rempsyc 0.0.9.1
 * `nice_table`: 
     * fixed sr2 incorrectly showing leading zero.

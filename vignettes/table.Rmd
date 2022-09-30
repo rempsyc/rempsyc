@@ -214,6 +214,14 @@ nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 fun <- function(x) {paste("×", x)}
 
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
+
+fun <- function(x) {formatC(x, format = "f", digits = 0)}
+
+nice_table(test[3:6], col.format.custom = 1:4, format.custom = "fun")
+
+fun <- function(x) {formatC(x, format = "f", digits = 5)}
+
+nice_table(test[3:6], col.format.custom = 1:4, format.custom = "fun")
 ```
 
 ---
@@ -305,6 +313,26 @@ nice_table(wide.data, separate.header = TRUE, italics = seq(wide.data))
 ```
 
 If you find a more efficient way to do this (the data wrangling part), please let me know. Nice result though!
+
+### Multilevel heading, with formatting
+
+Another colleague asked, whether it was possible to use the multilevel headings, while still benefiting from the regular automatic formatting of the p-values, confidence intervals, etc. That wasa a challenging task to implement, but I think I've got something that should *mostly* work. Demo:
+
+```{r}
+T1.mpg <- nice_t_test(data = mtcars, response = "mpg", group = "am")
+T2.mpg <- nice_t_test(data = mtcars, response = "mpg", group = "vs")
+T1.disp <- nice_t_test(data = mtcars, response = "disp", group = "am")
+T2.disp <- nice_t_test(data = mtcars, response = "disp", group = "vs")
+names(T1.mpg)[-1] <- paste0("T1.", names(T1.mpg)[-1])
+names(T2.mpg) <- paste0("T2.", names(T2.mpg))
+names(T1.disp)[-1] <- paste0("T1.", names(T1.disp)[-1])
+names(T2.disp) <- paste0("T2.", names(T2.disp))
+T1 <- rbind(T1.mpg, T1.disp)
+T2 <- rbind(T2.mpg, T2.disp)
+wide.data <- cbind(T1, T2[-(1)])
+nice_table(wide.data)
+nice_table(wide.data, separate.header = TRUE)
+```
 
 ### Thanks for checking in
     

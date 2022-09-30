@@ -23,6 +23,7 @@
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
 -   `nice_contrasts`
+    -   Check something weird going on with vignette!
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
     -   Add option to not use robust Cohen's *d*

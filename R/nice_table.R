@@ -352,26 +352,57 @@ nice_table <- function(data,
   #   _________________________________
   #   Formatting                   ####
 
+  if(!missing(separate.header)) {
+    filtered.names <- grep("[.]", names(dataframe), value = TRUE)
+    sh.pattern <- lapply(filtered.names, function(x) {
+      gsub("\\..*", ".", x)
+    }) %>%
+      unlist %>%
+      unique
+    unique.pattern <- length(sh.pattern)
+  }
+
+  if (!missing(col.format.ci)) {
+    if(!methods::is(col.format.ci, "list")) {
+      col.format.ci <- list(col.format.ci)
+    }
+    for (i in col.format.ci) {
+      ci.name <- paste0(sh.pattern[i], "95% CI")
+      # ci.pattern <- gsub("\\..*", ".", i)[1]
+      # ci.name <- paste0(ci.pattern, "95% CI")
+      dataframe <- format_CI(
+        dataframe, i, col.name =
+          ci.name) %>%
+        relocate(all_of(ci.name), .after = select(
+          ., contains(sh.pattern), -last_col()) %>%
+            select(last_col()) %>% names)
+    }
+  }
+
   if ("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
   }
 
-  if (!missing(col.format.ci)) {
+  if(!missing(separate.header)) {
+    CI_lower.sh <- paste0(sh.pattern, rep(
+      "CI_lower", each = unique.pattern))
+    CI_upper.sh <- paste0(sh.pattern, rep(
+      "CI_upper", each = unique.pattern))
+    CI.df <- data.frame(CI_lower.sh, CI_upper.sh)
+    names(CI.df) <- NULL
 
-    if(!methods::is(col.format.ci, "list")) {
-      col.format.ci <- list(col.format.ci)
-    }
+    if (any(unlist(CI.df) %in% names(dataframe))) {
 
-    for (x in col.format.ci) {
-      ci.pattern <- gsub("\\..*", ".", x)[1]
-      ci.name <- paste0(ci.pattern, "95% CI")
-      dataframe <- format_CI(
-        dataframe, x, col.name =
-          ci.name) %>%
-        relocate(ci.name, .after = select(
-          ., contains(ci.pattern), -last_col()) %>%
-            select(last_col()) %>% names
-          )
+      for (i in seq(nrow(CI.df))) {
+        ci.name <- paste0(sh.pattern[i], "95% CI")
+        dataframe <- format_CI(
+          dataframe,
+          CI_low_high = unlist(CI.df[i, ]),
+          col.name = ci.name) %>%
+          relocate(all_of(ci.name), .after = select(
+            ., contains(sh.pattern[i]), -last_col()) %>%
+              select(last_col()) %>% names)
+      }
     }
   }
 
@@ -392,14 +423,14 @@ nice_table <- function(data,
   #   __________________________________
   #   Flextable                     ####
 
-  dataframe %>%
+  table <- dataframe %>%
     {
       if (highlight == TRUE || is.numeric(highlight)) {
         flextable(., col_keys = names(dataframe)[-length(dataframe)])
       } else {
         flextable(.)
       }
-    } -> table
+    }
 
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   table %>%
@@ -414,9 +445,9 @@ nice_table <- function(data,
   if (!missing(width)) {
     table %>%
       set_table_properties(layout = "autofit", width = width) -> table
-   } else {
+  } else {
     table %>%
-     set_table_properties(layout = "autofit") -> table
+      set_table_properties(layout = "autofit") -> table
   }
 
   if (!missing(footnote)) {
@@ -436,6 +467,7 @@ nice_table <- function(data,
     }
   }
 
+  # Separate headers
   if (!missing(separate.header)) {
     table <- table %>%
       separate_header("span-top", split = "[.]")
@@ -450,7 +482,7 @@ nice_table <- function(data,
 
   ##  ....................................
   ##  Special cases                  ####
-  # Fix header
+  # Fix header with italics
   if (!missing(italics) & missing(separate.header)) {
     table %>%
       italic(j = italics, part = "header") -> table
@@ -460,16 +492,33 @@ nice_table <- function(data,
     table %>%
       italic(j = italics, i = level.number, part = "header") -> table
   }
+
   # Degrees of freedom
-  if ("df" %in% names(dataframe)) {
-    df.digits <- ifelse(any(dataframe$df %% 1 == 0), 0, 2)
-    table %>%
-      format_flex(j = "df", digits = df.digits) -> table
+  cols.df <- "df"
+  if(!missing(separate.header)) {
+    cols.df.sh <- paste0(sh.pattern, rep(
+      cols.df, each = unique.pattern))
+    cols.df <- c(cols.df, cols.df.sh)
+  }
+
+  for (i in cols.df) {
+    if (i %in% names(dataframe)) {
+      df.digits <- ifelse(any(dataframe[i] %% 1 == 0), 0, 2)
+      table %>%
+        format_flex(j = i, digits = df.digits) -> table
+    }
   }
 
   ##  .....................................
   ##  2-digit columns                 ####
+
   cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "Mu", "S")
+  if(!missing(separate.header)) {
+    cols.2digits.sh <- paste0(sh.pattern, rep(
+      cols.2digits, each = unique.pattern))
+    cols.2digits <- c(cols.2digits, cols.2digits.sh)
+  }
+
   for (i in cols.2digits) {
     if (i %in% names(dataframe)) {
       table %>%
@@ -480,6 +529,12 @@ nice_table <- function(data,
   ##  .....................................
   ##  0-digit columns                 ####
   cols.0digits <- c("N", "n", "z")
+  if(!missing(separate.header)) {
+    cols.0digits.sh <- paste0(sh.pattern, rep(
+      cols.0digits, each = unique.pattern))
+    cols.0digits <- c(cols.0digits, cols.0digits.sh)
+  }
+
   for (i in cols.0digits) {
     if (i %in% names(dataframe)) {
       table %>%
@@ -493,6 +548,18 @@ nice_table <- function(data,
     col = c("r", "p"),
     fun = c("format_r", "format_p")
   )
+
+  if(!missing(separate.header)) {
+    cols.sh <- paste0(sh.pattern, rep(
+      compose.table0$col, each = unique.pattern))
+    table0.sh <- data.frame(
+      col = cols.sh,
+      fun = rep(compose.table0$fun, each =
+                  length(cols.sh) / length(compose.table0$fun))
+    )
+    compose.table0 <- rbind(compose.table0, table0.sh)
+  }
+
   for (i in seq(nrow(compose.table0))) {
     if (compose.table0[i, "col"] %in% names(dataframe)) {
       table %>%
@@ -547,6 +614,18 @@ nice_table <- function(data,
     col = c("R2", "sr2"),
     value = c('as_i("R"), as_sup("2")', 'as_i("sr"), as_sup("2")')
   )
+
+  if(!missing(separate.header)) {
+    cols.sh <- paste0(sh.pattern, rep(
+      compose.table2$col, each = unique.pattern))
+    table2.sh <- data.frame(
+      col = cols.sh,
+      value = rep(compose.table2$value, each =
+                  length(cols.sh) / length(compose.table2$value))
+    )
+    compose.table2 <- rbind(compose.table2, table2.sh)
+  }
+
   for (i in seq(nrow(compose.table2))) {
     if (compose.table2[i, "col"] %in% names(dataframe)) {
       table %>%
@@ -573,12 +652,22 @@ nice_table <- function(data,
   #   _____________________________________________
   #   Extra features                           ####
 
+  dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
+                    "M", "N", "n", "Z", "z", "W", "R2", "sr2")
+  dont.change <- paste0("^", dont.change0, "$", collapse = "|")
+
+  if(!missing(separate.header)) {
+    dont.change.sh <- paste0(sh.pattern, rep(
+      dont.change0, each = unique.pattern))
+    dont.change.sh <- paste0("^", dont.change.sh, "$", collapse = "|")
+    dont.change <- paste0(dont.change, "|", dont.change.sh)
+  }
+
   table %>%
     colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
-             select(-matches(
-"^p$|^r$|^t$|^SE$|^SD$|^F$|^df$|^b$|^M$|^N$|^n$|^Z$|^z$|^W$|^R2$|^sr2$",
-                             ignore.case = FALSE
+             select(-matches(dont.change,
+               ignore.case = FALSE
              )) %>% names()),
       big.mark = ",", digits = 2
     ) -> table
@@ -666,7 +755,7 @@ format_flex <- function(table, j, digits = 2, value, fun) {
     rExpression <- paste0("as_paragraph(", value, ")")
     table %>%
       compose(
-        i = 1, j = j, part = "header",
+        i = NULL, j = j, part = "header",
         value = eval(parse(text = rExpression))
       ) -> table
   }

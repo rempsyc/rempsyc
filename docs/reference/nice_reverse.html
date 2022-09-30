@@ -18,7 +18,7 @@ typically for questionnaire answers."><meta property="og:image" content="https:/
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@ typically for questionnaire answers.</p>
 
 
 <dt>min</dt>
-<dd><p>The miminum score on the scale (optional unless it isn't 1).</p></dd>
+<dd><p>The minimum score on the scale (optional unless it isn't 1).</p></dd>
 
 
 <dt>warning</dt>
@@ -122,17 +122,21 @@ typically for questionnaire answers.</p>
 about the minimum not being 1.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A numeric vector, of reversed scores.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Reverse score of 5 with a maximum score of 5</span></span></span>
 <span class="r-in"><span><span class="fu">nice_reverse</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Note: If your scale minimum score is not '1', please specify it in the 'min' argument</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Reverse several scores at once</span></span></span>
 <span class="r-in"><span><span class="fu">nice_reverse</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Note: If your scale minimum score is not '1', please specify it in the 'min' argument</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Reverse scores with maximum = 4 and minimum = 0</span></span></span>

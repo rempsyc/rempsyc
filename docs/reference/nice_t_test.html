@@ -30,7 +30,7 @@ argument: var.equal = TRUE."><meta property="og:image" content="https://rempsyc.
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,6 +160,14 @@ t-test instead of independent samples).</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A formatted dataframe of the specified model, with DV, degrees of
+freedom, t-value, p-value, the effect size, Cohen's d, and its
+95% confidence interval lower and upper bounds.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/t-test">https://rempsyc.remi-theriault.com/articles/t-test</a></p></div>
     </div>
@@ -172,10 +180,9 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">For the Student t-test, use `var.equal = TRUE`. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable         t       df           p         d  CI_lower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -3.767123 18.33225 0.001373638 -1.477947 -2.265973</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     CI_upper</span>
@@ -187,10 +194,9 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">For the Student t-test, use `var.equal = TRUE`. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable         t       df            p          d   CI_lower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -3.767123 18.33225 1.373638e-03 -1.4779471 -2.2659731</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                cyl  3.354114 25.85363 2.464713e-03  1.2084550  0.4315896</span>
@@ -218,9 +224,8 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
 <span class="r-in"><span>  var.equal <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using Student t-test. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using Student t-test. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable         t df            p         d  CI_lower   CI_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -4.106127 30 0.0002850207 -1.477947 -2.265973 -0.6705686</span>
 <span class="r-in"><span></span></span>
@@ -231,10 +236,9 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
 <span class="r-in"><span>  alternative <span class="op">=</span> <span class="st">"less"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">For the Student t-test, use `var.equal = TRUE`. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable         t       df            p         d  CI_lower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -3.767123 18.33225 0.0006868192 -1.477947 -2.265973</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     CI_upper</span>
@@ -246,12 +250,11 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
 <span class="r-in"><span>  mu <span class="op">=</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Using one-sample t-test. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">For the Student t-test, use `var.equal = TRUE`. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using one-sample t-test. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable        t df            p        d CI_lower CI_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg 9.470995 31 1.154598e-10 1.674251  1.12797 2.208995</span>
 <span class="r-in"><span></span></span>
@@ -262,9 +265,8 @@ t-test instead of independent samples).</p></dd>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"supp"</span>,</span></span>
 <span class="r-in"><span>  paired <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Using paired t-test. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;">Using paired t-test. </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #FFFFFF;"> </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable        t df           p         d  CI_lower  CI_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                len 3.302585 29 0.002549842 0.6029668 0.2088153 0.9883436</span>
 <span class="r-in"><span><span class="co"># Make sure cases appear in the same order for</span></span></span>

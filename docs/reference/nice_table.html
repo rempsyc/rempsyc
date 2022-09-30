@@ -20,7 +20,7 @@ automatic formatting features."><meta property="og:image" content="https://remps
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,6 +109,7 @@ automatic formatting features.</p>
 <span>  <span class="va">italics</span>,</span>
 <span>  <span class="va">col.format.p</span>,</span>
 <span>  <span class="va">col.format.r</span>,</span>
+<span>  <span class="va">col.format.ci</span>,</span>
 <span>  <span class="va">format.custom</span>,</span>
 <span>  <span class="va">col.format.custom</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -153,6 +154,11 @@ than one column named "p"). Select with numerical range, e.g., 1:3.</p></dd>
 that cannot be named "r" (for example for a data frame full
 of r-values, also because it is not possible to have more
 than one column named "r"). Select with numerical range, e.g., 1:3.</p></dd>
+
+
+<dt>col.format.ci</dt>
+<dd><p>Applies 95% confidence interval formatting
+to selected columns (e.g., when reporting more than one interval).</p></dd>
 
 
 <dt>format.custom</dt>
@@ -200,9 +206,16 @@ version of the tables made by the <code>report</code> package.</p></dd>
 
 
 <dt>separate.header</dt>
-<dd><p>Logical, whether to separate headers based on name delimiters (i.e., periods ".").</p></dd>
+<dd><p>Logical, whether to separate headers based
+on name delimiters (i.e., periods ".").</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>An APA-formatted table of class "flextable" (and "nice_table").</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table">https://rempsyc.remi-theriault.com/articles/table</a></p></div>
@@ -226,10 +239,11 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Save table to word</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">my_table</span>, path <span class="op">=</span> <span class="st">"nicetablehere.docx"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">mypath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".docx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">my_table</span>, path <span class="op">=</span> <span class="va">mypath</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Publication-ready tables</span></span></span>
 <span class="r-in"><span><span class="va">mtcars.std</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">scale</span><span class="op">)</span></span></span>

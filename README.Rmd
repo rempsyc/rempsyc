@@ -43,16 +43,19 @@ R package of convenience functions to make your workflow faster and easier. Easi
 
 ## Installation
 
-You can install the development version (the only version currently available) of the `rempsyc` package from the r-universe:
+You can install the `rempsyc` package directly from CRAN:
+``` r
+install.packages("rempsyc")
+```
 
+Or the development version from the r-universe (note that there is a 24-hour delay with GitHub):
 ``` r
 install.packages("rempsyc", repos = c(
   rempsyc = "https://rempsyc.r-universe.dev",
   CRAN = "https://cloud.r-project.org"))
 ```
 
-Or from GitHub:
-
+Or from GitHub, for the very latest version:
 ``` r
 # If package `remotes` isn't already installed, install it with `install.packages("remotes")`
 remotes::install_github("rempsyc/rempsyc")
@@ -282,7 +285,7 @@ Easily output a correlation matrix and export it to Microsoft Excel, with the fi
 
 ```{r cormatrix_excel2, warning = FALSE}
 
-cormatrix_excel2(infert)
+cormatrix_excel2(infert, "cormatrix1")
 
 ```
 

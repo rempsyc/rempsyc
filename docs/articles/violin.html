@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,10 +197,11 @@ of the argument.</p>
 </blockquote>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Save a high-resolution image file to specified directory</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nice_violinplothere.tiff'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span>,</span>
-<span>       path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nice_violinplothere.tiff'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
+<span>       unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
-<span><span class="co"># If you copy-paste your path name, remember to use "R" slashes ('/' rather than '\').</span></span>
+<span><span class="co"># If you copy-paste your path name, </span></span>
+<span><span class="co"># remember to use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .tiff extension of the file.</span></span></code></pre></div>
 <blockquote>
 <p><strong>Pro tip</strong>: Change <code>.tiff</code> for
@@ -259,13 +260,14 @@ technique when the significance computed with <code>ggsignif</code> does
 not correspond to the number of stars we want to use, for example if we
 use a different <em>p</em>-value or not a <em>t</em>-test.)</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"**"</span>,<span class="st">"***"</span><span class="op">)</span>, <span class="co"># manually enter the number of stars</span></span>
-<span>            signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">35</span>,<span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
-<span>            signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># Where should the left-sided brackets start (x)?</span></span>
-<span>            signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># Where should the right-sided brackets end (x)?</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"**"</span>,<span class="st">"***"</span><span class="op">)</span>, <span class="co"># manually enter the number of stars</span></span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">35</span>,<span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
+<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># Where should the left-sided brackets start (x)?</span></span>
+<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># Where should the right-sided brackets end (x)?</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-8-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -435,20 +437,30 @@ the statistics we were going to be using:)</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute basic statistics and save to object</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/" class="external-link">psych</a></span><span class="op">)</span> <span class="co"># Install the psych package if you don't already have it</span></span>
-<span><span class="va">statsSummary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/describe.by.html" class="external-link">describeBy</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">len</span>, group <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span>, mat <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">statsSummary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/describe.by.html" class="external-link">describeBy</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">len</span>, group <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span>, mat <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add our annotations! (Warning: a bit more complicated code ahead!)</span></span>
-<span><span class="co">##+ fig.width=8</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span>geom<span class="op">=</span><span class="st">"text"</span>, <span class="co"># First annotation adds the average</span></span>
-<span>             x<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Specifies annotations is for all groups/x-axis ticks</span></span>
-<span>             y<span class="op">=</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">+</span><span class="fl">2</span>, <span class="co"># Puts mean at mean value on the y-axis (adds 2)</span></span>
-<span>             label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"m="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="co"># That prints the mean on the plot</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span>geom<span class="op">=</span><span class="st">"text"</span>, <span class="co"># (Second annotation adds the sample size)</span></span>
-<span>           x<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>           y<span class="op">=</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">-</span><span class="fl">2</span>, <span class="co"># Puts sample size at mean value on the y-axis (substracts 2)</span></span>
-<span>           label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"n="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">n</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># That prints the sample size on the plot</span></span></code></pre></div>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
+<span>  geom <span class="op">=</span> <span class="st">"text"</span>, </span>
+<span>  <span class="co"># First annotation adds the average</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="co"># Specifies annotations is for all groups/x-axis ticks</span></span>
+<span>  y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">+</span><span class="fl">2</span>, </span>
+<span>  <span class="co"># Puts mean at mean value on the y-axis (adds 2)</span></span>
+<span>  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"m ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="co"># That prints the mean on the plot</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>, </span>
+<span>    <span class="co"># (Second annotation adds the sample size)</span></span>
+<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">-</span><span class="fl">2</span>, </span>
+<span>    <span class="co"># Puts sample size at mean value on the y-axis (substracts 2)</span></span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"n ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">n</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-20-1.png" width="70%"></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>    <span class="co"># That prints the sample size on the plot</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>
 </h3>

@@ -33,8 +33,14 @@ bug, or request a feature.
 
 ## Installation
 
-You can install the development version (the only version currently
-available) of the `rempsyc` package from the r-universe:
+You can install the `rempsyc` package directly from CRAN:
+
+``` r
+install.packages("rempsyc")
+```
+
+Or the development version from the r-universe (note that there is a
+24-hour delay with GitHub):
 
 ``` r
 install.packages("rempsyc", repos = c(
@@ -42,7 +48,7 @@ install.packages("rempsyc", repos = c(
   CRAN = "https://cloud.r-project.org"))
 ```
 
-Or from GitHub:
+Or from GitHub, for the very latest version:
 
 ``` r
 # If package `remotes` isn't already installed, install it with `install.packages("remotes")`
@@ -102,10 +108,6 @@ library(rempsyc)
 nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
-#> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-#> For the Student t-test, use `var.equal = TRUE`. 
-#>  
-#> 
 t.tests
 #>   Dependent Variable         t       df              p         d   CI_lower
 #> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
@@ -154,13 +156,13 @@ contrasts
 #> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower  CI_upper
-#> 1  2.1377454  5.663733
-#> 2  0.6750781  2.459834
-#> 3  1.0391995  4.017140
-#> 4 -4.9961142 -2.474849
-#> 5 -3.8102196 -1.396722
-#> 6 -1.8332830 -0.502074
+#>     CI_lower   CI_upper
+#> 1  2.1233860  6.0349710
+#> 2  0.6940004  2.4148648
+#> 3  1.0572399  3.7468412
+#> 4 -5.0874810 -2.5054357
+#> 5 -3.8315642 -1.4064004
+#> 6 -1.7864343 -0.4682829
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -396,7 +398,7 @@ blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
 
-cormatrix_excel2(infert)
+cormatrix_excel2(infert, "cormatrix1")
 #> # Correlation Matrix (pearson-method)
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
@@ -411,7 +413,7 @@ cormatrix_excel2(infert)
 #> 
 #> p-value adjustment method: none
 #> 
-#>  [Correlation matrix 'cormatrix.xlsx' has been saved to working directory (or where specified).]
+#>  [Correlation matrix 'cormatrix1.xlsx' has been saved to working directory (or where specified).]
 #> NULL
 ```
 
@@ -444,8 +446,6 @@ df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
-#> Warning in nice_na(df, scales = c("scale1", "scale2", "scale3")): Some variables
-#> are not numeric. They are ignored for calculating the `all_na` column.
 #>                   var items na cells na_percent na_max na_max_percent all_na
 #> 1 scale1_Q1:scale1_Q3     3  6    27      22.22      3            100      2
 #> 2 scale2_Q1:scale2_Q3     3  9    27      33.33      3            100      2
@@ -454,8 +454,6 @@ nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 # Or whole dataframe
 nice_na(df)
-#> Warning in nice_na(df): Some variables are not numeric. They are ignored for
-#> calculating the `all_na` column.
 #>                   var items na cells na_percent na_max na_max_percent all_na
 #> 1 scale1_Q1:scale3_Q3     9 23    81       28.4      9            100      2
 ```
@@ -468,7 +466,6 @@ answers.
 ``` r
 # Reverse score of 5 with a maximum score of 5
 nice_reverse(5, 5)
-#> Note: If your scale minimum score is not '1', please specify it in the 'min' argument
 #> [1] 1
 
 # Reverse scores with maximum = 4 and minimum = 0
@@ -570,12 +567,10 @@ group having variance four times bigger than any of the other groups.
 nice_var(data = iris,
          variable = "Sepal.Length",
          group = "Species")
-#> # A tibble: 1 × 7
-#> # Rowwise: 
-#>   Variable     Setosa Versicolor Virginica Variance.ratio Criteria Heterosceda…¹
-#>   <chr>         <dbl>      <dbl>     <dbl>          <dbl>    <dbl> <lgl>        
-#> 1 Sepal.Length  0.124      0.266     0.404            3.3        4 FALSE        
-#> # … with abbreviated variable name ¹​Heteroscedastic
+#>       Variable Setosa Versicolor Virginica Variance.ratio Criteria
+#> 1 Sepal.Length  0.124      0.266     0.404            3.3        4
+#>   Heteroscedastic
+#> 1           FALSE
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
