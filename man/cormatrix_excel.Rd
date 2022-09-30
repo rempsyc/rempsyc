@@ -2,13 +2,15 @@
 % Please edit documentation in R/cormatrix_excel.R
 \name{cormatrix_excel}
 \alias{cormatrix_excel}
-\title{Easy export of correlation matrix to Excel}
+\title{Easy export of correlation matrix to Excel (improved version)}
 \usage{
 cormatrix_excel(
   data,
   filename,
   overwrite = TRUE,
-  use = "pairwise.complete.obs"
+  p_adjust = "none",
+  print.mat = TRUE,
+  ...
 )
 }
 \arguments{
@@ -19,24 +21,42 @@ but no need to specify extension).}
 
 \item{overwrite}{Whether to allow overwriting previous file.}
 
-\item{use}{How to handle NA (see \code{?cor} for options).}
+\item{p_adjust}{Default p-value adjustment method (default is "none",
+although \code{correlation::correlation}'s default is "holm")}
+
+\item{print.mat}{Logical, whether to also print the correlation matrix
+to console.}
+
+\item{...}{Parameters to be passed to the \code{correlation} package
+(see \code{?correlation::correlation})}
 }
 \value{
 A Microsoft Excel document, containing the colour-coded
-correlation matrix.
+correlation matrix with significance stars, on the first
+sheet, and the colour-coded p-values on the second sheet.
 }
 \description{
 Easily output a correlation matrix and export it to
 Microsoft Excel, with the first row and column frozen, and
-correlation coefficients colour-coded based on their effect size
-(0.0-0.2: small (no colour); 0.2-0.4: medium (pink); 0.4-1.0:
-large (red)).
+correlation coefficients colour-coded based on effect size
+(0.0-0.2: small (no colour); 0.2-0.4: medium (pink/light blue);
+0.4-1.0: large (red/dark blue)), following Cohen's suggestions
+for small (.10), medium (.30), and large (.50) correlation sizes.
+
+Based on the \code{correlation} and \code{openxlsx2} packages.
 }
 \examples{
 \dontshow{.old_wd <- setwd(tempdir())}
 # Basic example
-cormatrix_excel(mtcars, "cormatrix")
+cormatrix_excel(mtcars, "cormatrix1")
+cormatrix_excel(iris, p_adjust = "none", "cormatrix2")
+cormatrix_excel(airquality, method = "spearman", "cormatrix3")
 \dontshow{setwd(.old_wd)}
+}
+\author{
+Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
+the original \code{rempsyc::cormatrix_excel} (now internal function
+\code{cormatrix_excel_deprecated})
 }
 \keyword{Excel}
 \keyword{correlation}

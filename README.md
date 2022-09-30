@@ -7,12 +7,13 @@
 
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
 [![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui#package:rempsyc)
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN
+status](http://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
+[![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://cran.r-project.org/package=rempsyc)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://cranlogs.r-pkg.org/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
@@ -157,12 +158,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1233860  6.0349710
-#> 2  0.6940004  2.4148648
-#> 3  1.0572399  3.7468412
-#> 4 -5.0874810 -2.5054357
-#> 5 -3.8315642 -1.4064004
-#> 6 -1.7864343 -0.4682829
+#> 1  2.1487008  5.7689231
+#> 2  0.7035566  2.3509116
+#> 3  1.0468740  3.7319684
+#> 4 -5.1248076 -2.4970391
+#> 5 -3.7433383 -1.4850357
+#> 6 -1.8048131 -0.5092325
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -389,7 +390,7 @@ overlap_circle(6.84)
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 
-## `cormatrix_excel2`
+## `cormatrix_excel`
 
 Easily output a correlation matrix and export it to Microsoft Excel,
 with the first row and column frozen, and correlation coefficients
@@ -398,7 +399,7 @@ blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
 
-cormatrix_excel2(infert, "cormatrix1")
+cormatrix_excel(infert, "cormatrix1")
 #> # Correlation Matrix (pearson-method)
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
