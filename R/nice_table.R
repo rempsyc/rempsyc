@@ -355,7 +355,7 @@ nice_table <- function(data,
   if(!missing(separate.header)) {
     filtered.names <- grep("[.]", names(dataframe), value = TRUE)
     sh.pattern <- lapply(filtered.names, function(x) {
-      gsub("\\..*", ".", x)
+      gsub("[^\\.]*$", "", x)
     }) %>%
       unlist %>%
       unique

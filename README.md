@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
 [![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui#package:rempsyc)
 [![CRAN
-status](http://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
+status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
@@ -158,12 +158,12 @@ contrasts
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.1487008  5.7689231
-#> 2  0.7035566  2.3509116
-#> 3  1.0468740  3.7319684
-#> 4 -5.1248076 -2.4970391
-#> 5 -3.7433383 -1.4850357
-#> 6 -1.8048131 -0.5092325
+#> 1  2.1056999  5.9863560
+#> 2  0.7250413  2.4661723
+#> 3  1.0671121  3.9446031
+#> 4 -4.9933707 -2.4435444
+#> 5 -3.8138399 -1.4221001
+#> 6 -1.7824941 -0.4946931
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -457,6 +457,142 @@ nice_na(df, scales = c("scale1", "scale2", "scale3"))
 nice_na(df)
 #>                   var items na cells na_percent na_max na_max_percent all_na
 #> 1 scale1_Q1:scale3_Q3     9 23    81       28.4      9            100      2
+```
+
+## `extract_duplicates`
+
+Extracts ALL duplicates (including the first one, contrary to
+`duplicated` or `dplyr::distinct`) to a data frame for visual
+inspection.
+
+``` r
+df1 <- data.frame(
+   id = c(1, 2, 3, 1, 3),
+   item1 = c(NA, 1, 1, 2, 3),
+   item2 = c(NA, 1, 1, 2, 3),
+   item3 = c(NA, 1, 1, 2, 3)
+)
+df1
+#>   id item1 item2 item3
+#> 1  1    NA    NA    NA
+#> 2  2     1     1     1
+#> 3  3     1     1     1
+#> 4  1     2     2     2
+#> 5  3     3     3     3
+
+extract_duplicates(df1, id = "id")
+#>   Row id item1 item2 item3 count_na
+#> 1   1  1    NA    NA    NA        3
+#> 2   4  1     2     2     2        0
+#> 3   3  3     1     1     1        0
+#> 4   5  3     3     3     3        0
+```
+
+## `best_duplicate`
+
+Extracts the “best” duplicate: the one with the fewer number of missing
+values (in case of ties, picks the first one).
+
+``` r
+best_duplicate(df1, id = "id")
+#> (2 duplicates removed)
+#>   id item1 item2 item3
+#> 1  1     2     2     2
+#> 2  2     1     1     1
+#> 3  3     1     1     1
+```
+
+## `scale_mad`
+
+Scale and center (“standardize”) data based on the median absolute
+deviation.
+
+``` r
+scale_mad(mtcars$mpg)
+#>  [1]  0.33262558  0.33262558  0.66525116  0.40654238 -0.09239599 -0.20327119
+#>  [7] -0.90548075  0.96091834  0.66525116  0.00000000 -0.25870878 -0.51741757
+#> [13] -0.35110478 -0.73916796 -1.62616950 -1.62616950 -0.83156395  2.43925425
+#> [19]  2.06967028  2.71644224  0.42502157 -0.68373036 -0.73916796 -1.09027273
+#> [25]  0.00000000  1.49681511  1.25658552  2.06967028 -0.62829276  0.09239599
+#> [31] -0.77612635  0.40654238
+```
+
+## `find_mad`
+
+Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
+
+``` r
+find_mad(data = mtcars, col.list = names(mtcars), criteria = 3)
+#> 20 outlier(s) based on 3 median absolute deviations for variable(s): 
+#>  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb 
+#> 
+#> The following participants were considered outliers for more than one variable: 
+#> 
+#>   Row n
+#> 1   3 2
+#> 2   9 2
+#> 3  18 2
+#> 4  19 2
+#> 5  20 2
+#> 6  26 2
+#> 7  28 2
+#> 8  31 2
+#> 9  32 2
+#> 
+#> Outliers per variable: 
+#> 
+#> $qsec
+#>   Row qsec_mad
+#> 1   9 3.665557
+#> 
+#> $vs
+#>    Row vs_mad
+#> 1    3    Inf
+#> 2    4    Inf
+#> 3    6    Inf
+#> 4    8    Inf
+#> 5    9    Inf
+#> 6   10    Inf
+#> 7   11    Inf
+#> 8   18    Inf
+#> 9   19    Inf
+#> 10  20    Inf
+#> 11  21    Inf
+#> 12  26    Inf
+#> 13  28    Inf
+#> 14  32    Inf
+#> 
+#> $am
+#>    Row am_mad
+#> 1    1    Inf
+#> 2    2    Inf
+#> 3    3    Inf
+#> 4   18    Inf
+#> 5   19    Inf
+#> 6   20    Inf
+#> 7   26    Inf
+#> 8   27    Inf
+#> 9   28    Inf
+#> 10  29    Inf
+#> 11  30    Inf
+#> 12  31    Inf
+#> 13  32    Inf
+#> 
+#> $carb
+#>   Row carb_mad
+#> 1  31 4.046945
+```
+
+## `winsorize_mad`
+
+Winsorize outliers based on (e.g.,) 3 median absolute deviations (MAD).
+
+``` r
+winsorize_mad(mtcars$qsec, criteria = 3)
+#>  [1] 16.46000 17.02000 18.61000 19.44000 17.02000 20.22000 15.84000 20.00000
+#>  [9] 21.95765 18.30000 18.90000 17.40000 17.60000 18.00000 17.98000 17.82000
+#> [17] 17.42000 19.47000 18.52000 19.90000 20.01000 16.87000 17.30000 15.41000
+#> [25] 17.05000 18.90000 16.70000 16.90000 14.50000 15.50000 14.60000 18.60000
 ```
 
 ## `nice_reverse`

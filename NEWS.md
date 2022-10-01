@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Future updates here.
 
+## rempsyc 0.0.9.4
+* `nice_table`: automatic formatting (of p-values, confidence intervals, etc.) now supports more than two levels of headers (with the `separate.header` argument).
+
 ## rempsyc 0.0.9.3
 * Now that `openxlsx2` is on CRAN, `cormatrix_excel2` now replaces `cormatrix_excel` (and `rempsyc` package does not rely on an external GitHub dependency anymore, yeah!).
 

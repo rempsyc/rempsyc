@@ -321,6 +321,54 @@ nice_na(df)
 
 ```
 
+## `extract_duplicates`
+
+Extracts ALL duplicates (including the first one, contrary to `duplicated` or `dplyr::distinct`) to a data frame for visual inspection.
+
+```{r, extract_duplicates}
+df1 <- data.frame(
+   id = c(1, 2, 3, 1, 3),
+   item1 = c(NA, 1, 1, 2, 3),
+   item2 = c(NA, 1, 1, 2, 3),
+   item3 = c(NA, 1, 1, 2, 3)
+)
+df1
+
+extract_duplicates(df1, id = "id")
+```
+
+## `best_duplicate`
+
+Extracts the "best" duplicate: the one with the fewer number of missing values (in case of ties, picks the first one).
+
+```{r, best_duplicate}
+best_duplicate(df1, id = "id")
+```
+
+## `scale_mad`
+
+Scale and center ("standardize") data based on the median absolute deviation.
+
+```{r, scale_mad}
+scale_mad(mtcars$mpg)
+```
+
+## `find_mad`
+
+Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
+
+```{r, find_mad}
+find_mad(data = mtcars, col.list = names(mtcars), criteria = 3)
+```
+
+## `winsorize_mad`
+
+Winsorize outliers based on (e.g.,) 3 median absolute deviations (MAD).
+
+```{r, winsorize_mad}
+winsorize_mad(mtcars$qsec, criteria = 3)
+```
+
 ## `nice_reverse`
 
 Easily recode scores (reverse-score), typically for questionnaire answers.
