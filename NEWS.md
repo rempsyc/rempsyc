@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Future updates here.
 
+## rempsyc 0.0.9.5
+* `rempsyc` gets lighter, as we get rid of the rather large `car` package dependency (by incorporating the single function we were using, `Anova`), and move other packages (`boot`, `lmtest`, `ggrepel`, `ggsignif`, and `qqplotr`) from required to suggested packages.
+
 ## rempsyc 0.0.9.4
 * `nice_table`: automatic formatting (of p-values, confidence intervals, etc.) now supports more than two levels of headers (with the `separate.header` argument).
 

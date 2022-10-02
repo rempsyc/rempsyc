@@ -66,6 +66,7 @@ nice_varplot <- function(data,
                          grid = TRUE,
                          shapiro = FALSE,
                          ytitle = ggplot2::waiver()) {
+  rlang::check_installed("ggrepel", reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   {
     if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels

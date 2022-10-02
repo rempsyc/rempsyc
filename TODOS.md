@@ -1,14 +1,8 @@
 # Development objectives (to-do list)
 
--   Update `README` with new util functions...
+-   Reduce dependencies to make the package more lightweight
 -   all `lm` functions
     -   Add 95% confidence interval for sr2
--   `winsorize_mad`
-    -   Add documentation (or not given it has been integrated to the `easystats::datawizard` package)
--   `scale_mad` (or not given it is already available from the `easystats::datawizard` package)
-    -   Add documentation
--   `find_mad`
-    -   Add documentation (or not given it is in the process to be integrated to the `easystats::datawizard` package)
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d
@@ -19,6 +13,8 @@
     -   Support second moderator
 -   `nice_slopes`
     -   Add support for multiple moderators (like for `nice_mod`)
+-   `nice_violin`
+    -   Make bootstrapping optional
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
@@ -30,9 +26,7 @@
     -   Add option to not use bootstrapping
 -   All functions
     -   Check for consistency among argument names like response/variable
-        -   Check at other functions to see what's most typically used
-    -   Add documentation for outputs
-    -   Add support for NA missing values
+        -   Check other packages to see what's most typically used
+    -   Triple check support for missing values
 -   Finish writing all function tests
 -   Suggest collaboration with easystats
--   Submit to CRAN

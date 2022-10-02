@@ -217,6 +217,7 @@ nice_violin <- function(data,
                         has.d = FALSE,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3) {
+  rlang::check_installed("boot", reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"
@@ -323,6 +324,7 @@ nice_violin <- function(data,
     } +
     {
       if (!missing(comp1)) {
+        rlang::check_installed("ggsignif", reason = "for this function.")
         ggsignif::geom_signif(
           comparisons = list(c(comp1, comp2)), test = "t.test",
           map_signif_level = TRUE, size = 1.3, textsize = 8
@@ -331,6 +333,7 @@ nice_violin <- function(data,
     } +
     {
       if (!missing(signif_annotation)) {
+        rlang::check_installed("ggsignif", reason = "for this function.")
         ggsignif::geom_signif(
           annotation = signif_annotation, y_position = signif_yposition,
           xmin = signif_xmin, xmax = signif_xmax, size = 1.3, textsize = 8

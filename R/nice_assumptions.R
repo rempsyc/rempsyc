@@ -34,6 +34,7 @@
 
 #' @export
 nice_assumptions <- function(model) {
+  rlang::check_installed("lmtest", reason = "for this function.")
   model.name <- format(model$terms)
   shapiro <- round(stats::shapiro.test(model$residuals)$p.value, 3)
   bp <- round(lmtest::bptest(model)$p.value, 3)

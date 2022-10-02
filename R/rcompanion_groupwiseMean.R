@@ -34,16 +34,16 @@
 #'                    will produce \code{NA}.
 #' @param normal If \code{TRUE}, includes the normal confidence
 #'                    intervals for the group means by bootstrap.
-#'                    See \code{\link{boot.ci}}.
+#'                    See \code{{boot::boot.ci}}.
 #' @param basic If \code{TRUE}, includes the basic confidence
 #'                    intervals for the group means by bootstrap.
-#'                    See \code{\link{boot.ci}}.
+#'                    See \code{{boot::boot.ci}}.
 #' @param percentile If \code{TRUE}, includes the percentile confidence
 #'                    intervals for the group means by bootstrap.
-#'                    See \code{\link{boot.ci}}.
+#'                    See \code{{boot::boot.ci}}.
 #' @param bca If \code{TRUE}, includes the BCa confidence
 #'                    intervals for the group means by bootstrap.
-#'                    See \code{\link{boot.ci}}.
+#'                    See \code{{boot::boot.ci}}.
 #' @param digits The number of significant figures to use in output.
 #' @param ... Other arguments passed to the \code{boot} function.
 #'
@@ -97,7 +97,6 @@
 #' )
 #' }
 #'
-#' @importFrom boot boot boot.ci
 #' @importFrom dplyr syms cur_data group_by summarize rename all_of across
 
 rcompanion_groupwiseMean <- function(formula = NULL,
@@ -145,7 +144,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   D1 <- ddply(.data = data, .variables = group, var, .fun = fun1)
   if (boot == TRUE) {
     fun2 <- function(x, idx) {
-      mean(boot(x[, idx], function(y, j) {
+      mean(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...)$t[, 1])
     }
@@ -153,7 +152,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (basic == TRUE) {
     fun4 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -161,7 +160,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
       )$basic[4]
     }
     fun5 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim)
       }, R = R, ...),
       conf = conf, type = "basic",
@@ -173,7 +172,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (normal == TRUE) {
     fun6 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -181,7 +180,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
       )$normal[2]
     }
     fun7 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -193,7 +192,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (percentile == TRUE) {
     fun8 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -201,7 +200,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
       )$percent[4]
     }
     fun9 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -213,7 +212,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (bca == TRUE) {
     fun10 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,
@@ -221,7 +220,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
       )$bca[4]
     }
     fun11 <- function(x, idx) {
-      boot.ci(boot(x[, idx], function(y, j) {
+      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
         mean(y[j], trim = trim, na.rm = na.rm)
       }, R = R, ...),
       conf = conf,

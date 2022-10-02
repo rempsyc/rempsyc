@@ -30,7 +30,7 @@ lmSupport_modelEffectSizes <- function(Model,
                                        Print = TRUE,
                                        Digits = 4) {
   HasIntercept <- (attr(Model$terms, "intercept"))
-  tANOVA <- car::Anova(Model, type = 3)
+  tANOVA <- car_Anova(Model, type = 3)
   nEffects <- nrow(tANOVA) - 1
   tSS <- matrix(NA, nEffects, 4)
   rownames(tSS) <- c(row.names(tANOVA)[1:(nEffects)])

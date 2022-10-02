@@ -61,6 +61,7 @@ nice_qq <- function(data,
                     grid = TRUE,
                     shapiro = FALSE,
                     title = variable) {
+  rlang::check_installed("qqplotr", reason = "for this function.")
   if (missing(group)) {
     group <- "All"
     data[[group]] <- group
@@ -72,6 +73,7 @@ nice_qq <- function(data,
   }
   # Make data for the Shapiro-Wilk tests
   if (shapiro == TRUE) {
+    rlang::check_installed("ggrepel", reason = "for this function.")
     dat_text <- data %>%
       group_by(.data[[group]]) %>%
       summarize(text = shapiro.test(.data[[variable]])$p.value) %>%
