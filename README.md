@@ -11,7 +11,6 @@
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-![size](https://img.shields.io/github/repo-size/rempsyc/rempsyc)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://cranlogs.r-pkg.org/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
@@ -150,20 +149,20 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
-#>   Dependent Variable Comparison df         t              p        dR
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
-#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144
-#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630
-#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
-#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1056999  5.9863560
-#> 2  0.7250413  2.4661723
-#> 3  1.0671121  3.9446031
-#> 4 -4.9933707 -2.4435444
-#> 5 -3.8138399 -1.4221001
-#> 6 -1.7824941 -0.4946931
+#>   Dependent Variable Comparison df         t              p        dR  CI_lower
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.146614
+#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.713568
+#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.040662
+#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -5.013819
+#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.828664
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.803092
+#>     CI_upper
+#> 1  5.8816537
+#> 2  2.4716317
+#> 3  3.9099994
+#> 4 -2.4349612
+#> 5 -1.4201006
+#> 6 -0.5022421
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
