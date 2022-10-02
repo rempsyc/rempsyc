@@ -50,7 +50,7 @@ nice_lm <- function(model,
   })
   df.list <- lapply(models.list, function(x) x[["df.residual"]])
   ES.list <- lapply(models.list, function(x) {
-    lmSupport_modelEffectSizes(x, Print = FALSE)$Effects[-1, 4]
+    sr2(x)$sr2
   })
   stats.list <- mapply(cbind, df.list, sums.list, ES.list, SIMPLIFY = FALSE)
   stats.list <- lapply(stats.list, function(x) {

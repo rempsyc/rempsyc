@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Future updates here.
 
+## rempsyc 0.0.9.6
+* We get rid of `car_Anova` and `lmsupport_modeleffectsizes` and now compute the sr2 ourselves! With the help of our friends `insight` and `performance`.
+
 ## rempsyc 0.0.9.5
 * `rempsyc` gets lighter, as we get rid of the rather large `car` package dependency (by incorporating the single function we were using, `Anova`), and move other packages (`boot`, `lmtest`, `ggrepel`, `ggsignif`, and `qqplotr`) from required to suggested packages.
 
