@@ -12,7 +12,7 @@ nice_violin(
   bootstraps = 2000,
   colours,
   xlabels = NULL,
-  ytitle = ggplot2::waiver(),
+  ytitle = response,
   xtitle = NULL,
   has.ylabels = TRUE,
   has.xlabels = TRUE,
@@ -130,7 +130,7 @@ nice_violin(
 \donttest{
 \dontshow{.old_wd <- setwd(tempdir())}
 # Save a high-resolution image file to specified directory
-ggsave("niceviolinplothere.pdf", width = 7,
+ggplot2::ggsave("niceviolinplothere.pdf", width = 7,
   height = 7, unit = "in", dpi = 300
 ) # change for your own desired path
 \dontshow{setwd(.old_wd)}

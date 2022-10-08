@@ -149,20 +149,20 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
-#>   Dependent Variable Comparison df         t              p        dR  CI_lower
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.146614
-#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.713568
-#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.040662
-#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -5.013819
-#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.828664
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.803092
-#>     CI_upper
-#> 1  5.8816537
-#> 2  2.4716317
-#> 3  3.9099994
-#> 4 -2.4349612
-#> 5 -1.4201006
-#> 6 -0.5022421
+#>   Dependent Variable Comparison df         t              p        dR
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
+#> 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144
+#> 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630
+#> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
+#> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
+#>     CI_lower   CI_upper
+#> 1  2.1048044  5.6507320
+#> 2  0.6822567  2.2282184
+#> 3  1.0850389  3.9310262
+#> 4 -4.8990287 -2.4179862
+#> 5 -3.8970000 -1.4438520
+#> 6 -1.7783875 -0.4648771
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -308,8 +308,8 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
 ## Visualization
 
-All plots can be saved with the `ggsave()` function. They are `ggplot2`
-objects so can be modified as such.
+All plots can be saved with the `ggplot2::ggsave()` function. They are
+`ggplot2` objects so can be modified as such.
 
 ## `nice_violin`
 
@@ -332,8 +332,8 @@ nice_violin(data = ToothGrowth,
 ``` r
 
 # Save plot
-ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-       dpi = 300, path = "D:/R treasures/")
+ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
+                dpi = 300, path = "D:/R treasures/")
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/violin>

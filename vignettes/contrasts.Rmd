@@ -78,7 +78,8 @@ save_as_docx(my_table, path = "contrasts.docx")
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
 ```{r, eval = FALSE}
-ggsave('Figure 1.pdf', figure, width = 7, height = 7, unit = 'in', dpi = 300)
+ggplot2::ggsave('Figure 1.pdf', figure, width = 7, height = 7, 
+                unit = 'in', dpi = 300)
 ```
 
 Congratulations for making it that far! You've done it! From A to Z, you now know how to make things work! If you would like to integrate this with a broader workflow, read on for the next part!
@@ -216,8 +217,8 @@ library(ggpubr)
 Let's save a high-resolution/vector version of this figure in PDF (it could be .png or any other format too if necessary).
 
 ```{r, eval = FALSE}
-ggsave('Figure 1.pdf', figure, width = 14, height = 14, 
-       unit = 'in', dpi = 300)
+ggplot2::ggsave('Figure 1.pdf', figure, width = 14, height = 14, 
+                unit = 'in', dpi = 300)
 ```
 
 ### Thanks for checking in

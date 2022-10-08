@@ -66,7 +66,7 @@
 #' \donttest{
 #' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Save a high-resolution image file to specified directory
-#' ggsave("niceviolinplothere.pdf", width = 7,
+#' ggplot2::ggsave("niceviolinplothere.pdf", width = 7,
 #'   height = 7, unit = "in", dpi = 300
 #' ) # change for your own desired path
 #' \dontshow{setwd(.old_wd)}
@@ -182,11 +182,6 @@
 #' \code{\link{nice_scatter}}. Tutorial:
 #' \url{https://rempsyc.remi-theriault.com/articles/violin}
 #'
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
-#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
-#' geom_violin geom_point geom_errorbar geom_dotplot
-#' scale_y_continuous aes_string aes element_blank element_line
-#' element_text
 #' @importFrom rlang .data UQ
 
 nice_violin <- function(data,
@@ -196,7 +191,7 @@ nice_violin <- function(data,
                         bootstraps = 2000,
                         colours,
                         xlabels = NULL,
-                        ytitle = ggplot2::waiver(),
+                        ytitle = response,
                         xtitle = NULL,
                         has.ylabels = TRUE,
                         has.xlabels = TRUE,
@@ -217,7 +212,7 @@ nice_violin <- function(data,
                         has.d = FALSE,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3) {
-  rlang::check_installed("boot", reason = "for this function.")
+  rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   gform <- stats::reformulate(group, response)
   class(data[[response]]) <- "numeric"
@@ -256,26 +251,30 @@ nice_violin <- function(data,
     d <- format_d(abs(d))
     d <- paste("=", d)
   }
-  ggplot(data, aes(
+  plot <- ggplot2::ggplot(data, ggplot2::aes(
     x = .data[[group]],
     y = .data[[response]],
     fill = .data[[group]]
   )) +
     {
-      if (!missing(colours)) scale_fill_manual(values = colours)
+      if (!missing(colours)) {
+        ggplot2::scale_fill_manual(values = colours)
+      }
     } +
     {
-      if (!missing(xlabels)) scale_x_discrete(labels = c(xlabels))
+      if (!missing(xlabels)) {
+        ggplot2::scale_x_discrete(labels = c(xlabels))
+      }
     } +
-    ylab(ytitle) +
-    xlab(xtitle) +
-    geom_violin(color = border.colour, alpha = alpha, size = border.size) +
-    geom_point(aes(y = .data$Mean),
+    ggplot2::ylab(ytitle) +
+    ggplot2::xlab(xtitle) +
+    ggplot2::geom_violin(color = border.colour, alpha = alpha, size = border.size) +
+    ggplot2::geom_point(ggplot2::aes(y = .data$Mean),
       color = "black",
       size = 4,
       data = dataSummary
     ) +
-    geom_errorbar(aes(
+    ggplot2::geom_errorbar(ggplot2::aes(
       y = .data$Mean,
       ymin = dataSummary[, 6],
       ymax = dataSummary[, 7]
@@ -284,11 +283,11 @@ nice_violin <- function(data,
     size = 1,
     width = CIcap.width,
     data = dataSummary
-    ) +
-    theme_apa +
+    )
+  plot <- theme_apa(plot) +
     {
       if (obs == TRUE) {
-        geom_dotplot(
+        ggplot2::geom_dotplot(
           binaxis = "y",
           stackdir = "center",
           position = "dodge",
@@ -301,23 +300,23 @@ nice_violin <- function(data,
     } +
     {
       if (has.ylabels == FALSE) {
-        theme(
-          axis.text.y = element_blank(),
-          axis.ticks.y = element_blank()
+        ggplot2::theme(
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()
         )
       }
     } +
     {
       if (has.xlabels == FALSE) {
-        theme(
-          axis.text.x = element_blank(),
-          axis.ticks.x = element_blank()
+        ggplot2::theme(
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank()
         )
       }
     } +
     {
       if (!missing(ymin)) {
-        scale_y_continuous(
+        ggplot2::scale_y_continuous(
           limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby)
         )
       }
@@ -344,7 +343,7 @@ nice_violin <- function(data,
       !missing(comp1), !missing(comp2),
       !missing(signif_xmin)
     )) {
-      annotate(
+      ggplot2::annotate(
         geom = "text",
         x = d.x,
         y = d.y,
@@ -355,4 +354,5 @@ nice_violin <- function(data,
         size = 7
       )
     }
+  plot
 }

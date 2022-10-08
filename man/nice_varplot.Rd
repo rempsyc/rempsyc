@@ -12,7 +12,7 @@ nice_varplot(
   groups.labels,
   grid = TRUE,
   shapiro = FALSE,
-  ytitle = ggplot2::waiver()
+  ytitle = variable
 )
 }
 \arguments{

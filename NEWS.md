@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Future updates here.
 
+## rempsyc 0.0.9.7
+* We move `ggplot2` from a hard (imported) dependency to a soft (suggested) one, since many people seem to be using `nice_table` over the plotting features. And given the recent `isoband` CRAN dependency events.
+
 ## rempsyc 0.0.9.6
 * We get rid of `car_Anova` and `lmsupport_modeleffectsizes` and now compute the sr2 ourselves! With the help of our friends `insight` and `performance`.
 

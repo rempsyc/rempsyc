@@ -52,7 +52,7 @@ nice_var <- function(data,
   # Make basic frame
   var.table <- data %>%
     group_by(.data[[group]]) %>%
-    summarize(var = var(.data[[variable]])) %>%
+    summarize(var = stats::var(.data[[variable]])) %>%
     t() %>%
     as.data.frame()
   # Format table in an acceptable format

@@ -57,7 +57,7 @@
 #' \donttest{
 #' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Save a high-resolution image file to specified directory
-#' ggsave("nicescatterplothere.pdf", width = 7,
+#' ggplot2::ggsave("nicescatterplothere.pdf", width = 7,
 #'   height = 7, unit = "in", dpi = 300
 #' ) # change for your own desired path
 #' \dontshow{setwd(.old_wd)}
@@ -245,19 +245,13 @@
 #' \code{\link{nice_violin}}. Tutorial:
 #' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
-#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
-#' geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous
-#' stat_smooth geom_smooth geom_jitter scale_x_continuous
-#' scale_color_manual guides scale_alpha_manual aes_string aes
-#' element_blank element_line element_text guide_legend
 #' @importFrom stats cor.test
 
 nice_scatter <- function(data,
                          predictor,
                          response,
-                         xtitle = ggplot2::waiver(),
-                         ytitle = ggplot2::waiver(),
+                         xtitle = predictor,
+                         ytitle = response,
                          has.points = TRUE,
                          has.jitter = FALSE,
                          alpha = 0.7,
@@ -285,6 +279,7 @@ nice_scatter <- function(data,
                          has.p = FALSE,
                          p.x = Inf,
                          p.y = -Inf) {
+  rlang::check_installed("ggplot2", reason = "for this function.")
   has.groups <- !missing(group)
   if (has.r == TRUE) {
     r <- format_r(cor.test(data[[predictor]],
@@ -301,14 +296,14 @@ nice_scatter <- function(data,
     )
   }
   if (missing(group)) {
-    smooth <- stat_smooth(
+    smooth <- ggplot2::stat_smooth(
       formula = y ~ x, geom = "line", method = "lm",
       fullrange = has.fullrange, color = colours, size = 1
     )
   }
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
-    smooth <- stat_smooth(
+    smooth <- ggplot2::stat_smooth(
       formula = y ~ x, geom = "line", method = "lm",
       fullrange = has.fullrange, size = 1
     )
@@ -320,49 +315,49 @@ nice_scatter <- function(data,
     levels(data[[group]]) <- groups.labels
   }
   if (has.confband == TRUE & missing(group)) {
-    band <- geom_smooth(formula = y ~ x, method = "lm",
-                        colour = NA, fill = colours)
+    band <- ggplot2::geom_smooth(formula = y ~ x, method = "lm",
+                                 colour = NA, fill = colours)
   }
   if (has.confband == TRUE & !missing(group)) {
-    band <- geom_smooth(formula = y ~ x, method = "lm", colour = NA)
+    band <- ggplot2::geom_smooth(formula = y ~ x, method = "lm", colour = NA)
   }
   if (has.points == TRUE & missing(group) & missing(colours)) {
-    observations <- geom_point(size = 2, alpha = alpha, shape = 16)
+    observations <- ggplot2::geom_point(size = 2, alpha = alpha, shape = 16)
   }
   if (has.points == TRUE & !missing(group) & has.shape == FALSE) {
-    observations <- geom_point(size = 2, alpha = alpha, shape = 16)
+    observations <- ggplot2::geom_point(size = 2, alpha = alpha, shape = 16)
   }
   if (has.points == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_point(
+    observations <- ggplot2::geom_point(
       size = 2, alpha = alpha,
       colour = colours, shape = 16
     )
   }
   if (has.points == TRUE & !missing(group) & has.shape == TRUE) {
-    observations <- geom_point(size = 2, alpha = alpha)
+    observations <- ggplot2::geom_point(size = 2, alpha = alpha)
   }
   if (has.jitter == TRUE & missing(group) & missing(colours)) {
-    observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
+    observations <- ggplot2::geom_jitter(size = 2, alpha = alpha, shape = 16)
     has.points <- FALSE
   }
   if (has.jitter == TRUE & !missing(group) & has.shape == FALSE) {
-    observations <- geom_jitter(size = 2, alpha = alpha, shape = 16)
+    observations <- ggplot2::geom_jitter(size = 2, alpha = alpha, shape = 16)
     has.points <- FALSE
   }
   if (has.jitter == TRUE & missing(group) & !missing(colours)) {
-    observations <- geom_jitter(
+    observations <- ggplot2::geom_jitter(
       size = 2, alpha = alpha,
       colour = colours, shape = 16
     )
     has.points <- FALSE
   }
   if (has.jitter == TRUE & !missing(group) & has.shape == TRUE) {
-    observations <- geom_jitter(size = 2, alpha = alpha)
+    observations <- ggplot2::geom_jitter(size = 2, alpha = alpha)
     has.points <- FALSE
   }
-  ggplot(
+  plot <- ggplot2::ggplot(
     data,
-    aes(
+    ggplot2::aes(
       x = .data[[predictor]],
       y = .data[[response]],
       colour = switch(has.groups == TRUE,
@@ -382,63 +377,71 @@ nice_scatter <- function(data,
       )
     )
   ) +
-    xlab(xtitle) +
-    ylab(ytitle) +
+    ggplot2::xlab(xtitle) +
+    ggplot2::ylab(ytitle) +
     {
-      if (has.line == TRUE) smooth
+      if (has.line == TRUE) {
+        smooth
+      }
     } +
     {
-      if (has.confband == TRUE) band
+      if (has.confband == TRUE) {
+        band
+      }
     } +
     {
-      if (exists("observations")) observations
+      if (exists("observations")) {
+        observations
+      }
     } +
     {
       if (!missing(xmin)) {
-        scale_x_continuous(
+        ggplot2::scale_x_continuous(
           limits = c(xmin, xmax), breaks = seq(xmin, xmax, by = xby)
         )
       }
     } +
     {
       if (!missing(ymin)) {
-        scale_y_continuous(
+        ggplot2::scale_y_continuous(
           limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby)
         )
       }
     } +
     {
       if (!missing(colours) & !missing(group)) {
-        scale_color_manual(values = colours, name = legend.title)
+        ggplot2::scale_color_manual(values = colours, name = legend.title)
       }
     } +
     {
       if (!missing(colours) & !missing(group)) {
-        scale_fill_manual(values = colours, name = legend.title)
+        ggplot2::scale_fill_manual(values = colours, name = legend.title)
       }
     } +
     {
       if (!missing(colours)) {
-        guides(fill = guide_legend(
+        ggplot2::guides(fill = ggplot2::guide_legend(
           override.aes = list(colour = colours)
         ))
       }
     } +
     {
-      if (has.legend == FALSE) theme(legend.position = "none")
+      if (has.legend == FALSE) {
+        ggplot2::theme(legend.position = "none")
+      }
     } +
-    labs(
+    ggplot2::labs(
       legend.title = legend.title, colour = legend.title,
       fill = legend.title, linetype = legend.title, shape = legend.title
     ) +
     {
       if (!missing(groups.alpha)) {
-        scale_alpha_manual(values = groups.alpha, guide = "none")
+        ggplot2::scale_alpha_manual(values = groups.alpha, guide = "none")
       }
     } +
     {
       if (has.r == TRUE) {
-        annotate(
+        ggplot2::annotate(
           geom = "text",
           x = r.x,
           y = r.y,
@@ -452,7 +455,7 @@ nice_scatter <- function(data,
     } +
     {
       if (has.p == TRUE) {
-        annotate(
+        ggplot2::annotate(
           geom = "text",
           x = p.x,
           y = p.y,
@@ -463,6 +466,6 @@ nice_scatter <- function(data,
           size = 7
         )
       }
-    } +
-    theme_apa
+    }
+  theme_apa(plot)
 }

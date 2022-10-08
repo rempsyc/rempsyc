@@ -54,9 +54,6 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do rename
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
-#' scale_fill_manual theme annotate aes
-#' @importFrom stats var median
 
 nice_varplot <- function(data,
                          variable,
@@ -65,8 +62,8 @@ nice_varplot <- function(data,
                          groups.labels,
                          grid = TRUE,
                          shapiro = FALSE,
-                         ytitle = ggplot2::waiver()) {
-  rlang::check_installed("ggrepel", reason = "for this function.")
+                         ytitle = variable) {
+  rlang::check_installed(c("ggplot2", "ggrepel"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   {
     if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels
@@ -74,7 +71,7 @@ nice_varplot <- function(data,
   # Calculate variance
   var <- data %>%
     group_by(.data[[group]]) %>%
-    summarize(var = var(.data[[variable]]))
+    summarize(var = stats::var(.data[[variable]]))
   diff <- max(var[, "var"]) / min(var[, "var"])
   # Make annotation dataframe
   dat_text <- var %>%
@@ -92,10 +89,10 @@ nice_varplot <- function(data,
     has.points = FALSE,
     has.jitter = FALSE
   ) +
-    geom_jitter(size = 2, width = 0.10) +
-    annotate(
+    ggplot2::geom_jitter(size = 2, width = 0.10) +
+    ggplot2::annotate(
       geom = "text",
-      x = median(seq_along(levels(data[[group]]))),
+      x = stats::median(seq_along(levels(data[[group]]))),
       y = max(data[[variable]]),
       label = paste0(
         "max/min = ",
@@ -107,7 +104,7 @@ nice_varplot <- function(data,
     ) +
     ggrepel::geom_text_repel(
       data = dat_text,
-      mapping = aes(
+      mapping = ggplot2::aes(
         x = .data[[group]],
         y = -Inf,
         label = text

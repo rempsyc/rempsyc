@@ -52,13 +52,6 @@
 #' )
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle theme_bw
-#' scale_fill_manual theme annotate scale_x_discrete ylab xlab
-#' geom_violin geom_point geom_errorbar geom_dotplot scale_y_continuous
-#' stat_smooth geom_smooth geom_jitter scale_x_continuous
-#' scale_color_manual guides scale_alpha_manual geom_density
-#' geom_line aes_string aes element_blank element_line
-#' element_text geom_histogram
 #' @importFrom stats reformulate dnorm
 #'
 #' @seealso
@@ -83,6 +76,7 @@ nice_density <- function(data,
                          histogram = FALSE,
                          breaks.auto = FALSE,
                          bins = 30) {
+  rlang::check_installed("ggplot2", reason = "for this function.")
   if (missing(group)) {
     group <- "All"
     data[[group]] <- group
@@ -132,29 +126,29 @@ nice_density <- function(data,
   }
 
   # Make plot
-  ggplot(data, aes_string(x = variable, fill = group)) +
+  plot <- ggplot2::ggplot(data, ggplot2::aes_string(x = variable, fill = group)) +
     {
       if (isTRUE(histogram)) {
-        geom_histogram(aes(y = ..density.., alpha = 0.5),
+        ggplot2::geom_histogram(ggplot2::aes(y = ..density.., alpha = 0.5),
           colour = "black", breaks = breaks, bins = bins
         )
       }
     } +
-    geom_density(alpha = 0.6, size = 1, colour = "gray25") +
-    theme_bw(base_size = 24) +
-    ggtitle(title) +
-    facet_grid(gform) +
-    geom_line(
-      data = dat_norm, aes(x = x, y = y),
+    ggplot2::geom_density(alpha = 0.6, size = 1, colour = "gray25") +
+    ggplot2::theme_bw(base_size = 24) +
+    ggplot2::ggtitle(title) +
+    ggplot2::facet_grid(gform) +
+    ggplot2::geom_line(
+      data = dat_norm, ggplot2::aes(x = x, y = y),
       color = "darkslateblue", size = 1.2, alpha = 0.9
     ) +
-    ylab(ytitle) +
-    xlab(xtitle) +
+    ggplot2::ylab(ytitle) +
+    ggplot2::xlab(xtitle) +
     {
       if (shapiro == TRUE) {
         ggrepel::geom_text_repel(
           data = dat_text,
-          mapping = aes(
+          mapping = ggplot2::aes(
             x = Inf,
             y = Inf,
             label = text
@@ -167,15 +161,19 @@ nice_density <- function(data,
       }
     } +
     {
-      if (!missing(colours)) scale_fill_manual(values = colours)
-    } +
-    theme_apa +
+      if (!missing(colours)) {
+        ggplot2::scale_fill_manual(values = colours)
+      }
+    }
+  plot <- theme_apa(plot) +
     {
       if (grid == TRUE) {
-        theme(
-          panel.grid.major = element_line(),
-          panel.grid.minor = element_line(size = 0.5)
+        ggplot2::theme(
+          panel.grid.major = ggplot2::element_line(),
+          panel.grid.minor = ggplot2::element_line(size = 0.5)
         )
       }
     }
+  plot
 }
+

@@ -8,8 +8,8 @@ nice_scatter(
   data,
   predictor,
   response,
-  xtitle = ggplot2::waiver(),
-  ytitle = ggplot2::waiver(),
+  xtitle = predictor,
+  ytitle = response,
   has.points = TRUE,
   has.jitter = FALSE,
   alpha = 0.7,
@@ -129,7 +129,7 @@ nice_scatter(
 \donttest{
 \dontshow{.old_wd <- setwd(tempdir())}
 # Save a high-resolution image file to specified directory
-ggsave("nicescatterplothere.pdf", width = 7,
+ggplot2::ggsave("nicescatterplothere.pdf", width = 7,
   height = 7, unit = "in", dpi = 300
 ) # change for your own desired path
 \dontshow{setwd(.old_wd)}

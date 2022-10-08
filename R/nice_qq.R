@@ -48,9 +48,6 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
-#' @importFrom ggplot2 ggplot labs facet_grid ggtitle
-#' theme_bw scale_fill_manual theme aes_string aes element_text
-#' element_line element_blank
 #' @importFrom stats reformulate shapiro.test
 
 nice_qq <- function(data,
@@ -61,7 +58,7 @@ nice_qq <- function(data,
                     grid = TRUE,
                     shapiro = FALSE,
                     title = variable) {
-  rlang::check_installed("qqplotr", reason = "for this function.")
+  rlang::check_installed(c("ggplot2", "qqplotr"), reason = "for this function.")
   if (missing(group)) {
     group <- "All"
     data[[group]] <- group
@@ -84,18 +81,19 @@ nice_qq <- function(data,
       )))
   }
   # Make plot
-  ggplot(data = data, mapping = aes_string(fill = group, sample = variable)) +
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes_string(
+    fill = group, sample = variable)) +
     qqplotr::stat_qq_band() +
     qqplotr::stat_qq_line() +
     qqplotr::stat_qq_point() +
-    labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
-    facet_grid(gform) +
-    ggtitle(title) +
+    ggplot2::labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
+    ggplot2::facet_grid(gform) +
+    ggplot2::ggtitle(title) +
     {
       if (shapiro == TRUE) {
         ggrepel::geom_text_repel(
           data = dat_text,
-          mapping = aes(
+          mapping = ggplot2::aes(
             x = Inf,
             y = -Inf,
             label = text
@@ -108,15 +106,18 @@ nice_qq <- function(data,
       }
     } +
     {
-      if (!missing(colours)) scale_fill_manual(values = colours)
-    } +
-    theme_apa +
+      if (!missing(colours)) {
+        ggplot2::scale_fill_manual(values = colours)
+      }
+    }
+    plot <- theme_apa(plot) +
     {
       if (grid == TRUE) {
-        theme(
-          panel.grid.major = element_line(),
-          panel.grid.minor = element_line(size = 0.5)
+        ggplot2::theme(
+          panel.grid.major = ggplot2::element_line(),
+          panel.grid.minor = ggplot2::element_line(size = 0.5)
         )
       }
     }
+  plot
 }

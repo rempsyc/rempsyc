@@ -221,7 +221,7 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
 ## Visualization
 
-All plots can be saved with the `ggsave()` function. They are `ggplot2` objects so can be modified as such. 
+All plots can be saved with the `ggplot2::ggsave()` function. They are `ggplot2` objects so can be modified as such. 
 
 ## `nice_violin`
 
@@ -238,8 +238,8 @@ nice_violin(data = ToothGrowth,
             d.y = 30)
 
 # Save plot
-ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-       dpi = 300, path = "D:/R treasures/")
+ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
+                dpi = 300, path = "D:/R treasures/")
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/violin

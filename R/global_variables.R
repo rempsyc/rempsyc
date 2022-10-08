@@ -5,5 +5,5 @@ utils::globalVariables(c(
   "Alternative", "r", "W", "CI", "Fit", "Parameter",
   "95% CI", "95% CI (b)", "b", "Dependent Variable",
   "var.equal", "95% CI (t)", "Row", "..density..",
-  "cells", "na", "na_max"
+  "cells", "na", "na_max", "theme_apa"
 ))
