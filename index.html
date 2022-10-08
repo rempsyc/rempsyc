@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -217,20 +217,20 @@
 <span>               group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
 <span>               covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">contrasts</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR  CI_lower</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774  2.146614</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144  0.713568</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630  1.040662</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937 -5.013819</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185 -3.828664</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753 -1.803092</span></span>
-<span><span class="co">#&gt;     CI_upper</span></span>
-<span><span class="co">#&gt; 1  5.8816537</span></span>
-<span><span class="co">#&gt; 2  2.4716317</span></span>
-<span><span class="co">#&gt; 3  3.9099994</span></span>
-<span><span class="co">#&gt; 4 -2.4349612</span></span>
-<span><span class="co">#&gt; 5 -1.4201006</span></span>
-<span><span class="co">#&gt; 6 -0.5022421</span></span>
+<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
+<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
+<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
+<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1  2.1048044  5.6507320</span></span>
+<span><span class="co">#&gt; 2  0.6822567  2.2282184</span></span>
+<span><span class="co">#&gt; 3  1.0850389  3.9310262</span></span>
+<span><span class="co">#&gt; 4 -4.8990287 -2.4179862</span></span>
+<span><span class="co">#&gt; 5 -3.8970000 -1.4438520</span></span>
+<span><span class="co">#&gt; 6 -1.7783875 -0.4648771</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -358,7 +358,7 @@
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
-<p>All plots can be saved with the <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave()</a></code> function. They are <code>ggplot2</code> objects so can be modified as such.</p>
+<p>All plots can be saved with the <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> function. They are <code>ggplot2</code> objects so can be modified as such.</p>
 </div>
 <div class="section level2">
 <h2 id="nice_violin">
@@ -378,8 +378,8 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Save plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceplot.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, </span>
-<span>       dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceplot.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, </span>
+<span>                dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/violin" class="uri">https://rempsyc.remi-theriault.com/articles/violin</a></p>
 </div>
 <div class="section level2">
