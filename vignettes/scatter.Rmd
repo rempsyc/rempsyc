@@ -35,7 +35,7 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
 
 ```{r}
 nice_scatter(data = mtcars,
@@ -45,7 +45,7 @@ nice_scatter(data = mtcars,
 
 ```{r, eval = FALSE}
 ### Save a high-resolution image file to specified directory
-ggplot2::ggsave('nice_scatterplothere.tiff', width = 7, height = 7, 
+ggplot2::ggsave('nice_scatterplothere.pdf', width = 7, height = 7, 
                 unit = 'in', dpi = 300)
 # Change the path to where you would like to save it.
 # If you copy-paste your path name, remember to 
@@ -53,7 +53,7 @@ ggplot2::ggsave('nice_scatterplothere.tiff', width = 7, height = 7,
 # Also remember to specify the .tiff extension of the file.
 ```
 
-**Pro tip**: Change `.tiff` for `.pdf` or `.eps` for scalable vector graphics for high-resolution submissions to scientific journals!
+> **Pro tip**: Recommended dimensions for saving is 7 inches wide and 7 inches high. The `.pdf` or `.eps` formats are recommended for scalable vector graphics for high-resolution submissions to scientific journals. However, you can also save in other formats, such as `.tiff`, `.png`, or `.jpg`.
 
 ## Customization
 

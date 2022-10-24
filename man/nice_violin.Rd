@@ -8,7 +8,7 @@ nice_violin(
   data,
   group,
   response,
-  boot = TRUE,
+  boot = FALSE,
   bootstraps = 2000,
   colours,
   xlabels = NULL,
@@ -42,7 +42,8 @@ nice_violin(
 
 \item{response}{The dependent variable to be plotted.}
 
-\item{boot}{Logical, whether to use bootstrapping or not.}
+\item{boot}{Logical, whether to use bootstrapping for the confidence
+interval or not.}
 
 \item{bootstraps}{How many bootstraps to use.}
 
@@ -116,8 +117,13 @@ of the horizontal position of the annotations/stars
 A violin plot of class ggplot, by group.
 }
 \description{
-Make nice violin plots easily with 95\% bootstrapped
-confidence intervals.
+Make nice violin plots easily with 95\% (possibly
+bootstrapped) confidence intervals.
+}
+\details{
+Using \code{boot = TRUE} uses bootstrapping (for the
+confidence intervals only) with the BCa method, using
+the \code{rcompanion_groupwiseMean} function.
 }
 \examples{
 # Make the basic plot

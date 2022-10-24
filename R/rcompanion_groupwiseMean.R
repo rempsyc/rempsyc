@@ -8,6 +8,13 @@
 #' From the original documentation: "Calculates means and
 #' confidence intervals for groups."
 #'
+#' From: https://rcompanion.org/handbook/C_03.html
+#'
+#' "For routine use, I recommend using bootstrapped confidence
+#' intervals, particularly the BCa or percentile methods (but...)
+#' by default, the function reports confidence intervals by the
+#' traditional method."
+#'
 #' @param formula A formula indicating the measurement variable and
 #'                the grouping variables. e.g. y ~ x1 + x2.
 #' @param data The data frame to use.

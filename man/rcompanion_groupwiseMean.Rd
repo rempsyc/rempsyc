@@ -89,6 +89,13 @@ the dependency is failing upon install of the current package.
 
 From the original documentation: "Calculates means and
 confidence intervals for groups."
+
+From: https://rcompanion.org/handbook/C_03.html
+
+"For routine use, I recommend using bootstrapped confidence
+intervals, particularly the BCa or percentile methods (but...)
+by default, the function reports confidence intervals by the
+traditional method."
 }
 \details{
 The input should include either \code{formula} and \code{data};

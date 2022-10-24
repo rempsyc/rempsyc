@@ -13,8 +13,8 @@
     -   Support second moderator
 -   `nice_slopes`
     -   Add support for multiple moderators (like for `nice_mod`)
--   `nice_violin`
-    -   Make bootstrapping optional
+-   `rcompanion_groupwiseMean`
+    -   Rewrite with only the `boot` package and `dplyr::group_by`?
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot

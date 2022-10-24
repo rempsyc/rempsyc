@@ -35,7 +35,7 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `devtools::install_github("rempsyc/rempsyc")`. Package `devtools` is necessary for this command. If you haven't installed `devtools` yet, install it via `install.packages("devtools")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
 
 ```{r}
 nice_violin(data = ToothGrowth,
@@ -44,20 +44,14 @@ nice_violin(data = ToothGrowth,
 ```
 
 ```
-Dots  = Means
-Error bars = 95% bootstrapped confidence Intervals (2000 replications)
-Width = Distribution Density (Frequency)
+Dots = means
+Error bars = 95% confidence intervals
+Width = distribution density (frequency)
 ```
-
-### Basic idea
-
-This is cool because it gives you a 95% bootstrapped confidence interval (with 2000 bootstraps), as shown by the error bars. Bootstrapping is a non-parametric technique, meaning that it does not need to respect the classical parametric assumptions (normality, homoscedasticity, etc.). In this case it's just a nice alternative way to look at your data.
-
-> ***Note:*** bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I've added an option to specify a specific number of bootstraps with the option `bootstraps = 2000` (change default to your desired value). But because I've recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead; just add `boot = FALSE` as one of the argument.
+### Save a high-resolution image file to specified directory
 
 ```{r, eval = FALSE}
-### Save a high-resolution image file to specified directory
-ggplot2::ggsave('nice_violinplothere.tiff', width = 7, height = 7, 
+ggplot2::ggsave('nice_violinplothere.pdf', width = 7, height = 7, 
                 unit = 'in', dpi = 300)
 # Change the path to where you would like to save it.
 # If you copy-paste your path name, 
@@ -65,7 +59,7 @@ ggplot2::ggsave('nice_violinplothere.tiff', width = 7, height = 7,
 # Also remember to specify the .tiff extension of the file.
 ```
 
-> **Pro tip**: Change `.tiff` for `.pdf` or `.eps` for scalable vector graphics for high-resolution submissions to scientific journals!
+> **Pro tip**: Recommended dimensions for saving is 7 inches wide and 7 inches high. The `.pdf` or `.eps` formats are recommended for scalable vector graphics for high-resolution submissions to scientific journals. However, you can also save in other formats, such as `.tiff`, `.png`, or `.jpg`.
 
 ## Customization
 
@@ -113,7 +107,7 @@ nice_violin(
   group = "dose",
   response = "len",
   signif_annotation = c("*","**","***"), # manually enter the number of stars
-  signif_yposition = c(30,35,40), # What height (y) should the stars appear?
+  signif_yposition = c(30,36,40), # What height (y) should the stars appear?
   signif_xmin = c(1,2,1), # Where should the left-sided brackets start (x)?
   signif_xmax = c(2,3,3)) # Where should the right-sided brackets end (x)?
 ```
@@ -207,9 +201,16 @@ nice_violin(data = ToothGrowth,
             response = "len",
             CIcap.width = 0,
             alpha = .70,
-            border.colour = "white",
-            border.size = 1)
+            border.colour = "white")
 ```
+
+### Bootstrapping
+
+This function used to give you 95% bootstrapped confidence intervals (with 2000 bootstraps) for the error bars by default, but bootstrapping now has to be specified explicitly.
+
+Bootstrapping is a non-parametric technique, meaning that it does not need to respect the classical parametric assumptions (normality, homoscedasticity, etc.). In this case it's just a nice alternative way to look at your data.
+
+> ***Note:*** bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I've added an option to specify a specific number of bootstraps with the option `bootstraps = 2000` (change default to your desired value). But because I've recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead (`boot = FALSE`, now turned off by default).
 
 ### Putting it all together
 
@@ -219,6 +220,8 @@ If you'd like to see all available options at once (a bit long):
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
+            boot = TRUE,
+            bootstraps = 200,
             ytitle = "Length of Tooth",   
             xtitle = "Vitamin C Dosage",
             colours = c("darkseagreen", "cadetblue", "darkslateblue"),

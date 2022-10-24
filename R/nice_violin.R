@@ -1,12 +1,17 @@
 #' @title Easy violin plots
 #'
-#' @description Make nice violin plots easily with 95% bootstrapped
-#' confidence intervals.
+#' @description Make nice violin plots easily with 95% (possibly
+#' bootstrapped) confidence intervals.
+#'
+#' @details Using `boot = TRUE` uses bootstrapping (for the
+#' confidence intervals only) with the BCa method, using
+#' the `rcompanion_groupwiseMean` function.
 #'
 #' @param data The data frame.
 #' @param group The group by which to plot the variable.
 #' @param response The dependent variable to be plotted.
-#' @param boot Logical, whether to use bootstrapping or not.
+#' @param boot Logical, whether to use bootstrapping for the confidence
+#' interval or not.
 #' @param bootstraps How many bootstraps to use.
 #' @param colours Desired colours for the plot, if desired.
 #' @param xlabels The individual group labels on the x-axis.
@@ -187,7 +192,7 @@
 nice_violin <- function(data,
                         group,
                         response,
-                        boot = TRUE,
+                        boot = FALSE,
                         bootstraps = 2000,
                         colours,
                         xlabels = NULL,
@@ -214,18 +219,15 @@ nice_violin <- function(data,
                         d.y = mean(data[[response]]) * 1.3) {
   rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
-  gform <- stats::reformulate(group, response)
-  class(data[[response]]) <- "numeric"
-  dataSummary <- rcompanion_groupwiseMean(gform,
+  data[[response]] <- as.numeric(data[[response]])
+  dataSummary <- rcompanion_groupwiseMean(
+    group = group,
+    var = response,
     data = data,
     conf = 0.95,
-    digits = 3,
+    digits = 5,
     R = bootstraps,
-    boot = TRUE,
     traditional = !boot,
-    normal = FALSE,
-    basic = FALSE,
-    percentile = FALSE,
     bca = boot
   )
   if (has.d == TRUE & any(
@@ -276,8 +278,8 @@ nice_violin <- function(data,
     ) +
     ggplot2::geom_errorbar(ggplot2::aes(
       y = .data$Mean,
-      ymin = dataSummary[, 6],
-      ymax = dataSummary[, 7]
+      ymin = dataSummary[, 5],
+      ymax = dataSummary[, 6]
     ),
     color = "black",
     size = 1,

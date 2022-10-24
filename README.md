@@ -11,8 +11,8 @@
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://cran.r-project.org/package=rempsyc)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://cranlogs.r-pkg.org/)
+[![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
@@ -156,13 +156,13 @@ contrasts
 #> 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937
 #> 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1048044  5.6507320
-#> 2  0.6822567  2.2282184
-#> 3  1.0850389  3.9310262
-#> 4 -4.8990287 -2.4179862
-#> 5 -3.8970000 -1.4438520
-#> 6 -1.7783875 -0.4648771
+#>     CI_lower  CI_upper
+#> 1  2.1170032  6.257670
+#> 2  0.7030306  2.291567
+#> 3  1.0742856  3.929680
+#> 4 -5.0931455 -2.452713
+#> 5 -3.7156377 -1.466031
+#> 6 -1.7321330 -0.448104
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
