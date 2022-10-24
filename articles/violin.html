@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,33 +148,28 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong><em>Note:</em></strong> If you haven’t installed this package yet, you will need to install it via the following command: <code>devtools::install_github("rempsyc/rempsyc")</code>. Package <code>devtools</code> is necessary for this command. If you haven’t installed <code>devtools</code> yet, install it via <code>install.packages("devtools")</code>.</p>
+<p><strong><em>Note:</em></strong> If you haven’t installed this package yet, you will need to install it via the following command: <code>install.packages("rempsyc")</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
 <span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
 <span>            response <span class="op">=</span> <span class="st">"len"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-3-1.png" width="70%"></p>
-<pre><code>Dots  = Means
-Error bars = 95% bootstrapped confidence Intervals (2000 replications)
-Width = Distribution Density (Frequency)</code></pre>
+<pre><code>Dots = means
+Error bars = 95% confidence intervals
+Width = distribution density (frequency)</code></pre>
 <div class="section level3">
-<h3 id="basic-idea">Basic idea<a class="anchor" aria-label="anchor" href="#basic-idea"></a>
+<h3 id="save-a-high-resolution-image-file-to-specified-directory">Save a high-resolution image file to specified directory<a class="anchor" aria-label="anchor" href="#save-a-high-resolution-image-file-to-specified-directory"></a>
 </h3>
-<p>This is cool because it gives you a 95% bootstrapped confidence interval (with 2000 bootstraps), as shown by the error bars. Bootstrapping is a non-parametric technique, meaning that it does not need to respect the classical parametric assumptions (normality, homoscedasticity, etc.). In this case it’s just a nice alternative way to look at your data.</p>
-<blockquote>
-<p><strong><em>Note:</em></strong> bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I’ve added an option to specify a specific number of bootstraps with the option <code>bootstraps = 2000</code> (change default to your desired value). But because I’ve recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead; just add <code>boot = FALSE</code> as one of the argument.</p>
-</blockquote>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">### Save a high-resolution image file to specified directory</span></span>
-<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nice_violinplothere.tiff'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nice_violinplothere.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
 <span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
 <span><span class="co"># If you copy-paste your path name, </span></span>
 <span><span class="co"># remember to use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .tiff extension of the file.</span></span></code></pre></div>
 <blockquote>
-<p><strong>Pro tip</strong>: Change <code>.tiff</code> for <code>.pdf</code> or <code>.eps</code> for scalable vector graphics for high-resolution submissions to scientific journals!</p>
+<p><strong>Pro tip</strong>: Recommended dimensions for saving is 7 inches wide and 7 inches high. The <code>.pdf</code> or <code>.eps</code> formats are recommended for scalable vector graphics for high-resolution submissions to scientific journals. However, you can also save in other formats, such as <code>.tiff</code>, <code>.png</code>, or <code>.jpg</code>.</p>
 </blockquote>
 </div>
 </div>
@@ -226,7 +221,7 @@ Width = Distribution Density (Frequency)</code></pre>
 <span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
 <span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"**"</span>,<span class="st">"***"</span><span class="op">)</span>, <span class="co"># manually enter the number of stars</span></span>
-<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">35</span>,<span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">36</span>,<span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
 <span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># Where should the left-sided brackets start (x)?</span></span>
 <span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># Where should the right-sided brackets end (x)?</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-8-1.png" width="70%"></p>
@@ -330,9 +325,17 @@ Width = Distribution Density (Frequency)</code></pre>
 <span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
 <span>            CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>            alpha <span class="op">=</span> <span class="fl">.70</span>,</span>
-<span>            border.colour <span class="op">=</span> <span class="st">"white"</span>,</span>
-<span>            border.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span>            border.colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-17-1.png" width="70%"></p>
+</div>
+<div class="section level3">
+<h3 id="bootstrapping">Bootstrapping<a class="anchor" aria-label="anchor" href="#bootstrapping"></a>
+</h3>
+<p>This function used to give you 95% bootstrapped confidence intervals (with 2000 bootstraps) for the error bars by default, but bootstrapping now has to be specified explicitly.</p>
+<p>Bootstrapping is a non-parametric technique, meaning that it does not need to respect the classical parametric assumptions (normality, homoscedasticity, etc.). In this case it’s just a nice alternative way to look at your data.</p>
+<blockquote>
+<p><strong><em>Note:</em></strong> bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I’ve added an option to specify a specific number of bootstraps with the option <code>bootstraps = 2000</code> (change default to your desired value). But because I’ve recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead (<code>boot = FALSE</code>, now turned off by default).</p>
+</blockquote>
 </div>
 <div class="section level3">
 <h3 id="putting-it-all-together">Putting it all together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a>
@@ -342,6 +345,8 @@ Width = Distribution Density (Frequency)</code></pre>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
 <span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
 <span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>            boot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            bootstraps <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>            ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,   </span>
 <span>            xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span>,</span>
 <span>            colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>, <span class="st">"cadetblue"</span>, <span class="st">"darkslateblue"</span><span class="op">)</span>,</span>
