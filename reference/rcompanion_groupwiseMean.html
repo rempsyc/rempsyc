@@ -245,26 +245,26 @@ See <code>{boot::boot.ci}</code>.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The input should include either <code>formula</code> and <code>data</code>;
 or <code>data</code>, <code>var</code>, and <code>group</code>. (See examples).</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>     Results <span class="cf">for</span> <span class="kw">ungrouped</span> (one<span class="op">-</span>sample) data can be obtained by either</span>
-<span id="cb1-2"><a href="#cb1-2"></a>     setting the right side of the formula to <span class="dv">1</span>, e.g.  y <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, or by</span>
-<span id="cb1-3"><a href="#cb1-3"></a>     setting \code{group=<span class="ot">NULL</span>} when using \code{var}.</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>     Results <span class="cf">for</span> <span class="fu">ungrouped</span> (one<span class="sc">-</span>sample) data can be obtained by either</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     setting the right side of the formula to <span class="dv">1</span>, e.g.  y <span class="sc">~</span> <span class="dv">1</span>, or by</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     setting \code{group<span class="ot">=</span><span class="cn">NULL</span>} when using \code{var}.</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The parsing of the formula is simplistic. The first variable on the
 left side is used as the measurement variable.  The variables on the
 right side are used for the grouping variables.</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>     In general, it is advisable to handle \code{<span class="ot">NA</span>} values before</span>
-<span id="cb1-2"><a href="#cb1-2"></a>     using this function.</span>
-<span id="cb1-3"><a href="#cb1-3"></a>     With some options, the <span class="cf">function</span> may not handle missing values well,</span>
-<span id="cb1-4"><a href="#cb1-4"></a>     or <span class="cf">in</span> the manner desired by the user.</span>
-<span id="cb1-5"><a href="#cb1-5"></a>     In particular, <span class="cf">if</span> \code{bca=<span class="ot">TRUE</span>} and there are \code{<span class="ot">NA</span>} values,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>     the <span class="cf">function</span> may fail.</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a>     For a traditional method to calculate confidence intervals</span>
-<span id="cb1-9"><a href="#cb1-9"></a>     on trimmed means,</span>
-<span id="cb1-10"><a href="#cb1-10"></a>     see Rand Wilcox, Introduction to Robust Estimation and</span>
-<span id="cb1-11"><a href="#cb1-11"></a>     Hypothesis Testing.</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>     In general, it is advisable to handle \code{<span class="cn">NA</span>} values before</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     using this function.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     With some options, the <span class="cf">function</span> may not handle missing values well,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     or <span class="cf">in</span> the manner desired by the user.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     In particular, <span class="cf">if</span> \code{bca<span class="ot">=</span><span class="cn">TRUE</span>} and there are \code{<span class="cn">NA</span>} values,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     the <span class="cf">function</span> may fail.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     For a traditional method to calculate confidence intervals</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     on trimmed means,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>     see Rand Wilcox, Introduction to Robust Estimation and</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>     Hypothesis Testing.</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
