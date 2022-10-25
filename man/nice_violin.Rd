@@ -130,8 +130,7 @@ the \code{rcompanion_groupwiseMean} function.
 nice_violin(
   data = ToothGrowth,
   group = "dose",
-  response = "len",
-  bootstraps = 200,
+  response = "len"
 )
 \donttest{
 \dontshow{.old_wd <- setwd(tempdir())}
