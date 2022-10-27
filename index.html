@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,6 +127,7 @@
 </h1>
 </div>
 <!-- badges: start -->
+
 <p>R package of convenience functions to make your workflow faster and easier. Easily customizable plots (via <code>ggplot2</code>), nice APA tables exportable to Word (via <code>flextable</code>), easily run statistical tests or check assumptions, and automatize various other tasks. Mostly geared at researchers in the psychological sciences. The package is still under active development. Feel free to open an issue to ask for help, report a bug, or request a feature.</p>
 <ul>
 <li><a href="https://rempsyc.remi-theriault.com/news/index.html">Release notes</a></li>
@@ -162,8 +163,10 @@
 <p><a href="#testing-assumptions">Testing assumptions</a><a name="Testing%20assumptions"></a></p>
 <p><a href="#lavaanextra">lavaanExtra</a><a name="lavaanExtra"></a></p>
 </div>
-<div class="section level2"><h2 id="nice-apa-tables">Nice APA tables<a class="anchor" aria-label="anchor" href="#nice-apa-tables"></a>
-</h2></div>
+<div class="section level2">
+<h2 id="nice-apa-tables">Nice APA tables<a class="anchor" aria-label="anchor" href="#nice-apa-tables"></a>
+</h2>
+</div>
 <div class="section level2">
 <h2 id="nice_table">
 <code>nice_table</code><a class="anchor" aria-label="anchor" href="#nice_table"></a>
@@ -172,8 +175,10 @@
 <p>The tables can be saved with the <code>save_as_docx</code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
 <p>Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.</p>
 </div>
-<div class="section level2"><h2 id="t-tests-planned-contrasts-regressions-moderations-simple-slopes">T-tests, planned contrasts, regressions, moderations, simple slopes<a class="anchor" aria-label="anchor" href="#t-tests-planned-contrasts-regressions-moderations-simple-slopes"></a>
-</h2></div>
+<div class="section level2">
+<h2 id="t-tests-planned-contrasts-regressions-moderations-simple-slopes">T-tests, planned contrasts, regressions, moderations, simple slopes<a class="anchor" aria-label="anchor" href="#t-tests-planned-contrasts-regressions-moderations-simple-slopes"></a>
+</h2>
+</div>
 <div class="section level2">
 <h2 id="nice_t_test">
 <code>nice_t_test</code><a class="anchor" aria-label="anchor" href="#nice_t_test"></a>
@@ -219,18 +224,18 @@
 <span><span class="va">contrasts</span></span>
 <span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
 <span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
-<span><span class="co">#&gt;     CI_lower  CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1170032  6.257670</span></span>
-<span><span class="co">#&gt; 2  0.7030306  2.291567</span></span>
-<span><span class="co">#&gt; 3  1.0742856  3.929680</span></span>
-<span><span class="co">#&gt; 4 -5.0931455 -2.452713</span></span>
-<span><span class="co">#&gt; 5 -3.7156377 -1.466031</span></span>
-<span><span class="co">#&gt; 6 -1.7321330 -0.448104</span></span>
+<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1  2.0931825  5.4521491</span></span>
+<span><span class="co">#&gt; 2  0.7276065  2.3983961</span></span>
+<span><span class="co">#&gt; 3  1.0353053  3.8313294</span></span>
+<span><span class="co">#&gt; 4 -4.9000782 -2.4588340</span></span>
+<span><span class="co">#&gt; 5 -3.7025698 -1.4598208</span></span>
+<span><span class="co">#&gt; 6 -1.7260912 -0.4571215</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -448,8 +453,10 @@
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p><img src="reference/figures/cormatrix.png" width="80%"><img src="reference/figures/cormatrix2.png" width="80%"></p>
 </div>
-<div class="section level2"><h2 id="utility-functions">Utility functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
-</h2></div>
+<div class="section level2">
+<h2 id="utility-functions">Utility functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a>
+</h2>
+</div>
 <div class="section level2">
 <h2 id="nice_na">
 <code>nice_na</code><a class="anchor" aria-label="anchor" href="#nice_na"></a>
@@ -675,8 +682,10 @@
 <span><span class="co">#&gt; 3  3 AV - SV - ST</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/randomize" class="uri">https://rempsyc.remi-theriault.com/articles/randomize</a></p>
 </div>
-<div class="section level2"><h2 id="testing-assumptions">Testing assumptions<a class="anchor" aria-label="anchor" href="#testing-assumptions"></a>
-</h2></div>
+<div class="section level2">
+<h2 id="testing-assumptions">Testing assumptions<a class="anchor" aria-label="anchor" href="#testing-assumptions"></a>
+</h2>
+</div>
 <div class="section level2">
 <h2 id="nice_assumptions">
 <code>nice_assumptions</code><a class="anchor" aria-label="anchor" href="#nice_assumptions"></a>

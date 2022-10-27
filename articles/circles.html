@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Interpolating the Inclusion of the Other in the Self Scale</h1>
-                        <h4 data-toc-skip class="author">Rémi Thériault</h4>
+                        <h4 data-toc-skip class="author">Rémi
+Thériault</h4>
             
             <h4 data-toc-skip class="date">February 28, 2020</h4>
       
@@ -129,13 +130,26 @@
 
     
     
-<p>For anyone in social psychology using the Inclusion of the Other in the Self (IOS) Scale to measure self-other merging, you might have wished that you could know for sure how much self-other overlap there is between your participant and a target group or individual.</p>
-<p>Indeed, the IOS response choices go from 1 to 7 only, and unfortunately these don’t match the percentage overlap from the circle images (i.e., 1/7 is not 14% overlap, and 7/7 is not 100% overlap). You can observe this on the original IOS scale below.</p>
+<p>For anyone in social psychology using the Inclusion of the Other in
+the Self (IOS) Scale to measure self-other merging, you might have
+wished that you could know for sure how much self-other overlap there is
+between your participant and a target group or individual.</p>
+<p>Indeed, the IOS response choices go from 1 to 7 only, and
+unfortunately these don’t match the percentage overlap from the circle
+images (i.e., 1/7 is not 14% overlap, and 7/7 is not 100% overlap). You
+can observe this on the original IOS scale below.</p>
 <p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_circles/IOS.png"></p>
-<p>So through trial and error (using the <code>VennDiagram</code> package), I was able to determine the approximate actual overlap from the pictures (below).</p>
+<p>So through trial and error (using the <code>VennDiagram</code>
+package), I was able to determine the approximate actual overlap from
+the pictures (below).</p>
 <p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_circles/overlap.png"></p>
-<p>I feel like the overlap is pretty close to the original scale. Based on this, I used the <code><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approx()</a></code> function to interpolate any responses so that 1 = 0% (overlap), 2 = 10%, 3 = 20%, 4 = 30%, 5 = 55%, 6 = 65%, and 7 (the maximum) = 85%.</p>
-<p>But that also means that a continuous response (for example based on a group average) can also be plotted accurately (e.g., a score of 6.84 would turn into 81.8 % overlap). Let’s see a few examples.</p>
+<p>I feel like the overlap is pretty close to the original scale. Based
+on this, I used the <code><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approx()</a></code> function to interpolate any
+responses so that 1 = 0% (overlap), 2 = 10%, 3 = 20%, 4 = 30%, 5 = 55%,
+6 = 65%, and 7 (the maximum) = 85%.</p>
+<p>But that also means that a continuous response (for example based on
+a group average) can also be plotted accurately (e.g., a score of 6.84
+would turn into 81.8 % overlap). Let’s see a few examples.</p>
 <div class="section level3">
 <h3 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h3>
@@ -143,7 +157,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong><em>Note:</em></strong> If you haven’t installed this package yet, you will need to install it via the following command: <code>install.packages("rempsyc")</code>.</p>
+<p><strong><em>Note:</em></strong> If you haven’t installed this package
+yet, you will need to install it via the following command:
+<code>install.packages("rempsyc")</code>.</p>
 </blockquote>
 </div>
 <div class="section level3">
@@ -170,7 +186,8 @@
 <div class="section level2">
 <h2 id="changing-labels">Changing labels<a class="anchor" aria-label="anchor" href="#changing-labels"></a>
 </h2>
-<p>You can also change group labels with the <code>categories</code> argument, although ‘Self’ and ‘Other’ are the defaults.</p>
+<p>You can also change group labels with the <code>categories</code>
+argument, although ‘Self’ and ‘Other’ are the defaults.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.12</span>, categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Humans"</span>,<span class="st">"Animals"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="circles_files/figure-html/unnamed-chunk-6-1.png" width="30%"></p>
@@ -182,7 +199,8 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="circles_files/figure-html/unnamed-chunk-7-1.png" width="30%"></p>
-<p>Then you can use the ggplot2 save command directly with the object name:</p>
+<p>Then you can use the ggplot2 save command directly with the object
+name:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">plot</span>, file <span class="op">=</span> <span class="st">"overlap.pdf"</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
 <span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
@@ -191,18 +209,28 @@
 <span><span class="co"># use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .pdf extension of the file.</span></span></code></pre></div>
 <blockquote>
-<p><strong>Pro tip</strong>: Recommended dimensions for saving is 7 inches wide and 7 inches high. The <code>.pdf</code> or <code>.eps</code> formats are recommended for scalable vector graphics for high-resolution submissions to scientific journals. However, you can also save in other formats, such as <code>.tiff</code>, <code>.png</code>, or <code>.jpg</code>.</p>
+<p><strong>Pro tip</strong>: Recommended dimensions for saving is 7
+inches wide and 7 inches high. The <code>.pdf</code> or
+<code>.eps</code> formats are recommended for scalable vector graphics
+for high-resolution submissions to scientific journals. However, you can
+also save in other formats, such as <code>.tiff</code>,
+<code>.png</code>, or <code>.jpg</code>.</p>
 </blockquote>
 </div>
 <div class="section level2">
 <h2 id="example-figure">Example figure<a class="anchor" aria-label="anchor" href="#example-figure"></a>
 </h2>
-<p>This allowed me for instance, <a href="https://doi.org/10.1177/17470218211024826" class="external-link">for one study</a>, to compare three of my groups side-by-side following an intervention:</p>
+<p>This allowed me for instance, <a href="https://doi.org/10.1177/17470218211024826" class="external-link">for one study</a>, to
+compare three of my groups side-by-side following an intervention:</p>
 <p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_circles/figure.png"></p>
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>
 </h3>
-<p>Make sure to check out this page again if you use the code after a time or if you encounter errors, as I periodically update or improve the code. Feel free to contact me for comments, questions, or requests to improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
+<p>Make sure to check out this page again if you use the code after a
+time or if you encounter errors, as I periodically update or improve the
+code. Feel free to contact me for comments, questions, or requests to
+improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all
+tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

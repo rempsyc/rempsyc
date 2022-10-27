@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Publication-ready scatter plots in R</h1>
-                        <h4 data-toc-skip class="author">Rémi Thériault</h4>
+                        <h4 data-toc-skip class="author">Rémi
+Thériault</h4>
             
             <h4 data-toc-skip class="date">September 12, 2019</h4>
       
@@ -132,8 +133,11 @@
 <div class="section level2">
 <h2 id="basic-idea">Basic idea<a class="anchor" aria-label="anchor" href="#basic-idea"></a>
 </h2>
-<p>After the <code><a href="../reference/nice_violin.html">nice_violin()</a></code> function, here’s how to make nice scatter plots easily!</p>
-<p>Let’s first load the demo data. This data set comes with base <code>R</code> (meaning you have it too and can directly type this command into your <code>R</code> console).</p>
+<p>After the <code><a href="../reference/nice_violin.html">nice_violin()</a></code> function, here’s how to make
+nice scatter plots easily!</p>
+<p>Let’s first load the demo data. This data set comes with base
+<code>R</code> (meaning you have it too and can directly type this
+command into your <code>R</code> console).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
@@ -151,7 +155,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong><em>Note:</em></strong> If you haven’t installed this package yet, you will need to install it via the following command: <code>install.packages("rempsyc")</code>.</p>
+<p><strong><em>Note:</em></strong> If you haven’t installed this package
+yet, you will need to install it via the following command:
+<code>install.packages("rempsyc")</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
@@ -167,7 +173,12 @@
 <span><span class="co"># use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .tiff extension of the file.</span></span></code></pre></div>
 <blockquote>
-<p><strong>Pro tip</strong>: Recommended dimensions for saving is 7 inches wide and 7 inches high. The <code>.pdf</code> or <code>.eps</code> formats are recommended for scalable vector graphics for high-resolution submissions to scientific journals. However, you can also save in other formats, such as <code>.tiff</code>, <code>.png</code>, or <code>.jpg</code>.</p>
+<p><strong>Pro tip</strong>: Recommended dimensions for saving is 7
+inches wide and 7 inches high. The <code>.pdf</code> or
+<code>.eps</code> formats are recommended for scalable vector graphics
+for high-resolution submissions to scientific journals. However, you can
+also save in other formats, such as <code>.tiff</code>,
+<code>.png</code>, or <code>.jpg</code>.</p>
 </blockquote>
 </div>
 </div>
@@ -188,7 +199,8 @@
 <div class="section level3">
 <h3 id="have-points-jittered">Have points “jittered”<a class="anchor" aria-label="anchor" href="#have-points-jittered"></a>
 </h3>
-<p>Meaning randomly moved around a bit to prevent overplotting (when two or more points overlap, thus hiding information).</p>
+<p>Meaning randomly moved around a bit to prevent overplotting (when two
+or more points overlap, thus hiding information).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
@@ -388,7 +400,8 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <p><img src="scatter_files/figure-html/unnamed-chunk-22-1.png" width="70%"></p>
 </div>
 <div class="section level3">
-<h3 id="plot-by-group-point-shapes-line-types-legend-no-colours-black-and-white">Plot by group, point shapes, line types, legend + no colours (black and white)<a class="anchor" aria-label="anchor" href="#plot-by-group-point-shapes-line-types-legend-no-colours-black-and-white"></a>
+<h3 id="plot-by-group-point-shapes-line-types-legend-no-colours-black-and-white">Plot by group, point shapes, line types, legend + no colours (black
+and white)<a class="anchor" aria-label="anchor" href="#plot-by-group-point-shapes-line-types-legend-no-colours-black-and-white"></a>
 </h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
@@ -440,7 +453,9 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <div class="section level2">
 <h2 id="special-situation-add-group-average">Special situation: Add group average<a class="anchor" aria-label="anchor" href="#special-situation-add-group-average"></a>
 </h2>
-<p>There’s no straightforward way to add group average, so here’s a hack to do it. We first have to create a second data set with another “group” that will be used as the average.</p>
+<p>There’s no straightforward way to add group average, so here’s a hack
+to do it. We first have to create a second data set with another “group”
+that will be used as the average.</p>
 <div class="section level3">
 <h3 id="black-line-coloured-lines">Black line + coloured lines<a class="anchor" aria-label="anchor" href="#black-line-coloured-lines"></a>
 </h3>
@@ -453,7 +468,9 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <span><span class="va">new.Data</span><span class="op">$</span><span class="va">cyl</span> <span class="op">&lt;-</span> <span class="st">"Average"</span></span>
 <span><span class="co"># This adds the new "Average" group rows to the original data rows</span></span>
 <span><span class="va">XData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="va">new.Data</span><span class="op">)</span></span></code></pre></div>
-<p>Then we need to create a FIRST layer of just the slopes. We add transparency to the group lines except the group average to emphasize the group average (with the new argument <code>groups.alpha</code>).</p>
+<p>Then we need to create a FIRST layer of just the slopes. We add
+transparency to the group lines except the group average to emphasize
+the group average (with the new argument <code>groups.alpha</code>).</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">XData</span>,</span>
 <span>                   predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
@@ -470,7 +487,9 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># This adds 50% transparency to all lines except </span></span>
 <span><span class="co"># the first one (Average) which is 100%</span></span></code></pre></div>
-<p>Finally we are ready to add a SECOND layer of just the points on top of our previous layer. We use standard <code>ggplot</code> syntax for this.</p>
+<p>Finally we are ready to add a SECOND layer of just the points on top
+of our previous layer. We use standard <code>ggplot</code> syntax for
+this.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
@@ -488,7 +507,8 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <div class="section level3">
 <h3 id="black-line-coloured-dots">Black line, coloured dots<a class="anchor" aria-label="anchor" href="#black-line-coloured-dots"></a>
 </h3>
-<p>If you’d like instead to still show the group points but only the black average line, you can do the following as first layer:</p>
+<p>If you’d like instead to still show the group points but only the
+black average line, you can do the following as first layer:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>                   predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
@@ -512,7 +532,11 @@ This is to make sure to have the right labels for the right groups!</code></pre>
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>
 </h3>
-<p>Make sure to check out this page again if you use the code after a time or if you encounter errors, as I periodically update or improve the code. Feel free to contact me for comments, questions, or requests to improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
+<p>Make sure to check out this page again if you use the code after a
+time or if you encounter errors, as I periodically update or improve the
+code. Feel free to contact me for comments, questions, or requests to
+improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all
+tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

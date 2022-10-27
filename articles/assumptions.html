@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Quickly test linear regression assumptions</h1>
-                        <h4 data-toc-skip class="author">Rémi Thériault</h4>
+                        <h4 data-toc-skip class="author">Rémi
+Thériault</h4>
             
             <h4 data-toc-skip class="date">December 25, 2020</h4>
       
@@ -133,7 +134,10 @@
 <div class="section level2">
 <h2 id="basic-idea">Basic idea<a class="anchor" aria-label="anchor" href="#basic-idea"></a>
 </h2>
-<p>I recently discovered a wonderful package for easily checking linear regression assumptions via diagnostic plots: the <code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code> function of the <code>performance</code> package.</p>
+<p>I recently discovered a wonderful package for easily checking linear
+regression assumptions via diagnostic plots: the
+<code><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model()</a></code> function of the <code>performance</code>
+package.</p>
 <p>Let’s make a quick demonstration of this package first.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load necessary libraries</span></span>
@@ -149,8 +153,22 @@
 <code class="sourceCode R"><span><span class="co"># Check model assumptions</span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html" class="external-link">check_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="assumptions_files/figure-html/unnamed-chunk-3-1.png" width="90%"></p>
-<p>Wonderful! And efficient. However, sometimes, for different reasons, someone might want to check assumptions with an objective test. Testing each assumption one by one is kind of time-consuming, so I made a convenience function to accelerate this process.</p>
-<p>Just a <strong>warning</strong> before jumping into objective assumption tests. Note these tests are generally NOT recommended! With a large sample size, objective assumption tests will be OVER-sensitive to deviations from expected values, while with a small sample size, the objective assumption tests will be UNDER-powered to detect real, existing deviations. It can also mask other visual patterns not reflected in a single number. It is thus recommended to use visual assessment of diagnostic plots instead (e.g., see <a href="https://doi.org/10.1111/jac.12220" class="external-link">Kozak &amp; Piepho, 2018</a>; <a href="https://doi.org/10.1080/03610920600853308" class="external-link">Schucany &amp; Ng, 2006</a>). For a quick and accessible argument against tests of normality specifically, see <u><a href="https://towardsdatascience.com/stop-testing-for-normality-dba96bb73f90" class="external-link">this source</a></u>.</p>
+<p>Wonderful! And efficient. However, sometimes, for different reasons,
+someone might want to check assumptions with an objective test. Testing
+each assumption one by one is kind of time-consuming, so I made a
+convenience function to accelerate this process.</p>
+<p>Just a <strong>warning</strong> before jumping into objective
+assumption tests. Note these tests are generally NOT recommended! With a
+large sample size, objective assumption tests will be OVER-sensitive to
+deviations from expected values, while with a small sample size, the
+objective assumption tests will be UNDER-powered to detect real,
+existing deviations. It can also mask other visual patterns not
+reflected in a single number. It is thus recommended to use visual
+assessment of diagnostic plots instead (e.g., see <a href="https://doi.org/10.1111/jac.12220" class="external-link">Kozak &amp; Piepho, 2018</a>;
+<a href="https://doi.org/10.1080/03610920600853308" class="external-link">Schucany &amp; Ng,
+2006</a>). For a quick and accessible argument against tests of
+normality specifically, see <u><a href="https://towardsdatascience.com/stop-testing-for-normality-dba96bb73f90" class="external-link">this
+source</a></u>.</p>
 <div class="section level3">
 <h3 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h3>
@@ -158,15 +176,20 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong><em>Note:</em></strong> If you haven’t installed this package yet, you will need to install it via the following command: <code>install.packages("rempsyc")</code>.</p>
+<p><strong><em>Note:</em></strong> If you haven’t installed this package
+yet, you will need to install it via the following command:
+<code>install.packages("rempsyc")</code>.</p>
 </blockquote>
-<p>The raw output doesn’t look so nice in the console because the column names are so long, but it does look good in the viewer or when exported to a word processing software because the column names get wrapped. You can try it in Rstudio yourself with the following command:</p>
+<p>The raw output doesn’t look so nice in the console because the column
+names are so long, but it does look good in the viewer or when exported
+to a word processing software because the column names get wrapped. You
+can try it in Rstudio yourself with the following command:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="../reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://rempsyc.remi-theriault.com/articles/images/blog_assumptions/assumptions1.png"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="fu"><a href="../reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>, col.format.p <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<template id="5e6c5b28-0a3a-4a15-96c9-e1b7f1024818"><style>
+<template id="988b36ad-ac5c-4c9e-bf3b-adad3a58dade"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -207,32 +230,34 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-ac40a456{table-layout:auto;}.cl-ac38a2e2{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ac3c28d6{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-ac3c4280{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ac3c428a{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-ac40a456">
+<style>.cl-64d6b9dc{table-layout:auto;}.cl-64cf5598{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64d29438{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-64d2ab4e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-64d2ab58{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-64d6b9dc">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-ac3c4280"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">Model...</span></p></td>
-<td class="cl-ac3c4280"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">Normality (Shapiro-Wilk)...</span></p></td>
-<td class="cl-ac3c4280"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">Homoscedasticity (Breusch-Pagan)...</span></p></td>
-<td class="cl-ac3c4280"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
-<td class="cl-ac3c4280"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">Diagnostic...</span></p></td>
+<td class="cl-64d2ab4e"><p class="cl-64d29438"><span class="cl-64cf5598">Model...</span></p></td>
+<td class="cl-64d2ab4e"><p class="cl-64d29438"><span class="cl-64cf5598">Normality (Shapiro-Wilk)...</span></p></td>
+<td class="cl-64d2ab4e"><p class="cl-64d29438"><span class="cl-64cf5598">Homoscedasticity (Breusch-Pagan)...</span></p></td>
+<td class="cl-64d2ab4e"><p class="cl-64d29438"><span class="cl-64cf5598">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
+<td class="cl-64d2ab4e"><p class="cl-64d29438"><span class="cl-64cf5598">Diagnostic...</span></p></td>
 </tr></thead>
 <tbody><tr style="overflow-wrap:break-word;">
-<td class="cl-ac3c428a"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">mpg ~ wt * cyl + gear</span></p></td>
-<td class="cl-ac3c428a"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">.615</span></p></td>
-<td class="cl-ac3c428a"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">.054</span></p></td>
-<td class="cl-ac3c428a"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">.525</span></p></td>
-<td class="cl-ac3c428a"><p class="cl-ac3c28d6"><span class="cl-ac38a2e2">0</span></p></td>
+<td class="cl-64d2ab58"><p class="cl-64d29438"><span class="cl-64cf5598">mpg ~ wt * cyl + gear</span></p></td>
+<td class="cl-64d2ab58"><p class="cl-64d29438"><span class="cl-64cf5598">.615</span></p></td>
+<td class="cl-64d2ab58"><p class="cl-64d29438"><span class="cl-64cf5598">.054</span></p></td>
+<td class="cl-64d2ab58"><p class="cl-64d29438"><span class="cl-64cf5598">.525</span></p></td>
+<td class="cl-64d2ab58"><p class="cl-64d29438"><span class="cl-64cf5598">0</span></p></td>
 </tr></tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="52ae28ee-3c1c-4b25-af28-3401b81cb6a2"></div>
+</div></template><div class="flextable-shadow-host" id="7f6219e5-0262-4218-b63e-5a5fc7eb3f9d"></div>
 <script>
-var dest = document.getElementById("52ae28ee-3c1c-4b25-af28-3401b81cb6a2");
-var template = document.getElementById("5e6c5b28-0a3a-4a15-96c9-e1b7f1024818");
+var dest = document.getElementById("7f6219e5-0262-4218-b63e-5a5fc7eb3f9d");
+var template = document.getElementById("988b36ad-ac5c-4c9e-bf3b-adad3a58dade");
 var caption = template.content.querySelector("caption");
 var fantome = dest.attachShadow({mode: 'open'});
 var templateContent = template.content;
 fantome.appendChild(templateContent);
-</script><p>This function is particularly useful when testing several models simultaneously as it makes for a nice table of results. Let’s make a short demonstration of this.</p>
+</script><p>This function is particularly useful when testing several models
+simultaneously as it makes for a nice table of results. Let’s make a
+short demonstration of this.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our dependent variables</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -249,7 +274,7 @@ fantome.appendChild(templateContent);
 <p>Or alternatively with the <a href="../articles/table.html">nice_table() function</a></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">assumptions.table</span>, col.format.p <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<template id="f9c19041-8483-45a6-a382-7eac29f6493b"><style>
+<template id="4cddf52d-8b69-4f44-bf3c-37422a85f181"><style>
 .tabwid table{
   border-spacing:0px !important;
   border-collapse:collapse;
@@ -290,92 +315,92 @@ background-color: transparent;
 }
 </style>
 <div class="tabwid">
-<style>.cl-ac96450a{table-layout:auto;}.cl-ac8d4e82{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ac92125a{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-ac9227ae{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ac9227b8{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ac9227b9{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table class="table cl-ac96450a">
+<style>.cl-652aba5a{table-layout:auto;}.cl-6522ac7a{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-6526cfd0{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-6526e286{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6526e290{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6526e291{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table class="table cl-652aba5a">
 <thead><tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227ae"><p class="cl-ac92125a"><span class="cl-ac8d4e82">Model...</span></p></td>
-<td class="cl-ac9227ae"><p class="cl-ac92125a"><span class="cl-ac8d4e82">Normality (Shapiro-Wilk)...</span></p></td>
-<td class="cl-ac9227ae"><p class="cl-ac92125a"><span class="cl-ac8d4e82">Homoscedasticity (Breusch-Pagan)...</span></p></td>
-<td class="cl-ac9227ae"><p class="cl-ac92125a"><span class="cl-ac8d4e82">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
-<td class="cl-ac9227ae"><p class="cl-ac92125a"><span class="cl-ac8d4e82">Diagnostic...</span></p></td>
+<td class="cl-6526e286"><p class="cl-6526cfd0"><span class="cl-6522ac7a">Model...</span></p></td>
+<td class="cl-6526e286"><p class="cl-6526cfd0"><span class="cl-6522ac7a">Normality (Shapiro-Wilk)...</span></p></td>
+<td class="cl-6526e286"><p class="cl-6526cfd0"><span class="cl-6522ac7a">Homoscedasticity (Breusch-Pagan)...</span></p></td>
+<td class="cl-6526e286"><p class="cl-6526cfd0"><span class="cl-6522ac7a">Autocorrelation of residuals (Durbin-Watson)...</span></p></td>
+<td class="cl-6526e286"><p class="cl-6526cfd0"><span class="cl-6522ac7a">Diagnostic...</span></p></td>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">cyl ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.361</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.282</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.460</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">0</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">cyl ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.361</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.282</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.460</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">disp ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.506</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.831</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.077</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">0</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">disp ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.506</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.831</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.077</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">hp ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.004</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.351</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.198</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">1</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">hp ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.004</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.351</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.198</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">drat ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.939</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.887</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.505</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">0</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">drat ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.939</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.887</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.505</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">wt ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.020</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.270</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.002</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">2</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">wt ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.020</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.270</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.002</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">2</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">qsec ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.427</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.944</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.011</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">1</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">qsec ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.427</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.944</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.011</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">vs ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.142</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.568</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.238</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">0</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">vs ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.142</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.568</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.238</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">0</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">am ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.074</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.650</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">&lt; .001</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">1</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">am ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.074</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.650</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">&lt; .001</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">1</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">gear ~ mpg</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.001</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.528</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">&lt; .001</span></p></td>
-<td class="cl-ac9227b8"><p class="cl-ac92125a"><span class="cl-ac8d4e82">2</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">gear ~ mpg</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.001</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.528</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">&lt; .001</span></p></td>
+<td class="cl-6526e290"><p class="cl-6526cfd0"><span class="cl-6522ac7a">2</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-ac9227b9"><p class="cl-ac92125a"><span class="cl-ac8d4e82">carb ~ mpg</span></p></td>
-<td class="cl-ac9227b9"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.008</span></p></td>
-<td class="cl-ac9227b9"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.362</span></p></td>
-<td class="cl-ac9227b9"><p class="cl-ac92125a"><span class="cl-ac8d4e82">.003</span></p></td>
-<td class="cl-ac9227b9"><p class="cl-ac92125a"><span class="cl-ac8d4e82">2</span></p></td>
+<td class="cl-6526e291"><p class="cl-6526cfd0"><span class="cl-6522ac7a">carb ~ mpg</span></p></td>
+<td class="cl-6526e291"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.008</span></p></td>
+<td class="cl-6526e291"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.362</span></p></td>
+<td class="cl-6526e291"><p class="cl-6526cfd0"><span class="cl-6522ac7a">.003</span></p></td>
+<td class="cl-6526e291"><p class="cl-6526cfd0"><span class="cl-6522ac7a">2</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="b001948c-9a3a-44fa-938e-8317ee53d014"></div>
+</div></template><div class="flextable-shadow-host" id="de651c90-5216-4301-a6d7-b576525e727e"></div>
 <script>
-var dest = document.getElementById("b001948c-9a3a-44fa-938e-8317ee53d014");
-var template = document.getElementById("f9c19041-8483-45a6-a382-7eac29f6493b");
+var dest = document.getElementById("de651c90-5216-4301-a6d7-b576525e727e");
+var template = document.getElementById("4cddf52d-8b69-4f44-bf3c-37422a85f181");
 var caption = template.content.querySelector("caption");
 var fantome = dest.attachShadow({mode: 'open'});
 var templateContent = template.content;
@@ -386,8 +411,11 @@ fantome.appendChild(templateContent);
 <div class="section level2">
 <h2 id="categorical-predictors">Categorical Predictors<a class="anchor" aria-label="anchor" href="#categorical-predictors"></a>
 </h2>
-<p>If you have categorical predictors (e.g., groups), then it is suggested that you check assumptions directly on the raw data rather than on the residuals <a href="https://stats.stackexchange.com/a/502177/195567" class="external-link">(source)</a>.</p>
-<p>In this case, one can make qqplots on the different groups to first check the normality assumption.</p>
+<p>If you have categorical predictors (e.g., groups), then it is
+suggested that you check assumptions directly on the raw data rather
+than on the residuals <a href="https://stats.stackexchange.com/a/502177/195567" class="external-link">(source)</a>.</p>
+<p>In this case, one can make qqplots on the different groups to first
+check the normality assumption.</p>
 </div>
 <div class="section level2">
 <h2 id="qq-plots">QQ Plots<a class="anchor" aria-label="anchor" href="#qq-plots"></a>
@@ -400,12 +428,15 @@ fantome.appendChild(templateContent);
 <span>        variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>        group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="assumptions_files/figure-html/unnamed-chunk-10-1.png" width="70%"></p>
-<p>Generally speaking, as long as the dots lie within the confidence band, all is good and the data distribute normally.</p>
+<p>Generally speaking, as long as the dots lie within the confidence
+band, all is good and the data distribute normally.</p>
 </div>
 <div class="section level3">
 <h3 id="further-customization">Further customization<a class="anchor" aria-label="anchor" href="#further-customization"></a>
 </h3>
-<p>Change (or reorder) colours, x-axis title or y-axis title, names of groups, no grid lines, or add the <em>p</em>-value from the Shapiro-Wilk (if you wish so).</p>
+<p>Change (or reorder) colours, x-axis title or y-axis title, names of
+groups, no grid lines, or add the <em>p</em>-value from the Shapiro-Wilk
+(if you wish so).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_qq.html">nice_qq</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>        variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -416,13 +447,21 @@ fantome.appendChild(templateContent);
 <span>        shapiro <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>        title <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="assumptions_files/figure-html/unnamed-chunk-11-1.png" width="70%"></p>
-<p>A <em>p</em> &gt; .05 suggests that your data is normally distributed (according to the Shapiro-Wilk test). Inversely, a <em>p</em> &lt; .05 suggests your data is not normally distributed. Keep in mind however that there are several known problems with objective tests, so visual assessment is recommended. Nonetheless, for beginners, it can sometimes be useful (or rather, reassuring) to be able to pair the visual assessment to the tests values.</p>
+<p>A <em>p</em> &gt; .05 suggests that your data is normally distributed
+(according to the Shapiro-Wilk test). Inversely, a <em>p</em> &lt; .05
+suggests your data is not normally distributed. Keep in mind however
+that there are several known problems with objective tests, so visual
+assessment is recommended. Nonetheless, for beginners, it can sometimes
+be useful (or rather, reassuring) to be able to pair the visual
+assessment to the tests values.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="density-plots">Density Plots<a class="anchor" aria-label="anchor" href="#density-plots"></a>
 </h2>
-<p>Some people think that density distributions are less useful than qqplots, but sometimes, people still like to look at distributions, so I made another function for this.</p>
+<p>Some people think that density distributions are less useful than
+qqplots, but sometimes, people still like to look at distributions, so I
+made another function for this.</p>
 <div class="section level3">
 <h3 id="make-the-basic-plot-1">Make the basic plot<a class="anchor" aria-label="anchor" href="#make-the-basic-plot-1"></a>
 </h3>
@@ -431,12 +470,15 @@ fantome.appendChild(templateContent);
 <span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="assumptions_files/figure-html/unnamed-chunk-12-1.png" width="70%"></p>
-<p><strong>Pro tip</strong>: Save density plots with a narrower width for better-looking results.</p>
+<p><strong>Pro tip</strong>: Save density plots with a narrower width
+for better-looking results.</p>
 </div>
 <div class="section level3">
 <h3 id="further-customization-1">Further customization<a class="anchor" aria-label="anchor" href="#further-customization-1"></a>
 </h3>
-<p>Change (or reorder) colours, x-axis title or y-axis title, names of groups, no grid lines, or add the <em>p</em>-value from the Shapiro-Wilk (if you wish so).</p>
+<p>Change (or reorder) colours, x-axis title or y-axis title, names of
+groups, no grid lines, or add the <em>p</em>-value from the Shapiro-Wilk
+(if you wish so).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_density.html">nice_density</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -455,7 +497,8 @@ fantome.appendChild(templateContent);
 <div class="section level2">
 <h2 id="density-qq-plots">Density + QQ Plots<a class="anchor" aria-label="anchor" href="#density-qq-plots"></a>
 </h2>
-<p>Finally, it is also possible to combine both these plot types with a single function, <code>nice_normality</code>.</p>
+<p>Finally, it is also possible to combine both these plot types with a
+single function, <code>nice_normality</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_normality.html">nice_normality</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>               variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -468,7 +511,11 @@ fantome.appendChild(templateContent);
 <div class="section level2">
 <h2 id="homoscedasticity-equality-of-variance">Homoscedasticity (equality of variance)<a class="anchor" aria-label="anchor" href="#homoscedasticity-equality-of-variance"></a>
 </h2>
-<p>To check homoscedasticity (equality of variance) for categorical predictors, we can check the variance within each group. We can use a rule of thumb that the variance of one group should not be four times that of another group. We can check that with this function which makes a table.</p>
+<p>To check homoscedasticity (equality of variance) for categorical
+predictors, we can check the variance within each group. We can use a
+rule of thumb that the variance of one group should not be four times
+that of another group. We can check that with this function which makes
+a table.</p>
 <div class="section level3">
 <h3 id="make-the-basic-table">Make the basic table<a class="anchor" aria-label="anchor" href="#make-the-basic-table"></a>
 </h3>
@@ -492,7 +539,8 @@ fantome.appendChild(templateContent);
 <div class="section level3">
 <h3 id="visualizing-variance">Visualizing Variance<a class="anchor" aria-label="anchor" href="#visualizing-variance"></a>
 </h3>
-<p>It can also be interesting to look at variance visually for learning purposes.</p>
+<p>It can also be interesting to look at variance visually for learning
+purposes.</p>
 </div>
 <div class="section level3">
 <h3 id="make-the-basic-plot-2">Make the basic plot<a class="anchor" aria-label="anchor" href="#make-the-basic-plot-2"></a>
@@ -519,7 +567,11 @@ fantome.appendChild(templateContent);
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>
 </h3>
-<p>Make sure to check out this page again if you use the code after a time or if you encounter errors, as I periodically update or improve the code. Feel free to contact me for comments, questions, or requests to improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
+<p>Make sure to check out this page again if you use the code after a
+time or if you encounter errors, as I periodically update or improve the
+code. Feel free to contact me for comments, questions, or requests to
+improve this function at <a href="https://github.com/rempsyc/rempsyc/issues" class="external-link uri">https://github.com/rempsyc/rempsyc/issues</a>. See all
+tutorials here: <a href="https://remi-theriault.com/tutorials" class="external-link uri">https://remi-theriault.com/tutorials</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

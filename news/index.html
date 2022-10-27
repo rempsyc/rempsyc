@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,35 +92,49 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1" id="rempsyc-01x">rempsyc 0.1.x<a class="anchor" aria-label="anchor" href="#rempsyc-01x"></a></h2>
-<ul><li>Future updates here.</li></ul><div class="section level3">
-<h3 id="rempsyc-0-1">rempsyc 0.0.9.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+<ul><li>Future updates here.</li>
+</ul><div class="section level3">
+<h3 id="rempsyc-0-1">rempsyc 0.0.9.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
 <ul><li>
-<code>nice_violin</code> gets some love after receiving its first citation (Jensen &amp; Westergaard, 2022; <a href="https://doi.org/10.1111/lang.12525" class="external-link uri">https://doi.org/10.1111/lang.12525</a>; yeah!!). It now defaults to <em>not</em> using bootstrapping per default, so it now needs to be requested explicitly. The bootstrapping method is now specified (BCa) in the documentation, and it is also clarified that the bootstrapping only applies to the confidence interval (not e.g., the mean). Underlying code is also simplified. Finally, a bug is fixed whereas the function used bootstrapping even when <code>boot</code> was set to <code>FALSE</code>.</li></ul></div>
+<code>nice_contrasts</code>: corrects a bug whereas the effect sizes appeared in the wrong order.</li>
+</ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-1">rempsyc 0.0.9.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
-<ul><li>We move <code>ggplot2</code> from a hard (imported) dependency to a soft (suggested) one, since many people seem to be using <code>nice_table</code> over the plotting features. And given the recent <code>isoband</code> CRAN dependency events.</li></ul></div>
-<div class="section level3">
-<h3 id="rempsyc-0-1-2">rempsyc 0.0.9.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
-<ul><li>We get rid of <code>car_Anova</code> and <code>lmsupport_modeleffectsizes</code> and now compute the sr2 ourselves! With the help of our friends <code>insight</code> and <code>performance</code>.</li></ul></div>
-<div class="section level3">
-<h3 id="rempsyc-0-1-3">rempsyc 0.0.9.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-3"></a></h3>
+<h3 id="rempsyc-0-1-1">rempsyc 0.0.9.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
 <ul><li>
-<code>rempsyc</code> gets lighter, as we get rid of the rather large <code>car</code> package dependency (by incorporating the single function we were using, <code>Anova</code>), and move other packages (<code>boot</code>, <code>lmtest</code>, <code>ggrepel</code>, <code>ggsignif</code>, and <code>qqplotr</code>) from required to suggested packages.</li></ul></div>
+<code>nice_violin</code> gets some love after receiving its first citation (Jensen &amp; Westergaard, 2022; <a href="https://doi.org/10.1111/lang.12525" class="external-link uri">https://doi.org/10.1111/lang.12525</a>; yeah!!). It now defaults to <em>not</em> using bootstrapping per default, so it now needs to be requested explicitly. The bootstrapping method (BCa) is now specified in the documentation, and it is also clarified that the bootstrapping only applies to the confidence interval (not e.g., the mean). Underlying code is also simplified. Finally, a bug is fixed whereas the function used bootstrapping even when <code>boot</code> was set to <code>FALSE</code>.</li>
+</ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-4">rempsyc 0.0.9.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-4"></a></h3>
+<h3 id="rempsyc-0-1-2">rempsyc 0.0.9.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
+<ul><li>We move <code>ggplot2</code> from a hard (imported) dependency to a soft (suggested) one, since many people seem to be using <code>nice_table</code> over the plotting features. And given the recent <code>isoband</code> CRAN dependency events.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-3">rempsyc 0.0.9.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-3"></a></h3>
+<ul><li>We get rid of <code>car_Anova</code> and <code>lmsupport_modeleffectsizes</code> and now compute the sr2 ourselves! With the help of our friends <code>insight</code> and <code>performance</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-4">rempsyc 0.0.9.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-4"></a></h3>
 <ul><li>
-<code>nice_table</code>: automatic formatting (of p-values, confidence intervals, etc.) now supports more than two levels of headers (with the <code>separate.header</code> argument).</li></ul></div>
+<code>rempsyc</code> gets lighter, as we get rid of the rather large <code>car</code> package dependency (by incorporating the single function we were using, <code>Anova</code>), and move other packages (<code>boot</code>, <code>lmtest</code>, <code>ggrepel</code>, <code>ggsignif</code>, and <code>qqplotr</code>) from required to suggested packages.</li>
+</ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-5">rempsyc 0.0.9.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-5"></a></h3>
-<ul><li>Now that <code>openxlsx2</code> is on CRAN, <code>cormatrix_excel2</code> replaces <code>cormatrix_excel</code> (and <code>rempsyc</code> package does not rely on an external GitHub dependency anymore, yeah!).</li></ul></div>
-<div class="section level3">
-<h3 id="rempsyc-0-1-6">rempsyc 0.0.9.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-6"></a></h3>
+<h3 id="rempsyc-0-1-5">rempsyc 0.0.9.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-5"></a></h3>
 <ul><li>
-<code>nice_table</code>: Multilevel headings, with the <code>separate.header</code> argument, now supports automatic formatting (of p-values, confidence intervals, etc.).</li></ul></div>
+<code>nice_table</code>: automatic formatting (of p-values, confidence intervals, etc.) now supports more than two levels of headers (with the <code>separate.header</code> argument).</li>
+</ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-7">rempsyc 0.0.9.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-7"></a></h3>
+<h3 id="rempsyc-0-1-6">rempsyc 0.0.9.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-6"></a></h3>
+<ul><li>Now that <code>openxlsx2</code> is on CRAN, <code>cormatrix_excel2</code> replaces <code>cormatrix_excel</code> (and <code>rempsyc</code> package does not rely on an external GitHub dependency anymore, yeah!).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-7">rempsyc 0.0.9.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-7"></a></h3>
 <ul><li>
-<code>nice_table</code>:<ul><li>fixed sr2 incorrectly showing leading zero.</li>
+<code>nice_table</code>: Multilevel headings, with the <code>separate.header</code> argument, now supports automatic formatting (of p-values, confidence intervals, etc.).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-8">rempsyc 0.0.9.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-8"></a></h3>
+<ul><li>
+<code>nice_table</code>:
+<ul><li>fixed sr2 incorrectly showing leading zero.</li>
 <li>new argument: <code>col.format.ci</code>, to format confidence intervals (accepts lists of lower and upper thresholds)</li>
 </ul></li>
 <li>
@@ -129,7 +143,8 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.9" id="rempsyc-009">rempsyc 0.0.9<a class="anchor" aria-label="anchor" href="#rempsyc-009"></a></h2><p class="text-muted">CRAN release: 2022-09-26</p>
-<ul><li>CRAN resubmission!</li></ul><div class="section level3">
+<ul><li>CRAN resubmission!</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-9">rempsyc 0.0.8.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-9"></a></h3>
 <ul><li>
 <code>nice_var</code>: now returns a dataframe instead of a tibble</li>
@@ -146,22 +161,26 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.8" id="rempsyc-008">rempsyc 0.0.8<a class="anchor" aria-label="anchor" href="#rempsyc-008"></a></h2>
-<ul><li>CRAN resubmission!</li></ul></div>
+<ul><li>CRAN resubmission!</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.7" id="rempsyc-007">rempsyc 0.0.7<a class="anchor" aria-label="anchor" href="#rempsyc-007"></a></h2>
 <ul><li>First CRAN submission!</li>
 <li>This requires bumping the package version to 2 decimals only.</li>
 </ul><div class="section level3">
 <h3 id="rempsyc-0-0-7">rempsyc 0.0.6.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7"></a></h3>
-<ul><li>Preparing for CRAN submission.</li></ul></div>
+<ul><li>Preparing for CRAN submission.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-7-1">rempsyc 0.0.6.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7-1"></a></h3>
 <ul><li>
-<code>nice_normality</code>: <code>breaks.auto</code> argument now uses <code>na.rm = TRUE</code> to support missing values</li></ul></div>
+<code>nice_normality</code>: <code>breaks.auto</code> argument now uses <code>na.rm = TRUE</code> to support missing values</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-7-2">rempsyc 0.0.6.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7-2"></a></h3>
 <ul><li>
-<code>nice_normality</code>: <code>breaks.auto</code> argument added to allow control of the density plot in this aspect.</li></ul></div>
+<code>nice_normality</code>: <code>breaks.auto</code> argument added to allow control of the density plot in this aspect.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-7-3">rempsyc 0.0.6.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7-3"></a></h3>
 <ul><li>
@@ -172,30 +191,37 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-7-4">rempsyc 0.0.6.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7-4"></a></h3>
 <ul><li>
-<code>nice_density</code>: Now uses <code>na.rm = TRUE</code> internally to support data with missing values.</li></ul></div>
+<code>nice_density</code>: Now uses <code>na.rm = TRUE</code> internally to support data with missing values.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-7-5">rempsyc 0.0.6.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-7-5"></a></h3>
 <ul><li>
-<code>find_mad</code>: New argument <code>mad.scores</code> to return robust zscore (MAD) scores instead of raw scores (now default to TRUE).</li></ul></div>
+<code>find_mad</code>: New argument <code>mad.scores</code> to return robust zscore (MAD) scores instead of raw scores (now default to TRUE).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.6" id="rempsyc-006">rempsyc 0.0.6<a class="anchor" aria-label="anchor" href="#rempsyc-006"></a></h2>
 <ul><li>
-<code>nice_density</code>: Now uses the Sturges method to define the optimal number of bins automatically. Also adds two new arguments: <code>breaks.auto = TRUE</code>, if one does not want to use the Sturges method, and <code>bins = 30</code>, to define bins manually, if needed.</li></ul><div class="section level3">
+<code>nice_density</code>: Now uses the Sturges method to define the optimal number of bins automatically. Also adds two new arguments: <code>breaks.auto = TRUE</code>, if one does not want to use the Sturges method, and <code>bins = 30</code>, to define bins manually, if needed.</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-6">rempsyc 0.0.5.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6"></a></h3>
 <ul><li>
-<code>cormatrix_excel2</code>: Added a third (sixth) colour for one star significances (* = p &lt; .05), and add an argument for printing the correlation matrix to the console too (or not), <code>print.mat</code>.</li></ul></div>
+<code>cormatrix_excel2</code>: Added a third (sixth) colour for one star significances (* = p &lt; .05), and add an argument for printing the correlation matrix to the console too (or not), <code>print.mat</code>.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-1">rempsyc 0.0.5.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-1"></a></h3>
 <ul><li>
-<code>nice_table</code>: Added <code>chi2</code> automatic formatting (+ <code>chi2.df</code> formatting)</li></ul></div>
+<code>nice_table</code>: Added <code>chi2</code> automatic formatting (+ <code>chi2.df</code> formatting)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-2">rempsyc 0.0.5.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-2"></a></h3>
 <ul><li>
-<code>nice_na</code>: integrated a feature request to include the number of rows that were all NAs.</li></ul></div>
+<code>nice_na</code>: integrated a feature request to include the number of rows that were all NAs.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-3">rempsyc 0.0.5.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-3"></a></h3>
-<ul><li>New function: <code>cormatrix_excel2</code>: a new version of <code>cormatrix_excel</code> relying on the <code>openxlsx2</code> package and that allows incorporating significance stars along the correlation matrix, as well as a second sheet containing the matrix of p-values. Experimental until <code>openxlsx2</code> reaches CRAN.</li></ul></div>
+<ul><li>New function: <code>cormatrix_excel2</code>: a new version of <code>cormatrix_excel</code> relying on the <code>openxlsx2</code> package and that allows incorporating significance stars along the correlation matrix, as well as a second sheet containing the matrix of p-values. Experimental until <code>openxlsx2</code> reaches CRAN.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-4">rempsyc 0.0.5.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-4"></a></h3>
 <ul><li>Fixed <code>nice_randomize</code> as it had been outputting the wrong output format for within-subject designs when moving from plyr to dplyr (+ updated runsheet tutorial).</li>
@@ -205,7 +231,8 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-5">rempsyc 0.0.5.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-5"></a></h3>
 <ul><li>
-<code>cormatrix_excel</code>: corrected values for small, medium, large correlations (from 0.0-0.3: small; 0.3-0.6: medium; 0.6-1.0: large to 0.0-0.2: small; 0.2-0.4: medium; 0.4-1.0: large).</li></ul></div>
+<code>cormatrix_excel</code>: corrected values for small, medium, large correlations (from 0.0-0.3: small; 0.3-0.6: medium; 0.6-1.0: large to 0.0-0.2: small; 0.2-0.4: medium; 0.4-1.0: large).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-6">rempsyc 0.0.5.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-6"></a></h3>
 <ul><li>Corrected spelling of all code with <code>devtools::spell_check()</code>
@@ -218,19 +245,23 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-7">rempsyc 0.0.5.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-7"></a></h3>
 <ul><li>
-<code>nice_table</code>: added new argument, <code>separate.header</code>, a logical (and simplified) form of the <code><a href="https://davidgohel.github.io/flextable/reference/separate_header.html" class="external-link">flextable::separate_header</a></code> argument.</li></ul></div>
+<code>nice_table</code>: added new argument, <code>separate.header</code>, a logical (and simplified) form of the <code><a href="https://davidgohel.github.io/flextable/reference/separate_header.html" class="external-link">flextable::separate_header</a></code> argument.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-6-8">rempsyc 0.0.5.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-8"></a></h3>
 <ul><li>New package site, hooray!</li>
 <li>
-<code>cormatrix_excel</code>:<ul><li>Changed default method of base <code>cor</code> function from “na.or.complete” to the most liberal one to match SPSS: “pairwise.complete.obs”.</li>
+<code>cormatrix_excel</code>:
+<ul><li>Changed default method of base <code>cor</code> function from “na.or.complete” to the most liberal one to match SPSS: “pairwise.complete.obs”.</li>
 <li>Added a <code>use</code> argument to specify which one to use in case a user wants a different option.</li>
 </ul></li>
 <li>
-<code>nice_table</code>:<ul><li>Automatized integration with the <code>report</code> package so we don’t have to specify the e.g. <code>report = "lm"</code> argument manually.</li>
+<code>nice_table</code>:
+<ul><li>Automatized integration with the <code>report</code> package so we don’t have to specify the e.g. <code>report = "lm"</code> argument manually.</li>
 <li>Added optional arguments for table title and footnote.</li>
 </ul></li>
-<li>Many functions (based on <code>goodpractice</code> package recommendations):<ul><li>Changed <code>sapply</code> for <code>lapply</code> since <code>sapply</code> is not recommended and using <code>vapply</code> with list outputs was too complicated.</li>
+<li>Many functions (based on <code>goodpractice</code> package recommendations):
+<ul><li>Changed <code>sapply</code> for <code>lapply</code> since <code>sapply</code> is not recommended and using <code>vapply</code> with list outputs was too complicated.</li>
 <li>Shortened line codes to &lt; 80 characters.</li>
 <li>Replaced 1:length(…) or 1:nrow(…) by seq_along(…).</li>
 </ul></li>
@@ -239,17 +270,21 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="rempsyc-005">rempsyc 0.0.5<a class="anchor" aria-label="anchor" href="#rempsyc-005"></a></h2>
 <ul><li>
-<code>nice_na</code>: added scales argument to specify specific scales</li></ul><div class="section level3">
+<code>nice_na</code>: added scales argument to specify specific scales</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-5">rempsyc 0.0.4.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5"></a></h3>
-<ul><li>New function: <code>nice_NA</code>; nicely reports NA values according to existing guidelines. This function reports both absolute and percentage values of specified column lists.</li></ul></div>
+<ul><li>New function: <code>nice_NA</code>; nicely reports NA values according to existing guidelines. This function reports both absolute and percentage values of specified column lists.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-1">rempsyc 0.0.4.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-1"></a></h3>
 <ul><li>
-<code>nice_density</code> and <code>nice_normality</code>: added the possibility to provide no group argument so as to have a plot of all data.</li></ul></div>
+<code>nice_density</code> and <code>nice_normality</code>: added the possibility to provide no group argument so as to have a plot of all data.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-2">rempsyc 0.0.4.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-2"></a></h3>
 <ul><li>
-<code>nice_violin</code>: made default contour lines thicker, but also added argument <code>border.size</code> to allow customization.</li></ul></div>
+<code>nice_violin</code>: made default contour lines thicker, but also added argument <code>border.size</code> to allow customization.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-3">rempsyc 0.0.4.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-3"></a></h3>
 <ul><li>
@@ -259,45 +294,56 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-4">rempsyc 0.0.4.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-4"></a></h3>
 <ul><li>
-<code>nice_violin</code>: Added the ability to add the Cohen’s d to the plot</li></ul></div>
+<code>nice_violin</code>: Added the ability to add the Cohen’s d to the plot</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-5">rempsyc 0.0.4.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-5"></a></h3>
 <ul><li>
-<code>find_mad</code>: improved reporting of ID and row number</li></ul></div>
+<code>find_mad</code>: improved reporting of ID and row number</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-6">rempsyc 0.0.4.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-6"></a></h3>
 <ul><li>
-<code>nice_table</code>: changed default table width (again)</li></ul></div>
+<code>nice_table</code>: changed default table width (again)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-7">rempsyc 0.0.4.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-7"></a></h3>
 <ul><li>
-<code>nice_table</code>: changed default table width</li></ul></div>
+<code>nice_table</code>: changed default table width</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-5-8">rempsyc 0.0.4.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-5-8"></a></h3>
 <ul><li>
-<code>find_mad</code>: corrected a bug whereas having a dataframe with no outliers in certain situations generated an error</li></ul></div>
+<code>find_mad</code>: corrected a bug whereas having a dataframe with no outliers in certain situations generated an error</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.4" id="rempsyc-004">rempsyc 0.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-004"></a></h2>
 <ul><li>
-<code>nice_density</code> and <code>nice_normality</code>: added the <code>histogram</code> option to add an histogram to the density plot.</li></ul><div class="section level3">
+<code>nice_density</code> and <code>nice_normality</code>: added the <code>histogram</code> option to add an histogram to the density plot.</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-4">rempsyc 0.0.3.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4"></a></h3>
-<ul><li>Created an internal ggplot2 APA “theme” to avoid code redundancy across plots</li></ul></div>
+<ul><li>Created an internal ggplot2 APA “theme” to avoid code redundancy across plots</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-1">rempsyc 0.0.3.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-1"></a></h3>
 <ul><li>
-<code>nice_table</code>: greatly improved underlying code: more clarity (dplyr) and less repetition (with added internal functions)</li></ul></div>
+<code>nice_table</code>: greatly improved underlying code: more clarity (dplyr) and less repetition (with added internal functions)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-2">rempsyc 0.0.3.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-2"></a></h3>
 <ul><li>
-<code>nice_violin</code>: reverted theme to original default (alpha = 1 and black border) from modified theme some time ago (alpha = .70, white border). Users wishing to keep the original style can simply specify these options in their script.</li></ul></div>
+<code>nice_violin</code>: reverted theme to original default (alpha = 1 and black border) from modified theme some time ago (alpha = .70, white border). Users wishing to keep the original style can simply specify these options in their script.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-3">rempsyc 0.0.3.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-3"></a></h3>
-<ul><li>New function: <code>nice_contrasts</code> for planned contrasts (multiple group pairwise comparisons)</li></ul></div>
+<ul><li>New function: <code>nice_contrasts</code> for planned contrasts (multiple group pairwise comparisons)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-4">rempsyc 0.0.3.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-4"></a></h3>
 <ul><li>
-<code>nice_t_test</code>: Fixed <code>mu</code> value for one-sample t-test</li></ul></div>
+<code>nice_t_test</code>: Fixed <code>mu</code> value for one-sample t-test</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-5">rempsyc 0.0.3.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-5"></a></h3>
 <ul><li>Added <code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">ggplot2::waiver</a></code> to reexports</li>
@@ -312,15 +358,18 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-7">rempsyc 0.0.3.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-7"></a></h3>
 <ul><li>
-<code>nice_t_test</code>: Added support for one-sample t-test.</li></ul></div>
+<code>nice_t_test</code>: Added support for one-sample t-test.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-4-8">rempsyc 0.0.3.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-4-8"></a></h3>
-<ul><li>new functions for the median absolute deviation (MAD): <code>find_mad</code> to find outliers based on the MAD, <code>scale_mad</code> to scale (standardize) data based on the MAD, and winsorize_mad to winsorize (bring outliers in +/3 SD) based on the MAD.</li></ul></div>
+<ul><li>new functions for the median absolute deviation (MAD): <code>find_mad</code> to find outliers based on the MAD, <code>scale_mad</code> to scale (standardize) data based on the MAD, and winsorize_mad to winsorize (bring outliers in +/3 SD) based on the MAD.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.3" id="rempsyc-003">rempsyc 0.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-003"></a></h2>
 <ul><li>
-<code>nice_table</code>: brought a correction to the automatic 95% CI so that when numbers are rounded to 0, the zeros still show (e.g., 0.20 instead of 0.2).</li></ul><div class="section level3">
+<code>nice_table</code>: brought a correction to the automatic 95% CI so that when numbers are rounded to 0, the zeros still show (e.g., 0.20 instead of 0.2).</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-3">rempsyc 0.0.2.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3"></a></h3>
 <ul><li>
 <code>nice_normality</code>: improved implementation of the <code>title</code> argument</li>
@@ -330,7 +379,8 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-1">rempsyc 0.0.2.8<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-1"></a></h3>
 <ul><li>
-<code>nice_table</code><ul><li>integration with <code>broom</code> package: moved columns Method and Alternative to beginning for consistency with treatment of the <code>report</code> package.</li>
+<code>nice_table</code>
+<ul><li>integration with <code>broom</code> package: moved columns Method and Alternative to beginning for consistency with treatment of the <code>report</code> package.</li>
 <li>Fixed appropriate decimals display for degrees of freedom with actual decimals (e.g., for Welch t-test).</li>
 </ul></li>
 <li>
@@ -339,7 +389,8 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-2">rempsyc 0.0.2.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-2"></a></h3>
 <ul><li>
-<code>nice_t_test</code>: changed from package <code>effsize</code> to <code>effectsize</code> for effect size because the Cohen’s d value for paired samples wasn’t consistent with other packages.</li></ul></div>
+<code>nice_t_test</code>: changed from package <code>effsize</code> to <code>effectsize</code> for effect size because the Cohen’s d value for paired samples wasn’t consistent with other packages.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-3">rempsyc 0.0.2.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-3"></a></h3>
 <ul><li>Integration with <code>report</code> package: combined CI_low and CI_high for method <code>t.test</code> (just like for method <code>lm</code>)</li>
@@ -347,19 +398,23 @@
 </ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-4">rempsyc 0.0.2.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-4"></a></h3>
-<ul><li>Fixed a slight model number mix-up in <code>nice_slopes</code>.</li></ul></div>
+<ul><li>Fixed a slight model number mix-up in <code>nice_slopes</code>.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-5">rempsyc 0.0.2.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-5"></a></h3>
-<ul><li>Added support for paired t-tests (only adaptation of Cohen’s d was necessary) and updated documentation to give multiple examples of t-test customization.</li></ul></div>
+<ul><li>Added support for paired t-tests (only adaptation of Cohen’s d was necessary) and updated documentation to give multiple examples of t-test customization.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-6">rempsyc 0.0.2.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-6"></a></h3>
-<ul><li>Added warning to <code>nice_t_test</code> informing users about the Welch t-test being used per default (through base R <code>t.test</code>’s default) and how to change it. Also added option to turn off this warning.</li></ul></div>
+<ul><li>Added warning to <code>nice_t_test</code> informing users about the Welch t-test being used per default (through base R <code>t.test</code>’s default) and how to change it. Also added option to turn off this warning.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-7">rempsyc 0.0.2.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-7"></a></h3>
 <ul><li>new function: <code>nice_lm</code> to format any existing <code>lm</code> model object in a proper format for <code>nice_table</code>, including sr2</li>
 <li>new function: <code>nice_lm_slopes</code> to format simple slopes for any existing <code>lm</code> model object in a proper format for <code>nice_table</code>, including sr2</li>
 <li>
-<code>nice_mod</code> and <code>nice_slopes</code>:<ul><li>Added model number when more then one model.</li>
+<code>nice_mod</code> and <code>nice_slopes</code>:
+<ul><li>Added model number when more then one model.</li>
 <li>Also added an optional <code>mod.id = TRUE</code> argument, to display the model number, when there is more than one model.</li>
 <li>Also reordered default order of rows when there is a second moderator present as it makes more sense to group the same models completely together for different levels of the second moderator.</li>
 <li>By combining the row names within the list object rather than in the combined dataframe, we also don’t have to worry about changing names, etc. anymore. Thus it is now cleaner and not missing with variable names.</li>
@@ -368,11 +423,13 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-3-8">rempsyc 0.0.2.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-3-8"></a></h3>
 <ul><li>
-<code>nice_mod</code> and <code>nice_slopes</code>: Added an argument <code>b.label</code> to rename b, e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol automatically in the <code>nice_table</code> function.</li></ul></div>
+<code>nice_mod</code> and <code>nice_slopes</code>: Added an argument <code>b.label</code> to rename b, e.g., to capital B if using standardized data for it to be converted to the Greek beta symbol automatically in the <code>nice_table</code> function.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.2" id="rempsyc-002">rempsyc 0.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-002"></a></h2>
-<ul><li>nice_mod and nice_slopes: Corrected a bug whereas having column names with periods would cut off the variable names before the dots because of the automatic correction of the interaction term row names which contain periods as well.</li></ul><div class="section level3">
+<ul><li>nice_mod and nice_slopes: Corrected a bug whereas having column names with periods would cut off the variable names before the dots because of the automatic correction of the interaction term row names which contain periods as well.</li>
+</ul><div class="section level3">
 <h3 id="rempsyc-0-0-2">rempsyc 0.0.1.9<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2"></a></h3>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 <li>Improved <code>report</code> package integration with <code>nice_table</code>
@@ -386,7 +443,8 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-2">rempsyc 0.0.1.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-2"></a></h3>
 <ul><li>
-<code>nice_table</code>: changed argument name <code>dataframe</code> for <code>data</code> for consistency.</li></ul></div>
+<code>nice_table</code>: changed argument name <code>dataframe</code> for <code>data</code> for consistency.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-3">rempsyc 0.0.1.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-3"></a></h3>
 <ul><li>Added compatibility of <code>nice_table</code> with the broom package</li>
@@ -406,7 +464,8 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-5">rempsyc 0.0.1.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-5"></a></h3>
 <ul><li>new function: <code>nice_normality</code>
-</li></ul></div>
+</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-6">rempsyc 0.0.1.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-6"></a></h3>
 <ul><li>added new function: <code>format_values</code>
@@ -422,11 +481,13 @@
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-7">rempsyc 0.0.1.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-7"></a></h3>
 <ul><li>removed dependency on <code>plyr</code>
-</li></ul></div>
+</li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-0-2-8">rempsyc 0.0.1.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-2-8"></a></h3>
 <ul><li>added new function: <code><a href="../reference/nice_reverse.html">nice_reverse()</a></code>
-</li></ul></div>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="rempsyc-001">rempsyc 0.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-001"></a></h2>

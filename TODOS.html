@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,34 +90,52 @@
       <small class="dont-index">Source: <a href="https://github.com/rempsyc/rempsyc/blob/HEAD/TODOS.md" class="external-link"><code>TODOS.md</code></a></small>
     </div>
 
-<div id="development-objectives-to-do-list" class="section level1"><ul><li>Reduce dependencies to make the package more lightweight</li>
-<li>all <code>lm</code> functions<ul><li>Add 95% confidence interval for sr2</li></ul></li>
+<div id="development-objectives-to-do-list" class="section level1">
+
+<ul><li>Reduce dependencies to make the package more lightweight</li>
+<li>all <code>lm</code> functions
+<ul><li>Add 95% confidence interval for sr2</li>
+</ul></li>
 <li>
-<code>nice_t_test</code><ul><li>Add other optional corrections argument (other than Bonferroni)</li>
+<code>nice_t_test</code>
+<ul><li>Add other optional corrections argument (other than Bonferroni)</li>
 <li>Add option to specify <code>robust.d</code> for a robust version of Cohen’s d</li>
 <li>Add option <code>bootstrapped.CI</code> to use a bootstrapped version of the 95% CI</li>
 </ul></li>
 <li>
-<code>nice_table</code><ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li></ul></li>
-<li>
-<code>nice_lm_slopes</code><ul><li>Support second moderator</li></ul></li>
-<li>
-<code>nice_slopes</code><ul><li>Add support for multiple moderators (like for <code>nice_mod</code>)</li></ul></li>
-<li>
-<code>rcompanion_groupwiseMean</code><ul><li>Rewrite with only the <code>boot</code> package and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by</a></code>?</li></ul></li>
-<li>
-<code>nice_varplot</code><ul><li>Add option to standardize or not</li>
-<li>Also add option to annotate Levene test on the plot</li>
+<code>nice_table</code>
+<ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li>
 </ul></li>
 <li>
-<code>nice_contrasts</code><ul><li>Check something weird going on with vignette!</li>
-<li>Need to accommodate: interactions/moderations in the models</li>
+<code>nice_lm_slopes</code>
+<ul><li>Support second moderator</li>
+</ul></li>
+<li>
+<code>nice_slopes</code>
+<ul><li>Add support for multiple moderators (like for <code>nice_mod</code>)</li>
+</ul></li>
+<li>
+<code>rcompanion_groupwiseMean</code>
+<ul><li>Rewrite with only the <code>boot</code> package and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by</a></code>?</li>
+</ul></li>
+<li>
+<code>nice_varplot</code>
+<ul><li>Add option to standardize or not</li>
+<li>Also add option to annotate Levene test on the plot</li>
+<li>Use violin points, and mean centered</li>
+</ul></li>
+<li>
+<code>nice_contrasts</code>
+<ul><li>Need to accommodate: interactions/moderations in the models</li>
 <li>Also add option to specify contrasts manually</li>
 <li>Add option to not use robust Cohen’s <em>d</em>
 </li>
 <li>Add option to not use bootstrapping</li>
 </ul></li>
-<li>All functions<ul><li>Check for consistency among argument names like response/variable<ul><li>Check other packages to see what’s most typically used</li></ul></li>
+<li>All functions
+<ul><li>Check for consistency among argument names like response/variable
+<ul><li>Check other packages to see what’s most typically used</li>
+</ul></li>
 <li>Triple check support for missing values</li>
 </ul></li>
 <li>Finish writing all function tests</li>
