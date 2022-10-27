@@ -1,3 +1,9 @@
+## Submission rempsyc 0.1.0
+
+R CMD check results
+
+0 errors | 0 warnings | 0 notes
+
 ## Resubmission rempsyc 0.0.9
 
 > Please omit the redundant "Convenience functions to" at the start of your description.
