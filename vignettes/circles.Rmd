@@ -20,11 +20,11 @@ For anyone in social psychology using the Inclusion of the Other in the Self (IO
 
 Indeed, the IOS response choices go from 1 to 7 only, and unfortunately these don't match the percentage overlap from the circle images (i.e., 1/7 is not 14% overlap, and 7/7 is not 100% overlap). You can observe this on the original IOS scale below.
 
-![](https://rempsyc.remi-theriault.com/articles/images/blog_circles/IOS.png)
+![](https://rempsyc.remi-theriault.com/images/blog_circles/IOS.png)
 
 So through trial and error (using the `VennDiagram` package), I was able to determine the approximate actual overlap from the pictures (below).
 
-![](https://rempsyc.remi-theriault.com/articles/images/blog_circles/overlap.png)
+![](https://rempsyc.remi-theriault.com/images//blog_circles/overlap.png)
 
 I feel like the overlap is pretty close to the original scale. Based on this, I used the `approx()` function to interpolate any responses so that 1 = 0% (overlap), 2 = 10%, 3 = 20%, 4 = 30%, 5 = 55%, 6 = 65%, and 7 (the maximum) = 85%.
 
@@ -90,7 +90,7 @@ ggplot2::ggsave(plot, file = "overlap.pdf", width = 7, height = 7,
 ## Example figure
 This allowed me for instance, [for one study](https://doi.org/10.1177/17470218211024826), to compare three of my groups side-by-side following an intervention:
 
-![](https://rempsyc.remi-theriault.com/articles/images/blog_circles/figure.png)
+![](https://rempsyc.remi-theriault.com/images//blog_circles/figure.png)
 
 ### Thanks for checking in
     
