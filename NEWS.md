@@ -1,8 +1,11 @@
 # rempsyc 0.1.x
 * Future updates here.
 
+## rempsyc 0.0.9.9
+* `nice_contrasts`: corrects a bug whereas the effect sizes appeared in the wrong order.
+
 ## rempsyc 0.0.9.8
-* `nice_violin` gets some love after receiving its first citation (Jensen & Westergaard, 2022; https://doi.org/10.1111/lang.12525; yeah!!). It now defaults to *not* using bootstrapping per default, so it now needs to be requested explicitly. The bootstrapping method is now specified (BCa) in the documentation, and it is also clarified that the bootstrapping only applies to the confidence interval (not e.g., the mean). Underlying code is also simplified. Finally, a bug is fixed whereas the function used bootstrapping even when `boot` was set to `FALSE`.
+* `nice_violin` gets some love after receiving its first citation (Jensen & Westergaard, 2022; https://doi.org/10.1111/lang.12525; yeah!!). It now defaults to *not* using bootstrapping per default, so it now needs to be requested explicitly. The bootstrapping method (BCa) is now specified in the documentation, and it is also clarified that the bootstrapping only applies to the confidence interval (not e.g., the mean). Underlying code is also simplified. Finally, a bug is fixed whereas the function used bootstrapping even when `boot` was set to `FALSE`.
 
 ## rempsyc 0.0.9.7
 * We move `ggplot2` from a hard (imported) dependency to a soft (suggested) one, since many people seem to be using `nice_table` over the plotting features. And given the recent `isoband` CRAN dependency events.

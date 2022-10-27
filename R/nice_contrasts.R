@@ -59,6 +59,7 @@
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
+#' @importFrom dplyr %>% bind_rows
 
 nice_contrasts <- function(response, group, covariates = NULL,
                            data, bootstraps = 2000) {
@@ -102,18 +103,25 @@ nice_contrasts <- function(response, group, covariates = NULL,
     adjust = "none"
   )
   contrval.sums <- lapply(contrval.list, summary)
-  boot.sums <- lapply(unlist(boot.lists, recursive = FALSE), summary)
+  # boot.sums <- lapply(unlist(boot.lists, recursive = FALSE), summary)
+
+  boot.sums <- lapply(seq(length(response)), function(y) {
+    lapply(boot.lists, function(x) {
+      as.data.frame(summary(x[[y]]))
+        }) %>%
+      bind_rows
+  })
   list.names <- c("estimates", "SE", "df", "tratio", "pvalue")
   stats.list <- list()
   for (i in seq_along(list.names)) {
     stats.list[[list.names[i]]] <- unlist(c(t((
       lapply(contrval.sums, `[[`, i + 1)))))
   }
-  list.names2 <- c("cohenD", "cohenDL", "cohenDH")
-  for (i in seq_along(list.names2)) {
-    stats.list[[list.names2[i]]] <- unlist(lapply(boot.sums, `[[`, i))
-  }
-  response.names <- rep(response, times = length(contrval.sums[[1]]$contrast))
+  # list.names2 <- c("cohenD", "cohenDL", "cohenDH")
+  # for (i in seq_along(list.names2)) {
+  #   stats.list[[list.names2[i]]] <- bind_rows(boot.sums)
+  # }
+  response.names <- rep(response, each = length(contrval.sums[[1]]$contrast))
   comparisons.names <- rep(
     c(
       paste(
@@ -129,16 +137,17 @@ nice_contrasts <- function(response, group, covariates = NULL,
         levels(data[[group]])[2]
       )
     ), ###### support x groups
-    each = length(response)
+    times = length(response)
   )
   table.stats <- data.frame(
     response.names,
     comparisons.names,
-    stats.list[-c(1:2)]
+    stats.list[-c(1:2)],
+    bind_rows(boot.sums)[1:3]
   )
-  table.stats <- table.stats[order(factor(table.stats$response.names,
-    levels = response
-  )), ]
+  # table.stats <- table.stats[order(factor(table.stats$response.names,
+  #   levels = response
+  # )), ]
   names(table.stats) <- c(
     "Dependent Variable", "Comparison", "df",
     "t", "p", "dR", "CI_lower", "CI_upper"

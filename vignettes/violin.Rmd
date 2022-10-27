@@ -210,7 +210,7 @@ This function used to give you 95% bootstrapped confidence intervals (with 2000 
 
 Bootstrapping is a non-parametric technique, meaning that it does not need to respect the classical parametric assumptions (normality, homoscedasticity, etc.). In this case it's just a nice alternative way to look at your data.
 
-> ***Note:*** bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I've added an option to specify a specific number of bootstraps with the option `bootstraps = 2000` (change default to your desired value). But because I've recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead (`boot = FALSE`, now turned off by default).
+> ***Note:*** bootstrapping requires a number of bootstraps equal or higher than your number of observations (rows). Because people sometimes work with big datasets, I've added an option to specify a specific number of bootstraps with the option `bootstraps = 2000` (change default to your desired value). But because I've recently had to work with a very large data set (7 million observations), it was impractical to do 7 million bootstraps (that would have been a very, very long operation), so I also added an option to turn bootstrapping off completely and just use a regular confidence interval instead (with `boot = FALSE`, which is now the default).
 
 ### Putting it all together
 
