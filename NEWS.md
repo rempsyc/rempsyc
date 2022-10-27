@@ -1,5 +1,5 @@
-# rempsyc 0.1.x
-* Future updates here.
+# rempsyc 0.1.0
+* CRAN resubmission!
 
 ## rempsyc 0.0.9.9
 * `nice_contrasts`: corrects a bug whereas the effect sizes appeared in the wrong order.
