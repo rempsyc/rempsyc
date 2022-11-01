@@ -11,7 +11,6 @@
 #' around the mean, use absolute deviation around the median.
 #' *Journal of Experimental Social Psychology*, *49*(4), 764–766.
 #' https://doi.org/10.1016/j.jesp.2013.03.013
-#' @author Hugues Leduc, Charles-Étienne Lavoie
 #' @export
 #' @examples
 #' scale_mad(mtcars$mpg)

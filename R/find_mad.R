@@ -17,7 +17,6 @@
 #' @param mad.scores Logical, whether to output robust z (MAD) scores (default)
 #'                   or raw scores. Defaults to `TRUE`.
 #' @keywords standardization normalization median MAD mean outliers
-#' @author Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
 #' @return A list of dataframes of outliers per variable, with row
 #'         numbers, based on the MAD. When printed, provides the number
 #'         of outliers, selected variables, and any outlier flagged for
