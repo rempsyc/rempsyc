@@ -52,9 +52,6 @@ find_mad(
   criteria = 3
 )
 }
-\author{
-Hugues Leduc, Charles-Étienne Lavoie, Rémi Thériault
-}
 \keyword{MAD}
 \keyword{mean}
 \keyword{median}

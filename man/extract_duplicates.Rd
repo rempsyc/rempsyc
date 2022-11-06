@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_duplicates.R
 \name{extract_duplicates}
 \alias{extract_duplicates}
-\title{Choose the best duplicate}
+\title{Extract all duplicates}
 \usage{
 extract_duplicates(data, id)
 }
@@ -12,18 +12,15 @@ extract_duplicates(data, id)
 \item{id}{The ID variable for which to check for duplicates.}
 }
 \value{
-A dataframe, containing all duplicates, for visual inspection.
+A dataframe, containing all duplicates.
+}
+\description{
+Extract all duplicates, for visual inspection.
 Note that it also contains the first occurrence of future
-duplicates, unlike the \code{duplicated()} base R function. Also
+duplicates, unlike \code{\link[=duplicated]{duplicated()}} or \code{\link[dplyr:distinct]{dplyr::distinct()}}). Also
 contains an additional column reporting the number of missing
 values for that row, to help in the decision-making when
 selecting which duplicates to keep.
-}
-\description{
-Chooses the best duplicate, based on the
-duplicate with the fewer number of NA values. In case of ties,
-it picks the first duplicate, as it is the one most likely to
-be valid and authentic, given practice effects.
 }
 \examples{
 df1 <- data.frame(

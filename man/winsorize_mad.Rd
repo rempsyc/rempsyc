@@ -30,9 +30,6 @@ around the mean, use absolute deviation around the median.
 \emph{Journal of Experimental Social Psychology}, \emph{49}(4), 764–766.
 https://doi.org/10.1016/j.jesp.2013.03.013
 }
-\author{
-Hugues Leduc, Charles-Étienne Lavoie
-}
 \keyword{MAD}
 \keyword{mean}
 \keyword{median}

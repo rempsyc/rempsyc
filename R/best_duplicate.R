@@ -33,7 +33,6 @@ best_duplicate <- function(data, id) {
     group_by(.data[[id]]) %>%
     slice_min(.data$count_na) %>%
     distinct(.data[[id]], .keep_all = TRUE) %>%
-    ungroup() %>%
     select(all_of(og.names))
 
   good.data <- distinct(data, .data[[id]], .keep_all = TRUE)
