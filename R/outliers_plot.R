@@ -141,5 +141,5 @@ outliers_plot <- function(data,
         )
       }
     }
-  plot
+  suppressMessages(print(plot))
 }
