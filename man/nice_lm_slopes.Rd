@@ -32,9 +32,6 @@ squared.
 \description{
 Extracts simple slopes from \code{lm} model
 object and format for a publication-ready format.
-
-Note: this function uses the \code{modelEffectSizes} function
-from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make and format model

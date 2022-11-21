@@ -1,7 +1,9 @@
 # Development objectives (to-do list)
 
+-   Create new function to visualize outliers: violin scatter plots and add lines for +/- 3 MAD (or SD, based on selected method)
 -   Reduce dependencies to make the package more lightweight
 -   all `lm` functions
+    -   Correct bug with sr2 and factors in lm models
     -   Add 95% confidence interval for sr2
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)

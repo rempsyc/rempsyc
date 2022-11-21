@@ -3,9 +3,6 @@
 #' @description Formats output of `lm` model object for a
 #' publication-ready format.
 #'
-#' Note: this function uses the `modelEffectSizes` function
-#' from the `lmSupport` package to get the sr2 effect sizes.
-#'
 #' @param model The model to be formatted.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted

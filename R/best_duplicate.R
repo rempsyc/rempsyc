@@ -1,9 +1,9 @@
 #' @title Choose the best duplicate
 #'
 #' @description Chooses the best duplicate, based on the
-#' duplicate with the fewer number of NA values. In case of ties,
-#' it picks the first duplicate, as it is the one most likely to
-#' be valid and authentic, given practice effects.
+#' duplicate with the smallest number of missing values. In case of
+#' ties, it picks the first duplicate, as it is the one most likely
+#' to be valid and authentic, given practice effects.
 #'
 #' @param data The data frame.
 #' @param id The ID variable for which to check for duplicates.

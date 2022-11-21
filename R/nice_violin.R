@@ -217,7 +217,13 @@ nice_violin <- function(data,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3) {
   rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
-  data[[group]] <- as.factor(data[[group]])
+  if (missing(group)) {
+    group <- "All data"
+    data[[group]] <- group
+  } else {
+    data[[group]] <- as.factor(data[[group]])
+  }
+
   data[[response]] <- as.numeric(data[[response]])
   dataSummary <- rcompanion_groupwiseMean(
     group = group,

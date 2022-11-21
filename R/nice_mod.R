@@ -3,9 +3,6 @@
 #' @description Easily compute moderation analyses, with effect
 #' sizes, and format in publication-ready format.
 #'
-#' Note: this function uses the `modelEffectSizes` function from
-#' the `lmSupport` package to get the sr2 effect sizes.
-#'
 #' @param data The data frame
 #' @param response The dependent variable.
 #' @param predictor The independent variable.

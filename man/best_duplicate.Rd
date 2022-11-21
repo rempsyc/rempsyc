@@ -16,9 +16,9 @@ A dataframe, containing only the "best" duplicates.
 }
 \description{
 Chooses the best duplicate, based on the
-duplicate with the fewer number of NA values. In case of ties,
-it picks the first duplicate, as it is the one most likely to
-be valid and authentic, given practice effects.
+duplicate with the smallest number of missing values. In case of
+ties, it picks the first duplicate, as it is the one most likely
+to be valid and authentic, given practice effects.
 }
 \examples{
 df1 <- data.frame(

@@ -31,7 +31,7 @@
 
 extract_duplicates <- function(data, id) {
 
-  Row <- seq(nrow(data))
+  Row <- seq_len(nrow(data))
   data <- cbind(Row, data)
   dups.index <- data[[id]] %in% data[[id]][duplicated(data[id])]
   dups <- data[dups.index, ]

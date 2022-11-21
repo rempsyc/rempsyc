@@ -3,9 +3,6 @@
 #' @description Extracts simple slopes from `lm` model
 #' object and format for a publication-ready format.
 #'
-#' Note: this function uses the `modelEffectSizes` function
-#' from the `lmSupport` package to get the sr2 effect sizes.
-#'
 #' @param model The model to be formatted.
 #' @param predictor The independent variable.
 #' @param moderator The moderating variable.

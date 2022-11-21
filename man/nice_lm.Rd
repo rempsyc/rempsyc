@@ -27,9 +27,6 @@ size, the semi-partial correlation squared.
 \description{
 Formats output of \code{lm} model object for a
 publication-ready format.
-
-Note: this function uses the \code{modelEffectSizes} function
-from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make and format model

@@ -49,9 +49,6 @@ semi-partial correlation squared.
 \description{
 Easily compute simple slopes in moderation analysis,
 with effect sizes, and format in publication-ready format.
-
-Note: this function uses the \code{modelEffectSizes} function
-from the \code{lmSupport} package to get the sr2 effect sizes.
 }
 \examples{
 # Make the basic table
