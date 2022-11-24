@@ -19,9 +19,7 @@
 #' @param ymin The minimum score on the y-axis scale.
 #' @param ymax The maximum score on the y-axis scale.
 #' @param yby How much to increase on each "tick" on the y-axis scale.
-#' @param alpha The transparency of the plot.
-#' @param border.colour The colour of the violins border.
-#' @param border.size The size of the violins border.
+#' @param ... Other arguments passed to [ggplot2::geom_dotplot].
 #'
 #' @keywords dotplot plots
 #' @return A dot plot of class ggplot, by group.
@@ -60,9 +58,7 @@ outliers_plot <- function(data,
                           ymin,
                           ymax,
                           yby = 1,
-                          alpha = 1,
-                          border.colour = "black",
-                          border.size = 2) {
+                          ...) {
   rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
   if (missing(group)) {
     group <- "All data"
@@ -99,11 +95,7 @@ outliers_plot <- function(data,
     ggplot2::geom_dotplot(
       binaxis = "y",
       stackdir = "center",
-      position = "dodge",
-      color = "black",
-      #fill = "black",
-      alpha = 1,
-      dotsize = 1) +
+      ...) +
     ggplot2::geom_hline(yintercept = criteria, size = 1, colour = "red", linetype = "dashed") +
     ggplot2::geom_hline(yintercept = -criteria, size = 1, colour = "red", linetype = "dashed")
 
@@ -141,5 +133,5 @@ outliers_plot <- function(data,
         )
       }
     }
-  suppressMessages(print(plot))
+  plot
 }

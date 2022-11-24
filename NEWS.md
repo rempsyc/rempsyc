@@ -1,7 +1,7 @@
 # rempsyc 0.1.x
 * Upcoming!
 
-# rempsyc 0.1.0.1
+## rempsyc 0.1.0.1
 * New function to visualize outliers: `outliers_plot`, which generates a violin scatter plot (dot plot) and adds lines for +/- 3 MAD (or SD, based on selected method). Importantly, supports plotting by group.
 * `nice_violin`: at some point in time, it supported a single group (or no group), but this feature was lost at some point. It is now back.
 

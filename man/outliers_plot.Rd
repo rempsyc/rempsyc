@@ -19,9 +19,7 @@ outliers_plot(
   ymin,
   ymax,
   yby = 1,
-  alpha = 1,
-  border.colour = "black",
-  border.size = 2
+  ...
 )
 }
 \arguments{
@@ -55,11 +53,7 @@ threshold (default is 3).}
 
 \item{yby}{How much to increase on each "tick" on the y-axis scale.}
 
-\item{alpha}{The transparency of the plot.}
-
-\item{border.colour}{The colour of the violins border.}
-
-\item{border.size}{The size of the violins border.}
+\item{...}{Other arguments passed to \link[ggplot2:geom_dotplot]{ggplot2::geom_dotplot}.}
 }
 \value{
 A dot plot of class ggplot, by group.
