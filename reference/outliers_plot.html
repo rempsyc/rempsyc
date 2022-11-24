@@ -115,9 +115,7 @@ with accompanying reference lines at +/- 3 MAD or SD.</p>
 <span>  <span class="va">ymin</span>,</span>
 <span>  <span class="va">ymax</span>,</span>
 <span>  yby <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  border.colour <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>  border.size <span class="op">=</span> <span class="fl">2</span></span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -181,16 +179,8 @@ threshold (default is 3).</p></dd>
 <dd><p>How much to increase on each "tick" on the y-axis scale.</p></dd>
 
 
-<dt>alpha</dt>
-<dd><p>The transparency of the plot.</p></dd>
-
-
-<dt>border.colour</dt>
-<dd><p>The colour of the violins border.</p></dd>
-
-
-<dt>border.size</dt>
-<dd><p>The size of the violins border.</p></dd>
+<dt>...</dt>
+<dd><p>Other arguments passed to <a href="https://ggplot2.tidyverse.org/reference/geom_dotplot.html" class="external-link">ggplot2::geom_dotplot</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -214,6 +204,8 @@ Tutorial:
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span></span>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Bin width defaults to 1/30 of the range of the data. Pick better value with</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `binwidth`.</span>
 <span class="r-plt img"><img src="outliers_plot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">outliers_plot</span><span class="op">(</span></span></span>
@@ -221,6 +213,8 @@ Tutorial:
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
 <span class="r-in"><span>  method <span class="op">=</span> <span class="st">"sd"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Bin width defaults to 1/30 of the range of the data. Pick better value with</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> `binwidth`.</span>
 <span class="r-plt img"><img src="outliers_plot-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
