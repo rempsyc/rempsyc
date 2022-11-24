@@ -71,7 +71,7 @@ nice_varplot <- function(data,
   # Calculate variance
   var <- data %>%
     group_by(.data[[group]]) %>%
-    summarize(var = stats::var(.data[[variable]]))
+    summarize(var = stats::var(.data[[variable]], na.rm = TRUE))
   diff <- max(var[, "var"]) / min(var[, "var"])
   # Make annotation dataframe
   dat_text <- var %>%
