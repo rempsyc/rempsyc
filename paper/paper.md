@@ -1,3 +1,24 @@
+---
+title: 'rempsyc: Convenience functions for psychology'
+tags:
+  - R
+  - psychology
+  - statistics
+  - visualization
+authors:
+  - name: Rémi Thériault
+    orcid: 0000-0003-4315-6788
+    affiliation: 1
+affiliations:
+  - name: "Département de psychologie, Université du Québec à Montréal, Québec, Canada"
+    index: 1
+date: "2022-11-29"
+bibliography: paper.bib
+output:
+  md_document:
+    preserve_yaml: TRUE
+---
+
 # Summary
 
 (R Core Team 2022)
