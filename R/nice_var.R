@@ -52,7 +52,7 @@ nice_var <- function(data,
   # Make basic frame
   var.table <- data %>%
     group_by(.data[[group]]) %>%
-    summarize(var = stats::var(.data[[variable]])) %>%
+    summarize(var = stats::var(.data[[variable]], na.rm = TRUE)) %>%
     t() %>%
     as.data.frame()
   # Format table in an acceptable format
@@ -66,8 +66,8 @@ nice_var <- function(data,
   var.table %>%
     rowwise() %>%
     mutate(
-      variance.ratio = round(max(select(., -variable)) / min(
-        select(., -variable)
+      variance.ratio = round(max(select(., -variable), na.rm = TRUE) / min(
+        select(., -variable), na.rm = TRUE
       ), 1), criteria = criteria,
       heteroscedastic = variance.ratio > criteria
     ) -> var.table

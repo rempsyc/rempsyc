@@ -92,8 +92,8 @@ nice_varplot <- function(data,
     ggplot2::geom_jitter(size = 2, width = 0.10) +
     ggplot2::annotate(
       geom = "text",
-      x = stats::median(seq_along(levels(data[[group]]))),
-      y = max(data[[variable]]),
+      x = stats::median(seq_along(levels(data[[group]])), na.rm = TRUE),
+      y = max(data[[variable]], na.rm = TRUE),
       label = paste0(
         "max/min = ",
         round(diff, 2),
