@@ -1,6 +1,5 @@
 # Development objectives (to-do list)
 
--   Create new function to visualize outliers: violin scatter plots and add lines for +/- 3 MAD (or SD, based on selected method)
 -   Reduce dependencies to make the package more lightweight
 -   all `lm` functions
     -   Correct bug with sr2 and factors in lm models
@@ -10,6 +9,8 @@
     -   Add option to specify `robust.d` for a robust version of Cohen's d
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 -   `nice_table`
+    -   For `footnote` argument: fix extra empty row at the end. Also change it for `note`?
+    -   Merge cells for dependent variable when it is repeating
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
 -   `nice_lm_slopes`
     -   Support second moderator
@@ -20,7 +21,7 @@
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
-    -   Use violin points, and mean centered
+    -   Use violin points, and group-mean centered (but not standardized)
 -   `nice_contrasts`
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually

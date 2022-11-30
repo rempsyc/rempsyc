@@ -129,6 +129,7 @@
 #' as_paragraph as_i as_sub as_sup set_caption
 #' add_footer_lines line_spacing valign separate_header
 #' border add_header_lines autofit fp_border_default hline
+#' merge_v fix_border_issues
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -432,6 +433,12 @@ nice_table <- function(data,
       }
     }
 
+  # Merge cells for repeated dependent variables...
+  if ("Dependent Variable" %in% names(dataframe)) {
+    table <- table %>%
+      merge_v(j = "Dependent Variable")
+  }
+
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   table %>%
     hline_top(part = "head", border = nice.borders) %>%
@@ -440,7 +447,8 @@ nice_table <- function(data,
     hline_bottom(part = "body", border = nice.borders) %>%
     align(align = "center", part = "all") %>%
     valign(valign = "center", part = "all") %>%
-    line_spacing(space = 2, part = "all") -> table
+    line_spacing(space = 2, part = "all") %>%
+    fix_border_issues -> table
 
   if (!missing(width)) {
     table %>%

@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Upcoming!
 
+## rempsyc 0.1.0.3
+* `nice_table` now only keeps the first occurence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called "Dependent Variables".
+
 ## rempsyc 0.1.0.2
 * `nice_varplot` and `nice_var`: Now ignores missing values when calculating variance.
 
