@@ -441,7 +441,8 @@ nice_table <- function(data,
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 
   # Merge cells for repeated dependent variables...
-  if ("Dependent Variable" %in% names(dataframe)) {
+  if ("Dependent Variable" %in% names(dataframe) &&
+      any(duplicated(dataframe$`Dependent Variable`))) {
     model.row <- which(!duplicated(dataframe$`Dependent Variable`, fromLast = TRUE))
     table <- table %>%
       merge_v(j = "Dependent Variable") %>%

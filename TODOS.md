@@ -19,6 +19,7 @@
     -   Add support for multiple moderators (like for `nice_mod`)
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?
+-   `nice_assumptions`: accept list objects!
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
