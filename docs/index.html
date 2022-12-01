@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -205,7 +205,7 @@
 <span><span class="co"># Format t-test results</span></span>
 <span><span class="va">t_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">t.tests</span><span class="op">)</span></span>
 <span><span class="va">t_table</span></span></code></pre></div>
-<p><img src="reference/figures/README-t_table-1.png" width="60%"></p>
+<p><img src="reference/figures/README-nice_t_test-1.png" width="60%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save to word</span></span>
 <span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
@@ -224,22 +224,22 @@
 <span><span class="va">contrasts</span></span>
 <span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
 <span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  3.640418 0.001092088865  1.245144</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28 -4.861413 0.000040511099  1.786630</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28  1.290359 0.207480642577 -3.467937</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -6.040561 0.000001640986 -2.427185</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1048044  5.6507320</span></span>
-<span><span class="co">#&gt; 2  0.6822567  2.2282184</span></span>
-<span><span class="co">#&gt; 3  1.0850389  3.9310262</span></span>
-<span><span class="co">#&gt; 4 -4.8990287 -2.4179862</span></span>
-<span><span class="co">#&gt; 5 -3.8970000 -1.4438520</span></span>
-<span><span class="co">#&gt; 6 -1.7783875 -0.4648771</span></span>
+<span><span class="co">#&gt; 1  2.1445588  5.9604661</span></span>
+<span><span class="co">#&gt; 2  0.7080337  2.4180893</span></span>
+<span><span class="co">#&gt; 3  1.0323844  3.6036727</span></span>
+<span><span class="co">#&gt; 4 -5.0429761 -2.5358454</span></span>
+<span><span class="co">#&gt; 5 -3.8549009 -1.4083974</span></span>
+<span><span class="co">#&gt; 6 -1.8096884 -0.4977134</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-contrasts_table-1.png" width="70%"></p>
+<p><img src="reference/figures/README-nice_contrasts-1.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts" class="uri">https://rempsyc.remi-theriault.com/articles/contrasts</a></p>
 </div>
 <div class="section level2">
@@ -270,7 +270,7 @@
 <span></span>
 <span><span class="co"># Format moderation results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">moderations</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-mod_table-1.png" width="70%"></p>
+<p><img src="reference/figures/README-nice_mod-1.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
@@ -331,7 +331,7 @@
 <span></span>
 <span><span class="co"># Format simple slopes results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-slopes_table-1.png" width="80%"></p>
+<p><img src="reference/figures/README-nice_slopes-1.png" width="80%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
@@ -439,15 +439,16 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum</span></span>
 <span><span class="co">#&gt; ----------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; age            |  1.00*** |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**</span></span>
-<span><span class="co">#&gt; parity         |     0.08 |  1.00*** |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12</span></span>
-<span><span class="co">#&gt; induced        |    -0.10 |  0.45*** |  1.00*** |     0.02 |    -0.27*** |    -0.10 |          0.16*</span></span>
-<span><span class="co">#&gt; case           | 3.53e-03 | 8.91e-03 |     0.02 |  1.00*** |     0.36*** | 3.83e-03 |       4.86e-03</span></span>
-<span><span class="co">#&gt; spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |     1.00*** |     0.06 |        0.21***</span></span>
-<span><span class="co">#&gt; stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |  1.00*** |        0.75***</span></span>
-<span><span class="co">#&gt; pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |        1.00***</span></span>
+<span><span class="co">#&gt; age            |          |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**</span></span>
+<span><span class="co">#&gt; parity         |     0.08 |          |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12</span></span>
+<span><span class="co">#&gt; induced        |    -0.10 |  0.45*** |          |     0.02 |    -0.27*** |    -0.10 |          0.16*</span></span>
+<span><span class="co">#&gt; case           | 3.53e-03 | 8.91e-03 |     0.02 |          |     0.36*** | 3.83e-03 |       4.86e-03</span></span>
+<span><span class="co">#&gt; spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |             |     0.06 |        0.21***</span></span>
+<span><span class="co">#&gt; stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |          |        0.75***</span></span>
+<span><span class="co">#&gt; pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |               </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; p-value adjustment method: none</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  [Correlation matrix 'cormatrix1.xlsx' has been saved to working directory (or where specified).]</span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
@@ -716,11 +717,29 @@
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
+<h2 id="plot_outliers">
+<code>plot_outliers</code><a class="anchor" aria-label="anchor" href="#plot_outliers"></a>
+</h2>
+<p>Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>, </span>
+<span>              group <span class="op">=</span> <span class="st">"Month"</span>,</span>
+<span>              response <span class="op">=</span> <span class="st">"Ozone"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_outliers-1.png" width="70%"></p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
+<span>              response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
+<span>              method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_outliers-2.png" width="70%"></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
+</div>
+<div class="section level2">
 <h2 id="nice_var">
 <code>nice_var</code><a class="anchor" aria-label="anchor" href="#nice_var"></a>
 </h2>
 <p>Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>         variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>         group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
@@ -735,7 +754,7 @@
 <code>nice_varplot</code><a class="anchor" aria-label="anchor" href="#nice_varplot"></a>
 </h2>
 <p>Attempt to visualize variance per group.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
@@ -796,8 +815,8 @@
 <li><a href="https://cran.r-project.org/package=rempsyc" class="external-link"><img src="https://www.r-pkg.org/badges/version/rempsyc" alt="CRAN status"></a></li>
 <li><a href="https://github.com/rempsyc/rempsyc/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/rempsyc/rempsyc" alt="Last-commit"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="license"></a></li>
-<li><a href="https://cran.r-project.org/package=rempsyc" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/rempsyc" alt="downloads"></a></li>
-<li><a href="https://cranlogs.r-pkg.org/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rempsyc" alt="total"></a></li>
+<li><a href="https://shinyus.ipub.com/cranview/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/rempsyc" alt="downloads"></a></li>
+<li><a href="https://shinyus.ipub.com/cranview/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rempsyc" alt="total"></a></li>
 <li><a href="https://github.com/sponsors/rempsyc" class="external-link"><img src="https://img.shields.io/github/sponsors/rempsyc" alt="sponsors"></a></li>
 <li><a href="https://github.com/rempsyc?tab=followers" class="external-link"><img src="https://img.shields.io/github/followers/rempsyc?style=social" alt="followers"></a></li>
 <li><a href="https://github.com/rempsyc/rempsyc/network/members" class="external-link"><img src="https://img.shields.io/github/forks/rempsyc/rempsyc?style=social" alt="forks"></a></li>
