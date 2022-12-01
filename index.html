@@ -230,12 +230,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.0931825  5.4521491</span></span>
-<span><span class="co">#&gt; 2  0.7276065  2.3983961</span></span>
-<span><span class="co">#&gt; 3  1.0353053  3.8313294</span></span>
-<span><span class="co">#&gt; 4 -4.9000782 -2.4588340</span></span>
-<span><span class="co">#&gt; 5 -3.7025698 -1.4598208</span></span>
-<span><span class="co">#&gt; 6 -1.7260912 -0.4571215</span></span>
+<span><span class="co">#&gt; 1  2.1288269  5.9092665</span></span>
+<span><span class="co">#&gt; 2  0.7032205  2.5152078</span></span>
+<span><span class="co">#&gt; 3  1.0352824  3.5168226</span></span>
+<span><span class="co">#&gt; 4 -5.0232756 -2.4238783</span></span>
+<span><span class="co">#&gt; 5 -3.6994373 -1.3452619</span></span>
+<span><span class="co">#&gt; 6 -1.8057076 -0.4693716</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -439,15 +439,16 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum</span></span>
 <span><span class="co">#&gt; ----------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co">#&gt; age            |  1.00*** |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**</span></span>
-<span><span class="co">#&gt; parity         |     0.08 |  1.00*** |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12</span></span>
-<span><span class="co">#&gt; induced        |    -0.10 |  0.45*** |  1.00*** |     0.02 |    -0.27*** |    -0.10 |          0.16*</span></span>
-<span><span class="co">#&gt; case           | 3.53e-03 | 8.91e-03 |     0.02 |  1.00*** |     0.36*** | 3.83e-03 |       4.86e-03</span></span>
-<span><span class="co">#&gt; spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |     1.00*** |     0.06 |        0.21***</span></span>
-<span><span class="co">#&gt; stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |  1.00*** |        0.75***</span></span>
-<span><span class="co">#&gt; pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |        1.00***</span></span>
+<span><span class="co">#&gt; age            |          |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**</span></span>
+<span><span class="co">#&gt; parity         |     0.08 |          |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12</span></span>
+<span><span class="co">#&gt; induced        |    -0.10 |  0.45*** |          |     0.02 |    -0.27*** |    -0.10 |          0.16*</span></span>
+<span><span class="co">#&gt; case           | 3.53e-03 | 8.91e-03 |     0.02 |          |     0.36*** | 3.83e-03 |       4.86e-03</span></span>
+<span><span class="co">#&gt; spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |             |     0.06 |        0.21***</span></span>
+<span><span class="co">#&gt; stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |          |        0.75***</span></span>
+<span><span class="co">#&gt; pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |               </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; p-value adjustment method: none</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  [Correlation matrix 'cormatrix1.xlsx' has been saved to working directory (or where specified).]</span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
@@ -716,11 +717,29 @@
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
 <div class="section level2">
+<h2 id="plot_outliers">
+<code>plot_outliers</code><a class="anchor" aria-label="anchor" href="#plot_outliers"></a>
+</h2>
+<p>Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>, </span>
+<span>              group <span class="op">=</span> <span class="st">"Month"</span>,</span>
+<span>              response <span class="op">=</span> <span class="st">"Ozone"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_outliers-1.png" width="70%"></p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
+<span>              response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
+<span>              method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_outliers-2.png" width="70%"></p>
+<p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
+</div>
+<div class="section level2">
 <h2 id="nice_var">
 <code>nice_var</code><a class="anchor" aria-label="anchor" href="#nice_var"></a>
 </h2>
 <p>Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>         variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>         group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
@@ -735,7 +754,7 @@
 <code>nice_varplot</code><a class="anchor" aria-label="anchor" href="#nice_varplot"></a>
 </h2>
 <p>Attempt to visualize variance per group.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
