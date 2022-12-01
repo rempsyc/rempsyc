@@ -421,6 +421,12 @@ nice_table <- function(data,
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
 
+  if ("Predictor" %in% names(dataframe)) {
+    dataframe$Predictor <- gsub(
+      ":", " \u00D7 ", dataframe$Predictor
+    )
+  }
+
   if ("Model Number" %in% names(dataframe)) {
     dataframe <- dataframe %>%
       select(-all_of("Model Number"))
