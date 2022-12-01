@@ -444,6 +444,22 @@ nice_normality(data = iris,
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 
+## `plot_outliers`
+
+Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).
+
+```{r plot_outliers, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
+plot_outliers(airquality, 
+              group = "Month",
+              response = "Ozone")
+
+plot_outliers(airquality,
+              response = "Ozone",
+              method = "sd")
+```
+
+Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
+
 ## `nice_var `
 
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.

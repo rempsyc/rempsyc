@@ -27,9 +27,9 @@ researchers in the psychological sciences. The package is still under
 active development. Feel free to open an issue to ask for help, report a
 bug, or request a feature.
 
--   [Release notes](https://rempsyc.remi-theriault.com/news/index.html)
--   [Development objectives (to-do
-    list)](https://rempsyc.remi-theriault.com/TODOS.html)
+- [Release notes](https://rempsyc.remi-theriault.com/news/index.html)
+- [Development objectives (to-do
+  list)](https://rempsyc.remi-theriault.com/TODOS.html)
 
 ## Installation
 
@@ -157,12 +157,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
 #>     CI_lower   CI_upper
-#> 1  2.0931825  5.4521491
-#> 2  0.7276065  2.3983961
-#> 3  1.0353053  3.8313294
-#> 4 -4.9000782 -2.4588340
-#> 5 -3.7025698 -1.4598208
-#> 6 -1.7260912 -0.4571215
+#> 1  2.1288269  5.9092665
+#> 2  0.7032205  2.5152078
+#> 3  1.0352824  3.5168226
+#> 4 -5.0232756 -2.4238783
+#> 5 -3.6994373 -1.3452619
+#> 6 -1.8057076 -0.4693716
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -403,15 +403,16 @@ cormatrix_excel(infert, "cormatrix1")
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
 #> ----------------------------------------------------------------------------------------------------
-#> age            |  1.00*** |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**
-#> parity         |     0.08 |  1.00*** |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12
-#> induced        |    -0.10 |  0.45*** |  1.00*** |     0.02 |    -0.27*** |    -0.10 |          0.16*
-#> case           | 3.53e-03 | 8.91e-03 |     0.02 |  1.00*** |     0.36*** | 3.83e-03 |       4.86e-03
-#> spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |     1.00*** |     0.06 |        0.21***
-#> stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |  1.00*** |        0.75***
-#> pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |        1.00***
+#> age            |          |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**
+#> parity         |     0.08 |          |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12
+#> induced        |    -0.10 |  0.45*** |          |     0.02 |    -0.27*** |    -0.10 |          0.16*
+#> case           | 3.53e-03 | 8.91e-03 |     0.02 |          |     0.36*** | 3.83e-03 |       4.86e-03
+#> spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |             |     0.06 |        0.21***
+#> stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |          |        0.75***
+#> pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |               
 #> 
 #> p-value adjustment method: none
+#> 
 #> 
 #>  [Correlation matrix 'cormatrix1.xlsx' has been saved to working directory (or where specified).]
 #> NULL
@@ -691,6 +692,30 @@ nice_normality(data = iris,
 ```
 
 <img src="man/figures/README-nice_normality-1.png" width="80%" />
+
+Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
+
+## `plot_outliers`
+
+Visually check outliers based on (e.g.) +/- 3 MAD (median absolute
+deviations) or SD (standard deviations).
+
+``` r
+plot_outliers(airquality, 
+              group = "Month",
+              response = "Ozone")
+```
+
+<img src="man/figures/README-plot_outliers-1.png" width="70%" />
+
+``` r
+
+plot_outliers(airquality,
+              response = "Ozone",
+              method = "sd")
+```
+
+<img src="man/figures/README-plot_outliers-2.png" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 

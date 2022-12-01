@@ -1,6 +1,7 @@
 # Development objectives (to-do list)
 
 -   Reduce dependencies to make the package more lightweight
+-   `plot_outliers`: add to assumptions vignette
 -   all `lm` functions
     -   Correct bug with sr2 and factors in lm models
     -   Add 95% confidence interval for sr2

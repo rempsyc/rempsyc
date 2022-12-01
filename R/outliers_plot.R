@@ -1,7 +1,9 @@
 #' @title Visually check outliers (dot plot)
 #'
 #' @description Easily and visually check outliers through a dot plot
-#' with accompanying reference lines at +/- 3 MAD or SD.
+#' with accompanying reference lines at +/- 3 MAD or SD. When providing
+#' a group, data are group-mean centered and standardized (based on
+#' MAD or SD); if no group is provided, data are simply standardized.
 #'
 #' @param data The data frame.
 #' @param group The group by which to plot the variable.
@@ -26,17 +28,15 @@
 #' @export
 #' @examples
 #' # Make the basic plot
-#' outliers_plot(
-#'   data = ToothGrowth,
-#'   group = "dose",
-#'   response = "len"
-#' )
+#' plot_outliers(
+#'   airquality,
+#'   group = "Month",
+#'   response = "Ozone")
 #'
-#' outliers_plot(
-#'   data = ToothGrowth,
-#'   response = "len",
-#'   method = "sd"
-#' )
+#' plot_outliers(
+#'   airquality,
+#'   response = "Ozone",
+#'   method = "sd")
 #'
 #' @seealso
 #' Other functions useful in assumption testing:
@@ -44,14 +44,14 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 
-outliers_plot <- function(data,
+plot_outliers <- function(data,
                           group,
                           response,
                           method = "mad",
                           criteria = 3,
                           colours,
                           xlabels = NULL,
-                          ytitle = paste(response, "(group-mean centered, mad-standardized)"),
+                          ytitle = NULL,
                           xtitle = NULL,
                           has.ylabels = TRUE,
                           has.xlabels = TRUE,
@@ -63,8 +63,14 @@ outliers_plot <- function(data,
   if (missing(group)) {
     group <- "All data"
     data[[group]] <- group
+    if (is.null(ytitle)) {
+      ytitle <- paste(response, "(standardized)")
+    }
   } else {
     data[[group]] <- as.factor(data[[group]])
+    if (is.null(ytitle)) {
+      ytitle <- paste(response, "(group-mean standardized)")
+    }
   }
 
   data[[response]] <- as.numeric(data[[response]])

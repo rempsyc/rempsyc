@@ -3,6 +3,7 @@
 
 ## rempsyc 0.1.0.3
 * `nice_table` now only keeps the first occurence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called "Dependent Variables".
+* `outliers_plot` changes name to `plot_outliers`, to be consistent with the verb naming approach.
 
 ## rempsyc 0.1.0.2
 * `nice_varplot` and `nice_var`: Now ignores missing values when calculating variance.
