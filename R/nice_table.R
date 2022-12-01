@@ -421,6 +421,11 @@ nice_table <- function(data,
       mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
   }
 
+  if ("Model Number" %in% names(dataframe)) {
+    dataframe <- dataframe %>%
+      select(-all_of("Model Number"))
+  }
+
   #   __________________________________
   #   Flextable                     ####
 
@@ -433,13 +438,16 @@ nice_table <- function(data,
       }
     }
 
+  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
+
   # Merge cells for repeated dependent variables...
   if ("Dependent Variable" %in% names(dataframe)) {
+    model.row <- which(!duplicated(dataframe$`Dependent Variable`, fromLast = TRUE))
     table <- table %>%
-      merge_v(j = "Dependent Variable")
+      merge_v(j = "Dependent Variable") %>%
+      hline(i = model.row, border = nice.borders)
   }
 
-  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
   table %>%
     hline_top(part = "head", border = nice.borders) %>%
     hline_bottom(part = "head", border = nice.borders) %>%
