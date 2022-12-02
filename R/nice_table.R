@@ -427,9 +427,9 @@ nice_table <- function(data,
     )
   }
 
-  if ("Terms" %in% names(dataframe)) {
-    dataframe$Terms <- gsub(
-      ":", " \u00D7 ", dataframe$Terms
+  if ("Term" %in% names(dataframe)) {
+    dataframe$Term <- gsub(
+      ":", " \u00D7 ", dataframe$Term
     )
   }
 
