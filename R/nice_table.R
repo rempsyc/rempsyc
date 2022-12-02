@@ -427,6 +427,12 @@ nice_table <- function(data,
     )
   }
 
+  if ("Terms" %in% names(dataframe)) {
+    dataframe$Terms <- gsub(
+      ":", " \u00D7 ", dataframe$Terms
+    )
+  }
+
   if ("Model Number" %in% names(dataframe)) {
     dataframe <- dataframe %>%
       select(-all_of("Model Number"))
