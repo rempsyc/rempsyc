@@ -736,7 +736,7 @@ nice_table <- function(data,
     bold.decision <- ifelse(length(title) == 1, FALSE, TRUE)
 
     table <- table %>%
-      add_header_lines(values = rev(title)) %>%
+      add_header_lines(values = title) %>%
       align(part = "header", i = seq(length(title)), align = "left") %>%
       hline(part = "header", i = seq_len(length(title) - 1),
             border = invisible.borders) %>%
