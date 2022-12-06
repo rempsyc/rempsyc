@@ -4,7 +4,7 @@
 \alias{nice_lm}
 \title{Nice formatting of lm models}
 \usage{
-nice_lm(model, b.label = "b", mod.id = TRUE, ...)
+nice_lm(model, b.label = "b", mod.id = TRUE, ci.alternative = "two.sided", ...)
 }
 \arguments{
 \item{model}{The model to be formatted.}
@@ -15,6 +15,10 @@ to the Greek beta symbol in the \code{nice_table} function).}
 
 \item{mod.id}{Logical. Whether to display the model number,
 when there is more than one model.}
+
+\item{ci.alternative}{Alternative for the confidence interval
+of the sr2. It can be either "two.sided (the default in this
+package), "greater", or "less".}
 
 \item{...}{Further arguments to be passed to the
 \link[effectsize:r2_semipartial]{effectsize::r2_semipartial} function for the effect size.}
@@ -29,12 +33,12 @@ Formats output of \code{lm} model object for a
 publication-ready format.
 }
 \details{
-The effect size (semi-partial correlation squared, also
+The effect size, sr2 (semi-partial correlation squared, also
 known as delta R2), is computed through \link[effectsize:r2_semipartial]{effectsize::r2_semipartial}.
 Please read the documentation for that function, especially regarding
-the interpretation of the confidence interval. By default, it uses a
-one-sided alternative ("greater"), since the sr2, like the R2, cannot
-be negative, with the upper bound fixed to 1.
+the interpretation of the confidence interval. In \code{rempsyc}, instead
+of using the default one-sided alternative ("greater"), we use the
+two-sided alternative.
 }
 \examples{
 # Make and format model

@@ -3,12 +3,7 @@
 #' @description Extracts simple slopes from `lm` model
 #' object and format for a publication-ready format.
 #'
-#' @details The effect size (semi-partial correlation squared, also
-#' known as delta R2), is computed through [effectsize::r2_semipartial].
-#' Please read the documentation for that function, especially regarding
-#' the interpretation of the confidence interval. By default, it uses a
-#' one-sided alternative ("greater"), since the sr2, like the R2, cannot
-#' be negative, with the upper bound fixed to 1.
+#' @inherit nice_lm details
 #'
 #' @param model The model to be formatted.
 #' @param predictor The independent variable.
@@ -18,6 +13,9 @@
 #' to the Greek beta symbol in the `nice_table` function).
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
+#' @param ci.alternative Alternative for the confidence interval
+#' of the sr2. It can be either "two.sided (the default in this
+#' package), "greater", or "less".
 #' @param ... Further arguments to be passed to the `lm`
 #' function for the models.
 #'
@@ -49,6 +47,7 @@ nice_lm_slopes <- function(model,
                            moderator,
                            b.label = "b",
                            mod.id = TRUE,
+                           ci.alternative = "two.sided",
                            ...) {
   ifelse(class(model) == "list",
     models.list <- model,
@@ -75,13 +74,13 @@ nice_lm_slopes <- function(model,
     lm(formulas.lows[[x]], data = data.list.lows[[x]], ...)
   })
 
-  table.stats1 <- lapply(models.list.lows, nice_lm)
+  table.stats1 <- lapply(models.list.lows, nice_lm, ci.alternative = ci.alternative)
   table.stats1 <- dplyr::bind_rows(table.stats1)
   table.stats1 <- dplyr::filter(table.stats1, .data$Predictor == {{predictor}})
   table.stats1$Predictor <- paste0(predictor, " (LOW-", moderator, ")")
 
   # Calculate simple slopes for mean-level
-  table.stats2 <- lapply(models.list, nice_lm)
+  table.stats2 <- lapply(models.list, nice_lm, ci.alternative = ci.alternative)
   table.stats2 <- dplyr::bind_rows(table.stats2)
   table.stats2 <- dplyr::filter(table.stats2, .data$Predictor == {{predictor}})
   table.stats2$Predictor <- paste0(predictor, " (MEAN-", moderator, ")")
@@ -98,7 +97,7 @@ nice_lm_slopes <- function(model,
     lm(formulas.highs[[x]], data = data.list.highs[[x]], ...)
   })
 
-  table.stats3 <- lapply(models.list.highs, nice_lm)
+  table.stats3 <- lapply(models.list.highs, nice_lm, ci.alternative = ci.alternative)
   table.stats3 <- dplyr::bind_rows(table.stats3)
   table.stats3 <- dplyr::filter(table.stats3, .data$Predictor == {{predictor}})
   table.stats3$Predictor <- paste0(predictor, " (HIGH-", moderator, ")")

@@ -3,12 +3,7 @@
 #' @description Easily compute moderation analyses, with effect
 #' sizes, and format in publication-ready format.
 #'
-#' @details The effect size (semi-partial correlation squared, also
-#' known as delta R2), is computed through [effectsize::r2_semipartial].
-#' Please read the documentation for that function, especially regarding
-#' the interpretation of the confidence interval. By default, it uses a
-#' one-sided alternative ("greater"), since the sr2, like the R2, cannot
-#' be negative, with the upper bound fixed to 1.
+#' @inherit nice_lm details
 #'
 #' @param data The data frame
 #' @param response The dependent variable.
@@ -21,6 +16,9 @@
 #' to the Greek beta symbol in the `nice_table` function).
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
+#' @param ci.alternative Alternative for the confidence interval
+#' of the sr2. It can be either "two.sided (the default in this
+#' package), "greater", or "less".
 #' @param ... Further arguments to be passed to the `lm`
 #' function for the models.
 #'
@@ -79,6 +77,7 @@ nice_mod <- function(data,
                      covariates = NULL,
                      b.label = "b",
                      mod.id = TRUE,
+                     ci.alternative = "two.sided",
                      ...) {
   if (!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
@@ -96,7 +95,7 @@ nice_mod <- function(data,
   )
   models.list <- lapply(formulas, stats::lm, data = data, ...)
 
-  table.stats <- lapply(models.list, nice_lm)
+  table.stats <- lapply(models.list, nice_lm, ci.alternative = ci.alternative)
   model.number.rows <- lapply(table.stats, nrow)
   table.stats <- dplyr::bind_rows(table.stats)
 

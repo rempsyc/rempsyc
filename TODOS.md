@@ -1,7 +1,6 @@
 # Development objectives (to-do list)
 
 -   Make new vignette for featured elsewhere
--   `nice_mod` et al.: use `nice_lm` internally to reduce code redundancy
 -   Reduce dependencies to make the package more lightweight
 -   `plot_outliers`: add to assumptions vignette
 -   all `lm` functions
