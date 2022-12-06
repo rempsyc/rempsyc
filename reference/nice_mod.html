@@ -18,7 +18,7 @@ sizes, and format in publication-ready format."><meta property="og:image" conten
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@ sizes, and format in publication-ready format."><meta property="og:image" conten
   <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../TODOS.html">To-dos</a>
@@ -161,7 +161,16 @@ function for the models.</p></dd>
 
 <p>A formatted dataframe of the specified lm model, with DV, IV, degrees
 of freedom, regression coefficient, t-value, p-value, and the effect
-size, the semi-partial correlation squared.</p>
+size, the semi-partial correlation squared, and its confidence interval.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The effect size (semi-partial correlation squared, also
+known as delta R2), is computed through <a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a>.
+Please read the documentation for that function, especially regarding
+the interpretation of the confidence interval. By default, it uses a
+one-sided alternative ("greater"), since the sr2, like the R2, cannot
+be negative, with the upper bound fixed to 1.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -184,6 +193,10 @@ size, the semi-partial correlation squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 28  5.615951  1.9437108 0.06204275 0.028488305</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 28  1.403861  0.4301493 0.67037970 0.001395217</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg   gear:wt 28 -1.966931 -2.1551077 0.03989970 0.035022025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       CI_lower CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0003502202        1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables at once</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -202,16 +215,16 @@ size, the semi-partial correlation squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7            3                 hp      gear 28  -7.461189 -0.1554963 0.87754563</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8            3                 hp        wt 28  11.253239  0.2076235 0.83702568</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9            3                 hp   gear:wt 28  14.539586  0.9592587 0.34563902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0284883047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0013952173</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0350220247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0027372180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0433559718</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0048402513</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.0003885555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.0006927326</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9 0.0147871391</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            sr2     CI_lower CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0284883047 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0013952173 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0350220247 0.0003502202        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0027372180 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0433559718 0.0004335597        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0048402513 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.0003885555 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.0006927326 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 0.0147871391 0.0000000000        1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add covariates</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -227,6 +240,12 @@ size, the semi-partial correlation squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg        am 26  1.578465  0.8569286 0.399314133 0.004240876</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg        vs 26  3.817509  3.2441426 0.003228614 0.060780767</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg   gear:wt 26 -2.096457 -2.5615471 0.016567730 0.037894048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       CI_lower CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0002492212        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0006078077        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0003789405        1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Three-way interaction</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -244,6 +263,14 @@ size, the semi-partial correlation squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg    gear:am 24 -58.83248 -1.992346 0.05782588 0.01964494</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6                mpg      wt:am 24 -58.67147 -2.053052 0.05112221 0.02086032</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7                mpg gear:wt:am 24  16.79352  1.854357 0.07601677 0.01701798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      CI_lower CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.000243049        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.000000000        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.000000000        1</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
   <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="active nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../TODOS.html">To-dos</a>
@@ -94,19 +94,30 @@
 <h2 class="pkg-version" data-toc-text="0.1" id="rempsyc-01x">rempsyc 0.1.x<a class="anchor" aria-label="anchor" href="#rempsyc-01x"></a></h2>
 <ul><li>Upcoming!</li>
 </ul><div class="section level3">
-<h3 id="rempsyc-0-1">rempsyc 0.1.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+<h3 id="rempsyc-0-1">rempsyc 0.1.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+<ul><li>Since <code>easystats</code> added a new function to calculate the sr2, <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>, <code>rempsyc</code> now relies on that function. First, it has the advantage of also providing a confidence interval for the sr2. Second, it also fixes a bug when using factors in <code>lm</code> models that was introduced when switching from <code><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">car::Anova</a></code> to manual calculation via the formula interface.</li>
+<li>Accordingly, <code><a href="../reference/sr2.html">rempsyc::sr2</a></code> becomes deprecated and will be removed completely in the next major version, please use <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>.</li>
+<li>
+<code>nice_mod</code>, <code>nice_slopes</code>, and <code>nice_lm_slopes</code> now use <code>nice_lm</code> internally to reduce code redundancy and shorten the code base (and <code>nice_slopes</code> additionally uses <code>nice_lm_slopes</code> internally).</li>
+<li>To align with other package dependencies, <code>rempsyc</code> now requires <code>R &gt;= 3.6</code>
+</li>
+<li>
+<code>nice_reverse</code> loses its <code>warning</code> parameter, as the warning seems unnecessary (and annoying to some), given all relevant information is available from the documentation.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-1">rempsyc 0.1.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
 <ul><li>
-<code>nice_table</code> now only keeps the first occurence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called “Dependent Variables”. For columns named “Predictor”, now also converts colons “:” to the multiplication symbol, “×”.</li>
+<code>nice_table</code> now only keeps the first occurrence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called “Dependent Variables”. For columns named “Predictor” and “Term”, now also converts colons “:” to the multiplication symbol, “×”.</li>
 <li>
 <code>outliers_plot</code> changes name to <code>plot_outliers</code>, to be consistent with the verb naming approach.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-1">rempsyc 0.1.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
+<h3 id="rempsyc-0-1-2">rempsyc 0.1.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
 <ul><li>
 <code>nice_varplot</code> and <code>nice_var</code>: Now ignores missing values when calculating variance.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-2">rempsyc 0.1.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
+<h3 id="rempsyc-0-1-3">rempsyc 0.1.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-3"></a></h3>
 <ul><li>New function to visualize outliers: <code>outliers_plot</code>, which generates a violin scatter plot (dot plot) and adds lines for +/- 3 MAD (or SD, based on selected method). Importantly, supports plotting by group.</li>
 <li>
 <code>nice_violin</code>: at some point in time, it supported a single group (or no group), but this feature was lost at some point. It is now back.</li>
