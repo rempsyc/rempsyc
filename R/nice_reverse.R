@@ -6,8 +6,6 @@
 #' @param x The score to reverse.
 #' @param max The maximum score on the scale.
 #' @param min The minimum score on the scale (optional unless it isn't 1).
-#' @param warning Logical. Whether to show the warning
-#' about the minimum not being 1.
 #'
 #' @keywords reverse scoring
 #' @return A numeric vector, of reversed scores.
@@ -27,7 +25,6 @@
 #'
 nice_reverse <- function(x,
                          max,
-                         min = 1,
-                         warning = TRUE) {
+                         min = 1) {
   max - as.numeric(x) + min
 }

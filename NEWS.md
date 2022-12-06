@@ -1,8 +1,15 @@
 # rempsyc 0.1.x
 * Upcoming!
 
+## rempsyc 0.1.0.4
+* Since `easystats` added a new function to calculate the sr2, `effectsize::r2_semipartial`, `rempsyc` now relies on that function. First, it has the advantage of also providing a confidence interval for the sr2. Second, it also fixes a bug when using factors in `lm` models that was introduced when switching from `car::Anova` to manual calculation via the formula interface.
+* Accordingly, `rempsyc::sr2` becomes deprecated and will be removed completely in the next major version, please use `effectsize::r2_semipartial`.
+* `nice_mod`, `nice_slopes`, and `nice_lm_slopes` now use `nice_lm` internally to reduce code redundancy and shorten the code base (and `nice_slopes` additionally uses `nice_lm_slopes` internally).
+* To align with other package dependencies, `rempsyc` now requires `R >= 3.6`
+* `nice_reverse` loses its `warning` parameter, as the warning seems unnecessary (and annoying to some), given all relevant information is available from the documentation.
+
 ## rempsyc 0.1.0.3
-* `nice_table` now only keeps the first occurence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called "Dependent Variables". For columns named "Predictor", now also converts colons ":" to the multiplication symbol, "×".
+* `nice_table` now only keeps the first occurrence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called "Dependent Variables". For columns named "Predictor" and "Terms", now also converts colons ":" to the multiplication symbol, "×".
 * `outliers_plot` changes name to `plot_outliers`, to be consistent with the verb naming approach.
 
 ## rempsyc 0.1.0.2

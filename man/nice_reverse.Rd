@@ -4,7 +4,7 @@
 \alias{nice_reverse}
 \title{Easily recode scores}
 \usage{
-nice_reverse(x, max, min = 1, warning = TRUE)
+nice_reverse(x, max, min = 1)
 }
 \arguments{
 \item{x}{The score to reverse.}
@@ -12,9 +12,6 @@ nice_reverse(x, max, min = 1, warning = TRUE)
 \item{max}{The maximum score on the scale.}
 
 \item{min}{The minimum score on the scale (optional unless it isn't 1).}
-
-\item{warning}{Logical. Whether to show the warning
-about the minimum not being 1.}
 }
 \value{
 A numeric vector, of reversed scores.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sr2.R
 \name{sr2}
 \alias{sr2}
-\title{Semi-Partial Correlation Squared (Delta R2)}
+\title{Semi-Partial Correlation Squared (Delta R2) \link{Deprecated}}
 \usage{
 sr2(model, ...)
 }
@@ -16,11 +16,16 @@ these can be \code{subset} and \code{na.action}.}
 A data frame with the effect size.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+}
+\details{
 Compute the semi-partial correlation squared (also known as the delta
 R2), for a \code{lm} model.
 }
 \examples{
+\dontrun{
 m <- lm(mpg ~ cyl + disp + hp * drat, data = mtcars)
 sr2(m)
+}
 }
 \concept{effect size correlation}

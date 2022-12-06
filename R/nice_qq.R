@@ -81,8 +81,8 @@ nice_qq <- function(data,
       )))
   }
   # Make plot
-  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes_string(
-    fill = group, sample = variable)) +
+  plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(
+    fill = .data[[group]], sample = .data[[variable]])) +
     qqplotr::stat_qq_band() +
     qqplotr::stat_qq_line() +
     qqplotr::stat_qq_point() +

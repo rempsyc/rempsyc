@@ -27,11 +27,19 @@ function for the models.}
 A formatted dataframe of the simple slopes of the specified lm model,
 with DV, levels of IV, degrees of freedom, regression coefficient,
 t-value, p-value, and the effect size, the semi-partial correlation
-squared.
+squared, and its confidence interval.
 }
 \description{
 Extracts simple slopes from \code{lm} model
 object and format for a publication-ready format.
+}
+\details{
+The effect size (semi-partial correlation squared, also
+known as delta R2), is computed through \link[effectsize:r2_semipartial]{effectsize::r2_semipartial}.
+Please read the documentation for that function, especially regarding
+the interpretation of the confidence interval. By default, it uses a
+one-sided alternative ("greater"), since the sr2, like the R2, cannot
+be negative, with the upper bound fixed to 1.
 }
 \examples{
 # Make and format model

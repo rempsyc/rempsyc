@@ -1,18 +1,17 @@
 # Development objectives (to-do list)
 
 -   Make new vignette for featured elsewhere
+-   `nice_mod` et al.: use `nice_lm` internally to reduce code redundancy
 -   Reduce dependencies to make the package more lightweight
 -   `plot_outliers`: add to assumptions vignette
 -   all `lm` functions
-    -   Correct bug with sr2 and factors in lm models
-    -   Add 95% confidence interval for sr2
+    -   Correct bug with factors in lm models (use data matrix as in easystats?)
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
 -   `nice_table`
     -   For `footnote` argument: fix extra empty row at the end. Also change it for `note`?
-    -   Merge cells for dependent variable when it is repeating
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
 -   `nice_lm_slopes`
     -   Support second moderator
