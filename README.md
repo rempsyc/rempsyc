@@ -156,13 +156,13 @@ contrasts
 #> 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1421392  5.9566106
-#> 2  0.7116579  2.4996346
-#> 3  1.0645301  4.0200497
-#> 4 -5.0082944 -2.4384693
-#> 5 -3.7742297 -1.3928240
-#> 6 -1.8706259 -0.5231478
+#>     CI_lower  CI_upper
+#> 1  2.1105071  5.589077
+#> 2  0.6819338  2.354933
+#> 3  1.0237180  3.901613
+#> 4 -4.9717766 -2.470887
+#> 5 -3.9551999 -1.433502
+#> 6 -1.7693800 -0.494110
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -763,6 +763,3 @@ automatically, see my other package, `lavaanExtra`.
 
 Thank you for your support. You can support me and this package here:
 <https://github.com/sponsors/rempsyc>
-
-Mastodon:
-<a rel="me" href="https://mastodon.world/@rempsyc">Mastodon</a>
