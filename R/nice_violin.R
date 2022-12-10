@@ -217,10 +217,16 @@ nice_violin <- function(data,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3) {
   rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
+
+  var_message <- "' variable does not seem to exist in this data set... Typo?"
+
+  if (!response %in% names(data)) stop(paste0("The '", response, var_message))
+
   if (missing(group)) {
     group <- "All data"
     data[[group]] <- group
   } else {
+    if (!group %in% names(data)) stop(paste0("The '", group, var_message))
     data[[group]] <- as.factor(data[[group]])
   }
 
@@ -287,7 +293,7 @@ nice_violin <- function(data,
       ymax = dataSummary[, 6]
     ),
     color = "black",
-    linewidth = 1,
+    size = 1,
     width = CIcap.width,
     data = dataSummary
     )

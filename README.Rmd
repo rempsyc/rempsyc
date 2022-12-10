@@ -159,10 +159,11 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/contrasts
 Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
 ```{r nice_mod, warning = FALSE, message = FALSE}
-nice_mod(data = mtcars,
-         response = c("mpg", "disp"),
-         predictor = "gear",
-         moderator = "wt") -> moderations
+moderations <- nice_mod(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  predictor = "gear",
+  moderator = "wt")
 moderations
 
 # Format moderation results
@@ -181,9 +182,15 @@ For more complicated models not supported by `nice_mod`, one can define the mode
 
 model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
 model2 <- lm(qsec ~ disp + drat * carb, mtcars)
-nice_lm(list(model1, model2))
+mods <- nice_lm(list(model1, model2))
+mods
+
+# Format moderation results
+nice_table(mods, highlight = TRUE)
 
 ```
+
+<img src="man/figures/README-nice_lm-1.png" width="70%" />
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 
@@ -192,10 +199,11 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.
 
 ```{r nice_slopes, warning = FALSE, message = FALSE}
-nice_slopes(data = mtcars,
-            response = c("mpg", "disp"),
-            predictor = "gear",
-            moderator = "wt") -> simple.slopes
+simple.slopes <- nice_slopes(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  predictor = "gear",
+  moderator = "wt")
 simple.slopes
 
 # Format simple slopes results
@@ -214,8 +222,14 @@ For more complicated models not supported by `nice_slopes`, one can define the m
 model1 <- lm(mpg ~ gear * wt, mtcars)
 model2 <- lm(disp ~ gear * wt, mtcars)
 my.models <- list(model1, model2)
-nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+simple.slopes <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+simple.slopes
+
+# Format simple slopes results
+nice_table(simple.slopes)
 ```
+
+<img src="man/figures/README-nice_lm_slopes-1.png" width="80%" />
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/moderation
 

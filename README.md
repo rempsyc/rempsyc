@@ -156,13 +156,13 @@ contrasts
 #> 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower  CI_upper
-#> 1  2.1105071  5.589077
-#> 2  0.6819338  2.354933
-#> 3  1.0237180  3.901613
-#> 4 -4.9717766 -2.470887
-#> 5 -3.9551999 -1.433502
-#> 6 -1.7693800 -0.494110
+#>     CI_lower   CI_upper
+#> 1  2.1387445  5.8738756
+#> 2  0.7376438  2.3599802
+#> 3  1.0945374  4.0864983
+#> 4 -5.1153824 -2.5097344
+#> 5 -3.7773298 -1.4532430
+#> 6 -1.8033008 -0.4682493
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -179,10 +179,11 @@ publication-ready format. Supports multiple dependent variables and
 covariates at once.
 
 ``` r
-nice_mod(data = mtcars,
-         response = c("mpg", "disp"),
-         predictor = "gear",
-         moderator = "wt") -> moderations
+moderations <- nice_mod(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  predictor = "gear",
+  moderator = "wt")
 moderations
 #>   Model Number Dependent Variable Predictor df          b          t          p
 #> 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275
@@ -217,7 +218,8 @@ Supports multiple `lm` models as well.
 
 model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
 model2 <- lm(qsec ~ disp + drat * carb, mtcars)
-nice_lm(list(model1, model2))
+mods <- nice_lm(list(model1, model2))
+mods
 #>   Model Number Dependent Variable Predictor df            b          t
 #> 1            1                mpg       cyl 27 -0.365239089 -0.7180977
 #> 2            1                mpg        wt 27 -7.627489287 -5.0146028
@@ -236,7 +238,12 @@ nice_lm(list(model1, model2))
 #> 6 0.84539274511 0.0006984424 0.0000000000 0.01347203
 #> 7 0.47895897531 0.0092872897 0.0000000000 0.05587351
 #> 8 0.28857203297 0.0211165564 0.0000000000 0.09136014
+
+# Format moderation results
+nice_table(mods, highlight = TRUE)
 ```
+
+<img src="man/figures/README-nice_lm-1.png" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -247,10 +254,11 @@ and format in publication-ready format. Supports multiple dependent
 variables and covariates at once.
 
 ``` r
-nice_slopes(data = mtcars,
-            response = c("mpg", "disp"),
-            predictor = "gear",
-            moderator = "wt") -> simple.slopes
+simple.slopes <- nice_slopes(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  predictor = "gear",
+  moderator = "wt")
 simple.slopes
 #>   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t
 #> 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560
@@ -287,7 +295,8 @@ can change).
 model1 <- lm(mpg ~ gear * wt, mtcars)
 model2 <- lm(disp ~ gear * wt, mtcars)
 my.models <- list(model1, model2)
-nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+simple.slopes <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+simple.slopes
 #>   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t
 #> 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560
 #> 2            1                mpg      gear (MEAN-wt) 28  5.615951 1.9437108
@@ -302,7 +311,12 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 #> 4 0.51118526 0.003234637        0 0.02113980
 #> 5 0.54535707 0.002737218        0 0.01919662
 #> 6 0.61629796 0.001875579        0 0.01548357
+
+# Format simple slopes results
+nice_table(simple.slopes)
 ```
+
+<img src="man/figures/README-nice_lm_slopes-1.png" width="80%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 

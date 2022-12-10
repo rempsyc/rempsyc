@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Upcoming!
 
+## rempsyc 0.1.0.6
+* `nice_violin` now provides more informative error messages if the response or group variables are mispelled.
+
 ## rempsyc 0.1.0.5
 * `nice_lm`, `nice_mod`, `nice_lm_slopes`, and `nice_slopes` now use "two.sided" as alternative for the sr2 effect size confidence interval, to facilitate interpretation and in accordance with current norms in psychology.
 
