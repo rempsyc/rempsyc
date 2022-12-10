@@ -30,7 +30,7 @@ plot_outliers(
 \item{response}{The dependent variable to be plotted.}
 
 \item{method}{Method to identify outliers, either (e.g., 3)
-median absolute deviations (default) or standard deviations.}
+median absolute deviations ("mad", default) or standard deviations ("sd").}
 
 \item{criteria}{How many MADs (or standard deviations) to use as
 threshold (default is 3).}

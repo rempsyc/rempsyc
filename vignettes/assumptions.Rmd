@@ -171,6 +171,44 @@ nice_normality(data = iris,
                title = "Density (Sepal Length)")
 ```
 
+## Outliers
+
+To check outliers for categorical predictors, we can check for each group whether any observations is greater than 3 units (either standard deviations, SDs, or median absolute deviations, MADs).
+
+### Make the basic plot
+
+```{r}
+plot_outliers(
+  airquality,
+  group = "Month",
+  response = "Ozone")
+```
+
+Be aware that checking outliers by group and not by group will yield different results, e.g.,:
+
+```{r}
+plot_outliers(
+  airquality,
+  response = "Ozone")
+```
+
+### Further customization
+
+Change (or reorder) colours, y-axis title, or names of groups.
+
+```{r}
+plot_outliers(
+  airquality,
+  group = "Month",
+  response = "Ozone",
+  method = "sd",
+  criteria = 3.29,
+  colours = c("white", "black", "purple", "grey", "pink"),
+  ytitle = "Ozone",
+  xtitle = "Month of the Year")
+```
+
+
 ## Homoscedasticity (equality of variance)
 
 To check homoscedasticity (equality of variance) for categorical predictors, we can check the variance within each group. We can use a rule of thumb that the variance of one group should not be four times that of another group. We can check that with this function which makes a table.

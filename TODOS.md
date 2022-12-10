@@ -1,7 +1,6 @@
 # Development objectives (to-do list)
 
 -   Make new vignette for featured elsewhere
--   `plot_outliers`: add to assumptions vignette
 -   all `lm` functions
     -   Correct bug with factors in lm models (use data matrix as in easystats?)
 -   `nice_t_test`

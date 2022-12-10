@@ -9,7 +9,7 @@
 #' @param group The group by which to plot the variable.
 #' @param response The dependent variable to be plotted.
 #' @param method Method to identify outliers, either (e.g., 3)
-#' median absolute deviations (default) or standard deviations.
+#' median absolute deviations ("mad", default) or standard deviations ("sd").
 #' @param criteria How many MADs (or standard deviations) to use as
 #' threshold (default is 3).
 #' @param colours Desired colours for the plot, if desired.
