@@ -229,13 +229,13 @@
 <span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937</span></span>
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
-<span><span class="co">#&gt;     CI_lower  CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1105071  5.589077</span></span>
-<span><span class="co">#&gt; 2  0.6819338  2.354933</span></span>
-<span><span class="co">#&gt; 3  1.0237180  3.901613</span></span>
-<span><span class="co">#&gt; 4 -4.9717766 -2.470887</span></span>
-<span><span class="co">#&gt; 5 -3.9551999 -1.433502</span></span>
-<span><span class="co">#&gt; 6 -1.7693800 -0.494110</span></span>
+<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1  2.1387445  5.8738756</span></span>
+<span><span class="co">#&gt; 2  0.7376438  2.3599802</span></span>
+<span><span class="co">#&gt; 3  1.0945374  4.0864983</span></span>
+<span><span class="co">#&gt; 4 -5.1153824 -2.5097344</span></span>
+<span><span class="co">#&gt; 5 -3.7773298 -1.4532430</span></span>
+<span><span class="co">#&gt; 6 -1.8033008 -0.4682493</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -248,10 +248,11 @@
 </h2>
 <p>Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_mod.html">nice_mod</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>         response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
-<span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>         moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">moderations</span></span>
+<code class="sourceCode R"><span><span class="va">moderations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_mod.html">nice_mod</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
 <span><span class="va">moderations</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df          b          t          p</span></span>
 <span><span class="co">#&gt; 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275</span></span>
@@ -282,7 +283,8 @@
 <code class="sourceCode R"><span></span>
 <span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">*</span> <span class="va">carb</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mods</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df            b          t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       cyl 27 -0.365239089 -0.7180977</span></span>
 <span><span class="co">#&gt; 2            1                mpg        wt 27 -7.627489287 -5.0146028</span></span>
@@ -300,7 +302,11 @@
 <span><span class="co">#&gt; 5 0.05861684483 0.0702566891 0.0000000000 0.19796621</span></span>
 <span><span class="co">#&gt; 6 0.84539274511 0.0006984424 0.0000000000 0.01347203</span></span>
 <span><span class="co">#&gt; 7 0.47895897531 0.0092872897 0.0000000000 0.05587351</span></span>
-<span><span class="co">#&gt; 8 0.28857203297 0.0211165564 0.0000000000 0.09136014</span></span></code></pre></div>
+<span><span class="co">#&gt; 8 0.28857203297 0.0211165564 0.0000000000 0.09136014</span></span>
+<span></span>
+<span><span class="co"># Format moderation results</span></span>
+<span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">mods</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-nice_lm-1.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
@@ -309,10 +315,11 @@
 </h2>
 <p>Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_slopes.html">nice_slopes</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>            response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
-<span>            predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>            moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">simple.slopes</span></span>
+<code class="sourceCode R"><span><span class="va">simple.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_slopes.html">nice_slopes</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
 <span><span class="va">simple.slopes</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560</span></span>
@@ -343,7 +350,8 @@
 <code class="sourceCode R"><span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">disp</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">my.models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/nice_lm_slopes.html">nice_lm_slopes</a></span><span class="op">(</span><span class="va">my.models</span>, predictor <span class="op">=</span> <span class="st">"gear"</span>, moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span><span class="va">simple.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_lm_slopes.html">nice_lm_slopes</a></span><span class="op">(</span><span class="va">my.models</span>, predictor <span class="op">=</span> <span class="st">"gear"</span>, moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span><span class="va">simple.slopes</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560</span></span>
 <span><span class="co">#&gt; 2            1                mpg      gear (MEAN-wt) 28  5.615951 1.9437108</span></span>
@@ -357,7 +365,11 @@
 <span><span class="co">#&gt; 3 0.08336403 0.024311231        0 0.07551496</span></span>
 <span><span class="co">#&gt; 4 0.51118526 0.003234637        0 0.02113980</span></span>
 <span><span class="co">#&gt; 5 0.54535707 0.002737218        0 0.01919662</span></span>
-<span><span class="co">#&gt; 6 0.61629796 0.001875579        0 0.01548357</span></span></code></pre></div>
+<span><span class="co">#&gt; 6 0.61629796 0.001875579        0 0.01548357</span></span>
+<span></span>
+<span><span class="co"># Format simple slopes results</span></span>
+<span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-nice_lm_slopes-1.png" width="80%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
