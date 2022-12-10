@@ -1,7 +1,6 @@
 # Development objectives (to-do list)
 
 -   Make new vignette for featured elsewhere
--   Reduce dependencies to make the package more lightweight
 -   `plot_outliers`: add to assumptions vignette
 -   all `lm` functions
     -   Correct bug with factors in lm models (use data matrix as in easystats?)

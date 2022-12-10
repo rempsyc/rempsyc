@@ -86,8 +86,8 @@ assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
 Make nice APA tables easily through a wrapper around the `flextable`
 package with sensical defaults and automatic formatting features.
 
-The tables can be saved with the `save_as_docx` function, and are
-`flextable` objects, and can be modified as such. The function also
+The tables can be saved with the `flextable::save_as_docx` function, and
+are `flextable` objects, and can be modified as such. The function also
 integrates with objects from the `broom` and `report` packages. Full
 tutorial: <https://rempsyc.remi-theriault.com/articles/table>
 
@@ -109,11 +109,11 @@ nice_t_test(data = mtcars,
             response = c("mpg", "disp", "drat", "wt"),
             group = "am") -> t.tests
 t.tests
-#>   Dependent Variable         t       df              p         d   CI_lower
-#> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
-#> 2               disp  4.197727 29.25845 0.000230041299  1.445221  0.6417834
-#> 3               drat -5.646088 27.19780 0.000005266742 -2.003084 -2.8592770
-#> 4                 wt  5.493905 29.23352 0.000006272020  1.892406  1.0300224
+#>   Dependent Variable         t       df            p         d   CI_lower
+#> 1                mpg -3.767123 18.33225 1.373638e-03 -1.477947 -2.2659731
+#> 2               disp  4.197727 29.25845 2.300413e-04  1.445221  0.6417834
+#> 3               drat -5.646088 27.19780 5.266742e-06 -2.003084 -2.8592770
+#> 4                 wt  5.493905 29.23352 6.272020e-06  1.892406  1.0300224
 #>     CI_upper
 #> 1 -0.6705686
 #> 2  2.2295592
@@ -129,7 +129,7 @@ t_table
 
 ``` r
 # Save to word
-save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
+flextable::save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/t-test>
@@ -149,20 +149,20 @@ nice_contrasts(data = mtcars,
                group = "cyl",
                covariates = "hp") -> contrasts
 contrasts
-#>   Dependent Variable Comparison df         t              p        dR
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774
-#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144
-#> 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630
-#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937
-#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753
-#>     CI_lower   CI_upper
-#> 1  2.1387445  5.8738756
-#> 2  0.7376438  2.3599802
-#> 3  1.0945374  4.0864983
-#> 4 -5.1153824 -2.5097344
-#> 5 -3.7773298 -1.4532430
-#> 6 -1.8033008 -0.4682493
+#>   Dependent Variable Comparison df         t            p        dR   CI_lower
+#> 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.031774  2.2006726
+#> 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.245144  0.7081908
+#> 3                mpg      4 - 6 28  3.640418 1.092089e-03  1.786630  1.0516408
+#> 4               disp      4 - 8 28 -6.040561 1.640986e-06 -3.467937 -4.9018649
+#> 5               disp      6 - 8 28 -4.861413 4.051110e-05 -2.427185 -3.8948490
+#> 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.040753 -1.8182612
+#>     CI_upper
+#> 1  6.0131738
+#> 2  2.4393158
+#> 3  3.6939037
+#> 4 -2.4371486
+#> 5 -1.4231764
+#> 6 -0.4930812
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -229,15 +229,15 @@ mods
 #> 6            2               qsec      drat 27  0.227692395  0.1968842
 #> 7            2               qsec      carb 27  1.154106215  0.7179431
 #> 8            2               qsec drat:carb 27 -0.477539959 -1.0825727
-#>               p          sr2     CI_lower   CI_upper
-#> 1 0.47886516037 0.0021596150 0.0000000000 0.01306786
-#> 2 0.00002928375 0.1053130854 0.0089876445 0.20163853
-#> 3 0.00113640283 0.0555024045 0.0005550240 0.11934768
-#> 4 0.00322175341 0.0437733438 0.0004377334 0.09898662
-#> 5 0.05861684483 0.0702566891 0.0000000000 0.19796621
-#> 6 0.84539274511 0.0006984424 0.0000000000 0.01347203
-#> 7 0.47895897531 0.0092872897 0.0000000000 0.05587351
-#> 8 0.28857203297 0.0211165564 0.0000000000 0.09136014
+#>              p          sr2     CI_lower   CI_upper
+#> 1 4.788652e-01 0.0021596150 0.0000000000 0.01306786
+#> 2 2.928375e-05 0.1053130854 0.0089876445 0.20163853
+#> 3 1.136403e-03 0.0555024045 0.0005550240 0.11934768
+#> 4 3.221753e-03 0.0437733438 0.0004377334 0.09898662
+#> 5 5.861684e-02 0.0702566891 0.0000000000 0.19796621
+#> 6 8.453927e-01 0.0006984424 0.0000000000 0.01347203
+#> 7 4.789590e-01 0.0092872897 0.0000000000 0.05587351
+#> 8 2.885720e-01 0.0211165564 0.0000000000 0.09136014
 
 # Format moderation results
 nice_table(mods, highlight = TRUE)
@@ -344,7 +344,6 @@ nice_violin(data = ToothGrowth,
 <img src="man/figures/README-nice_violin-1.png" width="60%" />
 
 ``` r
-
 # Save plot
 ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
                 dpi = 300, path = "D:/R treasures/")

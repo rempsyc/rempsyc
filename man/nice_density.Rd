@@ -84,7 +84,8 @@ nice_density(
   ),
   grid = FALSE,
   shapiro = TRUE,
-  title = "Density (Sepal Length)"
+  title = "Density (Sepal Length)",
+  histogram = TRUE
 )
 
 }

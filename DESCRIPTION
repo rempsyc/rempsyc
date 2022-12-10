@@ -1,7 +1,7 @@
 Package: rempsyc
 Title: Convenience Functions for Psychology
-Version: 0.1.0.5
-Date: 2022-12-06
+Version: 0.1.0.6
+Date: 2022-12-10
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))
@@ -16,15 +16,18 @@ BugReports: https://github.com/rempsyc/rempsyc/issues
 Depends: 
     R (>= 3.6)
 Imports: 
-    methods,
     rlang,
-    dplyr (>= 1.0.4),
-    flextable (>= 0.8.3),
-    effectsize (> 0.8.2),
-    insight (>= 0.18.4),
-    performance (>= 0.10.0)
+    dplyr (>= 1.0.4)
 Suggests: 
+    flextable (>= 0.8.3),
     ggplot2 (>= 3.4.0),
+    effectsize (> 0.8.2),
+    performance (>= 0.10.0),
+    insight (>= 0.18.4),
+    correlation,
+    datawizard (>= 0.5.0),
+    report (>= 0.5.1),
+    see,
     lmtest,
     ggrepel,
     boot,
@@ -32,29 +35,25 @@ Suggests:
     ggsignif,
     qqplotr (>= 0.0.6),
     broom,
-    correlation,
-    datawizard (>= 0.5.0),
     emmeans,
     ggpubr,
     interactions,
-    knitr,
-    markdown,
-    rmarkdown,
-    openxlsx,
     openxlsx2,
     patchwork,
     psych,
-    report (>= 0.5.1),
-    see,
+    VennDiagram,
+    methods,
     testthat (>= 3.0.0),
-    VennDiagram
+    knitr,
+    markdown,
+    rmarkdown
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Remotes: 
   easystats/effectsize,
   aloy/qqplotr

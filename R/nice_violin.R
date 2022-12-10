@@ -216,7 +216,10 @@ nice_violin <- function(data,
                         has.d = FALSE,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3) {
-  rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2"), reason = "for this function.")
+  if (isTRUE(boot)) {
+    rlang::check_installed(c("boot"), reason = "for this feature.")
+  }
 
   var_message <- "' variable does not seem to exist in this data set... Typo?"
 
@@ -293,7 +296,7 @@ nice_violin <- function(data,
       ymax = dataSummary[, 6]
     ),
     color = "black",
-    size = 1,
+    linewidth = 1,
     width = CIcap.width,
     data = dataSummary
     )

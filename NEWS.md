@@ -2,7 +2,8 @@
 * Upcoming!
 
 ## rempsyc 0.1.0.6
-* `nice_violin` now provides more informative error messages if the response or group variables are mispelled.
+* Following `easystats`'s policy of minimal reliance on external dependencies, we attempt to once again change a few more packages from hard to soft dependencies: `flextable`, `effectsize`, `performance`, `insight`, and `methods`. So we are left only with the basic blocks for coding: `dplyr` and `rlang`. For `flextable`, this is a breaking change for saving tables, since we now need to specify `flextable::save_as_docx`. However, this change makes sense because (1) we used `flextable` for only one function, (2) some users rely on `rempsyc` for plots and don't use tables, (3) this is consistent with how we are saving `ggplot2` plots already, and (4) it also gives credit to the `flextable` package, as this is the powerhouse that produces the tables under the hood.
+* `nice_violin` now provides more informative error messages if the response or group variables are misspelled.
 
 ## rempsyc 0.1.0.5
 * `nice_lm`, `nice_mod`, `nice_lm_slopes`, and `nice_slopes` now use "two.sided" as alternative for the sr2 effect size confidence interval, to facilitate interpretation and in accordance with current norms in psychology.

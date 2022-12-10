@@ -103,7 +103,7 @@ invisible(lapply(list(
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 
-The tables can be saved with the `save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://rempsyc.remi-theriault.com/articles/table
+The tables can be saved with the `flextable::save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://rempsyc.remi-theriault.com/articles/table
 
 Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.
 
@@ -128,9 +128,9 @@ t_table
 
 <img src="man/figures/README-nice_t_test-1.png" width="60%" />
 
-```{r table_save, warning = FALSE, message = FALSE}
+```{r table_save, warning = FALSE, message = FALSE, eval = FALSE}
 # Save to word
-save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
+flextable::save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/t-test
@@ -251,10 +251,14 @@ nice_violin(data = ToothGrowth,
             has.d = TRUE,
             d.y = 30)
 
+```
+
+```{r, eval = FALSE}
 # Save plot
 ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
                 dpi = 300, path = "D:/R treasures/")
 ```
+
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/violin
 

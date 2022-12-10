@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
   <a class="nav-link" href="reference/index.html">Functions</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="news/index.html">Changelog</a>
+  <a class="nav-link" href="news/index.html">News</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="TODOS.html">To-dos</a>
@@ -172,7 +172,7 @@
 <code>nice_table</code><a class="anchor" aria-label="anchor" href="#nice_table"></a>
 </h2>
 <p>Make nice APA tables easily through a wrapper around the <code>flextable</code> package with sensical defaults and automatic formatting features.</p>
-<p>The tables can be saved with the <code>save_as_docx</code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
+<p>The tables can be saved with the <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
 <p>Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.</p>
 </div>
 <div class="section level2">
@@ -191,11 +191,11 @@
 <span>            response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"drat"</span>, <span class="st">"wt"</span><span class="op">)</span>,</span>
 <span>            group <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">t.tests</span></span>
 <span><span class="va">t.tests</span></span>
-<span><span class="co">#&gt;   Dependent Variable         t       df              p         d   CI_lower</span></span>
-<span><span class="co">#&gt; 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731</span></span>
-<span><span class="co">#&gt; 2               disp  4.197727 29.25845 0.000230041299  1.445221  0.6417834</span></span>
-<span><span class="co">#&gt; 3               drat -5.646088 27.19780 0.000005266742 -2.003084 -2.8592770</span></span>
-<span><span class="co">#&gt; 4                 wt  5.493905 29.23352 0.000006272020  1.892406  1.0300224</span></span>
+<span><span class="co">#&gt;   Dependent Variable         t       df            p         d   CI_lower</span></span>
+<span><span class="co">#&gt; 1                mpg -3.767123 18.33225 1.373638e-03 -1.477947 -2.2659731</span></span>
+<span><span class="co">#&gt; 2               disp  4.197727 29.25845 2.300413e-04  1.445221  0.6417834</span></span>
+<span><span class="co">#&gt; 3               drat -5.646088 27.19780 5.266742e-06 -2.003084 -2.8592770</span></span>
+<span><span class="co">#&gt; 4                 wt  5.493905 29.23352 6.272020e-06  1.892406  1.0300224</span></span>
 <span><span class="co">#&gt;     CI_upper</span></span>
 <span><span class="co">#&gt; 1 -0.6705686</span></span>
 <span><span class="co">#&gt; 2  2.2295592</span></span>
@@ -208,7 +208,7 @@
 <p><img src="reference/figures/README-nice_t_test-1.png" width="60%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save to word</span></span>
-<span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/t-test" class="uri">https://rempsyc.remi-theriault.com/articles/t-test</a></p>
 </div>
 <div class="section level2">
@@ -222,20 +222,20 @@
 <span>               group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
 <span>               covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">contrasts</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p        dR</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.031774</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.245144</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  1.786630</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -3.467937</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -2.427185</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.040753</span></span>
-<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.1445588  5.9604661</span></span>
-<span><span class="co">#&gt; 2  0.7080337  2.4180893</span></span>
-<span><span class="co">#&gt; 3  1.0323844  3.6036727</span></span>
-<span><span class="co">#&gt; 4 -5.0429761 -2.5358454</span></span>
-<span><span class="co">#&gt; 5 -3.8549009 -1.4083974</span></span>
-<span><span class="co">#&gt; 6 -1.8096884 -0.4977134</span></span>
+<span><span class="co">#&gt;   Dependent Variable Comparison df         t            p        dR   CI_lower</span></span>
+<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.031774  2.2006726</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.245144  0.7081908</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 1.092089e-03  1.786630  1.0516408</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 1.640986e-06 -3.467937 -4.9018649</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 4.051110e-05 -2.427185 -3.8948490</span></span>
+<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.040753 -1.8182612</span></span>
+<span><span class="co">#&gt;     CI_upper</span></span>
+<span><span class="co">#&gt; 1  6.0131738</span></span>
+<span><span class="co">#&gt; 2  2.4393158</span></span>
+<span><span class="co">#&gt; 3  3.6939037</span></span>
+<span><span class="co">#&gt; 4 -2.4371486</span></span>
+<span><span class="co">#&gt; 5 -1.4231764</span></span>
+<span><span class="co">#&gt; 6 -0.4930812</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -248,10 +248,11 @@
 </h2>
 <p>Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_mod.html">nice_mod</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>         response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
-<span>         predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>         moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">moderations</span></span>
+<code class="sourceCode R"><span><span class="va">moderations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_mod.html">nice_mod</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
 <span><span class="va">moderations</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df          b          t          p</span></span>
 <span><span class="co">#&gt; 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275</span></span>
@@ -260,13 +261,13 @@
 <span><span class="co">#&gt; 4            2               disp      gear 28  35.797623  0.6121820 0.54535707</span></span>
 <span><span class="co">#&gt; 5            2               disp        wt 28 160.930043  2.4364098 0.02144867</span></span>
 <span><span class="co">#&gt; 6            2               disp   gear:wt 28 -15.037022 -0.8140664 0.42247646</span></span>
-<span><span class="co">#&gt;           sr2</span></span>
-<span><span class="co">#&gt; 1 0.028488305</span></span>
-<span><span class="co">#&gt; 2 0.001395217</span></span>
-<span><span class="co">#&gt; 3 0.035022025</span></span>
-<span><span class="co">#&gt; 4 0.002737218</span></span>
-<span><span class="co">#&gt; 5 0.043355972</span></span>
-<span><span class="co">#&gt; 6 0.004840251</span></span>
+<span><span class="co">#&gt;           sr2     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1 0.028488305 0.0000000000 0.08418650</span></span>
+<span><span class="co">#&gt; 2 0.001395217 0.0000000000 0.01331121</span></span>
+<span><span class="co">#&gt; 3 0.035022025 0.0003502202 0.09723370</span></span>
+<span><span class="co">#&gt; 4 0.002737218 0.0000000000 0.01919662</span></span>
+<span><span class="co">#&gt; 5 0.043355972 0.0004335597 0.11228977</span></span>
+<span><span class="co">#&gt; 6 0.004840251 0.0000000000 0.02679265</span></span>
 <span></span>
 <span><span class="co"># Format moderation results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">moderations</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -282,7 +283,8 @@
 <code class="sourceCode R"><span></span>
 <span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">*</span> <span class="va">carb</span>, <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mods</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df            b          t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       cyl 27 -0.365239089 -0.7180977</span></span>
 <span><span class="co">#&gt; 2            1                mpg        wt 27 -7.627489287 -5.0146028</span></span>
@@ -292,15 +294,19 @@
 <span><span class="co">#&gt; 6            2               qsec      drat 27  0.227692395  0.1968842</span></span>
 <span><span class="co">#&gt; 7            2               qsec      carb 27  1.154106215  0.7179431</span></span>
 <span><span class="co">#&gt; 8            2               qsec drat:carb 27 -0.477539959 -1.0825727</span></span>
-<span><span class="co">#&gt;               p          sr2</span></span>
-<span><span class="co">#&gt; 1 0.47886516037 0.0021596150</span></span>
-<span><span class="co">#&gt; 2 0.00002928375 0.1053130854</span></span>
-<span><span class="co">#&gt; 3 0.00113640283 0.0555024045</span></span>
-<span><span class="co">#&gt; 4 0.00322175341 0.0437733438</span></span>
-<span><span class="co">#&gt; 5 0.05861684483 0.0702566891</span></span>
-<span><span class="co">#&gt; 6 0.84539274511 0.0006984424</span></span>
-<span><span class="co">#&gt; 7 0.47895897531 0.0092872897</span></span>
-<span><span class="co">#&gt; 8 0.28857203297 0.0211165564</span></span></code></pre></div>
+<span><span class="co">#&gt;              p          sr2     CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1 4.788652e-01 0.0021596150 0.0000000000 0.01306786</span></span>
+<span><span class="co">#&gt; 2 2.928375e-05 0.1053130854 0.0089876445 0.20163853</span></span>
+<span><span class="co">#&gt; 3 1.136403e-03 0.0555024045 0.0005550240 0.11934768</span></span>
+<span><span class="co">#&gt; 4 3.221753e-03 0.0437733438 0.0004377334 0.09898662</span></span>
+<span><span class="co">#&gt; 5 5.861684e-02 0.0702566891 0.0000000000 0.19796621</span></span>
+<span><span class="co">#&gt; 6 8.453927e-01 0.0006984424 0.0000000000 0.01347203</span></span>
+<span><span class="co">#&gt; 7 4.789590e-01 0.0092872897 0.0000000000 0.05587351</span></span>
+<span><span class="co">#&gt; 8 2.885720e-01 0.0211165564 0.0000000000 0.09136014</span></span>
+<span></span>
+<span><span class="co"># Format moderation results</span></span>
+<span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">mods</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-nice_lm-1.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
@@ -309,10 +315,11 @@
 </h2>
 <p>Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_slopes.html">nice_slopes</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>            response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
-<span>            predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>            moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">simple.slopes</span></span>
+<code class="sourceCode R"><span><span class="va">simple.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_slopes.html">nice_slopes</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
 <span><span class="va">simple.slopes</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560</span></span>
@@ -321,13 +328,13 @@
 <span><span class="co">#&gt; 4            2               disp       gear (LOW-wt) 28 50.510710 0.6654856</span></span>
 <span><span class="co">#&gt; 5            2               disp      gear (MEAN-wt) 28 35.797623 0.6121820</span></span>
 <span><span class="co">#&gt; 6            2               disp      gear (HIGH-wt) 28 21.084536 0.5067498</span></span>
-<span><span class="co">#&gt;            p         sr2</span></span>
-<span><span class="co">#&gt; 1 0.05408136 0.030484485</span></span>
-<span><span class="co">#&gt; 2 0.06204275 0.028488305</span></span>
-<span><span class="co">#&gt; 3 0.08336403 0.024311231</span></span>
-<span><span class="co">#&gt; 4 0.51118526 0.003234637</span></span>
-<span><span class="co">#&gt; 5 0.54535707 0.002737218</span></span>
-<span><span class="co">#&gt; 6 0.61629796 0.001875579</span></span>
+<span><span class="co">#&gt;            p         sr2 CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1 0.05408136 0.030484485        0 0.08823243</span></span>
+<span><span class="co">#&gt; 2 0.06204275 0.028488305        0 0.08418650</span></span>
+<span><span class="co">#&gt; 3 0.08336403 0.024311231        0 0.07551496</span></span>
+<span><span class="co">#&gt; 4 0.51118526 0.003234637        0 0.02113980</span></span>
+<span><span class="co">#&gt; 5 0.54535707 0.002737218        0 0.01919662</span></span>
+<span><span class="co">#&gt; 6 0.61629796 0.001875579        0 0.01548357</span></span>
 <span></span>
 <span><span class="co"># Format simple slopes results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
@@ -343,7 +350,8 @@
 <code class="sourceCode R"><span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">disp</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">my.models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/nice_lm_slopes.html">nice_lm_slopes</a></span><span class="op">(</span><span class="va">my.models</span>, predictor <span class="op">=</span> <span class="st">"gear"</span>, moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span><span class="va">simple.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_lm_slopes.html">nice_lm_slopes</a></span><span class="op">(</span><span class="va">my.models</span>, predictor <span class="op">=</span> <span class="st">"gear"</span>, moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span><span class="va">simple.slopes</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560</span></span>
 <span><span class="co">#&gt; 2            1                mpg      gear (MEAN-wt) 28  5.615951 1.9437108</span></span>
@@ -351,13 +359,17 @@
 <span><span class="co">#&gt; 4            2               disp       gear (LOW-wt) 28 50.510710 0.6654856</span></span>
 <span><span class="co">#&gt; 5            2               disp      gear (MEAN-wt) 28 35.797623 0.6121820</span></span>
 <span><span class="co">#&gt; 6            2               disp      gear (HIGH-wt) 28 21.084536 0.5067498</span></span>
-<span><span class="co">#&gt;            p         sr2</span></span>
-<span><span class="co">#&gt; 1 0.05408136 0.030484485</span></span>
-<span><span class="co">#&gt; 2 0.06204275 0.028488305</span></span>
-<span><span class="co">#&gt; 3 0.08336403 0.024311231</span></span>
-<span><span class="co">#&gt; 4 0.51118526 0.003234637</span></span>
-<span><span class="co">#&gt; 5 0.54535707 0.002737218</span></span>
-<span><span class="co">#&gt; 6 0.61629796 0.001875579</span></span></code></pre></div>
+<span><span class="co">#&gt;            p         sr2 CI_lower   CI_upper</span></span>
+<span><span class="co">#&gt; 1 0.05408136 0.030484485        0 0.08823243</span></span>
+<span><span class="co">#&gt; 2 0.06204275 0.028488305        0 0.08418650</span></span>
+<span><span class="co">#&gt; 3 0.08336403 0.024311231        0 0.07551496</span></span>
+<span><span class="co">#&gt; 4 0.51118526 0.003234637        0 0.02113980</span></span>
+<span><span class="co">#&gt; 5 0.54535707 0.002737218        0 0.01919662</span></span>
+<span><span class="co">#&gt; 6 0.61629796 0.001875579        0 0.01548357</span></span>
+<span></span>
+<span><span class="co"># Format simple slopes results</span></span>
+<span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-nice_lm_slopes-1.png" width="80%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/moderation" class="uri">https://rempsyc.remi-theriault.com/articles/moderation</a></p>
 </div>
 <div class="section level2">
@@ -381,8 +393,7 @@
 <span>            d.y <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_violin-1.png" width="60%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Save plot</span></span>
+<code class="sourceCode R"><span><span class="co"># Save plot</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceplot.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, </span>
 <span>                dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/violin" class="uri">https://rempsyc.remi-theriault.com/articles/violin</a></p>

@@ -48,7 +48,8 @@
 #'   ),
 #'   grid = FALSE,
 #'   shapiro = TRUE,
-#'   title = "Density (Sepal Length)"
+#'   title = "Density (Sepal Length)",
+#'   histogram = TRUE
 #' )
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise do
@@ -129,7 +130,7 @@ nice_density <- function(data,
   plot <- ggplot2::ggplot(data, ggplot2::aes_string(x = variable, fill = group)) +
     {
       if (isTRUE(histogram)) {
-        ggplot2::geom_histogram(ggplot2::aes(y = ..density.., alpha = 0.5),
+        ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density), alpha = 0.5),
           colour = "black", breaks = breaks, bins = bins
         )
       }

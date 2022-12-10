@@ -59,7 +59,7 @@
 #' \donttest{
 #' # Save table to word
 #' mypath <- tempfile(fileext = ".docx")
-#' save_as_docx(my_table, path = mypath)
+#' flextable::save_as_docx(my_table, path = mypath)
 #' }
 #'
 #' # Publication-ready tables
@@ -123,13 +123,6 @@
 #' @importFrom dplyr mutate %>% select matches
 #' case_when relocate across contains select_if any_of
 #' last_col
-#' @importFrom flextable "flextable" hline_top hline_bottom
-#' fontsize font align set_table_properties italic
-#' set_formatter colformat_double compose bold bg
-#' as_paragraph as_i as_sub as_sup set_caption
-#' add_footer_lines line_spacing valign separate_header
-#' border add_header_lines autofit fp_border_default hline
-#' merge_v fix_border_issues
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -152,6 +145,8 @@ nice_table <- function(data,
                        title,
                        footnote,
                        separate.header) {
+  rlang::check_installed(c("flextable", "methods"), reason = "for this function.")
+
   dataframe <- data
 
   #   __________________________________
@@ -444,9 +439,9 @@ nice_table <- function(data,
   table <- dataframe %>%
     {
       if (highlight == TRUE || is.numeric(highlight)) {
-        flextable(., col_keys = names(dataframe)[-length(dataframe)])
+        flextable::flextable(., col_keys = names(dataframe)[-length(dataframe)])
       } else {
-        flextable(.)
+        flextable::flextable(.)
       }
     }
 
@@ -457,26 +452,26 @@ nice_table <- function(data,
       any(duplicated(dataframe$`Dependent Variable`))) {
     model.row <- which(!duplicated(dataframe$`Dependent Variable`, fromLast = TRUE))
     table <- table %>%
-      merge_v(j = "Dependent Variable") %>%
-      hline(i = model.row, border = nice.borders)
+      flextable::merge_v(j = "Dependent Variable") %>%
+      flextable::hline(i = model.row, border = nice.borders)
   }
 
   table %>%
-    hline_top(part = "head", border = nice.borders) %>%
-    hline_bottom(part = "head", border = nice.borders) %>%
-    hline_top(part = "body", border = nice.borders) %>%
-    hline_bottom(part = "body", border = nice.borders) %>%
-    align(align = "center", part = "all") %>%
-    valign(valign = "center", part = "all") %>%
-    line_spacing(space = 2, part = "all") %>%
-    fix_border_issues -> table
+    flextable::hline_top(part = "head", border = nice.borders) %>%
+    flextable::hline_bottom(part = "head", border = nice.borders) %>%
+    flextable::hline_top(part = "body", border = nice.borders) %>%
+    flextable::hline_bottom(part = "body", border = nice.borders) %>%
+    flextable::align(align = "center", part = "all") %>%
+    flextable::valign(valign = "center", part = "all") %>%
+    flextable::line_spacing(space = 2, part = "all") %>%
+    flextable::fix_border_issues() -> table
 
   if (!missing(width)) {
     table %>%
-      set_table_properties(layout = "autofit", width = width) -> table
+      flextable::set_table_properties(layout = "autofit", width = width) -> table
   } else {
     table %>%
-      set_table_properties(layout = "autofit") -> table
+      flextable::set_table_properties(layout = "autofit") -> table
   }
 
   if (!missing(footnote)) {
@@ -484,27 +479,27 @@ nice_table <- function(data,
     footnote.list <- as.list(footnote)
 
     table <- table %>%
-      add_footer_lines("") %>%
-      compose(i = 1, j = 1, value = as_paragraph(
-        as_i("Note. "), footnote[[1]]), part = "footer") %>%
-      align(part = "footer", align = "left") %>%
-      add_footer_lines("")
+      flextable::add_footer_lines("") %>%
+      flextable::compose(i = 1, j = 1, value = flextable::as_paragraph(
+        flextable::as_i("Note. "), footnote[[1]]), part = "footer") %>%
+      flextable::align(part = "footer", align = "left") %>%
+      flextable::add_footer_lines("")
 
     if (length(footnote.list) > 1) {
       table <- table %>%
-        add_footer_lines(footnote.list[-1])
+        flextable::add_footer_lines(footnote.list[-1])
     }
   }
 
   # Separate headers
   if (!missing(separate.header)) {
     table <- table %>%
-      separate_header("span-top", split = "[.]")
+      flextable::separate_header("span-top", split = "[.]")
   }
 
   table <- table %>%
-    fontsize(part = "all", size = 12) %>%
-    font(part = "all", fontname = "Times New Roman")
+    flextable::fontsize(part = "all", size = 12) %>%
+    flextable::font(part = "all", fontname = "Times New Roman")
 
   #   ___________________________________
   #   Column formatting              ####
@@ -514,12 +509,12 @@ nice_table <- function(data,
   # Fix header with italics
   if (!missing(italics) & missing(separate.header)) {
     table %>%
-      italic(j = italics, part = "header") -> table
+      flextable::italic(j = italics, part = "header") -> table
   } else if (!missing(italics) & !missing(separate.header)) {
     level.number <- sum(charToRaw(names(
       dataframe[2])) == charToRaw(".")) + 1
     table %>%
-      italic(j = italics, i = level.number, part = "header") -> table
+      flextable::italic(j = italics, i = level.number, part = "header") -> table
   }
 
   # Degrees of freedom
@@ -609,25 +604,25 @@ nice_table <- function(data,
       "rho", "rrb", "chi2", "chi2.df"
     ),
     value = c(
-      '"95% CI (", as_i("b"), ")"',
+      '"95% CI (", flextable::as_i("b"), ")"',
       '"95% CI (", "\u03B2", ")"',
-      '"95% CI (", as_i("t"), ")"',
-      '"95% CI (", as_i("d"), ")"',
-      '"95% CI (", "\u03b7", as_sub("p"), as_sup("2"), ")"',
-      '"95% CI (", "\u03b7", as_sup("2"), ")"',
-      '"95% CI (", as_i("r"), as_i(as_sub("rb")), ")"',
+      '"95% CI (", flextable::as_i("t"), ")"',
+      '"95% CI (", flextable::as_i("d"), ")"',
+      '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"',
+      '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"',
+      '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"',
       '"\u03B2"',
-      '"\u03b7", as_sub("p"), as_sup("2")',
-      '"\u03b7", as_sup("2")',
-      '"\u03b7", as_sub("G"), as_sup("2")',
-      'as_i("d"), as_sub("R")',
-      '"Predictor (+/-1 ", as_i("SD"), ")"',
-      'as_i("M"), as_sub("1"), " - ", as_i("M"), as_sub("2")',
+      '"\u03b7", flextable::as_sub("p"), flextable::as_sup("2")',
+      '"\u03b7", flextable::as_sup("2")',
+      '"\u03b7", flextable::as_sub("G"), flextable::as_sup("2")',
+      'flextable::as_i("d"), flextable::as_sub("R")',
+      '"Predictor (+/-1 ", flextable::as_i("SD"), ")"',
+      'flextable::as_i("M"), flextable::as_sub("1"), " - ", flextable::as_i("M"), flextable::as_sub("2")',
       '"\u03C4"',
       '"\u03C1"',
-      'as_i("r"), as_i(as_sub("rb"))',
-      '"\u03C7", as_sup("2")',
-      '"\u03C7", as_sup("2"), "\u2215", as_i("df")'
+      'flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb"))',
+      '"\u03C7", flextable::as_sup("2")',
+      '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")'
     )
   )
   for (i in seq(nrow(compose.table1))) {
@@ -641,7 +636,7 @@ nice_table <- function(data,
   }
   compose.table2 <- data.frame(
     col = c("R2", "sr2"),
-    value = c('as_i("R"), as_sup("2")', 'as_i("sr"), as_sup("2")')
+    value = c('flextable::as_i("R"), flextable::as_sup("2")', 'flextable::as_i("sr"), flextable::as_sup("2")')
   )
 
   if(!missing(separate.header)) {
@@ -667,11 +662,11 @@ nice_table <- function(data,
   }
   if (!missing(highlight)) {
     table %>%
-      bold(
+      flextable::bold(
         i = ~ signif == TRUE,
         j = table$col_keys
       ) %>%
-      bg(
+      flextable::bg(
         i = ~ signif == TRUE,
         j = table$col_keys,
         bg = "#D9D9D9"
@@ -693,7 +688,7 @@ nice_table <- function(data,
   }
 
   table %>%
-    colformat_double(
+    flextable::colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
              select(-matches(dont.change,
                ignore.case = FALSE
@@ -720,7 +715,7 @@ nice_table <- function(data,
     #                   fun = "format.custom") -> table
     # Error in set_formatter: object 'format.custom' not found
     rExpression <- paste0(
-      "table <- table %>% set_formatter(`",
+      "table <- table %>% flextable::set_formatter(`",
       table$col_keys[col.format.custom], "` = ",
       format.custom, ")"
     )
@@ -731,22 +726,22 @@ nice_table <- function(data,
   #   Final touch up (title) ####
 
   if (!missing(title)) {
-    invisible.borders <- fp_border_default("width" = 0)
+    invisible.borders <- flextable::fp_border_default("width" = 0)
     italic.lvl <- ifelse(length(title) == 1, 1, 2)
     bold.decision <- ifelse(length(title) == 1, FALSE, TRUE)
 
     table <- table %>%
-      add_header_lines(values = title) %>%
-      align(part = "header", i = seq(length(title)), align = "left") %>%
-      hline(part = "header", i = seq_len(length(title) - 1),
+      flextable::add_header_lines(values = title) %>%
+      flextable::align(part = "header", i = seq(length(title)), align = "left") %>%
+      flextable::hline(part = "header", i = seq_len(length(title) - 1),
             border = invisible.borders) %>%
-      hline(part = "header", i = length(title),
+      flextable::hline(part = "header", i = length(title),
             border = nice.borders) %>%
-      hline_top(border = invisible.borders, part = "header") %>%
-      # border(part = "header", i = 1:length(title),
+      flextable::hline_top(border = invisible.borders, part = "header") %>%
+      # flextable::border(part = "header", i = 1:length(title),
       #        border = invisible.borders) %>%
-      italic(part = "header", i = italic.lvl) %>%
-      bold(., part = "header", i = 1, bold = bold.decision)
+      flextable::italic(part = "header", i = italic.lvl) %>%
+      flextable::bold(., part = "header", i = 1, bold = bold.decision)
 
   }
 
@@ -777,13 +772,13 @@ format_CI <- function(dataframe, CI_low_high = c("CI_lower", "CI_upper"),
 format_flex <- function(table, j, digits = 2, value, fun) {
   if (missing(value)) {
     table %>%
-      italic(j = j, part = "header") %>%
-      colformat_double(j = j, big.mark = ",", digits = digits) -> table
+      flextable::italic(j = j, part = "header") %>%
+      flextable::colformat_double(j = j, big.mark = ",", digits = digits) -> table
   }
   if (!missing(value)) {
-    rExpression <- paste0("as_paragraph(", value, ")")
+    rExpression <- paste0("flextable::as_paragraph(", value, ")")
     table %>%
-      compose(
+      flextable::compose(
         i = NULL, j = j, part = "header",
         value = eval(parse(text = rExpression))
       ) -> table
@@ -795,7 +790,7 @@ format_flex <- function(table, j, digits = 2, value, fun) {
   table
 }
 
-parse_formatter <- function(table, call = "table <- table %>% set_formatter",
+parse_formatter <- function(table, call = "table <- table %>% flextable::set_formatter",
                             column, fun) {
   rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
   eval(parse(text = rExpression))

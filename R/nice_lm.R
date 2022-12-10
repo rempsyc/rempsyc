@@ -49,6 +49,7 @@ nice_lm <- function(model,
                     mod.id = TRUE,
                     ci.alternative = "two.sided",
                     ...) {
+  rlang::check_installed("effectsize", reason = "for this function.")
   ifelse(class(model) == "list",
     models.list <- model,
     models.list <- list(model)

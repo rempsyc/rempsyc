@@ -98,7 +98,7 @@ my_table
 \donttest{
 # Save table to word
 mypath <- tempfile(fileext = ".docx")
-save_as_docx(my_table, path = mypath)
+flextable::save_as_docx(my_table, path = mypath)
 }
 
 # Publication-ready tables

@@ -78,8 +78,6 @@
 #' )
 #' # Make sure cases appear in the same order for
 #' # both levels of the grouping factor
-#' @importFrom methods hasArg
-#'
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 #'
@@ -90,19 +88,20 @@ nice_t_test <- function(data,
                         correction = "none",
                         warning = TRUE,
                         ...) {
+  rlang::check_installed(c("effectsize", "methods"), reason = "for this function.")
   args <- list(...)
-  if (hasArg(var.equal)) {
+  if (methods::hasArg(var.equal)) {
     if (args$var.equal == TRUE) message_white("Using Student t-test. \n ")
     if (args$var.equal == FALSE) message_white("Using Welch t-test. \n ")
   }
-  if (hasArg(paired)) {
+  if (methods::hasArg(paired)) {
     paired <- args$paired
     if (paired == TRUE) message_white("Using paired t-test. \n ")
     if (paired == FALSE) message_white("Using independent samples t-test. \n ")
   } else {
     paired <- FALSE
   }
-  if (!hasArg(var.equal) & paired == FALSE & warning == TRUE) {
+  if (!methods::hasArg(var.equal) & paired == FALSE & warning == TRUE) {
     message_white(
       "Using Welch t-test (base R's default; ",
       "cf. https://doi.org/10.5334/irsp.82).
@@ -117,7 +116,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
     message_white("Using one-sample t-test. \n ")
     formulas <- lapply(data[response], as.numeric)
   }
-  if (hasArg(mu)) {
+  if (methods::hasArg(mu)) {
     mu <- args$mu
   } else {
     mu <- 0

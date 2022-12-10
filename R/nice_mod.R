@@ -79,6 +79,7 @@ nice_mod <- function(data,
                      mod.id = TRUE,
                      ci.alternative = "two.sided",
                      ...) {
+  rlang::check_installed("effectsize", reason = "for this function.")
   if (!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {

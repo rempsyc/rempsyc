@@ -18,7 +18,7 @@ object and format for a publication-ready format."><meta property="og:image" con
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@ object and format for a publication-ready format."><meta property="og:image" con
   <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../TODOS.html">To-dos</a>
@@ -100,7 +100,15 @@ object and format for a publication-ready format.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nice_lm_slopes</span><span class="op">(</span><span class="va">model</span>, <span class="va">predictor</span>, <span class="va">moderator</span>, b.label <span class="op">=</span> <span class="st">"b"</span>, mod.id <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nice_lm_slopes</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  <span class="va">predictor</span>,</span>
+<span>  <span class="va">moderator</span>,</span>
+<span>  b.label <span class="op">=</span> <span class="st">"b"</span>,</span>
+<span>  mod.id <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -128,6 +136,12 @@ to the Greek beta symbol in the <code>nice_table</code> function).</p></dd>
 when there is more than one model.</p></dd>
 
 
+<dt>ci.alternative</dt>
+<dd><p>Alternative for the confidence interval
+of the sr2. It can be either "two.sided (the default in this
+package), "greater", or "less".</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments to be passed to the <code>lm</code>
 function for the models.</p></dd>
@@ -140,7 +154,16 @@ function for the models.</p></dd>
 <p>A formatted dataframe of the simple slopes of the specified lm model,
 with DV, levels of IV, degrees of freedom, regression coefficient,
 t-value, p-value, and the effect size, the semi-partial correlation
-squared.</p>
+squared, and its confidence interval.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The effect size, sr2 (semi-partial correlation squared, also
+known as delta R2), is computed through <a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a>.
+Please read the documentation for that function, especially regarding
+the interpretation of the confidence interval. In <code>rempsyc</code>, instead
+of using the default one-sided alternative ("greater"), we use the
+two-sided alternative.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -159,10 +182,10 @@ squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg       gear (LOW-wt) 28 7.540509 2.010656 0.05408136</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      gear (MEAN-wt) 28 5.615951 1.943711 0.06204275</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      gear (HIGH-wt) 28 3.691393 1.795568 0.08336403</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.03048448</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.02848830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.02431123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          sr2 CI_lower   CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.03048448        0 0.08823243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.02848830        0 0.08418650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.02431123        0 0.07551496</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Make and format multiple models</span></span></span>
 <span class="r-in"><span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
@@ -175,13 +198,13 @@ squared.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4            2               qsec       gear (LOW-wt) 28 -1.933515 -0.8847558</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5            2               qsec      gear (MEAN-wt) 28 -1.742853 -1.0351610</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6            2               qsec      gear (HIGH-wt) 28 -1.552191 -1.2956736</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            p        sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.05408136 0.03048448</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.06204275 0.02848830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.08336403 0.02431123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.38382325 0.02280057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.30945179 0.03121151</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.20566798 0.04889790</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            p        sr2 CI_lower   CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.05408136 0.03048448        0 0.08823243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.06204275 0.02848830        0 0.08418650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.08336403 0.02431123        0 0.07551496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.38382325 0.02280057        0 0.11642689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.30945179 0.03121151        0 0.14035904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.20566798 0.04889790        0 0.18442862</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

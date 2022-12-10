@@ -22,6 +22,7 @@
 
 sr2 <- function(model, ...) {
   .Deprecated("effectsize::r2_semipartial")
+  rlang::check_installed(c("performance", "insight"), reason = "for this function.")
   data <- insight::get_data(model)
   response <- insight::find_response(model)
 
@@ -42,7 +43,6 @@ sr2 <- function(model, ...) {
   list.sr2 <- lapply(list.R2, function(x) {
     r_total - x$R2
   })
-
 
   data.frame(
     Parameter = list.parameters,
