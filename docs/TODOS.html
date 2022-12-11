@@ -94,9 +94,11 @@
 
 <div id="development-objectives-to-do-list" class="section level1">
 
-<ul><li>Make new vignette for featured elsewhere</li>
-<li>all <code>lm</code> functions
-<ul><li>Correct bug with factors in <code>lm</code> models (use data matrix as in <code>easystats</code>?)</li>
+<ul><li>
+<code>nice_assumptions</code>: accept list objects!</li>
+<li>
+<code>rcompanion_groupwiseMean</code>
+<ul><li>Rewrite with only the <code>boot</code> package and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by</a></code>?</li>
 </ul></li>
 <li>
 <code>nice_t_test</code>
@@ -105,9 +107,25 @@
 <li>Add option <code>bootstrapped.CI</code> to use a bootstrapped version of the 95% CI</li>
 </ul></li>
 <li>
+<code>nice_varplot</code>
+<ul><li>Add option to standardize or not</li>
+<li>Also add option to annotate Levene test on the plot</li>
+<li>Use violin points, and group-mean centered (but not standardized)</li>
+</ul></li>
+<li>
 <code>nice_table</code>
 <ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li>
 <li>Reduce cyclomatic complexity (swap if statements for functions)</li>
+<li>Remove unwanted italic formatting of headers when using <code>separate.header = TRUE</code>.</li>
+</ul></li>
+<li>
+<code>nice_contrasts</code>
+<ul><li>Need to accommodate: interactions/moderations in the models</li>
+<li>Also add option to specify contrasts manually</li>
+<li>Add option to not use bootstrapping</li>
+</ul></li>
+<li>all <code>lm</code> functions
+<ul><li>Correct bug with factors in <code>lm</code> models (use data matrix as in <code>easystats</code>?)</li>
 </ul></li>
 <li>
 <code>nice_lm_slopes</code>
@@ -116,26 +134,6 @@
 <li>
 <code>nice_slopes</code>
 <ul><li>Add support for multiple moderators (like for <code>nice_mod</code>)</li>
-</ul></li>
-<li>
-<code>rcompanion_groupwiseMean</code>
-<ul><li>Rewrite with only the <code>boot</code> package and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by</a></code>?</li>
-</ul></li>
-<li>
-<code>nice_assumptions</code>: accept list objects!</li>
-<li>
-<code>nice_varplot</code>
-<ul><li>Add option to standardize or not</li>
-<li>Also add option to annotate Levene test on the plot</li>
-<li>Use violin points, and group-mean centered (but not standardized)</li>
-</ul></li>
-<li>
-<code>nice_contrasts</code>
-<ul><li>Need to accommodate: interactions/moderations in the models</li>
-<li>Also add option to specify contrasts manually</li>
-<li>Add option to not use robust Cohen’s <em>d</em>
-</li>
-<li>Add option to not use bootstrapping</li>
 </ul></li>
 <li>All functions
 <ul><li>Check for consistency among argument names like response/variable
