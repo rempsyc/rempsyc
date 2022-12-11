@@ -93,6 +93,5 @@ Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 \keyword{contrasts}
 \keyword{differences}
 \keyword{group}
-\keyword{internal}
 \keyword{pairwise}
 \keyword{planned}

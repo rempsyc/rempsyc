@@ -26,7 +26,7 @@
 #' @param bootstraps The number of bootstraps to use for the confidence interval
 #' @param ... Arguments passed to [bootES::bootES].
 #' @keywords planned contrasts pairwise comparisons
-#' group differences internal
+#' group differences
 #' @return A dataframe, with the selected dependent variable(s), comparisons of
 #'         interest, degrees of freedom, t-values, p-values, robust Cohen's d
 #'         (dR), and the lower and upper 95% confidence intervals of the
