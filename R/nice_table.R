@@ -42,17 +42,20 @@
 #' @param short Logical. Whether to return an abbreviated
 #' version of the tables made by the `report` package.
 #' @param title Optional, to add a table header, if desired.
-#' @param footnote Optional, to add a table footnote (or more), if desired.
+#' @param note Optional, to add one or more table footnote (APA note),
+#' if desired.
 #' @param separate.header Logical, whether to separate headers based
-#'                        on name delimiters (i.e., periods ".").
+#' on name delimiters (i.e., periods ".").
 #'
 #' @keywords APA style table
 #' @return An APA-formatted table of class "flextable" (and "nice_table").
 #' @examples
 #' # Make the basic table
-#' my_table <- nice_table(mtcars[1:3, ],
-#'   title = "Motor Trend Car Road Tests",
-#'   footnote = "1974 Motor Trend US magazine."
+#' my_table <- nice_table(
+#'   mtcars[1:3, ],
+#'   title = c("Table 1", "Motor Trend Car Road Tests"),
+#'   note = c("The data was extracted from the 1974 Motor Trend US magazine.",
+#'            "* p < .05, ** p < .01, *** p < .001")
 #' )
 #' my_table
 #'
@@ -139,211 +142,26 @@ nice_table <- function(data,
                        format.custom,
                        col.format.custom,
                        width = 1,
-                       broom = "",
-                       report = "",
+                       broom = NULL,
+                       report = NULL,
                        short = FALSE,
                        title,
-                       footnote,
+                       note,
                        separate.header) {
-  rlang::check_installed(c("flextable", "methods"), reason = "for this function.")
+  rlang::check_installed(c("flextable", "methods"),
+                         reason = "for this function.")
 
   dataframe <- data
 
   #   __________________________________
   #   Broom integration            ####
 
-  if (!missing(broom)) {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "p.value" ~ "p",
-          . == "conf.low" ~ "CI_lower",
-          . == "conf.high" ~ "CI_upper",
-          . == "statistic" ~ "t",
-          . == "std.error" ~ "SE",
-          . == "parameter" ~ "df",
-          . == "term" ~ "Term",
-          . == "method" ~ "Method",
-          . == "alternative" ~ "Alternative",
-          TRUE ~ .
-        )
-      ) -> dataframe
-  }
-  if (broom == "t.test") {
-    dataframe %>%
-      relocate(estimate, .after = estimate2) %>%
-      rename_with(
-        ~ case_when(
-          . == "estimate" ~ "M1 - M2",
-          . == "estimate1" ~ "Mean 1",
-          . == "estimate2" ~ "Mean 2",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(df, .before = p) %>%
-      relocate(Method:Alternative) -> dataframe
-  }
-  if (broom == "lm") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "estimate" ~ "b",
-          TRUE ~ .
-        )
-      ) -> dataframe
-  }
-  if (broom == "cor.test") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "estimate" ~ "r",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(df, .before = p) %>%
-      relocate(Method:Alternative, .before = r) -> dataframe
-  }
-  if (broom == "wilcox.test") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "t" ~ "W",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(Method:Alternative, .before = W) -> dataframe
-  }
+  dataframe <- prepare_broom(dataframe, broom)
 
   #   __________________________________
   #   Report integration           ####
 
-
-  if (any(class(dataframe) == "report_table")) {
-    # t.test, aov, and wilcox need to be done separately
-    # because they have no model_class attribute
-    if ("Method" %in% names(dataframe)) {
-      if (grepl("t-test", dataframe$Method)) {
-        report <- "t.test"
-      }
-      if (grepl("Wilcox", dataframe$Method)) {
-        report <- "wilcox"
-      }
-    }
-    if ("Sum_Squares" %in% names(dataframe)) {
-      report <- "aov"
-    }
-    if (length(attr(dataframe, "model_class")) > 0) {
-      if ("lm" %in% attr(dataframe, "model_class")) {
-        report <- "lm"
-      }
-      if (grepl("correlation", attr(dataframe, "title"))) {
-        report <- "cor.test"
-      }
-    }
-  }
-  if (!missing(report)) {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "CI_low" ~ "CI_lower",
-          . == "CI_high" ~ "CI_upper",
-          . == "df_error" ~ "df",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(any_of(c("Method", "Alternative"))) %>%
-      select(-any_of("CI")) -> dataframe
-  }
-  if (report == "t.test") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "Cohens_d_CI_low" ~ "d_CI_low",
-          . == "Cohens_d_CI_high" ~ "d_CI_high",
-          . == "Cohens_d" ~ "d",
-          . == "mu" ~ "Mu",
-          TRUE ~ .
-        )
-      ) -> dataframe
-
-    dataframe %>%
-      format_CI(col.name = "95% CI (t)") %>%
-      relocate(`95% CI (t)`, .after = t) -> dataframe
-
-    dataframe %>%
-      format_CI(c("d_CI_low", "d_CI_high"),
-                col.name = "95% CI (d)"
-      ) -> dataframe
-
-    if (short == TRUE) {
-      dataframe <- dataframe %>%
-        select_if(!names(.) %in% c(
-          "Method", "Alternative", "Mean_Group1",
-          "Mean_Group2", "Difference", "95% CI (t)"
-        ))
-    }
-  }
-  if (report == "lm") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "Coefficient" ~ "b",
-          . == "Std_Coefficient" ~ "B",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(Fit, .after = Parameter) -> dataframe
-
-    dataframe %>%
-      format_CI(col.name = "95% CI (b)") %>%
-      relocate(`95% CI (b)`, .after = b) -> dataframe
-
-    dataframe %>%
-      format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
-                col.name = "95% CI (B)"
-      ) -> dataframe
-
-    if (short == TRUE) {
-      dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
-      dataframe <- dataframe[-(
-        which(is.na(dataframe$Parameter)):nrow(dataframe)), ]
-    }
-  }
-  if (report == "aov") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "Eta2" ~ "n2",
-          . == "Eta2_partial" ~ "np2",
-          TRUE ~ .
-        )
-      ) -> dataframe
-    if ("Eta2_CI_low" %in% names(dataframe)) {
-      dataframe %>%
-        format_CI(c("Eta2_CI_low", "Eta2_CI_high"),
-                  col.name = "95% CI (n2)"
-        ) -> dataframe
-    }
-    if ("Eta2_partial_CI_low" %in% names(dataframe)) {
-      dataframe %>%
-        format_CI(c("Eta2_partial_CI_low", "Eta2_partial_CI_high"),
-                  col.name = "95% CI (np2)"
-        ) -> dataframe
-    }
-  }
-  if (report == "wilcox") {
-    dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "r_rank_biserial" ~ "rrb",
-          TRUE ~ .
-        )
-      ) -> dataframe
-    dataframe %>%
-      format_CI(c("rank_biserial_CI_low", "rank_biserial_CI_high"),
-                col.name = "95% CI (rrb)"
-      ) -> dataframe
-  }
+  dataframe <- prepare_report(dataframe, report, short)
 
   #   _________________________________
   #   Formatting                   ####
@@ -358,14 +176,281 @@ nice_table <- function(data,
     unique.pattern <- length(sh.pattern)
   }
 
+  dataframe <- prepare_flextable(
+    dataframe, separate.header, col.format.ci, highlight,
+    sh.pattern, unique.pattern)
+
+  #   __________________________________
+  #   Flextable                     ####
+
+  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
+
+  table <- create_flextable(dataframe, highlight, width, note,
+                            separate.header, nice.borders)
+
+  #   ___________________________________
+  #   Column formatting              ####
+
+  table <- format_columns(dataframe, table, italics, separate.header,
+                          highlight, sh.pattern, unique.pattern)
+
+  #   _____________________________________________
+  #   Extra features                           ####
+
+  table <- beautify_flextable(
+    dataframe, table, separate.header, col.format.p, col.format.r,
+    format.custom, col.format.custom, sh.pattern, unique.pattern)
+
+  #   ___________________________
+  #   Final touch up (title) ####
+
+  table <- finalize_table(table, title, nice.borders)
+
+  class(table) <- c("nice_table", class(table))
+
+  table
+}
+
+#   ____________________________________________________________________________
+#   Other functions                                                         ####
+
+# format_CI
+format_CI <- function(dataframe, CI_low_high = c("CI_lower", "CI_upper"),
+                      col.name = "95% CI") {
+  dataframe %>%
+    mutate(across(all_of(CI_low_high), function(x) {
+      x %>%
+        as.numeric() %>%
+        round(2) %>%
+        formatC(2, format = "f")
+    })) %>%
+    mutate(!!col.name := paste0(
+      "[", .[[CI_low_high[1]]],
+      ", ", .[[CI_low_high[2]]], "]"
+    )) %>%
+    select(-all_of(CI_low_high))
+}
+
+# format_flex
+format_flex <- function(table, j, digits = 2, value, fun) {
+  if (missing(value)) {
+    table <- table %>%
+      flextable::italic(j = j, part = "header") %>%
+      flextable::colformat_double(j = j, big.mark = ",", digits = digits)
+  } else {
+    rExpression <- paste0("flextable::as_paragraph(", value, ")")
+    table <- table %>%
+      flextable::compose(
+        i = NULL, j = j, part = "header",
+        value = eval(parse(text = rExpression))
+      )
+  }
+  if (!missing(fun)) {
+    table <- table %>%
+      parse_formatter(column = j, fun = fun)
+  }
+  table
+}
+
+# parse_formatter
+parse_formatter <- function(
+    table,
+    call = "table <- table %>% flextable::set_formatter",
+    column, fun) {
+  rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
+  eval(parse(text = rExpression))
+}
+
+# prepare_broom
+prepare_broom <- function(dataframe, broom)  {
+  if (!is.null(broom)) {
+    dataframe <- dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "p.value" ~ "p",
+          . == "conf.low" ~ "CI_lower",
+          . == "conf.high" ~ "CI_upper",
+          . == "statistic" ~ "t",
+          . == "std.error" ~ "SE",
+          . == "parameter" ~ "df",
+          . == "term" ~ "Term",
+          . == "method" ~ "Method",
+          . == "alternative" ~ "Alternative",
+          TRUE ~ .
+        )
+      )
+    if (broom == "t.test") {
+      dataframe <- dataframe %>%
+        relocate(estimate, .after = estimate2) %>%
+        rename_with(
+          ~ case_when(
+            . == "estimate" ~ "M1 - M2",
+            . == "estimate1" ~ "Mean 1",
+            . == "estimate2" ~ "Mean 2",
+            TRUE ~ .
+          )
+        ) %>%
+        relocate(df, .before = p) %>%
+        relocate(Method:Alternative)
+    } else if (broom == "lm") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "estimate" ~ "b",
+            TRUE ~ .
+          )
+        )
+    } else if (broom == "cor.test") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "estimate" ~ "r",
+            TRUE ~ .
+          )
+        ) %>%
+        relocate(df, .before = p) %>%
+        relocate(Method:Alternative, .before = r)
+    } else if (broom == "wilcox.test") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "t" ~ "W",
+            TRUE ~ .
+          )
+        ) %>%
+        relocate(Method:Alternative, .before = W)
+    }
+  }
+  dataframe
+}
+
+# prepare_report
+prepare_report <- function(dataframe, report, short)  {
+  if (!is.null(report) || any(class(dataframe) == "report_table")) {
+    # t.test, aov, and wilcox need to be done separately
+    # because they have no model_class attribute
+    if ("Method" %in% names(dataframe)) {
+      if (grepl("t-test", dataframe$Method)) {
+        report <- "t.test"
+      } else if (grepl("Wilcox", dataframe$Method)) {
+        report <- "wilcox"
+      }
+    } else if ("Sum_Squares" %in% names(dataframe)) {
+      report <- "aov"
+    } else if (length(attr(dataframe, "model_class")) > 0) {
+      if ("lm" %in% attr(dataframe, "model_class")) {
+        report <- "lm"
+      } else if (grepl("correlation", attr(dataframe, "title"))) {
+        report <- "cor.test"
+      }
+    }
+    dataframe <- dataframe %>%
+      rename_with(
+        ~ case_when(
+          . == "CI_low" ~ "CI_lower",
+          . == "CI_high" ~ "CI_upper",
+          . == "df_error" ~ "df",
+          TRUE ~ .
+        )
+      ) %>%
+      relocate(any_of(c("Method", "Alternative"))) %>%
+      select(-any_of("CI"))
+    if (report == "t.test") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "Cohens_d_CI_low" ~ "d_CI_low",
+            . == "Cohens_d_CI_high" ~ "d_CI_high",
+            . == "Cohens_d" ~ "d",
+            . == "mu" ~ "Mu",
+            TRUE ~ .
+          )
+        )
+      dataframe <- dataframe %>%
+        format_CI(col.name = "95% CI (t)") %>%
+        relocate(`95% CI (t)`, .after = t)
+
+      dataframe <- dataframe %>%
+        format_CI(c("d_CI_low", "d_CI_high"),
+                  col.name = "95% CI (d)"
+        )
+      if (short == TRUE) {
+        dataframe <- dataframe %>%
+          select_if(!names(.) %in% c(
+            "Method", "Alternative", "Mean_Group1",
+            "Mean_Group2", "Difference", "95% CI (t)"
+          ))
+      }
+    } else if (report == "lm") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "Coefficient" ~ "b",
+            . == "Std_Coefficient" ~ "B",
+            TRUE ~ .
+          )
+        ) %>%
+        relocate(Fit, .after = Parameter)
+      dataframe <- dataframe %>%
+        format_CI(col.name = "95% CI (b)") %>%
+        relocate(`95% CI (b)`, .after = b)
+
+      dataframe <- dataframe %>%
+        format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
+                  col.name = "95% CI (B)"
+        )
+      if (short == TRUE) {
+        dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
+        dataframe <- dataframe[-(
+          which(is.na(dataframe$Parameter)):nrow(dataframe)), ]
+      }
+    } else if (report == "aov") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "Eta2" ~ "n2",
+            . == "Eta2_partial" ~ "np2",
+            TRUE ~ .
+          )
+        )
+      if ("Eta2_CI_low" %in% names(dataframe)) {
+        dataframe <- dataframe %>%
+          format_CI(c("Eta2_CI_low", "Eta2_CI_high"),
+                    col.name = "95% CI (n2)"
+          )
+      }
+      if ("Eta2_partial_CI_low" %in% names(dataframe)) {
+        dataframe <- dataframe %>%
+          format_CI(c("Eta2_partial_CI_low", "Eta2_partial_CI_high"),
+                    col.name = "95% CI (np2)"
+          )
+      }
+    } else if (report == "wilcox") {
+      dataframe <- dataframe %>%
+        rename_with(
+          ~ case_when(
+            . == "r_rank_biserial" ~ "rrb",
+            TRUE ~ .
+          )
+        )
+      dataframe <- dataframe %>%
+        format_CI(c("rank_biserial_CI_low", "rank_biserial_CI_high"),
+                  col.name = "95% CI (rrb)"
+        )
+    }
+  }
+  dataframe
+}
+
+# prepare_flextable
+prepare_flextable <- function(dataframe, separate.header, col.format.ci,
+                              highlight, sh.pattern, unique.pattern) {
   if (!missing(col.format.ci)) {
     if(!methods::is(col.format.ci, "list")) {
       col.format.ci <- list(col.format.ci)
     }
     for (i in col.format.ci) {
       ci.name <- paste0(sh.pattern[i], "95% CI")
-      # ci.pattern <- gsub("\\..*", ".", i)[1]
-      # ci.name <- paste0(ci.pattern, "95% CI")
       dataframe <- format_CI(
         dataframe, i, col.name =
           ci.name) %>%
@@ -374,11 +459,9 @@ nice_table <- function(data,
             select(last_col()) %>% names)
     }
   }
-
   if ("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
   }
-
   if(!missing(separate.header)) {
     CI_lower.sh <- paste0(sh.pattern, rep(
       "CI_lower", each = unique.pattern))
@@ -386,9 +469,7 @@ nice_table <- function(data,
       "CI_upper", each = unique.pattern))
     CI.df <- data.frame(CI_lower.sh, CI_upper.sh)
     names(CI.df) <- NULL
-
     if (any(unlist(CI.df) %in% names(dataframe))) {
-
       for (i in seq(nrow(CI.df))) {
         ci.name <- paste0(sh.pattern[i], "95% CI")
         dataframe <- format_CI(
@@ -401,62 +482,57 @@ nice_table <- function(data,
       }
     }
   }
-
-  dataframe %>%
+  dataframe <- dataframe %>%
     mutate(across(contains("95% CI"), ~ ifelse(
       .x == "[ NA,  NA]", "", .x
-    ))) -> dataframe
-
-  if (highlight == TRUE) {
-    dataframe %>%
-      mutate(signif = ifelse(p < .05, TRUE, FALSE)) -> dataframe
+    )))
+  if ("p" %in% names(dataframe) && isTRUE(highlight) ||
+      is.numeric(highlight)) {
+    highlight <- ifelse(isTRUE(highlight), .05, highlight)
+    dataframe <- dataframe %>%
+      mutate(signif = ifelse(p < highlight, TRUE, FALSE))
   }
-  if (is.numeric(highlight)) {
-    dataframe %>%
-      mutate(signif = ifelse(p < highlight, TRUE, FALSE)) -> dataframe
-  }
-
   if ("Predictor" %in% names(dataframe)) {
     dataframe$Predictor <- gsub(
       ":", " \u00D7 ", dataframe$Predictor
     )
   }
-
   if ("Term" %in% names(dataframe)) {
     dataframe$Term <- gsub(
       ":", " \u00D7 ", dataframe$Term
     )
   }
-
   if ("Model Number" %in% names(dataframe)) {
     dataframe <- dataframe %>%
       select(-all_of("Model Number"))
   }
+  dataframe
+}
 
-  #   __________________________________
-  #   Flextable                     ####
-
+# create_flextable
+create_flextable <- function(dataframe, highlight, width, note,
+                             separate.header, nice.borders) {
   table <- dataframe %>%
     {
-      if (highlight == TRUE || is.numeric(highlight)) {
+      if ("p" %in% names(dataframe) && highlight == TRUE ||
+          is.numeric(highlight)) {
         flextable::flextable(., col_keys = names(dataframe)[-length(dataframe)])
       } else {
         flextable::flextable(.)
       }
     }
 
-  nice.borders <- list("width" = 0.5, color = "black", style = "solid")
-
   # Merge cells for repeated dependent variables...
   if ("Dependent Variable" %in% names(dataframe) &&
       any(duplicated(dataframe$`Dependent Variable`))) {
-    model.row <- which(!duplicated(dataframe$`Dependent Variable`, fromLast = TRUE))
+    model.row <- which(!duplicated(dataframe$`Dependent Variable`,
+                                   fromLast = TRUE))
     table <- table %>%
       flextable::merge_v(j = "Dependent Variable") %>%
       flextable::hline(i = model.row, border = nice.borders)
   }
 
-  table %>%
+  table <- table %>%
     flextable::hline_top(part = "head", border = nice.borders) %>%
     flextable::hline_bottom(part = "head", border = nice.borders) %>%
     flextable::hline_top(part = "body", border = nice.borders) %>%
@@ -464,30 +540,26 @@ nice_table <- function(data,
     flextable::align(align = "center", part = "all") %>%
     flextable::valign(valign = "center", part = "all") %>%
     flextable::line_spacing(space = 2, part = "all") %>%
-    flextable::fix_border_issues() -> table
+    flextable::fix_border_issues()
 
   if (!missing(width)) {
-    table %>%
-      flextable::set_table_properties(layout = "autofit", width = width) -> table
+    table <- table %>%
+      flextable::set_table_properties(layout = "autofit", width = width)
   } else {
-    table %>%
-      flextable::set_table_properties(layout = "autofit") -> table
+    table <- table %>%
+      flextable::set_table_properties(layout = "autofit")
   }
 
-  if (!missing(footnote)) {
-
-    footnote.list <- as.list(footnote)
-
+  if (!missing(note)) {
+    note.list <- as.list(note)
     table <- table %>%
       flextable::add_footer_lines("") %>%
       flextable::compose(i = 1, j = 1, value = flextable::as_paragraph(
-        flextable::as_i("Note. "), footnote[[1]]), part = "footer") %>%
-      flextable::align(part = "footer", align = "left") %>%
-      flextable::add_footer_lines("")
-
-    if (length(footnote.list) > 1) {
+        flextable::as_i("Note. "), note[[1]]), part = "footer") %>%
+      flextable::align(part = "footer", align = "left")
+    if (length(note.list) > 1) {
       table <- table %>%
-        flextable::add_footer_lines(footnote.list[-1])
+        flextable::add_footer_lines(note.list[-1])
     }
   }
 
@@ -500,21 +572,22 @@ nice_table <- function(data,
   table <- table %>%
     flextable::fontsize(part = "all", size = 12) %>%
     flextable::font(part = "all", fontname = "Times New Roman")
+  table
+}
 
-  #   ___________________________________
-  #   Column formatting              ####
-
+format_columns <- function(dataframe, table, italics, separate.header,
+                           highlight, sh.pattern, unique.pattern) {
   ##  ....................................
   ##  Special cases                  ####
   # Fix header with italics
   if (!missing(italics) & missing(separate.header)) {
-    table %>%
-      flextable::italic(j = italics, part = "header") -> table
+    table <- table %>%
+      flextable::italic(j = italics, part = "header")
   } else if (!missing(italics) & !missing(separate.header)) {
     level.number <- sum(charToRaw(names(
       dataframe[2])) == charToRaw(".")) + 1
-    table %>%
-      flextable::italic(j = italics, i = level.number, part = "header") -> table
+    table <- table %>%
+      flextable::italic(j = italics, i = level.number, part = "header")
   }
 
   # Degrees of freedom
@@ -528,15 +601,15 @@ nice_table <- function(data,
   for (i in cols.df) {
     if (i %in% names(dataframe)) {
       df.digits <- ifelse(any(dataframe[i] %% 1 == 0), 0, 2)
-      table %>%
-        format_flex(j = i, digits = df.digits) -> table
+      table <- table %>%
+        format_flex(j = i, digits = df.digits)
     }
   }
 
   ##  .....................................
   ##  2-digit columns                 ####
 
-  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "Mu", "S")
+  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "g", "Mu", "S")
   if(!missing(separate.header)) {
     cols.2digits.sh <- paste0(sh.pattern, rep(
       cols.2digits, each = unique.pattern))
@@ -545,8 +618,8 @@ nice_table <- function(data,
 
   for (i in cols.2digits) {
     if (i %in% names(dataframe)) {
-      table %>%
-        format_flex(j = i) -> table
+      table <- table %>%
+        format_flex(j = i)
     }
   }
 
@@ -561,8 +634,8 @@ nice_table <- function(data,
 
   for (i in cols.0digits) {
     if (i %in% names(dataframe)) {
-      table %>%
-        format_flex(j = i, digits = 0) -> table
+      table <- table %>%
+        format_flex(j = i, digits = 0)
     }
   }
 
@@ -586,11 +659,11 @@ nice_table <- function(data,
 
   for (i in seq(nrow(compose.table0))) {
     if (compose.table0[i, "col"] %in% names(dataframe)) {
-      table %>%
+      table <- table %>%
         format_flex(
           j = compose.table0[i, "col"],
           fun = compose.table0[i, "fun"]
-        ) -> table
+        )
     }
   }
 
@@ -627,16 +700,17 @@ nice_table <- function(data,
   )
   for (i in seq(nrow(compose.table1))) {
     if (compose.table1[i, "col"] %in% names(dataframe)) {
-      table %>%
+      table <- table %>%
         format_flex(
           j = compose.table1[i, "col"],
           value = compose.table1[i, "value"]
-        ) -> table
+        )
     }
   }
   compose.table2 <- data.frame(
     col = c("R2", "sr2"),
-    value = c('flextable::as_i("R"), flextable::as_sup("2")', 'flextable::as_i("sr"), flextable::as_sup("2")')
+    value = c('flextable::as_i("R"), flextable::as_sup("2")',
+              'flextable::as_i("sr"), flextable::as_sup("2")')
   )
 
   if(!missing(separate.header)) {
@@ -645,23 +719,25 @@ nice_table <- function(data,
     table2.sh <- data.frame(
       col = cols.sh,
       value = rep(compose.table2$value, each =
-                  length(cols.sh) / length(compose.table2$value))
+                    length(cols.sh) / length(compose.table2$value))
     )
     compose.table2 <- rbind(compose.table2, table2.sh)
   }
 
   for (i in seq(nrow(compose.table2))) {
     if (compose.table2[i, "col"] %in% names(dataframe)) {
-      table %>%
+      table <- table %>%
         format_flex(
           j = compose.table2[i, "col"],
           value = compose.table2[i, "value"],
           fun = "format_r"
-        ) -> table
+        )
     }
   }
-  if (!missing(highlight)) {
-    table %>%
+
+  if ("p" %in% names(dataframe) && isTRUE(highlight) ||
+      is.numeric(highlight)) {
+    table <- table %>%
       flextable::bold(
         i = ~ signif == TRUE,
         j = table$col_keys
@@ -670,11 +746,15 @@ nice_table <- function(data,
         i = ~ signif == TRUE,
         j = table$col_keys,
         bg = "#D9D9D9"
-      ) -> table
+      )
   }
+  table
 
-  #   _____________________________________________
-  #   Extra features                           ####
+}
+
+beautify_flextable <- function(
+    dataframe, table, separate.header, col.format.p, col.format.r,
+    format.custom, col.format.custom, sh.pattern, unique.pattern) {
 
   dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
                     "M", "N", "n", "Z", "z", "W", "R2", "sr2")
@@ -687,27 +767,27 @@ nice_table <- function(data,
     dont.change <- paste0(dont.change, "|", dont.change.sh)
   }
 
-  table %>%
+  table <- table %>%
     flextable::colformat_double(
       j = (select(dataframe, where(is.numeric)) %>%
              select(-matches(dont.change,
-               ignore.case = FALSE
+                             ignore.case = FALSE
              )) %>% names()),
       big.mark = ",", digits = 2
-    ) -> table
+    )
   if (!missing(col.format.p)) {
-    table %>%
+    table <- table %>%
       parse_formatter(
         column = table$col_keys[col.format.p],
         fun = "format_p"
-      ) -> table
+      )
   }
   if (!missing(col.format.r)) {
-    table %>%
+    table <- table %>%
       parse_formatter(
         column = table$col_keys[col.format.r],
         fun = "format_r"
-      ) -> table
+      )
   }
   if (!missing(format.custom) & !missing(col.format.custom)) {
     # table %>%
@@ -721,10 +801,10 @@ nice_table <- function(data,
     )
     eval(parse(text = rExpression))
   }
+  table
+}
 
-  #   ___________________________
-  #   Final touch up (title) ####
-
+finalize_table <- function(table, title, nice.borders) {
   if (!missing(title)) {
     invisible.borders <- flextable::fp_border_default("width" = 0)
     italic.lvl <- ifelse(length(title) == 1, 1, 2)
@@ -732,66 +812,17 @@ nice_table <- function(data,
 
     table <- table %>%
       flextable::add_header_lines(values = title) %>%
-      flextable::align(part = "header", i = seq(length(title)), align = "left") %>%
+      flextable::align(part = "header", i = seq(length(title)),
+                       align = "left") %>%
       flextable::hline(part = "header", i = seq_len(length(title) - 1),
-            border = invisible.borders) %>%
+                       border = invisible.borders) %>%
       flextable::hline(part = "header", i = length(title),
-            border = nice.borders) %>%
+                       border = nice.borders) %>%
       flextable::hline_top(border = invisible.borders, part = "header") %>%
       # flextable::border(part = "header", i = 1:length(title),
       #        border = invisible.borders) %>%
       flextable::italic(part = "header", i = italic.lvl) %>%
       flextable::bold(., part = "header", i = 1, bold = bold.decision)
-
-  }
-
-  class(table) <- c("nice_table", class(table))
-
-  table
-}
-
-#   ____________________________________________________________________________
-#   Other functions                                                         ####
-
-format_CI <- function(dataframe, CI_low_high = c("CI_lower", "CI_upper"),
-                      col.name = "95% CI") {
-  dataframe %>%
-    mutate(across(all_of(CI_low_high), function(x) {
-      x %>%
-        as.numeric() %>%
-        round(2) %>%
-        formatC(2, format = "f")
-    })) %>%
-    mutate(!!col.name := paste0(
-      "[", .[[CI_low_high[1]]],
-      ", ", .[[CI_low_high[2]]], "]"
-    )) %>%
-    select(-all_of(CI_low_high))
-}
-
-format_flex <- function(table, j, digits = 2, value, fun) {
-  if (missing(value)) {
-    table %>%
-      flextable::italic(j = j, part = "header") %>%
-      flextable::colformat_double(j = j, big.mark = ",", digits = digits) -> table
-  }
-  if (!missing(value)) {
-    rExpression <- paste0("flextable::as_paragraph(", value, ")")
-    table %>%
-      flextable::compose(
-        i = NULL, j = j, part = "header",
-        value = eval(parse(text = rExpression))
-      ) -> table
-  }
-  if (!missing(fun)) {
-    table %>%
-      parse_formatter(column = j, fun = fun) -> table
   }
   table
-}
-
-parse_formatter <- function(table, call = "table <- table %>% flextable::set_formatter",
-                            column, fun) {
-  rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
-  eval(parse(text = rExpression))
 }

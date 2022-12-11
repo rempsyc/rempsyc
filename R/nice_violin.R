@@ -284,7 +284,9 @@ nice_violin <- function(data,
     } +
     ggplot2::ylab(ytitle) +
     ggplot2::xlab(xtitle) +
-    ggplot2::geom_violin(color = border.colour, alpha = alpha, linewidth = border.size) +
+    ggplot2::geom_violin(color = border.colour,
+                         alpha = alpha,
+                         linewidth = border.size) +
     ggplot2::geom_point(ggplot2::aes(y = .data$Mean),
       color = "black",
       size = 4,

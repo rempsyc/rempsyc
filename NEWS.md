@@ -1,6 +1,14 @@
 # rempsyc 0.1.x
 * Upcoming!
 
+## rempsyc 0.1.0.7
+* `nice_table`: 
+  * `footnote` argument is renamed to simply `note` since this is what it is called in APA table language.
+  * Fixed a bug whereas the `note`/`footnote` added an extra empty invisible row at the end.
+  * Reduced cyclomatic complexity internally (swapped `if` statements for functions) dramatically (from 85 to 2).
+* `nice_contrasts`
+  * Default effect size changed to regular Cohen's *d*, and the robust Cohen's *d* (and other effects) can now be specified with the `effect.type` argument.
+
 ## rempsyc 0.1.0.6
 * Following `easystats`'s policy of minimal reliance on external dependencies, we attempt to once again change a few more packages from hard to soft dependencies: `flextable`, `effectsize`, `performance`, `insight`, and `methods`. So we are left only with the basic blocks for coding: `dplyr` and `rlang`. For `flextable`, this is a breaking change for saving tables, since we now need to specify `flextable::save_as_docx`. However, this change makes sense because (1) we used `flextable` for only one function, (2) some users rely on `rempsyc` for plots and don't use tables, (3) this is consistent with how we are saving `ggplot2` plots already, and (4) it also gives credit to the `flextable` package, as this is the powerhouse that produces the tables under the hood.
 * `nice_violin` now provides more informative error messages if the response or group variables are misspelled.

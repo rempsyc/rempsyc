@@ -4,7 +4,15 @@
 \alias{nice_contrasts}
 \title{Easy planned contrasts}
 \usage{
-nice_contrasts(response, group, covariates = NULL, data, bootstraps = 2000)
+nice_contrasts(
+  response,
+  group,
+  covariates = NULL,
+  data,
+  effect.type = "cohens.d",
+  bootstraps = 2000,
+  ...
+)
 }
 \arguments{
 \item{response}{The dependent variable.}
@@ -15,7 +23,12 @@ nice_contrasts(response, group, covariates = NULL, data, bootstraps = 2000)
 
 \item{data}{The data frame.}
 
+\item{effect.type}{What effect size type to use. One of "cohens.d" (default),
+"akp.robust.d", "unstandardized", "hedges.g", "cohens.d.sigma", or "r".}
+
 \item{bootstraps}{The number of bootstraps to use for the confidence interval}
+
+\item{...}{Arguments passed to \link[bootES:bootES]{bootES::bootES}.}
 }
 \value{
 A dataframe, with the selected dependent variable(s), comparisons of
@@ -38,6 +51,9 @@ because only the cases in the two groups are selected; and b)
 in the planned contrast the error term is smaller than it is
 with the standard \emph{t} test because it is based on all the cases
 (\href{https://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
+
+The effect size calculated here is Cohen's d (or its robust version,
+if specified), as calculated by \link[bootES:bootES]{bootES::bootES}.
 }
 \examples{
 # Basic example

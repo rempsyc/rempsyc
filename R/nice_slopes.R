@@ -4,6 +4,7 @@
 #' with effect sizes, and format in publication-ready format.
 #'
 #' @inherit nice_lm details
+#' @inherit nice_lm_slopes return
 #'
 #' @param data The data frame
 #' @param response The dependent variable.
@@ -24,10 +25,6 @@
 #' function for the models.
 #'
 #' @keywords simple slopes moderation interaction regression
-#' @return A formatted dataframe of the simple slopes of the specified lm
-#'         model, with DV, levels of IV, degrees of freedom, regression
-#'         coefficient, t-value, p-value, and the effect size, the
-#'         semi-partial correlation squared, and its confidence interval.
 #' @export
 #' @examples
 #' # Make the basic table
@@ -102,17 +99,21 @@ nice_slopes <- function(data,
   )
   models.list <- lapply(formulas, lm, data = data, ...)
 
-  table.stats <- nice_lm_slopes(models.list, predictor = predictor, moderator = moderator,
+  table.stats <- nice_lm_slopes(models.list,
+                                predictor = predictor,
+                                moderator = moderator,
                                 ci.alternative = ci.alternative)
 
   if (missing(moderator2)) {
     return(table.stats)
   }
 
-  if (!missing(moderator2)) { # Repeat steps for other level of the moderator
+  if (!missing(moderator2)) {
+    # Repeat steps for other level of the moderator
 
     # Add a column about moderator to the first column
-    table.stats <- dplyr::rename(table.stats, Predictor = .data$`Predictor (+/-1 SD)`)
+    table.stats <- dplyr::rename(table.stats,
+                                 Predictor = .data$`Predictor (+/-1 SD)`)
     table.stats[moderator2] <- 0
     table.stats <- dplyr::select(table.stats, `Dependent Variable`,
                                  dplyr::all_of(moderator2),
@@ -128,11 +129,14 @@ nice_slopes <- function(data,
     )
     models.list <- lapply(formulas, lm, data = data, ...)
 
-    table2.stats <- nice_lm_slopes(models.list, predictor = predictor, moderator = moderator,
+    table2.stats <- nice_lm_slopes(models.list,
+                                   predictor = predictor,
+                                   moderator = moderator,
                                    ci.alternative = ci.alternative)
 
     # Add a column for moderator2
-    table2.stats <- dplyr::rename(table2.stats, Predictor = .data$`Predictor (+/-1 SD)`)
+    table2.stats <- dplyr::rename(table2.stats,
+                                  Predictor = .data$`Predictor (+/-1 SD)`)
     table2.stats[moderator2] <- 1
     table2.stats <- dplyr::select(table2.stats, `Dependent Variable`,
                                   dplyr::all_of(moderator2),
@@ -143,7 +147,8 @@ nice_slopes <- function(data,
     final.table <- final.table %>% dplyr::arrange(
       dplyr::desc(`Dependent Variable`)
     )
-    final.table <- dplyr::rename(final.table, `Predictor (+/-1 SD)` = .data$Predictor)
+    final.table <- dplyr::rename(final.table,
+                                 `Predictor (+/-1 SD)` = .data$Predictor)
     if (!missing(b.label)) {
       names(final.table)[names(
         final.table

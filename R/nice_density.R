@@ -127,10 +127,12 @@ nice_density <- function(data,
   }
 
   # Make plot
-  plot <- ggplot2::ggplot(data, ggplot2::aes_string(x = variable, fill = group)) +
+  plot <- ggplot2::ggplot(data, ggplot2::aes_string(x = variable,
+                                                    fill = group)) +
     {
       if (isTRUE(histogram)) {
-        ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(density), alpha = 0.5),
+        ggplot2::geom_histogram(ggplot2::aes(y = ggplot2::after_stat(
+          !!str2lang("density")), alpha = 0.5),
           colour = "black", breaks = breaks, bins = bins
         )
       }

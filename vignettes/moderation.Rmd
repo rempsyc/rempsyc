@@ -41,10 +41,11 @@ mtcars2 <- lapply(mtcars, scale) |> as.data.frame()
 ## Simple moderation: `nice_mod`
 
 ```{r}
-nice_mod(data = mtcars2,
-         response = "mpg",
-         predictor = "gear",
-         moderator = "wt") -> moderations
+moderations <- nice_mod(
+  data = mtcars2,
+  response = "mpg",
+  predictor = "gear",
+  moderator = "wt")
 moderations
 ```
 
@@ -69,10 +70,11 @@ flextable::save_as_docx(my_table, path = "moderations.docx")
 Let's extract the simple slopes now, including the sr2.
 
 ```{r}
-nice_slopes(data = mtcars2,
-            response = "mpg",
-            predictor = "gear",
-            moderator = "wt") -> slopes
+slopes <- nice_slopes(
+  data = mtcars2,
+  response = "mpg",
+  predictor = "gear",
+  moderator = "wt")
 slopes
 nice_table(slopes, highlight = TRUE)
 ```

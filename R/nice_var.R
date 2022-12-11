@@ -63,14 +63,14 @@ nice_var <- function(data,
   var.table <- var.table %>%
     mutate(across(-variable, function(x) round(as.numeric(x), 3)))
   # Add the ratio and hetero columns
-  var.table %>%
+  var.table <- var.table %>%
     rowwise() %>%
     mutate(
       variance.ratio = round(max(select(., -variable), na.rm = TRUE) / min(
         select(., -variable), na.rm = TRUE
       ), 1), criteria = criteria,
       heteroscedastic = variance.ratio > criteria
-    ) -> var.table
+    )
   # Change names to something meaningful
   for (i in seq_along(levels(data[[group]]))) {
     names(var.table)[1 + i] <- levels(data[[group]])[i]

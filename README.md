@@ -141,7 +141,7 @@ comparisons similar to t-tests but more powerful when more than 2
 groups), and format in publication-ready format. Supports multiple
 dependent variables at once (but supports only three groups for the
 moment). In this particular case, the confidence intervals are
-bootstraped around the Robust Cohen’s d.
+bootstraped around the Cohen’s d.
 
 ``` r
 nice_contrasts(data = mtcars,
@@ -150,19 +150,19 @@ nice_contrasts(data = mtcars,
                covariates = "hp") -> contrasts
 contrasts
 #>   Dependent Variable Comparison df         t            p        dR   CI_lower
-#> 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.031774  2.2006726
-#> 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.245144  0.7081908
-#> 3                mpg      4 - 6 28  3.640418 1.092089e-03  1.786630  1.0516408
-#> 4               disp      4 - 8 28 -6.040561 1.640986e-06 -3.467937 -4.9018649
-#> 5               disp      6 - 8 28 -4.861413 4.051110e-05 -2.427185 -3.8948490
-#> 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.040753 -1.8182612
+#> 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.031774  2.1356887
+#> 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.245144  0.6765467
+#> 3                mpg      4 - 6 28  3.640418 1.092089e-03  1.786630  1.0741272
+#> 4               disp      4 - 8 28 -6.040561 1.640986e-06 -3.467937 -5.0399942
+#> 5               disp      6 - 8 28 -4.861413 4.051110e-05 -2.427185 -3.8659404
+#> 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.040753 -1.8108553
 #>     CI_upper
-#> 1  6.0131738
-#> 2  2.4393158
-#> 3  3.6939037
-#> 4 -2.4371486
-#> 5 -1.4231764
-#> 6 -0.4930812
+#> 1  5.6812538
+#> 2  2.3297249
+#> 3  4.1769305
+#> 4 -2.4329681
+#> 5 -1.5472735
+#> 6 -0.4639611
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)

@@ -47,7 +47,8 @@ cormatrix_excel <- function(data,
     stop("Argument 'filename' now required (as per CRAN policies)")
   }
 
-  rlang::check_installed(c("correlation", "openxlsx2"), reason = "for this function.")
+  rlang::check_installed(c("correlation", "openxlsx2"),
+                         reason = "for this function.")
 
 # if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
 #   cat("The package `openxlsx2` is required for this function\n",

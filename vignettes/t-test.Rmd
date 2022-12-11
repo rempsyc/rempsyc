@@ -46,10 +46,11 @@ nice_t_test(data = mtcars,
 Now the best thing about this function is that you can put all your dependent variables of interest in the function call and it will output a sweet, pre-formatted table for your convenience.
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = names(mtcars)[1:6],
-            group = "am",
-            warning = FALSE) -> t.test.results
+t.test.results <- nice_t_test(
+  data = mtcars,
+  response = names(mtcars)[1:6],
+  group = "am",
+  warning = FALSE)
 t.test.results
 ```
 

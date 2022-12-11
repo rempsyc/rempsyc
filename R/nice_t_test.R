@@ -88,11 +88,18 @@ nice_t_test <- function(data,
                         correction = "none",
                         warning = TRUE,
                         ...) {
-  rlang::check_installed(c("effectsize", "methods"), reason = "for this function.")
+  rlang::check_installed(c("effectsize", "methods"),
+                         reason = "for this function.")
   args <- list(...)
   if (methods::hasArg(var.equal)) {
-    if (args$var.equal == TRUE) message_white("Using Student t-test. \n ")
-    if (args$var.equal == FALSE) message_white("Using Welch t-test. \n ")
+    if (isTRUE(args$var.equal)) {
+      message_white("Using Student t-test. \n ")
+    } else if (isFALSE(args$var.equal)) {
+      message_white("Using Welch t-test. \n ")
+    }
+    pooled_sd <- args$var.equal
+    } else {
+      pooled_sd <- TRUE
   }
   if (methods::hasArg(paired)) {
     paired <- args$paired
@@ -126,13 +133,14 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
-  lapply(formulas, function(x) {
+  boot.lists <- lapply(formulas, function(x) {
     effectsize::cohens_d(x,
       data = data,
       paired = paired,
-      mu = mu
+      mu = mu,
+      pooled_sd = pooled_sd
     )
-  }) -> boot.lists
+  })
   list.stats <- list()
   for (i in seq_along(list.names)) {
     list.stats[[list.names[i]]] <- unlist(c(t((lapply(sums.list, `[[`, i)))))

@@ -21,9 +21,9 @@
 #'
 #' @keywords moderation interaction regression
 #' @return A formatted dataframe of the simple slopes of the specified lm model,
-#'         with DV, levels of IV, degrees of freedom, regression coefficient,
-#'         t-value, p-value, and the effect size, the semi-partial correlation
-#'         squared, and its confidence interval.
+#' with DV, levels of IV, degrees of freedom, regression coefficient,
+#' t-value, p-value, and the effect size, the semi-partial correlation
+#' squared, and its confidence interval.
 #' @export
 #' @examples
 #' # Make and format model
@@ -75,7 +75,8 @@ nice_lm_slopes <- function(model,
     lm(formulas.lows[[x]], data = data.list.lows[[x]], ...)
   })
 
-  table.stats1 <- lapply(models.list.lows, nice_lm, ci.alternative = ci.alternative)
+  table.stats1 <- lapply(models.list.lows, nice_lm,
+                         ci.alternative = ci.alternative)
   table.stats1 <- dplyr::bind_rows(table.stats1)
   table.stats1 <- dplyr::filter(table.stats1, .data$Predictor == {{predictor}})
   table.stats1$Predictor <- paste0(predictor, " (LOW-", moderator, ")")
@@ -98,7 +99,8 @@ nice_lm_slopes <- function(model,
     lm(formulas.highs[[x]], data = data.list.highs[[x]], ...)
   })
 
-  table.stats3 <- lapply(models.list.highs, nice_lm, ci.alternative = ci.alternative)
+  table.stats3 <- lapply(models.list.highs, nice_lm,
+                         ci.alternative = ci.alternative)
   table.stats3 <- dplyr::bind_rows(table.stats3)
   table.stats3 <- dplyr::filter(table.stats3, .data$Predictor == {{predictor}})
   table.stats3$Predictor <- paste0(predictor, " (HIGH-", moderator, ")")
@@ -113,7 +115,8 @@ nice_lm_slopes <- function(model,
     c(1, 3, 2)
   ))
   table.stats <- table.stats[correct.order, ] # 1, 4, 7, 2, 5, 8, 3, 6, 9
-  table.stats <- dplyr::rename(table.stats, `Predictor (+/-1 SD)` = .data$Predictor)
+  table.stats <- dplyr::rename(table.stats,
+                               `Predictor (+/-1 SD)` = .data$Predictor)
 
   if (!missing(b.label)) {
     names(table.stats)[names(

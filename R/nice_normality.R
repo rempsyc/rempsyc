@@ -74,7 +74,8 @@ nice_normality <- function(data,
                            histogram = FALSE,
                            breaks.auto = FALSE,
                            ...) {
-  rlang::check_installed(c("ggplot2", "see", "patchwork"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2", "see", "patchwork"),
+                         reason = "for this function.")
   plot.a <- nice_density(
     data = data, variable = variable, group = group,
     colours = colours, groups.labels = groups.labels,

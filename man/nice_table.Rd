@@ -14,11 +14,11 @@ nice_table(
   format.custom,
   col.format.custom,
   width = 1,
-  broom = "",
-  report = "",
+  broom = NULL,
+  report = NULL,
   short = FALSE,
   title,
-  footnote,
+  note,
   separate.header
 )
 }
@@ -74,7 +74,8 @@ version of the tables made by the \code{report} package.}
 
 \item{title}{Optional, to add a table header, if desired.}
 
-\item{footnote}{Optional, to add a table footnote (or more), if desired.}
+\item{note}{Optional, to add one or more table footnote (APA note),
+if desired.}
 
 \item{separate.header}{Logical, whether to separate headers based
 on name delimiters (i.e., periods ".").}
@@ -89,9 +90,11 @@ automatic formatting features.
 }
 \examples{
 # Make the basic table
-my_table <- nice_table(mtcars[1:3, ],
-  title = "Motor Trend Car Road Tests",
-  footnote = "1974 Motor Trend US magazine."
+my_table <- nice_table(
+  mtcars[1:3, ],
+  title = c("Table 1", "Motor Trend Car Road Tests"),
+  note = c("The data was extracted from the 1974 Motor Trend US magazine.",
+           "* p < .05, ** p < .01, *** p < .001")
 )
 my_table
 

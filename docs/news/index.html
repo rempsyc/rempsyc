@@ -97,7 +97,13 @@
 <ul><li>Upcoming!</li>
 </ul><div class="section level3">
 <h3 id="rempsyc-0-1">rempsyc 0.1.0.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
-</div>
+<ul><li>
+<code>nice_table</code>:
+<ul><li>
+<code>footnote</code> argument is renamed to simply <code>note</code> since this is what it is called in APA table language.</li>
+<li>Fix a bug whereas the <code>note</code>/<code>footnote</code> added an extra empty invisible row at the end.</li>
+</ul></li>
+</ul></div>
 <div class="section level3">
 <h3 id="rempsyc-0-1-1">rempsyc 0.1.0.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
 <ul><li>Following <code>easystats</code>’s policy of minimal reliance on external dependencies, we attempt to once again change a few more packages from hard to soft dependencies: <code>flextable</code>, <code>effectsize</code>, <code>performance</code>, <code>insight</code>, and <code>methods</code>. So we are left only with the basic blocks for coding: <code>dplyr</code> and <code>rlang</code>. For <code>flextable</code>, this is a breaking change for saving tables, since we now need to specify <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code>. However, this change makes sense because (1) we used <code>flextable</code> for only one function, (2) some users rely on <code>rempsyc</code> for plots and don’t use tables, (3) this is consistent with how we are saving <code>ggplot2</code> plots already, and (4) it also gives credit to the <code>flextable</code> package, as this is the powerhouse that produces the tables under the hood.</li>

@@ -4,6 +4,6 @@ utils::globalVariables(c(
   "estimate", "estimate1", "estimate2", "df", "Method",
   "Alternative", "r", "W", "CI", "Fit", "Parameter",
   "95% CI", "95% CI (b)", "b", "Dependent Variable",
-  "var.equal", "95% CI (t)", "Row", "density",
+  "var.equal", "95% CI (t)", "Row",
   "cells", "na", "na_max", "theme_apa"
 ))

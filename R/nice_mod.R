@@ -3,7 +3,7 @@
 #' @description Easily compute moderation analyses, with effect
 #' sizes, and format in publication-ready format.
 #'
-#' @inherit nice_lm details
+#' @inherit nice_lm details return
 #'
 #' @param data The data frame
 #' @param response The dependent variable.
@@ -23,9 +23,6 @@
 #' function for the models.
 #'
 #' @keywords moderation interaction regression
-#' @return A formatted dataframe of the specified lm model, with DV, IV, degrees
-#'         of freedom, regression coefficient, t-value, p-value, and the effect
-#'         size, the semi-partial correlation squared, and its confidence interval.
 #' @export
 #' @examples
 #' # Make the basic table

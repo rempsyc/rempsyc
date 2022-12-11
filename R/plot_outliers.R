@@ -102,8 +102,14 @@ plot_outliers <- function(data,
       binaxis = "y",
       stackdir = "center",
       ...) +
-    ggplot2::geom_hline(yintercept = criteria, size = 1, colour = "red", linetype = "dashed") +
-    ggplot2::geom_hline(yintercept = -criteria, size = 1, colour = "red", linetype = "dashed")
+    ggplot2::geom_hline(yintercept = criteria,
+                        size = 1,
+                        colour = "red",
+                        linetype = "dashed") +
+    ggplot2::geom_hline(yintercept = -criteria,
+                        size = 1,
+                        colour = "red",
+                        linetype = "dashed")
 
   plot <- theme_apa(plot) +
     {

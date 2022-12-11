@@ -22,7 +22,8 @@
 
 sr2 <- function(model, ...) {
   .Deprecated("effectsize::r2_semipartial")
-  rlang::check_installed(c("performance", "insight"), reason = "for this function.")
+  rlang::check_installed(c("performance", "insight"),
+                         reason = "for this function.")
   data <- insight::get_data(model)
   response <- insight::find_response(model)
 

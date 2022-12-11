@@ -30,7 +30,7 @@ For the minimal example, we will use the `iris` dataset, which is installed with
 
 ### Using `nice_contrasts()`
 
-*Load the `rempsyc` package:*
+**Load the `rempsyc` package:**
 
 ```{r}
 library(rempsyc)
@@ -47,7 +47,7 @@ table.stats <- nice_contrasts(response = "Sepal.Length",
 table.stats
 ```
 
-This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviations from parametric assumptions). It will also provide us with bootstrapped 95% confidence intervals of that effect size.
+This will give us Cohen's *d* by default for the effect size, but it is possible to request the 'robust' version (i.e., robust to deviations from parametric assumptions) of Cohen's *d* by specifying `effect.type = "akp.robust.d"`. It will also provide us with bootstrapped 95% confidence intervals of that effect size.
 
 ### Make it publication-ready using [`nice_table()`](../articles/table.html).
 
@@ -55,7 +55,7 @@ This will give us the 'robust' version of Cohen's *d* (i.e., robust to deviation
 (my_table <- nice_table(table.stats))
 ```
 
-*Save the table to Word*
+**Save the table to Word**
 
 ```{r, eval = FALSE}
 flextable::save_as_docx(my_table, path = "contrasts.docx")
@@ -87,7 +87,7 @@ Congratulations for making it that far! You've done it! From A to Z, you now kno
 
 For the full workflow, we will use the dataset from one of my studies published at the [Quarterly Journal of Experimental Psychology](https://doi.org/10.1177/17470218211024826) and available on the Open Science Framework.
 
-*Load the data file from the Open Science Framework*
+**Load the data file from the Open Science Framework**
 
 ```{r, eval = FALSE}
 data <- read.csv("https://osf.io/qkmnp//?action=download", header=TRUE)
@@ -234,7 +234,8 @@ data <- structure(list(id = 1:90, Group = c("Embodied", "Embodied", "Control",
 2.42857142857143, 3.57142857142857, 2.71428571428571, 3.57142857142857, 
 4, 3.85714285714286, 3.85714285714286, 2.71428571428571, 4.14285714285714, 
 4.14285714285714, 4.42857142857143, 3.85714285714286, 4.33333333333333, 
-3.85714285714286, 4.57142857142857, 2.28571428571429, 5), IRIFS = c(4.28571428571429, 
+3.85714285714286, 4.57142857142857, 2.28571428571429, 5), 
+IRIFS = c(4.28571428571429, 
 3.71428571428571, 4.28571428571429, 4.28571428571429, 4.14285714285714, 
 4.28571428571429, 3.42857142857143, 3.57142857142857, 3.14285714285714, 
 4.71428571428571, 2.57142857142857, 3, 4.42857142857143, 4.14285714285714, 
@@ -333,14 +334,14 @@ NA, 2.14285714285714, 3, 2.85714285714286, 2.71428571428571,
 
 ```
 
-*Specify the order of factor levels for "Group"* (otherwise R will alphabetize them)
+**Specify the order of factor levels for "Group"** (otherwise R will alphabetize them)
 
 ```{r}
 (data$Group <- factor(data$Group, levels = c("Embodied", "Mental", "Control")))
 ```
 
 
-*Define our dependent variables*
+**Define our dependent variables**
 
 ```{r}
 library(dplyr)
@@ -355,7 +356,7 @@ table.stats
 
 ```
 
-*Add more meaningful names for measures*
+**Add more meaningful names for measures**
 
 ```{r}
 table.stats[1] <- rep(c("Peripheral Responsivity (QCAE)",
@@ -370,10 +371,13 @@ table.stats[1] <- rep(c("Peripheral Responsivity (QCAE)",
 Note that with option `highlight = TRUE`, it will automatically highlight significant results.
 
 ```{r}
-(my_table <- nice_table(table.stats, highlight = TRUE))
+(my_table <- nice_table(table.stats, 
+                        highlight = TRUE,
+                        title = c("Table 1", "Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)"),
+                        note = "\U1D451\U1D3F = robust Cohen’s \U1D451; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable."))
 ```
 
-*Save the table to Word*
+**Save the table to Word**
 
 ```{r, eval = FALSE}
 flextable::save_as_docx(my_table, path = "contrasts.docx")
@@ -389,7 +393,7 @@ This function will throw an error if your dataset contains missing data. We will
 Data <- na.omit(data)
 ```
 
-*Make figure panel 1*
+**Make figure panel 1**
 
 ```{r}
 (EC <- nice_violin(group = "Group",
@@ -403,7 +407,7 @@ Data <- na.omit(data)
                    signif_xmax = 3))
 ```
 
-*Make figure panel 2*
+**Make figure panel 2**
 
 ```{r}
 (PD <- nice_violin(group = "Group", 
@@ -417,7 +421,7 @@ Data <- na.omit(data)
                    signif_xmax = 3))
 ```
 
-*Make figure panel 3*
+**Make figure panel 3**
 
 ```{r}
 (PR <- nice_violin(group = "Group", 
@@ -431,7 +435,7 @@ Data <- na.omit(data)
                    signif_xmax=3))
 ```
 
-*Make figure panel 4*
+**Make figure panel 4**
 
 ```{r}
 (IOS <- nice_violin(group = "Group", 
