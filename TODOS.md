@@ -2,7 +2,7 @@
 
 -   Make new vignette for featured elsewhere
 -   all `lm` functions
-    -   Correct bug with factors in lm models (use data matrix as in easystats?)
+    -   Correct bug with factors in `lm` models (use data matrix as in `easystats`?)
 -   `nice_t_test`
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d

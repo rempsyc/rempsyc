@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,8 @@
     <a class="dropdown-item" href="../articles/scatter.html">Scatter plots</a>
     <a class="dropdown-item" href="../articles/circles.html">Overlapping circles</a>
     <a class="dropdown-item" href="../articles/assumptions.html">Assumptions</a>
+    <h6 class="dropdown-header" data-toc-skip>📰 OTHER</h6>
+    <a class="dropdown-item" href="../articles/featured.html">Featured in</a>
   </div>
 </li>
 <li class="nav-item">
@@ -94,18 +96,21 @@
 <h2 class="pkg-version" data-toc-text="0.1" id="rempsyc-01x">rempsyc 0.1.x<a class="anchor" aria-label="anchor" href="#rempsyc-01x"></a></h2>
 <ul><li>Upcoming!</li>
 </ul><div class="section level3">
-<h3 id="rempsyc-0-1">rempsyc 0.1.0.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+<h3 id="rempsyc-0-1">rempsyc 0.1.0.7<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+</div>
+<div class="section level3">
+<h3 id="rempsyc-0-1-1">rempsyc 0.1.0.6<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
 <ul><li>Following <code>easystats</code>’s policy of minimal reliance on external dependencies, we attempt to once again change a few more packages from hard to soft dependencies: <code>flextable</code>, <code>effectsize</code>, <code>performance</code>, <code>insight</code>, and <code>methods</code>. So we are left only with the basic blocks for coding: <code>dplyr</code> and <code>rlang</code>. For <code>flextable</code>, this is a breaking change for saving tables, since we now need to specify <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code>. However, this change makes sense because (1) we used <code>flextable</code> for only one function, (2) some users rely on <code>rempsyc</code> for plots and don’t use tables, (3) this is consistent with how we are saving <code>ggplot2</code> plots already, and (4) it also gives credit to the <code>flextable</code> package, as this is the powerhouse that produces the tables under the hood.</li>
 <li>
 <code>nice_violin</code> now provides more informative error messages if the response or group variables are misspelled.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-1">rempsyc 0.1.0.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1"></a></h3>
+<h3 id="rempsyc-0-1-2">rempsyc 0.1.0.5<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
 <ul><li>
 <code>nice_lm</code>, <code>nice_mod</code>, <code>nice_lm_slopes</code>, and <code>nice_slopes</code> now use “two.sided” as alternative for the sr2 effect size confidence interval, to facilitate interpretation and in accordance with current norms in psychology.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-2">rempsyc 0.1.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-2"></a></h3>
+<h3 id="rempsyc-0-1-3">rempsyc 0.1.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-3"></a></h3>
 <ul><li>Since <code>easystats</code> added a new function to calculate the sr2, <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>, <code>rempsyc</code> now relies on that function. First, it has the advantage of also providing a confidence interval for the sr2. Second, it also fixes a bug when using factors in <code>lm</code> models that was introduced when switching from <code><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">car::Anova</a></code> to manual calculation via the formula interface.</li>
 <li>Accordingly, <code><a href="../reference/sr2.html">rempsyc::sr2</a></code> becomes deprecated and will be removed completely in the next major version, please use <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>.</li>
 <li>
@@ -116,19 +121,19 @@
 <code>nice_reverse</code> loses its <code>warning</code> parameter, as the warning seems unnecessary (and annoying to some), given all relevant information is available from the documentation.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-3">rempsyc 0.1.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-3"></a></h3>
+<h3 id="rempsyc-0-1-4">rempsyc 0.1.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-4"></a></h3>
 <ul><li>
 <code>nice_table</code> now only keeps the first occurrence of repeated (duplicated) dependent variables, and merges (and centers). Only works for a column called “Dependent Variables”. For columns named “Predictor” and “Term”, now also converts colons “:” to the multiplication symbol, “×”.</li>
 <li>
 <code>outliers_plot</code> changes name to <code>plot_outliers</code>, to be consistent with the verb naming approach.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-4">rempsyc 0.1.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-4"></a></h3>
+<h3 id="rempsyc-0-1-5">rempsyc 0.1.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-5"></a></h3>
 <ul><li>
 <code>nice_varplot</code> and <code>nice_var</code>: Now ignores missing values when calculating variance.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-5">rempsyc 0.1.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-5"></a></h3>
+<h3 id="rempsyc-0-1-6">rempsyc 0.1.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-6"></a></h3>
 <ul><li>New function to visualize outliers: <code>outliers_plot</code>, which generates a violin scatter plot (dot plot) and adds lines for +/- 3 MAD (or SD, based on selected method). Importantly, supports plotting by group.</li>
 <li>
 <code>nice_violin</code>: at some point in time, it supported a single group (or no group), but this feature was lost at some point. It is now back.</li>
@@ -281,7 +286,7 @@
 <h3 id="rempsyc-0-0-6-6">rempsyc 0.0.5.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-0-6-6"></a></h3>
 <ul><li>Corrected spelling of all code with <code><a href="https://devtools.r-lib.org/reference/spell_check.html" class="external-link">devtools::spell_check()</a></code>
 </li>
-<li>Restyled all code according to the tidyverse guidelines with <code>styler::style_pkg()</code>
+<li>Restyled all code according to the tidyverse guidelines with <code><a href="https://styler.r-lib.org/reference/style_pkg.html" class="external-link">styler::style_pkg()</a></code>
 </li>
 <li>
 <code>nice_table</code>: greatly improved APA title feature thanks to <a href="https://github.com/Buedenbender" class="external-link">@Buedenbender</a> (and shout-out to his package <a href="https://buedenbender.github.io/datscience/" class="external-link">datscience</a> and function <a href="https://buedenbender.github.io/datscience/reference/format_flextable.html" class="external-link">flex_table1</a> on which this improvement was based!)</li>
