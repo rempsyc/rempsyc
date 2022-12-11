@@ -20,7 +20,7 @@ automatic formatting features."><meta property="og:image" content="https://remps
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,11 @@ automatic formatting features.</p>
 <span>  <span class="va">format.custom</span>,</span>
 <span>  <span class="va">col.format.custom</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  broom <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  report <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  broom <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  report <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  short <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">title</span>,</span>
-<span>  <span class="va">footnote</span>,</span>
+<span>  <span class="va">note</span>,</span>
 <span>  <span class="va">separate.header</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -203,8 +203,9 @@ version of the tables made by the <code>report</code> package.</p></dd>
 <dd><p>Optional, to add a table header, if desired.</p></dd>
 
 
-<dt>footnote</dt>
-<dd><p>Optional, to add a table footnote (or more), if desired.</p></dd>
+<dt>note</dt>
+<dd><p>Optional, to add one or more table footnote (APA note),
+if desired.</p></dd>
 
 
 <dt>separate.header</dt>
@@ -226,14 +227,16 @@ on name delimiters (i.e., periods ".").</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic table</span></span></span>
-<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,</span></span>
-<span class="r-in"><span>  title <span class="op">=</span> <span class="st">"Motor Trend Car Road Tests"</span>,</span></span>
-<span class="r-in"><span>  footnote <span class="op">=</span> <span class="st">"1974 Motor Trend US magazine."</span></span></span>
+<span class="r-in"><span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu">nice_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Table 1"</span>, <span class="st">"Motor Trend Car Road Tests"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  note <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"The data was extracted from the 1974 Motor Trend US magazine."</span>,</span></span>
+<span class="r-in"><span>           <span class="st">"* p &lt; .05, ** p &lt; .01, *** p &lt; .001"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_table</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a flextable object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> col_keys: `mpg`, `cyl`, `disp`, `hp`, `drat`, `wt`, `qsec`, `vs`, `am`, `gear`, `carb` </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> header has 2 row(s) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> header has 3 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> body has 3 row(s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> original dataset sample: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
