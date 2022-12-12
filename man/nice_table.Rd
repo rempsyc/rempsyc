@@ -13,7 +13,7 @@ nice_table(
   col.format.ci,
   format.custom,
   col.format.custom,
-  width = 1,
+  width = NULL,
   broom = NULL,
   report = NULL,
   short = FALSE,
@@ -58,7 +58,8 @@ or print a specific symbol along the values for instance.}
 function to. Select with numerical range, e.g., 1:3.}
 
 \item{width}{Width of the table, in percentage of the
-total width, when exported e.g., to Word.}
+total width, when exported e.g., to Word. For full width,
+use \code{width = 1}.}
 
 \item{broom}{If providing a tidy table produced with the
 \code{broom} package, which model type to use if one wants

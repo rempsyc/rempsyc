@@ -31,7 +31,8 @@
 #' @param col.format.custom Which columns to apply the custom
 #' function to. Select with numerical range, e.g., 1:3.
 #' @param width Width of the table, in percentage of the
-#' total width, when exported e.g., to Word.
+#' total width, when exported e.g., to Word. For full width,
+#' use `width = 1`.
 #' @param broom If providing a tidy table produced with the
 #' `broom` package, which model type to use if one wants
 #' automatic formatting (options are "t.test", "lm", "cor.test",
@@ -141,7 +142,7 @@ nice_table <- function(data,
                        col.format.ci,
                        format.custom,
                        col.format.custom,
-                       width = 1,
+                       width = NULL,
                        broom = NULL,
                        report = NULL,
                        short = FALSE,
@@ -542,7 +543,7 @@ create_flextable <- function(dataframe, highlight, width, note,
     flextable::line_spacing(space = 2, part = "all") %>%
     flextable::fix_border_issues()
 
-  if (!missing(width)) {
+  if (!is.null(width)) {
     table <- table %>%
       flextable::set_table_properties(layout = "autofit", width = width)
   } else {
