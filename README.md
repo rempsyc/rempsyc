@@ -125,7 +125,7 @@ t_table <- nice_table(t.tests)
 t_table
 ```
 
-<img src="man/figures/README-nice_t_test-1.png" width="60%" />
+<img src="man/figures/README-nice_t_test-1.png" width="100%" />
 
 ``` r
 # Save to word
@@ -150,25 +150,25 @@ nice_contrasts(data = mtcars,
                covariates = "hp") -> contrasts
 contrasts
 #>   Dependent Variable Comparison df         t            p         d   CI_lower
-#> 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.587739  2.6641376
-#> 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.440495  0.8248173
-#> 3                mpg      4 - 6 28  3.640418 1.092089e-03  2.147244  1.3576137
-#> 4               disp      4 - 8 28 -6.040561 1.640986e-06 -4.803022 -5.7684217
-#> 5               disp      6 - 8 28 -4.861413 4.051110e-05 -3.288726 -4.3178853
-#> 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.514296 -2.2727653
+#> 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.587739  2.7189023
+#> 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.440495  0.8360122
+#> 3                mpg      4 - 6 28  3.640418 1.092089e-03  2.147244  1.3386073
+#> 4               disp      4 - 8 28 -6.040561 1.640986e-06 -4.803022 -5.7946702
+#> 5               disp      6 - 8 28 -4.861413 4.051110e-05 -3.288726 -4.2864630
+#> 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.514296 -2.2369170
 #>     CI_upper
-#> 1  4.5486594
-#> 2  1.9973816
-#> 3  3.0452570
-#> 4 -3.8157237
-#> 5 -2.2038683
-#> 6 -0.8802854
+#> 1  4.4757031
+#> 2  1.9936491
+#> 3  3.1136875
+#> 4 -3.8223424
+#> 5 -2.3005024
+#> 6 -0.8934329
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
 ```
 
-<img src="man/figures/README-nice_contrasts-1.png" width="70%" />
+<img src="man/figures/README-nice_contrasts-1.png" width="100%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/contrasts>
 
@@ -204,7 +204,7 @@ moderations
 nice_table(moderations, highlight = TRUE)
 ```
 
-<img src="man/figures/README-nice_mod-1.png" width="70%" />
+<img src="man/figures/README-nice_mod-1.png" width="100%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -243,7 +243,7 @@ mods
 nice_table(mods, highlight = TRUE)
 ```
 
-<img src="man/figures/README-nice_lm-1.png" width="70%" />
+<img src="man/figures/README-nice_lm-1.png" width="100%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -279,7 +279,7 @@ simple.slopes
 nice_table(simple.slopes)
 ```
 
-<img src="man/figures/README-nice_slopes-1.png" width="80%" />
+<img src="man/figures/README-nice_slopes-1.png" width="100%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -316,7 +316,7 @@ simple.slopes
 nice_table(simple.slopes)
 ```
 
-<img src="man/figures/README-nice_lm_slopes-1.png" width="80%" />
+<img src="man/figures/README-nice_lm_slopes-1.png" width="100%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
