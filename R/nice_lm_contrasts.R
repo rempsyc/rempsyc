@@ -1,10 +1,11 @@
-#' @title Easy planned contrasts
+#' @title Easy planned contrasts using lm models
 #'
 #' @description Easily compute planned contrast analyses (pairwise
 #' comparisons similar to t-tests but more powerful when more than
 #' 2 groups), and format in publication-ready format. Supports only
 #' three groups for the moment. In this particular case, the
-#' confidence intervals are bootstraped on the Robust Cohen's d.
+#' confidence intervals are bootstraped on chosen effect size
+#' (default to Cohen's d).
 #'
 #' @details Statistical power is lower with the standard *t* test
 #' compared than it is with the planned contrast version for two
@@ -14,8 +15,8 @@
 #' with the standard *t* test because it is based on all the cases
 #' ([source](https://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf)).
 #'
-#' The effect size calculated here is Cohen's d (or its robust version,
-#' if specified), as calculated by [bootES::bootES].
+#' The effect size and confidence interval are calculated via
+#' [bootES::bootES].
 #'
 #' @param response The dependent variable.
 #' @param group The group for the comparison.
@@ -34,25 +35,41 @@
 #' @export
 #' @examples
 #' # Make and format model
-#' model <- lm(mpg ~ cyl + wt * hp, mtcars)
-#' nice_contrasts(model, group = "cyl", data = mtcars)
+#' #model <- lm(mpg ~ cyl + wt * hp, mtcars)
+#' #nice_lm_contrasts(model, group = "cyl", data = mtcars)
+#'
+#' #model2 <- lm(qsec ~ cyl, data = mtcars)
+#' #my.models <- list(model, model2)
+#'
+#' #nice_lm_contrasts(my.models, group = "cyl", data = mtcars)
 #'
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
 #' @importFrom dplyr %>% bind_rows
 
-nice_contrasts <- function(model,
-                           group,
-                           data,
-                           effect.type = "cohens.d",
-                           bootstraps = 2000,
-                           ...) {
+nice_lm_contrasts <- function(model,
+                              group,
+                              data,
+                              effect.type = "cohens.d",
+                              bootstraps = 2000,
+                              ...) {
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
   ifelse(class(model) == "list",
          models.list <- model,
          models.list <- list(model)
   )
+
+  #if (missing(data)) {
+    # data.list <- lapply(models.list, `[[`, "model")
+    # data.list <- lapply(data.list, function(x) {
+    #   x[[group]] = as.factor(x[[group]])
+    #   x
+    #   })
+    # data <- Reduce(dplyr::right_join, data.list) # wrap in suppressMessages later
+  #}
+
+  data[[group]] <- as.factor(data[[group]])
   leastsquare.list <- lapply(models.list, emmeans::emmeans, group, data = data)
   groups.contrasts <- list(
     comp1 = stats::setNames(c(1, 0, -1), levels(data[[group]])),
@@ -63,7 +80,7 @@ nice_contrasts <- function(model,
   )
 
   response.list <- lapply(models.list, function(x) {
-    attr(x$terms, "term.labels")[1]
+    as.character(attributes(x$terms)$variables[[2]])
   })
 
   # Add support x groups
@@ -87,7 +104,7 @@ nice_contrasts <- function(model,
   )
   contrval.sums <- lapply(contrval.list, summary)
 
-  boot.sums <- lapply(seq(length(response)), function(y) {
+  boot.sums <- lapply(seq(length(response.list)), function(y) {
     lapply(es.lists, function(x) {
       as.data.frame(summary(x[[y]]))
         }) %>%
@@ -99,7 +116,7 @@ nice_contrasts <- function(model,
     stats.list[[list.names[i]]] <- unlist(c(t((
       lapply(contrval.sums, `[[`, i + 1)))))
   }
-  response.names <- rep(response, each = length(contrval.sums[[1]]$contrast))
+  response.names <- rep(unlist(response.list), each = length(contrval.sums[[1]]$contrast))
   comparisons.names <- rep(
     c(
       paste(
@@ -115,7 +132,7 @@ nice_contrasts <- function(model,
         levels(data[[group]])[2]
       )
     ), ###### support x groups
-    times = length(response)
+    times = length(response.list)
   )
   table.stats <- data.frame(
     response.names,

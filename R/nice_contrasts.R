@@ -1,21 +1,6 @@
 #' @title Easy planned contrasts
 #'
-#' @description Easily compute planned contrast analyses (pairwise
-#' comparisons similar to t-tests but more powerful when more than
-#' 2 groups), and format in publication-ready format. Supports only
-#' three groups for the moment. In this particular case, the
-#' confidence intervals are bootstraped on the Robust Cohen's d.
-#'
-#' @details Statistical power is lower with the standard *t* test
-#' compared than it is with the planned contrast version for two
-#' reasons: a) the sample size is smaller with the *t* test,
-#' because only the cases in the two groups are selected; and b)
-#' in the planned contrast the error term is smaller than it is
-#' with the standard *t* test because it is based on all the cases
-#' ([source](https://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf)).
-#'
-#' The effect size calculated here is Cohen's d (or its robust version,
-#' if specified), as calculated by [bootES::bootES].
+#' @inherit nice_lm_contrasts description details return
 #'
 #' @param response The dependent variable.
 #' @param group The group for the comparison.
@@ -97,22 +82,21 @@ nice_contrasts <- function(response,
     comp3 = stats::setNames(c(1, -1, 0), levels(data[[group]]))
   )
 
-  # if (isTRUE(robust.d)) {
-    # Add support x groups
-    es.lists <- lapply(groups.contrasts, function(y) {
-      lapply(response, function(x) {
-        bootES::bootES(
-          data = stats::na.omit(data),
-          R = bootstraps,
-          data.col = x,
-          group.col = group,
-          contrast = y,
-          effect.type = effect.type,
-          ...
-        )
-      })
+  # Add support x groups
+  es.lists <- lapply(groups.contrasts, function(y) {
+    lapply(response, function(x) {
+      bootES::bootES(
+        data = stats::na.omit(data[, c(group, x)]),
+        R = bootstraps,
+        data.col = x,
+        group.col = group,
+        contrast = y,
+        effect.type = effect.type,
+        ...
+      )
     })
-  # }
+  })
+
   contrval.list <- lapply(leastsquare.list, emmeans::contrast,
     groups.contrasts,
     adjust = "none"
