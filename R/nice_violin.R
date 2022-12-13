@@ -242,7 +242,8 @@ nice_violin <- function(data,
     digits = 5,
     R = bootstraps,
     traditional = !boot,
-    bca = boot
+    bca = boot,
+    na.rm = TRUE
   )
   if (has.d == TRUE & any(
     !missing(comp1), !missing(comp2),
