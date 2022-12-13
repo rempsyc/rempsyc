@@ -48,6 +48,7 @@
 #' )
 #' }
 #' @seealso
+#' \code{\link{nice_lm_contrasts}},
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
 #' @importFrom dplyr %>% bind_rows

@@ -14,6 +14,8 @@ nice_lm_contrasts(
 )
 }
 \arguments{
+\item{model}{The model to be formatted.}
+
 \item{group}{The group for the comparison.}
 
 \item{data}{The data frame.}
@@ -24,10 +26,6 @@ nice_lm_contrasts(
 \item{bootstraps}{The number of bootstraps to use for the confidence interval}
 
 \item{...}{Arguments passed to \link[bootES:bootES]{bootES::bootES}.}
-
-\item{response}{The dependent variable.}
-
-\item{covariates}{The desired covariates in the model.}
 }
 \value{
 A dataframe, with the selected dependent variable(s), comparisons of
@@ -67,6 +65,7 @@ The effect size and confidence interval are calculated via
 
 }
 \seealso{
+\code{\link{nice_contrasts}},
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 }
 \keyword{comparisons}

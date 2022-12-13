@@ -18,9 +18,8 @@
 #' The effect size and confidence interval are calculated via
 #' [bootES::bootES].
 #'
-#' @param response The dependent variable.
+#' @param model The model to be formatted.
 #' @param group The group for the comparison.
-#' @param covariates The desired covariates in the model.
 #' @param data The data frame.
 #' @param effect.type What effect size type to use. One of "cohens.d" (default),
 #' "akp.robust.d", "unstandardized", "hedges.g", "cohens.d.sigma", or "r".
@@ -44,6 +43,7 @@
 #' #nice_lm_contrasts(my.models, group = "cyl", data = mtcars)
 #'
 #' @seealso
+#' \code{\link{nice_contrasts}},
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
 #' @importFrom dplyr %>% bind_rows
