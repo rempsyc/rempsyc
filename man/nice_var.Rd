@@ -38,10 +38,9 @@ nice_var(
 )
 
 # Try on multiple variables
-DV <- names(iris[1:4])
 nice_var(
   data = iris,
-  variable = DV,
+  variable = names(iris[1:4]),
   group = "Species"
 )
 

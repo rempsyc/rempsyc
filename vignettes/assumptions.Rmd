@@ -233,7 +233,10 @@ Let's now try it for many variables to see how handy it can be.
 DV <- names(iris[1:4])
 
 # Make diagnostic table
-var.table <- do.call("rbind", lapply(DV, nice_var, data=iris, group="Species"))
+var.table <- nice_var(data = iris,
+                      variable = DV,
+                      group = "Species")
+
 ```
 
 Use the Viewer for better results (or export it to Word using my [nice_table() function](../articles/table.html))
