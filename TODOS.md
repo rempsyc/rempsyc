@@ -1,5 +1,6 @@
 # Development objectives (to-do list)
 
+-   assumptions vignette: Include Lakens' feedback, and add `find_mad` & `winsorize_mad`!
 -   `nice_lm_contrasts`: improve function and add to contrasts vignette!
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?

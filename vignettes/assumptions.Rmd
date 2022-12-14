@@ -176,7 +176,9 @@ nice_normality(data = iris,
 
 ## Outliers
 
-To check outliers for categorical predictors, we can check for each group whether any observations is greater than 3 units (either standard deviations, SDs, or median absolute deviations, MADs).
+To check outliers for categorical predictors, we can check for each group whether any observations is greater than 3 units. By default it uses median absolute deviations (MADs, with `method = "mad"`), based on the following publication:
+
+Leys, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. *Journal of Experimental Social Psychology*, *49*(4), 764–766. https://doi.org/10.1016/j.jesp.2013.03.013
 
 ### Make the basic plot
 
@@ -197,7 +199,7 @@ plot_outliers(
 
 ### Further customization
 
-Change (or reorder) colours, y-axis title, or names of groups.
+Change (or reorder) colours, y-axis title, names of groups, or detection method.
 
 ```{r}
 plot_outliers(
@@ -211,6 +213,39 @@ plot_outliers(
   xtitle = "Month of the Year")
 ```
 
+### Flagging outliers
+
+Outliers can also be identifed with `find_mad` and multiple variables:
+
+```{r}
+find_mad(airquality, names(airquality), criteria = 3)
+  
+```
+
+### Winsorizing outliers
+
+Outliers can also be winsorized with `winsorize_mad`, meaning that outlier values outside 3 MADs will be brought back to 3 MADs:
+
+```{r}
+winsorize_mad(airquality$Ozone, criteria = 3) |>
+  head(30)
+  
+```
+
+### Multivariate outliers
+
+For multivariate outliers, it is recommended to use the Minimum Covariance Determinant (MCD), as available in the `performance` package from `easystats` mentioned in the beginning of this post.
+
+```{r}
+
+check_outliers(na.omit(airquality), method = "mcd")
+
+```
+
+
+We note also that ideally the handling of outliers should be preregistered a priori. For more up-to-date recommendations on handling outliers, please see:
+
+Leys, C., Delacre, M., Mora, Y. L., Lakens, D., & Ley, C. (2019). How to classify, detect, and manage univariate and multivariate outliers, with emphasis on pre-registration. *International Review of Social Psychology*, *32*(1). http://doi.org/10.5334/irsp.289
 
 ## Homoscedasticity (equality of variance)
 
@@ -219,9 +254,9 @@ To check homoscedasticity (equality of variance) for categorical predictors, we 
 ### Make the basic table
 
 ```{r, eval = FALSE}
-View(nice_var(data=iris,
-              variable="Sepal.Length",
-              group="Species"))
+View(nice_var(data = iris,
+              variable = "Sepal.Length",
+              group = "Species"))
 ```
 
 ![](https://rempsyc.remi-theriault.com/images/blog_assumptions/var1.png)
