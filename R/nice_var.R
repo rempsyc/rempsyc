@@ -27,10 +27,11 @@
 #'
 #' # Try on multiple variables
 #' DV <- names(iris[1:4])
-#' var.table <- do.call("rbind", lapply(DV, nice_var,
-#'   data = iris, group = "Species"
-#' ))
-#' var.table
+#' nice_var(
+#'   data = iris,
+#'   variable = DV,
+#'   group = "Species"
+#' )
 #'
 #' @seealso
 #' Other functions useful in assumption testing:
@@ -40,34 +41,45 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/assumptions}
 #'
 #' @importFrom dplyr mutate %>% select group_by summarize rowwise
-#' do rename_with across everything
+#' do rename_with across everything bind_rows c_across
 
 #' @export
 nice_var <- function(data,
                      variable,
                      group,
                      criteria = 4) {
+  if (inherits(variable, "list")) {
+    variable <- variable
+  } else {
+    variable <- as.list(variable)
+  }
   # Make group as factor
   data[[group]] <- as.factor(data[[group]])
   # Make basic frame
-  var.table <- data %>%
-    group_by(.data[[group]]) %>%
-    summarize(var = stats::var(.data[[variable]], na.rm = TRUE)) %>%
-    t() %>%
-    as.data.frame()
+
+  var.table <- lapply(variable, function(x) {
+    var.table <- data %>%
+      group_by(.data[[group]]) %>%
+      summarize(var = stats::var(.data[[x]], na.rm = TRUE)) %>%
+      t() %>%
+      as.data.frame()
+    cbind(x, var.table)[-1, ]
+  })
+
+  var.table <- bind_rows(var.table)
+
   # Format table in an acceptable format
-  var.table <- cbind(variable, var.table)
-  var.table <- var.table[-1, ]
+
   rownames(var.table) <- NULL
   # Make all relevant variables numeric
   var.table <- var.table %>%
-    mutate(across(-variable, function(x) round(as.numeric(x), 3)))
+    mutate(across(-1, function(x) round(as.numeric(x), 3)))
   # Add the ratio and hetero columns
   var.table <- var.table %>%
     rowwise() %>%
     mutate(
-      variance.ratio = round(max(select(., -variable), na.rm = TRUE) / min(
-        select(., -variable), na.rm = TRUE
+      variance.ratio = round(max(c_across(-1), na.rm = TRUE) / min(
+        c_across(-1), na.rm = TRUE
       ), 1), criteria = criteria,
       heteroscedastic = variance.ratio > criteria
     )
@@ -75,6 +87,7 @@ nice_var <- function(data,
   for (i in seq_along(levels(data[[group]]))) {
     names(var.table)[1 + i] <- levels(data[[group]])[i]
   }
+  names(var.table)[1] <- group
   # Capitalize first letters
   var.table <- var.table %>%
     rename_with(tools::toTitleCase, everything())

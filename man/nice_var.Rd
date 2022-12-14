@@ -39,10 +39,11 @@ nice_var(
 
 # Try on multiple variables
 DV <- names(iris[1:4])
-var.table <- do.call("rbind", lapply(DV, nice_var,
-  data = iris, group = "Species"
-))
-var.table
+nice_var(
+  data = iris,
+  variable = DV,
+  group = "Species"
+)
 
 }
 \seealso{

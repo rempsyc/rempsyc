@@ -142,9 +142,9 @@ respected for a given model or variable.</p>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nice_assumptions</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Model Normality (Shapiro-Wilk)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 mpg ~ wt * cyl + gear                0.6154925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 mpg ~ wt * cyl + gear                    0.615</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Homoscedasticity (Breusch-Pagan) Autocorrelation of residuals (Durbin-Watson)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       0.05394952                                    0.5249364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                            0.054                                        0.525</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Diagnostic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1          0</span>
 <span class="r-in"><span></span></span>
@@ -153,11 +153,11 @@ respected for a given model or variable.</p>
 <span class="r-in"><span><span class="va">my.models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">model2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nice_assumptions</span><span class="op">(</span><span class="va">my.models</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Model Normality (Shapiro-Wilk)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     mpg ~ wt * cyl + gear               0.61549247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 qsec ~ disp + drat * carb               0.01260219</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     mpg ~ wt * cyl + gear                    0.615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 qsec ~ disp + drat * carb                    0.013</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Homoscedasticity (Breusch-Pagan) Autocorrelation of residuals (Durbin-Watson)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       0.05394952                                  0.524936379</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                       0.94730300                                  0.003435938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                            0.054                                        0.525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                            0.947                                        0.003</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Diagnostic</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1          0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2          2</span>
