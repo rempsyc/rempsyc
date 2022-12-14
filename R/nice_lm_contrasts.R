@@ -28,8 +28,8 @@
 #' @keywords planned contrasts pairwise comparisons
 #' group differences
 #' @return A dataframe, with the selected dependent variable(s), comparisons of
-#'         interest, degrees of freedom, t-values, p-values, robust Cohen's d
-#'         (dR), and the lower and upper 95% confidence intervals of the
+#'         interest, degrees of freedom, t-values, p-values, Cohen's d, and the
+#'         lower and upper 95% confidence intervals of the
 #'         effect size (i.e., dR).
 #' @export
 #' @examples
@@ -55,10 +55,11 @@ nice_lm_contrasts <- function(model,
                               bootstraps = 2000,
                               ...) {
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
-  ifelse(class(model) == "list",
-         models.list <- model,
-         models.list <- list(model)
-  )
+  if (inherits(model, "list")) {
+    models.list <- model
+  } else {
+    models.list <- list(model)
+  }
 
   #if (length(models.list) == 1) {
   #  data <- model$model

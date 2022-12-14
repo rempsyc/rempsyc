@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,7 @@
 <div id="development-objectives-to-do-list" class="section level1">
 
 <ul><li>
-<code>nice_assumptions</code>: accept list objects!</li>
+<code>nice_lm_contrasts</code>: improve function and add to contrasts vignette!</li>
 <li>
 <code>rcompanion_groupwiseMean</code>
 <ul><li>Rewrite with only the <code>boot</code> package and <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by</a></code>?</li>
@@ -116,15 +116,13 @@
 <li>
 <code>nice_table</code>
 <ul><li>Integration: add meaningful error messages when using <code>lm</code> or <code>t.test</code> with wrong model type.</li>
-<li>Reduce cyclomatic complexity (swap if statements for functions)</li>
 <li>Remove unwanted italic formatting of headers when using <code>separate.header = TRUE</code>.</li>
 </ul></li>
 <li>
 <code>nice_contrasts</code>
 <ul><li>Need to accommodate: interactions/moderations in the models</li>
 <li>Also add option to specify contrasts manually</li>
-<li>Add option to not use bootstrapping</li>
-<li>Could the solution be a <code>nice_lm_contrasts</code>?</li>
+<li>Add option to not use bootstrapping (waiting on <code>bootES</code> CRAN version 1.2.2)</li>
 </ul></li>
 <li>all <code>lm</code> functions
 <ul><li>Correct bug with factors in <code>lm</code> models (use data matrix as in <code>easystats</code>?)</li>

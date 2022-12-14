@@ -29,8 +29,8 @@ nice_lm_contrasts(
 }
 \value{
 A dataframe, with the selected dependent variable(s), comparisons of
-interest, degrees of freedom, t-values, p-values, robust Cohen's d
-(dR), and the lower and upper 95\% confidence intervals of the
+interest, degrees of freedom, t-values, p-values, Cohen's d, and the
+lower and upper 95\% confidence intervals of the
 effect size (i.e., dR).
 }
 \description{

@@ -64,6 +64,8 @@ View(nice_assumptions(model))
 nice_table(nice_assumptions(model), col.format.p = 2:4)
 ```
 
+> Interpretation: (p) values < .05 imply assumptions are not respected. Diagnostic is how many assumptions are not respected for a given model or variable.
+
 This function is particularly useful when testing several models simultaneously as it makes for a nice table of results. Let's make a short demonstration of this.
 
 ```{r}
@@ -74,7 +76,8 @@ formulas <- paste(DV, "~ mpg")
 # Make list of all models
 models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 # Make diagnostic table
-assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions))
+assumptions.table <- nice_assumptions(models.list)
+
 ```
 
 Use the Viewer for better results

@@ -19,18 +19,20 @@ not respected for a given model.
 Test linear regression assumptions easily with a
 nice summary table.
 }
+\details{
+Interpretation: (p) values < .05 imply assumptions are
+not respected. Diagnostic is how many assumptions are not
+respected for a given model or variable.
+}
 \examples{
 # Create a regression model (using data available in R by default)
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 nice_assumptions(model)
 
 # Multiple dependent variables at once
-DV <- names(mtcars[-1])
-formulas <- paste(DV, "~ mpg")
-models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
-assumptions.table <- do.call("rbind", lapply(models.list, nice_assumptions
-))
-assumptions.table
+model2 <- lm(qsec ~ disp + drat * carb, mtcars)
+my.models <- list(model, model2)
+nice_assumptions(my.models)
 
 }
 \seealso{

@@ -50,10 +50,11 @@ nice_lm_slopes <- function(model,
                            ci.alternative = "two.sided",
                            ...) {
   rlang::check_installed("effectsize", reason = "for this function.")
-  ifelse(class(model) == "list",
-    models.list <- model,
+  if (inherits(model, "list")) {
+    models.list <- model
+  } else {
     models.list <- list(model)
-  )
+  }
 
   data.list <- lapply(models.list, function(x) {
     x$model

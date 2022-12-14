@@ -50,10 +50,11 @@ nice_lm <- function(model,
                     ci.alternative = "two.sided",
                     ...) {
   rlang::check_installed("effectsize", reason = "for this function.")
-  ifelse(class(model) == "list",
-    models.list <- model,
+  if (inherits(model, "list")) {
+    models.list <- model
+  } else {
     models.list <- list(model)
-  )
+  }
   sums.list <- lapply(models.list, function(x) {
     summary(x)$coefficients[-1, -2]
   })
