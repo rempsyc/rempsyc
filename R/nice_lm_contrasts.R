@@ -33,14 +33,14 @@
 #'         effect size (i.e., dR).
 #' @export
 #' @examples
-#' # Make and format model
-#' #model <- lm(mpg ~ cyl + wt * hp, mtcars)
-#' #nice_lm_contrasts(model, group = "cyl", data = mtcars)
+#' # Make and format model (group need to be a factor)
+#' model <- lm(mpg ~ as.factor(cyl) + wt * hp, mtcars)
+#' nice_lm_contrasts(model, group = "cyl", data = mtcars)
 #'
-#' #model2 <- lm(qsec ~ cyl, data = mtcars)
-#' #my.models <- list(model, model2)
+#' model2 <- lm(qsec ~ as.factor(cyl), data = mtcars)
+#' my.models <- list(model, model2)
 #'
-#' #nice_lm_contrasts(my.models, group = "cyl", data = mtcars)
+#' nice_lm_contrasts(my.models, group = "cyl", data = mtcars)
 #'
 #' @seealso
 #' \code{\link{nice_contrasts}},
@@ -60,6 +60,10 @@ nice_lm_contrasts <- function(model,
          models.list <- list(model)
   )
 
+  #if (length(models.list) == 1) {
+  #  data <- model$model
+  #}
+
   #if (missing(data)) {
     # data.list <- lapply(models.list, `[[`, "model")
     # data.list <- lapply(data.list, function(x) {
@@ -70,7 +74,7 @@ nice_lm_contrasts <- function(model,
   #}
 
   data[[group]] <- as.factor(data[[group]])
-  leastsquare.list <- lapply(models.list, emmeans::emmeans, group, data = data)
+  leastsquare.list <- lapply(models.list, emmeans::emmeans, specs = group, data = data)
   groups.contrasts <- list(
     comp1 = stats::setNames(c(1, 0, -1), levels(data[[group]])),
     # Add support x groups

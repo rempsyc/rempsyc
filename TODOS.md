@@ -1,5 +1,6 @@
 # Development objectives (to-do list)
 
+-   `nice_lm_contrasts`: improve function and add to contrasts vignette!
 -   `nice_assumptions`: accept list objects!
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?
@@ -19,6 +20,7 @@
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
     -   Add option to not use bootstrapping
+    -   Could the solution be a `nice_lm_contrasts`?
 -   all `lm` functions
     -   Correct bug with factors in `lm` models (use data matrix as in `easystats`?)
 -   `nice_lm_slopes`

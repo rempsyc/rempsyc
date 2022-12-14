@@ -1,6 +1,10 @@
 # rempsyc 0.1.x
 * Upcoming!
 
+## rempsyc 0.1.0.8
+* `nice_violin` and `nice_contrasts`: Now correctly handle missing values.
+* New function! `nice_lm_contrasts`, to handle more complex contrast models involving e.g., interactions between variables (similar to `nice_contrasts`).
+
 ## rempsyc 0.1.0.7
 * `nice_table`: 
   * `footnote` argument is renamed to simply `note` since this is what it is called in APA table language.
