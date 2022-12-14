@@ -4,7 +4,7 @@
   * Waiting on CRAN qqplotr (>= 0.0.6) [but does not seem mandatory, could submit without]
 
 ## rempsyc 0.1.0.9
-* `nice_assumptions`: now support list objects, and does not print the interpretation message anymore since it is available from the documentation.
+* `nice_assumptions`: now supports list objects, and does not print the interpretation message anymore since it is available from the documentation.
 
 ## rempsyc 0.1.0.8
 * `nice_violin` and `nice_contrasts`: Now correctly handle missing values.

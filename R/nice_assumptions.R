@@ -60,7 +60,8 @@ nice_assumptions <- function(model) {
 
   names(df) <- c("Model", "shapiro", "bp", "dw")
   df <- df %>%
-    mutate(Diagnostic = rowSums(select(., shapiro:dw) < .05))
+    dplyr::mutate(dplyr::across(where(is.numeric), round, 3),
+           Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05))
 
   names(df) <- c("Model", "Normality (Shapiro-Wilk)",
                  "Homoscedasticity (Breusch-Pagan)",
