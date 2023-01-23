@@ -44,7 +44,7 @@
 #' )
 #'
 #' # Can be passed some of the regular arguments
-#' # of base `t.test()`
+#' # of base [t.test()]
 #'
 #' # Student t-test (instead of Welch)
 #' nice_t_test(

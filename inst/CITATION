@@ -5,5 +5,9 @@ citEntry(
   year     = 2022,
   note     = paste0("(R package version ", utils::packageVersion("rempsyc"), ") [Computer software]."),
   url      = "https://rempsyc.remi-theriault.com",
-  textVersion = paste0("Thériault, R. (2022). rempsyc: Convenience functions for psychology (R package version ", utils::packageVersion("rempsyc"), ") [Computer software]. https://rempsyc.remi-theriault.com")
+  textVersion = paste0("Thériault, R. (2022). rempsyc: Convenience functions for psychology (R package version ", version, ") [Computer software]. https://rempsyc.remi-theriault.com")
 )
+
+version <- meta$Version
+if(is.null(version))
+  version <- utils::packageVersion("rempsyc")

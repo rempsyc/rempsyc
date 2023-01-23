@@ -56,12 +56,12 @@ The effect size and confidence interval are calculated via
 \examples{
 # Make and format model (group need to be a factor)
 model <- lm(mpg ~ as.factor(cyl) + wt * hp, mtcars)
-nice_lm_contrasts(model, group = "cyl", data = mtcars)
+nice_lm_contrasts(model, group = "cyl", data = mtcars, bootstraps = 500)
 
 model2 <- lm(qsec ~ as.factor(cyl), data = mtcars)
 my.models <- list(model, model2)
 
-nice_lm_contrasts(my.models, group = "cyl", data = mtcars)
+nice_lm_contrasts(my.models, group = "cyl", data = mtcars, bootstraps = 500)
 
 }
 \seealso{
