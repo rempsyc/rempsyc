@@ -8,6 +8,16 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
+```{r echo = FALSE}
+if (pkgdown::in_pkgdown()) {
+  knit_print.data.frame <- function(x, ...) {
+    knitr::knit_print(knitr::kable(x), ...)
+  }
+  registerS3method("knit_print", "data.frame",
+                   knit_print.data.frame, envir = asNamespace("knitr"))
+}
+```
+
 ```{r}
 mtcars
 ```
