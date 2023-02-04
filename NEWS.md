@@ -1,7 +1,5 @@
 # rempsyc 0.1.1
 * CRAN resubmission!
-  * Waiting on CRAN effectsize (>= 0.8.3) [necessary for sr2 and confidence intervals]
-  * Waiting on CRAN qqplotr (>= 0.0.6) [but does not seem mandatory, could submit without]
 
 ## rempsyc 0.1.0.9
 * `nice_assumptions`: now supports list objects, and does not print the interpretation message anymore since it is available from the documentation.
