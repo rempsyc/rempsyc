@@ -11,6 +11,7 @@
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
@@ -157,12 +158,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7170373  4.5024428
-#> 2  0.8511956  2.0106199
-#> 3  1.3490153  3.0829491
-#> 4 -5.7651045 -3.7947737
-#> 5 -4.2630965 -2.1604816
-#> 6 -2.2324787 -0.9219754
+#> 1  2.7127359  4.4954696
+#> 2  0.8135737  1.9905962
+#> 3  1.3079592  3.0676981
+#> 4 -5.8077552 -3.8255808
+#> 5 -4.3376481 -2.1930240
+#> 6 -2.2483892 -0.8570376
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -741,7 +742,7 @@ group having variance four times bigger than any of the other groups.
 nice_var(data = iris,
          variable = "Sepal.Length",
          group = "Species")
-#>        Species Setosa Versicolor Virginica Variance.ratio Criteria
+#>       Variable Setosa Versicolor Virginica Variance.ratio Criteria
 #> 1 Sepal.Length  0.124      0.266     0.404            3.3        4
 #>   Heteroscedastic
 #> 1           FALSE
