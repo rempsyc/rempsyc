@@ -11,6 +11,9 @@ ggplot2::ggsave("niceviolinplothere.tiff",
   dpi = 300, path = NULL
 ) # change for your own desired path
 
+# Remove file
+unlink("niceviolinplothere.tiff")
+
 # Change x- and y- axes labels
 nice_violin(
   data = ToothGrowth,
