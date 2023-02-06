@@ -1,3 +1,16 @@
+## Submission rempsyc 0.1.1 attempt no 2
+
+> Package CITATION file contains call(s) to old-style citEntry() or
+citHeader()/citFooter().  Please use bibentry() instead, possibly with
+arguments 'header' and 'footer'.
+
+* Fixed.
+
+> Size of tarball: 5843394 bytes
+Less than 5 MB for a CRAN package, please.
+
+* Fixed.
+
 ## Submission rempsyc 0.1.1
 
 R CMD check results
