@@ -1,4 +1,4 @@
-#' @title Easy export of correlation matrix to Excel (improved version)
+#' @title Easy export of correlation matrix to Excel
 #'
 #' @description Easily output a correlation matrix and export it to
 #' Microsoft Excel, with the first row and column frozen, and
@@ -22,8 +22,7 @@
 #'
 #' @keywords correlation matrix Excel
 #' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
-#' the original `rempsyc::cormatrix_excel` (now internal function
-#' `cormatrix_excel_deprecated`)
+#' the original `rempsyc::cormatrix_excel`.
 #' @return A Microsoft Excel document, containing the colour-coded
 #'         correlation matrix with significance stars, on the first
 #'         sheet, and the colour-coded p-values on the second sheet.
@@ -31,9 +30,9 @@
 #' @examples
 #' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Basic example
-#' cormatrix_excel(mtcars, "cormatrix1")
-#' cormatrix_excel(iris, p_adjust = "none", "cormatrix2")
-#' cormatrix_excel(airquality, method = "spearman", "cormatrix3")
+#' cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp", "carb"), filename = "cormatrix1")
+#' cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2")
+#' cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3")
 #' \dontshow{setwd(.old_wd)}
 
 cormatrix_excel <- function(data,
@@ -49,21 +48,6 @@ cormatrix_excel <- function(data,
 
   rlang::check_installed(c("correlation", "openxlsx2"),
                          reason = "for this function.")
-
-# if (isFALSE(requireNamespace("openxlsx2", quietly = TRUE))) {
-#   cat("The package `openxlsx2` is required for this function\n",
-#       "Would you like to install it?")
-#   if (utils::menu(c("Yes", "No")) == 1) {
-#     utils::install.packages('openxlsx2', repos = c(
-#       janmarvin = "https://janmarvin.r-universe.dev",
-#       CRAN = "https://cloud.r-project.org"))
-#   } else (stop(
-#     'The cormatrix_excel2 function relies on the `openxlsx2` package.
-#     You can install it manually with:
-#     install.packages("openxlsx2", repos = c(
-#       janmarvin = "https://janmarvin.r-universe.dev",
-#       CRAN = "https://cloud.r-project.org")'))
-#   }
 
 # create correlation matrix with p values
 cm <- data %>%
@@ -377,5 +361,3 @@ openxlsx2::wb_save(wb, path = paste0(filename, ".xlsx"), overwrite = TRUE)
 openxlsx2::xl_open(paste0(filename, ".xlsx"))
 
 }
-
-cormatrix_excel2 <- cormatrix_excel

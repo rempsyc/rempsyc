@@ -305,7 +305,10 @@ Easily output a correlation matrix and export it to Microsoft Excel, with the fi
 
 ```{r cormatrix_excel2, warning = FALSE}
 
-cormatrix_excel(infert, "cormatrix1")
+cormatrix_excel(data = infert, 
+                filename = "cormatrix1", 
+                select = c("age", "parity", "induced", "case", "spontaneous", 
+                           "stratum", "pooled.stratum"))
 
 ```
 

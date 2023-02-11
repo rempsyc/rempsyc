@@ -157,13 +157,13 @@ contrasts
 #> 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
-#>     CI_lower   CI_upper
-#> 1  2.7127359  4.4954696
-#> 2  0.8135737  1.9905962
-#> 3  1.3079592  3.0676981
-#> 4 -5.8077552 -3.8255808
-#> 5 -4.3376481 -2.1930240
-#> 6 -2.2483892 -0.8570376
+#>     CI_lower  CI_upper
+#> 1  2.6806763  4.389178
+#> 2  0.8159358  1.999843
+#> 3  1.3329199  3.141800
+#> 4 -5.8023093 -3.805017
+#> 5 -4.2749877 -2.299162
+#> 6 -2.2302089 -0.899217
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -412,7 +412,10 @@ blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
 
-cormatrix_excel(infert, "cormatrix1")
+cormatrix_excel(data = infert, 
+                filename = "cormatrix1", 
+                select = c("age", "parity", "induced", "case", "spontaneous", 
+                           "stratum", "pooled.stratum"))
 #> # Correlation Matrix (pearson-method)
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
