@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
-[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui/#package:rempsyc)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
+[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui/#package:rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -16,7 +16,6 @@ status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.or
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
-[![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
 [![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/stargazers)
 <!-- badges: end -->
 
@@ -157,13 +156,13 @@ contrasts
 #> 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
-#>     CI_lower  CI_upper
-#> 1  2.6806763  4.389178
-#> 2  0.8159358  1.999843
-#> 3  1.3329199  3.141800
-#> 4 -5.8023093 -3.805017
-#> 5 -4.2749877 -2.299162
-#> 6 -2.2302089 -0.899217
+#>     CI_lower   CI_upper
+#> 1  2.6999202  4.5532167
+#> 2  0.7694332  1.9809066
+#> 3  1.3801590  3.1426618
+#> 4 -5.8567192 -3.8591783
+#> 5 -4.2907264 -2.2789595
+#> 6 -2.2577701 -0.9024787
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
