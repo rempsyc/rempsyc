@@ -95,11 +95,7 @@ suits particularly well the pipe workflow.
     tidy(model, conf.int = TRUE) |>
       nice_table(broom = "lm")
 
-<figure>
-<img src="paper_files/figure-markdown_strict/broom-1.png"
-style="width:20.0%" alt="Caption for example figure." />
-<figcaption aria-hidden="true">Caption for example figure.</figcaption>
-</figure>
+![Caption for example figure.](paper_files/figure-markdown_strict/broom-1.png){width=20%}
 
 We can do the same with a {report} table.
 
