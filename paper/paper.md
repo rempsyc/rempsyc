@@ -84,9 +84,6 @@ use the magical function, `nice_table()`, on the resulting data frame.
 `nice_table()` works on any data frame, even non-statistical ones. For
 example, it will work on the `mtcars` data set.
 
-    ## Suggested APA citation: Thériault, R. (2022). rempsyc: Convenience functions for psychology 
-    ## (R package version 0.1.1) [Computer software]. https://rempsyc.remi-theriault.com
-
     library(rempsyc)
 
     nice_table(
@@ -95,7 +92,8 @@ example, it will work on the `mtcars` data set.
       note = c("The data was extracted from the 1974 Motor Trend US magazine.",
                "* p < .05, ** p < .01, *** p < .001"))
 
-![](paper_files/figure-markdown_strict/nice_table-1.png)
+<img src="paper_files/figure-markdown_strict/nice_table-1.png"
+style="width:50.0%" />
 
 One of its main benefit however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
