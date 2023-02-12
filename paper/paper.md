@@ -84,16 +84,18 @@ use the magical function, `nice_table()`, on the resulting data frame.
 `nice_table()` works on any data frame, even non-statistical ones. For
 example, it will work on the `mtcars` data set.
 
-    library(rempsyc)
-
     ## Suggested APA citation: Thériault, R. (2022). rempsyc: Convenience functions for psychology 
     ## (R package version 0.1.1) [Computer software]. https://rempsyc.remi-theriault.com
+
+    library(rempsyc)
 
     nice_table(
       mtcars[1:3, ], 
       title = c("Table 1", "Motor Trend Car Road Tests"),
       note = c("The data was extracted from the 1974 Motor Trend US magazine.",
                "* p < .05, ** p < .01, *** p < .001"))
+
+![](paper_files/figure-markdown_strict/nice_table-1.png)
 
 One of its main benefit however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
@@ -113,6 +115,8 @@ example create a {broom} table and then apply `nice_table()` on it.
     ## 5 wt:hp         0.0258   0.00799     3.23  3.22e- 3   0.00944    0.0422
 
     nice_table(stats.table, broom = "lm")
+
+![](paper_files/figure-markdown_strict/broom-1.png)
 
 We can do the same with a {report} table.
 
@@ -137,16 +141,22 @@ We can do the same with a {report} table.
 
     nice_table(stats.table)
 
+![](paper_files/figure-markdown_strict/report-1.png)
+
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `short` argument.
 
     nice_table(stats.table, short = TRUE)
+
+![](paper_files/figure-markdown_strict/short-1.png)
 
 For convenience, it is also possible to highlight significant results
 for better visual discrimination, using the `highlight` argument[1].
 
     my_table <- nice_table(stats.table, short = TRUE, highlight = 0.001)
     my_table
+
+![](paper_files/figure-markdown_strict/highlight-1.png)
 
 One can easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
@@ -183,6 +193,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
     nice_table(stats.table)
 
+![](paper_files/figure-markdown_strict/nice_t_test-1.png)
+
 ### Contrasts
 
     nice_contrasts(data = mtcars,
@@ -192,21 +204,23 @@ tables before they can be fed to `nice_table()` and saved to Word.
     contrasts
 
     ##   Dependent Variable Comparison df         t            p         d   CI_lower
-    ## 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.587739  2.7143753
-    ## 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.440495  0.8462678
-    ## 3                mpg      4 - 6 28  3.640418 1.092089e-03  2.147244  1.3212325
-    ## 4               disp      4 - 8 28 -6.040561 1.640986e-06 -4.803022 -5.8312011
-    ## 5               disp      6 - 8 28 -4.861413 4.051110e-05 -3.288726 -4.3326451
-    ## 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.514296 -2.2620589
+    ## 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.587739  2.6675232
+    ## 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.440495  0.8577536
+    ## 3                mpg      4 - 6 28  3.640418 1.092089e-03  2.147244  1.3689365
+    ## 4               disp      4 - 8 28 -6.040561 1.640986e-06 -4.803022 -5.7699794
+    ## 5               disp      6 - 8 28 -4.861413 4.051110e-05 -3.288726 -4.2638686
+    ## 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.514296 -2.2759030
     ##     CI_upper
-    ## 1  4.5305985
-    ## 2  1.9861713
-    ## 3  3.0369043
-    ## 4 -3.8431158
-    ## 5 -2.2438064
-    ## 6 -0.8974695
+    ## 1  4.4207911
+    ## 2  2.0045019
+    ## 3  3.0621741
+    ## 4 -3.8531752
+    ## 5 -2.2649722
+    ## 6 -0.8836528
 
     nice_table(contrasts, highlight = .001)
+
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
 
 ### Moderations
 
@@ -225,6 +239,10 @@ tables before they can be fed to `nice_table()` and saved to Word.
     ## 1 0.0000000000 0.08418650
     ## 2 0.0000000000 0.01331121
     ## 3 0.0003502202 0.09723370
+
+    nice_table(stats.table)
+
+![](paper_files/figure-markdown_strict/moderations-1.png)
 
 ### Regressions
 
@@ -254,6 +272,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
     nice_table(mods, highlight = TRUE)
 
+![](paper_files/figure-markdown_strict/nice_lm-1.png)
+
 ### Simple Slopes
 
     model1 <- lm(mpg ~ gear * wt, mtcars)
@@ -278,6 +298,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
     ## 6 0.61629796 0.001875579        0 0.01548357
 
     nice_table(simple.slopes)
+
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png)
 
 ### Correlation Matrix
 
@@ -327,6 +349,12 @@ readily available in a convenient format.
 <img src="figures/cormatrix.png" width="80%" />
 <img src="figures/cormatrix2.png" width="80%" />
 
+<img src="paper_files/cormatrix.png" width="80%" />
+
+![](paper_files/cormatrix.png)
+
+![](figures/cormatrix.png)
+
 ## Publication-Ready Figures
 
 Preparing figures according to APA style, having them look good, and
@@ -353,7 +381,7 @@ For an example of such use in publication, see Thériault et al.
                 has.d = TRUE,
                 d.y = 30)
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+![](paper_files/figure-markdown_strict/nice_violin-1.png)
 
 One can easily save the resulting figure with `ggplot2::ggsave()`,
 specifying the desired file name, extension, and resolution.
@@ -381,7 +409,7 @@ For an example of such use in publication, see Krol et al.
                  has.r = TRUE,
                  has.p = TRUE)
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+![](paper_files/figure-markdown_strict/nice_scatter-1.png)
 
     nice_scatter(data = mtcars,
                  predictor = "wt",
@@ -389,7 +417,7 @@ For an example of such use in publication, see Krol et al.
                  group = "cyl",
                  has.confband = TRUE)
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-15-2.png)
+![](paper_files/figure-markdown_strict/nice_scatter-2.png)
 
 ### Overlapping Circles
 
@@ -402,7 +430,7 @@ example of such use in publication, see Thériault et al.
 
     overlap_circle(3.5)
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+![](paper_files/figure-markdown_strict/overlap_circle-1.png)
 
 ## Testing assumptions
 
@@ -416,17 +444,9 @@ in large samples and underpowered in small samples ([Kozak and Piepho
 
 That said, if for whatever reason one wants to check objective asumption
 tests for a linear model, rempsyc makes this easy with the
-`nice_assumptions()` function.
-
-    model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
-    nice_assumptions(model)
-
-    ##                   Model Normality (Shapiro-Wilk)
-    ## 1 mpg ~ wt * cyl + gear                    0.615
-    ##   Homoscedasticity (Breusch-Pagan) Autocorrelation of residuals (Durbin-Watson)
-    ## 1                            0.054                                        0.525
-    ##   Diagnostic
-    ## 1          0
+`nice_assumptions()` function, which provide *p* values for normality
+(Shapiro-Wilk), homoscedasticity (Breusch-Pagan) and autocorrelation of
+residuals (Durbin-Watson) in one call. .
 
 ### Categorical Predictors
 
@@ -441,7 +461,7 @@ combination of quantile-quantile plots, density plots, and histograms.
                    histogram = TRUE,
                    title = "Density (Sepal Length)")
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-18-1.png)
+![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using the median absolute deviation
 (MAD, [Leys et al. 2013](#ref-leys2013outliers)).
@@ -456,7 +476,7 @@ Similarly for univariate outliers using the median absolute deviation
 
     ## Warning: Removed 37 rows containing missing values (`stat_bindot()`).
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-19-1.png)
+![](paper_files/figure-markdown_strict/plot_outliers-1.png)
 
 Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.[4]
@@ -485,17 +505,26 @@ Univariate outliers based on the MAD can also be simply requested with
 Homoscedasticity can also be checked numerically with `nice_var()` or
 visually with `nice_varplot()`.
 
-    DV <- names(iris[1:4])
+    nice_var(data = iris,
+             variable = names(iris[1:4]),
+             group = "Species")
 
-    var.table <- nice_var(data = iris,
-                          variable = DV,
-                          group = "Species")
+    ##        Species Setosa Versicolor Virginica Variance.ratio Criteria
+    ## 1 Sepal.Length  0.124      0.266     0.404            3.3        4
+    ## 2  Sepal.Width  0.144      0.098     0.104            1.5        4
+    ## 3 Petal.Length  0.030      0.221     0.305           10.2        4
+    ## 4  Petal.Width  0.011      0.039     0.075            6.8        4
+    ##   Heteroscedastic
+    ## 1           FALSE
+    ## 2           FALSE
+    ## 3            TRUE
+    ## 4            TRUE
 
     nice_varplot(data = iris,
                  variable = "Sepal.Length",
                  group = "Species")
 
-![](paper_files/figure-markdown_strict/unnamed-chunk-21-1.png)
+![](paper_files/figure-markdown_strict/nice_var-1.png)
 
 ## Utility functions
 

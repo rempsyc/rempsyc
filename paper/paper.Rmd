@@ -77,7 +77,13 @@ function, `nice_table()`, on the resulting data frame. `nice_table()` works on
 any data frame, even non-statistical ones. For example, it will work on the
 `mtcars` data set.
 
-```{r}
+```{r setup, echo=FALSE}
+flextable::set_flextable_defaults(background.color = "white")
+library(rempsyc)
+```
+
+
+```{r nice_table}
 library(rempsyc)
 
 nice_table(
@@ -88,11 +94,13 @@ nice_table(
 
 ```
 
+![](paper_files/figure-markdown_strict/nice_table-1.png)
+
 One of its main benefit however is the automatic formatting of statistical
 symbols and its integration with other packages. We can for example create
 a {broom} table and then apply `nice_table()` on it.
 
-```{r}
+```{r broom}
 library(broom)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
 (stats.table <- tidy(model, conf.int = TRUE))
@@ -100,9 +108,11 @@ model <- lm(mpg ~ cyl + wt * hp, mtcars)
 nice_table(stats.table, broom = "lm")
 ```
 
+![](paper_files/figure-markdown_strict/broom-1.png)
+
 We can do the same with a {report} table.
 
-```{r}
+```{r report}
 library(report)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
 (stats.table <- as.data.frame(report(model)))
@@ -110,27 +120,33 @@ model <- lm(mpg ~ cyl + wt * hp, mtcars)
 nice_table(stats.table)
 ```
 
+![](paper_files/figure-markdown_strict/report-1.png)
+
 The {report} package provides quite comprehensive tables, so one may request an 
 abbreviated table with the `short` argument.
 
-```{r}
+```{r short}
 nice_table(stats.table, short = TRUE)
 ```
+
+![](paper_files/figure-markdown_strict/short-1.png)
 
 For convenience, it is also possible to highlight significant results for better 
 visual discrimination, using the `highlight` argument^[This argument can be used
 logically, as `TRUE` or `FALSE`, but can also be provided with a numeric value
 representing the cut-off threshold for the _p_ value].
 
-```{r}
+```{r highlight}
 my_table <- nice_table(stats.table, short = TRUE, highlight = 0.001)
 my_table
 ```
 
+![](paper_files/figure-markdown_strict/highlight-1.png)
+
 One can easily save the resulting table to Word with `flextable::save_as_docx()`, 
 specifying the object name and desired path.
 
-```{r, eval=FALSE}
+```{r save_as_docx, eval=FALSE}
 flextable::save_as_docx(my_table, path = "nice_tablehere.docx")
 ```
 
@@ -145,7 +161,7 @@ before they can be fed to `nice_table()` and saved to Word.
 
 ### _t_ tests
 
-```{r}
+```{r nice_t_test}
 stats.table <- nice_t_test(
   data = mtcars,
   response = c("mpg", "disp", "drat"),
@@ -156,9 +172,11 @@ stats.table
 nice_table(stats.table)
 ```
 
+![](paper_files/figure-markdown_strict/nice_t_test-1.png)
+
 ### Contrasts
 
-```{r}
+```{r nice_contrasts}
 nice_contrasts(data = mtcars,
                response = c("mpg", "disp"),
                group = "cyl",
@@ -168,20 +186,26 @@ contrasts
 nice_table(contrasts, highlight = .001)
 ```
 
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
+
 ### Moderations
 
-```{r}
+```{r moderations}
 stats.table <- nice_mod(
   data = mtcars,
   response = "mpg",
   predictor = "gear",
   moderator = "wt")
 stats.table
+
+nice_table(stats.table)
 ```
+
+![](paper_files/figure-markdown_strict/moderations-1.png)
 
 ### Regressions
 
-```{r}
+```{r nice_lm}
 model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
 model2 <- lm(qsec ~ disp + drat * carb, mtcars)
 mods <- nice_lm(list(model1, model2))
@@ -190,9 +214,11 @@ mods
 nice_table(mods, highlight = TRUE)
 ```
 
+![](paper_files/figure-markdown_strict/nice_lm-1.png)
+
 ### Simple Slopes
 
-```{r}
+```{r nice_lm_slopes}
 model1 <- lm(mpg ~ gear * wt, mtcars)
 model2 <- lm(disp ~ gear * wt, mtcars)
 my.models <- list(model1, model2)
@@ -201,6 +227,8 @@ simple.slopes
 
 nice_table(simple.slopes)
 ```
+
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png)
 
 ### Correlation Matrix
 
@@ -237,7 +265,7 @@ used when the corresponding _p_ value is at least smaller than .05] The exact
 _p_ values are provided in a second tab for reference purposes, so all 
 information is readily available in a convenient format.
 
-```{r, eval=FALSE}
+```{r cormatrix_excel, eval=FALSE}
 cormatrix_excel(data = infert, 
                 filename = "cormatrix1", 
                 select = c("age", "parity", "induced", "case", "spontaneous", 
@@ -246,6 +274,12 @@ cormatrix_excel(data = infert,
 
 <img src="figures/cormatrix.png" width="80%" />
 <img src="figures/cormatrix2.png" width="80%" />
+
+<img src="paper_files/cormatrix.png" width="80%" />
+
+![](paper_files/cormatrix.png)
+
+![](figures/cormatrix.png)
 
 ## Publication-Ready Figures
 
@@ -262,7 +296,7 @@ saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 For an example of such use in publication, see @theriault2021swapping.
 
-```{r}
+```{r nice_violin}
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
@@ -276,7 +310,7 @@ nice_violin(data = ToothGrowth,
 One can easily save the resulting figure with `ggplot2::ggsave()`, specifying 
 the desired file name, extension, and resolution.
 
-```{r, eval=FALSE}
+```{r ggsave, eval=FALSE}
 ggplot2::ggsave('nice_violinplothere.pdf', width = 7, height = 7, 
                 unit = 'in', dpi = 300)
 ```
@@ -292,7 +326,7 @@ submissions to scientific journals. Additionally, figures are {ggplot2} objects
 
 For an example of such use in publication, see @krol2020self.
 
-```{r}
+```{r nice_scatter}
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
@@ -315,7 +349,7 @@ For psychologists using the Inclusion of Other in the the Self Scale
 scores (1 to 7) into a group average representation of the conceptual self-other 
 overlap. For an example of such use in publication, see @theriault2021swapping.
 
-```{r}
+```{r overlap_circle}
 overlap_circle(3.5)
 ```
 
@@ -330,12 +364,9 @@ since they are overpowered in large samples and underpowered in small samples
 
 That said, if for whatever reason one wants to check objective asumption tests
 for a linear model, rempsyc makes this easy with the `nice_assumptions()`
-function.
-
-```{r}
-model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
-nice_assumptions(model)
-```
+function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticity 
+(Breusch-Pagan) and autocorrelation of residuals (Durbin-Watson) in one call.
+.
 
 ### Categorical Predictors
 
@@ -343,7 +374,7 @@ nice_assumptions(model)
 categorical predictors (i.e., when using groups), through a combination of 
 quantile-quantile plots, density plots, and histograms.
 
-```{r}
+```{r nice_normality}
 nice_normality(data = iris,
                variable = "Sepal.Length",
                group = "Species",
@@ -356,7 +387,7 @@ nice_normality(data = iris,
 Similarly for univariate outliers using the median absolute deviation [MAD, 
 @leys2013outliers].
 
-```{r}
+```{r plot_outliers}
 plot_outliers(
   airquality,
   group = "Month",
@@ -367,19 +398,17 @@ Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.^[Once one has identified outliers, it is also possible ot winsorize them with the
 `winsorize_mad()` function.]
 
-```{r}
+```{r find_mad}
 find_mad(airquality, names(airquality), criteria = 3)
 ```
 
 Homoscedasticity can also be checked numerically with `nice_var()` or visually 
 with `nice_varplot()`.
 
-```{r}
-DV <- names(iris[1:4])
-
-var.table <- nice_var(data = iris,
-                      variable = DV,
-                      group = "Species")
+```{r nice_var}
+nice_var(data = iris,
+         variable = names(iris[1:4]),
+         group = "Species")
 
 nice_varplot(data = iris,
              variable = "Sepal.Length",
@@ -409,7 +438,7 @@ given the reader a gentle introduction to this package.
 
 # Availability
 
-The {rempsyc} package is available on CRAN, and can be installed using 
+The {rempsyc} package is available on CRAN, and can be installed using \n
 `install.packages("rempsyc")`. The full tutorial website can be accessed at: 
 https://rempsyc.remi-theriault.com/.
 
