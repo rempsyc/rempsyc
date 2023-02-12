@@ -93,7 +93,11 @@ nice_table(
 
 ```
 
-![](paper_files/figure-markdown_strict/nice_table-1.png){width=50%}
+![](paper_files/figure-markdown_strict/nice_table-1.png)
+
+```{r, echo=FALSE, out.width="50%", fig.cap="A nice image."}
+knitr::include_graphics("paper_files/figure-markdown_strict/nice_table-1.png")
+```
 
 One of its main benefit however is the automatic formatting of statistical
 symbols and its integration with other packages. We can for example create
@@ -277,7 +281,7 @@ saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
 
-```{r nice_violin}
+```{r nice_violin, fig.width=8, fig.height=7, out.width="60%"}
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
@@ -309,7 +313,7 @@ submissions to scientific journals. Additionally, figures are {ggplot2} objects
 
 For an example of such use in publication, see @krol2020self.
 
-```{r nice_scatter}
+```{r nice_scatter, fig.width=8, fig.height=7, out.width="60%"}
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
@@ -331,7 +335,7 @@ For psychologists using the Inclusion of Other in the the Self Scale
 scores (1 to 7) into a group average representation of the conceptual self-other 
 overlap. For an example of such use in publication, see @theriault2021swapping.
 
-```{r overlap_circle}
+```{r overlap_circle, fig.width=7, fig.height=7, out.width="30%"}
 overlap_circle(3.5)
 ```
 
@@ -356,7 +360,7 @@ function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticit
 categorical predictors (i.e., when using groups), through a combination of 
 quantile-quantile plots, density plots, and histograms.
 
-```{r nice_normality}
+```{r nice_normality, fig.width=16, fig.height=7, out.width="80%"}
 nice_normality(data = iris,
                variable = "Sepal.Length",
                group = "Species",
@@ -368,7 +372,7 @@ nice_normality(data = iris,
 Similarly for univariate outliers using the median absolute deviation [MAD, 
 @leys2013outliers].
 
-```{r plot_outliers}
+```{r plot_outliers, fig.width=8, fig.height=7, out.width="70%"}
 plot_outliers(airquality,
               group = "Month",
               response = "Ozone")
@@ -385,7 +389,7 @@ find_mad(airquality, names(airquality), criteria = 3)
 Homoscedasticity can also be checked numerically with `nice_var()` or visually 
 with `nice_varplot()`.
 
-```{r nice_var}
+```{r nice_var, fig.width=8, fig.height=7, out.width="70%"}
 nice_var(data = iris,
          variable = names(iris[1:4]),
          group = "Species")
