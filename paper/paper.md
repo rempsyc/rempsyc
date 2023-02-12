@@ -94,11 +94,6 @@ example, it will work on the `mtcars` data set.
 
 ![](paper_files/figure-markdown_strict/nice_table-1.png)
 
-<img src="paper_files/figure-markdown_strict/nice_table-1.png" alt="A nice image." width="50%" />
-<p class="caption">
-A nice image.
-</p>
-
 One of its main benefit however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
 example create a {broom} table and then apply `nice_table()` on it. It
@@ -272,7 +267,7 @@ ready to be saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
                 has.d = TRUE,
                 d.y = 30)
 
-<img src="paper_files/figure-markdown_strict/nice_violin-1.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_violin-1.png)
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -303,7 +298,7 @@ For an example of such use in publication, see Krol et al.
                  has.r = TRUE,
                  has.p = TRUE)
 
-<img src="paper_files/figure-markdown_strict/nice_scatter-1.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_scatter-1.png)
 
     nice_scatter(data = mtcars,
                  predictor = "wt",
@@ -311,7 +306,7 @@ For an example of such use in publication, see Krol et al.
                  group = "cyl",
                  has.confband = TRUE)
 
-<img src="paper_files/figure-markdown_strict/nice_scatter-2.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_scatter-2.png)
 
 ### Overlapping Circles
 
@@ -324,7 +319,7 @@ example of such use in publication, see Thériault et al.
 
     overlap_circle(3.5)
 
-<img src="paper_files/figure-markdown_strict/overlap_circle-1.png" width="30%" />
+![](paper_files/figure-markdown_strict/overlap_circle-1.png)
 
 ## Testing assumptions
 
@@ -355,7 +350,7 @@ combination of quantile-quantile plots, density plots, and histograms.
                    histogram = TRUE,
                    title = "Density (Sepal Length)")
 
-<img src="paper_files/figure-markdown_strict/nice_normality-1.png" width="80%" />
+![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using the median absolute deviation
 (MAD, [Leys et al. 2013](#ref-leys2013outliers)).
@@ -369,7 +364,7 @@ Similarly for univariate outliers using the median absolute deviation
 
     ## Warning: Removed 37 rows containing missing values (`stat_bindot()`).
 
-<img src="paper_files/figure-markdown_strict/plot_outliers-1.png" width="70%" />
+![](paper_files/figure-markdown_strict/plot_outliers-1.png)
 
 Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.[4]
@@ -417,7 +412,7 @@ visually with `nice_varplot()`.
                  variable = "Sepal.Length",
                  group = "Species")
 
-<img src="paper_files/figure-markdown_strict/nice_var-1.png" width="70%" />
+![](paper_files/figure-markdown_strict/nice_var-1.png)
 
 ## Utility functions
 
