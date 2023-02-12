@@ -10,83 +10,77 @@ authors:
     orcid: 0000-0003-4315-6788
     affiliation: 1
 affiliations:
-  - name: "Département de psychologie, Université du Québec à Montréal, Québec, Canada"
+  - name: "Departement of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2022-11-29"
+date: "2023-02-12"
 bibliography: paper.bib
 output:
   md_document:
     preserve_yaml: TRUE
+journal: JOSS
+link-citations: yes
 ---
 
 # Summary
 
-(R Core Team 2022)
+([R Core Team 2022](#ref-base2021))
 
-The forces on stars, galaxies, and dark matter under external
-gravitational fields lead to the dynamical evolution of structures in
-the universe. The orbits of these bodies are therefore key to
-understanding the formation, history, and future state of galaxies. The
-field of “galactic dynamics,” which aims to model the gravitating
-components of galaxies to study their structure and evolution, is now
-well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems
-require efficient numerical tools, many of which require the same base
-code (e.g., for performing numerical orbit integration).
+{rempsyc} is an R package of convenience functions to make the
+analysis-to-publication workflow faster and easier. It affords easily
+customizable plots (via {ggplot2}) and nice APA tables exportable to
+Word (via {flextable}); it makes it easy to run statistical tests, check
+assumptions, or automatize various tasks. It is a package mostly geared
+at researchers in the psychological sciences but people from all fields
+can find it useful.
+
+# Introduction
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics.
-Python enables wrapping low-level languages (e.g., C) for speed without
-losing flexibility or ease-of-use in the user-interface. The API for
-`Gala` was designed to provide a class-based and user-friendly interface
-to fast (C or Cython-optimized) implementations of common operations
-such as gravitational potential and force evaluation, orbit integration,
-dynamical transformations, and chaos indicators for nonlinear dynamics.
-`Gala` also relies heavily on and interfaces well with the
-implementations of physical units and astronomical coordinate systems in
-the `Astropy` package (**astropy?**) (`astropy.units` and
-`astropy.coordinates`).
+There are many reasons to use R ([R Core Team 2022](#ref-base2021)) for
+analyzing and reporting data from research studies. R is more compatible
+with the ideals of open science ([Quintana 2020](#ref-quintana2020)). In
+contrast to commercial software: (a) it is free to use; (b) it makes it
+easy to share a fully comprehensive analysis script; (c) it is
+transparent as anyone can look at the formulas or algorithms used in a
+given package; (d) the community can quickly contribute new packages
+based on current needs; (e) it generates better-looking figures; and (f)
+it helps reduce copy-paste errors so common in psychology[1].
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has
-already been used in a number of scientific publications
-(**Pearson:2017?**) and has also been used in graduate courses on
-Galactic dynamics to, e.g., provide interactive visualizations of
-textbook material (**Binney:2008?**). The combination of speed, design,
-and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia*
-mission (**gaia?**) by students and experts alike.
+------------------------------------------------------------------------
 
-# Citations
+However, R has a major downside: its steep learning curve due to its
+programmatic interface, in contrast to perhaps more beginner-friendly
+point-and-click software. Of course, this flexibility is also a
+strength, and there are increasing momentum for producing packages that
+make using R as easy as possible.
 
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+The R software thus makes it possible to export the results (in the form
+of text (e.g., the “report” package from easystats) or tables (e.g., the
+rempsyc package) directly into Microsoft Word or Microsoft Excel. It
+also makes it possible to check s ’there are obvious statistical errors
+directly in the PDF of your final article (via the statcheck package).
+Note for artists, it is also the software that makes the most beautiful
+figures to visualize your data and results !
 
-If you want to cite a software repository URL (e.g. something on GitHub
-without a preferred citation) then you can do it with the example BibTeX
-entry below for (**fidgit?**).
-
-For a quick reference, the following citation commands can be used: -
-`@author:2001` -&gt; “Author et al. (2001)” - `[@author:2001]` -&gt;
-“(Author et al., 2001)” - `[@author1:2001; @author2:2001]` -&gt;
-“(Author1 et al., 2001; Author2 et al., 2002)”
-
-# Figures
-
-Figure sizes can be customized by adding an optional second parameter:
-<img src="figure.png" style="width:20.0%"
-alt="Caption for example figure." />
+# Examples of Features
 
 # Acknowledgements
 
 I would like to thank Hugues Leduc, Jay Olson, Charles-Étienne Lavoie,
 and Björn Büdenbender for statistical or technical advice that helped
-inform some functions of this package, as well as useful feedback on
-this manuscript. I would also like to acknowledge funding from the
-Social Sciences and Humanities Research Council of Canada.
+inform some functions of this package and/or useful feedback on this
+manuscript. I would also like to acknowledge funding from the Social
+Sciences and Humanities Research Council of Canada.
+
+# References
+
+Quintana, D. S. 2020. *Five Things about Open and Reproducible Science
+That Every Early Career Researcher Should Know*. <https://osf.io/2jt9u>.
 
 R Core Team. 2022. *R: A Language and Environment for Statistical
 Computing*. Vienna, Austria: R Foundation for Statistical Computing.
 <https://www.R-project.org/>.
+
+[1] according to some estimates, up to 50% of articles have at least one
+statistical error (Nuijten et al., 2016)
