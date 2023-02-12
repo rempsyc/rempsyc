@@ -82,7 +82,6 @@ flextable::set_flextable_defaults(background.color = "white")
 library(rempsyc)
 ```
 
-
 ```{r nice_table}
 library(rempsyc)
 
@@ -98,14 +97,14 @@ nice_table(
 
 One of its main benefit however is the automatic formatting of statistical
 symbols and its integration with other packages. We can for example create
-a {broom} table and then apply `nice_table()` on it.
+a {broom} table and then apply `nice_table()` on it. It suits particularly
+well the pipe workflow.
 
 ```{r broom}
 library(broom)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
-(stats.table <- tidy(model, conf.int = TRUE))
-
-nice_table(stats.table, broom = "lm")
+tidy(model, conf.int = TRUE) |>
+  nice_table(broom = "lm")
 ```
 
 ![](paper_files/figure-markdown_strict/broom-1.png)
@@ -115,7 +114,7 @@ We can do the same with a {report} table.
 ```{r report}
 library(report)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
-(stats.table <- as.data.frame(report(model)))
+stats.table <- as.data.frame(report(model))
 
 nice_table(stats.table)
 ```
@@ -162,14 +161,11 @@ before they can be fed to `nice_table()` and saved to Word.
 ### _t_ tests
 
 ```{r nice_t_test}
-stats.table <- nice_t_test(
-  data = mtcars,
-  response = c("mpg", "disp", "drat"),
-  group = "am",
-  warning = FALSE)
-stats.table
-
-nice_table(stats.table)
+nice_t_test(data = mtcars,
+            response = c("mpg", "disp", "drat"),
+            group = "am",
+            warning = FALSE) |>
+  nice_table()
 ```
 
 ![](paper_files/figure-markdown_strict/nice_t_test-1.png)
@@ -180,10 +176,8 @@ nice_table(stats.table)
 nice_contrasts(data = mtcars,
                response = c("mpg", "disp"),
                group = "cyl",
-               covariates = "hp") -> contrasts
-contrasts
-
-nice_table(contrasts, highlight = .001)
+               covariates = "hp") |>
+  nice_table(highlight = .001)
 ```
 
 ![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
@@ -191,14 +185,11 @@ nice_table(contrasts, highlight = .001)
 ### Moderations
 
 ```{r moderations}
-stats.table <- nice_mod(
-  data = mtcars,
-  response = "mpg",
-  predictor = "gear",
-  moderator = "wt")
-stats.table
-
-nice_table(stats.table)
+nice_mod(data = mtcars,
+         response = "mpg",
+         predictor = "gear",
+         moderator = "wt") |>
+  nice_table()
 ```
 
 ![](paper_files/figure-markdown_strict/moderations-1.png)
@@ -208,10 +199,9 @@ nice_table(stats.table)
 ```{r nice_lm}
 model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
 model2 <- lm(qsec ~ disp + drat * carb, mtcars)
-mods <- nice_lm(list(model1, model2))
-mods
 
-nice_table(mods, highlight = TRUE)
+nice_lm(list(model1, model2)) |>
+  nice_table(highlight = TRUE)
 ```
 
 ![](paper_files/figure-markdown_strict/nice_lm-1.png)
@@ -222,17 +212,16 @@ nice_table(mods, highlight = TRUE)
 model1 <- lm(mpg ~ gear * wt, mtcars)
 model2 <- lm(disp ~ gear * wt, mtcars)
 my.models <- list(model1, model2)
-simple.slopes <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
-simple.slopes
 
-nice_table(simple.slopes)
+nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
+  nice_table()
 ```
 
 ![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png)
 
 ### Correlation Matrix
 
-It is also possible to export a coloured correlation matrix to Microsoft Excel. 
+It is also possible to export a colour-coded correlation matrix to Microsoft Excel. 
 The `cormatrix_excel()` function has several benefits over conventional 
 approaches. The base R `cor()` function for example does not use rounded values
 and the console is impractical for large matrices. One may manually round values
@@ -272,14 +261,8 @@ cormatrix_excel(data = infert,
                            "stratum", "pooled.stratum"))
 ```
 
-<img src="figures/cormatrix.png" width="80%" />
-<img src="figures/cormatrix2.png" width="80%" />
-
-<img src="paper_files/cormatrix.png" width="80%" />
-
-![](paper_files/cormatrix.png)
-
 ![](figures/cormatrix.png)
+![](figures/cormatrix2.png)
 
 ## Publication-Ready Figures
 
@@ -294,8 +277,6 @@ saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
 
-For an example of such use in publication, see @theriault2021swapping.
-
 ```{r nice_violin}
 nice_violin(data = ToothGrowth,
             group = "dose",
@@ -306,6 +287,8 @@ nice_violin(data = ToothGrowth,
             has.d = TRUE,
             d.y = 30)
 ```
+
+For an example of such use in publication, see @theriault2021swapping.
 
 One can easily save the resulting figure with `ggplot2::ggsave()`, specifying 
 the desired file name, extension, and resolution.
@@ -333,7 +316,6 @@ nice_scatter(data = mtcars,
              has.confband = TRUE,
              has.r = TRUE,
              has.p = TRUE)
-
 
 nice_scatter(data = mtcars,
              predictor = "wt",
@@ -381,17 +363,15 @@ nice_normality(data = iris,
                shapiro = TRUE,
                histogram = TRUE,
                title = "Density (Sepal Length)")
-
 ```
 
 Similarly for univariate outliers using the median absolute deviation [MAD, 
 @leys2013outliers].
 
 ```{r plot_outliers}
-plot_outliers(
-  airquality,
-  group = "Month",
-  response = "Ozone")
+plot_outliers(airquality,
+              group = "Month",
+              response = "Ozone")
 ```
 
 Univariate outliers based on the MAD can also be simply requested with 

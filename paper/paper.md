@@ -99,22 +99,13 @@ example, it will work on the `mtcars` data set.
 
 One of its main benefit however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
-example create a {broom} table and then apply `nice_table()` on it.
+example create a {broom} table and then apply `nice_table()` on it. It
+suits particularly well the pipe workflow.
 
     library(broom)
     model <- lm(mpg ~ cyl + wt * hp, mtcars)
-    (stats.table <- tidy(model, conf.int = TRUE))
-
-    ## # A tibble: 5 × 7
-    ##   term        estimate std.error statistic  p.value  conf.low conf.high
-    ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>     <dbl>     <dbl>
-    ## 1 (Intercept)  49.5      3.66       13.5   1.58e-13  42.0       57.0   
-    ## 2 cyl          -0.365    0.509      -0.718 4.79e- 1  -1.41       0.678 
-    ## 3 wt           -7.63     1.52       -5.01  2.93e- 5 -10.7       -4.51  
-    ## 4 hp           -0.108    0.0298     -3.64  1.14e- 3  -0.169     -0.0473
-    ## 5 wt:hp         0.0258   0.00799     3.23  3.22e- 3   0.00944    0.0422
-
-    nice_table(stats.table, broom = "lm")
+    tidy(model, conf.int = TRUE) |>
+      nice_table(broom = "lm")
 
 ![](paper_files/figure-markdown_strict/broom-1.png)
 
@@ -122,22 +113,7 @@ We can do the same with a {report} table.
 
     library(report)
     model <- lm(mpg ~ cyl + wt * hp, mtcars)
-    (stats.table <- as.data.frame(report(model)))
-
-    ## Parameter   | Coefficient |          95% CI | t(27) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
-    ## ------------------------------------------------------------------------------------------------------
-    ## (Intercept) |       49.49 | [ 41.97, 57.01] | 13.51 | < .001 |      -0.18 |    [-0.36, -0.01] |       
-    ## cyl         |       -0.37 | [ -1.41,  0.68] | -0.72 | 0.479  |      -0.11 |    [-0.42,  0.20] |       
-    ## wt          |       -7.63 | [-10.75, -4.51] | -5.01 | < .001 |      -0.62 |    [-0.85, -0.40] |       
-    ## hp          |       -0.11 | [ -0.17, -0.05] | -3.64 | 0.001  |      -0.29 |    [-0.53, -0.04] |       
-    ## wt × hp     |        0.03 | [  0.01,  0.04] |  3.23 | 0.003  |       0.29 |    [ 0.11,  0.47] |       
-    ##             |             |                 |       |        |            |                   |       
-    ## AIC         |             |                 |       |        |            |                   | 147.01
-    ## AICc        |             |                 |       |        |            |                   | 150.37
-    ## BIC         |             |                 |       |        |            |                   | 155.80
-    ## R2          |             |                 |       |        |            |                   |   0.89
-    ## R2 (adj.)   |             |                 |       |        |            |                   |   0.87
-    ## Sigma       |             |                 |       |        |            |                   |   2.17
+    stats.table <- as.data.frame(report(model))
 
     nice_table(stats.table)
 
@@ -175,23 +151,11 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
 ### *t* tests
 
-    stats.table <- nice_t_test(
-      data = mtcars,
-      response = c("mpg", "disp", "drat"),
-      group = "am",
-      warning = FALSE)
-    stats.table
-
-    ##   Dependent Variable         t       df            p         d   CI_lower
-    ## 1                mpg -3.767123 18.33225 1.373638e-03 -1.477947 -2.2659731
-    ## 2               disp  4.197727 29.25845 2.300413e-04  1.445221  0.6417834
-    ## 3               drat -5.646088 27.19780 5.266742e-06 -2.003084 -2.8592770
-    ##     CI_upper
-    ## 1 -0.6705686
-    ## 2  2.2295592
-    ## 3 -1.1245498
-
-    nice_table(stats.table)
+    nice_t_test(data = mtcars,
+                response = c("mpg", "disp", "drat"),
+                group = "am",
+                warning = FALSE) |>
+      nice_table()
 
 ![](paper_files/figure-markdown_strict/nice_t_test-1.png)
 
@@ -200,47 +164,18 @@ tables before they can be fed to `nice_table()` and saved to Word.
     nice_contrasts(data = mtcars,
                    response = c("mpg", "disp"),
                    group = "cyl",
-                   covariates = "hp") -> contrasts
-    contrasts
-
-    ##   Dependent Variable Comparison df         t            p         d   CI_lower
-    ## 1                mpg      4 - 8 28  3.663188 1.028617e-03  3.587739  2.6675232
-    ## 2                mpg      6 - 8 28  1.290359 2.074806e-01  1.440495  0.8577536
-    ## 3                mpg      4 - 6 28  3.640418 1.092089e-03  2.147244  1.3689365
-    ## 4               disp      4 - 8 28 -6.040561 1.640986e-06 -4.803022 -5.7699794
-    ## 5               disp      6 - 8 28 -4.861413 4.051110e-05 -3.288726 -4.2638686
-    ## 6               disp      4 - 6 28 -2.703423 1.153440e-02 -1.514296 -2.2759030
-    ##     CI_upper
-    ## 1  4.4207911
-    ## 2  2.0045019
-    ## 3  3.0621741
-    ## 4 -3.8531752
-    ## 5 -2.2649722
-    ## 6 -0.8836528
-
-    nice_table(contrasts, highlight = .001)
+                   covariates = "hp") |>
+      nice_table(highlight = .001)
 
 ![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
 
 ### Moderations
 
-    stats.table <- nice_mod(
-      data = mtcars,
-      response = "mpg",
-      predictor = "gear",
-      moderator = "wt")
-    stats.table
-
-    ##   Dependent Variable Predictor df         b          t          p         sr2
-    ## 1                mpg      gear 28  5.615951  1.9437108 0.06204275 0.028488305
-    ## 2                mpg        wt 28  1.403861  0.4301493 0.67037970 0.001395217
-    ## 3                mpg   gear:wt 28 -1.966931 -2.1551077 0.03989970 0.035022025
-    ##       CI_lower   CI_upper
-    ## 1 0.0000000000 0.08418650
-    ## 2 0.0000000000 0.01331121
-    ## 3 0.0003502202 0.09723370
-
-    nice_table(stats.table)
+    nice_mod(data = mtcars,
+             response = "mpg",
+             predictor = "gear",
+             moderator = "wt") |>
+      nice_table()
 
 ![](paper_files/figure-markdown_strict/moderations-1.png)
 
@@ -248,29 +183,9 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
     model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
     model2 <- lm(qsec ~ disp + drat * carb, mtcars)
-    mods <- nice_lm(list(model1, model2))
-    mods
 
-    ##   Model Number Dependent Variable Predictor df            b          t
-    ## 1            1                mpg       cyl 27 -0.365239089 -0.7180977
-    ## 2            1                mpg        wt 27 -7.627489287 -5.0146028
-    ## 3            1                mpg        hp 27 -0.108394273 -3.6404181
-    ## 4            1                mpg     wt:hp 27  0.025836594  3.2329593
-    ## 5            2               qsec      disp 27 -0.006222635 -1.9746464
-    ## 6            2               qsec      drat 27  0.227692395  0.1968842
-    ## 7            2               qsec      carb 27  1.154106215  0.7179431
-    ## 8            2               qsec drat:carb 27 -0.477539959 -1.0825727
-    ##              p          sr2     CI_lower   CI_upper
-    ## 1 4.788652e-01 0.0021596150 0.0000000000 0.01306786
-    ## 2 2.928375e-05 0.1053130854 0.0089876445 0.20163853
-    ## 3 1.136403e-03 0.0555024045 0.0005550240 0.11934768
-    ## 4 3.221753e-03 0.0437733438 0.0004377334 0.09898662
-    ## 5 5.861684e-02 0.0702566891 0.0000000000 0.19796621
-    ## 6 8.453927e-01 0.0006984424 0.0000000000 0.01347203
-    ## 7 4.789590e-01 0.0092872897 0.0000000000 0.05587351
-    ## 8 2.885720e-01 0.0211165564 0.0000000000 0.09136014
-
-    nice_table(mods, highlight = TRUE)
+    nice_lm(list(model1, model2)) |>
+      nice_table(highlight = TRUE)
 
 ![](paper_files/figure-markdown_strict/nice_lm-1.png)
 
@@ -279,34 +194,18 @@ tables before they can be fed to `nice_table()` and saved to Word.
     model1 <- lm(mpg ~ gear * wt, mtcars)
     model2 <- lm(disp ~ gear * wt, mtcars)
     my.models <- list(model1, model2)
-    simple.slopes <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
-    simple.slopes
 
-    ##   Model Number Dependent Variable Predictor (+/-1 SD) df         b         t
-    ## 1            1                mpg       gear (LOW-wt) 28  7.540509 2.0106560
-    ## 2            1                mpg      gear (MEAN-wt) 28  5.615951 1.9437108
-    ## 3            1                mpg      gear (HIGH-wt) 28  3.691393 1.7955678
-    ## 4            2               disp       gear (LOW-wt) 28 50.510710 0.6654856
-    ## 5            2               disp      gear (MEAN-wt) 28 35.797623 0.6121820
-    ## 6            2               disp      gear (HIGH-wt) 28 21.084536 0.5067498
-    ##            p         sr2 CI_lower   CI_upper
-    ## 1 0.05408136 0.030484485        0 0.08823243
-    ## 2 0.06204275 0.028488305        0 0.08418650
-    ## 3 0.08336403 0.024311231        0 0.07551496
-    ## 4 0.51118526 0.003234637        0 0.02113980
-    ## 5 0.54535707 0.002737218        0 0.01919662
-    ## 6 0.61629796 0.001875579        0 0.01548357
-
-    nice_table(simple.slopes)
+    nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
+      nice_table()
 
 ![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png)
 
 ### Correlation Matrix
 
-It is also possible to export a coloured correlation matrix to Microsoft
-Excel. The `cormatrix_excel()` function has several benefits over
-conventional approaches. The base R `cor()` function for example does
-not use rounded values and the console is impractical for large
+It is also possible to export a colour-coded correlation matrix to
+Microsoft Excel. The `cormatrix_excel()` function has several benefits
+over conventional approaches. The base R `cor()` function for example
+does not use rounded values and the console is impractical for large
 matrices. One may manually round values and export it to a `.csv` file,
 which is an improvement but still unsatisfying.
 
@@ -346,14 +245,7 @@ readily available in a convenient format.
                     select = c("age", "parity", "induced", "case", "spontaneous", 
                                "stratum", "pooled.stratum"))
 
-<img src="figures/cormatrix.png" width="80%" />
-<img src="figures/cormatrix2.png" width="80%" />
-
-<img src="paper_files/cormatrix.png" width="80%" />
-
-![](paper_files/cormatrix.png)
-
-![](figures/cormatrix.png)
+![](figures/cormatrix.png) ![](figures/cormatrix2.png)
 
 ## Publication-Ready Figures
 
@@ -369,9 +261,6 @@ ready to be saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
 
-For an example of such use in publication, see Thériault et al.
-([2021](#ref-theriault2021swapping)).
-
     nice_violin(data = ToothGrowth,
                 group = "dose",
                 response = "len",
@@ -382,6 +271,9 @@ For an example of such use in publication, see Thériault et al.
                 d.y = 30)
 
 ![](paper_files/figure-markdown_strict/nice_violin-1.png)
+
+For an example of such use in publication, see Thériault et al.
+([2021](#ref-theriault2021swapping)).
 
 One can easily save the resulting figure with `ggplot2::ggsave()`,
 specifying the desired file name, extension, and resolution.
@@ -466,10 +358,9 @@ combination of quantile-quantile plots, density plots, and histograms.
 Similarly for univariate outliers using the median absolute deviation
 (MAD, [Leys et al. 2013](#ref-leys2013outliers)).
 
-    plot_outliers(
-      airquality,
-      group = "Month",
-      response = "Ozone")
+    plot_outliers(airquality,
+                  group = "Month",
+                  response = "Ozone")
 
     ## Bin width defaults to 1/30 of the range of the data. Pick better value with
     ## `binwidth`.

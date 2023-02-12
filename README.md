@@ -144,10 +144,11 @@ moment). In this particular case, the confidence intervals are
 bootstraped around the Cohen’s d.
 
 ``` r
-nice_contrasts(data = mtcars,
-               response = c("mpg", "disp"),
-               group = "cyl",
-               covariates = "hp") -> contrasts
+contrasts <- nice_contrasts(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  group = "cyl",
+  covariates = "hp")
 contrasts
 #>   Dependent Variable Comparison df         t              p         d
 #> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739
@@ -157,12 +158,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.6999202  4.5532167
-#> 2  0.7694332  1.9809066
-#> 3  1.3801590  3.1426618
-#> 4 -5.8567192 -3.8591783
-#> 5 -4.2907264 -2.2789595
-#> 6 -2.2577701 -0.9024787
+#> 1  2.5989657  4.4772920
+#> 2  0.8691266  1.9802006
+#> 3  1.2524146  3.0111861
+#> 4 -5.6920043 -3.8980568
+#> 5 -4.3276824 -2.2204870
+#> 6 -2.2488896 -0.9160156
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -744,7 +745,7 @@ group having variance four times bigger than any of the other groups.
 nice_var(data = iris,
          variable = "Sepal.Length",
          group = "Species")
-#>       Variable Setosa Versicolor Virginica Variance.ratio Criteria
+#>        Species Setosa Versicolor Virginica Variance.ratio Criteria
 #> 1 Sepal.Length  0.124      0.266     0.404            3.3        4
 #>   Heteroscedastic
 #> 1           FALSE
