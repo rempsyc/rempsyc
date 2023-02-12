@@ -220,10 +220,11 @@
 </h2>
 <p>Easily compute regression with planned contrast analyses (pairwise comparisons similar to t-tests but more powerful when more than 2 groups), and format in publication-ready format. Supports multiple dependent variables at once (but supports only three groups for the moment). In this particular case, the confidence intervals are bootstraped around the Cohen’s d.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>               response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
-<span>               group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
-<span>               covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">contrasts</span></span>
+<code class="sourceCode R"><span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
+<span>  covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span>
 <span><span class="va">contrasts</span></span>
 <span><span class="co">#&gt;   Dependent Variable Comparison df         t              p         d</span></span>
 <span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739</span></span>
@@ -233,12 +234,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.6999202  4.5532167</span></span>
-<span><span class="co">#&gt; 2  0.7694332  1.9809066</span></span>
-<span><span class="co">#&gt; 3  1.3801590  3.1426618</span></span>
-<span><span class="co">#&gt; 4 -5.8567192 -3.8591783</span></span>
-<span><span class="co">#&gt; 5 -4.2907264 -2.2789595</span></span>
-<span><span class="co">#&gt; 6 -2.2577701 -0.9024787</span></span>
+<span><span class="co">#&gt; 1  2.5989657  4.4772920</span></span>
+<span><span class="co">#&gt; 2  0.8691266  1.9802006</span></span>
+<span><span class="co">#&gt; 3  1.2524146  3.0111861</span></span>
+<span><span class="co">#&gt; 4 -5.6920043 -3.8980568</span></span>
+<span><span class="co">#&gt; 5 -4.3276824 -2.2204870</span></span>
+<span><span class="co">#&gt; 6 -2.2488896 -0.9160156</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -760,7 +761,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>         variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
 <span>         group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       Variable Setosa Versicolor Virginica Variance.ratio Criteria</span></span>
+<span><span class="co">#&gt;        Species Setosa Versicolor Virginica Variance.ratio Criteria</span></span>
 <span><span class="co">#&gt; 1 Sepal.Length  0.124      0.266     0.404            3.3        4</span></span>
 <span><span class="co">#&gt;   Heteroscedastic</span></span>
 <span><span class="co">#&gt; 1           FALSE</span></span></code></pre></div>
