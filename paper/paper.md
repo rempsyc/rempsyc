@@ -81,30 +81,25 @@ rigid especially when using analyzes that are not supported by default.
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
 use the magical function, `nice_table()`, on the resulting data frame.
-`nice_table()` works on any data frame, even non-statistical ones. For
-example, it will work on the `mtcars` data set.
-
-    library(rempsyc)
-
-    nice_table(
-      mtcars[1:3, ], 
-      title = c("Table 1", "Motor Trend Car Road Tests"),
-      note = c("The data was extracted from the 1974 Motor Trend US magazine.",
-               "* p < .05, ** p < .01, *** p < .001"))
-
-![](paper_files/figure-markdown_strict/nice_table-1.png)
+`nice_table()` works on any data frame, even non-statistical ones like
+`mtcars`.
 
 One of its main benefit however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
 example create a {broom} table and then apply `nice_table()` on it. It
 suits particularly well the pipe workflow.
 
+    library(rempsyc)
     library(broom)
     model <- lm(mpg ~ cyl + wt * hp, mtcars)
     tidy(model, conf.int = TRUE) |>
       nice_table(broom = "lm")
 
-![](paper_files/figure-markdown_strict/broom-1.png)
+<figure>
+<img src="paper_files/figure-markdown_strict/broom-1.png"
+style="width:20.0%" alt="Caption for example figure." />
+<figcaption aria-hidden="true">Caption for example figure.</figcaption>
+</figure>
 
 We can do the same with a {report} table.
 
@@ -125,13 +120,18 @@ request an abbreviated table with the `short` argument.
 
 For convenience, it is also possible to highlight significant results
 for better visual discrimination, using the `highlight` argument[1].
+Once satisfied with the table, we can add a title and note.
 
-    my_table <- nice_table(stats.table, short = TRUE, highlight = 0.001)
+    my_table <- nice_table(
+      stats.table, short = TRUE, highlight = 0.001,
+      title = c("Table 1", "A Pretty Regression Model"),
+      note = c("The data was extracted from the 1974 Motor Trend US magazine.",
+               "* p < .05, ** p < .01, *** p < .001"))
     my_table
 
 ![](paper_files/figure-markdown_strict/highlight-1.png)
 
-One can easily save the resulting table to Word with
+One can then easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
 path.
 
@@ -165,16 +165,6 @@ tables before they can be fed to `nice_table()` and saved to Word.
       nice_table(highlight = .001)
 
 ![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
-
-### Moderations
-
-    nice_mod(data = mtcars,
-             response = "mpg",
-             predictor = "gear",
-             moderator = "wt") |>
-      nice_table()
-
-![](paper_files/figure-markdown_strict/moderations-1.png)
 
 ### Regressions
 
@@ -288,9 +278,6 @@ Additionally, figures are {ggplot2} objects ([Wickham
 
 ### Scatter Plots
 
-For an example of such use in publication, see Krol et al.
-([2020](#ref-krol2020self)).
-
     nice_scatter(data = mtcars,
                  predictor = "wt",
                  response = "mpg",
@@ -308,18 +295,22 @@ For an example of such use in publication, see Krol et al.
 
 ![](paper_files/figure-markdown_strict/nice_scatter-2.png)
 
+For an example of such use in publication, see Krol et al.
+([2020](#ref-krol2020self)).
+
 ### Overlapping Circles
 
 For psychologists using the Inclusion of Other in the the Self Scale
 ([Aron, Aron, and Smollan 1992](#ref-aron1992inclusion)), it can be
 useful to interpolate the original discrete scores (1 to 7) into a group
-average representation of the conceptual self-other overlap. For an
-example of such use in publication, see Thériault et al.
-([2021](#ref-theriault2021swapping)).
+average representation of the conceptual self-other overlap.
 
     overlap_circle(3.5)
 
 ![](paper_files/figure-markdown_strict/overlap_circle-1.png)
+
+For an example of such use in publication, see Thériault et al.
+([2021](#ref-theriault2021swapping)).
 
 ## Testing assumptions
 
@@ -358,11 +349,6 @@ Similarly for univariate outliers using the median absolute deviation
     plot_outliers(airquality,
                   group = "Month",
                   response = "Ozone")
-
-    ## Bin width defaults to 1/30 of the range of the data. Pick better value with
-    ## `binwidth`.
-
-    ## Warning: Removed 37 rows containing missing values (`stat_bindot()`).
 
 ![](paper_files/figure-markdown_strict/plot_outliers-1.png)
 
