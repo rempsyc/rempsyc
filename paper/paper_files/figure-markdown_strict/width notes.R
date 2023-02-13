@@ -23,7 +23,7 @@ patterns2 <- c(
   "![](paper_files/figure-markdown_strict/broom-1.png){width=60%}",
   "![](paper_files/figure-markdown_strict/report-1.png){width=80%}",
   "![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}",
-  "![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=60%}",
+  "![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=70%}",
   "![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=80%}",
   "![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}",
   "![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}",
