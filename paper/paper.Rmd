@@ -17,7 +17,7 @@ bibliography: paper.bib
 output:
   md_document:
     preserve_yaml: TRUE
-    variant: "markdown"
+    variant: "markdown_strict"
 journal: JOSS
 link-citations: yes
 ---
@@ -339,7 +339,7 @@ function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticit
 categorical predictors (i.e., when using groups), through a combination of 
 quantile-quantile plots, density plots, and histograms.
 
-```{r nice_normality, fig.width=16, fig.height=7, out.width="80%"}
+```{r nice_normality, fig.width=16, fig.height=7}
 nice_normality(data = iris,
                variable = "Sepal.Length",
                group = "Species",
