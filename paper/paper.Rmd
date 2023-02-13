@@ -17,6 +17,7 @@ bibliography: paper.bib
 output:
   md_document:
     preserve_yaml: TRUE
+    variant: "markdown"
 journal: JOSS
 link-citations: yes
 ---
@@ -94,7 +95,7 @@ tidy(model, conf.int = TRUE) |>
   nice_table(broom = "lm")
 ```
 
-![Caption for example figure.](paper_files/figure-markdown_strict/broom-1.png){width=20%}
+![](paper_files/figure-markdown_strict/broom-1.png){width=70%}
 
 We can do the same with a {report} table.
 
@@ -106,7 +107,7 @@ stats.table <- as.data.frame(report(model))
 nice_table(stats.table)
 ```
 
-![](paper_files/figure-markdown_strict/report-1.png)
+![](paper_files/figure-markdown_strict/report-1.png){width=80%}
 
 The {report} package provides quite comprehensive tables, so one may request an 
 abbreviated table with the `short` argument.
@@ -115,7 +116,7 @@ abbreviated table with the `short` argument.
 nice_table(stats.table, short = TRUE)
 ```
 
-![](paper_files/figure-markdown_strict/short-1.png)
+![](paper_files/figure-markdown_strict/short-1.png){width=70%}
 
 For convenience, it is also possible to highlight significant results for better 
 visual discrimination, using the `highlight` argument^[This argument can be used
@@ -132,7 +133,7 @@ my_table <- nice_table(
 my_table
 ```
 
-![](paper_files/figure-markdown_strict/highlight-1.png)
+![](paper_files/figure-markdown_strict/highlight-1.png){width=70%}
 
 One can then easily save the resulting table to Word with `flextable::save_as_docx()`, 
 specifying the object name and desired path.
@@ -160,7 +161,7 @@ nice_t_test(data = mtcars,
   nice_table()
 ```
 
-![](paper_files/figure-markdown_strict/nice_t_test-1.png)
+![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=60%}
 
 ### Contrasts
 
@@ -172,7 +173,7 @@ nice_contrasts(data = mtcars,
   nice_table(highlight = .001)
 ```
 
-![](paper_files/figure-markdown_strict/nice_contrasts-1.png)
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=70%}
 
 ### Regressions
 
@@ -184,7 +185,7 @@ nice_lm(list(model1, model2)) |>
   nice_table(highlight = TRUE)
 ```
 
-![](paper_files/figure-markdown_strict/nice_lm-1.png)
+![](paper_files/figure-markdown_strict/nice_lm-1.png){width=70%}
 
 ### Simple Slopes
 
@@ -197,7 +198,7 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
   nice_table()
 ```
 
-![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png)
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=70%}
 
 ### Correlation Matrix
 
@@ -257,7 +258,7 @@ saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
 
-```{r nice_violin, fig.width=8, fig.height=7}
+```{r nice_violin, fig.width=8, fig.height=7, out.width="60%"}
 nice_violin(data = ToothGrowth,
             group = "dose",
             response = "len",
@@ -287,7 +288,7 @@ submissions to scientific journals. Additionally, figures are {ggplot2} objects
 
 ### Scatter Plots
 
-```{r nice_scatter, fig.width=8, fig.height=7}
+```{r nice_scatter, fig.width=8, fig.height=7, out.width="60%"}
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
@@ -311,7 +312,7 @@ For psychologists using the Inclusion of Other in the the Self Scale
 scores (1 to 7) into a group average representation of the conceptual self-other 
 overlap.
 
-```{r overlap_circle, fig.width=7, fig.height=7}
+```{r overlap_circle, fig.width=7, fig.height=7, out.width="30%"}
 overlap_circle(3.5)
 ```
 
@@ -338,7 +339,7 @@ function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticit
 categorical predictors (i.e., when using groups), through a combination of 
 quantile-quantile plots, density plots, and histograms.
 
-```{r nice_normality, fig.width=16, fig.height=7}
+```{r nice_normality, fig.width=16, fig.height=7, out.width="80%"}
 nice_normality(data = iris,
                variable = "Sepal.Length",
                group = "Species",
@@ -350,7 +351,7 @@ nice_normality(data = iris,
 Similarly for univariate outliers using the median absolute deviation [MAD, 
 @leys2013outliers].
 
-```{r plot_outliers, warning=FALSE, message=FALSE, fig.width=8, fig.height=7}
+```{r plot_outliers, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, out.width="70%"}
 plot_outliers(airquality,
               group = "Month",
               response = "Ozone")
@@ -367,7 +368,7 @@ find_mad(airquality, names(airquality), criteria = 3)
 Homoscedasticity can also be checked numerically with `nice_var()` or visually 
 with `nice_varplot()`.
 
-```{r nice_var, fig.width=8, fig.height=7}
+```{r nice_var, fig.width=8, fig.height=7, out.width="70%"}
 nice_var(data = iris,
          variable = names(iris[1:4]),
          group = "Species")
