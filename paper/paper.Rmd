@@ -95,7 +95,7 @@ tidy(model, conf.int = TRUE) |>
   nice_table(broom = "lm")
 ```
 
-![](paper_files/figure-markdown_strict/broom-1.png){width=70%}
+![](paper_files/figure-markdown_strict/broom-1.png){width=60%}
 
 We can do the same with a {report} table.
 
@@ -110,19 +110,12 @@ nice_table(stats.table)
 ![](paper_files/figure-markdown_strict/report-1.png){width=80%}
 
 The {report} package provides quite comprehensive tables, so one may request an 
-abbreviated table with the `short` argument.
-
-```{r short}
-nice_table(stats.table, short = TRUE)
-```
-
-![](paper_files/figure-markdown_strict/short-1.png){width=70%}
-
-For convenience, it is also possible to highlight significant results for better 
-visual discrimination, using the `highlight` argument^[This argument can be used
-logically, as `TRUE` or `FALSE`, but can also be provided with a numeric value
-representing the cut-off threshold for the _p_ value]. Once satisfied 
-with the table, we can add a title and note.
+abbreviated table with the `short` argument. For convenience, it is also 
+possible to highlight significant results for better visual discrimination, 
+using the `highlight` argument^[This argument can be used logically, as `TRUE` 
+or `FALSE`, but can also be provided with a numeric value representing the 
+cut-off threshold for the _p_ value]. Once satisfied with the table, we can add 
+a title and note.
 
 ```{r highlight}
 my_table <- nice_table(
@@ -133,7 +126,7 @@ my_table <- nice_table(
 my_table
 ```
 
-![](paper_files/figure-markdown_strict/highlight-1.png){width=70%}
+![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}
 
 One can then easily save the resulting table to Word with `flextable::save_as_docx()`, 
 specifying the object name and desired path.
@@ -173,7 +166,7 @@ nice_contrasts(data = mtcars,
   nice_table(highlight = .001)
 ```
 
-![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=70%}
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=80%}
 
 ### Regressions
 
@@ -185,7 +178,7 @@ nice_lm(list(model1, model2)) |>
   nice_table(highlight = TRUE)
 ```
 
-![](paper_files/figure-markdown_strict/nice_lm-1.png){width=70%}
+![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}
 
 ### Simple Slopes
 
@@ -198,7 +191,7 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
   nice_table()
 ```
 
-![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=70%}
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
 
 ### Correlation Matrix
 
@@ -312,7 +305,7 @@ For psychologists using the Inclusion of Other in the the Self Scale
 scores (1 to 7) into a group average representation of the conceptual self-other 
 overlap.
 
-```{r overlap_circle, fig.width=7, fig.height=7, out.width="30%"}
+```{r overlap_circle, fig.width=7, fig.height=7, out.width="40%"}
 overlap_circle(3.5)
 ```
 
@@ -351,7 +344,7 @@ nice_normality(data = iris,
 Similarly for univariate outliers using the median absolute deviation [MAD, 
 @leys2013outliers].
 
-```{r plot_outliers, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, out.width="70%"}
+```{r plot_outliers, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, out.width="60%"}
 plot_outliers(airquality,
               group = "Month",
               response = "Ozone")

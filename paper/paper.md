@@ -98,6 +98,7 @@ suits particularly well the pipe workflow.
 
 ![](paper_files/figure-markdown_strict/broom-1.png){width=60%}
 
+
 We can do the same with a {report} table.
 
     library(report)
@@ -108,16 +109,12 @@ We can do the same with a {report} table.
 
 ![](paper_files/figure-markdown_strict/report-1.png){width=80%}
 
+
 The {report} package provides quite comprehensive tables, so one may
-request an abbreviated table with the `short` argument.
-
-    nice_table(stats.table, short = TRUE)
-
-![](paper_files/figure-markdown_strict/short-1.png){width=60%}
-
-For convenience, it is also possible to highlight significant results
-for better visual discrimination, using the `highlight` argument[1].
-Once satisfied with the table, we can add a title and note.
+request an abbreviated table with the `short` argument. For convenience,
+it is also possible to highlight significant results for better visual
+discrimination, using the `highlight` argument[1]. Once satisfied with
+the table, we can add a title and note.
 
     my_table <- nice_table(
       stats.table, short = TRUE, highlight = 0.001,
@@ -126,7 +123,8 @@ Once satisfied with the table, we can add a title and note.
                "* p < .05, ** p < .01, *** p < .001"))
     my_table
 
-![](paper_files/figure-markdown_strict/highlight-1.png){width=60%}
+![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}
+
 
 One can then easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
@@ -153,6 +151,7 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
 ![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=60%}
 
+
 ### Contrasts
 
     nice_contrasts(data = mtcars,
@@ -161,7 +160,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
                    covariates = "hp") |>
       nice_table(highlight = .001)
 
-![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=60%}
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=80%}
+
 
 ### Regressions
 
@@ -171,7 +171,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
     nice_lm(list(model1, model2)) |>
       nice_table(highlight = TRUE)
 
-![](paper_files/figure-markdown_strict/nice_lm-1.png){width=60%}
+![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}
+
 
 ### Simple Slopes
 
@@ -182,7 +183,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
     nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
       nice_table()
 
-![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=60%}
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
+
 
 ### Correlation Matrix
 
@@ -304,7 +306,7 @@ average representation of the conceptual self-other overlap.
 
     overlap_circle(3.5)
 
-![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=30%}
+![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=40%}
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -338,7 +340,7 @@ combination of quantile-quantile plots, density plots, and histograms.
                    histogram = TRUE,
                    title = "Density (Sepal Length)")
 
-![](paper_files/figure-markdown_strict/nice_normality-1.png){width=100%}
+![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using the median absolute deviation
 (MAD, [Leys et al. 2013](#ref-leys2013outliers)).
@@ -347,7 +349,7 @@ Similarly for univariate outliers using the median absolute deviation
                   group = "Month",
                   response = "Ozone")
 
-![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=70%}
+![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
 
 Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.[4]
