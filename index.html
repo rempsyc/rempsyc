@@ -234,12 +234,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.5989657  4.4772920</span></span>
-<span><span class="co">#&gt; 2  0.8691266  1.9802006</span></span>
-<span><span class="co">#&gt; 3  1.2524146  3.0111861</span></span>
-<span><span class="co">#&gt; 4 -5.6920043 -3.8980568</span></span>
-<span><span class="co">#&gt; 5 -4.3276824 -2.2204870</span></span>
-<span><span class="co">#&gt; 6 -2.2488896 -0.9160156</span></span>
+<span><span class="co">#&gt; 1  2.7235058  4.4793775</span></span>
+<span><span class="co">#&gt; 2  0.8205553  2.0114111</span></span>
+<span><span class="co">#&gt; 3  1.3832544  3.0743861</span></span>
+<span><span class="co">#&gt; 4 -5.8495047 -3.8317707</span></span>
+<span><span class="co">#&gt; 5 -4.3601968 -2.2767707</span></span>
+<span><span class="co">#&gt; 6 -2.2459729 -0.9355198</span></span>
 <span></span>
 <span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -567,61 +567,15 @@
 </h2>
 <p>Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/find_mad.html">find_mad</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 20 outlier(s) based on 3 median absolute deviations for variable(s): </span></span>
-<span><span class="co">#&gt;  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The following participants were considered outliers for more than one variable: </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Row n</span></span>
-<span><span class="co">#&gt; 1   3 2</span></span>
-<span><span class="co">#&gt; 2   9 2</span></span>
-<span><span class="co">#&gt; 3  18 2</span></span>
-<span><span class="co">#&gt; 4  19 2</span></span>
-<span><span class="co">#&gt; 5  20 2</span></span>
-<span><span class="co">#&gt; 6  26 2</span></span>
-<span><span class="co">#&gt; 7  28 2</span></span>
-<span><span class="co">#&gt; 8  31 2</span></span>
-<span><span class="co">#&gt; 9  32 2</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/find_mad.html">find_mad</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 2 outlier(s) based on 3 median absolute deviations for variable(s): </span></span>
+<span><span class="co">#&gt;  mpg, cyl, disp, hp, drat, wt, qsec, gear, carb </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Outliers per variable: </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qsec</span></span>
 <span><span class="co">#&gt;   Row qsec_mad</span></span>
 <span><span class="co">#&gt; 1   9 3.665557</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $vs</span></span>
-<span><span class="co">#&gt;    Row vs_mad</span></span>
-<span><span class="co">#&gt; 1    3    Inf</span></span>
-<span><span class="co">#&gt; 2    4    Inf</span></span>
-<span><span class="co">#&gt; 3    6    Inf</span></span>
-<span><span class="co">#&gt; 4    8    Inf</span></span>
-<span><span class="co">#&gt; 5    9    Inf</span></span>
-<span><span class="co">#&gt; 6   10    Inf</span></span>
-<span><span class="co">#&gt; 7   11    Inf</span></span>
-<span><span class="co">#&gt; 8   18    Inf</span></span>
-<span><span class="co">#&gt; 9   19    Inf</span></span>
-<span><span class="co">#&gt; 10  20    Inf</span></span>
-<span><span class="co">#&gt; 11  21    Inf</span></span>
-<span><span class="co">#&gt; 12  26    Inf</span></span>
-<span><span class="co">#&gt; 13  28    Inf</span></span>
-<span><span class="co">#&gt; 14  32    Inf</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $am</span></span>
-<span><span class="co">#&gt;    Row am_mad</span></span>
-<span><span class="co">#&gt; 1    1    Inf</span></span>
-<span><span class="co">#&gt; 2    2    Inf</span></span>
-<span><span class="co">#&gt; 3    3    Inf</span></span>
-<span><span class="co">#&gt; 4   18    Inf</span></span>
-<span><span class="co">#&gt; 5   19    Inf</span></span>
-<span><span class="co">#&gt; 6   20    Inf</span></span>
-<span><span class="co">#&gt; 7   26    Inf</span></span>
-<span><span class="co">#&gt; 8   27    Inf</span></span>
-<span><span class="co">#&gt; 9   28    Inf</span></span>
-<span><span class="co">#&gt; 10  29    Inf</span></span>
-<span><span class="co">#&gt; 11  30    Inf</span></span>
-<span><span class="co">#&gt; 12  31    Inf</span></span>
-<span><span class="co">#&gt; 13  32    Inf</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $carb</span></span>
 <span><span class="co">#&gt;   Row carb_mad</span></span>
