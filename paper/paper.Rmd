@@ -199,8 +199,8 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
 
 ### Correlation Matrix
 
-It is also possible to export a colour-coded correlation matrix to Microsoft Excel. 
-The `cormatrix_excel()` function has several benefits over conventional 
+It is also possible to export a colour-coded correlation matrix to Microsoft 
+Excel. The `cormatrix_excel()` function has several benefits over conventional 
 approaches. The base R `cor()` function for example does not use rounded values
 and the console is impractical for large matrices. One may manually round values
 and export it to a `.csv` file, which is an improvement but still unsatisfying.
@@ -211,11 +211,13 @@ satifying for APA requirements. Hovever, the Word format is not suitable for
 large matrices, as it will often spread beyond the document's margin limits.
 
 Another approach is to export to an image, like the {correlation} package does 
-[@correlationpackage]. For very small matrices, this works extremely well, and 
-the colour is an immense help to quickly identify which correlations are strong 
-or weak, positive or negative, and significant or non-significant. Again, 
-however, this does not work so well for large matrices because labels might 
-overlap or navigating the large figure becomes difficult.
+[@correlationpackage].^[Exporting the correlation matrix to an image through the 
+{correlation} package also requires the {see} package [@seepackage]] For very 
+small matrices, this works extremely well, and the colour is an immense help to
+quickly identify which correlations are strong or weak, positive or negative, 
+and significant or non-significant. Again, however, this does not work so well 
+for large matrices because labels might overlap or navigating the large figure 
+becomes difficult.
 
 When the goal is more exploratory, rather than reporting, and we have large 
 matrices, it can be more useful to export it to Excel. In {rempsyc}, we combine 

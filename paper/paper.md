@@ -206,7 +206,7 @@ for large matrices, as it will often spread beyond the document’s margin
 limits.
 
 Another approach is to export to an image, like the {correlation}
-package does ([Makowski et al., 2020](#ref-correlationpackage)). For
+package does ([Makowski et al., 2020](#ref-correlationpackage)).[3] For
 very small matrices, this works extremely well, and the colour is an
 immense help to quickly identify which correlations are strong or weak,
 positive or negative, and significant or non-significant. Again,
@@ -225,7 +225,7 @@ correlates with which other variable, regardless of how far or deep
 those variables are located within the matrix.
 
 The colour represents the strength of the correlation, whereas the stars
-represent how significant the *p* value is.[3] The exact *p* values are
+represent how significant the *p* value is.[4] The exact *p* values are
 provided in a second tab for reference purposes, so all information is
 readily available in a convenient format.
 
@@ -318,11 +318,11 @@ For an example of such use in publication, see Thériault et al.
 
 When comes time to test assumptions of a linear model, the best option
 is the `check_model()` function from *easystats*’ {performance} package,
-which allows direct visual evaluation of assumptions ([Lüdecke et al.,
-2021](#ref-performancepackage)). Indeed, visual assessment of diagnostic
-plots is recommended over statistical tests since they are overpowered
-in large samples and underpowered in small samples ([Kozak & Piepho,
-2018](#ref-kozak2018s)).
+which allows direct visual evaluation of assumptions ([Lüdecke,
+Ben-Shachar, et al., 2021](#ref-performancepackage)). Indeed, visual
+assessment of diagnostic plots is recommended over statistical tests
+since they are overpowered in large samples and underpowered in small
+samples ([Kozak & Piepho, 2018](#ref-kozak2018s)).
 
 That said, if for whatever reason one wants to check objective asumption
 tests for a linear model, rempsyc makes this easy with the
@@ -355,7 +355,7 @@ Similarly for univariate outliers using the median absolute deviation
 ![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
 
 Univariate outliers based on the MAD can also be simply requested with
-`find_mad()`.[4]
+`find_mad()`.[5]
 
     find_mad(airquality, names(airquality), criteria = 3)
 
@@ -479,6 +479,11 @@ class="nocase">easystats</span>: Streamline model interpretation,
 visualization, and reporting*. <https://easystats.github.io/easystats/>
 (Original work published 2019)
 
+Lüdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner,
+P., & Makowski, D. (2021). <span class="nocase">see</span>: An R package
+for visualizing statistical models. *Journal of Open Source Software*,
+*6*(64), 3393. <https://doi.org/10.21105/joss.03393>
+
 Makowski, D., Ben-Shachar, M. S., Patil, I., & Lüdecke, D. (2020).
 Methods and algorithms for correlation analysis in R. *Journal of Open
 Source Software*, *5*(51), 2306. <https://doi.org/10.21105/joss.02306>
@@ -528,8 +533,12 @@ threshold for the *p* value
 [2] A great resource for this is the {flextable} e-book:
 <https://ardata-fr.github.io/flextable-book/>
 
-[3] For convenience, colours are only used when the corresponding *p*
+[3] Exporting the correlation matrix to an image through the
+{correlation} package also requires the {see} package ([Lüdecke, Patil,
+et al., 2021](#ref-seepackage))
+
+[4] For convenience, colours are only used when the corresponding *p*
 value is at least smaller than .05
 
-[4] Once one has identified outliers, it is also possible ot winsorize
+[5] Once one has identified outliers, it is also possible ot winsorize
 them with the `winsorize_mad()` function.
