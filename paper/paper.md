@@ -71,13 +71,13 @@ few quick examples of those.
 
 Formatting your table properly in R is already a time-consuming task,
 but fortunately several packages take care of the formatting within R
-([Makowski et al., 2021/2023](#ref-reportPackage), and there are several
-others; e.g., the {broom} or {report} packages, [Robinson et al.,
-2022](#ref-broom2022)). Exporting these formatted tables to Microsoft
-Word remains a challenge however. Some packages do export to Word (e.g.,
-[Stanley & Spence, 2018](#ref-stanley2018reproducible)), but their
-formatting is often rigid especially when using analyzes that are not
-supported by default.
+(e.g., the {broom} or {report} packages, [Makowski et al.,
+2021/2023](#ref-reportPackage); [Robinson et al., 2022](#ref-broom2022),
+and there are several others). Exporting these formatted tables to
+Microsoft Word remains a challenge however. Some packages do export to
+Word (e.g., [Stanley & Spence, 2018](#ref-stanley2018reproducible)), but
+their formatting is often rigid especially when using analyzes that are
+not supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
