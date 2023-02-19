@@ -10,7 +10,6 @@
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
 [![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui/#package:rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
-[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
@@ -158,12 +157,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7235058  4.4793775
-#> 2  0.8205553  2.0114111
-#> 3  1.3832544  3.0743861
-#> 4 -5.8495047 -3.8317707
-#> 5 -4.3601968 -2.2767707
-#> 6 -2.2459729 -0.9355198
+#> 1  2.7834549  4.5987584
+#> 2  0.8487621  1.9829747
+#> 3  1.3657530  3.1161587
+#> 4 -5.7833739 -3.9268509
+#> 5 -4.3079646 -2.1971336
+#> 6 -2.2869914 -0.8468964
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
