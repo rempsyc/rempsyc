@@ -158,12 +158,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.5989657  4.4772920
-#> 2  0.8691266  1.9802006
-#> 3  1.2524146  3.0111861
-#> 4 -5.6920043 -3.8980568
-#> 5 -4.3276824 -2.2204870
-#> 6 -2.2488896 -0.9160156
+#> 1  2.7235058  4.4793775
+#> 2  0.8205553  2.0114111
+#> 3  1.3832544  3.0743861
+#> 4 -5.8495047 -3.8317707
+#> 5 -4.3601968 -2.2767707
+#> 6 -2.2459729 -0.9355198
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -539,61 +539,15 @@ scale_mad(mtcars$mpg)
 Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
 
 ``` r
-find_mad(data = mtcars, col.list = names(mtcars), criteria = 3)
-#> 20 outlier(s) based on 3 median absolute deviations for variable(s): 
-#>  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb 
-#> 
-#> The following participants were considered outliers for more than one variable: 
-#> 
-#>   Row n
-#> 1   3 2
-#> 2   9 2
-#> 3  18 2
-#> 4  19 2
-#> 5  20 2
-#> 6  26 2
-#> 7  28 2
-#> 8  31 2
-#> 9  32 2
+find_mad(data = mtcars, col.list = names(mtcars)[c(1:7, 10:11)], criteria = 3)
+#> 2 outlier(s) based on 3 median absolute deviations for variable(s): 
+#>  mpg, cyl, disp, hp, drat, wt, qsec, gear, carb 
 #> 
 #> Outliers per variable: 
 #> 
 #> $qsec
 #>   Row qsec_mad
 #> 1   9 3.665557
-#> 
-#> $vs
-#>    Row vs_mad
-#> 1    3    Inf
-#> 2    4    Inf
-#> 3    6    Inf
-#> 4    8    Inf
-#> 5    9    Inf
-#> 6   10    Inf
-#> 7   11    Inf
-#> 8   18    Inf
-#> 9   19    Inf
-#> 10  20    Inf
-#> 11  21    Inf
-#> 12  26    Inf
-#> 13  28    Inf
-#> 14  32    Inf
-#> 
-#> $am
-#>    Row am_mad
-#> 1    1    Inf
-#> 2    2    Inf
-#> 3    3    Inf
-#> 4   18    Inf
-#> 5   19    Inf
-#> 6   20    Inf
-#> 7   26    Inf
-#> 8   27    Inf
-#> 9   28    Inf
-#> 10  29    Inf
-#> 11  30    Inf
-#> 12  31    Inf
-#> 13  32    Inf
 #> 
 #> $carb
 #>   Row carb_mad

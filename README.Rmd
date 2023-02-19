@@ -379,7 +379,7 @@ scale_mad(mtcars$mpg)
 Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
 
 ```{r, find_mad}
-find_mad(data = mtcars, col.list = names(mtcars), criteria = 3)
+find_mad(data = mtcars, col.list = names(mtcars)[c(1:7, 10:11)], criteria = 3)
 ```
 
 ## `winsorize_mad`
