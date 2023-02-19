@@ -27,11 +27,11 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the 
 analysis-to-publication workflow faster, easier, and less error-prone. It 
-affords easily customizable APA plots (via {ggplot2}) and nice APA tables 
-exportable to Word (via {flextable}). It makes it easy to run statistical tests, 
-check assumptions, and automatize various tasks. It is a package mostly geared 
-at researchers in the psychological sciences but people from all fields can 
-benefit from it.
+affords nice APA tables exportable to Word (via {flextable}) and easily 
+customizable APA plots (via {ggplot2}). It makes it easy to run statistical 
+tests, check assumptions, and automatize various tasks. It is a package mostly
+geared at researchers in the psychological sciences but people from all fields 
+can benefit from it.
 
 # Statement of need
 
@@ -42,15 +42,15 @@ it makes it easy to share a fully comprehensive analysis script; (c) it is
 transparent as anyone can look at the formulas or algorithms used in a given 
 package; (d) the community can quickly contribute new packages based on current 
 needs; (e) it generates better-looking figures; and (f) it helps reduce 
-copy-paste errors so common in psychology. The latter point is a substantial one 
-because according to some estimates, up to 50% of articles in psychology have at 
-least one statistical error [@nuijten2016prevalence].
+copy-paste errors so common in psychology. The latter point is not trivial
+given that according to some estimates, up to 50% of articles in psychology have 
+at least one statistical error [@nuijten2016prevalence].
 
-However, R has a major downside for R novices: its steep learning curve due to 
+However, R has a major downside for novices: its steep learning curve due to 
 its programmatic interface, in contrast to perhaps more user-friendly 
 point-and-click software. Of course, this flexibility is also a strength, as the 
-R community can, and increasingly does, mobilize to produce packages that make 
-using R as easy as possible [e.g., the _easystats_ ecosystem @easystatsPackage]. 
+R community can, and does, mobilize to produce packages that make 
+using R increasingly easier [e.g., the _easystats_ ecosystem @easystatsPackage]. 
 The {rempsyc} package contributes to this momentum by providing convenience 
 functions that remove as much friction as possible between your script and your 
 manuscript (in particular, if you are using Microsoft Word).
@@ -67,7 +67,7 @@ a few quick examples of those.
 
 Formatting your table properly in R is already a time-consuming task, but 
 fortunately several packages take care of the formatting within R [e.g., the 
-{broom} or {report} packages, @broom2022; @reportPackage; and there are several
+{broom} or {report} packages, @broom2022; @reportPackage, and there are several
 others]. Exporting these formatted tables to Microsoft Word remains a challenge 
 however. Some packages do export to Word [e.g., @stanley2018reproducible], but 
 their formatting is often rigid especially when using analyzes that are not
@@ -91,8 +91,9 @@ well the pipe workflow.
 ```{r broom}
 library(rempsyc)
 library(broom)
-model <- lm(mpg ~ cyl + wt * hp, mtcars)
-tidy(model, conf.int = TRUE) |>
+
+lm(mpg ~ cyl + wt * hp, mtcars) |>
+  tidy(conf.int = TRUE) |>
   nice_table(broom = "lm")
 ```
 
@@ -102,8 +103,10 @@ We can do the same with a {report} table.
 
 ```{r report}
 library(report)
-model <- lm(mpg ~ cyl + wt * hp, mtcars)
-stats.table <- as.data.frame(report(model))
+
+stats.table <- lm(mpg ~ cyl + wt * hp, mtcars) |>
+  report() |>
+  as.data.frame()
 
 nice_table(stats.table)
 ```
@@ -111,10 +114,10 @@ nice_table(stats.table)
 ![](paper_files/figure-markdown_strict/report-1.png){width=80%}
 
 The {report} package provides quite comprehensive tables, so one may request an 
-abbreviated table with the `short` argument. For convenience, it is also 
+abbreviated table with the `'short'` argument. For convenience, it is also 
 possible to highlight significant results for better visual discrimination, 
-using the `highlight` argument^[This argument can be used logically, as `TRUE` 
-or `FALSE`, but can also be provided with a numeric value representing the 
+using the `'highlight'` argument^[This argument can be used logically, as `'TRUE'` 
+or `'FALSE'`, but can also be provided with a numeric value representing the 
 cut-off threshold for the _p_ value]. Once satisfied with the table, we can add 
 a title and note.
 
@@ -123,7 +126,7 @@ my_table <- nice_table(
   stats.table, short = TRUE, highlight = 0.001,
   title = c("Table 1", "A Pretty Regression Model"),
   note = c("The data was extracted from the 1974 Motor Trend US magazine.",
-           "* p < .05, ** p < .01, *** p < .001"))
+           "Greyed rows represent statistically significant differences, p < .001."))
 my_table
 ```
 
@@ -207,12 +210,12 @@ correlation matrix to Word in an APA format, and in many cases this is very
 satifying for APA requirements. Hovever, the Word format is not suitable for 
 large matrices, as it will often spread beyond the document's margin limits.
 
-Another approach is to export to an image, like {correlation} package does 
+Another approach is to export to an image, like the {correlation} package does 
 [@correlationpackage]. For very small matrices, this works extremely well, and 
 the colour is an immense help to quickly identify which correlations are strong 
-or weak, positive or negative. Again, however, this does not work so well for 
-large matrices because labels might overlap or navigating the large figure
-becomes difficult.
+or weak, positive or negative, and significant or non-significant. Again, 
+however, this does not work so well for large matrices because labels might 
+overlap or navigating the large figure becomes difficult.
 
 When the goal is more exploratory, rather than reporting, and we have large 
 matrices, it can be more useful to export it to Excel. In {rempsyc}, we combine 
@@ -220,8 +223,9 @@ the idea of using a coloured correlation matrix from the {correlation} package
 with the idea of exporting to Excel using {openxlsx2} [@openxlsx2package].
 
 We also provide some quality of life-improvements, like freezing the first row
-and column so as to be able to easily see to which variables the correlations
-relate, regardless of how far or deep we are within the large correlation matrix.
+and column so as to be able to easily see which variables correlates with which
+other variable, regardless of how far or deep those variables are located 
+within the matrix.
 
 The colour represents the strength of the correlation, whereas the stars 
 represent how significant the _p_ value is.^[For convenience, colours are only 
@@ -247,7 +251,7 @@ Working with {ggplot2} [@ggplot2package] provides tremendous flexibility, but
 an unintended consequence is that doing even trivial operations can at times be 
 daunting.
 
-This is why {rempsyc} prepares a few plot types for you, so they are ready to be 
+This is why {rempsyc} setups a few default plot types, ready to be 
 saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
@@ -325,7 +329,6 @@ That said, if for whatever reason one wants to check objective asumption tests
 for a linear model, rempsyc makes this easy with the `nice_assumptions()`
 function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticity 
 (Breusch-Pagan) and autocorrelation of residuals (Durbin-Watson) in one call.
-.
 
 ### Categorical Predictors
 
@@ -375,13 +378,13 @@ nice_varplot(data = iris,
 ## Utility functions
 
 Finally, with the idea of making the analysis workflow easier in mind,
-{rempsyc} also has a few other utility functions. `nice_na()` allows reporting
-item-level missing values per scale, as well as participant’s maximum number of 
-missing items by scale, as per recommendations [@parent2013handling].
+{rempsyc} also provides a few other utility functions. `nice_na()` allows 
+reporting item-level missing values per scale, as well as participant’s maximum 
+number of missing items by scale, as per recommendations [@parent2013handling].
 
 `extract_duplicates()` creates a data frame of only observations with a 
 duplicated ID or participant number, so they can be investigated more 
-thoroughly. best_duplicate() allows to follow-up on this investigation and
+thoroughly. `best_duplicate()` allows to follow-up on this investigation and
 only keep the "best" duplicate, meaning those with the fewer number of missing
 values, and in case of ties, the first one.
 

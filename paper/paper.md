@@ -12,7 +12,7 @@ authors:
 affiliations:
   - name: "Departement of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-02-12"
+date: "2023-02-19"
 bibliography: paper.bib
 output:
   md_document:
@@ -27,8 +27,8 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the
 analysis-to-publication workflow faster, easier, and less error-prone.
-It affords easily customizable APA plots (via {ggplot2}) and nice APA
-tables exportable to Word (via {flextable}). It makes it easy to run
+It affords nice APA tables exportable to Word (via {flextable}) and
+easily customizable APA plots (via {ggplot2}). It makes it easy to run
 statistical tests, check assumptions, and automatize various tasks. It
 is a package mostly geared at researchers in the psychological sciences
 but people from all fields can benefit from it.
@@ -44,20 +44,19 @@ transparent as anyone can look at the formulas or algorithms used in a
 given package; (d) the community can quickly contribute new packages
 based on current needs; (e) it generates better-looking figures; and (f)
 it helps reduce copy-paste errors so common in psychology. The latter
-point is a substantial one because according to some estimates, up to
-50% of articles in psychology have at least one statistical error
-([Nuijten et al., 2016](#ref-nuijten2016prevalence)).
+point is not trivial given that according to some estimates, up to 50%
+of articles in psychology have at least one statistical error ([Nuijten
+et al., 2016](#ref-nuijten2016prevalence)).
 
-However, R has a major downside for R novices: its steep learning curve
+However, R has a major downside for novices: its steep learning curve
 due to its programmatic interface, in contrast to perhaps more
 user-friendly point-and-click software. Of course, this flexibility is
-also a strength, as the R community can, and increasingly does, mobilize
-to produce packages that make using R as easy as possible (e.g., the
-*easystats* ecosystem [Lüdecke et al.,
-2019/2023](#ref-easystatsPackage)). The {rempsyc} package contributes to
-this momentum by providing convenience functions that remove as much
-friction as possible between your script and your manuscript (in
-particular, if you are using Microsoft Word).
+also a strength, as the R community can, and does, mobilize to produce
+packages that make using R increasingly easier (e.g., the *easystats*
+ecosystem [Lüdecke et al., 2019/2023](#ref-easystatsPackage)). The
+{rempsyc} package contributes to this momentum by providing convenience
+functions that remove as much friction as possible between your script
+and your manuscript (in particular, if you are using Microsoft Word).
 
 There are mainly three things that go into a manuscript: text, tables,
 and figures. {rempsyc} does not generate publication-ready text
@@ -72,13 +71,13 @@ few quick examples of those.
 
 Formatting your table properly in R is already a time-consuming task,
 but fortunately several packages take care of the formatting within R
-\[e.g., the {broom} or {report} packages, Robinson et al.
-([2022](#ref-broom2022)); Makowski et al.
-([2021/2023](#ref-reportPackage)); and there are several others\].
-Exporting these formatted tables to Microsoft Word remains a challenge
-however. Some packages do export to Word (e.g., [Stanley & Spence,
-2018](#ref-stanley2018reproducible)), but their formatting is often
-rigid especially when using analyzes that are not supported by default.
+([Makowski et al., 2021/2023](#ref-reportPackage), and there are several
+others; e.g., the {broom} or {report} packages, [Robinson et al.,
+2022](#ref-broom2022)). Exporting these formatted tables to Microsoft
+Word remains a challenge however. Some packages do export to Word (e.g.,
+[Stanley & Spence, 2018](#ref-stanley2018reproducible)), but their
+formatting is often rigid especially when using analyzes that are not
+supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
@@ -93,8 +92,9 @@ suits particularly well the pipe workflow.
 
     library(rempsyc)
     library(broom)
-    model <- lm(mpg ~ cyl + wt * hp, mtcars)
-    tidy(model, conf.int = TRUE) |>
+
+    lm(mpg ~ cyl + wt * hp, mtcars) |>
+      tidy(conf.int = TRUE) |>
       nice_table(broom = "lm")
 
 ![](paper_files/figure-markdown_strict/broom-1.png){width=60%}
@@ -103,8 +103,10 @@ suits particularly well the pipe workflow.
 We can do the same with a {report} table.
 
     library(report)
-    model <- lm(mpg ~ cyl + wt * hp, mtcars)
-    stats.table <- as.data.frame(report(model))
+
+    stats.table <- lm(mpg ~ cyl + wt * hp, mtcars) |>
+      report() |>
+      as.data.frame()
 
     nice_table(stats.table)
 
@@ -112,16 +114,16 @@ We can do the same with a {report} table.
 
 
 The {report} package provides quite comprehensive tables, so one may
-request an abbreviated table with the `short` argument. For convenience,
-it is also possible to highlight significant results for better visual
-discrimination, using the `highlight` argument[1]. Once satisfied with
-the table, we can add a title and note.
+request an abbreviated table with the `'short'` argument. For
+convenience, it is also possible to highlight significant results for
+better visual discrimination, using the `'highlight'` argument[1]. Once
+satisfied with the table, we can add a title and note.
 
     my_table <- nice_table(
       stats.table, short = TRUE, highlight = 0.001,
       title = c("Table 1", "A Pretty Regression Model"),
       note = c("The data was extracted from the 1974 Motor Trend US magazine.",
-               "* p < .05, ** p < .01, *** p < .001"))
+               "Greyed rows represent statistically significant differences, p < .001."))
     my_table
 
 ![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}
@@ -203,13 +205,13 @@ satifying for APA requirements. Hovever, the Word format is not suitable
 for large matrices, as it will often spread beyond the document’s margin
 limits.
 
-Another approach is to export to an image, like {correlation} package
-does ([Makowski et al., 2020](#ref-correlationpackage)). For very small
-matrices, this works extremely well, and the colour is an immense help
-to quickly identify which correlations are strong or weak, positive or
-negative. Again, however, this does not work so well for large matrices
-because labels might overlap or navigating the large figure becomes
-difficult.
+Another approach is to export to an image, like the {correlation}
+package does ([Makowski et al., 2020](#ref-correlationpackage)). For
+very small matrices, this works extremely well, and the colour is an
+immense help to quickly identify which correlations are strong or weak,
+positive or negative, and significant or non-significant. Again,
+however, this does not work so well for large matrices because labels
+might overlap or navigating the large figure becomes difficult.
 
 When the goal is more exploratory, rather than reporting, and we have
 large matrices, it can be more useful to export it to Excel. In
@@ -218,9 +220,9 @@ from the {correlation} package with the idea of exporting to Excel using
 {openxlsx2} ([Barbone & Garbuszus, 2023](#ref-openxlsx2package)).
 
 We also provide some quality of life-improvements, like freezing the
-first row and column so as to be able to easily see to which variables
-the correlations relate, regardless of how far or deep we are within the
-large correlation matrix.
+first row and column so as to be able to easily see which variables
+correlates with which other variable, regardless of how far or deep
+those variables are located within the matrix.
 
 The colour represents the strength of the correlation, whereas the stars
 represent how significant the *p* value is.[3] The exact *p* values are
@@ -243,8 +245,8 @@ often challenging. Working with {ggplot2} ([Wickham,
 unintended consequence is that doing even trivial operations can at
 times be daunting.
 
-This is why {rempsyc} prepares a few plot types for you, so they are
-ready to be saved to your preferred format (`.pdf`, `.tiff`, or `.png`).
+This is why {rempsyc} setups a few default plot types, ready to be saved
+to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ### Violin Plots
 
@@ -326,7 +328,7 @@ That said, if for whatever reason one wants to check objective asumption
 tests for a linear model, rempsyc makes this easy with the
 `nice_assumptions()` function, which provide *p* values for normality
 (Shapiro-Wilk), homoscedasticity (Breusch-Pagan) and autocorrelation of
-residuals (Durbin-Watson) in one call. .
+residuals (Durbin-Watson) in one call.
 
 ### Categorical Predictors
 
@@ -403,14 +405,14 @@ visually with `nice_varplot()`.
 ## Utility functions
 
 Finally, with the idea of making the analysis workflow easier in mind,
-{rempsyc} also has a few other utility functions. `nice_na()` allows
-reporting item-level missing values per scale, as well as participant’s
-maximum number of missing items by scale, as per recommendations
-([Parent, 2013](#ref-parent2013handling)).
+{rempsyc} also provides a few other utility functions. `nice_na()`
+allows reporting item-level missing values per scale, as well as
+participant’s maximum number of missing items by scale, as per
+recommendations ([Parent, 2013](#ref-parent2013handling)).
 
 `extract_duplicates()` creates a data frame of only observations with a
 duplicated ID or participant number, so they can be investigated more
-thoroughly. best\_duplicate() allows to follow-up on this investigation
+thoroughly. `best_duplicate()` allows to follow-up on this investigation
 and only keep the “best” duplicate, meaning those with the fewer number
 of missing values, and in case of ties, the first one.
 
@@ -519,9 +521,9 @@ embody another. *Quarterly Journal of Experimental Psychology*,
 Wickham, H. (2016). *ggplot2: Elegant graphics for data analysis*.
 Springer-Verlag New York. <https://ggplot2.tidyverse.org>
 
-[1] This argument can be used logically, as `TRUE` or `FALSE`, but can
-also be provided with a numeric value representing the cut-off threshold
-for the *p* value
+[1] This argument can be used logically, as `'TRUE'` or `'FALSE'`, but
+can also be provided with a numeric value representing the cut-off
+threshold for the *p* value
 
 [2] A great resource for this is the {flextable} e-book:
 <https://ardata-fr.github.io/flextable-book/>
