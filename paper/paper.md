@@ -52,11 +52,12 @@ However, R has a major downside for novices: its steep learning curve
 due to its programmatic interface, in contrast to perhaps more
 user-friendly point-and-click software. Of course, this flexibility is
 also a strength, as the R community can, and does, mobilize to produce
-packages that make using R increasingly easier (e.g., the *easystats*
-ecosystem [Lüdecke et al., 2019/2023](#ref-easystatsPackage)). The
-{rempsyc} package contributes to this momentum by providing convenience
-functions that remove as much friction as possible between your script
-and your manuscript (in particular, if you are using Microsoft Word).
+packages that make using R increasingly easier and more user-friendly
+(e.g., the *easystats* ecosystem [Lüdecke et al.,
+2019/2023](#ref-easystatsPackage)). The {rempsyc} package contributes to
+this momentum by providing convenience functions that remove as much
+friction as possible between your script and your manuscript (in
+particular, if you are using Microsoft Word).
 
 There are mainly three things that go into a manuscript: text, tables,
 and figures. {rempsyc} does not generate publication-ready text
