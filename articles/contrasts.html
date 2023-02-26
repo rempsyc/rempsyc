@@ -118,8 +118,8 @@
 
 
 
-<link href="contrasts_files/tabwid-1.1.2/tabwid.css" rel="stylesheet">
-<div class="row">
+<link href="contrasts_files/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="contrasts_files/tabwid-1.1.3/tabwid.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Planned Contrasts Analyses (Group Comparisons)</h1>
                         <h4 data-toc-skip class="author">Rémi
@@ -181,9 +181,9 @@ yet, you will need to install it via the following command:
 <span><span class="co">## 2       Sepal.Length versicolor - virginica 147  -6.332686 2.765638e-09</span></span>
 <span><span class="co">## 3       Sepal.Length    setosa - versicolor 147  -9.032819 8.770194e-16</span></span>
 <span><span class="co">##           d  CI_lower   CI_upper</span></span>
-<span><span class="co">## 1 -3.073101 -3.532703 -2.5063636</span></span>
-<span><span class="co">## 2 -1.266537 -1.715768 -0.7862012</span></span>
-<span><span class="co">## 3 -1.806564 -2.201371 -1.3986454</span></span></code></pre>
+<span><span class="co">## 1 -3.073101 -3.546543 -2.5155599</span></span>
+<span><span class="co">## 2 -1.266537 -1.707345 -0.7741359</span></span>
+<span><span class="co">## 3 -1.806564 -2.215119 -1.4084505</span></span></code></pre>
 <p>This will give us Cohen’s <em>d</em> by default for the effect size,
 but it is possible to request the ‘robust’ version (i.e., robust to
 deviations from parametric assumptions) of Cohen’s <em>d</em> by
@@ -196,93 +196,48 @@ size.</p>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<template id="a7c9ee31-f301-4b18-a3dd-84ecc0cce723"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
 <div class="tabwid">
-<style>.cl-36804c6c{table-layout:auto;}.cl-3678a200{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3678a214{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-367c0134{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-367c18cc{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-367c18d6{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-367c18e0{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-36804c6c">
+<style>.cl-d7ee5fe0{table-layout:auto;}.cl-d7e64ec2{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d7e64ecc{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d7e9de20{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-d7e9f734{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d7e9f73e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d7e9f73f{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-d7ee5fe0">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a200">Dependent Variable</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a200">Comparison</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a214">df</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a214">t</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a214">p</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a214">d</span></p></th>
-<th class="cl-367c18cc"><p class="cl-367c0134"><span class="cl-3678a200">95% CI</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">Dependent Variable</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">Comparison</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ecc">df</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ecc">t</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ecc">p</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ecc">d</span></p></th>
+<th class="cl-d7e9f734"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">95% CI</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">Sepal.Length</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">setosa - virginica</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">147</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">-15.37</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">&lt; .001</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">-3.07</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">[-3.53, -2.51]</span></p></td>
+<td rowspan="3" class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">Sepal.Length</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">setosa - virginica</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">147</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-15.37</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">&lt; .001</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-3.07</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">[-3.55, -2.52]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">versicolor - virginica</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">147</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">-6.33</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">&lt; .001</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">-1.27</span></p></td>
-<td class="cl-367c18e0"><p class="cl-367c0134"><span class="cl-3678a200">[-1.72, -0.79]</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">versicolor - virginica</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">147</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-6.33</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">&lt; .001</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-1.27</span></p></td>
+<td class="cl-d7e9f73f"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">[-1.71, -0.77]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">setosa - versicolor</span></p></td>
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">147</span></p></td>
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">-9.03</span></p></td>
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">&lt; .001</span></p></td>
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">-1.81</span></p></td>
-<td class="cl-367c18d6"><p class="cl-367c0134"><span class="cl-3678a200">[-2.20, -1.40]</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">setosa - versicolor</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">147</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-9.03</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">&lt; .001</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">-1.81</span></p></td>
+<td class="cl-d7e9f73e"><p class="cl-d7e9de20"><span class="cl-d7e64ec2">[-2.22, -1.41]</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="c1553c22-ef06-4af7-81f8-fc1db918a9d9"></div>
-<script>
-var dest = document.getElementById("c1553c22-ef06-4af7-81f8-fc1db918a9d9");
-var template = document.getElementById("a7c9ee31-f301-4b18-a3dd-84ecc0cce723");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script><p><strong>Save the table to Word</strong></p>
+</div>
+<p><strong>Save the table to Word</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">my_table</span>, path <span class="op">=</span> <span class="st">"contrasts.docx"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -367,24 +322,24 @@ Framework</strong></p>
 <span><span class="co">## 17                IOS   Mental - Control 87  2.12312024 3.658408e-02</span></span>
 <span><span class="co">## 18                IOS  Embodied - Mental 87  2.58466812 1.141344e-02</span></span>
 <span><span class="co">##               d    CI_lower  CI_upper</span></span>
-<span><span class="co">## 1   0.567002309  0.03085540 1.1120004</span></span>
-<span><span class="co">## 2   0.061297547 -0.49838441 0.5786596</span></span>
-<span><span class="co">## 3   0.505704762 -0.01564769 0.9651188</span></span>
-<span><span class="co">## 4   0.031628320 -0.48842636 0.6118089</span></span>
-<span><span class="co">## 5   0.005033685 -0.47518913 0.5174286</span></span>
-<span><span class="co">## 6   0.026594635 -0.42202394 0.5320017</span></span>
-<span><span class="co">## 7   0.039089129 -0.48553888 0.6254505</span></span>
-<span><span class="co">## 8  -0.361012819 -0.88402639 0.1239632</span></span>
-<span><span class="co">## 9   0.400101948 -0.14576235 0.8963201</span></span>
-<span><span class="co">## 10  0.594163085  0.02180101 1.1187713</span></span>
-<span><span class="co">## 11  0.376986233 -0.14485018 0.8671843</span></span>
-<span><span class="co">## 12  0.217176852 -0.30199870 0.7072447</span></span>
-<span><span class="co">## 13  0.550052081  0.02720598 1.0502798</span></span>
-<span><span class="co">## 14  0.223543334 -0.26160366 0.6952943</span></span>
-<span><span class="co">## 15  0.326508748 -0.25062191 0.8701921</span></span>
-<span><span class="co">## 16  1.215545729  0.66204389 1.7934255</span></span>
-<span><span class="co">## 17  0.548187290  0.09593405 1.0305261</span></span>
-<span><span class="co">## 18  0.667358440  0.10401251 1.1890402</span></span></code></pre>
+<span><span class="co">## 1   0.567002309  0.02646085 1.0884936</span></span>
+<span><span class="co">## 2   0.061297547 -0.47221577 0.6038866</span></span>
+<span><span class="co">## 3   0.505704762  0.03833490 0.9720919</span></span>
+<span><span class="co">## 4   0.031628320 -0.52795107 0.6023070</span></span>
+<span><span class="co">## 5   0.005033685 -0.46710551 0.4939919</span></span>
+<span><span class="co">## 6   0.026594635 -0.50332794 0.5192761</span></span>
+<span><span class="co">## 7   0.039089129 -0.45365364 0.5836126</span></span>
+<span><span class="co">## 8  -0.361012819 -0.86900844 0.1754747</span></span>
+<span><span class="co">## 9   0.400101948 -0.11650467 0.9599492</span></span>
+<span><span class="co">## 10  0.594163085  0.03274474 1.1348585</span></span>
+<span><span class="co">## 11  0.376986233 -0.16554301 0.9134346</span></span>
+<span><span class="co">## 12  0.217176852 -0.24548809 0.7188326</span></span>
+<span><span class="co">## 13  0.550052081  0.05724009 1.0376380</span></span>
+<span><span class="co">## 14  0.223543334 -0.25358965 0.6806504</span></span>
+<span><span class="co">## 15  0.326508748 -0.22907040 0.9048517</span></span>
+<span><span class="co">## 16  1.215545729  0.67135895 1.7750995</span></span>
+<span><span class="co">## 17  0.548187290  0.05094515 1.0571345</span></span>
+<span><span class="co">## 18  0.667358440  0.12085545 1.2086160</span></span></code></pre>
 <p><strong>Add more meaningful names for measures</strong></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">table.stats</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Peripheral Responsivity (QCAE)"</span>,</span>
@@ -402,223 +357,178 @@ automatically highlight significant results.</p>
 <span>                        highlight <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                        title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Table 1"</span>, <span class="st">"Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)"</span><span class="op">)</span>,</span>
 <span>                        note <span class="op">=</span> <span class="st">"\U1D451\U1D3F = robust Cohen’s \U1D451; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<template id="ce1e0622-ca34-45f5-a11f-729b2e856b00"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
 <div class="tabwid">
-<style>.cl-3b96be7a{table-layout:auto;}.cl-3b8dfb50{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3b8dfb64{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3b8dfb65{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3b8dfb66{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3b921690{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-3b9216a4{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-3b9216a5{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3b922d1a{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d24{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d2e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d2f{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d30{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d38{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d39{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d3a{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d42{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d43{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3b922d44{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-3b96be7a">
+<style>.cl-dd83c72e{table-layout:auto;}.cl-dd7b58f0{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd7b5904{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd7b5905{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd7b590e{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd7edb9c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-dd7edba6{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-dd7edbb0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-dd7ef3e8{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef3f2{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef3fc{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef3fd{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef3fe{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef406{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef407{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef408{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef410{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef411{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd7ef412{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-dd83c72e">
 <thead>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-3b922d1a"><p class="cl-3b921690"><span class="cl-3b8dfb50">Table 1</span></p></th></tr>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-3b922d24"><p class="cl-3b921690"><span class="cl-3b8dfb65">Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)</span></p></th></tr>
+<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-dd7ef3e8"><p class="cl-dd7edb9c"><span class="cl-dd7b58f0">Table 1</span></p></th></tr>
+<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-dd7ef3f2"><p class="cl-dd7edb9c"><span class="cl-dd7b5905">Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)</span></p></th></tr>
 <tr style="overflow-wrap:break-word;">
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Dependent Variable</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Comparison</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb65">df</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb65">t</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb65">p</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb65">d</span></p></th>
-<th class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">95% CI</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Dependent Variable</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Comparison</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b5905">df</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b5905">t</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b5905">p</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b5905">d</span></p></th>
+<th class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b590e">95% CI</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Peripheral Responsivity (QCAE)</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Embodied - Control</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">87</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">2.20</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">.031</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">0.57</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.03, 1.11]</span></p></td>
+<td rowspan="3" class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Peripheral Responsivity (QCAE)</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Embodied - Control</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">87</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">2.20</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">.031</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">0.57</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.03, 1.09]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Mental - Control</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">87</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.24</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.813</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.06</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.50, 0.58]</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Mental - Control</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">87</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.24</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.813</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.06</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.47, 0.60]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Mental</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">87</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">1.96</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.053</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.51</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.02, 0.97]</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">87</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">1.96</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.053</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.51</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[0.04, 0.97]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Perspective-Taking (IRI)</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Control</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.12</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.903</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.03</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.49, 0.61]</span></p></td>
+<td rowspan="3" class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Perspective-Taking (IRI)</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Control</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.12</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.903</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.03</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.53, 0.60]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Mental - Control</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.02</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.985</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.01</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.48, 0.52]</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Mental - Control</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.02</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.985</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.01</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.47, 0.49]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Mental</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.10</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.919</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.03</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.42, 0.53]</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.10</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.919</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.03</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.50, 0.52]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d2e"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Fantasy (IRI)</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Control</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.15</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.880</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.04</span></p></td>
-<td class="cl-3b922d3a"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.49, 0.63]</span></p></td>
+<td rowspan="3" class="cl-dd7ef3fc"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Fantasy (IRI)</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Control</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.15</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.880</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.04</span></p></td>
+<td class="cl-dd7ef408"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.45, 0.58]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Mental - Control</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">-1.39</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.169</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">-0.36</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.88, 0.12]</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Mental - Control</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">-1.39</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.169</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">-0.36</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.87, 0.18]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Mental</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">1.54</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.128</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.40</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.15, 0.90]</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">1.54</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.128</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.40</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.12, 0.96]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d42"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Empathic Concern (IRI)</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Embodied - Control</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">86</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">2.30</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">.024</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">0.59</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.02, 1.12]</span></p></td>
+<td rowspan="3" class="cl-dd7ef410"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Empathic Concern (IRI)</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Embodied - Control</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">86</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">2.30</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">.024</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">0.59</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.03, 1.13]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Mental - Control</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">1.45</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.151</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.38</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.14, 0.87]</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Mental - Control</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">1.45</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.151</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.38</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.17, 0.91]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Mental</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.83</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.407</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.22</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.30, 0.71]</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.83</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.407</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.22</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.25, 0.72]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d42"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Personal Distress (IRI)</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Embodied - Control</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">86</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">2.13</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">.036</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">0.55</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.03, 1.05]</span></p></td>
+<td rowspan="3" class="cl-dd7ef410"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Personal Distress (IRI)</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Embodied - Control</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">86</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">2.13</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">.036</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">0.55</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.06, 1.04]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Mental - Control</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.86</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.393</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.22</span></p></td>
-<td class="cl-3b922d38"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.26, 0.70]</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Mental - Control</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.86</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.393</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.22</span></p></td>
+<td class="cl-dd7ef406"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.25, 0.68]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">Embodied - Mental</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">86</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">1.25</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">.213</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">0.33</span></p></td>
-<td class="cl-3b922d39"><p class="cl-3b9216a4"><span class="cl-3b8dfb66">[-0.25, 0.87]</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">86</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">1.25</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">.213</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">0.33</span></p></td>
+<td class="cl-dd7ef407"><p class="cl-dd7edba6"><span class="cl-dd7b590e">[-0.23, 0.90]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-3b922d42"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Inclusion of Other in the Self (IOS)</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Embodied - Control</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">87</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">4.71</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">&lt; .001</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">1.22</span></p></td>
-<td class="cl-3b922d43"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.66, 1.79]</span></p></td>
+<td rowspan="3" class="cl-dd7ef410"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Inclusion of Other in the Self (IOS)</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Embodied - Control</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">87</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">4.71</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">&lt; .001</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">1.22</span></p></td>
+<td class="cl-dd7ef411"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.67, 1.78]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Mental - Control</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">87</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">2.12</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">.037</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">0.55</span></p></td>
-<td class="cl-3b922d30"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.10, 1.03]</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Mental - Control</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">87</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">2.12</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">.037</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">0.55</span></p></td>
+<td class="cl-dd7ef3fe"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.05, 1.06]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">Embodied - Mental</span></p></td>
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">87</span></p></td>
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">2.58</span></p></td>
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">.011</span></p></td>
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">0.67</span></p></td>
-<td class="cl-3b922d2f"><p class="cl-3b9216a4"><span class="cl-3b8dfb50">[0.10, 1.19]</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">Embodied - Mental</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">87</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">2.58</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">.011</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">0.67</span></p></td>
+<td class="cl-dd7ef3fd"><p class="cl-dd7edba6"><span class="cl-dd7b58f0">[0.12, 1.21]</span></p></td>
 </tr>
 </tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-3b922d44"><p class="cl-3b9216a5"><span class="cl-3b8dfb65">Note. </span><span class="cl-3b8dfb66">𝑑ᴿ = robust Cohen’s 𝑑; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable.</span></p></td></tr></tfoot>
+<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-dd7ef412"><p class="cl-dd7edbb0"><span class="cl-dd7b5905">Note. </span><span class="cl-dd7b590e">𝑑ᴿ = robust Cohen’s 𝑑; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable.</span></p></td></tr></tfoot>
 </table>
-</div></template><div class="flextable-shadow-host" id="b59002c1-1e54-4fdb-b11d-973fbdbf6fa8"></div>
-<script>
-var dest = document.getElementById("b59002c1-1e54-4fdb-b11d-973fbdbf6fa8");
-var template = document.getElementById("ce1e0622-ca34-45f5-a11f-729b2e856b00");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script><p><strong>Save the table to Word</strong></p>
+</div>
+<p><strong>Save the table to Word</strong></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">my_table</span>, path <span class="op">=</span> <span class="st">"contrasts.docx"</span><span class="op">)</span></span></code></pre></div>
 </div>
