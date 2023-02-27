@@ -23,6 +23,7 @@
 #' @importFrom dplyr mutate group_by group_by slice_min distinct %>% ungroup
 
 best_duplicate <- function(data, id) {
+  check_col_names(data, id)
 
   og.names <- names(data)
   dups <- data %>%

@@ -60,6 +60,7 @@ nice_contrasts <- function(response,
                            effect.type = "cohens.d",
                            bootstraps = 2000,
                            ...) {
+  check_col_names(data, c(group, response, covariates))
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   data[response] <- lapply(data[response], as.numeric)

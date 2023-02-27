@@ -6,7 +6,7 @@
 \usage{
 plot_outliers(
   data,
-  group,
+  group = NULL,
   response,
   method = "mad",
   criteria = 3,

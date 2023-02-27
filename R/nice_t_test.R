@@ -88,6 +88,7 @@ nice_t_test <- function(data,
                         correction = "none",
                         warning = TRUE,
                         ...) {
+  check_col_names(data, c(group, response))
   rlang::check_installed(c("effectsize", "methods"),
                          reason = "for this function.")
   args <- list(...)

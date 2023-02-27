@@ -4,7 +4,7 @@
 \alias{nice_na}
 \title{Report missing values according to guidelines}
 \usage{
-nice_na(data, vars, scales)
+nice_na(data, vars = NULL, scales = NULL)
 }
 \arguments{
 \item{data}{The data frame.}

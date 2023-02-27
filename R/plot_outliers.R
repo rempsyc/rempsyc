@@ -45,7 +45,7 @@
 #'
 
 plot_outliers <- function(data,
-                          group,
+                          group = NULL,
                           response,
                           method = "mad",
                           criteria = 3,
@@ -59,17 +59,19 @@ plot_outliers <- function(data,
                           ymax,
                           yby = 1,
                           ...) {
+  check_col_names(data, c(group, response))
   rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
+  mtd <- switch(method, "mad" = "median", "sd" = "mean")
   if (missing(group)) {
     group <- "All data"
     data[[group]] <- group
     if (is.null(ytitle)) {
-      ytitle <- paste(response, "(standardized)")
+      ytitle <- paste0(response, " (", mtd, "-standardized)")
     }
   } else {
     data[[group]] <- as.factor(data[[group]])
     if (is.null(ytitle)) {
-      ytitle <- paste(response, "(group-mean standardized)")
+      ytitle <- paste0(response, " (group-", mtd, " standardized)")
     }
   }
 

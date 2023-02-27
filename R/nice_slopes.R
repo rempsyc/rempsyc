@@ -80,6 +80,7 @@ nice_slopes <- function(data,
                         mod.id = TRUE,
                         ci.alternative = "two.sided",
                         ...) {
+  check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
   rlang::check_installed("effectsize", reason = "for this function.")
   if (!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")

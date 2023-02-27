@@ -1,7 +1,12 @@
 #' @title Standardize based on the absolute median deviation
 #'
 #' @description Scale and center ("standardize") data based on
-#' the median absolute deviation.
+#' the median absolute deviation (MAD).
+#'
+#' @details The function subtracts the median to each observation, and then
+#' divides the outcome by the MAD. This is analoguous to regular standardization
+#' which subtracts the mean to each observaion, and then divides the outcome
+#' by the standard deviation.
 #'
 #' @param x The vector to be scaled.
 #' @keywords standardization normalization median MAD mean outliers

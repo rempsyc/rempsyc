@@ -1,3 +1,7 @@
+## rempsyc 0.1.1.1
+* Clear error messages when specifying columns that don't exist across all functions.
+* `sr2` function is now removed.
+
 # rempsyc 0.1.1
 * CRAN resubmission!
 

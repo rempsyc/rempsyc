@@ -63,6 +63,7 @@ nice_varplot <- function(data,
                          grid = TRUE,
                          shapiro = FALSE,
                          ytitle = variable) {
+  check_col_names(data, c(group, variable))
   rlang::check_installed(c("ggplot2", "ggrepel"), reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   {

@@ -367,7 +367,7 @@ best_duplicate(df1, id = "id")
 
 ## `scale_mad`
 
-Scale and center ("standardize") data based on the median absolute deviation.
+Scale and center ("standardize") data based on the median and median absolute deviation (MAD).
 
 ```{r, scale_mad}
 scale_mad(mtcars$mpg)
@@ -375,7 +375,7 @@ scale_mad(mtcars$mpg)
 
 ## `find_mad`
 
-Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
+Identify outliers based on (e.g.,) 3 median absolute deviations (MAD) from the median.
 
 ```{r, find_mad}
 find_mad(data = mtcars, col.list = names(mtcars)[c(1:7, 10:11)], criteria = 3)

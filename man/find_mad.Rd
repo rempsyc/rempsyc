@@ -28,13 +28,13 @@ more than one variable. More information can be obtainned
 by using the \code{attributes()} function around the generated object.
 }
 \description{
-Identify outliers based on 3 median absolute deviations (MAD).
-
-See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
-Detecting outliers: Do not use standard deviation around the mean,
-use absolute deviation around the median. \emph{Journal of Experimental
-Social Psychology}, \emph{49}(4), 764–766.
-https://doi.org/10.1016/j.jesp.2013.03.013
+Identify outliers based on 3 median absolute deviations (MAD)
+from the median.
+}
+\details{
+The function internally use \code{scale_mad} to "standardize" the data
+based on the MAD and median, and then check for any observation greater
+than the specified criteria (e.g., +/-3).
 }
 \examples{
 find_mad(
@@ -51,6 +51,13 @@ find_mad(
   ID = "car",
   criteria = 3
 )
+}
+\references{
+Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L.
+(2013). Detecting outliers: Do not use standard deviation
+around the mean, use absolute deviation around the median.
+\emph{Journal of Experimental Social Psychology}, \emph{49}(4), 764–766.
+https://doi.org/10.1016/j.jesp.2013.03.013
 }
 \keyword{MAD}
 \keyword{mean}
