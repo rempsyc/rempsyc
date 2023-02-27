@@ -40,12 +40,19 @@ freedom, t-value, p-value, the effect size, Cohen's d, and its
 Easily compute t-test analyses, with effect sizes,
 and format in publication-ready format. The 95\% confidence interval
 is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
-
+}
+\details{
 This function relies on the base R \code{t.test} function, which
 uses the Welch t-test per default (see why here:
 \url{https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html}).
 To use the Student t-test, simply add the following
 argument: \code{var.equal = TRUE}.
+
+Note that for paired \emph{t} tests, you need to use \code{paired = TRUE}, and
+you also need data in "long" format rather than wide format (like for
+the \code{ToothGrowth} data set). In this case, the \code{group} argument refers
+to the participant ID for example, so the same group/participant is
+measured several times, and thus has several rows.
 }
 \examples{
 # Make the basic table
@@ -63,7 +70,7 @@ nice_t_test(
 )
 
 # Can be passed some of the regular arguments
-# of base `t.test()`
+# of base [t.test()]
 
 # Student t-test (instead of Welch)
 nice_t_test(
@@ -89,6 +96,7 @@ nice_t_test(
 )
 
 # Paired t-test instead of independent samples
+# Requires data in "long" format
 nice_t_test(
   data = ToothGrowth,
   response = "len",

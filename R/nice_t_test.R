@@ -4,11 +4,17 @@
 #' and format in publication-ready format. The 95% confidence interval
 #' is for the effect size, Cohen's d, both provided by the `effectsize` package.
 #'
-#' This function relies on the base R `t.test` function, which
+#' @details This function relies on the base R `t.test` function, which
 #' uses the Welch t-test per default (see why here:
 #' \url{https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html}).
 #' To use the Student t-test, simply add the following
 #' argument: `var.equal = TRUE`.
+#'
+#' Note that for paired *t* tests, you need to use `paired = TRUE`, and
+#' you also need data in "long" format rather than wide format (like for
+#' the `ToothGrowth` data set). In this case, the `group` argument refers
+#' to the participant ID for example, so the same group/participant is
+#' measured several times, and thus has several rows.
 #'
 #' @param data The data frame.
 #' @param response The dependent variable.
@@ -70,6 +76,7 @@
 #' )
 #'
 #' # Paired t-test instead of independent samples
+#' # Requires data in "long" format
 #' nice_t_test(
 #'   data = ToothGrowth,
 #'   response = "len",

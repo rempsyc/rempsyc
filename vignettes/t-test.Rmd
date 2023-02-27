@@ -106,7 +106,9 @@ nice_t_test(data = mtcars,
   nice_table()
 ```
 
-### Paired t-test (instead of independent samples)
+### Paired *t* test (instead of independent samples)
+
+Note that for paired *t* tests, you need to use `paired = TRUE`, and you also need data in "long" format rather than wide format (like for the `ToothGrowth` data set). In this case, the `group` argument refers to the participant ID for example, so the same group/participant is measured several times, and thus has several rows.
 
 ```{r}
 nice_t_test(data = ToothGrowth,
