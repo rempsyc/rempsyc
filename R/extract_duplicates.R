@@ -30,6 +30,7 @@
 #' @importFrom dplyr mutate %>%
 
 extract_duplicates <- function(data, id) {
+  check_col_names(data, id)
 
   Row <- seq_len(nrow(data))
   data <- cbind(Row, data)

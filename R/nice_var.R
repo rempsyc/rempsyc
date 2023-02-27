@@ -47,6 +47,7 @@ nice_var <- function(data,
                      variable,
                      group,
                      criteria = 4) {
+  check_col_names(data, c(group, variable))
   if (inherits(variable, "list")) {
     variable <- variable
   } else {

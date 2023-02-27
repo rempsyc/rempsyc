@@ -49,6 +49,7 @@ nice_lm_slopes <- function(model,
                            mod.id = TRUE,
                            ci.alternative = "two.sided",
                            ...) {
+  check_col_names(model$model, c(predictor, moderator))
   rlang::check_installed("effectsize", reason = "for this function.")
   if (inherits(model, "list")) {
     models.list <- model

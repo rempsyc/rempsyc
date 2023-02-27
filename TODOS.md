@@ -7,6 +7,7 @@
     -   Add other optional corrections argument (other than Bonferroni)
     -   Add option to specify `robust.d` for a robust version of Cohen's d
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
+    -   Add option to display group means(?)
 -   `nice_varplot`
     -   Add option to standardize or not
     -   Also add option to annotate Levene test on the plot
@@ -14,6 +15,10 @@
 -   `nice_table`
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
     -   Remove unwanted italic formatting of headers when using `separate.header = TRUE`.
+-   `nice_normality`
+    -   Change `shapiro = T/F` for `test = Shapiro/KS/auto(Shapiro for n<=50, KS for above)`
+    -   Fix error if no dv variation in one of the groups.
+    -   Add option to add SEs, skewness, kurtosis 
 -   `nice_contrasts`
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually

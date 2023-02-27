@@ -279,6 +279,7 @@ nice_scatter <- function(data,
                          has.p = FALSE,
                          p.x = Inf,
                          p.y = -Inf) {
+  check_col_names(data, c(predictor, response))
   rlang::check_installed("ggplot2", reason = "for this function.")
   has.groups <- !missing(group)
   if (has.r == TRUE) {

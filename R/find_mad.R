@@ -1,12 +1,11 @@
 #' @title Identify outliers based on 3 MAD
 #'
-#' @description Identify outliers based on 3 median absolute deviations (MAD).
+#' @description Identify outliers based on 3 median absolute deviations (MAD)
+#' from the median.
 #'
-#' See: Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
-#' Detecting outliers: Do not use standard deviation around the mean,
-#' use absolute deviation around the median. *Journal of Experimental
-#' Social Psychology*, *49*(4), 764–766.
-#' https://doi.org/10.1016/j.jesp.2013.03.013
+#' @details The function internally use `scale_mad` to "standardize" the data
+#' based on the MAD and median, and then check for any observation greater
+#' than the specified criteria (e.g., +/-3).
 #'
 #' @param data The data frame.
 #' @param col.list List of variables to check for outliers.
@@ -22,6 +21,11 @@
 #'         of outliers, selected variables, and any outlier flagged for
 #'         more than one variable. More information can be obtainned
 #'         by using the `attributes()` function around the generated object.
+#' @references Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L.
+#' (2013). Detecting outliers: Do not use standard deviation
+#' around the mean, use absolute deviation around the median.
+#' *Journal of Experimental Social Psychology*, *49*(4), 764–766.
+#' https://doi.org/10.1016/j.jesp.2013.03.013
 #' @export
 #' @examples
 #' find_mad(
@@ -47,6 +51,7 @@ find_mad <- function(data,
                      ID = NULL,
                      criteria = 3,
                      mad.scores = TRUE) {
+  check_col_names(data, c(col.list, ID))
   if (missing(ID)) {
     data$ID <- rownames(data)
   }

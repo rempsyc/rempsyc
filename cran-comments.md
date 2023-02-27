@@ -1,8 +1,29 @@
+## Submission rempsyc 0.1.1 attempt no 2
+
+> Package CITATION file contains call(s) to old-style citEntry() or
+citHeader()/citFooter().  Please use bibentry() instead, possibly with
+arguments 'header' and 'footer'.
+
+* Fixed.
+
+> Size of tarball: 5843394 bytes
+Less than 5 MB for a CRAN package, please.
+
+* Fixed.
+
+## Submission rempsyc 0.1.1
+
+R CMD check results
+
+0 errors | 0 warnings | 0 notes
+
+
 ## Submission rempsyc 0.1.0
 
 R CMD check results
 
 0 errors | 0 warnings | 0 notes
+
 
 ## Resubmission rempsyc 0.0.9
 
@@ -49,6 +70,7 @@ Please omit any default path in writing functions. -> R/cormatrix_excel2.R In yo
 
 * Fixed.
 
+
 ## Resubmission rempsyc 0.0.8
 
 > Please omit "+ file LICENSE" and the file itself which is part of R anyway. It is only used to specify additional restrictions to the GPL such as attribution requirements.
@@ -58,6 +80,7 @@ Please omit any default path in writing functions. -> R/cormatrix_excel2.R In yo
 > openxlsx2 [...] This seems to be still in development and the web page warns about API changes. Something in there why you cannot use openxlsx?
 
 * rempsyc package already has a function `cormatrix_excel` that relies on openxlsx. There is also a second version of this function, `cormatrix_excel2`, that relies on openxlsx2 for a specific feature that openxlsx does not support. Documentation for `cormatrix_excel2` warns users about this: "WARNING: This function will replace `cormatrix_excel` (the original one) as soon as `openxlsx2` is available from CRAN. In the meanwhile, it is experimental and subject to change. Use with care."
+
 
 ## R CMD check results
 

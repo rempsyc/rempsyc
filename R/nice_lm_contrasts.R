@@ -54,6 +54,7 @@ nice_lm_contrasts <- function(model,
                               effect.type = "cohens.d",
                               bootstraps = 2000,
                               ...) {
+  check_col_names(data, group)
   rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
   if (inherits(model, "list")) {
     models.list <- model

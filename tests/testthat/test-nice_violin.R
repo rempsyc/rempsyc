@@ -1,115 +1,128 @@
-# Make the basic plot
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len"
-)
+test_that("nice_fit regular", {
+  skip_if_not_installed(c("ggplot2", "boot", "ggsignif"))
 
-# Save a high-resolution image file to specified directory
-ggplot2::ggsave("niceviolinplothere.tiff",
-  width = 7, height = 7, unit = "in",
-  dpi = 300, path = NULL
-) # change for your own desired path
+  # Make the basic plot
+  x <- nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len"
+  )
 
-# Change x- and y- axes labels
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  ytitle = "Length of Tooth",
-  xtitle = "Vitamin C Dosage"
-)
+  expect_s3_class(
+    x,
+    c("gg", "ggplot2")
+  )
 
-# See difference between two groups
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  comp1 = "0.5",
-  comp2 = "2"
-)
+  # Save a high-resolution image file to specified directory
+  ggplot2::ggsave("niceviolinplothere.tiff",
+                  width = 7, height = 7, unit = "in",
+                  dpi = 300, path = NULL
+  ) # change for your own desired path
 
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  comp1 = 2,
-  comp2 = 3
-)
+  # Remove file
+  unlink("niceviolinplothere.tiff")
 
-# Compare all three groups
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  signif_annotation = c("*", "**", "***"),
-  # manually enter the number of stars
-  signif_yposition = c(30, 35, 40),
-  # What height (y) should the stars appear?
-  signif_xmin = c(1, 2, 1),
-  # Where should the left-sided brackets start (x)?
-  signif_xmax = c(2, 3, 3)
-)
-# Where should the right-sided brackets end (x)?
+  # Change x- and y- axes labels
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    ytitle = "Length of Tooth",
+    xtitle = "Vitamin C Dosage"
+  )
 
-# Set the colours manually
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  colours = c("darkseagreen", "cadetblue", "darkslateblue")
-)
+  # See difference between two groups
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    comp1 = "0.5",
+    comp2 = "2"
+  )
 
-# Changing the names of the x-axis labels
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  xlabels = c("Low", "Medium", "High")
-)
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    comp1 = 2,
+    comp2 = 3
+  )
 
-# Removing the x-axis or y-axis titles
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  ytitle = NULL,
-  xtitle = NULL
-)
+  # Compare all three groups
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    signif_annotation = c("*", "**", "***"),
+    # manually enter the number of stars
+    signif_yposition = c(30, 35, 40),
+    # What height (y) should the stars appear?
+    signif_xmin = c(1, 2, 1),
+    # Where should the left-sided brackets start (x)?
+    signif_xmax = c(2, 3, 3)
+  )
+  # Where should the right-sided brackets end (x)?
 
-# Removing the x-axis or y-axis labels (for whatever purpose)
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  has.ylabels = FALSE,
-  has.xlabels = FALSE
-)
+  # Set the colours manually
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    colours = c("darkseagreen", "cadetblue", "darkslateblue")
+  )
 
-# Set y-scale manually
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  ymin = 5,
-  ymax = 35,
-  yby = 5
-)
+  # Changing the names of the x-axis labels
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    xlabels = c("Low", "Medium", "High")
+  )
 
-# Plotting individual observations
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  obs = TRUE
-)
+  # Removing the x-axis or y-axis titles
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    ytitle = NULL,
+    xtitle = NULL
+  )
 
-# Micro-customizations
-nice_violin(
-  data = ToothGrowth,
-  group = "dose",
-  response = "len",
-  CIcap.width = 0,
-  alpha = 1,
-  border.colour = "black"
-)
+  # Removing the x-axis or y-axis labels (for whatever purpose)
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    has.ylabels = FALSE,
+    has.xlabels = FALSE
+  )
+
+  # Set y-scale manually
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    ymin = 5,
+    ymax = 35,
+    yby = 5
+  )
+
+  # Plotting individual observations
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    obs = TRUE
+  )
+
+  # Micro-customizations
+  nice_violin(
+    data = ToothGrowth,
+    group = "dose",
+    response = "len",
+    CIcap.width = 0,
+    alpha = 1,
+    border.colour = "black"
+  )
+
+})

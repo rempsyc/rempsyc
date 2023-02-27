@@ -58,6 +58,7 @@ nice_qq <- function(data,
                     grid = TRUE,
                     shapiro = FALSE,
                     title = variable) {
+  check_col_names(data, c(group, variable))
   rlang::check_installed(c("ggplot2", "qqplotr"), reason = "for this function.")
   if (missing(group)) {
     group <- "All"

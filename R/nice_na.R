@@ -72,7 +72,7 @@
 #'
 #' @importFrom dplyr select all_of bind_rows summarize %>% first last
 
-nice_na <- function(data, vars, scales) {
+nice_na <- function(data, vars = NULL, scales = NULL) {
   classes <- lapply(data, class)
   if (missing(vars) & missing(scales)) {
     vars.internal <- names(data)

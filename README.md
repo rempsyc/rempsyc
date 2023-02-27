@@ -6,16 +6,15 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
-[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui#package:rempsyc)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
+[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui/#package:rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
-[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
-[![forks](https://img.shields.io/github/forks/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/network/members)
 [![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/stargazers)
 <!-- badges: end -->
 
@@ -144,10 +143,11 @@ moment). In this particular case, the confidence intervals are
 bootstraped around the Cohen’s d.
 
 ``` r
-nice_contrasts(data = mtcars,
-               response = c("mpg", "disp"),
-               group = "cyl",
-               covariates = "hp") -> contrasts
+contrasts <- nice_contrasts(
+  data = mtcars,
+  response = c("mpg", "disp"),
+  group = "cyl",
+  covariates = "hp")
 contrasts
 #>   Dependent Variable Comparison df         t              p         d
 #> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739
@@ -157,12 +157,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7170373  4.5024428
-#> 2  0.8511956  2.0106199
-#> 3  1.3490153  3.0829491
-#> 4 -5.7651045 -3.7947737
-#> 5 -4.2630965 -2.1604816
-#> 6 -2.2324787 -0.9219754
+#> 1  2.7834549  4.5987584
+#> 2  0.8487621  1.9829747
+#> 3  1.3657530  3.1161587
+#> 4 -5.7833739 -3.9268509
+#> 5 -4.3079646 -2.1971336
+#> 6 -2.2869914 -0.8468964
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -411,7 +411,10 @@ blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
 
-cormatrix_excel(infert, "cormatrix1")
+cormatrix_excel(data = infert, 
+                filename = "cormatrix1", 
+                select = c("age", "parity", "induced", "case", "spontaneous", 
+                           "stratum", "pooled.stratum"))
 #> # Correlation Matrix (pearson-method)
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
@@ -535,61 +538,15 @@ scale_mad(mtcars$mpg)
 Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
 
 ``` r
-find_mad(data = mtcars, col.list = names(mtcars), criteria = 3)
-#> 20 outlier(s) based on 3 median absolute deviations for variable(s): 
-#>  mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb 
-#> 
-#> The following participants were considered outliers for more than one variable: 
-#> 
-#>   Row n
-#> 1   3 2
-#> 2   9 2
-#> 3  18 2
-#> 4  19 2
-#> 5  20 2
-#> 6  26 2
-#> 7  28 2
-#> 8  31 2
-#> 9  32 2
+find_mad(data = mtcars, col.list = names(mtcars)[c(1:7, 10:11)], criteria = 3)
+#> 2 outlier(s) based on 3 median absolute deviations for variable(s): 
+#>  mpg, cyl, disp, hp, drat, wt, qsec, gear, carb 
 #> 
 #> Outliers per variable: 
 #> 
 #> $qsec
 #>   Row qsec_mad
 #> 1   9 3.665557
-#> 
-#> $vs
-#>    Row vs_mad
-#> 1    3    Inf
-#> 2    4    Inf
-#> 3    6    Inf
-#> 4    8    Inf
-#> 5    9    Inf
-#> 6   10    Inf
-#> 7   11    Inf
-#> 8   18    Inf
-#> 9   19    Inf
-#> 10  20    Inf
-#> 11  21    Inf
-#> 12  26    Inf
-#> 13  28    Inf
-#> 14  32    Inf
-#> 
-#> $am
-#>    Row am_mad
-#> 1    1    Inf
-#> 2    2    Inf
-#> 3    3    Inf
-#> 4   18    Inf
-#> 5   19    Inf
-#> 6   20    Inf
-#> 7   26    Inf
-#> 8   27    Inf
-#> 9   28    Inf
-#> 10  29    Inf
-#> 11  30    Inf
-#> 12  31    Inf
-#> 13  32    Inf
 #> 
 #> $carb
 #>   Row carb_mad
