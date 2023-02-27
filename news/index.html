@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,6 +94,16 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1" id="rempsyc-01x">rempsyc 0.1.x<a class="anchor" aria-label="anchor" href="#rempsyc-01x"></a></h2>
+<ul><li>Incoming!</li>
+</ul><div class="section level3">
+<h3 id="rempsyc-0-1">rempsyc 0.1.1.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1"></a></h3>
+<ul><li>Clear error messages when specifying columns that don’t exist across all functions.</li>
+<li>
+<code>sr2</code> function is now removed.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="rempsyc-011">rempsyc 0.1.1<a class="anchor" aria-label="anchor" href="#rempsyc-011"></a></h2><p class="text-muted">CRAN release: 2023-02-06</p>
 <ul><li>CRAN resubmission!</li>
 </ul><div class="section level3">
@@ -137,7 +147,7 @@
 <div class="section level3">
 <h3 id="rempsyc-0-1-1-5">rempsyc 0.1.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-1-5"></a></h3>
 <ul><li>Since <code>easystats</code> added a new function to calculate the sr2, <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>, <code>rempsyc</code> now relies on that function. First, it has the advantage of also providing a confidence interval for the sr2. Second, it also fixes a bug when using factors in <code>lm</code> models that was introduced when switching from <code><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">car::Anova</a></code> to manual calculation via the formula interface.</li>
-<li>Accordingly, <code><a href="../reference/sr2.html">rempsyc::sr2</a></code> becomes deprecated and will be removed completely in the next major version, please use <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>.</li>
+<li>Accordingly, <code>rempsyc::sr2</code> becomes deprecated and will be removed completely in the next major version, please use <code><a href="https://easystats.github.io/effectsize/reference/r2_semipartial.html" class="external-link">effectsize::r2_semipartial</a></code>.</li>
 <li>
 <code>nice_mod</code> and <code>nice_lm_slopes</code> now use <code>nice_lm</code> internally to reduce code redundancy and shorten the code base (and <code>nice_slopes</code> uses <code>nice_lm_slopes</code> internally).</li>
 <li>To align with other package dependencies, <code>rempsyc</code> now requires <code>R &gt;= 3.6</code>
