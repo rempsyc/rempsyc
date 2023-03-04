@@ -52,7 +52,7 @@
 #'   histogram = TRUE
 #' )
 #'
-#' @importFrom dplyr mutate %>% select group_by summarize rowwise do
+#' @importFrom dplyr mutate %>% select group_by summarize rowwise do reframe
 #' @importFrom stats reformulate dnorm
 #'
 #' @seealso
@@ -92,7 +92,7 @@ nice_density <- function(data,
   # Make data for normally distributed lines
   dat_norm <- data %>%
     group_by(.data[[group]]) %>%
-    do(summarize(.,
+    do(reframe(.,
       x = seq(min(.[[variable]], na.rm = TRUE),
         max(.[[variable]], na.rm = TRUE),
         length.out = 100

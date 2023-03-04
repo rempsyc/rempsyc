@@ -15,6 +15,7 @@ affiliations:
 date: "2023-03-04"
 bibliography: paper.bib
 output:
+  #rticles::joss_article
   md_document:
     preserve_yaml: TRUE
     variant: "markdown_strict"
@@ -293,12 +294,9 @@ and can be modified as such.
                  has.r = TRUE,
                  has.p = TRUE) +
       ggplot2::geom_hline(yintercept = mean(mtcars$mpg), colour = "black", 
-                          size = 1.4, linetype = "dashed") +
+                          linewidth = 1.4, linetype = "dashed") +
       ggplot2::annotate("text", x = 3.5, y = 22, size = 7,
                         label = paste("Mean mpg =", round(mean(mtcars$mpg), 2)))
-
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## ℹ Please use `linewidth` instead.
 
 <img src="paper_files/figure-markdown_strict/nice_scatter-2.png" width="60%" />
 
@@ -348,14 +346,6 @@ combination of quantile-quantile plots, density plots, and histograms.
                    histogram = TRUE,
                    title = "Density (Sepal Length)")
 
-    ## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-    ## dplyr 1.1.0.
-    ## ℹ Please use `reframe()` instead.
-    ## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-    ##   always returns an ungrouped data frame and adjust accordingly.
-    ## ℹ The deprecated feature was likely used in the rempsyc package.
-    ##   Please report the issue at <]8;;https://github.com/rempsyc/rempsyc/issueshttps://github.com/rempsyc/rempsyc/issues]8;;>.
-
 ![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using the median absolute deviation
@@ -399,11 +389,14 @@ visually with `nice_varplot()`.
              group = "Species") |>
       nice_table()
 
-      nice_varplot(data = iris,
+<img src="paper_files/figure-markdown_strict/nice_var-1.png"
+style="width:100.0%" />
+
+    nice_varplot(data = iris,
                  variable = "Sepal.Length",
                  group = "Species")
 
-<img src="paper_files/figure-markdown_strict/nice_var-2.png" width="70%" />
+<img src="paper_files/figure-markdown_strict/nice_var plot-1.png" width="70%" />
 
 ## Utility functions
 
@@ -434,7 +427,7 @@ The {rempsyc} package is licensed under the GNU General Public License
 `install.packages("rempsyc")`. The full tutorial website can be accessed
 at: <https://rempsyc.remi-theriault.com/>. All code is open-source and
 hosted on GitHub, and bugs can be reported at
-<https://github.com/rempsyc/rempsyc/issues>.
+<https://github.com/rempsyc/rempsyc/issues/>.
 
 # Acknowledgements
 

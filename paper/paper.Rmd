@@ -15,6 +15,7 @@ affiliations:
 date: "`r Sys.Date()`"
 bibliography: paper.bib
 output:
+  #rticles::joss_article
   md_document:
     preserve_yaml: TRUE
     variant: "markdown_strict"
@@ -299,7 +300,7 @@ nice_scatter(data = mtcars,
              has.r = TRUE,
              has.p = TRUE) +
   ggplot2::geom_hline(yintercept = mean(mtcars$mpg), colour = "black", 
-                      size = 1.4, linetype = "dashed") +
+                      linewidth = 1.4, linetype = "dashed") +
   ggplot2::annotate("text", x = 3.5, y = 22, size = 7,
                     label = paste("Mean mpg =", round(mean(mtcars$mpg), 2)))
 
@@ -374,8 +375,12 @@ nice_var(data = iris,
          variable = names(iris[1:4]),
          group = "Species") |>
   nice_table()
+```
 
-  nice_varplot(data = iris,
+![](paper_files/figure-markdown_strict/nice_var-1.png){width=100%}
+
+```{r nice_var plot, fig.width=8, fig.height=7, out.width="70%"}
+nice_varplot(data = iris,
              variable = "Sepal.Length",
              group = "Species")
 ```
@@ -407,7 +412,7 @@ The {rempsyc} package is licensed under the GNU General Public License (GPL
 v3.0). It is available on CRAN, and can be installed using 
 `install.packages("rempsyc")`. The full tutorial website can be accessed at: 
 https://rempsyc.remi-theriault.com/. All code is open-source and hosted on 
-GitHub, and bugs can be reported at https://github.com/rempsyc/rempsyc/issues.
+GitHub, and bugs can be reported at https://github.com/rempsyc/rempsyc/issues/.
 
 # Acknowledgements
 

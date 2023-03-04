@@ -1,6 +1,12 @@
 test_that("nice_fit regular", {
   skip_if_not_installed(c("ggplot2", "boot", "ggsignif"))
 
+  nice_density(
+    data = iris,
+    variable = "Sepal.Length",
+    group = "Species"
+  )
+
   # Make the basic plot
   x <- nice_violin(
     data = ToothGrowth,
