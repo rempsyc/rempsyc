@@ -10,7 +10,7 @@ authors:
     orcid: 0000-0003-4315-6788
     affiliation: 1
 affiliations:
-  - name: "Departement of Psychology, Université du Québec à Montréal, Québec, Canada"
+  - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
 date: "`r Sys.Date()`"
 bibliography: paper.bib
@@ -27,34 +27,24 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the 
 analysis-to-publication workflow faster, easier, and less error-prone. It 
-affords nice APA tables exportable to Word (via {flextable}) and easily 
-customizable APA plots (via {ggplot2}). It makes it easy to run statistical 
-tests, check assumptions, and automatize various tasks. It is a package mostly
-geared at researchers in the psychological sciences but people from all fields 
-can benefit from it.
+enables nice APA tables exportable to Word (via {flextable}) and easily 
+customizable APA-compliant plots (via {ggplot2}). It makes it easy to run 
+statistical tests, check assumptions, and automate various tasks common in 
+psychology research.
 
 # Statement of need
 
 There are many reasons to use R [@base2021] for analyzing and reporting data 
-from research studies. R is more compatible with the ideals of open science 
-[@quintana2020]. In contrast to commercial software: (a) it is free to use; (b) 
-it makes it easy to share a fully comprehensive analysis script; (c) it is 
-transparent as anyone can look at the formulas or algorithms used in a given 
-package; (d) the community can quickly contribute new packages based on current 
-needs; (e) it generates better-looking figures; and (f) it helps reduce 
-copy-paste errors so common in psychology. The latter point is not trivial
-given that according to some estimates, up to 50% of articles in psychology have 
-at least one statistical error [@nuijten2016prevalence].
-
-However, R has a major downside for novices: its steep learning curve due to 
-its programmatic interface, in contrast to perhaps more user-friendly 
-point-and-click software. Of course, this flexibility is also a strength, as the 
-R community can, and does, mobilize to produce packages that make 
-using R increasingly easier and more user-friendly [e.g., the _easystats_ 
-ecosystem @easystatsPackage]. The {rempsyc} package contributes to this 
-momentum by providing convenience functions that remove as much friction as 
-possible between your script and your manuscript (in particular, if you are 
-using Microsoft Word).
+from research studies, such as being compatible with the ideals of open science 
+[@quintana2020]. However, R has a major downside for novices: its steep 
+learning curve due to its programmatic interface, in contrast to perhaps more 
+user-friendly point-and-click software. Of course, this flexibility is also a 
+strength, as the R community can and does come together to produce packages that 
+make using R increasingly easier and more user-friendly [e.g., the _easystats_ 
+ecosystem @easystatsPackage]. The {rempsyc} package (Really Easy Methods for 
+Psychology) contributes to this momentum by providing convenience functions 
+that remove as much friction as possible between your script and your 
+manuscript (in particular, if you are using Microsoft Word).
 
 There are mainly three things that go into a manuscript: text, tables, and 
 figures. {rempsyc} does not generate publication-ready text summarizing analyses; 
@@ -66,13 +56,21 @@ a few quick examples of those.
 
 ## Publication-Ready Tables
 
+Many researchers using R still copy-paste the values from the R console to
+their manuscript, or retype them manually. Yet, this approach increases the 
+risks of copy-paste and retyping errors so common in psychology. This problem 
+is not trivial given that according to some estimates, up to 50% of articles in 
+psychology have at least one statistical error [@nuijten2016prevalence]. 
+Ideally, one should be able to format the table directly in R, and to export it
+to Word directly.
+
 Formatting your table properly in R is already a time-consuming task, but 
-fortunately several packages take care of the formatting within R [e.g., the 
+fortunately several packages take care of this step [e.g., the 
 {broom} or {report} packages, @reportPackage; @broom2022, and there are several
 others]. Exporting these formatted tables to Microsoft Word remains a challenge 
 however. Some packages do export to Word [e.g., @stanley2018reproducible], but 
-their formatting is often rigid especially when using analyzes that are not
-supported by default.
+their formatting is often rigid especially when using analyzes or table formats
+that are not supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you manually 
 create the data frame exactly the way you want, and then only use the magical 
@@ -91,10 +89,9 @@ well the pipe workflow.
 
 ```{r broom}
 library(rempsyc)
-library(broom)
 
 lm(mpg ~ cyl + wt * hp, mtcars) |>
-  tidy(conf.int = TRUE) |>
+  broom::tidy(conf.int = TRUE) |>
   nice_table(broom = "lm")
 ```
 
@@ -103,10 +100,8 @@ lm(mpg ~ cyl + wt * hp, mtcars) |>
 We can do the same with a {report} table.
 
 ```{r report}
-library(report)
-
 stats.table <- lm(mpg ~ cyl + wt * hp, mtcars) |>
-  report() |>
+  report::report() |>
   as.data.frame()
 
 nice_table(stats.table)
@@ -117,9 +112,9 @@ nice_table(stats.table)
 The {report} package provides quite comprehensive tables, so one may request an 
 abbreviated table with the `'short'` argument. For convenience, it is also 
 possible to highlight significant results for better visual discrimination, 
-using the `'highlight'` argument^[This argument can be used logically, as `'TRUE'` 
+using the `'highlight'` argument.^[This argument can be used logically, as `'TRUE'` 
 or `'FALSE'`, but can also be provided with a numeric value representing the 
-cut-off threshold for the _p_ value]. Once satisfied with the table, we can add 
+cut-off threshold for the _p_ value] Once satisfied with the table, we can add 
 a title and note.
 
 ```{r highlight}
@@ -141,8 +136,8 @@ flextable::save_as_docx(my_table, path = "nice_tablehere.docx")
 ```
 
 Additionally, tables created with `nice_table()` are {flextable} objects 
-[@flextable2022], and can be modified as such^[A great resource for this is
-the {flextable} e-book: https://ardata-fr.github.io/flextable-book/].
+[@flextable2022], and can be modified as such.^[A great resource for this is
+the {flextable} e-book: https://ardata-fr.github.io/flextable-book/]
 
 ## Formattting Results of Analyses
 
@@ -198,7 +193,7 @@ nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
 
 ![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
 
-### Correlation Matrix
+### Correlation Matrices
 
 It is also possible to export a colour-coded correlation matrix to Microsoft 
 Excel. The `cormatrix_excel()` function has several benefits over conventional 
@@ -225,7 +220,7 @@ matrices, it can be more useful to export it to Excel. In {rempsyc}, we combine
 the idea of using a coloured correlation matrix from the {correlation} package 
 with the idea of exporting to Excel using {openxlsx2} [@openxlsx2package].
 
-We also provide some quality of life-improvements, like freezing the first row
+We also provide some usability improvements, like freezing the first row
 and column so as to be able to easily see which variables correlates with which
 other variable, regardless of how far or deep those variables are located 
 within the matrix.
@@ -284,24 +279,30 @@ Recommended dimensions for saving {rempsyc} figures is 7 inches wide and 7
 inches high at 300 dpi, which makes sure that the resolution is high enough even
 if saving to non-vector graphics formats like `.png`. That said, scalable vector 
 graphics formats like `.pdf` or `.eps` are still recommended for high-resolution 
-submissions to scientific journals. Additionally, figures are {ggplot2} objects 
-[@ggplot2package], and can be modified as such.
+submissions to scientific journals.
 
 ### Scatter Plots
+
+Figures are {ggplot2} objects [@ggplot2package], and can be modified as such.
 
 ```{r nice_scatter, fig.width=8, fig.height=7, out.width="60%"}
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
-             has.confband = TRUE,
-             has.r = TRUE,
-             has.p = TRUE)
+             group = "cyl",
+             has.confband = TRUE)
 
 nice_scatter(data = mtcars,
              predictor = "wt",
              response = "mpg",
-             group = "cyl",
-             has.confband = TRUE)
+             has.confband = TRUE,
+             has.r = TRUE,
+             has.p = TRUE) +
+  ggplot2::geom_hline(yintercept = mean(mtcars$mpg), colour = "black", 
+                      size = 1.4, linetype = "dashed") +
+  ggplot2::annotate("text", x = 3.5, y = 22, size = 7,
+                    label = paste("Mean mpg =", round(mean(mtcars$mpg), 2)))
+
 ```
 
 For an example of such use in publication, see @krol2020self.
@@ -330,8 +331,8 @@ since they are overpowered in large samples and underpowered in small samples
 
 That said, if for whatever reason one wants to check objective asumption tests
 for a linear model, rempsyc makes this easy with the `nice_assumptions()`
-function, which provide _p_ values for normality (Shapiro-Wilk), homoscedasticity 
-(Breusch-Pagan) and autocorrelation of residuals (Durbin-Watson) in one call.
+function, which provide _p_ values for normality (Shapiro--Wilk), homoscedasticity 
+(Breusch--Pagan) and autocorrelation of residuals (Durbin--Watson) in one call.
 
 ### Categorical Predictors
 
@@ -371,9 +372,10 @@ with `nice_varplot()`.
 ```{r nice_var, fig.width=8, fig.height=7, out.width="70%"}
 nice_var(data = iris,
          variable = names(iris[1:4]),
-         group = "Species")
+         group = "Species") |>
+  nice_table()
 
-nice_varplot(data = iris,
+  nice_varplot(data = iris,
              variable = "Sepal.Length",
              group = "Species")
 ```
@@ -399,15 +401,17 @@ There are other functions that the reader can explore at their leisure
 on the package official website. However, hopefully, this overview has
 given the reader a gentle introduction to this package.
 
-# Availability
+# Licensing and Availability
 
-The {rempsyc} package is available on CRAN, and can be installed using 
+The {rempsyc} package is licensed under the GNU General Public License (GPL 
+v3.0). It is available on CRAN, and can be installed using 
 `install.packages("rempsyc")`. The full tutorial website can be accessed at: 
-https://rempsyc.remi-theriault.com/.
+https://rempsyc.remi-theriault.com/. All code is open-source and hosted on 
+GitHub, and bugs can be reported at https://github.com/rempsyc/rempsyc/issues.
 
 # Acknowledgements
 
-I would like to thank Hugues Leduc, Jay Olson, Charles-Étienne Lavoie, and Björn 
+I would like to thank Jay Olson, Hugues Leduc, Charles-Étienne Lavoie, and Björn 
 Büdenbender for statistical or technical advice that helped inform some functions 
 of this package and/or useful feedback on this manuscript. I would also like
 to acknowledge funding from the Social Sciences and Humanities Research Council 

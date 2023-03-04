@@ -157,12 +157,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7834549  4.5987584
-#> 2  0.8487621  1.9829747
-#> 3  1.3657530  3.1161587
-#> 4 -5.7833739 -3.9268509
-#> 5 -4.3079646 -2.1971336
-#> 6 -2.2869914 -0.8468964
+#> 1  2.6313865  4.5520939
+#> 2  0.8069705  1.9501735
+#> 3  1.3395887  3.0175848
+#> 4 -5.7954871 -3.9271356
+#> 5 -4.2824222 -2.1855571
+#> 6 -2.2702868 -0.9346695
 
 # Format contrasts results
 nice_table(contrasts, highlight = .001)
@@ -520,8 +520,8 @@ best_duplicate(df1, id = "id")
 
 ## `scale_mad`
 
-Scale and center (“standardize”) data based on the median absolute
-deviation.
+Scale and center (“standardize”) data based on the median and median
+absolute deviation (MAD).
 
 ``` r
 scale_mad(mtcars$mpg)
@@ -535,7 +535,8 @@ scale_mad(mtcars$mpg)
 
 ## `find_mad`
 
-Identify outliers based on (e.g.,) 3 median absolute deviations (MAD).
+Identify outliers based on (e.g.,) 3 median absolute deviations (MAD)
+from the median.
 
 ``` r
 find_mad(data = mtcars, col.list = names(mtcars)[c(1:7, 10:11)], criteria = 3)

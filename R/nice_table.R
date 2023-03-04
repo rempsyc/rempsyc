@@ -539,6 +539,7 @@ create_flextable <- function(dataframe, highlight, width, note,
     flextable::hline_top(part = "body", border = nice.borders) %>%
     flextable::hline_bottom(part = "body", border = nice.borders) %>%
     flextable::align(align = "center", part = "all") %>%
+    flextable::align(j = 1, align = "left", part = "body") %>%
     flextable::valign(valign = "center", part = "all") %>%
     flextable::line_spacing(space = 2, part = "all") %>%
     flextable::fix_border_issues()

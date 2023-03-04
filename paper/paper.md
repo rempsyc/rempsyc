@@ -10,9 +10,9 @@ authors:
     orcid: 0000-0003-4315-6788
     affiliation: 1
 affiliations:
-  - name: "Departement of Psychology, Université du Québec à Montréal, Québec, Canada"
+  - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-02-19"
+date: "2023-03-04"
 bibliography: paper.bib
 output:
   md_document:
@@ -27,37 +27,27 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the
 analysis-to-publication workflow faster, easier, and less error-prone.
-It affords nice APA tables exportable to Word (via {flextable}) and
-easily customizable APA plots (via {ggplot2}). It makes it easy to run
-statistical tests, check assumptions, and automatize various tasks. It
-is a package mostly geared at researchers in the psychological sciences
-but people from all fields can benefit from it.
+It enables nice APA tables exportable to Word (via {flextable}) and
+easily customizable APA-compliant plots (via {ggplot2}). It makes it
+easy to run statistical tests, check assumptions, and automate various
+tasks common in psychology research.
 
 # Statement of need
 
 There are many reasons to use R ([R Core Team, 2022](#ref-base2021)) for
-analyzing and reporting data from research studies. R is more compatible
-with the ideals of open science ([Quintana, 2020](#ref-quintana2020)).
-In contrast to commercial software: (a) it is free to use; (b) it makes
-it easy to share a fully comprehensive analysis script; (c) it is
-transparent as anyone can look at the formulas or algorithms used in a
-given package; (d) the community can quickly contribute new packages
-based on current needs; (e) it generates better-looking figures; and (f)
-it helps reduce copy-paste errors so common in psychology. The latter
-point is not trivial given that according to some estimates, up to 50%
-of articles in psychology have at least one statistical error ([Nuijten
-et al., 2016](#ref-nuijten2016prevalence)).
-
-However, R has a major downside for novices: its steep learning curve
-due to its programmatic interface, in contrast to perhaps more
-user-friendly point-and-click software. Of course, this flexibility is
-also a strength, as the R community can, and does, mobilize to produce
-packages that make using R increasingly easier and more user-friendly
-(e.g., the *easystats* ecosystem [Lüdecke et al.,
-2019/2023](#ref-easystatsPackage)). The {rempsyc} package contributes to
-this momentum by providing convenience functions that remove as much
-friction as possible between your script and your manuscript (in
-particular, if you are using Microsoft Word).
+analyzing and reporting data from research studies, such as being
+compatible with the ideals of open science ([Quintana,
+2020](#ref-quintana2020)). However, R has a major downside for novices:
+its steep learning curve due to its programmatic interface, in contrast
+to perhaps more user-friendly point-and-click software. Of course, this
+flexibility is also a strength, as the R community can and does come
+together to produce packages that make using R increasingly easier and
+more user-friendly (e.g., the *easystats* ecosystem [Lüdecke et al.,
+2019/2023](#ref-easystatsPackage)). The {rempsyc} package (Really Easy
+Methods for Psychology) contributes to this momentum by providing
+convenience functions that remove as much friction as possible between
+your script and your manuscript (in particular, if you are using
+Microsoft Word).
 
 There are mainly three things that go into a manuscript: text, tables,
 and figures. {rempsyc} does not generate publication-ready text
@@ -70,15 +60,24 @@ few quick examples of those.
 
 ## Publication-Ready Tables
 
+Many researchers using R still copy-paste the values from the R console
+to their manuscript, or retype them manually. Yet, this approach
+increases the risks of copy-paste and retyping errors so common in
+psychology. This problem is not trivial given that according to some
+estimates, up to 50% of articles in psychology have at least one
+statistical error ([Nuijten et al., 2016](#ref-nuijten2016prevalence)).
+Ideally, one should be able to format the table directly in R, and to
+export it to Word directly.
+
 Formatting your table properly in R is already a time-consuming task,
-but fortunately several packages take care of the formatting within R
-(e.g., the {broom} or {report} packages, [Makowski et al.,
+but fortunately several packages take care of this step (e.g., the
+{broom} or {report} packages, [Makowski et al.,
 2021/2023](#ref-reportPackage); [Robinson et al., 2022](#ref-broom2022),
 and there are several others). Exporting these formatted tables to
 Microsoft Word remains a challenge however. Some packages do export to
 Word (e.g., [Stanley & Spence, 2018](#ref-stanley2018reproducible)), but
-their formatting is often rigid especially when using analyzes that are
-not supported by default.
+their formatting is often rigid especially when using analyzes or table
+formats that are not supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
@@ -92,32 +91,29 @@ example create a {broom} table and then apply `nice_table()` on it. It
 suits particularly well the pipe workflow.
 
     library(rempsyc)
-    library(broom)
 
     lm(mpg ~ cyl + wt * hp, mtcars) |>
-      tidy(conf.int = TRUE) |>
+      broom::tidy(conf.int = TRUE) |>
       nice_table(broom = "lm")
 
-![](paper_files/figure-markdown_strict/broom-1.png){width=60%}
-
+<img src="paper_files/figure-markdown_strict/broom-1.png"
+style="width:60.0%" />
 
 We can do the same with a {report} table.
 
-    library(report)
-
     stats.table <- lm(mpg ~ cyl + wt * hp, mtcars) |>
-      report() |>
+      report::report() |>
       as.data.frame()
 
     nice_table(stats.table)
 
-![](paper_files/figure-markdown_strict/report-1.png){width=80%}
-
+<img src="paper_files/figure-markdown_strict/report-1.png"
+style="width:80.0%" />
 
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `'short'` argument. For
 convenience, it is also possible to highlight significant results for
-better visual discrimination, using the `'highlight'` argument[1]. Once
+better visual discrimination, using the `'highlight'` argument.[1] Once
 satisfied with the table, we can add a title and note.
 
     my_table <- nice_table(
@@ -127,8 +123,8 @@ satisfied with the table, we can add a title and note.
                "Greyed rows represent statistically significant differences, p < .001."))
     my_table
 
-![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}
-
+<img src="paper_files/figure-markdown_strict/highlight-1.png"
+style="width:80.0%" />
 
 One can then easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
@@ -138,7 +134,7 @@ path.
 
 Additionally, tables created with `nice_table()` are {flextable} objects
 ([Gohel & Skintzos, 2022](#ref-flextable2022)), and can be modified as
-such[2].
+such.[2]
 
 ## Formattting Results of Analyses
 
@@ -153,8 +149,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
                 warning = FALSE) |>
       nice_table()
 
-![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=70%}
-
+<img src="paper_files/figure-markdown_strict/nice_t_test-1.png"
+style="width:60.0%" />
 
 ### Contrasts
 
@@ -164,8 +160,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
                    covariates = "hp") |>
       nice_table(highlight = .001)
 
-![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=80%}
-
+<img src="paper_files/figure-markdown_strict/nice_contrasts-1.png"
+style="width:80.0%" />
 
 ### Regressions
 
@@ -175,8 +171,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
     nice_lm(list(model1, model2)) |>
       nice_table(highlight = TRUE)
 
-![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}
-
+<img src="paper_files/figure-markdown_strict/nice_lm-1.png"
+style="width:80.0%" />
 
 ### Simple Slopes
 
@@ -187,10 +183,10 @@ tables before they can be fed to `nice_table()` and saved to Word.
     nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
       nice_table()
 
-![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
+<img src="paper_files/figure-markdown_strict/nice_lm_slopes-1.png"
+style="width:80.0%" />
 
-
-### Correlation Matrix
+### Correlation Matrices
 
 It is also possible to export a colour-coded correlation matrix to
 Microsoft Excel. The `cormatrix_excel()` function has several benefits
@@ -220,10 +216,10 @@ large matrices, it can be more useful to export it to Excel. In
 from the {correlation} package with the idea of exporting to Excel using
 {openxlsx2} ([Barbone & Garbuszus, 2023](#ref-openxlsx2package)).
 
-We also provide some quality of life-improvements, like freezing the
-first row and column so as to be able to easily see which variables
-correlates with which other variable, regardless of how far or deep
-those variables are located within the matrix.
+We also provide some usability improvements, like freezing the first row
+and column so as to be able to easily see which variables correlates
+with which other variable, regardless of how far or deep those variables
+are located within the matrix.
 
 The colour represents the strength of the correlation, whereas the stars
 represent how significant the *p* value is.[4] The exact *p* values are
@@ -260,7 +256,7 @@ to your preferred format (`.pdf`, `.tiff`, or `.png`).
                 has.d = TRUE,
                 d.y = 30)
 
-![](paper_files/figure-markdown_strict/nice_violin-1.png){width=60%}
+<img src="paper_files/figure-markdown_strict/nice_violin-1.png" width="60%" />
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -276,19 +272,11 @@ Recommended dimensions for saving {rempsyc} figures is 7 inches wide and
 enough even if saving to non-vector graphics formats like `.png`. That
 said, scalable vector graphics formats like `.pdf` or `.eps` are still
 recommended for high-resolution submissions to scientific journals.
-Additionally, figures are {ggplot2} objects ([Wickham,
-2016](#ref-ggplot2package)), and can be modified as such.
 
 ### Scatter Plots
 
-    nice_scatter(data = mtcars,
-                 predictor = "wt",
-                 response = "mpg",
-                 has.confband = TRUE,
-                 has.r = TRUE,
-                 has.p = TRUE)
-
-![](paper_files/figure-markdown_strict/nice_scatter-1.png){width=60%}
+Figures are {ggplot2} objects ([Wickham, 2016](#ref-ggplot2package)),
+and can be modified as such.
 
     nice_scatter(data = mtcars,
                  predictor = "wt",
@@ -296,7 +284,23 @@ Additionally, figures are {ggplot2} objects ([Wickham,
                  group = "cyl",
                  has.confband = TRUE)
 
-![](paper_files/figure-markdown_strict/nice_scatter-2.png){width=60%}
+<img src="paper_files/figure-markdown_strict/nice_scatter-1.png" width="60%" />
+
+    nice_scatter(data = mtcars,
+                 predictor = "wt",
+                 response = "mpg",
+                 has.confband = TRUE,
+                 has.r = TRUE,
+                 has.p = TRUE) +
+      ggplot2::geom_hline(yintercept = mean(mtcars$mpg), colour = "black", 
+                          size = 1.4, linetype = "dashed") +
+      ggplot2::annotate("text", x = 3.5, y = 22, size = 7,
+                        label = paste("Mean mpg =", round(mean(mtcars$mpg), 2)))
+
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+
+<img src="paper_files/figure-markdown_strict/nice_scatter-2.png" width="60%" />
 
 For an example of such use in publication, see Krol et al.
 ([2020](#ref-krol2020self)).
@@ -310,7 +314,7 @@ representation of the conceptual self-other overlap.
 
     overlap_circle(3.5)
 
-![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=40%}
+<img src="paper_files/figure-markdown_strict/overlap_circle-1.png" width="40%" />
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -328,8 +332,8 @@ samples ([Kozak & Piepho, 2018](#ref-kozak2018s)).
 That said, if for whatever reason one wants to check objective asumption
 tests for a linear model, rempsyc makes this easy with the
 `nice_assumptions()` function, which provide *p* values for normality
-(Shapiro-Wilk), homoscedasticity (Breusch-Pagan) and autocorrelation of
-residuals (Durbin-Watson) in one call.
+(Shapiro–Wilk), homoscedasticity (Breusch–Pagan) and autocorrelation of
+residuals (Durbin–Watson) in one call.
 
 ### Categorical Predictors
 
@@ -344,6 +348,14 @@ combination of quantile-quantile plots, density plots, and histograms.
                    histogram = TRUE,
                    title = "Density (Sepal Length)")
 
+    ## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+    ## dplyr 1.1.0.
+    ## ℹ Please use `reframe()` instead.
+    ## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+    ##   always returns an ungrouped data frame and adjust accordingly.
+    ## ℹ The deprecated feature was likely used in the rempsyc package.
+    ##   Please report the issue at <]8;;https://github.com/rempsyc/rempsyc/issueshttps://github.com/rempsyc/rempsyc/issues]8;;>.
+
 ![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using the median absolute deviation
@@ -353,7 +365,7 @@ Similarly for univariate outliers using the median absolute deviation
                   group = "Month",
                   response = "Ozone")
 
-![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
+<img src="paper_files/figure-markdown_strict/plot_outliers-1.png" width="60%" />
 
 Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.[5]
@@ -384,24 +396,14 @@ visually with `nice_varplot()`.
 
     nice_var(data = iris,
              variable = names(iris[1:4]),
-             group = "Species")
+             group = "Species") |>
+      nice_table()
 
-    ##        Species Setosa Versicolor Virginica Variance.ratio Criteria
-    ## 1 Sepal.Length  0.124      0.266     0.404            3.3        4
-    ## 2  Sepal.Width  0.144      0.098     0.104            1.5        4
-    ## 3 Petal.Length  0.030      0.221     0.305           10.2        4
-    ## 4  Petal.Width  0.011      0.039     0.075            6.8        4
-    ##   Heteroscedastic
-    ## 1           FALSE
-    ## 2           FALSE
-    ## 3            TRUE
-    ## 4            TRUE
-
-    nice_varplot(data = iris,
+      nice_varplot(data = iris,
                  variable = "Sepal.Length",
                  group = "Species")
 
-![](paper_files/figure-markdown_strict/nice_var-1.png){width=70%}
+<img src="paper_files/figure-markdown_strict/nice_var-2.png" width="70%" />
 
 ## Utility functions
 
@@ -425,15 +427,18 @@ There are other functions that the reader can explore at their leisure
 on the package official website. However, hopefully, this overview has
 given the reader a gentle introduction to this package.
 
-# Availability
+# Licensing and Availability
 
-The {rempsyc} package is available on CRAN, and can be installed using
+The {rempsyc} package is licensed under the GNU General Public License
+(GPL v3.0). It is available on CRAN, and can be installed using
 `install.packages("rempsyc")`. The full tutorial website can be accessed
-at: <https://rempsyc.remi-theriault.com/>.
+at: <https://rempsyc.remi-theriault.com/>. All code is open-source and
+hosted on GitHub, and bugs can be reported at
+<https://github.com/rempsyc/rempsyc/issues>.
 
 # Acknowledgements
 
-I would like to thank Hugues Leduc, Jay Olson, Charles-Étienne Lavoie,
+I would like to thank Jay Olson, Hugues Leduc, Charles-Étienne Lavoie,
 and Björn Büdenbender for statistical or technical advice that helped
 inform some functions of this package and/or useful feedback on this
 manuscript. I would also like to acknowledge funding from the Social
