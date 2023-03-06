@@ -309,7 +309,8 @@ For psychologists using the Inclusion of Other in the the Self Scale
 ([Aron et al., 1992](#ref-aron1992inclusion)), it can be useful to
 interpolate the original discrete scores (1 to 7) into a group average
 representation of the conceptual self-other overlap. For example,
-assuming the group mean is 3.5 on the 1 to 7 scale:
+assuming the group mean is 3.5 on the 1 to 7 scale, `overlap_circle()`
+will draw a 25% overlap from interpolation:
 
     overlap_circle(3.5)
 
