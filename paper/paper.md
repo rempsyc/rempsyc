@@ -12,7 +12,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-03-04"
+date: "2023-03-06"
 bibliography: paper.bib
 output:
   #rticles::joss_article
@@ -97,8 +97,8 @@ suits particularly well the pipe workflow.
       broom::tidy(conf.int = TRUE) |>
       nice_table(broom = "lm")
 
-<img src="paper_files/figure-markdown_strict/broom-1.png"
-style="width:60.0%" />
+![](paper_files/figure-markdown_strict/broom-1.png){width=60%}
+
 
 We can do the same with a {report} table.
 
@@ -108,8 +108,8 @@ We can do the same with a {report} table.
 
     nice_table(stats.table)
 
-<img src="paper_files/figure-markdown_strict/report-1.png"
-style="width:80.0%" />
+![](paper_files/figure-markdown_strict/report-1.png){width=80%}
+
 
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `'short'` argument. For
@@ -124,8 +124,8 @@ satisfied with the table, we can add a title and note.
                "Greyed rows represent statistically significant differences, p < .001."))
     my_table
 
-<img src="paper_files/figure-markdown_strict/highlight-1.png"
-style="width:80.0%" />
+![](paper_files/figure-markdown_strict/highlight-1.png){width=80%}
+
 
 One can then easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
@@ -150,8 +150,8 @@ tables before they can be fed to `nice_table()` and saved to Word.
                 warning = FALSE) |>
       nice_table()
 
-<img src="paper_files/figure-markdown_strict/nice_t_test-1.png"
-style="width:60.0%" />
+![](paper_files/figure-markdown_strict/nice_t_test-1.png){width=70%}
+
 
 ### Contrasts
 
@@ -161,8 +161,8 @@ style="width:60.0%" />
                    covariates = "hp") |>
       nice_table(highlight = .001)
 
-<img src="paper_files/figure-markdown_strict/nice_contrasts-1.png"
-style="width:80.0%" />
+![](paper_files/figure-markdown_strict/nice_contrasts-1.png){width=80%}
+
 
 ### Regressions
 
@@ -172,8 +172,8 @@ style="width:80.0%" />
     nice_lm(list(model1, model2)) |>
       nice_table(highlight = TRUE)
 
-<img src="paper_files/figure-markdown_strict/nice_lm-1.png"
-style="width:80.0%" />
+![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}
+
 
 ### Simple Slopes
 
@@ -184,8 +184,8 @@ style="width:80.0%" />
     nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
       nice_table()
 
-<img src="paper_files/figure-markdown_strict/nice_lm_slopes-1.png"
-style="width:80.0%" />
+![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
+
 
 ### Correlation Matrices
 
@@ -257,7 +257,7 @@ to your preferred format (`.pdf`, `.tiff`, or `.png`).
                 has.d = TRUE,
                 d.y = 30)
 
-<img src="paper_files/figure-markdown_strict/nice_violin-1.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_violin-1.png){width=60%}
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -285,7 +285,7 @@ and can be modified as such.
                  group = "cyl",
                  has.confband = TRUE)
 
-<img src="paper_files/figure-markdown_strict/nice_scatter-1.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_scatter-1.png){width=60%}
 
     nice_scatter(data = mtcars,
                  predictor = "wt",
@@ -298,7 +298,7 @@ and can be modified as such.
       ggplot2::annotate("text", x = 3.5, y = 22, size = 7,
                         label = paste("Mean mpg =", round(mean(mtcars$mpg), 2)))
 
-<img src="paper_files/figure-markdown_strict/nice_scatter-2.png" width="60%" />
+![](paper_files/figure-markdown_strict/nice_scatter-2.png){width=60%}
 
 For an example of such use in publication, see Krol et al.
 ([2020](#ref-krol2020self)).
@@ -312,7 +312,7 @@ representation of the conceptual self-other overlap.
 
     overlap_circle(3.5)
 
-<img src="paper_files/figure-markdown_strict/overlap_circle-1.png" width="40%" />
+![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=40%}
 
 For an example of such use in publication, see Thériault et al.
 ([2021](#ref-theriault2021swapping)).
@@ -355,7 +355,7 @@ Similarly for univariate outliers using the median absolute deviation
                   group = "Month",
                   response = "Ozone")
 
-<img src="paper_files/figure-markdown_strict/plot_outliers-1.png" width="60%" />
+![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
 
 Univariate outliers based on the MAD can also be simply requested with
 `find_mad()`.[5]
