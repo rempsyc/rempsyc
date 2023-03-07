@@ -14,7 +14,8 @@ patterns1 <- c(
   '<img src="paper_files/figure-markdown_strict/overlap_circle-1.png" width="40%" />',
   '![](paper_files/figure-markdown_strict/nice_normality-1.png){width=100%}',
   '<img src="paper_files/figure-markdown_strict/plot_outliers-1.png" width="60%" />',
-  '<img src="paper_files/figure-markdown_strict/nice_var-1.png" width="70%" />'
+  '<img src="paper_files/figure-markdown_strict/nice_var-1.png" width="70%" />',
+  '<img src="paper_files/figure-markdown_strict/nice_var_plot-1.png" width="100%" />'
 )
 
 patterns2 <- c(
@@ -33,7 +34,8 @@ patterns2 <- c(
   "![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=40%}",
   "![](paper_files/figure-markdown_strict/nice_normality-1.png){width=100%}",
   "![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}",
-  "![](paper_files/figure-markdown_strict/nice_var-1.png){width=70%}"
+  "![](paper_files/figure-markdown_strict/nice_var-1.png){width=70%}",
+  "![](paper_files/figure-markdown_strict/nice_var_plot-1.png){width=100%}"
 )
 
 tx  <- readLines("paper/paper.md")

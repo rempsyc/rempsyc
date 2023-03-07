@@ -391,14 +391,13 @@ visually with `nice_varplot()`.
              group = "Species") |>
       nice_table()
 
-<img src="paper_files/figure-markdown_strict/nice_var-1.png"
-style="width:100.0%" />
+![](paper_files/figure-markdown_strict/nice_var-1.png)
 
     nice_varplot(data = iris,
                  variable = "Sepal.Length",
                  group = "Species")
 
-<img src="paper_files/figure-markdown_strict/nice_var plot-1.png" width="70%" />
+![](paper_files/figure-markdown_strict/nice_var_plot-1.png)
 
 ## Utility functions
 
