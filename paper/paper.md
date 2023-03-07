@@ -1,5 +1,5 @@
 ---
-title: 'rempsyc: Convenience functions for psychology'
+title: 'rempsyc: Convenience functions for psychology and social sciences'
 tags:
   - R
   - psychology
@@ -28,10 +28,10 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the
 analysis-to-publication workflow faster, easier, and less error-prone.
-It enables nice APA tables exportable to Word (via {flextable}) and
+It enables the creation of publication-ready tables exportable to Word (via {flextable}) and
 easily customizable APA-compliant plots (via {ggplot2}). It makes it
 easy to run statistical tests, check assumptions, and automate various
-tasks common in psychology research.
+tasks common in psychological and social scientific research.
 
 # Statement of need
 
@@ -70,7 +70,7 @@ statistical error ([Nuijten et al., 2016](#ref-nuijten2016prevalence)).
 Ideally, one should be able to format the table directly in R, and to
 export it to Word directly.
 
-Formatting your table properly in R is already a time-consuming task,
+Formatting a table properly in R is already a tedious and time-consuming task,
 but fortunately several packages take care of this step (e.g., the
 {broom} or {report} packages, [Makowski et al.,
 2021/2023](#ref-reportPackage); [Robinson et al., 2022](#ref-broom2022),
@@ -109,7 +109,6 @@ We can do the same with a {report} table.
     nice_table(stats.table)
 
 ![](paper_files/figure-markdown_strict/report-1.png){width=80%}
-
 
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `'short'` argument. For
@@ -198,34 +197,35 @@ which is an improvement but still unsatisfying.
 
 The {apaTables} package ([Stanley & Spence,
 2018](#ref-stanley2018reproducible)) allows exporting the correlation
-matrix to Word in an APA format, and in many cases this is very
-satifying for APA requirements. Hovever, the Word format is not suitable
+matrix to Word in an APA format, and in many cases this already meets the 
+formal requirements of APA style. Hovever, the Word format is not suitable
 for large matrices, as it will often spread beyond the document’s margin
 limits.
 
-Another approach is to export to an image, like the {correlation}
-package does ([Makowski et al., 2020](#ref-correlationpackage)).[3] For
-very small matrices, this works extremely well, and the colour is an
+Another approach is to export the correlation matrix to an image, 
+like the {correlation} package does 
+([Makowski et al., 2020](#ref-correlationpackage)).[3] For
+very small matrices, this works extremely well, and the color is an
 immense help to quickly identify which correlations are strong or weak,
 positive or negative, and significant or non-significant. Again,
 however, this does not work so well for large matrices because labels
 might overlap or navigating the large figure becomes difficult.
 
-When the goal is more exploratory, rather than reporting, and we have
-large matrices, it can be more useful to export it to Excel. In
-{rempsyc}, we combine the idea of using a coloured correlation matrix
+When the goal is more exploratory in nature, and one has
+large matrices, it can be beneficial to export them to Excel. In
+{rempsyc}, I combine the idea of using a colored correlation matrix
 from the {correlation} package with the idea of exporting to Excel using
 {openxlsx2} ([Barbone & Garbuszus, 2023](#ref-openxlsx2package)).
 
-We also provide some usability improvements, like freezing the first row
-and column so as to be able to easily see which variables correlates
-with which other variable, regardless of how far or deep those variables
-are located within the matrix.
+The {rempsyc} package also provides some usability improvements, like freezing 
+the first row and column so as to be able to easily see which variables 
+correlates with which other variable, regardless of how far or deep those 
+variables are located within the matrix.
 
-The colour represents the strength of the correlation, whereas the stars
-represent how significant the *p* value is.[4] The exact *p* values are
-provided in a second tab for reference purposes, so all information is
-readily available in a convenient format.
+The color represents the strength of the correlation, whereas the stars
+represent different significance treshholds for the *p* value.[4] 
+The exact *p* values are provided in a second tab for reference purposes, 
+so all information is readily available in just one convenient function call.
 
     cormatrix_excel(data = infert, 
                     filename = "cormatrix1", 
