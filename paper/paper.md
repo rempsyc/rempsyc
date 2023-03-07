@@ -1,5 +1,5 @@
 ---
-title: 'rempsyc: Convenience functions for psychology and social sciences'
+title: 'rempsyc: Convenience functions for psychology'
 tags:
   - R
   - psychology
@@ -12,7 +12,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-03-06"
+date: "2023-03-07"
 bibliography: paper.bib
 output:
   #rticles::joss_article
@@ -28,10 +28,11 @@ csl: apa.csl
 
 {rempsyc} is an R package of convenience functions that make the
 analysis-to-publication workflow faster, easier, and less error-prone.
-It enables the creation of publication-ready tables exportable to Word (via {flextable}) and
-easily customizable APA-compliant plots (via {ggplot2}). It makes it
-easy to run statistical tests, check assumptions, and automate various
-tasks common in psychological and social scientific research.
+It enables the creation of publication-ready APA (American Psychological
+Association) tables exportable to Word (via {flextable}) and easily
+customizable APA-compliant plots (via {ggplot2}). It makes it easy to
+run statistical tests, check assumptions, and automate various tasks
+common in psychology research.
 
 # Statement of need
 
@@ -70,15 +71,16 @@ statistical error ([Nuijten et al., 2016](#ref-nuijten2016prevalence)).
 Ideally, one should be able to format the table directly in R, and to
 export it to Word directly.
 
-Formatting a table properly in R is already a tedious and time-consuming task,
-but fortunately several packages take care of this step (e.g., the
+Formatting a table properly in R is already a tedious and time-consuming
+task, but fortunately several packages take care of this step (e.g., the
 {broom} or {report} packages, [Makowski et al.,
 2021/2023](#ref-reportPackage); [Robinson et al., 2022](#ref-broom2022),
 and there are several others). Exporting these formatted tables to
 Microsoft Word remains a challenge however. Some packages do export to
-Word (e.g., [Stanley & Spence, 2018](#ref-stanley2018reproducible)), but
-their formatting is often rigid especially when using analyzes or table
-formats that are not supported by default.
+Word (e.g., the {apaTables} package [Stanley & Spence,
+2018](#ref-stanley2018reproducible)), but their formatting is often
+rigid especially when using analyzes or table formats that are not
+supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
@@ -86,7 +88,7 @@ use the magical function, `nice_table()`, on the resulting data frame.
 `nice_table()` works on any data frame, even non-statistical ones like
 `mtcars`.
 
-One of its main benefit however is the automatic formatting of
+One of its main benefits however is the automatic formatting of
 statistical symbols and its integration with other packages. We can for
 example create a {broom} table and then apply `nice_table()` on it. It
 suits particularly well the pipe workflow.
@@ -109,6 +111,7 @@ We can do the same with a {report} table.
     nice_table(stats.table)
 
 ![](paper_files/figure-markdown_strict/report-1.png){width=80%}
+
 
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `'short'` argument. For
@@ -197,35 +200,35 @@ which is an improvement but still unsatisfying.
 
 The {apaTables} package ([Stanley & Spence,
 2018](#ref-stanley2018reproducible)) allows exporting the correlation
-matrix to Word in an APA format, and in many cases this already meets the 
-formal requirements of APA style. Hovever, the Word format is not suitable
-for large matrices, as it will often spread beyond the document’s margin
-limits.
+matrix to Word in an APA format, and in many cases this already meets
+the formal requirements of APA style. However, the Word format is not
+suitable for large matrices, as it will often spread beyond the
+document’s margin limits.
 
-Another approach is to export the correlation matrix to an image, 
-like the {correlation} package does 
-([Makowski et al., 2020](#ref-correlationpackage)).[3] For
-very small matrices, this works extremely well, and the color is an
-immense help to quickly identify which correlations are strong or weak,
-positive or negative, and significant or non-significant. Again,
-however, this does not work so well for large matrices because labels
-might overlap or navigating the large figure becomes difficult.
+Another approach is to export the matrix to an image, like the
+{correlation} package does ([Makowski et al.,
+2020](#ref-correlationpackage)).[3] For very small matrices, this works
+extremely well, and the colour is an immense help to quickly identify
+which correlations are strong or weak, positive or negative, and
+significant or non-significant. Again, however, this does not work so
+well for large matrices because labels might overlap or navigating the
+large figure becomes difficult.
 
-When the goal is more exploratory in nature, and one has
-large matrices, it can be beneficial to export them to Excel. In
-{rempsyc}, I combine the idea of using a colored correlation matrix
-from the {correlation} package with the idea of exporting to Excel using
-{openxlsx2} ([Barbone & Garbuszus, 2023](#ref-openxlsx2package)).
+When the goal is more exploratory in nature, and one has large matrices,
+it can be beneficial to export them to Excel. {rempsyc} combines the
+idea of using a coloured correlation matrix from the {correlation}
+package with the idea of exporting to Excel using {openxlsx2} ([Barbone
+& Garbuszus, 2023](#ref-openxlsx2package)).
 
-The {rempsyc} package also provides some usability improvements, like freezing 
-the first row and column so as to be able to easily see which variables 
-correlates with which other variable, regardless of how far or deep those 
-variables are located within the matrix.
+{rempsyc} also provides some usability improvements, like freezing the
+first row and column so as to be able to easily see which variables
+correlate with which other variables, regardless of how far or deep
+those variables are located within the matrix.
 
-The color represents the strength of the correlation, whereas the stars
-represent different significance treshholds for the *p* value.[4] 
-The exact *p* values are provided in a second tab for reference purposes, 
-so all information is readily available in just one convenient function call.
+The colour represents the strength of the correlation, whereas the stars
+represent different significance thresholds for the *p* value is.[4] The
+exact *p* values are provided in a second tab for reference purposes, so
+all information is readily available in just one function call.
 
     cormatrix_excel(data = infert, 
                     filename = "cormatrix1", 
@@ -350,8 +353,8 @@ combination of quantile-quantile plots, density plots, and histograms.
 
 ![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
-Similarly for univariate outliers using the median absolute deviation
-(MAD, [Leys et al., 2013](#ref-leys2013outliers)).
+Similarly for univariate outliers using median absolute deviations from
+the median (MAD, [Leys et al., 2013](#ref-leys2013outliers)).
 
     plot_outliers(airquality,
                   group = "Month",
@@ -359,8 +362,8 @@ Similarly for univariate outliers using the median absolute deviation
 
 ![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
 
-Univariate outliers based on the MAD can also be simply requested with
-`find_mad()`.[5]
+Univariate outliers based on the median/MAD can also be simply requested
+with `find_mad()`.[5]
 
     find_mad(airquality, names(airquality), criteria = 3)
 
