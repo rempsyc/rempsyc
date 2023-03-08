@@ -12,7 +12,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-03-07"
+date: "2023-03-08"
 bibliography: paper.bib
 output:
   #rticles::joss_article
@@ -181,7 +181,7 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
 ### Simple Slopes
 
-    nice_lm_slopes(my.models, predictor = "wt", moderator = "hp", b.label = "B") |>
+    nice_lm_slopes(my.models, predictor = "wt", moderator = "hp") |>
       nice_table()
 
 ![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
@@ -419,8 +419,9 @@ common for psychology questionnaires, provided the minimum and maximum
 score values are known.
 
 There are other functions that the reader can explore at their leisure
-on the package official website. However, hopefully, this overview has
-given the reader a gentle introduction to this package.
+on the package [official website](https://rempsyc.remi-theriault.com/).
+However, hopefully, this overview has given the reader a gentle
+introduction to this package.
 
 # Licensing and Availability
 
@@ -433,8 +434,8 @@ hosted on GitHub, and bugs can be reported at
 
 # Acknowledgements
 
-I would like to thank Jay Olson, Hugues Leduc, Charles-Étienne Lavoie,
-and Björn Büdenbender for statistical or technical advice that helped
+I would like to thank Jay Olson, Hugues Leduc, Björn Büdenbender, and
+Charles-Étienne Lavoie for statistical or technical advice that helped
 inform some functions of this package and/or useful feedback on this
 manuscript. I would also like to acknowledge funding from the Social
 Sciences and Humanities Research Council of Canada.
