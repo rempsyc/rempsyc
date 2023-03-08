@@ -11,11 +11,17 @@
 #' @param predictor The independent variable
 #' @param moderator The moderating variable.
 #' @param moderator2 The second moderating variable, if applicable.
+#' At this time, the second moderator variable can only be a
+#' binary variable of the form `c(0, 1)`.
 #' @param covariates The desired covariates in the model.
 #' @param b.label What to rename the default "b" column
 #' (e.g., to capital B if using standardized data for it
 #' to be converted to the Greek beta symbol in the `nice_table`
-#' function).
+#' function). *This argument is now deprecated, please use
+#' `b.standardize`.*
+#' @param b.standardize Logical, whether to standardize the
+#' data before running the model. If TRUE, automatically sets
+#' `b.label = "B"`. Defaults to `TRUE`.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
 #' @param ci.alternative Alternative for the confidence interval
@@ -76,21 +82,39 @@ nice_slopes <- function(data,
                         moderator,
                         moderator2 = NULL,
                         covariates = NULL,
-                        b.label,
+                        b.label = "b",
+                        b.standardize = TRUE,
                         mod.id = TRUE,
                         ci.alternative = "two.sided",
                         ...) {
   check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
   rlang::check_installed("effectsize", reason = "for this function.")
+
+  if (!missing(b.label)) {
+    message("The argument 'b.label' is deprecated. Please use argument 'b.standardize' instead.")
+  }
+
   if (!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {
     covariates.term <- ""
   }
   if (!missing(moderator2)) {
+    if (!all(sort(unique(data[[moderator2]]) %>% as.numeric) == c(0, 1))) {
+      stop("Non-binary second moderators are not supported at this time.")
+    }
     moderator2.term <- paste("*", moderator2, collapse = " ")
+    moderator2.data <- data[[moderator2]]
   } else {
     moderator2.term <- ""
+  }
+
+  if (isTRUE(b.standardize)) {
+    data <- lapply(data, scale) %>% as.data.frame()
+    if (!missing(moderator2)) {
+      data[[moderator2]] <- moderator2.data
+      }
+    b.label <- "B"
   }
 
   # Generate formulas, models, and simple slopes
@@ -104,21 +128,20 @@ nice_slopes <- function(data,
                                 predictor = predictor,
                                 moderator = moderator,
                                 ci.alternative = ci.alternative)
+  names(table.stats)[names(table.stats) == "b"] <- b.label
 
   if (missing(moderator2)) {
     return(table.stats)
-  }
-
-  if (!missing(moderator2)) {
+  } else {
     # Repeat steps for other level of the moderator
 
     # Add a column about moderator to the first column
     table.stats <- dplyr::rename(table.stats,
-                                 Predictor = .data$`Predictor (+/-1 SD)`)
+                                 Predictor = "Predictor (+/-1 SD)")
     table.stats[moderator2] <- 0
     table.stats <- dplyr::select(table.stats, `Dependent Variable`,
                                  dplyr::all_of(moderator2),
-                                 .data$Predictor:.data$CI_upper)
+                                 "Predictor":"CI_upper")
 
     # Recode dichotomic group variable moderator2
     data[moderator2] <- ifelse(data[moderator2] == "0", 1, 0)
@@ -137,11 +160,12 @@ nice_slopes <- function(data,
 
     # Add a column for moderator2
     table2.stats <- dplyr::rename(table2.stats,
-                                  Predictor = .data$`Predictor (+/-1 SD)`)
+                                  Predictor = "Predictor (+/-1 SD)")
     table2.stats[moderator2] <- 1
     table2.stats <- dplyr::select(table2.stats, `Dependent Variable`,
                                   dplyr::all_of(moderator2),
-                                  .data$Predictor:.data$CI_upper)
+                                  "Predictor":"CI_upper")
+    names(table2.stats)[names(table2.stats) == "b"] <- b.label
 
     # Merge with the first table
     final.table <- rbind(table.stats, table2.stats)
@@ -149,12 +173,7 @@ nice_slopes <- function(data,
       dplyr::desc(`Dependent Variable`)
     )
     final.table <- dplyr::rename(final.table,
-                                 `Predictor (+/-1 SD)` = .data$Predictor)
-    if (!missing(b.label)) {
-      names(final.table)[names(
-        final.table
-      ) == "b"] <- b.label
-    }
+                                 `Predictor (+/-1 SD)` = "Predictor")
     if (length(models.list) > 1 & mod.id == TRUE) {
       model.number <- rep(seq_along(response), each = 3 * 2)
       final.table <- stats::setNames(cbind(model.number, final.table),

@@ -32,7 +32,7 @@ It enables the creation of publication-ready APA (American Psychological
 Association) tables exportable to Word (via {flextable}) and easily
 customizable APA-compliant plots (via {ggplot2}). It makes it easy to
 run statistical tests, check assumptions, and automate various tasks
-common in psychology research.
+common in psychology research and social sciences more broadly.
 
 # Statement of need
 
@@ -168,10 +168,12 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
 ### Regressions
 
-    model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
-    model2 <- lm(qsec ~ disp + drat * carb, mtcars)
+    data <- lapply(mtcars, scale)
+    model1 <- lm(mpg ~ disp + wt * hp, data)
+    model2 <- lm(qsec ~ drat + wt * hp, data)
+    my.models <- list(model1, model2)
 
-    nice_lm(list(model1, model2)) |>
+    nice_lm(my.models) |>
       nice_table(highlight = TRUE)
 
 ![](paper_files/figure-markdown_strict/nice_lm-1.png){width=80%}
@@ -179,11 +181,7 @@ tables before they can be fed to `nice_table()` and saved to Word.
 
 ### Simple Slopes
 
-    model1 <- lm(mpg ~ gear * wt, mtcars)
-    model2 <- lm(disp ~ gear * wt, mtcars)
-    my.models <- list(model1, model2)
-
-    nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
+    nice_lm_slopes(my.models, predictor = "wt", moderator = "hp", b.label = "B") |>
       nice_table()
 
 ![](paper_files/figure-markdown_strict/nice_lm_slopes-1.png){width=80%}
@@ -543,5 +541,5 @@ et al., 2021](#ref-seepackage))
 [4] For convenience, colours are only used when the corresponding *p*
 value is at least smaller than .05
 
-[5] Once one has identified outliers, it is also possible ot winsorize
+[5] Once one has identified outliers, it is also possible to winsorize
 them with the `winsorize_mad()` function.

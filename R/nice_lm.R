@@ -13,7 +13,9 @@
 #' @param model The model to be formatted.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
-#' to the Greek beta symbol in the `nice_table` function).
+#' to the Greek beta symbol in the `nice_table` function). Now
+#' attempts to automatically detect whether the variables were
+#' standardized, and if so, sets `b.label = "B"` automatically.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
 #' @param ci.alternative Alternative for the confidence interval
@@ -86,10 +88,15 @@ nice_lm <- function(model,
   } else {
     names(table.stats) <- good.names
   }
-  if (!missing(b.label)) {
-    names(table.stats)[names(
-      table.stats
-    ) == "b"] <- b.label
+  if (all(
+    lapply(models.list, function(submodel) {
+      lapply(submodel$model, function(x) {
+        c("scaled:center", "scaled:scale") %in% names(attributes(x))
+      })
+    }) %>% unlist())) {
+    b.label <- "B"
   }
+  names(table.stats)[names(table.stats) == "b"] <- b.label
+
   table.stats
 }

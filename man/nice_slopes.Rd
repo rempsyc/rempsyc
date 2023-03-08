@@ -11,7 +11,8 @@ nice_slopes(
   moderator,
   moderator2 = NULL,
   covariates = NULL,
-  b.label,
+  b.label = "b",
+  b.standardize = TRUE,
   mod.id = TRUE,
   ci.alternative = "two.sided",
   ...
@@ -26,14 +27,21 @@ nice_slopes(
 
 \item{moderator}{The moderating variable.}
 
-\item{moderator2}{The second moderating variable, if applicable.}
+\item{moderator2}{The second moderating variable, if applicable.
+At this time, the second moderator variable can only be a
+binary variable of the form \code{c(0, 1)}.}
 
 \item{covariates}{The desired covariates in the model.}
 
 \item{b.label}{What to rename the default "b" column
 (e.g., to capital B if using standardized data for it
 to be converted to the Greek beta symbol in the \code{nice_table}
-function).}
+function). \emph{This argument is now deprecated, please use
+\code{b.standardize}.}}
+
+\item{b.standardize}{Logical, whether to standardize the
+data before running the model. If TRUE, automatically sets
+\code{b.label = "B"}. Defaults to \code{TRUE}.}
 
 \item{mod.id}{Logical. Whether to display the model number,
 when there is more than one model.}

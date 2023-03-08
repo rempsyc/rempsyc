@@ -23,7 +23,9 @@ nice_lm_slopes(
 
 \item{b.label}{What to rename the default "b" column (e.g.,
 to capital B if using standardized data for it to be converted
-to the Greek beta symbol in the \code{nice_table} function).}
+to the Greek beta symbol in the \code{nice_table} function). Now
+attempts to automatically detect whether the variables were
+standardized, and if so, sets \code{b.label = "B"} automatically.}
 
 \item{mod.id}{Logical. Whether to display the model number,
 when there is more than one model.}

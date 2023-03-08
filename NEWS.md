@@ -1,6 +1,11 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.2
+* `nice_table`: It was pointed out that, in order to align with APA rules regarding tables, the first column should not be centered, but left-aligned. This has been corrected.
+* `nice_lm` and `nice_lm_slopes`: Now attempt to automatically detect whether the variables were standardized, and if so, sets `b.label = "B"` automatically.
+* `nice_mod` and `nice_slopes`: argument `b.label` becomes deprecated in favour of the new `b.standardize` argument, which defaults to `TRUE`.
+
 ## rempsyc 0.1.1.1
 * Clear error messages when specifying columns that don't exist across all functions.
 * `sr2` function is now removed.

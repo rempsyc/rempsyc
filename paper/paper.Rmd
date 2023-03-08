@@ -32,7 +32,7 @@ enables the creation of publication-ready APA (American Psychological
 Association) tables exportable to Word (via {flextable}) and easily 
 customizable APA-compliant plots (via {ggplot2}). It makes it easy to
 run statistical tests, check assumptions, and automate various tasks 
-common in psychology research.
+common in psychology research and social sciences more broadly.
 
 # Statement of need
 
@@ -173,10 +173,12 @@ nice_contrasts(data = mtcars,
 ### Regressions
 
 ```{r nice_lm}
-model1 <- lm(mpg ~ cyl + wt * hp, mtcars)
-model2 <- lm(qsec ~ disp + drat * carb, mtcars)
+data <- lapply(mtcars, scale)
+model1 <- lm(mpg ~ disp + wt * hp, data)
+model2 <- lm(qsec ~ drat + wt * hp, data)
+my.models <- list(model1, model2)
 
-nice_lm(list(model1, model2)) |>
+nice_lm(my.models) |>
   nice_table(highlight = TRUE)
 ```
 
@@ -185,11 +187,7 @@ nice_lm(list(model1, model2)) |>
 ### Simple Slopes
 
 ```{r nice_lm_slopes}
-model1 <- lm(mpg ~ gear * wt, mtcars)
-model2 <- lm(disp ~ gear * wt, mtcars)
-my.models <- list(model1, model2)
-
-nice_lm_slopes(my.models, predictor = "gear", moderator = "wt") |>
+nice_lm_slopes(my.models, predictor = "wt", moderator = "hp", b.label = "B") |>
   nice_table()
 ```
 
@@ -353,8 +351,8 @@ nice_normality(data = iris,
                title = "Density (Sepal Length)")
 ```
 
-Similarly for univariate outliers using median absolute deviations from the median [MAD, 
-@leys2013outliers].
+Similarly for univariate outliers using median absolute deviations from the 
+median [MAD, @leys2013outliers].
 
 ```{r plot_outliers, warning=FALSE, message=FALSE, fig.width=8, fig.height=7, out.width="60%"}
 plot_outliers(airquality,
@@ -363,8 +361,8 @@ plot_outliers(airquality,
 ```
 
 Univariate outliers based on the median/MAD can also be simply requested with 
-`find_mad()`.^[Once one has identified outliers, it is also possible ot winsorize them with the
-`winsorize_mad()` function.]
+`find_mad()`.^[Once one has identified outliers, it is also possible to 
+winsorize them with the `winsorize_mad()` function.]
 
 ```{r find_mad}
 find_mad(airquality, names(airquality), criteria = 3)

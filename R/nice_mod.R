@@ -14,6 +14,11 @@
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
 #' to the Greek beta symbol in the `nice_table` function).
+#'  *This argument is now deprecated, please use
+#' `b.standardize`.*
+#' @param b.standardize Logical, whether to standardize the
+#' data before running the model. If `TRUE`, automatically sets
+#' `b.label = "B"`. Defaults to `TRUE`.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
 #' @param ci.alternative Alternative for the confidence interval
@@ -73,11 +78,22 @@ nice_mod <- function(data,
                      moderator2 = NULL,
                      covariates = NULL,
                      b.label = "b",
+                     b.standardize = TRUE,
                      mod.id = TRUE,
                      ci.alternative = "two.sided",
                      ...) {
   check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
   rlang::check_installed("effectsize", reason = "for this function.")
+
+  if (!missing(b.label)) {
+    message("The argument 'b.label' is deprecated. Please use argument 'b.standardize' instead.")
+  }
+
+  if (isTRUE(b.standardize)) {
+    data <- lapply(data, scale)
+    b.label <- "B"
+  }
+
   if (!missing(covariates)) {
     covariates.term <- paste("+", covariates, collapse = " ")
   } else {
@@ -103,10 +119,7 @@ nice_mod <- function(data,
     table.stats <- stats::setNames(cbind(model.number, table.stats),
                             c("Model Number", names(table.stats)))
   }
-  if (!missing(b.label)) {
-    names(table.stats)[names(
-      table.stats
-    ) == "b"] <- b.label
-  }
+  names(table.stats)[names(table.stats) == "b"] <- b.label
+
   table.stats
 }
