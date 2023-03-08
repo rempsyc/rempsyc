@@ -111,6 +111,7 @@ sizes, and format in publication-ready format.</p>
 <span>  moderator2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  b.label <span class="op">=</span> <span class="st">"b"</span>,</span>
+<span>  b.standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  mod.id <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -146,7 +147,15 @@ sizes, and format in publication-ready format.</p>
 <dt>b.label</dt>
 <dd><p>What to rename the default "b" column (e.g.,
 to capital B if using standardized data for it to be converted
-to the Greek beta symbol in the <code>nice_table</code> function).</p></dd>
+to the Greek beta symbol in the <code>nice_table</code> function).
+<em>This argument is now deprecated, please use
+<code>b.standardize</code>.</em></p></dd>
+
+
+<dt>b.standardize</dt>
+<dd><p>Logical, whether to standardize the
+data before running the model. If <code>TRUE</code>, automatically sets
+<code>b.label = "B"</code>. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>mod.id</dt>
@@ -199,14 +208,14 @@ two-sided alternative.</p>
 <span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
 <span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df         b          t          p         sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 28  5.615951  1.9437108 0.06204275 0.028488305</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 28  1.403861  0.4301493 0.67037970 0.001395217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg   gear:wt 28 -1.966931 -2.1551077 0.03989970 0.035022025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       CI_lower   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0000000000 0.08418650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0000000000 0.01331121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0003502202 0.09723370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df           B          t            p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 28 -0.08718042 -0.7982999 4.314156e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 28 -0.94959988 -8.6037724 2.383144e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg   gear:wt 28 -0.23559962 -2.1551077 3.989970e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           sr2     CI_lower   CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.004805465 0.0000000000 0.02702141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.558188818 0.3142326391 0.80214500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.035022025 0.0003502202 0.09723370</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables at once</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -215,26 +224,26 @@ two-sided alternative.</p>
 <span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
 <span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Model Number Dependent Variable Predictor df          b          t          p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1            1                mpg      gear 28   5.615951  1.9437108 0.06204275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2            1                mpg        wt 28   1.403861  0.4301493 0.67037970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3            1                mpg   gear:wt 28  -1.966931 -2.1551077 0.03989970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4            2               disp      gear 28  35.797623  0.6121820 0.54535707</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5            2               disp        wt 28 160.930043  2.4364098 0.02144867</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6            2               disp   gear:wt 28 -15.037022 -0.8140664 0.42247646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7            3                 hp      gear 28  -7.461189 -0.1554963 0.87754563</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8            3                 hp        wt 28  11.253239  0.2076235 0.83702568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9            3                 hp   gear:wt 28  14.539586  0.9592587 0.34563902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            sr2     CI_lower   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0284883047 0.0000000000 0.08418650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0013952173 0.0000000000 0.01331121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0350220247 0.0003502202 0.09723370</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0027372180 0.0000000000 0.01919662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0433559718 0.0004335597 0.11228977</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0048402513 0.0000000000 0.02679265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.0003885555 0.0000000000 0.00955147</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 0.0006927326 0.0000000000 0.01292775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9 0.0147871391 0.0000000000 0.07139000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Model Number Dependent Variable Predictor df           B          t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            1                mpg      gear 28 -0.08718042 -0.7982999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2            1                mpg        wt 28 -0.94959988 -8.6037724</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3            1                mpg   gear:wt 28 -0.23559962 -2.1551077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4            2               disp      gear 28 -0.07488985 -0.6967831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5            2               disp        wt 28  0.83273987  7.6662883</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6            2               disp   gear:wt 28 -0.08758665 -0.8140664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7            3                 hp      gear 28  0.42308208  2.6537930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8            3                 hp        wt 28  0.92572761  5.7454866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9            3                 hp   gear:wt 28  0.15308972  0.9592587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              p         sr2     CI_lower   CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.314156e-01 0.004805465 0.0000000000 0.02702141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.383144e-09 0.558188818 0.3142326391 0.80214500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.989970e-02 0.035022025 0.0003502202 0.09723370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 4.916834e-01 0.003546038 0.0000000000 0.02230154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2.373171e-08 0.429258143 0.1916386492 0.66687764</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 4.224765e-01 0.004840251 0.0000000000 0.02679265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 1.297126e-02 0.113174016 0.0011317402 0.26928944</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 3.637782e-06 0.530476631 0.2928664478 0.76808681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 3.456390e-01 0.014787139 0.0000000000 0.07139000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add covariates</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -244,18 +253,18 @@ two-sided alternative.</p>
 <span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
 <span class="r-in"><span>  covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"am"</span>, <span class="st">"vs"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df         b          t           p         sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 26  5.840594  2.0773482 0.047786602 0.024922116</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 26  3.433057  1.1692031 0.252929701 0.007894893</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg        am 26  1.578465  0.8569286 0.399314133 0.004240876</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg        vs 26  3.817509  3.2441426 0.003228614 0.060780767</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg   gear:wt 26 -2.096457 -2.5615471 0.016567730 0.037894048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       CI_lower   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0002492212 0.06962308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0000000000 0.03218359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0000000000 0.02189819</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0006078077 0.13504910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0003789405 0.09436130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Predictor df          B          t            p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      gear 26 -0.1106937 -0.8787865 3.875666e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg        wt 26 -0.6977072 -5.0686874 2.803684e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg        am 26  0.1306864  0.8569286 3.993141e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg        vs 26  0.3192472  3.2441426 3.228614e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg   gear:wt 26 -0.2511143 -2.5615471 1.656773e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           sr2     CI_lower   CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.004459982 0.0000000000 0.02257663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.148373834 0.0198201790 0.27692749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.004240876 0.0000000000 0.02189819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.060780767 0.0006078077 0.13504910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.037894048 0.0003789405 0.09436130</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Three-way interaction</span></span></span>
 <span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
@@ -265,22 +274,22 @@ two-sided alternative.</p>
 <span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
 <span class="r-in"><span>  moderator2 <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable  Predictor df         b         t          p        sr2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg       gear 24  52.97009  1.831564 0.07945785 0.01660219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg         wt 24  42.12157  1.603869 0.12182331 0.01273090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg         am 24 202.38995  2.216085 0.03641826 0.02430490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg    gear:wt 24 -15.09281 -1.729114 0.09663310 0.01479682</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg    gear:am 24 -58.83248 -1.992346 0.05782588 0.01964494</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                mpg      wt:am 24 -58.67147 -2.053052 0.05112221 0.02086032</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                mpg gear:wt:am 24  16.79352  1.854357 0.07601677 0.01701798</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      CI_lower   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.000000000 0.04893816</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.000000000 0.04073892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.000243049 0.06424986</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.000000000 0.04517008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.000000000 0.05511454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.000000000 0.05753070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.000000000 0.04979416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable  Predictor df          B         t           p         sr2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg       gear 24  0.3013096  1.791291 0.085867454 0.015880099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg         wt 24 -1.9824141 -3.296782 0.003035645 0.053790002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg         am 24 -0.3381137 -1.431537 0.165170887 0.010142070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg    gear:wt 24 -0.9906361 -1.567980 0.129977525 0.012167517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg    gear:am 24 -0.2934245 -1.649909 0.111990122 0.013472278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                mpg      wt:am 24  0.2636573  0.499489 0.621983258 0.001234733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                mpg gear:wt:am 24  1.0037369  1.854357 0.076016767 0.017017980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    CI_lower    CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.0000000 0.047441438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.0005379 0.117448925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.0000000 0.034953502</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.0000000 0.039504439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0000000 0.042345492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0000000 0.009659682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.0000000 0.049794162</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
