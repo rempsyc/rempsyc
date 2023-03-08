@@ -398,7 +398,7 @@ visually with `nice_varplot()`.
                  variable = "Sepal.Length",
                  group = "Species")
 
-![](paper_files/figure-markdown_strict/nice_var_plot-1.png)
+![](paper_files/figure-markdown_strict/nice_var_plot-1.png){width=60%}
 
 ## Utility functions
 
