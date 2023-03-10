@@ -8,6 +8,9 @@
 #' which subtracts the mean to each observaion, and then divides the outcome
 #' by the standard deviation.
 #'
+#' For the *easystats* equivalent, use:
+#' `datawizard::standardize(x, robust = TRUE)`.
+#'
 #' @param x The vector to be scaled.
 #' @keywords standardization normalization median MAD mean outliers
 #' @return A numeric vector of standardized data.

@@ -7,6 +7,8 @@
 #' confidence intervals only) with the BCa method, using
 #' the `rcompanion_groupwiseMean` function.
 #'
+#' For the *easystats* equivalent, see: `see::geom_violindot()`.
+#'
 #' @param data The data frame.
 #' @param group The group by which to plot the variable.
 #' @param response The dependent variable to be plotted.

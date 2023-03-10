@@ -55,6 +55,9 @@ with the standard \emph{t} test because it is based on all the cases
 
 The effect size and confidence interval are calculated via
 \link[bootES:bootES]{bootES::bootES}.
+
+For the \emph{easystats} equivalent, see:
+\code{modelbased::estimate_contrasts()}.
 }
 \examples{
 # Basic example

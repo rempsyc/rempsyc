@@ -7,6 +7,9 @@
 #' based on the MAD and median, and then check for any observation greater
 #' than the specified criteria (e.g., +/-3).
 #'
+#' For the *easystats* equivalent, use:
+#' `performance::check_outliers(x, method = "zscore_robust, threshold = 3)`.
+#'
 #' @param data The data frame.
 #' @param col.list List of variables to check for outliers.
 #' @param ID ID variable if you would like the outliers to be identified

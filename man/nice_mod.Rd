@@ -67,6 +67,9 @@ Please read the documentation for that function, especially regarding
 the interpretation of the confidence interval. In \code{rempsyc}, instead
 of using the default one-sided alternative ("greater"), we use the
 two-sided alternative.
+
+For the \emph{easystats} equivalent, see:
+\code{report::report(model)}.
 }
 \examples{
 # Make the basic table

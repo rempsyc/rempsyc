@@ -4,6 +4,8 @@
 #' +/- 3 standard deviations) data based on median absolute
 #' deviations instead of standard deviations.
 #'
+#' @details For the *easystats* equivalent, use:
+#' `datawizard::winsorize(x, method = "zscore", threshold = 3, robust = TRUE)`.
 #' @param x The vector to be winsorized based on the MAD.
 #' @param criteria How many MAD to use as threshold
 #' (similar to standard deviations)

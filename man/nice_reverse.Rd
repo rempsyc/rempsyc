@@ -19,6 +19,9 @@ A numeric vector, of reversed scores.
 \description{
 Easily recode scores (reverse-score),
 typically for questionnaire answers.
+
+For the \emph{easystats} equivalent, see:
+\code{datawizard::reverse()}.
 }
 \examples{
 # Reverse score of 5 with a maximum score of 5

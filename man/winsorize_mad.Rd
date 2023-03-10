@@ -20,6 +20,10 @@ Winsorize (bring extreme observations to usually
 +/- 3 standard deviations) data based on median absolute
 deviations instead of standard deviations.
 }
+\details{
+For the \emph{easystats} equivalent, use:
+\code{datawizard::winsorize(x, method = "zscore", threshold = 3, robust = TRUE)}.
+}
 \examples{
 winsorize_mad(mtcars$qsec, criteria = 2)
 }

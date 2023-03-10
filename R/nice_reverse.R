@@ -3,6 +3,9 @@
 #' @description Easily recode scores (reverse-score),
 #' typically for questionnaire answers.
 #'
+#' For the *easystats* equivalent, see:
+#' `datawizard::reverse()`.
+#'
 #' @param x The score to reverse.
 #' @param max The maximum score on the scale.
 #' @param min The minimum score on the scale (optional unless it isn't 1).

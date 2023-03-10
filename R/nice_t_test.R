@@ -16,6 +16,9 @@
 #' to the participant ID for example, so the same group/participant is
 #' measured several times, and thus has several rows.
 #'
+#' For the *easystats* equivalent, use: `report::report()` on the
+#' `t.test` object.
+#'
 #' @param data The data frame.
 #' @param response The dependent variable.
 #' @param correction What correction for multiple comparison

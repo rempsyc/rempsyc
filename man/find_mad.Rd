@@ -35,6 +35,9 @@ from the median.
 The function internally use \code{scale_mad} to "standardize" the data
 based on the MAD and median, and then check for any observation greater
 than the specified criteria (e.g., +/-3).
+
+For the \emph{easystats} equivalent, use:
+\verb{performance::check_outliers(x, method = "zscore_robust, threshold = 3)}.
 }
 \examples{
 find_mad(

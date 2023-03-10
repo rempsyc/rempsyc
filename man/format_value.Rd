@@ -45,6 +45,10 @@ A formatted p, r, or d value.
 Easily format p or r values. Note: converts to character class
 for use in figures or manuscripts to accommodate e.g., "< .001".
 }
+\details{
+For the \emph{easystats} equivalent, see:
+\code{insight::format_value()}.
+}
 \examples{
 format_value(0.00041231, "p")
 format_value(0.00041231, "r")

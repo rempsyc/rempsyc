@@ -21,6 +21,9 @@ The function subtracts the median to each observation, and then
 divides the outcome by the MAD. This is analoguous to regular standardization
 which subtracts the mean to each observaion, and then divides the outcome
 by the standard deviation.
+
+For the \emph{easystats} equivalent, use:
+\code{datawizard::standardize(x, robust = TRUE)}.
 }
 \examples{
 scale_mad(mtcars$mpg)

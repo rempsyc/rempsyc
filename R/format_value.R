@@ -3,6 +3,9 @@
 #' @description Easily format p or r values. Note: converts to character class
 #' for use in figures or manuscripts to accommodate e.g., "< .001".
 #'
+#' @details For the *easystats* equivalent, see:
+#' `insight::format_value()`.
+#'
 #' @param p p-value to format.
 #' @param r r-value to format.
 #' @param d d-value to format.

@@ -124,6 +124,8 @@ bootstrapped) confidence intervals.
 Using \code{boot = TRUE} uses bootstrapping (for the
 confidence intervals only) with the BCa method, using
 the \code{rcompanion_groupwiseMean} function.
+
+For the \emph{easystats} equivalent, see: \code{see::geom_violindot()}.
 }
 \examples{
 # Make the basic plot

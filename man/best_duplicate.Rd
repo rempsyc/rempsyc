@@ -20,6 +20,10 @@ duplicate with the smallest number of missing values. In case of
 ties, it picks the first duplicate, as it is the one most likely
 to be valid and authentic, given practice effects.
 }
+\details{
+For the \emph{easystats} equivalent, see:
+\code{datawizard::data_duplicated()}.
+}
 \examples{
 df1 <- data.frame(
    id = c(1, 2, 3, 1, 3),

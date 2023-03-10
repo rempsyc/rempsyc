@@ -22,6 +22,10 @@ contains an additional column reporting the number of missing
 values for that row, to help in the decision-making when
 selecting which duplicates to keep.
 }
+\details{
+For the \emph{easystats} equivalent, see:
+\code{datawizard::data_unique()}.
+}
 \examples{
 df1 <- data.frame(
    id = c(1, 2, 3, 1, 3),

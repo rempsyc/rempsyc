@@ -18,6 +18,9 @@
 #' The effect size and confidence interval are calculated via
 #' [bootES::bootES].
 #'
+#' For the *easystats* equivalent, see:
+#' `modelbased::estimate_contrasts()`.
+#'
 #' @param model The model to be formatted.
 #' @param group The group for the comparison.
 #' @param data The data frame.

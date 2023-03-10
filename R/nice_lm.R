@@ -10,6 +10,9 @@
 #' of using the default one-sided alternative ("greater"), we use the
 #' two-sided alternative.
 #'
+#' For the *easystats* equivalent, use `report::report()` on the `lm`
+#' model object.
+#'
 #' @param model The model to be formatted.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted

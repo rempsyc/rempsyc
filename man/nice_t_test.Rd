@@ -53,6 +53,8 @@ you also need data in "long" format rather than wide format (like for
 the \code{ToothGrowth} data set). In this case, the \code{group} argument refers
 to the participant ID for example, so the same group/participant is
 measured several times, and thus has several rows.
+
+For the \emph{easystats} equivalent, see: \code{report::report(t.test.object)}.
 }
 \examples{
 # Make the basic table

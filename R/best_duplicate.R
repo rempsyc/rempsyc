@@ -5,6 +5,8 @@
 #' ties, it picks the first duplicate, as it is the one most likely
 #' to be valid and authentic, given practice effects.
 #'
+#' @details For the *easystats* equivalent, see:
+#' `datawizard::data_duplicated()`.
 #' @param data The data frame.
 #' @param id The ID variable for which to check for duplicates.
 #' @keywords duplicates
