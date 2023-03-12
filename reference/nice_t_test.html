@@ -101,7 +101,7 @@ is for the effect size, Cohen's d, both provided by the effectsize package."><me
     <div class="ref-description section level2">
     <p>Easily compute t-test analyses, with effect sizes,
 and format in publication-ready format. The 95% confidence interval
-is for the effect size, Cohen's d, both provided by the <code>effectsize</code> package.</p>
+is for the effect size, Cohen's d, both provided by the effectsize package.</p>
     </div>
 
     <div class="section level2">
@@ -141,7 +141,7 @@ to apply, if any. Default is "none" and the only other option
 
 
 <dt>...</dt>
-<dd><p>Further arguments to be passed to the <code>t.test</code>
+<dd><p>Further arguments to be passed to the <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code>
 function (e.g., to use Student instead of Welch test, to
 change from two-tail to one-tail, or to do a paired-sample
 t-test instead of independent samples).</p></dd>
@@ -157,7 +157,7 @@ freedom, t-value, p-value, the effect size, Cohen's d, and its
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function relies on the base R <code>t.test</code> function, which
+    <p>This function relies on the base R <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> function, which
 uses the Welch t-test per default (see why here:
 <a href="https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html" class="external-link">https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html</a>).
 To use the Student t-test, simply add the following
@@ -167,7 +167,8 @@ you also need data in "long" format rather than wide format (like for
 the <code>ToothGrowth</code> data set). In this case, the <code>group</code> argument refers
 to the participant ID for example, so the same group/participant is
 measured several times, and thus has several rows.</p>
-<p>For the <em>easystats</em> equivalent, see: <code>report::report(t.test.object)</code>.</p>
+<p>For the <em>easystats</em> equivalent, use: <code><a href="https://easystats.github.io/report/reference/report.html" class="external-link">report::report()</a></code> on the
+<code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> object.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

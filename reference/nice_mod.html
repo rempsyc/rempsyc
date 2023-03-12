@@ -147,7 +147,7 @@ sizes, and format in publication-ready format.</p>
 <dt>b.label</dt>
 <dd><p>What to rename the default "b" column (e.g.,
 to capital B if using standardized data for it to be converted
-to the Greek beta symbol in the <code>nice_table</code> function).
+to the Greek beta symbol in the <code><a href="nice_table.html">nice_table()</a></code> function).
 <em>This argument is now deprecated, please use
 <code>b.standardize</code>.</em></p></dd>
 
@@ -170,7 +170,7 @@ package), "greater", or "less".</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Further arguments to be passed to the <code>lm</code>
+<dd><p>Further arguments to be passed to the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>
 function for the models.</p></dd>
 
 </dl></div>
@@ -190,8 +190,9 @@ Please read the documentation for that function, especially regarding
 the interpretation of the confidence interval. In <code>rempsyc</code>, instead
 of using the default one-sided alternative ("greater"), we use the
 two-sided alternative.</p>
-<p>For the <em>easystats</em> equivalent, see:
-<code>report::report(model)</code>.</p>
+<p>To interpret the sr2, use <code><a href="https://easystats.github.io/effectsize/reference/interpret_omega_squared.html" class="external-link">effectsize::interpret_r2_semipartial()</a></code>.</p>
+<p>For the <em>easystats</em> equivalent, use <code><a href="https://easystats.github.io/report/reference/report.html" class="external-link">report::report()</a></code> on the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>
+model object.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -269,13 +270,14 @@ two-sided alternative.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.037894048 0.0003789405 0.09436130</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Three-way interaction</span></span></span>
-<span class="r-in"><span><span class="fu">nice_mod</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">nice_mod</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
 <span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span></span>
 <span class="r-in"><span>  moderator <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
 <span class="r-in"><span>  moderator2 <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable  Predictor df          B         t           p         sr2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg       gear 24  0.3013096  1.791291 0.085867454 0.015880099</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg         wt 24 -1.9824141 -3.296782 0.003035645 0.053790002</span>
@@ -292,7 +294,9 @@ two-sided alternative.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.0000000 0.042345492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.0000000 0.009659682</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 0.0000000 0.049794162</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get interpretations</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, Interpretation <span class="op">=</span> <span class="fu">effectsize</span><span class="fu">::</span><span class="fu">interpret_r2_semipartial</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">sr2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'interpret_r2_semipartial' is not an exported object from 'namespace:effectsize'</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
