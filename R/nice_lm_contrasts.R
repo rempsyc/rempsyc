@@ -19,7 +19,7 @@
 #' [bootES::bootES].
 #'
 #' For the *easystats* equivalent, see:
-#' `modelbased::estimate_contrasts()`.
+#' [modelbased::estimate_contrasts()].
 #'
 #' @param model The model to be formatted.
 #' @param group The group for the comparison.

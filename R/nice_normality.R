@@ -1,7 +1,7 @@
 #' @title Easy normality check per group
 #'
 #' @description Easily make nice per-group density and QQ plots
-#' through a wrapper around the `ggplot2` and `qqplotr` packages.
+#' through a wrapper around the [ggplot2] and [qqplotr] packages.
 #'
 #' @param data The data frame.
 #' @param variable The dependent variable to be plotted.
@@ -21,8 +21,8 @@
 #'                    automatically, mimicking the default behaviour of
 #'                    base R `hist()` (the Sturges method). Defaults to
 #'                    `FALSE`.
-#' @param ... Further arguments from `nice_qq()` and
-#' `nice_density()` to be passed to `nice_normality()`
+#' @param ... Further arguments from [nice_qq()] and
+#' [nice_density()] to be passed to [nice_normality()]
 #'
 #' @return A plot of classes patchwork and ggplot, containing two plots,
 #'         resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.

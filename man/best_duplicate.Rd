@@ -22,7 +22,7 @@ to be valid and authentic, given practice effects.
 }
 \details{
 For the \emph{easystats} equivalent, see:
-\code{datawizard::data_duplicated()}.
+\code{\link[datawizard:data_duplicated]{datawizard::data_duplicated()}}.
 }
 \examples{
 df1 <- data.frame(

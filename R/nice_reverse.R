@@ -4,7 +4,7 @@
 #' typically for questionnaire answers.
 #'
 #' For the *easystats* equivalent, see:
-#' `datawizard::reverse()`.
+#' [datawizard::reverse()].
 #'
 #' @param x The score to reverse.
 #' @param max The maximum score on the scale.

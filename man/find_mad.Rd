@@ -25,14 +25,14 @@ A list of dataframes of outliers per variable, with row
 numbers, based on the MAD. When printed, provides the number
 of outliers, selected variables, and any outlier flagged for
 more than one variable. More information can be obtainned
-by using the \code{attributes()} function around the generated object.
+by using the \code{\link[=attributes]{attributes()}} function around the generated object.
 }
 \description{
 Identify outliers based on 3 median absolute deviations (MAD)
 from the median.
 }
 \details{
-The function internally use \code{scale_mad} to "standardize" the data
+The function internally use \code{\link[=scale_mad]{scale_mad()}} to "standardize" the data
 based on the MAD and median, and then check for any observation greater
 than the specified criteria (e.g., +/-3).
 

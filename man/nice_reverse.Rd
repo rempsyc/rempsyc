@@ -21,7 +21,7 @@ Easily recode scores (reverse-score),
 typically for questionnaire answers.
 
 For the \emph{easystats} equivalent, see:
-\code{datawizard::reverse()}.
+\code{\link[datawizard:reverse]{datawizard::reverse()}}.
 }
 \examples{
 # Reverse score of 5 with a maximum score of 5

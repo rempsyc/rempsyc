@@ -7,18 +7,18 @@
 #' 0.4-1.0: large (red/dark blue)), following Cohen's suggestions
 #' for small (.10), medium (.30), and large (.50) correlation sizes.
 #'
-#' Based on the `correlation` and `openxlsx2` packages.
+#' Based on the [correlation] and [openxlsx2] packages.
 #'
 #' @param data The data frame
 #' @param filename Desired filename (path can be added before hand
 #' but no need to specify extension).
 #' @param overwrite Whether to allow overwriting previous file.
 #' @param p_adjust Default p-value adjustment method (default is "none",
-#' although `correlation::correlation`'s default is "holm")
+#' although [correlation::correlation]'s default is "holm")
 #' @param print.mat Logical, whether to also print the correlation matrix
 #'                  to console.
-#' @param ... Parameters to be passed to the `correlation` package
-#' (see `?correlation::correlation`)
+#' @param ... Parameters to be passed to the [correlation] package
+#' (see [correlation::correlation()])
 #'
 #' @keywords correlation matrix Excel
 #' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and

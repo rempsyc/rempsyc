@@ -16,12 +16,12 @@ format_r(r, precision = 0.01)
 format_d(d, precision = 0.01)
 }
 \arguments{
-\item{value}{Value to be formatted, when using the generic \code{format_value()}.}
+\item{value}{Value to be formatted, when using the generic \code{\link[=format_value]{format_value()}}.}
 
 \item{type}{Specify r or p value.}
 
 \item{...}{To specify precision level, if necessary, when using the
-generic \code{format_value()}. Simply add the \code{precision} argument.}
+generic \code{\link[=format_value]{format_value()}}. Simply add the \code{precision} argument.}
 
 \item{p}{p-value to format.}
 
@@ -47,7 +47,7 @@ for use in figures or manuscripts to accommodate e.g., "< .001".
 }
 \details{
 For the \emph{easystats} equivalent, see:
-\code{insight::format_value()}.
+\code{\link[insight:format_value]{insight::format_value()}}.
 }
 \examples{
 format_value(0.00041231, "p")

@@ -4,20 +4,20 @@
 #' for use in figures or manuscripts to accommodate e.g., "< .001".
 #'
 #' @details For the *easystats* equivalent, see:
-#' `insight::format_value()`.
+#' [insight::format_value()].
 #'
 #' @param p p-value to format.
 #' @param r r-value to format.
 #' @param d d-value to format.
 #' @param precision Level of precision desired, if necessary.
 #' @param type Specify r or p value.
-#' @param value Value to be formatted, when using the generic `format_value()`.
+#' @param value Value to be formatted, when using the generic [format_value()].
 #' @param prefix To add a prefix before the value.
 #' @param suffix To add a suffix after the value.
 #' @param sign Logical. Whether to add an equal sign for p-values higher or
 #' equal to .001.
 #' @param ... To specify precision level, if necessary, when using the
-#' generic `format_value()`. Simply add the `precision` argument.
+#' generic [format_value()]. Simply add the `precision` argument.
 #'
 #' @keywords formatting p-value r-value correlation
 #' @return A formatted p, r, or d value.

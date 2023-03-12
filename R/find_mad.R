@@ -3,7 +3,7 @@
 #' @description Identify outliers based on 3 median absolute deviations (MAD)
 #' from the median.
 #'
-#' @details The function internally use `scale_mad` to "standardize" the data
+#' @details The function internally use [scale_mad()] to "standardize" the data
 #' based on the MAD and median, and then check for any observation greater
 #' than the specified criteria (e.g., +/-3).
 #'
@@ -23,7 +23,7 @@
 #'         numbers, based on the MAD. When printed, provides the number
 #'         of outliers, selected variables, and any outlier flagged for
 #'         more than one variable. More information can be obtainned
-#'         by using the `attributes()` function around the generated object.
+#'         by using the [attributes()] function around the generated object.
 #' @references Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L.
 #' (2013). Detecting outliers: Do not use standard deviation
 #' around the mean, use absolute deviation around the median.

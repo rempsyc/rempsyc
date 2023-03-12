@@ -47,8 +47,8 @@ automatically, mimicking the default behaviour of
 base R \code{hist()} (the Sturges method). Defaults to
 \code{FALSE}.}
 
-\item{...}{Further arguments from \code{nice_qq()} and
-\code{nice_density()} to be passed to \code{nice_normality()}}
+\item{...}{Further arguments from \code{\link[=nice_qq]{nice_qq()}} and
+\code{\link[=nice_density]{nice_density()}} to be passed to \code{\link[=nice_normality]{nice_normality()}}}
 }
 \value{
 A plot of classes patchwork and ggplot, containing two plots,
@@ -56,7 +56,7 @@ resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.
 }
 \description{
 Easily make nice per-group density and QQ plots
-through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
+through a wrapper around the \link{ggplot2} and \link{qqplotr} packages.
 }
 \examples{
 # Make the basic plot

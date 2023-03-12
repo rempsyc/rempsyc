@@ -62,16 +62,16 @@ total width, when exported e.g., to Word. For full width,
 use \code{width = 1}.}
 
 \item{broom}{If providing a tidy table produced with the
-\code{broom} package, which model type to use if one wants
+\link{broom} package, which model type to use if one wants
 automatic formatting (options are "t.test", "lm", "cor.test",
 and "wilcox.test").}
 
 \item{report}{If providing an object produced with the
-\code{report} package, which model type to use if one wants
+\link{report} package, which model type to use if one wants
 automatic formatting (options are "t.test", "lm", and "cor.test").}
 
 \item{short}{Logical. Whether to return an abbreviated
-version of the tables made by the \code{report} package.}
+version of the tables made by the \link{report} package.}
 
 \item{title}{Optional, to add a table header, if desired.}
 
@@ -86,7 +86,7 @@ An APA-formatted table of class "flextable" (and "nice_table").
 }
 \description{
 Make nice APA tables easily through a wrapper
-around the \code{flextable} package with sensical defaults and
+around the \link{flextable} package with sensical defaults and
 automatic formatting features.
 }
 \examples{

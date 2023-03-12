@@ -42,7 +42,7 @@ reference interpretation helper, the 95\% confidence band.
 }
 \description{
 Easily make nice per-group QQ plots through
-a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
+a wrapper around the \link{ggplot2} and \link{qqplotr} packages.
 }
 \examples{
 # Make the basic plot

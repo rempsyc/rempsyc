@@ -1,7 +1,7 @@
 #' @title Get group means and CIs (rcompanion::groupwiseMean)
 #'
 #' @description Get group means and bootstrapped effect sizes
-#' from the `rcompanion` package and `groupwiseMean` function.
+#' from the `rcompanion::groupwiseMean` function.
 #' The function had to be taken separately from the package as
 #' the dependency is failing upon install of the current package.
 #'

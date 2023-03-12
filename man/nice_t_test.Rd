@@ -26,7 +26,7 @@ to apply, if any. Default is "none" and the only other option
 
 \item{warning}{Whether to display the Welch test warning or not.}
 
-\item{...}{Further arguments to be passed to the \code{t.test}
+\item{...}{Further arguments to be passed to the \code{\link[=t.test]{t.test()}}
 function (e.g., to use Student instead of Welch test, to
 change from two-tail to one-tail, or to do a paired-sample
 t-test instead of independent samples).}
@@ -39,10 +39,10 @@ freedom, t-value, p-value, the effect size, Cohen's d, and its
 \description{
 Easily compute t-test analyses, with effect sizes,
 and format in publication-ready format. The 95\% confidence interval
-is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
+is for the effect size, Cohen's d, both provided by the \link{effectsize} package.
 }
 \details{
-This function relies on the base R \code{t.test} function, which
+This function relies on the base R \code{\link[=t.test]{t.test()}} function, which
 uses the Welch t-test per default (see why here:
 \url{https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html}).
 To use the Student t-test, simply add the following
@@ -54,7 +54,8 @@ the \code{ToothGrowth} data set). In this case, the \code{group} argument refers
 to the participant ID for example, so the same group/participant is
 measured several times, and thus has several rows.
 
-For the \emph{easystats} equivalent, see: \code{report::report(t.test.object)}.
+For the \emph{easystats} equivalent, use: \code{\link[report:report]{report::report()}} on the
+\code{\link[=t.test]{t.test()}} object.
 }
 \examples{
 # Make the basic table

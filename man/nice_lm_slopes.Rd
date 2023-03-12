@@ -23,7 +23,7 @@ nice_lm_slopes(
 
 \item{b.label}{What to rename the default "b" column (e.g.,
 to capital B if using standardized data for it to be converted
-to the Greek beta symbol in the \code{nice_table} function). Now
+to the Greek beta symbol in the \code{\link[=nice_table]{nice_table()}} function). Now
 attempts to automatically detect whether the variables were
 standardized, and if so, sets \code{b.label = "B"} automatically.}
 
@@ -34,7 +34,7 @@ when there is more than one model.}
 of the sr2. It can be either "two.sided (the default in this
 package), "greater", or "less".}
 
-\item{...}{Further arguments to be passed to the \code{lm}
+\item{...}{Further arguments to be passed to the \code{\link[=lm]{lm()}}
 function for the models.}
 }
 \value{
@@ -44,7 +44,7 @@ t-value, p-value, and the effect size, the semi-partial correlation
 squared, and its confidence interval.
 }
 \description{
-Extracts simple slopes from \code{lm} model
+Extracts simple slopes from \code{\link[=lm]{lm()}} model
 object and format for a publication-ready format.
 }
 \details{
@@ -55,8 +55,10 @@ the interpretation of the confidence interval. In \code{rempsyc}, instead
 of using the default one-sided alternative ("greater"), we use the
 two-sided alternative.
 
-For the \emph{easystats} equivalent, see:
-\code{report::report(model)}.
+To interpret the sr2, use \code{\link[effectsize:interpret_omega_squared]{effectsize::interpret_r2_semipartial()}}.
+
+For the \emph{easystats} equivalent, use \code{\link[report:report]{report::report()}} on the \code{\link[=lm]{lm()}}
+model object.
 }
 \examples{
 # Make and format model
@@ -66,8 +68,12 @@ nice_lm_slopes(model, predictor = "gear", moderator = "wt")
 # Make and format multiple models
 model2 <- lm(qsec ~ gear * wt, mtcars)
 my.models <- list(model, model2)
-nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
-
+x <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
+x
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get interpretations
+cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Checking for moderation before checking simple slopes:

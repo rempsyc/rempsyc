@@ -6,7 +6,7 @@
 #' or within-subject (repeated-measures on same people).
 #' @param Ncondition The number of conditions you want to randomize.
 #' @param n The desired sample size. Note that it needs to
-#' be a multiple of your number of groups if you are using`between`.
+#' be a multiple of your number of groups if you are using `between`.
 #' @param condition.names The names of the randomized conditions.
 #' @param col.names The desired additional column names for a runsheet.
 #'

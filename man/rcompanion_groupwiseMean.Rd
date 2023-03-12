@@ -83,7 +83,7 @@ A data frame of requested statistics by group.
 }
 \description{
 Get group means and bootstrapped effect sizes
-from the \code{rcompanion} package and \code{groupwiseMean} function.
+from the \code{rcompanion::groupwiseMean} function.
 The function had to be taken separately from the package as
 the dependency is failing upon install of the current package.
 

@@ -1,6 +1,6 @@
 #' @title Nice formatting of lm models
 #'
-#' @description Formats output of `lm` model object for a
+#' @description Formats output of [lm()] model object for a
 #' publication-ready format.
 #'
 #' @details The effect size, sr2 (semi-partial correlation squared, also
@@ -10,13 +10,15 @@
 #' of using the default one-sided alternative ("greater"), we use the
 #' two-sided alternative.
 #'
-#' For the *easystats* equivalent, use `report::report()` on the `lm`
+#' To interpret the sr2, use [effectsize::interpret_r2_semipartial()].
+#'
+#' For the *easystats* equivalent, use [report::report()] on the [lm()]
 #' model object.
 #'
 #' @param model The model to be formatted.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
-#' to the Greek beta symbol in the `nice_table` function). Now
+#' to the Greek beta symbol in the [nice_table] function). Now
 #' attempts to automatically detect whether the variables were
 #' standardized, and if so, sets `b.label = "B"` automatically.
 #' @param mod.id Logical. Whether to display the model number,
@@ -40,7 +42,11 @@
 #' # Make and format multiple models
 #' model2 <- lm(qsec ~ disp + drat * carb, mtcars)
 #' my.models <- list(model, model2)
-#' nice_lm(my.models)
+#' x <- nice_lm(my.models)
+#' x
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
+#' # Get interpretations
+#' cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 #'
 #' @seealso
 #' Checking simple slopes after testing for moderation:

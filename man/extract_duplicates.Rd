@@ -24,7 +24,7 @@ selecting which duplicates to keep.
 }
 \details{
 For the \emph{easystats} equivalent, see:
-\code{datawizard::data_unique()}.
+\code{\link[datawizard:data_unique]{datawizard::data_unique()}}.
 }
 \examples{
 df1 <- data.frame(

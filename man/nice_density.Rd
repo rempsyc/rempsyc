@@ -50,12 +50,12 @@ from the Shapiro-Wilk test on the plot.}
 
 \item{breaks.auto}{If histogram = TRUE, then option to set bins/breaks
 automatically, mimicking the default behaviour of base
-R \code{hist()} (the Sturges method). Defaults to \code{FALSE}.}
+R \code{\link[=hist]{hist()}} (the Sturges method). Defaults to \code{FALSE}.}
 
-\item{bins}{If histogram = TRUE, then option to change the default bin (30).}
+\item{bins}{If \code{histogram = TRUE}, then option to change the default bin (30).}
 }
 \value{
-A density plot of class ggplot, by group (if provided), along a
+A density plot of class \code{ggplot}, by group (if provided), along a
 reference line representing a matched normal distribution.
 }
 \description{

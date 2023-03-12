@@ -13,7 +13,7 @@
 #' @param covariates The desired covariates in the model.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
-#' to the Greek beta symbol in the `nice_table` function).
+#' to the Greek beta symbol in the [nice_table()] function).
 #'  *This argument is now deprecated, please use
 #' `b.standardize`.*
 #' @param b.standardize Logical, whether to standardize the
@@ -24,7 +24,7 @@
 #' @param ci.alternative Alternative for the confidence interval
 #' of the sr2. It can be either "two.sided (the default in this
 #' package), "greater", or "less".
-#' @param ... Further arguments to be passed to the `lm`
+#' @param ... Further arguments to be passed to the [lm()]
 #' function for the models.
 #'
 #' @keywords moderation interaction regression
@@ -56,13 +56,17 @@
 #' )
 #'
 #' # Three-way interaction
-#' nice_mod(
+#' x <- nice_mod(
 #'   data = mtcars,
 #'   response = "mpg",
 #'   predictor = "gear",
 #'   moderator = "wt",
 #'   moderator2 = "am"
 #' )
+#' x
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
+#' # Get interpretations
+#' cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 #'
 #' @seealso
 #' Checking simple slopes after testing for moderation:

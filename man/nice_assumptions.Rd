@@ -7,7 +7,7 @@
 nice_assumptions(model)
 }
 \arguments{
-\item{model}{The \code{lm} object to be passed to the function.}
+\item{model}{The \code{\link[=lm]{lm()}} object to be passed to the function.}
 }
 \value{
 A dataframe, with p-value results for the Shapiro-Wilk,

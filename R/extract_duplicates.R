@@ -8,7 +8,7 @@
 #' selecting which duplicates to keep.
 #'
 #' @details For the *easystats* equivalent, see:
-#' `datawizard::data_unique()`.
+#' [datawizard::data_unique()].
 #' @param data The data frame.
 #' @param id The ID variable for which to check for duplicates.
 #' @keywords duplicates

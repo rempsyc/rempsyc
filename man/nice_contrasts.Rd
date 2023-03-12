@@ -57,7 +57,7 @@ The effect size and confidence interval are calculated via
 \link[bootES:bootES]{bootES::bootES}.
 
 For the \emph{easystats} equivalent, see:
-\code{modelbased::estimate_contrasts()}.
+\code{\link[modelbased:estimate_contrasts]{modelbased::estimate_contrasts()}}.
 }
 \examples{
 # Basic example

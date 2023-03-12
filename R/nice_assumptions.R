@@ -3,7 +3,7 @@
 #' @description Test linear regression assumptions easily with a
 #' nice summary table.
 #'
-#' @param model The `lm` object to be passed to the function.
+#' @param model The [lm()] object to be passed to the function.
 #'
 #' @details Interpretation: (p) values < .05 imply assumptions are
 #' not respected. Diagnostic is how many assumptions are not

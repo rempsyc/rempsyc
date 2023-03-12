@@ -35,7 +35,7 @@ binary variable of the form \code{c(0, 1)}.}
 
 \item{b.label}{What to rename the default "b" column
 (e.g., to capital B if using standardized data for it
-to be converted to the Greek beta symbol in the \code{nice_table}
+to be converted to the Greek beta symbol in the \code{\link[=nice_table]{nice_table()}}
 function). \emph{This argument is now deprecated, please use
 \code{b.standardize}.}}
 
@@ -50,7 +50,7 @@ when there is more than one model.}
 of the sr2. It can be either "two.sided (the default in this
 package), "greater", or "less".}
 
-\item{...}{Further arguments to be passed to the \code{lm}
+\item{...}{Further arguments to be passed to the \code{\link[=lm]{lm()}}
 function for the models.}
 }
 \value{
@@ -71,8 +71,10 @@ the interpretation of the confidence interval. In \code{rempsyc}, instead
 of using the default one-sided alternative ("greater"), we use the
 two-sided alternative.
 
-For the \emph{easystats} equivalent, see:
-\code{report::report(model)}.
+To interpret the sr2, use \code{\link[effectsize:interpret_omega_squared]{effectsize::interpret_r2_semipartial()}}.
+
+For the \emph{easystats} equivalent, use \code{\link[report:report]{report::report()}} on the \code{\link[=lm]{lm()}}
+model object.
 }
 \examples{
 # Make the basic table
@@ -102,14 +104,18 @@ nice_slopes(
 
 # Three-way interaction (continuous moderator and binary
 # second moderator required)
-nice_slopes(
+x <- nice_slopes(
   data = mtcars,
   response = "mpg",
   predictor = "gear",
   moderator = "wt",
   moderator2 = "am"
 )
-
+x
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get interpretations
+cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Checking for moderation before checking simple slopes:

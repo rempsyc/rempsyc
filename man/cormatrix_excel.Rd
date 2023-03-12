@@ -22,13 +22,13 @@ but no need to specify extension).}
 \item{overwrite}{Whether to allow overwriting previous file.}
 
 \item{p_adjust}{Default p-value adjustment method (default is "none",
-although \code{correlation::correlation}'s default is "holm")}
+although \link[correlation:correlation]{correlation::correlation}'s default is "holm")}
 
 \item{print.mat}{Logical, whether to also print the correlation matrix
 to console.}
 
-\item{...}{Parameters to be passed to the \code{correlation} package
-(see \code{?correlation::correlation})}
+\item{...}{Parameters to be passed to the \link{correlation} package
+(see \code{\link[correlation:correlation]{correlation::correlation()}})}
 }
 \value{
 A Microsoft Excel document, containing the colour-coded
@@ -43,7 +43,7 @@ correlation coefficients colour-coded based on effect size
 0.4-1.0: large (red/dark blue)), following Cohen's suggestions
 for small (.10), medium (.30), and large (.50) correlation sizes.
 
-Based on the \code{correlation} and \code{openxlsx2} packages.
+Based on the \link{correlation} and \link{openxlsx2} packages.
 }
 \examples{
 \dontshow{.old_wd <- setwd(tempdir())}
