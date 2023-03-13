@@ -12,7 +12,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-03-08"
+date: "2023-03-13"
 bibliography: paper.bib
 output:
   #rticles::joss_article
@@ -84,7 +84,7 @@ supported by default.
 
 {rempsyc} solves this problem by allowing maximum flexibility: you
 manually create the data frame exactly the way you want, and then only
-use the magical function, `nice_table()`, on the resulting data frame.
+use the `nice_table()` function on the resulting data frame.
 `nice_table()` works on any data frame, even non-statistical ones like
 `mtcars`.
 

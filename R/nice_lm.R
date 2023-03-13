@@ -44,7 +44,7 @@
 #' my.models <- list(model, model2)
 #' x <- nice_lm(my.models)
 #' x
-#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5"
 #' # Get interpretations
 #' cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 #'
