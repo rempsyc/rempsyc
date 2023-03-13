@@ -56,7 +56,7 @@ resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.
 }
 \description{
 Easily make nice per-group density and QQ plots
-through a wrapper around the \link{ggplot2} and \link{qqplotr} packages.
+through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
 }
 \examples{
 # Make the basic plot

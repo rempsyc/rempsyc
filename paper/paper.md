@@ -133,7 +133,7 @@ One can then easily save the resulting table to Word with
 `flextable::save_as_docx()`, specifying the object name and desired
 path.
 
-    flextable::save_as_docx(my_table, path = "nice_tablehere.docx")
+    flextable::save_as_docx(my_table, path = "my_table.docx")
 
 Additionally, tables created with `nice_table()` are {flextable} objects
 ([Gohel & Skintzos, 2022](#ref-flextable2022)), and can be modified as

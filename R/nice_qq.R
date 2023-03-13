@@ -1,7 +1,7 @@
 #' @title Easy QQ plots per group
 #'
 #' @description Easily make nice per-group QQ plots through
-#' a wrapper around the [ggplot2] and [qqplotr] packages.
+#' a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
 #' @param data The data frame.
 #' @param variable The dependent variable to be plotted.

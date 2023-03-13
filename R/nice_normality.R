@@ -1,7 +1,7 @@
 #' @title Easy normality check per group
 #'
 #' @description Easily make nice per-group density and QQ plots
-#' through a wrapper around the [ggplot2] and [qqplotr] packages.
+#' through a wrapper around the `ggplot2` and `qqplotr` packages.
 #'
 #' @param data The data frame.
 #' @param variable The dependent variable to be plotted.

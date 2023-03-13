@@ -2,7 +2,7 @@
 #'
 #' @description Easily compute t-test analyses, with effect sizes,
 #' and format in publication-ready format. The 95% confidence interval
-#' is for the effect size, Cohen's d, both provided by the [effectsize] package.
+#' is for the effect size, Cohen's d, both provided by the `effectsize` package.
 #'
 #' @details This function relies on the base R [t.test()] function, which
 #' uses the Welch t-test per default (see why here:

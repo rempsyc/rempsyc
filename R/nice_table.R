@@ -1,7 +1,7 @@
 #' @title Easily make nice APA tables
 #'
 #' @description Make nice APA tables easily through a wrapper
-#' around the [flextable] package with sensical defaults and
+#' around the `flextable` package with sensical defaults and
 #' automatic formatting features.
 #'
 #' @param data The data frame, to be converted to a flextable.
@@ -34,14 +34,14 @@
 #' total width, when exported e.g., to Word. For full width,
 #' use `width = 1`.
 #' @param broom If providing a tidy table produced with the
-#' [broom] package, which model type to use if one wants
+#' `broom` package, which model type to use if one wants
 #' automatic formatting (options are "t.test", "lm", "cor.test",
 #' and "wilcox.test").
 #' @param report If providing an object produced with the
-#' [report] package, which model type to use if one wants
+#' `report` package, which model type to use if one wants
 #' automatic formatting (options are "t.test", "lm", and "cor.test").
 #' @param short Logical. Whether to return an abbreviated
-#' version of the tables made by the [report] package.
+#' version of the tables made by the `report` package.
 #' @param title Optional, to add a table header, if desired.
 #' @param note Optional, to add one or more table footnote (APA note),
 #' if desired.

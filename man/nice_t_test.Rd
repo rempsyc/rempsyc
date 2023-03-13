@@ -39,7 +39,7 @@ freedom, t-value, p-value, the effect size, Cohen's d, and its
 \description{
 Easily compute t-test analyses, with effect sizes,
 and format in publication-ready format. The 95\% confidence interval
-is for the effect size, Cohen's d, both provided by the \link{effectsize} package.
+is for the effect size, Cohen's d, both provided by the \code{effectsize} package.
 }
 \details{
 This function relies on the base R \code{\link[=t.test]{t.test()}} function, which
