@@ -14,10 +14,10 @@
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
 #' to the Greek beta symbol in the [nice_table()] function).
-#'  *This argument is now deprecated, please use
-#' `b.standardize`.*
-#' @param b.standardize Logical, whether to standardize the
-#' data before running the model. If `TRUE`, automatically sets
+#' *This argument is now deprecated, please use argument
+#' `standardize` directly instead.*
+#' @param standardize Logical, whether to standardize the
+#' data before fitting the model. If `TRUE`, automatically sets
 #' `b.label = "B"`. Defaults to `TRUE`.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
@@ -82,7 +82,7 @@ nice_mod <- function(data,
                      moderator2 = NULL,
                      covariates = NULL,
                      b.label = "b",
-                     b.standardize = TRUE,
+                     standardize = TRUE,
                      mod.id = TRUE,
                      ci.alternative = "two.sided",
                      ...) {
@@ -90,10 +90,14 @@ nice_mod <- function(data,
   rlang::check_installed("effectsize", reason = "for this function.")
 
   if (!missing(b.label)) {
-    message("The argument 'b.label' is deprecated. Please use argument 'b.standardize' instead.")
+    message(paste("The argument 'b.label' is deprecated.",
+                  "If your data is standardized, capital B will be used automatically.",
+                  "Else, please use argument 'standardize' directly instead."))
   }
 
-  if (isTRUE(b.standardize)) {
+  if (data_is_standardized(data)) {
+    b.label <- "B"
+  } else if (isTRUE(standardize)) {
     data <- lapply(data, scale)
     b.label <- "B"
   }

@@ -12,7 +12,7 @@ nice_slopes(
   moderator2 = NULL,
   covariates = NULL,
   b.label = "b",
-  b.standardize = TRUE,
+  standardize = TRUE,
   mod.id = TRUE,
   ci.alternative = "two.sided",
   ...
@@ -37,10 +37,10 @@ binary variable of the form \code{c(0, 1)}.}
 (e.g., to capital B if using standardized data for it
 to be converted to the Greek beta symbol in the \code{\link[=nice_table]{nice_table()}}
 function). \emph{This argument is now deprecated, please use
-\code{b.standardize}.}}
+argument \code{standardize} directly instead.}}
 
-\item{b.standardize}{Logical, whether to standardize the
-data before running the model. If TRUE, automatically sets
+\item{standardize}{Logical, whether to standardize the
+data before fitting the model. If TRUE, automatically sets
 \code{b.label = "B"}. Defaults to \code{TRUE}.}
 
 \item{mod.id}{Logical. Whether to display the model number,

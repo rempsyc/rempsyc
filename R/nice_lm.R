@@ -21,6 +21,13 @@
 #' to the Greek beta symbol in the [nice_table] function). Now
 #' attempts to automatically detect whether the variables were
 #' standardized, and if so, sets `b.label = "B"` automatically.
+#' *This argument is now deprecated, please use argument
+#' `standardize` directly instead.*
+#' @param standardize Logical, whether to standardize the
+#' data before refitting the model. If `TRUE`, automatically sets
+#' `b.label = "B"`. Defaults to `FALSE`. Note that if you have factor
+#' variables, these will be pseudo-betas, so these coefficients could
+#' be interpreted more like Cohen's *d*.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
 #' @param ci.alternative Alternative for the confidence interval
@@ -57,6 +64,7 @@
 
 nice_lm <- function(model,
                     b.label = "b",
+                    standardize = FALSE,
                     mod.id = TRUE,
                     ci.alternative = "two.sided",
                     ...) {
@@ -66,6 +74,26 @@ nice_lm <- function(model,
   } else {
     models.list <- list(model)
   }
+
+  if (!missing(b.label)) {
+    message(paste("The argument 'b.label' is deprecated.",
+                  "If your data is standardized, capital B will be used automatically.",
+                  "Else, please use argument 'standardize' directly instead."))
+  }
+
+  if (model_is_standardized(models.list)) {
+    b.label <- "B"
+  } else if (isTRUE(standardize)) {
+    data.list <- lapply(models.list, function(x) {
+      scale(x$model)
+    })
+    models.list <- lapply(seq_along(models.list), function(i) {
+      data <- as.data.frame(data.list[i])
+      stats::update(models.list[[i]], data = data)
+    })
+    b.label <- "B"
+  }
+
   sums.list <- lapply(models.list, function(x) {
     summary(x)$coefficients[-1, -2]
   })
@@ -96,14 +124,6 @@ nice_lm <- function(model,
     names(table.stats) <- c("Model Number", good.names)
   } else {
     names(table.stats) <- good.names
-  }
-  if (all(
-    lapply(models.list, function(submodel) {
-      lapply(submodel$model, function(x) {
-        c("scaled:center", "scaled:scale") %in% names(attributes(x))
-      })
-    }) %>% unlist())) {
-    b.label <- "B"
   }
   names(table.stats)[names(table.stats) == "b"] <- b.label
 

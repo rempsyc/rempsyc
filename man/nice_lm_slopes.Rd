@@ -9,6 +9,7 @@ nice_lm_slopes(
   predictor,
   moderator,
   b.label = "b",
+  standardize = FALSE,
   mod.id = TRUE,
   ci.alternative = "two.sided",
   ...
@@ -25,7 +26,15 @@ nice_lm_slopes(
 to capital B if using standardized data for it to be converted
 to the Greek beta symbol in the \code{\link[=nice_table]{nice_table()}} function). Now
 attempts to automatically detect whether the variables were
-standardized, and if so, sets \code{b.label = "B"} automatically.}
+standardized, and if so, sets \code{b.label = "B"} automatically.
+\emph{This argument is now deprecated, please use argument
+\code{standardize} directly instead.}}
+
+\item{standardize}{Logical, whether to standardize the
+data before refitting the model. If \code{TRUE}, automatically sets
+\code{b.label = "B"}. Defaults to \code{FALSE}. Note that if you have factor
+variables, these will be pseudo-betas, so these coefficients could
+be interpreted more like Cohen's \emph{d}.}
 
 \item{mod.id}{Logical. Whether to display the model number,
 when there is more than one model.}

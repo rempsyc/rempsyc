@@ -18,9 +18,9 @@
 #' (e.g., to capital B if using standardized data for it
 #' to be converted to the Greek beta symbol in the [nice_table()]
 #' function). *This argument is now deprecated, please use
-#' `b.standardize`.*
-#' @param b.standardize Logical, whether to standardize the
-#' data before running the model. If TRUE, automatically sets
+#' argument `standardize` directly instead.*
+#' @param standardize Logical, whether to standardize the
+#' data before fitting the model. If TRUE, automatically sets
 #' `b.label = "B"`. Defaults to `TRUE`.
 #' @param mod.id Logical. Whether to display the model number,
 #' when there is more than one model.
@@ -87,7 +87,7 @@ nice_slopes <- function(data,
                         moderator2 = NULL,
                         covariates = NULL,
                         b.label = "b",
-                        b.standardize = TRUE,
+                        standardize = TRUE,
                         mod.id = TRUE,
                         ci.alternative = "two.sided",
                         ...) {
@@ -95,7 +95,19 @@ nice_slopes <- function(data,
   rlang::check_installed("effectsize", reason = "for this function.")
 
   if (!missing(b.label)) {
-    message("The argument 'b.label' is deprecated. Please use argument 'b.standardize' instead.")
+    message(paste("The argument 'b.label' is deprecated.",
+                  "If your data is standardized, capital B will be used automatically.",
+                  "Else, please use argument 'standardize' directly instead."))
+  }
+
+  if (data_is_standardized(data)) {
+    b.label <- "B"
+  } else if (isTRUE(standardize)) {
+    if (!missing(moderator2)) {
+      moderator2.data <- data[[moderator2]]
+    }
+    data <- as.data.frame(lapply(data, scale))
+    b.label <- "B"
   }
 
   if (!missing(covariates)) {
@@ -104,21 +116,14 @@ nice_slopes <- function(data,
     covariates.term <- ""
   }
   if (!missing(moderator2)) {
-    if (!all(sort(unique(data[[moderator2]]) %>% as.numeric) == c(0, 1))) {
+    data[[moderator2]] <- moderator2.data
+    mod2.levels <- unique(data[[moderator2]])
+    if (length(mod2.levels) != 2) {
       stop("Non-binary second moderators are not supported at this time.")
     }
     moderator2.term <- paste("*", moderator2, collapse = " ")
-    moderator2.data <- data[[moderator2]]
   } else {
     moderator2.term <- ""
-  }
-
-  if (isTRUE(b.standardize)) {
-    data <- lapply(data, scale) %>% as.data.frame()
-    if (!missing(moderator2)) {
-      data[[moderator2]] <- moderator2.data
-      }
-    b.label <- "B"
   }
 
   # Generate formulas, models, and simple slopes
@@ -142,13 +147,14 @@ nice_slopes <- function(data,
     # Add a column about moderator to the first column
     table.stats <- dplyr::rename(table.stats,
                                  Predictor = "Predictor (+/-1 SD)")
-    table.stats[moderator2] <- 0
+    table.stats[moderator2] <- mod2.levels[2]
     table.stats <- dplyr::select(table.stats, `Dependent Variable`,
                                  dplyr::all_of(moderator2),
                                  "Predictor":"CI_upper")
 
     # Recode dichotomic group variable moderator2
-    data[moderator2] <- ifelse(data[moderator2] == "0", 1, 0)
+    data[moderator2] <- ifelse(data[moderator2] == mod2.levels[2],
+                               mod2.levels[1], mod2.levels[2])
 
     # Generate formulas, models, and simple slopes
     formulas <- paste(
@@ -165,7 +171,7 @@ nice_slopes <- function(data,
     # Add a column for moderator2
     table2.stats <- dplyr::rename(table2.stats,
                                   Predictor = "Predictor (+/-1 SD)")
-    table2.stats[moderator2] <- 1
+    table2.stats[moderator2] <- mod2.levels[1]
     table2.stats <- dplyr::select(table2.stats, `Dependent Variable`,
                                   dplyr::all_of(moderator2),
                                   "Predictor":"CI_upper")

@@ -150,6 +150,7 @@ nice_density <- function(data,
     ggplot2::xlab(xtitle) +
     {
       if (shapiro == TRUE) {
+        rlang::check_installed("ggrepel", reason = "for this function.")
         ggrepel::geom_text_repel(
           data = dat_text,
           mapping = ggplot2::aes(

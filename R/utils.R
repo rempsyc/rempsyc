@@ -36,3 +36,18 @@ check_col_names <- function(data, names) {
     }
   }
 }
+
+#' @noRd
+data_is_standardized <- function(data) {
+  all(lapply(data, function(x) {
+    c("scaled:center", "scaled:scale") %in% names(attributes(x))
+  }) %>% unlist())
+}
+
+#' @noRd
+model_is_standardized <- function(models.list) {
+  all(
+    lapply(models.list, function(submodel) {
+      data_is_standardized(submodel$model)
+    }) %>% unlist())
+}
