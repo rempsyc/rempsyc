@@ -108,6 +108,7 @@ object and format for a publication-ready format.</p>
 <span>  <span class="va">predictor</span>,</span>
 <span>  <span class="va">moderator</span>,</span>
 <span>  b.label <span class="op">=</span> <span class="st">"b"</span>,</span>
+<span>  standardize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mod.id <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -133,7 +134,17 @@ object and format for a publication-ready format.</p>
 to capital B if using standardized data for it to be converted
 to the Greek beta symbol in the <code><a href="nice_table.html">nice_table()</a></code> function). Now
 attempts to automatically detect whether the variables were
-standardized, and if so, sets <code>b.label = "B"</code> automatically.</p></dd>
+standardized, and if so, sets <code>b.label = "B"</code> automatically.
+<em>This argument is now deprecated, please use argument
+<code>standardize</code> directly instead.</em></p></dd>
+
+
+<dt>standardize</dt>
+<dd><p>Logical, whether to standardize the
+data before refitting the model. If <code>TRUE</code>, automatically sets
+<code>b.label = "B"</code>. Defaults to <code>FALSE</code>. Note that if you have factor
+variables, these will be pseudo-betas, so these coefficients could
+be interpreted more like Cohen's <em>d</em>.</p></dd>
 
 
 <dt>mod.id</dt>

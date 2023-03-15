@@ -103,7 +103,14 @@ publication-ready format.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nice_lm</span><span class="op">(</span><span class="va">model</span>, b.label <span class="op">=</span> <span class="st">"b"</span>, mod.id <span class="op">=</span> <span class="cn">TRUE</span>, ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nice_lm</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  b.label <span class="op">=</span> <span class="st">"b"</span>,</span>
+<span>  standardize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  mod.id <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -117,7 +124,17 @@ publication-ready format.</p>
 to capital B if using standardized data for it to be converted
 to the Greek beta symbol in the <a href="nice_table.html">nice_table</a> function). Now
 attempts to automatically detect whether the variables were
-standardized, and if so, sets <code>b.label = "B"</code> automatically.</p></dd>
+standardized, and if so, sets <code>b.label = "B"</code> automatically.
+<em>This argument is now deprecated, please use argument
+<code>standardize</code> directly instead.</em></p></dd>
+
+
+<dt>standardize</dt>
+<dd><p>Logical, whether to standardize the
+data before refitting the model. If <code>TRUE</code>, automatically sets
+<code>b.label = "B"</code>. Defaults to <code>FALSE</code>. Note that if you have factor
+variables, these will be pseudo-betas, so these coefficients could
+be interpreted more like Cohen's <em>d</em>.</p></dd>
 
 
 <dt>mod.id</dt>

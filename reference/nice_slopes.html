@@ -111,7 +111,7 @@ with effect sizes, and format in publication-ready format.</p>
 <span>  moderator2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  b.label <span class="op">=</span> <span class="st">"b"</span>,</span>
-<span>  b.standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  mod.id <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ci.alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -151,12 +151,12 @@ binary variable of the form <code>c(0, 1)</code>.</p></dd>
 (e.g., to capital B if using standardized data for it
 to be converted to the Greek beta symbol in the <code><a href="nice_table.html">nice_table()</a></code>
 function). <em>This argument is now deprecated, please use
-<code>b.standardize</code>.</em></p></dd>
+argument <code>standardize</code> directly instead.</em></p></dd>
 
 
-<dt>b.standardize</dt>
+<dt>standardize</dt>
 <dd><p>Logical, whether to standardize the
-data before running the model. If TRUE, automatically sets
+data before fitting the model. If TRUE, automatically sets
 <code>b.label = "B"</code>. Defaults to <code>TRUE</code>.</p></dd>
 
 
