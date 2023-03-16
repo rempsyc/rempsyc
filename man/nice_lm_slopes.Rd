@@ -27,6 +27,8 @@ to capital B if using standardized data for it to be converted
 to the Greek beta symbol in the \code{\link[=nice_table]{nice_table()}} function). Now
 attempts to automatically detect whether the variables were
 standardized, and if so, sets \code{b.label = "B"} automatically.
+Factor variables or dummy variables (only two numeric values)
+are ignored when checking for standardization.
 \emph{This argument is now deprecated, please use argument
 \code{standardize} directly instead.}}
 

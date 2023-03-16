@@ -13,6 +13,8 @@
 #' to the Greek beta symbol in the [nice_table()] function). Now
 #' attempts to automatically detect whether the variables were
 #' standardized, and if so, sets `b.label = "B"` automatically.
+#' Factor variables or dummy variables (only two numeric values)
+#' are ignored when checking for standardization.
 #' *This argument is now deprecated, please use argument
 #' `standardize` directly instead.*
 #' @param standardize Logical, whether to standardize the

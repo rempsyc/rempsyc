@@ -39,8 +39,12 @@ check_col_names <- function(data, names) {
 
 #' @noRd
 data_is_standardized <- function(data) {
+  data <- dplyr::select(data, -dplyr::where(is.factor), -dplyr::where(function(x) {
+    length(unique(x)) == 2
+    }))
   all(lapply(data, function(x) {
-    c("scaled:center", "scaled:scale") %in% names(attributes(x))
+    y <- x %>% attributes %>% names
+    all(any(grepl("center", y)), any(grepl("scale", y)))
   }) %>% unlist())
 }
 

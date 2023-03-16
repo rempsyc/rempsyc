@@ -13,7 +13,11 @@
 #' @param covariates The desired covariates in the model.
 #' @param b.label What to rename the default "b" column (e.g.,
 #' to capital B if using standardized data for it to be converted
-#' to the Greek beta symbol in the [nice_table()] function).
+#' to the Greek beta symbol in the [nice_table()] function). Now
+#' attempts to automatically detect whether the variables were
+#' standardized, and if so, sets `b.label = "B"` automatically.
+#' Factor variables or dummy variables (only two numeric values)
+#' are ignored when checking for standardization.
 #' *This argument is now deprecated, please use argument
 #' `standardize` directly instead.*
 #' @param standardize Logical, whether to standardize the
