@@ -13,6 +13,7 @@
     -   Also add option to annotate Levene test on the plot
     -   Use violin points, and group-mean centered (but not standardized)
 -   `nice_table`
+    -   Add all possible alternative names for p values and family!
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
     -   Remove unwanted italic formatting of headers when using `separate.header = TRUE`.
 -   `nice_normality`
