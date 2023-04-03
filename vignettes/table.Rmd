@@ -128,6 +128,12 @@ nice_table(stats.table, highlight = TRUE)
 nice_table(stats.table, highlight = .01)
 ```
 
+To remove the more traditional significance asterisks, you can set the `stars` argument to `FALSE`.
+
+```{r}
+nice_table(stats.table, stars = FALSE)
+```
+
 ## Integrations
 
 Making your own table manually may be intimidating at first. Fortunately, this function integrates nicely with the `broom` and `report` packages. So we can also skip the complicated code if one is OK with using the default `broom`/`report` output. This requires specifying the type of model in the function's `broom`/`report` argument (supported options are `lm`, `t.test`, `cor.test` and `wilcox.test`). We go through an example of each below.
@@ -333,7 +339,7 @@ T1 <- rbind(T1.mpg, T1.disp)
 T2 <- rbind(T2.mpg, T2.disp)
 wide.data <- cbind(T1, T2[-(1)])
 nice_table(wide.data)
-nice_table(wide.data, separate.header = TRUE)
+nice_table(wide.data, separate.header = TRUE, stars = FALSE)
 ```
 
 Let's test adding another level of heading for testing.
@@ -342,7 +348,7 @@ Let's test adding another level of heading for testing.
 names(wide.data)[-1] <- paste0(rep(c("Early.", "Late."), each = 6), 
                                names(wide.data)[-1])
 nice_table(wide.data)
-nice_table(wide.data, separate.header = TRUE)
+nice_table(wide.data, separate.header = TRUE, stars = FALSE)
 
 ```
 

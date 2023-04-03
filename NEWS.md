@@ -1,13 +1,16 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.3
+* `nice_table` and `format_p`: Now support the logical `stars` argument to add significance stars (defaults to `TRUE` for `nice_table` but `FALSE` for `format_p`).
+
 ## rempsyc 0.1.1.2
 * `nice_table`: It was pointed out that, in order to align with APA rules regarding tables, the first column should not be centered, but left-aligned. This has been corrected.
 * `nice_lm` and `nice_lm_slopes`: Now attempt to automatically detect whether the variables were standardized, and if so, sets `b.label = "B"` automatically.
 * `nice_lm`, `nice_lm_slopes`, `nice_mod` and `nice_slopes`: argument `b.label` becomes deprecated in favour of the new `standardize` argument, which defaults to `FALSE` for the first two (as this is most likely the desired result) and `TRUE` for the last two (because models are probably already specified as desired, so we do not want to refit them unless required).
 
 ## rempsyc 0.1.1.1
-* Clear error messages when specifying columns that don't exist across all functions.
+* Now produces clearer error messages when specifying columns that don't exist, across all functions.
 * `sr2` function is now removed.
 
 # rempsyc 0.1.1

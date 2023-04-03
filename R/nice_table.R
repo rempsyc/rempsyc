@@ -13,6 +13,7 @@
 #' results? Requires a column named "p" containing p-values.
 #' Can either accept logical (TRUE/FALSE) OR a numeric value for
 #' a custom critical p-value threshold (e.g., 0.10 or 0.001).
+#' @param stars Logical. Whether to add asterisks for significant p values.
 #' @param col.format.p Applies p-value formatting to columns
 #' that cannot be named "p" (for example for a data frame full
 #' of p-values, also because it is not possible to have more
@@ -136,6 +137,7 @@
 #' @export
 nice_table <- function(data,
                        highlight = FALSE,
+                       stars = TRUE,
                        italics,
                        col.format.p,
                        col.format.r,
@@ -154,6 +156,8 @@ nice_table <- function(data,
 
   dataframe <- data
 
+  format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
+
   #   __________________________________
   #   Broom integration            ####
 
@@ -167,7 +171,7 @@ nice_table <- function(data,
   #   _________________________________
   #   Formatting                   ####
 
-  if(!missing(separate.header)) {
+  if (!missing(separate.header)) {
     filtered.names <- grep("[.]", names(dataframe), value = TRUE)
     sh.pattern <- lapply(filtered.names, function(x) {
       gsub("[^\\.]*$", "", x)
@@ -193,14 +197,16 @@ nice_table <- function(data,
   #   Column formatting              ####
 
   table <- format_columns(dataframe, table, italics, separate.header,
-                          highlight, sh.pattern, unique.pattern)
+                          highlight, sh.pattern, unique.pattern,
+                          format_p_internal)
 
   #   _____________________________________________
   #   Extra features                           ####
 
   table <- beautify_flextable(
     dataframe, table, separate.header, col.format.p, col.format.r,
-    format.custom, col.format.custom, sh.pattern, unique.pattern)
+    format.custom, col.format.custom, sh.pattern, unique.pattern,
+    format_p_internal)
 
   #   ___________________________
   #   Final touch up (title) ####
@@ -578,7 +584,8 @@ create_flextable <- function(dataframe, highlight, width, note,
 }
 
 format_columns <- function(dataframe, table, italics, separate.header,
-                           highlight, sh.pattern, unique.pattern) {
+                           highlight, sh.pattern, unique.pattern,
+                           format_p_internal) {
   ##  ....................................
   ##  Special cases                  ####
   # Fix header with italics
@@ -645,7 +652,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
   ##  Formatting functions            ####
   compose.table0 <- data.frame(
     col = c("r", "p"),
-    fun = c("format_r", "format_p")
+    fun = c("format_r", format_p_internal)
   )
 
   if(!missing(separate.header)) {
@@ -756,7 +763,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
 
 beautify_flextable <- function(
     dataframe, table, separate.header, col.format.p, col.format.r,
-    format.custom, col.format.custom, sh.pattern, unique.pattern) {
+    format.custom, col.format.custom, sh.pattern, unique.pattern,
+    format_p_internal) {
 
   dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
                     "M", "N", "n", "Z", "z", "W", "R2", "sr2")
@@ -781,7 +789,7 @@ beautify_flextable <- function(
     table <- table %>%
       parse_formatter(
         column = table$col_keys[col.format.p],
-        fun = "format_p"
+        fun = format_p_internal
       )
   }
   if (!missing(col.format.r)) {

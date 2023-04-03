@@ -9,7 +9,14 @@
 \usage{
 format_value(value, type = "d", ...)
 
-format_p(p, precision = 0.001, prefix = NULL, suffix = NULL, sign = FALSE)
+format_p(
+  p,
+  precision = 0.001,
+  prefix = NULL,
+  suffix = NULL,
+  sign = FALSE,
+  stars = FALSE
+)
 
 format_r(r, precision = 0.01)
 
@@ -23,7 +30,7 @@ format_d(d, precision = 0.01)
 \item{...}{To specify precision level, if necessary, when using the
 generic \code{\link[=format_value]{format_value()}}. Simply add the \code{precision} argument.}
 
-\item{p}{p-value to format.}
+\item{p}{p value to format.}
 
 \item{precision}{Level of precision desired, if necessary.}
 
@@ -31,12 +38,14 @@ generic \code{\link[=format_value]{format_value()}}. Simply add the \code{precis
 
 \item{suffix}{To add a suffix after the value.}
 
-\item{sign}{Logical. Whether to add an equal sign for p-values higher or
+\item{sign}{Logical. Whether to add an equal sign for p values higher or
 equal to .001.}
 
-\item{r}{r-value to format.}
+\item{stars}{Logical. Whether to add asterisks for significant p values.}
 
-\item{d}{d-value to format.}
+\item{r}{r value to format.}
+
+\item{d}{d value to format.}
 }
 \value{
 A formatted p, r, or d value.
@@ -62,5 +71,6 @@ format_d(0.341231)
 }
 \keyword{correlation}
 \keyword{formatting}
-\keyword{p-value}
-\keyword{r-value}
+\keyword{p}
+\keyword{r}
+\keyword{value}

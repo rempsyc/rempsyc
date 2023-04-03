@@ -7,6 +7,7 @@
 nice_table(
   data,
   highlight = FALSE,
+  stars = TRUE,
   italics,
   col.format.p,
   col.format.r,
@@ -30,6 +31,8 @@ The data frame cannot have duplicate column names.}
 results? Requires a column named "p" containing p-values.
 Can either accept logical (TRUE/FALSE) OR a numeric value for
 a custom critical p-value threshold (e.g., 0.10 or 0.001).}
+
+\item{stars}{Logical. Whether to add asterisks for significant p values.}
 
 \item{italics}{Which columns headers should be italic? Useful
 for column names that should be italic but that are not picked
