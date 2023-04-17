@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.4
+* Fix a newly introduced bug whereas `nice_normality`, `nice_density`, and `nice_qq` would not work without a group argument.
+
 ## rempsyc 0.1.1.3
 * `nice_table` and `format_p`: Now support the logical `stars` argument to add significance stars (defaults to `TRUE` for `nice_table` but `FALSE` for `format_p`).
 

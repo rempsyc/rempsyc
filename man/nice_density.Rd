@@ -7,7 +7,7 @@
 nice_density(
   data,
   variable,
-  group,
+  group = NULL,
   colours,
   ytitle = "Density",
   xtitle = variable,

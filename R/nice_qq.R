@@ -52,7 +52,7 @@
 
 nice_qq <- function(data,
                     variable,
-                    group,
+                    group = NULL,
                     colours,
                     groups.labels = NULL,
                     grid = TRUE,
@@ -60,7 +60,7 @@ nice_qq <- function(data,
                     title = variable) {
   check_col_names(data, c(group, variable))
   rlang::check_installed(c("ggplot2", "qqplotr"), reason = "for this function.")
-  if (missing(group)) {
+  if (is.null(group)) {
     group <- "All"
     data[[group]] <- group
   }

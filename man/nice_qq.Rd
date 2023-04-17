@@ -7,7 +7,7 @@
 nice_qq(
   data,
   variable,
-  group,
+  group = NULL,
   colours,
   groups.labels = NULL,
   grid = TRUE,
