@@ -71,10 +71,12 @@ nice_lm <- function(model,
                     ci.alternative = "two.sided",
                     ...) {
   rlang::check_installed("effectsize", reason = "for this function.")
-  if (inherits(model, "list")) {
+  if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lm")))) {
     models.list <- model
-  } else {
+  } else if (inherits(model, "lm")) {
     models.list <- list(model)
+  } else {
+    stop("Model must be of class 'lm' or be a 'list()' of lm models (using 'c()' won't work).")
   }
 
   if (!missing(b.label)) {
