@@ -65,7 +65,7 @@
 
 nice_normality <- function(data,
                            variable,
-                           group,
+                           group = NULL,
                            colours,
                            groups.labels,
                            grid = TRUE,

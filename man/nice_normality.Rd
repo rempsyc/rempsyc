@@ -7,7 +7,7 @@
 nice_normality(
   data,
   variable,
-  group,
+  group = NULL,
   colours,
   groups.labels,
   grid = TRUE,

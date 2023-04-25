@@ -66,7 +66,7 @@
 #' @export
 nice_density <- function(data,
                          variable,
-                         group,
+                         group = NULL,
                          colours,
                          ytitle = "Density",
                          xtitle = variable,
@@ -79,7 +79,7 @@ nice_density <- function(data,
                          bins = 30) {
   check_col_names(data, c(group, variable))
   rlang::check_installed("ggplot2", reason = "for this function.")
-  if (missing(group)) {
+  if (is.null(group)) {
     group <- "All"
     data[[group]] <- group
   }
