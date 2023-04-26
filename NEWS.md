@@ -1,6 +1,10 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.6
+
+* `nice_contrasts` and `nice_lm_contrasts` gain an argument `boot` (now defaults to FALSE), consistent with `nice_violin`, now allowing not to bootstrap the effect size (thanks to an update in `bootES`)
+
 ## rempsyc 0.1.1.5
 * `nice_lm` and `nice_lm_slopes`: better error messages if the wrong object type is provided.
 
