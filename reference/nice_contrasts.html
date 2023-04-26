@@ -196,28 +196,30 @@ Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts">https:
 <span class="r-in"><span>  bootstraps <span class="op">=</span> <span class="fl">200</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>extreme order statistics used as endpoints</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>extreme order statistics used as endpoints</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>extreme order statistics used as endpoints</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df        t            p        d  CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29 8.904534 8.568209e-10 3.587739 2.6283678</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29 3.111825 4.152209e-03 1.440495 0.9675454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29 4.441099 1.194696e-04 2.147244 1.3473972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29 8.904534 8.568209e-10 3.587739 2.7010118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29 3.111825 4.152209e-03 1.440495 0.8019328</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29 4.441099 1.194696e-04 2.147244 1.0781170</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.491446</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.131091</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2.990190</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.753395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.967675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.004281</span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"disp"</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"gear"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t            p          d   CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               disp      3 - 5 29  2.916870 6.759287e-03  1.5062653 -0.1175919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2               disp      4 - 5 29 -1.816053 7.971420e-02 -0.9666682 -2.3540820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3               disp      3 - 4 29  6.385087 5.569503e-07  2.4729335  1.2065525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 3.1678046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.1801005</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.3105711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t            p          d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               disp      3 - 5 29  2.916870 6.759287e-03  1.5062653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2               disp      4 - 5 29 -1.816053 7.971420e-02 -0.9666682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3               disp      3 - 4 29  6.385087 5.569503e-07  2.4729335</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      CI_lower  CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.08602021 3.0904264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -2.33807016 0.1522202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1.32597723 3.3181924</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple dependent variables</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
@@ -226,25 +228,25 @@ Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts">https:
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df          t            p         d   CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29   8.904534 8.568209e-10  3.587739  2.7068320</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29   3.111825 4.152209e-03  1.440495  0.7853514</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29   4.441099 1.194696e-04  2.147244  1.3747099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4               disp      4 - 8 29 -11.920787 1.064054e-12 -4.803022 -5.7901064</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5               disp      6 - 8 29  -7.104461 8.117219e-08 -3.288726 -4.3376338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6               disp      4 - 6 29  -3.131986 3.945539e-03 -1.514296 -2.2513401</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                 hp      4 - 8 29  -8.285112 3.915144e-09 -3.338167 -4.3245205</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                 hp      6 - 8 29  -4.952403 2.895434e-05 -2.292517 -3.1625242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                 hp      4 - 6 29  -2.162695 3.894886e-02 -1.045650 -1.7834131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 29   8.904534 8.568209e-10  3.587739  2.7194956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 29   3.111825 4.152209e-03  1.440495  0.8235019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 29   4.441099 1.194696e-04  2.147244  1.3483056</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4               disp      4 - 8 29 -11.920787 1.064054e-12 -4.803022 -5.8559065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5               disp      6 - 8 29  -7.104461 8.117219e-08 -3.288726 -4.2749439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6               disp      4 - 6 29  -3.131986 3.945539e-03 -1.514296 -2.2528961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                 hp      4 - 8 29  -8.285112 3.915144e-09 -3.338167 -4.4260716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                 hp      6 - 8 29  -4.952403 2.895434e-05 -2.292517 -3.1674085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                 hp      4 - 6 29  -2.162695 3.894886e-02 -1.045650 -1.7440483</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  4.5519809</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  1.9883892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3.0876278</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -3.9075703</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -2.2309926</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.8602517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 -2.4143407</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8 -1.3503476</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9 -0.4767631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  4.5776915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  1.9857528</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3.0655381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -3.8458951</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -2.2717128</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.9279738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 -2.4487512</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 -1.3098979</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 -0.4328015</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adding covariates</span></span></span>
 <span class="r-in"><span><span class="fu">nice_contrasts</span><span class="op">(</span></span></span>
@@ -254,13 +256,13 @@ Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts">https:
 <span class="r-in"><span>  covariates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disp"</span>, <span class="st">"hp"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df          t          p        d  CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 27  0.7506447 0.45935889 3.587739 2.6561664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 27 -0.6550186 0.51799786 1.440495 0.8077631</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 27  2.3955766 0.02379338 2.147244 1.3120303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 27  0.7506447 0.45935889 3.587739 2.6666121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 27 -0.6550186 0.51799786 1.440495 0.8158293</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 27  2.3955766 0.02379338 2.147244 1.3619740</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.485001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.978509</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.087732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.537211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.930008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.125316</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
