@@ -8,6 +8,8 @@
 #' @param data The data frame.
 #' @param effect.type What effect size type to use. One of "cohens.d" (default),
 #' "akp.robust.d", "unstandardized", "hedges.g", "cohens.d.sigma", or "r".
+#' @param boot Logical, whether to use bootstrapping for the confidence
+#' interval or not.
 #' @param bootstraps The number of bootstraps to use for the confidence interval
 #' @param ... Arguments passed to [bootES::bootES].
 #' @keywords planned contrasts pairwise comparisons
@@ -58,6 +60,7 @@ nice_contrasts <- function(response,
                            covariates = NULL,
                            data,
                            effect.type = "cohens.d",
+                           boot = FALSE,
                            bootstraps = 2000,
                            ...) {
   check_col_names(data, c(group, response, covariates))
@@ -85,6 +88,9 @@ nice_contrasts <- function(response,
   )
 
   # Add support x groups
+  if (isFALSE(boot)) {
+    bootstraps <- 0
+  }
   es.lists <- lapply(groups.contrasts, function(y) {
     lapply(response, function(x) {
       bootES::bootES(
