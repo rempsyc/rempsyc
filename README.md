@@ -126,7 +126,7 @@ t_table <- nice_table(t.tests)
 t_table
 ```
 
-<img src="man/figures/README-nice_t_test-1.png" width="60%" />
+<img src="man/figures/README-nice_t_test-1.png" />
 
 ``` r
 # Save to word
@@ -159,12 +159,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.6216621  4.5307934
-#> 2  0.8116183  2.0311785
-#> 3  1.3501830  3.0545161
-#> 4 -5.7312791 -3.8380868
-#> 5 -4.3194869 -2.2308193
-#> 6 -2.1849423 -0.8902772
+#> 1  2.7233152  4.5444020
+#> 2  0.7636356  1.9983921
+#> 3  1.3463241  3.0909832
+#> 4 -5.8742386 -3.8249073
+#> 5 -4.3364754 -2.2536315
+#> 6 -2.2348783 -0.8642249
 ```
 
 ``` r
@@ -172,7 +172,7 @@ contrasts
 nice_table(contrasts, highlight = .001)
 ```
 
-<img src="man/figures/README-nice_contrasts-1.png" width="70%" />
+<img src="man/figures/README-nice_contrasts-1.png" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/contrasts>
 
@@ -210,7 +210,7 @@ moderations
 nice_table(moderations, highlight = TRUE)
 ```
 
-<img src="man/figures/README-nice_mod-1.png" width="70%" />
+<img src="man/figures/README-nice_mod-1.png" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -250,7 +250,7 @@ mods
 nice_table(mods, highlight = TRUE)
 ```
 
-<img src="man/figures/README-nice_lm-1.png" width="70%" />
+<img src="man/figures/README-nice_lm-1.png" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -288,7 +288,7 @@ simple.slopes
 nice_table(simple.slopes)
 ```
 
-<img src="man/figures/README-nice_slopes-1.png" width="80%" />
+<img src="man/figures/README-nice_slopes-1.png" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
@@ -327,7 +327,7 @@ simple.slopes
 nice_table(simple.slopes)
 ```
 
-<img src="man/figures/README-nice_lm_slopes-1.png" width="80%" />
+<img src="man/figures/README-nice_lm_slopes-1.png" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/moderation>
 
