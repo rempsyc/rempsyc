@@ -30,7 +30,7 @@ check_col_names <- function(data, names) {
   })
   if(length(missing.cols) > 0) {
     id <- which(!unlist(missing.cols))
-    if (isTRUE(length(id >= 1))) {
+    if (isTRUE(length(id) >= 1)) {
       missing.cols <- toString(names[id])
       stop(paste0("Variables not found: ", missing.cols, ". Please double check spelling."))
     }

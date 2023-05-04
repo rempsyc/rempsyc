@@ -1,6 +1,11 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.6
+* Fix bug when checking column names (all functions).
+* Fix bug in `nice_violin` to accept NULL group argument again (similar to problem corrected in version 0.1.1.4). Also changed the order of argument, with `response` second, and `group` third, since group becomes optional (as consistent with other similar functions).
+* Fix a bug in `citation("rempsyc")`.
+
 ## rempsyc 0.1.1.5
 * `nice_lm` and `nice_lm_slopes`: better error messages if the wrong object type is provided.
 
