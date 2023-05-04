@@ -226,6 +226,8 @@ nice_violin <- function(data,
   if (is.null(group)) {
     group <- "All"
     data[[group]] <- group
+  } else {
+    data[[group]] <- as.factor(data[[group]])
   }
 
   data[[response]] <- as.numeric(data[[response]])

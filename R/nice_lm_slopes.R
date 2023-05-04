@@ -65,7 +65,6 @@ nice_lm_slopes <- function(model,
                            mod.id = TRUE,
                            ci.alternative = "two.sided",
                            ...) {
-  check_col_names(model$model, c(predictor, moderator))
   rlang::check_installed("effectsize", reason = "for this function.")
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lm")))) {
     models.list <- model
@@ -74,6 +73,10 @@ nice_lm_slopes <- function(model,
   } else {
     stop("Model must be of class 'lm' or be a 'list()' of lm models (using 'c()' won't work).")
   }
+
+  lapply(models.list, function(x) {
+    check_col_names(x$model, c(predictor, moderator))
+    })
 
   if (!missing(b.label)) {
     message(paste("The argument 'b.label' is deprecated.",
