@@ -651,8 +651,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
   ##  .....................................
   ##  Formatting functions            ####
   compose.table0 <- data.frame(
-    col = c("r", "p"),
-    fun = c("format_r", format_p_internal)
+    col = c("p", "r"),
+    fun = c(format_p_internal, "format_r")
   )
 
   if(!missing(separate.header)) {
@@ -717,9 +717,10 @@ format_columns <- function(dataframe, table, italics, separate.header,
     }
   }
   compose.table2 <- data.frame(
-    col = c("R2", "sr2"),
+    col = c("R2", "sr2", "CFI", "TLI", "RMSEA", "SRMR"),
     value = c('flextable::as_i("R"), flextable::as_sup("2")',
-              'flextable::as_i("sr"), flextable::as_sup("2")')
+              'flextable::as_i("sr"), flextable::as_sup("2")',
+              "CFI", "TLI", "RMSEA", "SRMR")
   )
 
   if(!missing(separate.header)) {
@@ -767,7 +768,8 @@ beautify_flextable <- function(
     format_p_internal) {
 
   dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
-                    "M", "N", "n", "Z", "z", "W", "R2", "sr2")
+                    "M", "N", "n", "Z", "z", "W", "R2", "sr2",
+                    "CFI", "TLI", "RMSEA", "SRMR")
   dont.change <- paste0("^", dont.change0, "$", collapse = "|")
 
   if(!missing(separate.header)) {

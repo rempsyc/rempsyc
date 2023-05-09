@@ -3,6 +3,7 @@
 
 ## rempsyc 0.1.1.7
 * `format_r`: will now convert NA values to "" instead of "NA"; this is useful when using the `col.format.r` argument in `nice_table()` for correlation matrices.
+* `nice_table`: CFI, TLI, RMSEA, and SRMR now omit the leading zero as they usually cannot be greater than one.
 
 ## rempsyc 0.1.1.6
 * Fix bug when checking column names (all functions).
