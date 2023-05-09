@@ -94,7 +94,9 @@ format_r <- function(r,
   }
   digits <- -log(precision, base = 10)
   r <- formatC(r, format = "f", digits = digits)
-  sub("0", "", r)
+  r <- sub("0", "", r)
+  r <- ifelse(r == " NA", "", r)
+  r
 }
 
 #' @export
