@@ -681,7 +681,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
   compose.table1 <- data.frame(
     col = c(
       "95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)",
-      "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "B", "np2",
+      "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "np2",
       "n2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2", "tau",
       "rho", "rrb", "chi2", "chi2.df"
     ),
@@ -693,7 +693,6 @@ format_columns <- function(dataframe, table, italics, separate.header,
       '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"',
       '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"',
       '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"',
-      '"\u03B2"',
       '"\u03b7", flextable::as_sub("p"), flextable::as_sup("2")',
       '"\u03b7", flextable::as_sup("2")',
       '"\u03b7", flextable::as_sub("G"), flextable::as_sup("2")',
@@ -716,11 +715,12 @@ format_columns <- function(dataframe, table, italics, separate.header,
         )
     }
   }
+  # Values that can't be greater than 1, but not just italic formatting like r
   compose.table2 <- data.frame(
-    col = c("R2", "sr2", "CFI", "TLI", "RMSEA", "SRMR"),
+    col = c("R2", "sr2", "CFI", "TLI", "RMSEA", "SRMR", "B"),
     value = c('flextable::as_i("R"), flextable::as_sup("2")',
               'flextable::as_i("sr"), flextable::as_sup("2")',
-              "CFI", "TLI", "RMSEA", "SRMR")
+              "CFI", "TLI", "RMSEA", "SRMR", '"\u03B2"')
   )
 
   if(!missing(separate.header)) {
@@ -769,7 +769,7 @@ beautify_flextable <- function(
 
   dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
                     "M", "N", "n", "Z", "z", "W", "R2", "sr2",
-                    "CFI", "TLI", "RMSEA", "SRMR")
+                    "CFI", "TLI", "RMSEA", "SRMR", "B")
   dont.change <- paste0("^", dont.change0, "$", collapse = "|")
 
   if(!missing(separate.header)) {

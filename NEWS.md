@@ -1,6 +1,9 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.8
+* `nice_table()`: It was requested that the leading zero be omitted for beta values, so that is now the case.
+
 ## rempsyc 0.1.1.7
 * `format_r`: will now convert NA values to "" instead of "NA"; this is useful when using the `col.format.r` argument in `nice_table()` for correlation matrices.
 * `nice_table`: CFI, TLI, RMSEA, and SRMR now omit the leading zero as they usually cannot be greater than one.
