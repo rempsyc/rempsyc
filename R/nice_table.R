@@ -158,6 +158,33 @@ nice_table <- function(data,
 
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
 
+  #   _______________________________________
+  #   Replace possible alternative names ####
+  dataframe <- dataframe %>%
+    rename_with(
+      ~ case_when(
+        . == "p.value" ~ "p",
+        . == "pvalue" ~ "p",
+        . == "chisq" ~ "chi2",
+        . == "conf.low" ~ "CI_lower",
+        . == "conf.high" ~ "CI_upper",
+        . == "CI_low" ~ "CI_lower",
+        . == "CI_high" ~ "CI_upper",
+        . == "df_error" ~ "df",
+        . == "Cohens_d" ~ "d",
+        . == "Coefficient" ~ "b",
+        . == "Std_Coefficient" ~ "B",
+        . == "r_rank_biserial" ~ "rrb",
+        . == "Eta2" ~ "n2",
+        . == "Eta2_partial" ~ "np2",
+        . == "mu" ~ "Mu",
+        . == "term" ~ "Term",
+        . == "method" ~ "Method",
+        . == "alternative" ~ "Alternative",
+        TRUE ~ .
+      )
+    )
+
   #   __________________________________
   #   Broom integration            ####
 
@@ -274,15 +301,9 @@ prepare_broom <- function(dataframe, broom)  {
     dataframe <- dataframe %>%
       rename_with(
         ~ case_when(
-          . == "p.value" ~ "p",
-          . == "conf.low" ~ "CI_lower",
-          . == "conf.high" ~ "CI_upper",
           . == "statistic" ~ "t",
           . == "std.error" ~ "SE",
           . == "parameter" ~ "df",
-          . == "term" ~ "Term",
-          . == "method" ~ "Method",
-          . == "alternative" ~ "Alternative",
           TRUE ~ .
         )
       )
@@ -352,27 +373,9 @@ prepare_report <- function(dataframe, report, short)  {
       }
     }
     dataframe <- dataframe %>%
-      rename_with(
-        ~ case_when(
-          . == "CI_low" ~ "CI_lower",
-          . == "CI_high" ~ "CI_upper",
-          . == "df_error" ~ "df",
-          TRUE ~ .
-        )
-      ) %>%
-      relocate(any_of(c("Method", "Alternative"))) %>%
+      relocate(any_of(c("method", "alternative"))) %>%
       select(-any_of("CI"))
     if (report == "t.test") {
-      dataframe <- dataframe %>%
-        rename_with(
-          ~ case_when(
-            . == "Cohens_d_CI_low" ~ "d_CI_low",
-            . == "Cohens_d_CI_high" ~ "d_CI_high",
-            . == "Cohens_d" ~ "d",
-            . == "mu" ~ "Mu",
-            TRUE ~ .
-          )
-        )
       dataframe <- dataframe %>%
         format_CI(col.name = "95% CI (t)") %>%
         relocate(`95% CI (t)`, .after = t)
@@ -384,19 +387,12 @@ prepare_report <- function(dataframe, report, short)  {
       if (short == TRUE) {
         dataframe <- dataframe %>%
           select_if(!names(.) %in% c(
-            "Method", "Alternative", "Mean_Group1",
+            "method", "alternative", "Mean_Group1",
             "Mean_Group2", "Difference", "95% CI (t)"
           ))
       }
     } else if (report == "lm") {
       dataframe <- dataframe %>%
-        rename_with(
-          ~ case_when(
-            . == "Coefficient" ~ "b",
-            . == "Std_Coefficient" ~ "B",
-            TRUE ~ .
-          )
-        ) %>%
         relocate(Fit, .after = Parameter)
       dataframe <- dataframe %>%
         format_CI(col.name = "95% CI (b)") %>%
@@ -412,14 +408,6 @@ prepare_report <- function(dataframe, report, short)  {
           which(is.na(dataframe$Parameter)):nrow(dataframe)), ]
       }
     } else if (report == "aov") {
-      dataframe <- dataframe %>%
-        rename_with(
-          ~ case_when(
-            . == "Eta2" ~ "n2",
-            . == "Eta2_partial" ~ "np2",
-            TRUE ~ .
-          )
-        )
       if ("Eta2_CI_low" %in% names(dataframe)) {
         dataframe <- dataframe %>%
           format_CI(c("Eta2_CI_low", "Eta2_CI_high"),
@@ -434,13 +422,6 @@ prepare_report <- function(dataframe, report, short)  {
       }
     } else if (report == "wilcox") {
       dataframe <- dataframe %>%
-        rename_with(
-          ~ case_when(
-            . == "r_rank_biserial" ~ "rrb",
-            TRUE ~ .
-          )
-        )
-      dataframe <- dataframe %>%
         format_CI(c("rank_biserial_CI_low", "rank_biserial_CI_high"),
                   col.name = "95% CI (rrb)"
         )
@@ -452,6 +433,7 @@ prepare_report <- function(dataframe, report, short)  {
 # prepare_flextable
 prepare_flextable <- function(dataframe, separate.header, col.format.ci,
                               highlight, sh.pattern, unique.pattern) {
+
   if (!missing(col.format.ci)) {
     if(!methods::is(col.format.ci, "list")) {
       col.format.ci <- list(col.format.ci)
@@ -466,8 +448,15 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
             select(last_col()) %>% names)
     }
   }
-  if ("CI_lower" %in% names(dataframe) & "CI_upper" %in% names(dataframe)) {
+  if ("CI_lower" %in% names(dataframe) && "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
+  }
+  if ("rmsea.ci.lower" %in% names(dataframe) && "rmsea.ci.upper" %in% names(dataframe)) {
+    dataframe <- format_CI(dataframe, c(
+      "rmsea.ci.lower", "rmsea.ci.upper"), "90% CI (RMSEA)")
+    if ("rmsea" %in% names(dataframe)) {
+      relocate(dataframe, "90% CI (RMSEA)", .after = "rmsea")
+    }
   }
   if(!missing(separate.header)) {
     CI_lower.sh <- paste0(sh.pattern, rep(
@@ -493,6 +482,7 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
     mutate(across(contains("95% CI"), ~ ifelse(
       .x == "[ NA,  NA]", "", .x
     )))
+
   if ("p" %in% names(dataframe) && isTRUE(highlight) ||
       is.numeric(highlight)) {
     highlight <- ifelse(isTRUE(highlight), .05, highlight)
@@ -513,6 +503,12 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
     dataframe <- dataframe %>%
       select(-all_of("Model Number"))
   }
+  # Capitals
+  cols.capitals <- c("cfi", "tli", "nnfi", "rfi", "nfi", "pnfi", "ifi",
+                     "rni", "logl", "aic", "bic", "bic2", "rmsea", "rmr",
+                     "srmr", "crmr", "gfi", "agfi", "pgfi", "mfi", "ecvi")
+  dataframe <- dataframe %>%
+    rename_with(.fn = toupper, .cols = any_of(cols.capitals))
   dataframe
 }
 

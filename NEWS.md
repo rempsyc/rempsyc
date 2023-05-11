@@ -1,11 +1,16 @@
 # rempsyc 0.1.x
 * Incoming!
 
+## rempsyc 0.1.1.9
+* `nice_table`: 
+  * Now capitalize fit indices for a better integration with package {lavaanExtra}.
+  * Simplification of internal coding and column formatting, e.g., columns names close equivalents, such as `"pvalue"` and `"p.value"`, are now automatically converted to `"p"` (similar for others such as `"chisq"` to `"chi2"`, `conf.low` and `CI_low` to `CI_lower`, etc.), for proper formatting.
+
 ## rempsyc 0.1.1.8
-* `nice_table()`: It was requested that the leading zero be omitted for beta values, so that is now the case.
+* `nice_table`: It was requested that the leading zero be omitted for beta values (since it rarely goes beyond 1), so that is now the case (although note that in some edge cases it can go beyond 1, but that may indicate other problems with the model, such as high multicollinearity).
 
 ## rempsyc 0.1.1.7
-* `format_r`: will now convert NA values to "" instead of "NA"; this is useful when using the `col.format.r` argument in `nice_table()` for correlation matrices.
+* `format_r`: will now convert NA values to "" instead of "NA"; this is useful when using the `col.format.r` argument in `nice_table` for correlation matrices.
 * `nice_table`: CFI, TLI, RMSEA, and SRMR now omit the leading zero as they usually cannot be greater than one.
 
 ## rempsyc 0.1.1.6
