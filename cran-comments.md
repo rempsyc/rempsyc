@@ -1,3 +1,9 @@
+## Submission rempsyc 0.1.2
+
+R CMD check results
+
+0 errors | 0 warnings | 0 notes
+
 ## Submission rempsyc 0.1.1 attempt no 2
 
 > Package CITATION file contains call(s) to old-style citEntry() or
