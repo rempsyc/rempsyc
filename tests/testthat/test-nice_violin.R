@@ -1,4 +1,4 @@
-test_that("nice_fit regular", {
+test_that("regular", {
   skip_if_not_installed(c("ggplot2", "boot", "ggsignif"))
 
   nice_density(
