@@ -74,7 +74,7 @@
 #' x
 #' @examplesIf requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5"
 #' # Get interpretations
-#' cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
+#' cbind(x, Interpretation = effectsize::interpret_omega_squared(x$sr2))
 #'
 #' @seealso
 #' Checking for moderation before checking simple slopes:
