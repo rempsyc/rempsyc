@@ -1,6 +1,10 @@
+# rempsyc 0.1.3
+* CRAN resubmission
+* `nice_table`: Correct beta rounding.
+
 # rempsyc 0.1.2
 * CRAN resubmission
-* Readd leading zero for beta
+* `nice_table`: Readd leading zero for beta.
 
 ## rempsyc 0.1.1.9
 * `nice_table`: 
