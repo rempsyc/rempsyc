@@ -766,7 +766,7 @@ beautify_flextable <- function(
 
   dont.change0 <- c("p", "r", "t", "SE", "SD", "F", "df", "b",
                     "M", "N", "n", "Z", "z", "W", "R2", "sr2",
-                    "CFI", "TLI", "RMSEA", "SRMR", "B")
+                    "CFI", "TLI", "RMSEA", "SRMR")
   dont.change <- paste0("^", dont.change0, "$", collapse = "|")
 
   if(!missing(separate.header)) {
