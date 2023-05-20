@@ -4,7 +4,7 @@
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?
 -   `nice_t_test`
-    -   Add other optional corrections argument (other than Bonferroni)
+    -   Add other optional corrections argument (other than Bonferroni) - can use easystats' effectsize maybe?
     -   Add option to specify `robust.d` for a robust version of Cohen's d
     -   Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
     -   Add option to display group means(?)
@@ -13,7 +13,6 @@
     -   Also add option to annotate Levene test on the plot
     -   Use violin points, and group-mean centered (but not standardized)
 -   `nice_table`
-    -   Add all possible alternative names for p values and family!
     -   Integration: add meaningful error messages when using `lm` or `t.test` with wrong model type.
     -   Remove unwanted italic formatting of headers when using `separate.header = TRUE`.
 -   `nice_normality`

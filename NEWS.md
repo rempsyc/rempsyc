@@ -1,5 +1,6 @@
-# rempsyc 0.1.x
-* Incoming!
+# rempsyc 0.1.2
+* CRAN resubmission
+* Readd leading zero for beta
 
 ## rempsyc 0.1.1.9
 * `nice_table`: 
