@@ -18,7 +18,7 @@ the median absolute deviation (MAD).
 }
 \details{
 The function subtracts the median to each observation, and then
-divides the outcome by the MAD. This is analoguous to regular standardization
+divides the outcome by the MAD. This is analogous to regular standardization
 which subtracts the mean to each observaion, and then divides the outcome
 by the standard deviation.
 
