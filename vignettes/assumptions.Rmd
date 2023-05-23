@@ -14,8 +14,22 @@ vignette: >
 ---
 
 ```{r, include=FALSE}
+library(knitr)
+
 knitr::opts_chunk$set(fig.width = 8, fig.height = 7, warning = FALSE, 
                       message = FALSE, out.width = "70%")
+
+pkgs <- c("rlang", "flextable", "performance", "see", "lmtest",
+          "ggplot2", "qqplotr", "ggrepel", "patchwork", "boot")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 ## Basic idea

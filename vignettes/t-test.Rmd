@@ -11,9 +11,22 @@ vignette: >
 ---
 
 ```{r global_options, include=FALSE}
+library(knitr)
+
 knitr::opts_chunk$set(fig.width = 7, fig.height = 7, 
                       warning = FALSE, message = FALSE)
 knitr::opts_knit$set(root.dir = tempdir())
+
+pkgs <- c("effectsize", "methods", "flextable", "broom", "report")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 ## Getting started

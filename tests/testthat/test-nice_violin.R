@@ -1,5 +1,8 @@
-test_that("regular", {
-  skip_if_not_installed(c("ggplot2", "boot", "ggsignif"))
+test_that("basic", {
+  skip_if_not_installed("ggplot2")
+  skip_if_not_installed("boot")
+  skip_if_not_installed("ggsignif")
+  skip_if_not_installed("ggrepel")
 
   nice_density(
     data = iris,
