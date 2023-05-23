@@ -25,7 +25,7 @@
 #' @keywords density normality
 #' @return A density plot of class `ggplot`, by group (if provided), along a
 #'         reference line representing a matched normal distribution.
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE)
 #' # Make the basic plot
 #' nice_density(
 #'   data = iris,

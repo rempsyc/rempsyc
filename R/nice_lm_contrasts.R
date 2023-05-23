@@ -35,7 +35,7 @@
 #'         lower and upper 95% confidence intervals of the
 #'         effect size (i.e., dR).
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("bootES", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)
 #' # Make and format model (group need to be a factor)
 #' model <- lm(mpg ~ as.factor(cyl) + wt * hp, mtcars)
 #' nice_lm_contrasts(model, group = "cyl", data = mtcars, bootstraps = 500)

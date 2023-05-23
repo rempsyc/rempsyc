@@ -47,7 +47,7 @@
 #' @keywords scatter plots
 #' @return A scatter plot of class ggplot.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' # Make the basic plot
 #' nice_scatter(
 #'   data = mtcars,

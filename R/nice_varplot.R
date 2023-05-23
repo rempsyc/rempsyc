@@ -20,7 +20,7 @@
 #'         group variances. Also includes the max variance ratio
 #'         (maximum variance divided by the minimum variance).
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE)
 #' # Make the basic plot
 #' nice_varplot(
 #'   data = iris,

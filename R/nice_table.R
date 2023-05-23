@@ -51,7 +51,7 @@
 #'
 #' @keywords APA style table
 #' @return An APA-formatted table of class "flextable" (and "nice_table").
-#' @examples
+#' @examplesIf requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)
 #' # Make the basic table
 #' my_table <- nice_table(
 #'   mtcars[1:3, ],

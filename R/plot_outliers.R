@@ -26,7 +26,7 @@
 #' @keywords dotplot plots
 #' @return A dot plot of class ggplot, by group.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' # Make the basic plot
 #' plot_outliers(
 #'   airquality,
@@ -60,7 +60,7 @@ plot_outliers <- function(data,
                           yby = 1,
                           ...) {
   check_col_names(data, c(group, response))
-  rlang::check_installed(c("ggplot2", "boot"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2"), reason = "for this function.")
   mtd <- switch(method, "mad" = "median", "sd" = "mean")
   if (missing(group)) {
     group <- "All data"

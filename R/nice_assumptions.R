@@ -14,7 +14,7 @@
 #'         diagnostic column reporting how many assumptions are
 #'         not respected for a given model.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("lmtest", quietly = TRUE)
 #' # Create a regression model (using data available in R by default)
 #' model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 #' nice_assumptions(model)

@@ -37,7 +37,7 @@
 #'         freedom, t-value, p-value, the effect size, Cohen's d, and its
 #'         95% confidence interval lower and upper bounds.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
 #' # Make the basic table
 #' nice_t_test(
 #'   data = mtcars,

@@ -27,7 +27,7 @@
 #'         correlation matrix with significance stars, on the first
 #'         sheet, and the colour-coded p-values on the second sheet.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("correlation", quietly = TRUE) && requireNamespace("openxlsx2", quietly = TRUE)
 #' \dontshow{.old_wd <- setwd(tempdir())}
 #' # Basic example
 #' cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp", "carb"), filename = "cormatrix1")

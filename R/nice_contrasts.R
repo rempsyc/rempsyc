@@ -17,7 +17,7 @@
 #'         (dR), and the lower and upper 95% confidence intervals of the
 #'         effect size (i.e., dR).
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("bootES", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)
 #' # Basic example
 #' nice_contrasts(
 #'   data = mtcars,

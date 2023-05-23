@@ -20,7 +20,7 @@
 #'         reference interpretation helper, the 95% confidence band.
 #' @keywords QQ plots normality distribution
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE) && requireNamespace("qqplotr", quietly = TRUE)
 #' # Make the basic plot
 #' nice_qq(
 #'   data = iris,

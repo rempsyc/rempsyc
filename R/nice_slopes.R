@@ -36,7 +36,7 @@
 #'
 #' @keywords simple slopes moderation interaction regression
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
 #' # Make the basic table
 #' nice_slopes(
 #'   data = mtcars,

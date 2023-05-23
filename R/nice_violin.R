@@ -62,7 +62,7 @@
 #' @keywords violin plots
 #' @return A violin plot of class ggplot, by group.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("boot", quietly = TRUE) && requireNamespace("ggsignif", quietly = TRUE)
 #' # Make the basic plot
 #' nice_violin(
 #'   data = ToothGrowth,

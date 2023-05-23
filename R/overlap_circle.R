@@ -11,7 +11,7 @@
 #' @return A plot of class gList, displaying overlapping circles relative
 #'         to the selected score.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("VennDiagram", quietly = TRUE)
 #' # Score of 1 (0% overlap)
 #' overlap_circle(1)
 #'
