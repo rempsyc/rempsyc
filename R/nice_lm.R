@@ -43,7 +43,7 @@
 #' of freedom, regression coefficient, t-value, p-value, and the effect
 #' size, the semi-partial correlation squared, and its confidence interval.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
 #' # Make and format model
 #' model <- lm(mpg ~ cyl + wt * hp, mtcars)
 #' nice_lm(model)

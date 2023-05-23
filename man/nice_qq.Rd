@@ -45,6 +45,7 @@ Easily make nice per-group QQ plots through
 a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE) && requireNamespace("qqplotr", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic plot
 nice_qq(
   data = iris,
@@ -63,7 +64,7 @@ nice_qq(
   shapiro = TRUE,
   title = NULL
 )
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions useful in assumption testing:

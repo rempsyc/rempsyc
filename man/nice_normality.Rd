@@ -59,6 +59,7 @@ Easily make nice per-group density and QQ plots
 through a wrapper around the \code{ggplot2} and \code{qqplotr} packages.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("see", quietly = TRUE) && requireNamespace("patchwork", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic plot
 nice_normality(
   data = iris,
@@ -84,7 +85,7 @@ nice_normality(
   grid = FALSE,
   shapiro = TRUE
 )
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions useful in assumption testing:

@@ -45,6 +45,7 @@ group variances. Also includes the max variance ratio
 Attempt to visualize variance per group.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic plot
 nice_varplot(
   data = iris,
@@ -69,7 +70,7 @@ nice_varplot(
     "(c) Virginica"
   )
 )
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other functions useful in assumption testing:

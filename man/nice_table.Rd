@@ -93,6 +93,7 @@ around the \code{flextable} package with sensical defaults and
 automatic formatting features.
 }
 \examples{
+\dontshow{if (requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic table
 my_table <- nice_table(
   mtcars[1:3, ],
@@ -165,7 +166,7 @@ nice_table(header.data,
   separate.header = TRUE,
   italics = 2:4
 )
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/table}

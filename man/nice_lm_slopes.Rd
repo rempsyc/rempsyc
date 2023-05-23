@@ -72,6 +72,7 @@ For the \emph{easystats} equivalent, use \code{\link[report:report]{report::repo
 model object.
 }
 \examples{
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make and format model
 model <- lm(mpg ~ gear * wt, mtcars)
 nice_lm_slopes(model, predictor = "gear", moderator = "wt")
@@ -81,6 +82,7 @@ model2 <- lm(qsec ~ gear * wt, mtcars)
 my.models <- list(model, model2)
 x <- nice_lm_slopes(my.models, predictor = "gear", moderator = "wt")
 x
+\dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get interpretations
 cbind(x, Interpretation = effectsize::interpret_omega_squared(x$sr2))

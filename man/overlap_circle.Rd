@@ -20,6 +20,7 @@ Interpolating the Inclusion of the Other in
 the Self Scale (self-other merging) easily.
 }
 \examples{
+\dontshow{if (requireNamespace("VennDiagram", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Score of 1 (0\% overlap)
 overlap_circle(1)
 
@@ -40,6 +41,7 @@ ggplot2::ggsave(plot, file = mypath, width = 7,
   height = 7, unit = 'in', dpi = 300)
 # Change for your own desired path
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/circles}

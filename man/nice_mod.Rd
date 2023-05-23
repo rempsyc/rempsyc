@@ -78,6 +78,7 @@ For the \emph{easystats} equivalent, use \code{\link[report:report]{report::repo
 model object.
 }
 \examples{
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic table
 nice_mod(
   data = mtcars,
@@ -112,6 +113,7 @@ x <- nice_mod(
   moderator2 = "am"
 )
 x
+\dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get interpretations
 cbind(x, Interpretation = effectsize::interpret_omega_squared(x$sr2))

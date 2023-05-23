@@ -58,6 +58,7 @@ For the \emph{easystats} equivalent, use: \code{\link[report:report]{report::rep
 \code{\link[=t.test]{t.test()}} object.
 }
 \examples{
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic table
 nice_t_test(
   data = mtcars,
@@ -108,6 +109,7 @@ nice_t_test(
 )
 # Make sure cases appear in the same order for
 # both levels of the grouping factor
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}

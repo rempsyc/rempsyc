@@ -33,7 +33,7 @@
 #'
 #' @keywords moderation interaction regression
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("effectsize", quietly = TRUE)
 #' # Make the basic table
 #' nice_mod(
 #'   data = mtcars,

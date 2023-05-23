@@ -60,6 +60,7 @@ For the \emph{easystats} equivalent, see:
 \code{\link[modelbased:estimate_contrasts]{modelbased::estimate_contrasts()}}.
 }
 \examples{
+\dontshow{if (requireNamespace("bootES", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Basic example
 nice_contrasts(
   data = mtcars,
@@ -89,6 +90,7 @@ nice_contrasts(
   covariates = c("disp", "hp")
 )
 }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{nice_lm_contrasts}},
