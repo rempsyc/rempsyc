@@ -76,7 +76,7 @@ my.models <- list(model, model2)
 x <- nice_lm(my.models)
 x
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE) && packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get interpretations
 cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 \dontshow{\}) # examplesIf}

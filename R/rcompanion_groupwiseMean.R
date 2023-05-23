@@ -83,7 +83,7 @@
 #' @concept mean confidence interval bootstrap
 #' @return A data frame of requested statistics by group.
 #' @keywords group means confidence intervals bootstrapping internal
-#' @examples
+#' @examplesIf requireNamespace("boot", quietly = TRUE)
 #' \donttest{
 #' ### Example with formula notation
 #' data(mtcars)
@@ -122,6 +122,7 @@ rcompanion_groupwiseMean <- function(formula = NULL,
                                      bca = FALSE,
                                      digits = 3,
                                      ...) {
+  rlang::check_installed("boot", reason = "for this function.")
   ddply <- function(.data, .variables, var, .fun, ...) {
     .data %>%
       group_by(across(all_of(.variables))) %>%

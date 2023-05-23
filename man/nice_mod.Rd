@@ -114,7 +114,7 @@ x <- nice_mod(
 )
 x
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("effectsize", quietly = TRUE) & packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE) && packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get interpretations
 cbind(x, Interpretation = effectsize::interpret_omega_squared(x$sr2))
 \dontshow{\}) # examplesIf}

@@ -125,6 +125,7 @@ right side are used for the grouping variables.
 }\if{html}{\out{</div>}}
 }
 \examples{
+\dontshow{if (requireNamespace("boot", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 ### Example with formula notation
 data(mtcars)
@@ -144,7 +145,7 @@ rcompanion_groupwiseMean(
   percentile = TRUE
 )
 }
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 \url{http://rcompanion.org/handbook/C_03.html}
