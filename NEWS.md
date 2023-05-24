@@ -1,4 +1,4 @@
-# rempsyc 0.1.3
+# rempsyc 0.1.2.1
 * CRAN resubmission
 * `nice_table`: Correct beta rounding.
 

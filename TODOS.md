@@ -1,6 +1,5 @@
 # Development objectives (to-do list)
 
--   Make all tests and examples conditional on suggested dependencies availability...
 -   When effectsize new version is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
 -   `nice_lm_contrasts`: improve function and add to contrasts vignette!
 -   `rcompanion_groupwiseMean`
