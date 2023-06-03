@@ -18,7 +18,7 @@ bootstrapped) confidence intervals."><meta property="og:image" content="https://
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,7 +131,9 @@ bootstrapped) confidence intervals.</p>
 <span>  border.size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  has.d <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  d.x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">comp1</span>, <span class="va">comp2</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.1</span>,</span>
-<span>  d.y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">response</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.3</span></span>
+<span>  d.y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">response</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.3</span>,</span>
+<span>  order.factor <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  xlabels.angle <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -243,7 +245,10 @@ of the horizontal position of the annotations/stars
 
 
 <dt>obs</dt>
-<dd><p>Logical, whether to plot individual observations or not.</p></dd>
+<dd><p>Logical, whether to plot individual observations or not.
+The type of plotting can also be specified, either <code>"dotplot"</code> (same
+as <code>obs = TRUE</code> for backward compatibility) or <code>"jitter"</code>,
+useful when there are a lot of observations.</p></dd>
 
 
 <dt>alpha</dt>
@@ -268,6 +273,21 @@ of the horizontal position of the annotations/stars
 
 <dt>d.y</dt>
 <dd><p>The y-axis coordinates for the d-value.</p></dd>
+
+
+<dt>order.factor</dt>
+<dd><p>How to order factor levels on
+the x-axis. Either "increasing" or "decreasing", to order
+based on the value of the variable on the y axis, or
+"string.length", to order from the shortest to the longest
+string (useful when working with long string names).
+"Defaults to "none".</p></dd>
+
+
+<dt>xlabels.angle</dt>
+<dd><p>How much to tilt the labels of the
+x-axis. Useful when working with long string names.
+"Defaults to 0.</p></dd>
 
 </dl></div>
     <div class="section level2">
