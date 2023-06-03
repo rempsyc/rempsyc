@@ -1,5 +1,14 @@
-# rempsyc 0.1.2.1
+# rempsyc 0.1.3
+* IN PROGRESS
 * CRAN resubmission
+
+# rempsyc 0.1.2.2
+* `nice_violin`: 
+  * For argument `obs`, there are two new choices: `"dotplot"` (same as `obs = TRUE` for backward compatibility) and `"jitter"`, useful when there are a lot of observations.
+  * Add new argument `order.factor`, to order factor levels based on value of the "response" variable, or on the string lengths for the group names (factor levels). Defaults to "none" to avoid changing previous behaviour.
+  * Add new argument `xlabels.angle`, to tilt the labels of the x-axis (useful when working with long string names).
+
+# rempsyc 0.1.2.1
 * `nice_table`: Correct beta rounding.
 
 # rempsyc 0.1.2

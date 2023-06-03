@@ -52,12 +52,24 @@
 #' @param yby How much to increase on each "tick" on the y-axis scale.
 #' @param CIcap.width The width of the confidence interval cap.
 #' @param obs Logical, whether to plot individual observations or not.
+#' The type of plotting can also be specified, either `"dotplot"` (same
+#' as `obs = TRUE` for backward compatibility) or `"jitter"`,
+#' useful when there are a lot of observations.
 #' @param alpha The transparency of the plot.
 #' @param border.colour The colour of the violins border.
 #' @param border.size The size of the violins border.
 #' @param has.d Whether to display the d-value.
 #' @param d.x The x-axis coordinates for the d-value.
 #' @param d.y The y-axis coordinates for the d-value.
+#' @param order.factor How to order factor levels on
+#' the x-axis. Either "increasing" or "decreasing", to order
+#' based on the value of the variable on the y axis, or
+#' "string.length", to order from the shortest to the longest
+#' string (useful when working with long string names).
+#' "Defaults to "none".
+#' @param xlabels.angle How much to tilt the labels of the
+#' x-axis. Useful when working with long string names.
+#' "Defaults to 0.
 #'
 #' @keywords violin plots
 #' @return A violin plot of class ggplot, by group.
@@ -216,7 +228,9 @@ nice_violin <- function(data,
                         border.size = 2,
                         has.d = FALSE,
                         d.x = mean(c(comp1, comp2)) * 1.1,
-                        d.y = mean(data[[response]]) * 1.3) {
+                        d.y = mean(data[[response]]) * 1.3,
+                        order.factor = "none",
+                        xlabels.angle = 0) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("ggplot2"), reason = "for this function.")
   if (isTRUE(boot)) {
@@ -228,6 +242,17 @@ nice_violin <- function(data,
     data[[group]] <- group
   } else {
     data[[group]] <- as.factor(data[[group]])
+  }
+
+  if (order.factor == "increasing") {
+    data[[group]] <- stats::reorder(data[[group]], data[[response]])
+    } else if (order.factor == "decreasing") {
+    data[[group]] <- stats::reorder(data[[group]], data[[response]],
+                                    decreasing = TRUE)
+  } else if (order.factor == "string.length") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(
+        nchar(levels(data[[group]])))])
   }
 
   data[[response]] <- as.numeric(data[[response]])
@@ -302,7 +327,13 @@ nice_violin <- function(data,
     )
   plot <- theme_apa(plot) +
     {
-      if (obs == TRUE) {
+      if (xlabels.angle != 0) {
+        ggplot2::theme(axis.text.x = ggplot2::element_text(
+          angle = xlabels.angle, size = 15, vjust = 1, hjust = 1))
+      }
+    }+
+    {
+      if (isTRUE(obs) || obs == "dotplot") {
         ggplot2::geom_dotplot(
           binaxis = "y",
           stackdir = "center",
@@ -311,6 +342,11 @@ nice_violin <- function(data,
           fill = "black",
           alpha = 0.3,
           dotsize = 0.5
+        )
+      } else if (obs == "jitter") {
+        ggplot2::geom_jitter(
+          alpha = 0.3,
+          width = 0.25
         )
       }
     } +

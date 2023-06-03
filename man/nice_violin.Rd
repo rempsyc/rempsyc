@@ -32,7 +32,9 @@ nice_violin(
   border.size = 2,
   has.d = FALSE,
   d.x = mean(c(comp1, comp2)) * 1.1,
-  d.y = mean(data[[response]]) * 1.3
+  d.y = mean(data[[response]]) * 1.3,
+  order.factor = "none",
+  xlabels.angle = 0
 )
 }
 \arguments{
@@ -99,7 +101,10 @@ of the horizontal position of the annotations/stars
 
 \item{CIcap.width}{The width of the confidence interval cap.}
 
-\item{obs}{Logical, whether to plot individual observations or not.}
+\item{obs}{Logical, whether to plot individual observations or not.
+The type of plotting can also be specified, either \code{"dotplot"} (same
+as \code{obs = TRUE} for backward compatibility) or \code{"jitter"},
+useful when there are a lot of observations.}
 
 \item{alpha}{The transparency of the plot.}
 
@@ -112,6 +117,17 @@ of the horizontal position of the annotations/stars
 \item{d.x}{The x-axis coordinates for the d-value.}
 
 \item{d.y}{The y-axis coordinates for the d-value.}
+
+\item{order.factor}{How to order factor levels on
+the x-axis. Either "increasing" or "decreasing", to order
+based on the value of the variable on the y axis, or
+"string.length", to order from the shortest to the longest
+string (useful when working with long string names).
+"Defaults to "none".}
+
+\item{xlabels.angle}{How much to tilt the labels of the
+x-axis. Useful when working with long string names.
+"Defaults to 0.}
 }
 \value{
 A violin plot of class ggplot, by group.
