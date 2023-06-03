@@ -244,17 +244,6 @@ nice_violin <- function(data,
     data[[group]] <- as.factor(data[[group]])
   }
 
-  if (order.factor == "increasing") {
-    data[[group]] <- stats::reorder(data[[group]], data[[response]])
-    } else if (order.factor == "decreasing") {
-    data[[group]] <- stats::reorder(data[[group]], data[[response]],
-                                    decreasing = TRUE)
-  } else if (order.factor == "string.length") {
-    data[[group]] <- factor(
-      data[[group]], levels = levels(data[[group]])[order(
-        nchar(levels(data[[group]])))])
-  }
-
   data[[response]] <- as.numeric(data[[response]])
   dataSummary <- rcompanion_groupwiseMean(
     group = group,
@@ -267,6 +256,20 @@ nice_violin <- function(data,
     bca = boot,
     na.rm = TRUE
   )
+
+  if (order.factor == "increasing") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean)])
+      } else if (order.factor == "decreasing") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean,
+                                                          decreasing = TRUE)])
+  } else if (order.factor == "string.length") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(
+        nchar(levels(data[[group]])))])
+  }
+
   if (has.d == TRUE & any(
     !missing(comp1), !missing(comp2),
     !missing(signif_xmin)
