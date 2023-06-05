@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -190,9 +190,11 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/nice_t_test.html">nice_t_test</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>            response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"drat"</span>, <span class="st">"wt"</span><span class="op">)</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">t.tests</span></span>
+<span><span class="fu"><a href="reference/nice_t_test.html">nice_t_test</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"drat"</span>, <span class="st">"wt"</span><span class="op">)</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"am"</span></span>
+<span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">t.tests</span></span>
 <span><span class="va">t.tests</span></span>
 <span><span class="co">#&gt;   Dependent Variable         t       df              p         d   CI_lower</span></span>
 <span><span class="co">#&gt; 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731</span></span>
@@ -224,22 +226,23 @@
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
-<span>  covariates <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span>
+<span>  covariates <span class="op">=</span> <span class="st">"hp"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p         d</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
-<span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.7233152  4.5444020</span></span>
-<span><span class="co">#&gt; 2  0.7636356  1.9983921</span></span>
-<span><span class="co">#&gt; 3  1.3463241  3.0909832</span></span>
-<span><span class="co">#&gt; 4 -5.8742386 -3.8249073</span></span>
-<span><span class="co">#&gt; 5 -4.3364754 -2.2536315</span></span>
-<span><span class="co">#&gt; 6 -2.2348783 -0.8642249</span></span></code></pre></div>
+<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p         d  CI_lower</span></span>
+<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739  2.740979</span></span>
+<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495  0.808685</span></span>
+<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244  1.387390</span></span>
+<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022 -5.807991</span></span>
+<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726 -4.280274</span></span>
+<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296 -2.219449</span></span>
+<span><span class="co">#&gt;     CI_upper</span></span>
+<span><span class="co">#&gt; 1  4.5871892</span></span>
+<span><span class="co">#&gt; 2  2.0069336</span></span>
+<span><span class="co">#&gt; 3  3.1032787</span></span>
+<span><span class="co">#&gt; 4 -3.8714847</span></span>
+<span><span class="co">#&gt; 5 -2.2758581</span></span>
+<span><span class="co">#&gt; 6 -0.8873183</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -256,7 +259,8 @@
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
 <span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">moderations</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor df           B          t</span></span>
 <span><span class="co">#&gt; 1            1                mpg      gear 28 -0.08718042 -0.7982999</span></span>
@@ -266,10 +270,10 @@
 <span><span class="co">#&gt; 5            2               disp        wt 28  0.83273987  7.6662883</span></span>
 <span><span class="co">#&gt; 6            2               disp   gear:wt 28 -0.08758665 -0.8140664</span></span>
 <span><span class="co">#&gt;                   p         sr2     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1 0.431415645312886 0.004805465 0.0000000000 0.02702141</span></span>
+<span><span class="co">#&gt; 1 0.431415645312884 0.004805465 0.0000000000 0.02702141</span></span>
 <span><span class="co">#&gt; 2 0.000000002383144 0.558188818 0.3142326391 0.80214500</span></span>
 <span><span class="co">#&gt; 3 0.039899695159515 0.035022025 0.0003502202 0.09723370</span></span>
-<span><span class="co">#&gt; 4 0.491683361920263 0.003546038 0.0000000000 0.02230154</span></span>
+<span><span class="co">#&gt; 4 0.491683361920264 0.003546038 0.0000000000 0.02230154</span></span>
 <span><span class="co">#&gt; 5 0.000000023731710 0.429258143 0.1916386492 0.66687764</span></span>
 <span><span class="co">#&gt; 6 0.422476456495512 0.004840251 0.0000000000 0.02679265</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -322,7 +326,8 @@
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
 <span>  predictor <span class="op">=</span> <span class="st">"gear"</span>,</span>
-<span>  moderator <span class="op">=</span> <span class="st">"wt"</span><span class="op">)</span></span>
+<span>  moderator <span class="op">=</span> <span class="st">"wt"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">simple.slopes</span></span>
 <span><span class="co">#&gt;   Model Number Dependent Variable Predictor (+/-1 SD) df           B          t</span></span>
 <span><span class="co">#&gt; 1            1                mpg       gear (LOW-wt) 28  0.14841920  1.0767040</span></span>
@@ -386,19 +391,23 @@
 </h2>
 <p>Make nice violin plots easily with 95% bootstrapped confidence intervals.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
-<span>            comp1 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>            comp2 <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>            has.d <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            d.y <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>  comp1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  comp2 <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  has.d <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  d.y <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_violin-1.png" width="60%"></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save plot</span></span>
-<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'niceplot.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">'in'</span>, </span>
-<span>                dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"niceplot.pdf"</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">"in"</span>,</span>
+<span>  dpi <span class="op">=</span> <span class="fl">300</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/violin" class="uri">https://rempsyc.remi-theriault.com/articles/violin</a></p>
 </div>
 <div class="section level2">
@@ -407,21 +416,25 @@
 </h2>
 <p>Make nice scatter plots easily.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
-<span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
-<span>             has.confband <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>             has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>             has.p <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
+<span>  has.confband <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  has.r <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  has.p <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_scatter-1.png" width="60%"></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>             predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
-<span>             response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
-<span>             group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
-<span>             has.confband <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-nice_scatter-2.png" width="60%"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
+<span>  has.confband <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  has.legend <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-nice_scatter2-1.png" width="60%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/scatter" class="uri">https://rempsyc.remi-theriault.com/articles/scatter</a></p>
 </div>
 <div class="section level2">
@@ -430,8 +443,7 @@
 </h2>
 <p>Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Score of 3.5 (25% overlap)</span></span>
+<code class="sourceCode R"><span><span class="co"># Score of 3.5 (25% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-overlap_circle-1.png" width="30%"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -447,11 +459,14 @@
 </h2>
 <p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (pink/light blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">infert</span>, </span>
-<span>                filename <span class="op">=</span> <span class="st">"cormatrix1"</span>, </span>
-<span>                select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"parity"</span>, <span class="st">"induced"</span>, <span class="st">"case"</span>, <span class="st">"spontaneous"</span>, </span>
-<span>                           <span class="st">"stratum"</span>, <span class="st">"pooled.stratum"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">infert</span>,</span>
+<span>  filename <span class="op">=</span> <span class="st">"cormatrix1"</span>,</span>
+<span>  select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"age"</span>, <span class="st">"parity"</span>, <span class="st">"induced"</span>, <span class="st">"case"</span>, <span class="st">"spontaneous"</span>,</span>
+<span>    <span class="st">"stratum"</span>, <span class="st">"pooled.stratum"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Correlation Matrix (pearson-method)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum</span></span>
@@ -483,15 +498,17 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create synthetic data frame for the demonstration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>scale1_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale1_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale1_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale2_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale2_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale2_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale3_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale3_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 scale3_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  scale1_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale1_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale1_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale2_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale2_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale2_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale3_Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale3_Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  scale3_Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Then select your scales by name</span></span>
 <span><span class="fu"><a href="reference/nice_na.html">nice_na</a></span><span class="op">(</span><span class="va">df</span>, scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scale1"</span>, <span class="st">"scale2"</span>, <span class="st">"scale3"</span><span class="op">)</span><span class="op">)</span></span>
@@ -513,10 +530,10 @@
 <p>Extracts ALL duplicates (including the first one, contrary to <code>duplicated</code> or <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">dplyr::distinct</a></code>) to a data frame for visual inspection.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>   id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>   item1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>   item2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>   item3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  item1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  item2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  item3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">df1</span></span>
 <span><span class="co">#&gt;   id item1 item2 item3</span></span>
@@ -631,10 +648,11 @@
 </h2>
 <p>Randomize easily with different designs.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
-<span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span>
-<span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>,<span class="st">"CX"</span>,<span class="st">"PZ"</span>,<span class="st">"ZL"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
+<span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
+<span>  design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BP"</span>, <span class="st">"CX"</span>, <span class="st">"PZ"</span>, <span class="st">"ZL"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id Condition</span></span>
 <span><span class="co">#&gt; 1  1        ZL</span></span>
 <span><span class="co">#&gt; 2  2        BP</span></span>
@@ -646,8 +664,10 @@
 <span><span class="co">#&gt; 8  8        ZL</span></span>
 <span></span>
 <span><span class="co"># Within-Group Design</span></span>
-<span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>               condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="st">"AV"</span>,<span class="st">"ST"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
+<span>  design <span class="op">=</span> <span class="st">"within"</span>, Ncondition <span class="op">=</span> <span class="fl">3</span>, n <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  condition.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SV"</span>, <span class="st">"AV"</span>, <span class="st">"ST"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id    Condition</span></span>
 <span><span class="co">#&gt; 1  1 SV - AV - ST</span></span>
 <span><span class="co">#&gt; 2  2 AV - ST - SV</span></span>
@@ -664,8 +684,7 @@
 </h2>
 <p>Test linear regression assumptions easily with a nice summary table.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Create regression model</span></span>
+<code class="sourceCode R"><span><span class="co"># Create regression model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co"># View results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="reference/nice_assumptions.html">nice_assumptions</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -678,12 +697,14 @@
 </h2>
 <p>Easily make nice density and QQ plots per-group.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_normality.html">nice_normality</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
-<span>               variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
-<span>               group <span class="op">=</span> <span class="st">"Species"</span>,</span>
-<span>               grid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>               shapiro <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>               histogram <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_normality.html">nice_normality</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span>,</span>
+<span>  grid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  shapiro <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  histogram <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_normality-1.png" width="80%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
@@ -693,15 +714,17 @@
 </h2>
 <p>Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>, </span>
-<span>              group <span class="op">=</span> <span class="st">"Month"</span>,</span>
-<span>              response <span class="op">=</span> <span class="st">"Ozone"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Month"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"Ozone"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_outliers-1.png" width="70%"></p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
-<span>              response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
-<span>              method <span class="op">=</span> <span class="st">"sd"</span><span class="op">)</span></span></code></pre></div>
+<span>  response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"sd"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_outliers-2.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>
@@ -711,9 +734,11 @@
 </h2>
 <p>Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
-<span>         variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
-<span>         group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt;        Species Setosa Versicolor Virginica Variance.ratio Criteria</span></span>
 <span><span class="co">#&gt; 1 Sepal.Length  0.124      0.266     0.404            3.3        4</span></span>
 <span><span class="co">#&gt;   Heteroscedastic</span></span>
@@ -726,9 +751,11 @@
 </h2>
 <p>Attempt to visualize variance per group.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iris</span>,</span>
-<span>             variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
-<span>             group <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_varplot-1.png" width="70%"></p>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/assumptions" class="uri">https://rempsyc.remi-theriault.com/articles/assumptions</a></p>
 </div>

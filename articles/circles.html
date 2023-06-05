@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,7 +192,7 @@ yet, you will need to install it via the following command:
 <p>You can also change group labels with the <code>categories</code>
 argument, although ‘Self’ and ‘Other’ are the defaults.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.12</span>, categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Humans"</span>,<span class="st">"Animals"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.12</span>, categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Humans"</span>, <span class="st">"Animals"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="circles_files/figure-html/unnamed-chunk-6-1.png" width="30%"></p>
 </div>
 <div class="section level2">
@@ -205,10 +205,12 @@ argument, although ‘Self’ and ‘Other’ are the defaults.</p>
 <p>Then you can use the ggplot2 save command directly with the object
 name:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">plot</span>, file <span class="op">=</span> <span class="st">"overlap.pdf"</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
-<span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="va">plot</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">"overlap.pdf"</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  unit <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
-<span><span class="co"># If you copy-paste your path name, remember to </span></span>
+<span><span class="co"># If you copy-paste your path name, remember to</span></span>
 <span><span class="co"># use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .pdf extension of the file.</span></span></code></pre></div>
 <blockquote>

@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,18 +172,20 @@ yet, you will need to install it via the following command:
 </blockquote>
 <p>Let’s test out the function on existing data</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">table.stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span>response <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
-<span>                              group <span class="op">=</span> <span class="st">"Species"</span>,</span>
-<span>                              data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">table.stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span></span>
+<span>  response <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">iris</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">table.stats</span></span></code></pre></div>
 <pre><code><span><span class="co">##   Dependent Variable             Comparison  df          t            p</span></span>
 <span><span class="co">## 1       Sepal.Length     setosa - virginica 147 -15.365506 2.214821e-32</span></span>
 <span><span class="co">## 2       Sepal.Length versicolor - virginica 147  -6.332686 2.765638e-09</span></span>
 <span><span class="co">## 3       Sepal.Length    setosa - versicolor 147  -9.032819 8.770194e-16</span></span>
 <span><span class="co">##           d  CI_lower   CI_upper</span></span>
-<span><span class="co">## 1 -3.073101 -3.534303 -2.4887337</span></span>
-<span><span class="co">## 2 -1.266537 -1.735892 -0.7902013</span></span>
-<span><span class="co">## 3 -1.806564 -2.185047 -1.3887313</span></span></code></pre>
+<span><span class="co">## 1 -3.073101 -3.537031 -2.4912726</span></span>
+<span><span class="co">## 2 -1.266537 -1.742348 -0.8144254</span></span>
+<span><span class="co">## 3 -1.806564 -2.163333 -1.3846616</span></span></code></pre>
 <p>This will give us Cohen’s <em>d</em> by default for the effect size,
 but it is possible to request the ‘robust’ version (i.e., robust to
 deviations from parametric assumptions) of Cohen’s <em>d</em> by
@@ -197,42 +199,42 @@ size.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-613413e0{table-layout:auto;}.cl-612c28ba{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-612c28c4{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-612fa1ca{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-612fa1d4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-612fb9bc{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-612fb9c6{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-612fb9c7{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-612fb9d0{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-612fb9d1{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-613413e0">
+<style>.cl-c654e4ea{table-layout:auto;}.cl-c64c4efc{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c64c4f10{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c6500f6a{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-c6500f74{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-c6502a2c{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c6502a36{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c6502a37{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c6502a40{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c6502a41{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-c654e4ea">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28ba">Dependent Variable</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28ba">Comparison</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28c4">df</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28c4">t</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28c4">p</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28c4">d</span></p></th>
-<th class="cl-612fb9bc"><p class="cl-612fa1ca"><span class="cl-612c28ba">95% CI</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4efc">Dependent Variable</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4efc">Comparison</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4f10">df</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4f10">t</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4f10">p</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4f10">d</span></p></th>
+<th class="cl-c6502a2c"><p class="cl-c6500f6a"><span class="cl-c64c4efc">95% CI</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-612fb9c6"><p class="cl-612fa1d4"><span class="cl-612c28ba">Sepal.Length</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">setosa - virginica</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">147</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">-15.37</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">&lt; .001***</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">-3.07</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">[-3.53, -2.49]</span></p></td>
+<td rowspan="3" class="cl-c6502a36"><p class="cl-c6500f74"><span class="cl-c64c4efc">Sepal.Length</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">setosa - virginica</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">147</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-15.37</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">&lt; .001***</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-3.07</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">[-3.54, -2.49]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">versicolor - virginica</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">147</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">-6.33</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">&lt; .001***</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">-1.27</span></p></td>
-<td class="cl-612fb9c7"><p class="cl-612fa1ca"><span class="cl-612c28ba">[-1.74, -0.79]</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">versicolor - virginica</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">147</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-6.33</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">&lt; .001***</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-1.27</span></p></td>
+<td class="cl-c6502a37"><p class="cl-c6500f6a"><span class="cl-c64c4efc">[-1.74, -0.81]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">setosa - versicolor</span></p></td>
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">147</span></p></td>
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">-9.03</span></p></td>
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">&lt; .001***</span></p></td>
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">-1.81</span></p></td>
-<td class="cl-612fb9d1"><p class="cl-612fa1ca"><span class="cl-612c28ba">[-2.19, -1.39]</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">setosa - versicolor</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">147</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-9.03</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">&lt; .001***</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">-1.81</span></p></td>
+<td class="cl-c6502a41"><p class="cl-c6500f6a"><span class="cl-c64c4efc">[-2.16, -1.38]</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -245,20 +247,24 @@ size.</p>
 <h3 id="make-a-violin-plot-comparing-groups-through-nice_violin-">Make a violin plot comparing groups through <a href="../articles/violin.html"><code>nice_violin()</code></a>.<a class="anchor" aria-label="anchor" href="#make-a-violin-plot-comparing-groups-through-nice_violin-"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">figure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Species"</span>, </span>
-<span>                       response <span class="op">=</span> <span class="st">"Sepal.Length"</span>, </span>
-<span>                       data <span class="op">=</span> <span class="va">iris</span>,</span>
-<span>                       ytitle <span class="op">=</span> <span class="st">"Length of Sepal"</span>, </span>
-<span>                       signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"***"</span>, <span class="st">"***"</span><span class="op">)</span>,</span>
-<span>                       signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.7</span>, <span class="fl">7.3</span>, <span class="fl">8.2</span><span class="op">)</span>,</span>
-<span>                       signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"setosa"</span>, <span class="st">"setosa"</span>, <span class="st">"versicolor"</span><span class="op">)</span>,</span>
-<span>                       signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span>, <span class="st">"virginica"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">figure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Length of Sepal"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"***"</span>, <span class="st">"***"</span><span class="op">)</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.7</span>, <span class="fl">7.3</span>, <span class="fl">8.2</span><span class="op">)</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"setosa"</span>, <span class="st">"setosa"</span>, <span class="st">"versicolor"</span><span class="op">)</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span>, <span class="st">"virginica"</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-5-1.png" width="70%"></p>
 <p>Let’s save a high-resolution/vector version of this figure in PDF (it
 could be .png or any other format too if necessary).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'Figure 1.pdf'</span>, <span class="va">figure</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
-<span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"Figure 1.pdf"</span>, <span class="va">figure</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  unit <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Congratulations for making it that far! You’ve done it! From A to Z,
 you now know how to make things work! If you would like to integrate
 this with a broader workflow, read on for the next part!</p>
@@ -274,7 +280,7 @@ on the Open Science Framework.</p>
 <p><strong>Load the data file from the Open Science
 Framework</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"https://osf.io/qkmnp//?action=download"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"https://osf.io/qkmnp//?action=download"</span>, header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Specify the order of factor levels for “Group”</strong>
 (otherwise R will alphabetize them)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -295,12 +301,14 @@ Framework</strong></p>
 <p><strong>Define our dependent variables</strong></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">QCAEPR</span><span class="op">:</span><span class="va">IOS</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">names</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">QCAEPR</span><span class="op">:</span><span class="va">IOS</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "QCAEPR" "IRIPT"  "IRIFS"  "IRIEC"  "IRIPD"  "IOS"</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">table.stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">DV</span>,</span>
-<span>                              group <span class="op">=</span> <span class="st">"Group"</span>,</span>
-<span>                              data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">table.stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span></span>
+<span>  response <span class="op">=</span> <span class="va">DV</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Group"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">data</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">table.stats</span></span></code></pre></div>
 <pre><code><span><span class="co">##    Dependent Variable         Comparison df           t            p</span></span>
 <span><span class="co">## 1              QCAEPR Embodied - Control 87  2.19599050 3.075313e-02</span></span>
@@ -321,211 +329,214 @@ Framework</strong></p>
 <span><span class="co">## 16                IOS Embodied - Control 87  4.70778837 9.385982e-06</span></span>
 <span><span class="co">## 17                IOS   Mental - Control 87  2.12312024 3.658408e-02</span></span>
 <span><span class="co">## 18                IOS  Embodied - Mental 87  2.58466812 1.141344e-02</span></span>
-<span><span class="co">##               d    CI_lower  CI_upper</span></span>
-<span><span class="co">## 1   0.567002309  0.03017591 1.1092039</span></span>
-<span><span class="co">## 2   0.061297547 -0.46035335 0.6182430</span></span>
-<span><span class="co">## 3   0.505704762  0.04729005 0.9441635</span></span>
-<span><span class="co">## 4   0.031628320 -0.53510843 0.5835184</span></span>
-<span><span class="co">## 5   0.005033685 -0.50928082 0.4991078</span></span>
-<span><span class="co">## 6   0.026594635 -0.47471141 0.5310085</span></span>
-<span><span class="co">## 7   0.039089129 -0.47592129 0.5777714</span></span>
-<span><span class="co">## 8  -0.361012819 -0.87521021 0.1817683</span></span>
-<span><span class="co">## 9   0.400101948 -0.14024649 0.8871877</span></span>
-<span><span class="co">## 10  0.594163085  0.07547070 1.1161868</span></span>
-<span><span class="co">## 11  0.376986233 -0.14583267 0.9167917</span></span>
-<span><span class="co">## 12  0.217176852 -0.29867495 0.7412373</span></span>
-<span><span class="co">## 13  0.550052081 -0.01393644 1.0040941</span></span>
-<span><span class="co">## 14  0.223543334 -0.25610180 0.6851797</span></span>
-<span><span class="co">## 15  0.326508748 -0.23961348 0.8975230</span></span>
-<span><span class="co">## 16  1.215545729  0.67744477 1.7624654</span></span>
-<span><span class="co">## 17  0.548187290  0.04920391 1.0593015</span></span>
-<span><span class="co">## 18  0.667358440  0.11935928 1.2455582</span></span></code></pre>
+<span><span class="co">##               d     CI_lower  CI_upper</span></span>
+<span><span class="co">## 1   0.567002309  0.031309404 1.1194858</span></span>
+<span><span class="co">## 2   0.061297547 -0.490688904 0.5792319</span></span>
+<span><span class="co">## 3   0.505704762  0.046396455 1.0193131</span></span>
+<span><span class="co">## 4   0.031628320 -0.520923042 0.6047239</span></span>
+<span><span class="co">## 5   0.005033685 -0.456765298 0.5191065</span></span>
+<span><span class="co">## 6   0.026594635 -0.489360451 0.5124354</span></span>
+<span><span class="co">## 7   0.039089129 -0.469214545 0.5890425</span></span>
+<span><span class="co">## 8  -0.361012819 -0.874357886 0.1732806</span></span>
+<span><span class="co">## 9   0.400101948 -0.145836912 0.9156716</span></span>
+<span><span class="co">## 10  0.594163085 -0.033925021 1.1093351</span></span>
+<span><span class="co">## 11  0.376986233 -0.148621933 0.8755387</span></span>
+<span><span class="co">## 12  0.217176852 -0.290871991 0.7082972</span></span>
+<span><span class="co">## 13  0.550052081  0.002070144 1.0344277</span></span>
+<span><span class="co">## 14  0.223543334 -0.247873932 0.6890136</span></span>
+<span><span class="co">## 15  0.326508748 -0.242994961 0.8833808</span></span>
+<span><span class="co">## 16  1.215545729  0.650104781 1.7601868</span></span>
+<span><span class="co">## 17  0.548187290  0.023639920 1.0213584</span></span>
+<span><span class="co">## 18  0.667358440  0.147053585 1.2339728</span></span></code></pre>
 <p><strong>Add more meaningful names for measures</strong></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">table.stats</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Peripheral Responsivity (QCAE)"</span>,</span>
-<span>                        <span class="st">"Perspective-Taking (IRI)"</span>, </span>
-<span>                        <span class="st">"Fantasy (IRI)"</span>, <span class="st">"Empathic Concern (IRI)"</span>, </span>
-<span>                        <span class="st">"Personal Distress (IRI)"</span>,</span>
-<span>                        <span class="st">"Inclusion of Other in the Self (IOS)"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">table.stats</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Peripheral Responsivity (QCAE)"</span>,</span>
+<span>  <span class="st">"Perspective-Taking (IRI)"</span>,</span>
+<span>  <span class="st">"Fantasy (IRI)"</span>, <span class="st">"Empathic Concern (IRI)"</span>,</span>
+<span>  <span class="st">"Personal Distress (IRI)"</span>,</span>
+<span>  <span class="st">"Inclusion of Other in the Self (IOS)"</span></span>
+<span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="make-it-publication-ready-using-nice_table--1">Make it publication-ready using <a href="../articles/table.html">nice_table()</a>.<a class="anchor" aria-label="anchor" href="#make-it-publication-ready-using-nice_table--1"></a>
 </h3>
 <p>Note that with option <code>highlight = TRUE</code>, it will
 automatically highlight significant results.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span>, </span>
-<span>                        highlight <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                        title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Table 1"</span>, <span class="st">"Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)"</span><span class="op">)</span>,</span>
-<span>                        note <span class="op">=</span> <span class="st">"\U1D451\U1D3F = robust Cohen’s \U1D451; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">my_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">table.stats</span>,</span>
+<span>  highlight <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Table 1"</span>, <span class="st">"Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)"</span><span class="op">)</span>,</span>
+<span>  note <span class="op">=</span> <span class="st">"\U1D451\U1D3F = robust Cohen’s \U1D451; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable."</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-666eb310{table-layout:auto;}.cl-66659f8c{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-66659fa0{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-66659fa1{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-66659faa{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-6669294a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-66692954{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-6669295e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-66694100{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6669410a{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6669410b{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694114{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694115{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694116{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6669411e{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6669411f{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694120{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694128{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694129{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694132{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694133{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694134{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-66694135{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6669413c{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-666eb310">
+<style>.cl-cc0ddfea{table-layout:auto;}.cl-cc04a880{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-cc04a894{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-cc04a895{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-cc04a89e{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-cc087da2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-cc087dac{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-cc087dad{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-cc0896c0{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896ca{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896cb{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896d4{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896d5{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896de{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896e8{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896e9{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896ea{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896f2{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896f3{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896fc{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc0896fd{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc089706{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc089710{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc089711{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-cc0ddfea">
 <thead>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-66694100"><p class="cl-6669294a"><span class="cl-66659f8c">Table 1</span></p></th></tr>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-6669410a"><p class="cl-6669294a"><span class="cl-66659fa1">Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)</span></p></th></tr>
+<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-cc0896c0"><p class="cl-cc087da2"><span class="cl-cc04a880">Table 1</span></p></th></tr>
+<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-cc0896ca"><p class="cl-cc087da2"><span class="cl-cc04a895">Results of multiple regression with planned contrasts analyses for empathy subscales and self–other merging (confirmatory analyses with the exception of self–other merging)</span></p></th></tr>
 <tr style="overflow-wrap:break-word;">
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659faa">Dependent Variable</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659faa">Comparison</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659fa1">df</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659fa1">t</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659fa1">p</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659fa1">d</span></p></th>
-<th class="cl-6669410b"><p class="cl-66692954"><span class="cl-66659faa">95% CI</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a89e">Dependent Variable</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a89e">Comparison</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a895">df</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a895">t</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a895">p</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a895">d</span></p></th>
+<th class="cl-cc0896cb"><p class="cl-cc087dac"><span class="cl-cc04a89e">95% CI</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694114"><p class="cl-6669294a"><span class="cl-66659f8c">Peripheral Responsivity (QCAE)</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">Embodied - Control</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">87</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">2.20</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">.031*</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">0.57</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">[0.03, 1.11]</span></p></td>
+<td rowspan="3" class="cl-cc0896d4"><p class="cl-cc087da2"><span class="cl-cc04a880">Peripheral Responsivity (QCAE)</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">Embodied - Control</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">87</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">2.20</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">.031*</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">0.57</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">[0.03, 1.12]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">Mental - Control</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">87</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.24</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">.813</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.06</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">[-0.46, 0.62]</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">Mental - Control</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">87</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.24</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">.813</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.06</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.49, 0.58]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Mental</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">87</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">1.96</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">.053</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.51</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">[0.05, 0.94]</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Mental</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">87</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">1.96</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">.053</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.51</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">[0.05, 1.02]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694128"><p class="cl-6669294a"><span class="cl-66659faa">Perspective-Taking (IRI)</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Control</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">0.12</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">.903</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">0.03</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">[-0.54, 0.58]</span></p></td>
+<td rowspan="3" class="cl-cc0896f2"><p class="cl-cc087da2"><span class="cl-cc04a89e">Perspective-Taking (IRI)</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Control</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.12</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">.903</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.03</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.52, 0.60]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">Mental - Control</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.02</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">.985</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.01</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">[-0.51, 0.50]</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">Mental - Control</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.02</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">.985</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.01</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.46, 0.52]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Mental</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.10</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">.919</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.03</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">[-0.47, 0.53]</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Mental</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.10</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">.919</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.03</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.49, 0.51]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694128"><p class="cl-6669294a"><span class="cl-66659faa">Fantasy (IRI)</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Control</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">0.15</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">.880</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">0.04</span></p></td>
-<td class="cl-66694129"><p class="cl-66692954"><span class="cl-66659faa">[-0.48, 0.58]</span></p></td>
+<td rowspan="3" class="cl-cc0896f2"><p class="cl-cc087da2"><span class="cl-cc04a89e">Fantasy (IRI)</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Control</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.15</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">.880</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.04</span></p></td>
+<td class="cl-cc0896f3"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.47, 0.59]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">Mental - Control</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">-1.39</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">.169</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">-0.36</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">[-0.88, 0.18]</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">Mental - Control</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">-1.39</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">.169</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">-0.36</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.87, 0.17]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Mental</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">1.54</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">.128</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.40</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">[-0.14, 0.89]</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Mental</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">1.54</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">.128</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.40</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.15, 0.92]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694132"><p class="cl-6669294a"><span class="cl-66659f8c">Empathic Concern (IRI)</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">Embodied - Control</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">86</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">2.30</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">.024*</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">0.59</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">[0.08, 1.12]</span></p></td>
+<td rowspan="3" class="cl-cc0896fc"><p class="cl-cc087da2"><span class="cl-cc04a880">Empathic Concern (IRI)</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">Embodied - Control</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">86</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">2.30</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">.024*</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">0.59</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">[-0.03, 1.11]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">Mental - Control</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">1.45</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">.151</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.38</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">[-0.15, 0.92]</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">Mental - Control</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">1.45</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">.151</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.38</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.15, 0.88]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Mental</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.83</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">.407</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.22</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">[-0.30, 0.74]</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Mental</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.83</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">.407</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.22</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.29, 0.71]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694132"><p class="cl-6669294a"><span class="cl-66659f8c">Personal Distress (IRI)</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">Embodied - Control</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">86</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">2.13</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">.036*</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">0.55</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">[-0.01, 1.00]</span></p></td>
+<td rowspan="3" class="cl-cc0896fc"><p class="cl-cc087da2"><span class="cl-cc04a880">Personal Distress (IRI)</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">Embodied - Control</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">86</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">2.13</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">.036*</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">0.55</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">[0.00, 1.03]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">Mental - Control</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.86</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">.393</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">0.22</span></p></td>
-<td class="cl-6669411e"><p class="cl-66692954"><span class="cl-66659faa">[-0.26, 0.69]</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">Mental - Control</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.86</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">.393</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.22</span></p></td>
+<td class="cl-cc0896e8"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.25, 0.69]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">Embodied - Mental</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">86</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">1.25</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">.213</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">0.33</span></p></td>
-<td class="cl-66694120"><p class="cl-66692954"><span class="cl-66659faa">[-0.24, 0.90]</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">Embodied - Mental</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">86</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">1.25</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">.213</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">0.33</span></p></td>
+<td class="cl-cc0896ea"><p class="cl-cc087dac"><span class="cl-cc04a89e">[-0.24, 0.88]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td rowspan="3" class="cl-66694132"><p class="cl-6669294a"><span class="cl-66659f8c">Inclusion of Other in the Self (IOS)</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">Embodied - Control</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">87</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">4.71</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">&lt; .001***</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">1.22</span></p></td>
-<td class="cl-66694133"><p class="cl-66692954"><span class="cl-66659f8c">[0.68, 1.76]</span></p></td>
+<td rowspan="3" class="cl-cc0896fc"><p class="cl-cc087da2"><span class="cl-cc04a880">Inclusion of Other in the Self (IOS)</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">Embodied - Control</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">87</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">4.71</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">&lt; .001***</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">1.22</span></p></td>
+<td class="cl-cc0896fd"><p class="cl-cc087dac"><span class="cl-cc04a880">[0.65, 1.76]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">Mental - Control</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">87</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">2.12</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">.037*</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">0.55</span></p></td>
-<td class="cl-66694115"><p class="cl-66692954"><span class="cl-66659f8c">[0.05, 1.06]</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">Mental - Control</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">87</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">2.12</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">.037*</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">0.55</span></p></td>
+<td class="cl-cc0896d5"><p class="cl-cc087dac"><span class="cl-cc04a880">[0.02, 1.02]</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">Embodied - Mental</span></p></td>
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">87</span></p></td>
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">2.58</span></p></td>
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">.011*</span></p></td>
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">0.67</span></p></td>
-<td class="cl-66694135"><p class="cl-66692954"><span class="cl-66659f8c">[0.12, 1.25]</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">Embodied - Mental</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">87</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">2.58</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">.011*</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">0.67</span></p></td>
+<td class="cl-cc089710"><p class="cl-cc087dac"><span class="cl-cc04a880">[0.15, 1.23]</span></p></td>
 </tr>
 </tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-6669413c"><p class="cl-6669295e"><span class="cl-66659fa1">Note. </span><span class="cl-66659faa">𝑑ᴿ = robust Cohen’s 𝑑; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable.</span></p></td></tr></tfoot>
+<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-cc089711"><p class="cl-cc087dad"><span class="cl-cc04a895">Note. </span><span class="cl-cc04a89e">𝑑ᴿ = robust Cohen’s 𝑑; CI = bootstrapped confidence interval. The comparisons were between-groups only (i.e., there were no within-subject pre/post comparisons). One participant did not complete the Interpersonal Reactivity Index. Bold/Grey background values represent statistically significant differences between the groups on that row and variable.</span></p></td></tr></tfoot>
 </table>
 </div>
 <p><strong>Save the table to Word</strong></p>
@@ -543,64 +554,75 @@ data. We will omit those rows missing data for now.</p>
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Make figure panel 1</strong></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">EC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Group"</span>,</span>
-<span>                   response <span class="op">=</span> <span class="st">"IRIEC"</span>, </span>
-<span>                   data <span class="op">=</span> <span class="va">Data</span>,</span>
-<span>                   colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>, </span>
-<span>                   ytitle <span class="op">=</span> <span class="st">"Empathic Concern (from IRI)"</span>, </span>
-<span>                   signif_annotation <span class="op">=</span> <span class="st">"*"</span>, </span>
-<span>                   signif_yposition <span class="op">=</span> <span class="fl">5.2</span>, </span>
-<span>                   signif_xmin <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                   signif_xmax <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">EC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="st">"Group"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"IRIEC"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">Data</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Empathic Concern (from IRI)"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="st">"*"</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fl">5.2</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-16-1.png" width="70%"></p>
 <p><strong>Make figure panel 2</strong></p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">PD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Group"</span>, </span>
-<span>                   response <span class="op">=</span> <span class="st">"IRIPD"</span>, </span>
-<span>                   data <span class="op">=</span> <span class="va">Data</span>,</span>
-<span>                   colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>, </span>
-<span>                   ytitle <span class="op">=</span> <span class="st">"Personal Distress (from IRI)"</span>, </span>
-<span>                   signif_annotation <span class="op">=</span> <span class="st">"*"</span>, </span>
-<span>                   signif_yposition <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                   signif_xmin <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                   signif_xmax <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">PD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="st">"Group"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"IRIPD"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">Data</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Personal Distress (from IRI)"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="st">"*"</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-17-1.png" width="70%"></p>
 <p><strong>Make figure panel 3</strong></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">PR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Group"</span>, </span>
-<span>                   response <span class="op">=</span> <span class="st">"QCAEPR"</span>, </span>
-<span>                   data <span class="op">=</span> <span class="va">Data</span>,</span>
-<span>                   colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>, </span>
-<span>                   ytitle <span class="op">=</span> <span class="st">"Peripheral Responsivity (from QCAE)"</span>, </span>
-<span>                   signif_annotation<span class="op">=</span><span class="st">"*"</span>,</span>
-<span>                   signif_yposition<span class="op">=</span><span class="fl">4.2</span>,</span>
-<span>                   signif_xmin<span class="op">=</span><span class="fl">1</span>,</span>
-<span>                   signif_xmax<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">PR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="st">"Group"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"QCAEPR"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">Data</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Peripheral Responsivity (from QCAE)"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="st">"*"</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fl">4.2</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-18-1.png" width="70%"></p>
 <p><strong>Make figure panel 4</strong></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">IOS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Group"</span>, </span>
-<span>                    response <span class="op">=</span> <span class="st">"IOS"</span>, </span>
-<span>                    data <span class="op">=</span> <span class="va">Data</span>,</span>
-<span>                    colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>, </span>
-<span>                    ytitle <span class="op">=</span> <span class="st">"Self-Other Merging (from IOS)"</span>, </span>
-<span>                    signif_annotation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"*"</span>, <span class="st">"*"</span><span class="op">)</span>,</span>
-<span>                    signif_yposition<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.25</span>, <span class="fl">7.5</span>, <span class="fl">6.75</span><span class="op">)</span>,</span>
-<span>                    signif_xmin<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,</span>
-<span>                    signif_xmax<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">IOS</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  group <span class="op">=</span> <span class="st">"Group"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"IOS"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">Data</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00BA38"</span>, <span class="st">"#619CFF"</span>, <span class="st">"#F8766D"</span><span class="op">)</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Self-Other Merging (from IOS)"</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"***"</span>, <span class="st">"*"</span>, <span class="st">"*"</span><span class="op">)</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.25</span>, <span class="fl">7.5</span>, <span class="fl">6.75</span><span class="op">)</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-19-1.png" width="70%"></p>
 <p>It’s now time to combine our four plots into one figure! Yeah!</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/" class="external-link">ggpubr</a></span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">figure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html" class="external-link">ggarrange</a></span><span class="op">(</span><span class="va">EC</span>, <span class="va">PD</span>, <span class="va">PR</span>, <span class="va">IOS</span>,</span>
-<span>                     labels <span class="op">=</span> <span class="st">"AUTO"</span>,</span>
-<span>                     ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  labels <span class="op">=</span> <span class="st">"AUTO"</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="contrasts_files/figure-html/unnamed-chunk-20-1.png" width="100%"></p>
 <p>Let’s save a high-resolution/vector version of this figure in PDF (it
 could be .png or any other format too if necessary).</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'Figure 1.pdf'</span>, <span class="va">figure</span>, width <span class="op">=</span> <span class="fl">14</span>, height <span class="op">=</span> <span class="fl">14</span>, </span>
-<span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"Figure 1.pdf"</span>, <span class="va">figure</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">14</span>, height <span class="op">=</span> <span class="fl">14</span>,</span>
+<span>  unit <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>

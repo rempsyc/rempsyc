@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -166,9 +166,11 @@ yet, you will need to install it via the following command:
 <code>install.packages("rempsyc")</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-3-1.png" width="70%"></p>
 <pre><code>Dots = means
 Error bars = 95% confidence intervals
@@ -177,10 +179,12 @@ Width = distribution density (frequency)</code></pre>
 <h3 id="save-a-high-resolution-image-file-to-specified-directory">Save a high-resolution image file to specified directory<a class="anchor" aria-label="anchor" href="#save-a-high-resolution-image-file-to-specified-directory"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">'nice_violinplothere.pdf'</span>, width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, </span>
-<span>                unit <span class="op">=</span> <span class="st">'in'</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"nice_violinplothere.pdf"</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  unit <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
-<span><span class="co"># If you copy-paste your path name, </span></span>
+<span><span class="co"># If you copy-paste your path name,</span></span>
 <span><span class="co"># remember to use "R" slashes ('/' rather than '\').</span></span>
 <span><span class="co"># Also remember to specify the .tiff extension of the file.</span></span></code></pre></div>
 <blockquote>
@@ -200,11 +204,13 @@ also save in other formats, such as <code>.tiff</code>,
 <h3 id="change-x--and-y--axes-labels">Change x- and y- axes labels<a class="anchor" aria-label="anchor" href="#change-x--and-y--axes-labels"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,</span>
-<span>            xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,</span>
+<span>  xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-5-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -212,11 +218,13 @@ also save in other formats, such as <code>.tiff</code>,
 </h3>
 <p>To see if two groups are statistically significantly different.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            comp1 <span class="op">=</span> <span class="st">"0.5"</span>,</span>
-<span>            comp2 <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  comp1 <span class="op">=</span> <span class="st">"0.5"</span>,</span>
+<span>  comp2 <span class="op">=</span> <span class="st">"2"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-6-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -225,11 +233,13 @@ also save in other formats, such as <code>.tiff</code>,
 <p>You can also select groups based on their position on the x-axis
 (notice no quotes this time).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            comp1 <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>            comp2 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  comp1 <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  comp2 <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-7-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -247,86 +257,101 @@ use a different <em>p</em>-value or not a <em>t</em>-test.)</p>
 <span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"**"</span>,<span class="st">"***"</span><span class="op">)</span>, <span class="co"># manually enter the number of stars</span></span>
-<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">36</span>,<span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
-<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, <span class="co"># Where should the left-sided brackets start (x)?</span></span>
-<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># Where should the right-sided brackets end (x)?</span></span></code></pre></div>
+<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"**"</span>, <span class="st">"***"</span><span class="op">)</span>, <span class="co"># manually enter the number of stars</span></span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">36</span>, <span class="fl">40</span><span class="op">)</span>, <span class="co"># What height (y) should the stars appear?</span></span>
+<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, <span class="co"># Where should the left-sided brackets start (x)?</span></span>
+<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="co"># Where should the right-sided brackets end (x)?</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-8-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="include-effect-size-cohens-d">Include effect size (Cohen’s <em>d</em>)<a class="anchor" aria-label="anchor" href="#include-effect-size-cohens-d"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"am"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
-<span>            comp1 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>            comp2 <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>            has.d <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"am"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span>
+<span>  comp1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  comp2 <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  has.d <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-9-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="set-the-colours-manually">Set the colours manually<a class="anchor" aria-label="anchor" href="#set-the-colours-manually"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>,<span class="st">"cadetblue"</span>,<span class="st">"darkslateblue"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>, <span class="st">"cadetblue"</span>, <span class="st">"darkslateblue"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-10-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="changing-the-names-of-the-x-axis-labels">Changing the names of the x-axis labels<a class="anchor" aria-label="anchor" href="#changing-the-names-of-the-x-axis-labels"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-11-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="removing-the-x-axis-or-y-axis-titles">Removing the x-axis or y-axis titles<a class="anchor" aria-label="anchor" href="#removing-the-x-axis-or-y-axis-titles"></a>
 </h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>            xtitle <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xtitle <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-12-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="removing-the-x-axis-or-y-axis-labels-for-whatever-purpose">Removing the x-axis or y-axis labels (for whatever purpose)<a class="anchor" aria-label="anchor" href="#removing-the-x-axis-or-y-axis-labels-for-whatever-purpose"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            has.ylabels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>            has.xlabels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  has.ylabels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  has.xlabels <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-13-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="set-y-scale-manually">Set y-scale manually<a class="anchor" aria-label="anchor" href="#set-y-scale-manually"></a>
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            ymin <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>            ymax <span class="op">=</span> <span class="fl">35</span>,</span>
-<span>            yby <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">35</span>,</span>
+<span>  yby <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-14-1.png" width="70%"></p>
 </div>
 <div class="section level3">
 <h3 id="with-x-number-of-groups">With x number of groups<a class="anchor" aria-label="anchor" href="#with-x-number-of-groups"></a>
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">six.groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">60</span>, replace<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"six.groups"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">six.groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">60</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"six.groups"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-15-1.png" width="70%"></p>
 <blockquote>
 <p><strong>Pro tip</strong>: Save figure with greater width when you
@@ -337,10 +362,12 @@ have more groups!</p>
 <h3 id="plotting-individual-observations">Plotting individual observations<a class="anchor" aria-label="anchor" href="#plotting-individual-observations"></a>
 </h3>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            obs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  obs <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-16-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -354,12 +381,14 @@ is no transparency), (c) define the colour of the violins’ borders with
 the <code>border.colour</code> argument (default is white which is the
 equivalent of no borders).</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>            alpha <span class="op">=</span> <span class="fl">.70</span>,</span>
-<span>            border.colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">.70</span>,</span>
+<span>  border.colour <span class="op">=</span> <span class="st">"white"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-17-1.png" width="70%"></p>
 </div>
 <div class="section level3">
@@ -391,32 +420,34 @@ now the default).</p>
 </h3>
 <p>If you’d like to see all available options at once (a bit long):</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>            group <span class="op">=</span> <span class="st">"dose"</span>,</span>
-<span>            response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>            boot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            bootstraps <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>            ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,   </span>
-<span>            xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span>,</span>
-<span>            colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>, <span class="st">"cadetblue"</span>, <span class="st">"darkslateblue"</span><span class="op">)</span>,</span>
-<span>            has.ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            has.xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
-<span>            ymin <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>            ymax <span class="op">=</span> <span class="fl">45</span>,</span>
-<span>            yby <span class="op">=</span> <span class="fl">15</span>,</span>
-<span>            signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>,<span class="st">"NS"</span>,<span class="st">"***"</span><span class="op">)</span>,</span>
-<span>            signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">36</span>,<span class="fl">41</span><span class="op">)</span>,</span>
-<span>            signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,</span>
-<span>            signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>,</span>
-<span>            CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>            alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>            border.colour <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>            border.size <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>            obs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            has.d <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            d.x <span class="op">=</span> <span class="fl">1.7</span>,</span>
-<span>            d.y <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  boot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  bootstraps <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="st">"Length of Tooth"</span>,</span>
+<span>  xtitle <span class="op">=</span> <span class="st">"Vitamin C Dosage"</span>,</span>
+<span>  colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"darkseagreen"</span>, <span class="st">"cadetblue"</span>, <span class="st">"darkslateblue"</span><span class="op">)</span>,</span>
+<span>  has.ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  has.xlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  xlabels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>  yby <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  signif_annotation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"NS"</span>, <span class="st">"***"</span><span class="op">)</span>,</span>
+<span>  signif_yposition <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">36</span>, <span class="fl">41</span><span class="op">)</span>,</span>
+<span>  signif_xmin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  signif_xmax <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  CIcap.width <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  border.colour <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  border.size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  obs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  has.d <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  d.x <span class="op">=</span> <span class="fl">1.7</span>,</span>
+<span>  d.y <span class="op">=</span> <span class="fl">20</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-18-1.png" width="70%"></p>
 </div>
 </div>
@@ -432,13 +463,15 @@ know which groups were more representative). For the demonstration,
 let’s just build the same multiple-groups plot we did earlier.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create our group variable:</span></span>
-<span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">60</span>, replace<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">60</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Make the plot and save it to object "p"</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
-<span>                 group <span class="op">=</span> <span class="st">"groups"</span>,</span>
-<span>                 response <span class="op">=</span> <span class="st">"len"</span>,</span>
-<span>                 border.size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"groups"</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"len"</span>,</span>
+<span>  border.size <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Then what I did is that I simply added conventional
 <code>ggplot</code> code to my plot object. (But first I had to compute
 the statistics we were going to be using:)</p>
@@ -446,29 +479,32 @@ the statistics we were going to be using:)</p>
 <code class="sourceCode R"><span><span class="co"># Compute basic statistics and save to object</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/" class="external-link">psych</a></span><span class="op">)</span> <span class="co"># Install the psych package if you don't already have it</span></span>
 <span><span class="va">statsSummary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/psych/man/describe.by.html" class="external-link">describeBy</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">len</span>, group <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span>, mat <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  x <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">len</span>, group <span class="op">=</span> <span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span>, mat <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add our annotations! (Warning: a bit more complicated code ahead!)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
-<span>  geom <span class="op">=</span> <span class="st">"text"</span>, </span>
+<span>  geom <span class="op">=</span> <span class="st">"text"</span>,</span>
 <span>  <span class="co"># First annotation adds the average</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="co"># Specifies annotations is for all groups/x-axis ticks</span></span>
-<span>  y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">+</span><span class="fl">2</span>, </span>
+<span>  y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span> <span class="op">+</span> <span class="fl">2</span>,</span>
 <span>  <span class="co"># Puts mean at mean value on the y-axis (adds 2)</span></span>
-<span>  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"m ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"m ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># That prints the mean on the plot</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span></span>
-<span>    geom <span class="op">=</span> <span class="st">"text"</span>, </span>
+<span>    geom <span class="op">=</span> <span class="st">"text"</span>,</span>
 <span>    <span class="co"># (Second annotation adds the sample size)</span></span>
 <span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span><span class="op">-</span><span class="fl">2</span>, </span>
+<span>    y <span class="op">=</span> <span class="va">statsSummary</span><span class="op">$</span><span class="va">mean</span> <span class="op">-</span> <span class="fl">2</span>,</span>
 <span>    <span class="co"># Puts sample size at mean value on the y-axis (substracts 2)</span></span>
-<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"n ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">n</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"n ="</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">statsSummary</span><span class="op">$</span><span class="va">n</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="violin_files/figure-html/unnamed-chunk-20-1.png" width="70%"></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>    <span class="co"># That prints the sample size on the plot</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># That prints the sample size on the plot</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="thanks-for-checking-in">Thanks for checking in<a class="anchor" aria-label="anchor" href="#thanks-for-checking-in"></a>
 </h3>
