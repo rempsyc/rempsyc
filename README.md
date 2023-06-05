@@ -154,20 +154,20 @@ contrasts <- nice_contrasts(
   covariates = "hp"
 )
 contrasts
-#>   Dependent Variable Comparison df         t              p         d  CI_lower
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739  2.740979
-#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495  0.808685
-#> 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244  1.387390
-#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022 -5.807991
-#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726 -4.280274
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296 -2.219449
-#>     CI_upper
-#> 1  4.5871892
-#> 2  2.0069336
-#> 3  3.1032787
-#> 4 -3.8714847
-#> 5 -2.2758581
-#> 6 -0.8873183
+#>   Dependent Variable Comparison df         t              p         d
+#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739
+#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495
+#> 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244
+#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022
+#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
+#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
+#>     CI_lower   CI_upper
+#> 1  2.6483541  4.4833167
+#> 2  0.8144608  1.9773906
+#> 3  1.2898542  3.1073436
+#> 4 -5.7383229 -3.9297322
+#> 5 -4.3078430 -2.2917952
+#> 6 -2.2290225 -0.8912713
 ```
 
 ``` r
@@ -394,12 +394,11 @@ nice_scatter(
   predictor = "wt",
   response = "mpg",
   group = "cyl",
-  has.confband = TRUE,
-  has.legend = TRUE
+  has.confband = TRUE
 )
 ```
 
-<img src="man/figures/README-nice_scatter2-1.png" width="60%" />
+<img src="man/figures/README-nice_scatter2-1.png" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/scatter>
 

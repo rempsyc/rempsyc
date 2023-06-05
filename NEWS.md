@@ -3,7 +3,9 @@
 * CRAN resubmission
 
 # rempsyc 0.1.2.3
-* `nice_scatter`: fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
+* `nice_scatter`: 
+  * fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
+  * `has.legend` now defaults to `TRUE` when using the `group` argument.
 
 # rempsyc 0.1.2.2
 * `nice_violin`: 

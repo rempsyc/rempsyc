@@ -172,22 +172,12 @@
 #'   has.line = FALSE
 #' )
 #'
-#' # Add a legend
-#' nice_scatter(
-#'   data = mtcars,
-#'   predictor = "wt",
-#'   response = "mpg",
-#'   group = "cyl",
-#'   has.legend = TRUE
-#' )
-#'
 #' # Change order of labels on the legend
 #' nice_scatter(
 #'   data = mtcars,
 #'   predictor = "wt",
 #'   response = "mpg",
 #'   group = "cyl",
-#'   has.legend = TRUE,
 #'   groups.order = c(8, 4, 6)
 #' )
 #'
@@ -197,7 +187,6 @@
 #'   predictor = "wt",
 #'   response = "mpg",
 #'   group = "cyl",
-#'   has.legend = TRUE,
 #'   groups.labels = c("Weak", "Average", "Powerful")
 #' )
 #' # Warning: This applies after changing order of level
@@ -208,7 +197,6 @@
 #'   predictor = "wt",
 #'   response = "mpg",
 #'   group = "cyl",
-#'   has.legend = TRUE,
 #'   legend.title = "cylinders"
 #' )
 #'
@@ -301,13 +289,15 @@ nice_scatter <- function(data,
       formula = y ~ x, geom = "line", method = "lm",
       fullrange = has.fullrange, color = colours, linewidth = 1
     )
-  }
-  if (!missing(group)) {
+  } else {
     data[[group]] <- as.factor(data[[group]])
     smooth <- ggplot2::stat_smooth(
       formula = y ~ x, geom = "line", method = "lm",
       fullrange = has.fullrange, linewidth = 1
     )
+    if (missing(has.legend)) {
+      has.legend <- TRUE
+    }
   }
   if (!missing(groups.order)) {
     data[[group]] <- factor(data[[group]], levels = groups.order)
