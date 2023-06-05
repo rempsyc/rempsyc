@@ -31,12 +31,14 @@
 #' plot_outliers(
 #'   airquality,
 #'   group = "Month",
-#'   response = "Ozone")
+#'   response = "Ozone"
+#' )
 #'
 #' plot_outliers(
 #'   airquality,
 #'   response = "Ozone",
-#'   method = "sd")
+#'   method = "sd"
+#' )
 #'
 #' @seealso
 #' Other functions useful in assumption testing:
@@ -61,7 +63,10 @@ plot_outliers <- function(data,
                           ...) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("ggplot2"), reason = "for this function.")
-  mtd <- switch(method, "mad" = "median", "sd" = "mean")
+  mtd <- switch(method,
+    "mad" = "median",
+    "sd" = "mean"
+  )
   if (missing(group)) {
     group <- "All data"
     data[[group]] <- group
@@ -82,14 +87,14 @@ plot_outliers <- function(data,
       rempsyc::scale_mad(x)
     } else if (methodx == "sd") {
       as.numeric(scale(x))
-  }
+    }
   }
 
   z.df <- data %>%
     group_by(.data[[group]]) %>%
     mutate(
       across(all_of(response), scale_function,
-             .names = "{col}"
+        .names = "{col}"
       )
     )
 
@@ -103,15 +108,20 @@ plot_outliers <- function(data,
     ggplot2::geom_dotplot(
       binaxis = "y",
       stackdir = "center",
-      ...) +
-    ggplot2::geom_hline(yintercept = criteria,
-                        size = 1,
-                        colour = "red",
-                        linetype = "dashed") +
-    ggplot2::geom_hline(yintercept = -criteria,
-                        size = 1,
-                        colour = "red",
-                        linetype = "dashed")
+      ...
+    ) +
+    ggplot2::geom_hline(
+      yintercept = criteria,
+      size = 1,
+      colour = "red",
+      linetype = "dashed"
+    ) +
+    ggplot2::geom_hline(
+      yintercept = -criteria,
+      size = 1,
+      colour = "red",
+      linetype = "dashed"
+    )
 
   plot <- theme_apa(plot) +
     {
@@ -139,8 +149,7 @@ plot_outliers <- function(data,
           axis.ticks.x = ggplot2::element_blank()
         )
       }
-    } +
-    {
+    } + {
       if (!missing(ymin)) {
         ggplot2::scale_y_continuous(
           limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby)

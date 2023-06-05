@@ -16,11 +16,15 @@ vignette: >
 ```{r, include=FALSE}
 library(knitr)
 
-knitr::opts_chunk$set(fig.width = 8, fig.height = 7, warning = FALSE, 
-                      message = FALSE, out.width = "70%")
+knitr::opts_chunk$set(
+  fig.width = 8, fig.height = 7, warning = FALSE,
+  message = FALSE, out.width = "70%"
+)
 
-pkgs <- c("rlang", "flextable", "performance", "see", "lmtest",
-          "ggplot2", "qqplotr", "ggrepel", "patchwork", "boot")
+pkgs <- c(
+  "rlang", "flextable", "performance", "see", "lmtest",
+  "ggplot2", "qqplotr", "ggrepel", "patchwork", "boot"
+)
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
@@ -42,7 +46,7 @@ Let's make a quick demonstration of this package first.
 # Load necessary libraries
 library(performance)
 library(see)
-# Note: if you haven't installed the packages above, 
+# Note: if you haven't installed the packages above,
 # you'll need to install them first by using:
 # install.packages("performance") and install.packages("see")
 
@@ -94,7 +98,6 @@ formulas <- paste(DV, "~ mpg")
 models.list <- lapply(X = formulas, FUN = lm, data = mtcars)
 # Make diagnostic table
 assumptions.table <- nice_assumptions(models.list)
-
 ```
 
 Use the Viewer for better results
@@ -122,9 +125,11 @@ In this case, one can make qqplots on the different groups to first check the no
 ### Make the basic plot
 
 ```{r}
-nice_qq(data = iris,
-        variable = "Sepal.Length",
-        group = "Species")
+nice_qq(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 Generally speaking, as long as the dots lie within the confidence band, all is good and the data distribute normally.
@@ -134,14 +139,16 @@ Generally speaking, as long as the dots lie within the confidence band, all is g
 Change (or reorder) colours, x-axis title or y-axis title, names of groups, no grid lines, or add the *p*-value from the Shapiro-Wilk (if you wish so).
 
 ```{r}
-nice_qq(data = iris,
-        variable = "Sepal.Length",
-        group = "Species",
-        colours = c("#00BA38", "#619CFF", "#F8766D"),
-        groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-        grid = FALSE,
-        shapiro = TRUE,
-        title = NULL)
+nice_qq(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c("#00BA38", "#619CFF", "#F8766D"),
+  groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+  grid = FALSE,
+  shapiro = TRUE,
+  title = NULL
+)
 ```
 
 A *p* > .05 suggests that your data is normally distributed (according to the Shapiro-Wilk test). Inversely, a *p* < .05 suggests your data is not normally distributed. Keep in mind however that there are several known problems with objective tests, so visual assessment is recommended. Nonetheless, for beginners, it can sometimes be useful (or rather, reassuring) to be able to pair the visual assessment to the tests values.
@@ -153,9 +160,11 @@ Some people think that density distributions are less useful than qqplots, but s
 ### Make the basic plot
 
 ```{r}
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_density(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 **Pro tip**: Save density plots with a narrower width for better-looking results.
@@ -165,17 +174,19 @@ nice_density(data = iris,
 Change (or reorder) colours, x-axis title or y-axis title, names of groups, no grid lines, or add the *p*-value from the Shapiro-Wilk (if you wish so).
 
 ```{r}
-nice_density(data = iris,
-             variable = "Sepal.Length",
-             group = "Species",
-             colours = c("#00BA38", "#619CFF", "#F8766D"),
-             xtitle = "Sepal Length",
-             ytitle = "Density (vs. Normal Distribution)",
-             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
-             grid = FALSE,
-             shapiro = TRUE,
-             histogram = TRUE,
-             title = "Density (Sepal Length)")
+nice_density(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c("#00BA38", "#619CFF", "#F8766D"),
+  xtitle = "Sepal Length",
+  ytitle = "Density (vs. Normal Distribution)",
+  groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"),
+  grid = FALSE,
+  shapiro = TRUE,
+  histogram = TRUE,
+  title = "Density (Sepal Length)"
+)
 ```
 
 ## Density + QQ Plots
@@ -183,12 +194,14 @@ nice_density(data = iris,
 Finally, it is also possible to combine both these plot types with a single function, `nice_normality`.
 
 ```{r, fig.width=12, fig.height=7, out.width="100%"}
-nice_normality(data = iris,
-               variable = "Sepal.Length",
-               group = "Species",
-               shapiro = TRUE,
-               histogram = TRUE,
-               title = "Density (Sepal Length)")
+nice_normality(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  shapiro = TRUE,
+  histogram = TRUE,
+  title = "Density (Sepal Length)"
+)
 ```
 
 ## Outliers
@@ -203,7 +216,8 @@ Leys, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do no
 plot_outliers(
   airquality,
   group = "Month",
-  response = "Ozone")
+  response = "Ozone"
+)
 ```
 
 Be aware that checking outliers by group and not by group will yield different results, e.g.,:
@@ -211,7 +225,8 @@ Be aware that checking outliers by group and not by group will yield different r
 ```{r}
 plot_outliers(
   airquality,
-  response = "Ozone")
+  response = "Ozone"
+)
 ```
 
 ### Further customization
@@ -227,7 +242,8 @@ plot_outliers(
   criteria = 3.29,
   colours = c("white", "black", "purple", "grey", "pink"),
   ytitle = "Ozone",
-  xtitle = "Month of the Year")
+  xtitle = "Month of the Year"
+)
 ```
 
 ### Flagging outliers
@@ -236,7 +252,6 @@ Outliers can also be identifed with `find_mad` and multiple variables:
 
 ```{r}
 find_mad(airquality, names(airquality), criteria = 3)
-  
 ```
 
 ### Winsorizing outliers
@@ -246,7 +261,6 @@ Outliers can also be winsorized with `winsorize_mad`, meaning that outlier value
 ```{r}
 winsorize_mad(airquality$Ozone, criteria = 3) |>
   head(30)
-  
 ```
 
 ### Multivariate outliers
@@ -254,9 +268,7 @@ winsorize_mad(airquality$Ozone, criteria = 3) |>
 For multivariate outliers, it is recommended to use the Minimum Covariance Determinant (MCD), as available in the `performance` package from `easystats` mentioned in the beginning of this post.
 
 ```{r}
-
 check_outliers(na.omit(airquality), method = "mcd")
-
 ```
 
 
@@ -271,9 +283,11 @@ To check homoscedasticity (equality of variance) for categorical predictors, we 
 ### Make the basic table
 
 ```{r, eval = FALSE}
-View(nice_var(data = iris,
-              variable = "Sepal.Length",
-              group = "Species"))
+View(nice_var(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+))
 ```
 
 ![](https://rempsyc.remi-theriault.com/images/blog_assumptions/var1.png)
@@ -285,10 +299,11 @@ Let's now try it for many variables to see how handy it can be.
 DV <- names(iris[1:4])
 
 # Make diagnostic table
-var.table <- nice_var(data = iris,
-                      variable = DV,
-                      group = "Species")
-
+var.table <- nice_var(
+  data = iris,
+  variable = DV,
+  group = "Species"
+)
 ```
 
 Use the Viewer for better results (or export it to Word using my [nice_table() function](../articles/table.html))
@@ -306,9 +321,11 @@ It can also be interesting to look at variance visually for learning purposes.
 ### Make the basic plot
 
 ```{r}
-nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 ### Further customization
@@ -316,12 +333,14 @@ nice_varplot(data = iris,
 Change (or reorder) colours, y-axis title, or names of groups.
 
 ```{r}
-nice_varplot(data = iris,
-             variable = "Sepal.Length", 
-             group = "Species",
-             colours = c("#00BA38", "#619CFF", "#F8766D"),
-             ytitle = "Sepal Length",
-             groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica"))
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  colours = c("#00BA38", "#619CFF", "#F8766D"),
+  ytitle = "Sepal Length",
+  groups.labels = c("(a) Setosa", "(b) Versicolor", "(c) Virginica")
+)
 ```
 
 ### Thanks for checking in

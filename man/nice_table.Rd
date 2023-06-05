@@ -98,8 +98,10 @@ automatic formatting features.
 my_table <- nice_table(
   mtcars[1:3, ],
   title = c("Table 1", "Motor Trend Car Road Tests"),
-  note = c("The data was extracted from the 1974 Motor Trend US magazine.",
-           "* p < .05, ** p < .01, *** p < .001")
+  note = c(
+    "The data was extracted from the 1974 Motor Trend US magazine.",
+    "* p < .05, ** p < .01, *** p < .001"
+  )
 )
 my_table
 
@@ -150,17 +152,18 @@ fun <- function(x) {
 nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
 
 # Separate headers based on periods
-header.data <- structure(list(
-  Variable = c(
-    "Sepal.Length",
-    "Sepal.Width", "Petal.Length"
-  ), setosa.M = c(
-    5.01, 3.43,
-    1.46
-  ), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
-    c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)
-),
-row.names = c(NA, -3L), class = "data.frame"
+header.data <- structure(
+  list(
+    Variable = c(
+      "Sepal.Length",
+      "Sepal.Width", "Petal.Length"
+    ), setosa.M = c(
+      5.01, 3.43,
+      1.46
+    ), setosa.SD = c(0.35, 0.38, 0.17), versicolor.M =
+      c(5.94, 2.77, 4.26), versicolor.SD = c(0.52, 0.31, 0.47)
+  ),
+  row.names = c(NA, -3L), class = "data.frame"
 )
 nice_table(header.data,
   separate.header = TRUE,

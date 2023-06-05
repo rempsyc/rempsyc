@@ -2,6 +2,9 @@
 * IN PROGRESS
 * CRAN resubmission
 
+# rempsyc 0.1.2.3
+* `nice_scatter`: fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
+
 # rempsyc 0.1.2.2
 * `nice_violin`: 
   * For argument `obs`, there are two new choices: `"dotplot"` (same as `obs = TRUE` for backward compatibility) and `"jitter"`, useful when there are a lot of observations.

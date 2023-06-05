@@ -28,16 +28,16 @@ For the \emph{easystats} equivalent, see:
 }
 \examples{
 df1 <- data.frame(
-   id = c(1, 2, 3, 1, 3),
-   item1 = c(NA, 1, 1, 2, 3),
-   item2 = c(NA, 1, 1, 2, 3),
-   item3 = c(NA, 1, 1, 2, 3)
+  id = c(1, 2, 3, 1, 3),
+  item1 = c(NA, 1, 1, 2, 3),
+  item2 = c(NA, 1, 1, 2, 3),
+  item3 = c(NA, 1, 1, 2, 3)
 )
 
 extract_duplicates(df1, id = "id")
 
 # Filter to exclude duplicates
-df2 <- df1[-c(1, 5),]
+df2 <- df1[-c(1, 5), ]
 df2
 
 }

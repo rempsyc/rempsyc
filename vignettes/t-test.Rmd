@@ -13,8 +13,10 @@ vignette: >
 ```{r global_options, include=FALSE}
 library(knitr)
 
-knitr::opts_chunk$set(fig.width = 7, fig.height = 7, 
-                      warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(
+  fig.width = 7, fig.height = 7,
+  warning = FALSE, message = FALSE
+)
 knitr::opts_knit$set(root.dir = tempdir())
 
 pkgs <- c("effectsize", "methods", "flextable", "broom", "report")
@@ -48,10 +50,12 @@ library(rempsyc)
 > ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am",
-            warning = FALSE)
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am",
+  warning = FALSE
+)
 ```
 
 > ***Note:*** This function relies on the base R `t.test` function, which uses the Welch t-test per default (see why here: https://daniellakens.blogspot.com/2015/01/always-use-welchs-t-test-instead-of.html). To use the Student t-test, simply add the following argument: `var.equal = TRUE`.
@@ -63,7 +67,8 @@ t.test.results <- nice_t_test(
   data = mtcars,
   response = names(mtcars)[1:6],
   group = "am",
-  warning = FALSE)
+  warning = FALSE
+)
 t.test.results
 ```
 
@@ -91,31 +96,37 @@ The function can be passed some of the regular arguments of the base `t.test()` 
 ### Student t-test (instead of Welch)
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am",
-            var.equal = TRUE) |> 
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am",
+  var.equal = TRUE
+) |>
   nice_table()
 ```
 
 ### One-sided (instead of two-sided)
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = "mpg",
-            group = "am",
-            alternative = "less",
-            warning = FALSE) |> 
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  group = "am",
+  alternative = "less",
+  warning = FALSE
+) |>
   nice_table()
 ```
 
 ### One-sample (instead of two-sample)
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = "mpg",
-            mu = 17,
-            warning = FALSE) |> 
+nice_t_test(
+  data = mtcars,
+  response = "mpg",
+  mu = 17,
+  warning = FALSE
+) |>
   nice_table()
 ```
 
@@ -124,10 +135,12 @@ nice_t_test(data = mtcars,
 Note that for paired *t* tests, you need to use `paired = TRUE`, and you also need data in "long" format rather than wide format (like for the `ToothGrowth` data set). In this case, the `group` argument refers to the participant ID for example, so the same group/participant is measured several times, and thus has several rows.
 
 ```{r}
-nice_t_test(data = ToothGrowth,
-            response = "len",
-            group = "supp",
-            paired = TRUE) |> 
+nice_t_test(
+  data = ToothGrowth,
+  response = "len",
+  group = "supp",
+  paired = TRUE
+) |>
   nice_table()
 ```
 
@@ -136,11 +149,13 @@ nice_t_test(data = ToothGrowth,
 It is also possible to correct for multiple comparisons. Note that only a Bonferroni correction is supported at this time (which simply multiplies the *p*-value by the number of tests). Bonferroni will automatically correct for the number of tests.
 
 ```{r}
-nice_t_test(data = mtcars,
-            response = names(mtcars)[1:6],
-            group = "am",
-            correction = "bonferroni",
-            warning = FALSE) |> 
+nice_t_test(
+  data = mtcars,
+  response = names(mtcars)[1:6],
+  group = "am",
+  correction = "bonferroni",
+  warning = FALSE
+) |>
   nice_table()
 ```
 

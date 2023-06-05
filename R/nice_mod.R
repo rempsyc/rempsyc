@@ -94,9 +94,11 @@ nice_mod <- function(data,
   rlang::check_installed("effectsize", reason = "for this function.")
 
   if (!missing(b.label)) {
-    message(paste("The argument 'b.label' is deprecated.",
-                  "If your data is standardized, capital B will be used automatically.",
-                  "Else, please use argument 'standardize' directly instead."))
+    message(paste(
+      "The argument 'b.label' is deprecated.",
+      "If your data is standardized, capital B will be used automatically.",
+      "Else, please use argument 'standardize' directly instead."
+    ))
   }
 
   if (data_is_standardized(data)) {
@@ -128,8 +130,10 @@ nice_mod <- function(data,
 
   if (length(models.list) > 1 && mod.id == TRUE) {
     model.number <- rep(seq_along(models.list), times = model.number.rows)
-    table.stats <- stats::setNames(cbind(model.number, table.stats),
-                            c("Model Number", names(table.stats)))
+    table.stats <- stats::setNames(
+      cbind(model.number, table.stats),
+      c("Model Number", names(table.stats))
+    )
   }
   names(table.stats)[names(table.stats) == "b"] <- b.label
 

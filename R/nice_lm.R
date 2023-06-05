@@ -80,9 +80,11 @@ nice_lm <- function(model,
   }
 
   if (!missing(b.label)) {
-    message(paste("The argument 'b.label' is deprecated.",
-                  "If your data is standardized, capital B will be used automatically.",
-                  "Else, please use argument 'standardize' directly instead."))
+    message(paste(
+      "The argument 'b.label' is deprecated.",
+      "If your data is standardized, capital B will be used automatically.",
+      "Else, please use argument 'standardize' directly instead."
+    ))
   }
 
   if (model_is_standardized(models.list)) {

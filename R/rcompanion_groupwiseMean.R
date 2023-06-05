@@ -160,19 +160,21 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (basic == TRUE) {
     fun4 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "basic", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "basic", ...
       )$basic[4]
     }
     fun5 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim)
-      }, R = R, ...),
-      conf = conf, type = "basic",
-      ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim)
+        }, R = R, ...),
+        conf = conf, type = "basic",
+        ...
       )$basic[5]
     }
     D4 <- ddply(.data = data, .variables = group, var, .fun = fun4)
@@ -180,19 +182,21 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (normal == TRUE) {
     fun6 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "norm", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "norm", ...
       )$normal[2]
     }
     fun7 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "norm", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "norm", ...
       )$normal[3]
     }
     D6 <- ddply(.data = data, .variables = group, var, .fun = fun6)
@@ -200,19 +204,21 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (percentile == TRUE) {
     fun8 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "perc", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "perc", ...
       )$percent[4]
     }
     fun9 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "perc", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "perc", ...
       )$percent[5]
     }
     D8 <- ddply(.data = data, .variables = group, var, .fun = fun8)
@@ -220,19 +226,21 @@ rcompanion_groupwiseMean <- function(formula = NULL,
   }
   if (bca == TRUE) {
     fun10 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "bca", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "bca", ...
       )$bca[4]
     }
     fun11 <- function(x, idx) {
-      boot::boot.ci(boot::boot(x[, idx], function(y, j) {
-        mean(y[j], trim = trim, na.rm = na.rm)
-      }, R = R, ...),
-      conf = conf,
-      type = "bca", ...
+      boot::boot.ci(
+        boot::boot(x[, idx], function(y, j) {
+          mean(y[j], trim = trim, na.rm = na.rm)
+        }, R = R, ...),
+        conf = conf,
+        type = "bca", ...
       )$bca[5]
     }
     D10 <- ddply(.data = data, .variables = group, var, .fun = fun10)

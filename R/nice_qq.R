@@ -84,7 +84,8 @@ nice_qq <- function(data,
   }
   # Make plot
   plot <- ggplot2::ggplot(data = data, mapping = ggplot2::aes(
-    fill = .data[[group]], sample = .data[[variable]])) +
+    fill = .data[[group]], sample = .data[[variable]]
+  )) +
     qqplotr::stat_qq_band() +
     qqplotr::stat_qq_line() +
     qqplotr::stat_qq_point() +
@@ -112,14 +113,13 @@ nice_qq <- function(data,
         ggplot2::scale_fill_manual(values = colours)
       }
     }
-    plot <- theme_apa(plot) +
-    {
-      if (grid == TRUE) {
-        ggplot2::theme(
-          panel.grid.major = ggplot2::element_line(),
-          panel.grid.minor = ggplot2::element_line(size = 0.5)
-        )
-      }
+  plot <- theme_apa(plot) + {
+    if (grid == TRUE) {
+      ggplot2::theme(
+        panel.grid.major = ggplot2::element_line(),
+        panel.grid.minor = ggplot2::element_line(size = 0.5)
+      )
     }
+  }
   plot
 }

@@ -70,7 +70,6 @@ library(rempsyc)
 ## Overview
 
 ```{r headers, results = "asis", echo = FALSE}
-
 section.1 <- "Nice APA tables"
 section.2 <- "T-tests, planned contrasts, regressions, moderations, simple slopes"
 section.3 <- "Visualization"
@@ -78,22 +77,25 @@ section.4 <- "Utility functions"
 section.5 <- "Testing assumptions"
 section.6 <- "lavaanExtra"
 
-cute_cat <- function(x, header.level = 1){ 
+cute_cat <- function(x, header.level = 1) {
   cat(rep("#", header.level), " ", x, sep = "")
 }
 
 cute_TOC <- function(section) {
   cat("[", section, "]",
-      "(#", tolower(gsub(" ", "-", gsub(",", "", section))), ")",
-      "<a name = '", section, "'/>",
-      "\n \n",
-      sep = "")
+    "(#", tolower(gsub(" ", "-", gsub(",", "", section))), ")",
+    "<a name = '", section, "'/>",
+    "\n \n",
+    sep = ""
+  )
 }
 
-invisible(lapply(list(
-  section.1, section.2, section.3, section.4, section.5, section.6), 
-  cute_TOC))
-
+invisible(lapply(
+  list(
+    section.1, section.2, section.3, section.4, section.5, section.6
+  ),
+  cute_TOC
+))
 ```
 
 ## Nice APA tables
@@ -115,9 +117,11 @@ Easily compute t-test analyses, with effect sizes, and format in publication-rea
 ```{r nice_t_test, warning = FALSE, message = FALSE}
 library(rempsyc)
 
-nice_t_test(data = mtcars,
-            response = c("mpg", "disp", "drat", "wt"),
-            group = "am") -> t.tests
+nice_t_test(
+  data = mtcars,
+  response = c("mpg", "disp", "drat", "wt"),
+  group = "am"
+) -> t.tests
 t.tests
 ```
 
@@ -129,8 +133,10 @@ t_table
 
 ```{r, include=FALSE}
 table_temp <- flextable::autofit(t_table)
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_t_test-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_t_test-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_t_test-1.png" />
@@ -151,7 +157,8 @@ contrasts <- nice_contrasts(
   data = mtcars,
   response = c("mpg", "disp"),
   group = "cyl",
-  covariates = "hp")
+  covariates = "hp"
+)
 contrasts
 ```
 
@@ -164,8 +171,10 @@ nice_table(contrasts, highlight = .001)
 table_temp <- contrasts |>
   nice_table(highlight = .001) |>
   flextable::autofit()
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_contrasts-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_contrasts-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_contrasts-1.png" />
@@ -181,7 +190,8 @@ moderations <- nice_mod(
   data = mtcars,
   response = c("mpg", "disp"),
   predictor = "gear",
-  moderator = "wt")
+  moderator = "wt"
+)
 moderations
 ```
 
@@ -194,8 +204,10 @@ nice_table(moderations, highlight = TRUE)
 table_temp <- moderations |>
   nice_table(highlight = TRUE) |>
   flextable::autofit()
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_mod-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_mod-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_mod-1.png" />
@@ -222,8 +234,10 @@ nice_table(mods, highlight = TRUE)
 table_temp <- mods |>
   nice_table(highlight = TRUE) |>
   flextable::autofit()
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_lm-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_lm-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_lm-1.png" />
@@ -239,7 +253,8 @@ simple.slopes <- nice_slopes(
   data = mtcars,
   response = c("mpg", "disp"),
   predictor = "gear",
-  moderator = "wt")
+  moderator = "wt"
+)
 simple.slopes
 ```
 
@@ -252,8 +267,10 @@ nice_table(simple.slopes)
 table_temp <- simple.slopes |>
   nice_table() |>
   flextable::autofit()
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_slopes-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_slopes-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_slopes-1.png" />
@@ -281,8 +298,10 @@ nice_table(simple.slopes)
 table_temp <- simple.slopes |>
   nice_table() |>
   flextable::autofit()
-flextable::save_as_image(table_temp, path = "man/figures/README-nice_lm_slopes-1.png",
-                         expand = 0, res = 300)
+flextable::save_as_image(table_temp,
+  path = "man/figures/README-nice_lm_slopes-1.png",
+  expand = 0, res = 300
+)
 ```
 
 <img src="man/figures/README-nice_lm_slopes-1.png" />
@@ -298,21 +317,24 @@ All plots can be saved with the `ggplot2::ggsave()` function. They are `ggplot2`
 Make nice violin plots easily with 95% bootstrapped confidence intervals.
 
 ```{r nice_violin, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
-nice_violin(data = ToothGrowth,
-            group = "dose",
-            response = "len",
-            xlabels = c("Low", "Medium", "High"),
-            comp1 = 1,
-            comp2 = 3,
-            has.d = TRUE,
-            d.y = 30)
-
+nice_violin(
+  data = ToothGrowth,
+  group = "dose",
+  response = "len",
+  xlabels = c("Low", "Medium", "High"),
+  comp1 = 1,
+  comp2 = 3,
+  has.d = TRUE,
+  d.y = 30
+)
 ```
 
 ```{r, eval = FALSE}
 # Save plot
-ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-                dpi = 300, path = "D:/R treasures/")
+ggplot2::ggsave("niceplot.pdf",
+  width = 7, height = 7, unit = "in",
+  dpi = 300, path = "D:/R treasures/"
+)
 ```
 
 
@@ -323,18 +345,25 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/violin
 Make nice scatter plots easily.
 
 ```{r nice_scatter, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="60%"}
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.confband = TRUE,
-             has.r = TRUE,
-             has.p = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.confband = TRUE,
+  has.r = TRUE,
+  has.p = TRUE
+)
+```
 
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.confband = TRUE)
+```{r nice_scatter2, warning = FALSE, message = FALSE, fig.width=10, fig.height=7, out.width="60%"}
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.confband = TRUE,
+  has.legend = TRUE
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/scatter
@@ -344,7 +373,6 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/scatter
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.
 
 ```{r overlap_circle, warning = FALSE, message = FALSE, fig.width=7, fig.height=7, out.width="30%"}
-
 # Score of 3.5 (25% overlap)
 overlap_circle(3.5)
 
@@ -359,12 +387,14 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/circles
 Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (pink/light blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ```{r cormatrix_excel2, warning = FALSE}
-
-cormatrix_excel(data = infert, 
-                filename = "cormatrix1", 
-                select = c("age", "parity", "induced", "case", "spontaneous", 
-                           "stratum", "pooled.stratum"))
-
+cormatrix_excel(
+  data = infert,
+  filename = "cormatrix1",
+  select = c(
+    "age", "parity", "induced", "case", "spontaneous",
+    "stratum", "pooled.stratum"
+  )
+)
 ```
 
 <img src="man/figures/cormatrix.png" width="80%" />
@@ -379,22 +409,23 @@ Nicely reports NA values according to existing guidelines (i.e, reporting absolu
 ```{r}
 # Create synthetic data frame for the demonstration
 set.seed(50)
-df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA))
+df <- data.frame(
+  scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA)
+)
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
 
 # Or whole dataframe
 nice_na(df)
-
 ```
 
 ## `extract_duplicates`
@@ -403,10 +434,10 @@ Extracts ALL duplicates (including the first one, contrary to `duplicated` or `d
 
 ```{r, extract_duplicates}
 df1 <- data.frame(
-   id = c(1, 2, 3, 1, 3),
-   item1 = c(NA, 1, 1, 2, 3),
-   item2 = c(NA, 1, 1, 2, 3),
-   item3 = c(NA, 1, 1, 2, 3)
+  id = c(1, 2, 3, 1, 3),
+  item1 = c(NA, 1, 1, 2, 3),
+  item2 = c(NA, 1, 1, 2, 3),
+  item3 = c(NA, 1, 1, 2, 3)
 )
 df1
 
@@ -476,14 +507,17 @@ format_d(t.tests$d)
 Randomize easily with different designs.
 
 ```{r nice_randomize, warning = FALSE, message = FALSE}
-
 # Specify design, number of conditions, number of participants, and names of conditions:
-nice_randomize(design = "between", Ncondition = 4, n = 8,
-               condition.names = c("BP","CX","PZ","ZL"))
+nice_randomize(
+  design = "between", Ncondition = 4, n = 8,
+  condition.names = c("BP", "CX", "PZ", "ZL")
+)
 
 # Within-Group Design
-nice_randomize(design = "within", Ncondition = 3, n = 3,
-               condition.names = c("SV","AV","ST"))
+nice_randomize(
+  design = "within", Ncondition = 3, n = 3,
+  condition.names = c("SV", "AV", "ST")
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/randomize
@@ -495,7 +529,6 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/randomize
 Test linear regression assumptions easily with a nice summary table.
 
 ```{r nice_assumptions, eval = FALSE, warning = FALSE, message = FALSE}
-
 # Create regression model
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 # View results
@@ -511,12 +544,14 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 Easily make nice density and QQ plots per-group.
 
 ```{r nice_normality, warning = FALSE, message = FALSE, fig.width=16, fig.height=7, out.width="80%"}
-nice_normality(data = iris,
-               variable = "Sepal.Length",
-               group = "Species",
-               grid = FALSE,
-               shapiro = TRUE,
-               histogram = TRUE)
+nice_normality(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  grid = FALSE,
+  shapiro = TRUE,
+  histogram = TRUE
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
@@ -526,13 +561,15 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).
 
 ```{r plot_outliers, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
-plot_outliers(airquality, 
-              group = "Month",
-              response = "Ozone")
+plot_outliers(airquality,
+  group = "Month",
+  response = "Ozone"
+)
 
 plot_outliers(airquality,
-              response = "Ozone",
-              method = "sd")
+  response = "Ozone",
+  method = "sd"
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
@@ -542,9 +579,11 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.
 
 ```{r nice_var, warning = FALSE, message = FALSE}
-nice_var(data = iris,
-         variable = "Sepal.Length",
-         group = "Species")
+nice_var(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
@@ -554,9 +593,11 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions
 Attempt to visualize variance per group.
 
 ```{r nice_varplot, warning = FALSE, message = FALSE, fig.width=8, fig.height=7, out.width="70%"}
-nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/assumptions

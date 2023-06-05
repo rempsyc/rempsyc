@@ -76,12 +76,14 @@ nice_lm_slopes <- function(model,
 
   lapply(models.list, function(x) {
     check_col_names(x$model, c(predictor, moderator))
-    })
+  })
 
   if (!missing(b.label)) {
-    message(paste("The argument 'b.label' is deprecated.",
-                  "If your data is standardized, capital B will be used automatically.",
-                  "Else, please use argument 'standardize' directly instead."))
+    message(paste(
+      "The argument 'b.label' is deprecated.",
+      "If your data is standardized, capital B will be used automatically.",
+      "Else, please use argument 'standardize' directly instead."
+    ))
   }
 
   if (model_is_standardized(models.list)) {
@@ -118,15 +120,16 @@ nice_lm_slopes <- function(model,
   })
 
   table.stats1 <- lapply(models.list.lows, nice_lm,
-                         ci.alternative = ci.alternative)
+    ci.alternative = ci.alternative
+  )
   table.stats1 <- dplyr::bind_rows(table.stats1)
-  table.stats1 <- dplyr::filter(table.stats1, .data$Predictor == {{predictor}})
+  table.stats1 <- dplyr::filter(table.stats1, .data$Predictor == {{ predictor }})
   table.stats1$Predictor <- paste0(predictor, " (LOW-", moderator, ")")
 
   # Calculate simple slopes for mean-level
   table.stats2 <- lapply(models.list, nice_lm, ci.alternative = ci.alternative)
   table.stats2 <- dplyr::bind_rows(table.stats2)
-  table.stats2 <- dplyr::filter(table.stats2, .data$Predictor == {{predictor}})
+  table.stats2 <- dplyr::filter(table.stats2, .data$Predictor == {{ predictor }})
   table.stats2$Predictor <- paste0(predictor, " (MEAN-", moderator, ")")
 
   # Calculate simple slopes for HIGHS
@@ -142,9 +145,10 @@ nice_lm_slopes <- function(model,
   })
 
   table.stats3 <- lapply(models.list.highs, nice_lm,
-                         ci.alternative = ci.alternative)
+    ci.alternative = ci.alternative
+  )
   table.stats3 <- dplyr::bind_rows(table.stats3)
-  table.stats3 <- dplyr::filter(table.stats3, .data$Predictor == {{predictor}})
+  table.stats3 <- dplyr::filter(table.stats3, .data$Predictor == {{ predictor }})
   table.stats3$Predictor <- paste0(predictor, " (HIGH-", moderator, ")")
 
   # Combine both dataframes for both LOWS and HIGHS
@@ -158,14 +162,17 @@ nice_lm_slopes <- function(model,
   ))
   table.stats <- table.stats[correct.order, ] # 1, 4, 7, 2, 5, 8, 3, 6, 9
   table.stats <- dplyr::rename(table.stats,
-                               `Predictor (+/-1 SD)` = .data$Predictor)
+    `Predictor (+/-1 SD)` = .data$Predictor
+  )
 
   names(table.stats)[names(table.stats) == "b"] <- b.label
 
   if (length(models.list) > 1 & mod.id == TRUE) {
     model.number <- rep(seq_along(models.list), each = 3)
-    table.stats <- stats::setNames(cbind(model.number, table.stats),
-                            c("Model Number", names(table.stats)))
+    table.stats <- stats::setNames(
+      cbind(model.number, table.stats),
+      c("Model Number", names(table.stats))
+    )
   }
   row.names(table.stats) <- NULL
   table.stats

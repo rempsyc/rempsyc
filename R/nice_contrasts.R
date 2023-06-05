@@ -108,8 +108,8 @@ nice_contrasts <- function(response,
   boot.sums <- lapply(seq(length(response)), function(y) {
     lapply(es.lists, function(x) {
       as.data.frame(summary(x[[y]]))
-        }) %>%
-      bind_rows
+    }) %>%
+      bind_rows()
   })
   list.names <- c("estimates", "SE", "df", "tratio", "pvalue")
   stats.list <- list()
@@ -148,7 +148,8 @@ nice_contrasts <- function(response,
     effect.type == "hedges.g" ~ "g",
     effect.type == "cohens.d.sigma" ~ "d_sigma",
     effect.type == "r" ~ "r",
-    effect.type == "akp.robust.d" ~ "dR")
+    effect.type == "akp.robust.d" ~ "dR"
+  )
 
   names(table.stats) <- c(
     "Dependent Variable", "Comparison", "df",

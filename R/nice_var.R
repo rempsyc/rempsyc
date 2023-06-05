@@ -79,7 +79,8 @@ nice_var <- function(data,
     rowwise() %>%
     mutate(
       variance.ratio = round(max(c_across(-1), na.rm = TRUE) / min(
-        c_across(-1), na.rm = TRUE
+        c_across(-1),
+        na.rm = TRUE
       ), 1), criteria = criteria,
       heteroscedastic = variance.ratio > criteria
     )

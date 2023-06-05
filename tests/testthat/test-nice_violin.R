@@ -24,8 +24,8 @@ test_that("basic", {
 
   # Save a high-resolution image file to specified directory
   ggplot2::ggsave("niceviolinplothere.tiff",
-                  width = 7, height = 7, unit = "in",
-                  dpi = 300, path = NULL
+    width = 7, height = 7, unit = "in",
+    dpi = 300, path = NULL
   ) # change for your own desired path
 
   # Remove file
@@ -133,5 +133,4 @@ test_that("basic", {
     alpha = 1,
     border.colour = "black"
   )
-
 })

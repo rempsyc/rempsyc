@@ -65,18 +65,18 @@ nice_lm_contrasts <- function(model,
     models.list <- list(model)
   }
 
-  #if (length(models.list) == 1) {
+  # if (length(models.list) == 1) {
   #  data <- model$model
-  #}
+  # }
 
-  #if (missing(data)) {
-    # data.list <- lapply(models.list, `[[`, "model")
-    # data.list <- lapply(data.list, function(x) {
-    #   x[[group]] = as.factor(x[[group]])
-    #   x
-    #   })
-    # data <- Reduce(dplyr::right_join, data.list) # wrap in suppressMessages later
-  #}
+  # if (missing(data)) {
+  # data.list <- lapply(models.list, `[[`, "model")
+  # data.list <- lapply(data.list, function(x) {
+  #   x[[group]] = as.factor(x[[group]])
+  #   x
+  #   })
+  # data <- Reduce(dplyr::right_join, data.list) # wrap in suppressMessages later
+  # }
 
   data[[group]] <- as.factor(data[[group]])
   leastsquare.list <- lapply(models.list, emmeans::emmeans, specs = group, data = data)
@@ -116,8 +116,8 @@ nice_lm_contrasts <- function(model,
   boot.sums <- lapply(seq(length(response.list)), function(y) {
     lapply(es.lists, function(x) {
       as.data.frame(summary(x[[y]]))
-        }) %>%
-      bind_rows
+    }) %>%
+      bind_rows()
   })
   list.names <- c("estimates", "SE", "df", "tratio", "pvalue")
   stats.list <- list()
@@ -156,7 +156,8 @@ nice_lm_contrasts <- function(model,
     effect.type == "hedges.g" ~ "g",
     effect.type == "cohens.d.sigma" ~ "d_sigma",
     effect.type == "r" ~ "r",
-    effect.type == "akp.robust.d" ~ "dR")
+    effect.type == "akp.robust.d" ~ "dR"
+  )
 
   names(table.stats) <- c(
     "Dependent Variable", "Comparison", "df",

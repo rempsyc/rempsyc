@@ -104,9 +104,11 @@ The 95% confidence interval is for the effect size (Cohen’s d).
 ``` r
 library(rempsyc)
 
-nice_t_test(data = mtcars,
-            response = c("mpg", "disp", "drat", "wt"),
-            group = "am") -> t.tests
+nice_t_test(
+  data = mtcars,
+  response = c("mpg", "disp", "drat", "wt"),
+  group = "am"
+) -> t.tests
 t.tests
 #>   Dependent Variable         t       df              p         d   CI_lower
 #> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
@@ -149,7 +151,8 @@ contrasts <- nice_contrasts(
   data = mtcars,
   response = c("mpg", "disp"),
   group = "cyl",
-  covariates = "hp")
+  covariates = "hp"
+)
 contrasts
 #>   Dependent Variable Comparison df         t              p         d
 #> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739
@@ -159,12 +162,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7233152  4.5444020
-#> 2  0.7636356  1.9983921
-#> 3  1.3463241  3.0909832
-#> 4 -5.8742386 -3.8249073
-#> 5 -4.3364754 -2.2536315
-#> 6 -2.2348783 -0.8642249
+#> 1  2.6895182  4.5404179
+#> 2  0.8440177  2.0224325
+#> 3  1.4061989  3.1493869
+#> 4 -5.7337041 -3.8135535
+#> 5 -4.3092034 -2.2854826
+#> 6 -2.2355212 -0.8958955
 ```
 
 ``` r
@@ -187,7 +190,8 @@ moderations <- nice_mod(
   data = mtcars,
   response = c("mpg", "disp"),
   predictor = "gear",
-  moderator = "wt")
+  moderator = "wt"
+)
 moderations
 #>   Model Number Dependent Variable Predictor df           B          t
 #> 1            1                mpg      gear 28 -0.08718042 -0.7982999
@@ -197,10 +201,10 @@ moderations
 #> 5            2               disp        wt 28  0.83273987  7.6662883
 #> 6            2               disp   gear:wt 28 -0.08758665 -0.8140664
 #>                   p         sr2     CI_lower   CI_upper
-#> 1 0.431415645312886 0.004805465 0.0000000000 0.02702141
+#> 1 0.431415645312884 0.004805465 0.0000000000 0.02702141
 #> 2 0.000000002383144 0.558188818 0.3142326391 0.80214500
 #> 3 0.039899695159515 0.035022025 0.0003502202 0.09723370
-#> 4 0.491683361920263 0.003546038 0.0000000000 0.02230154
+#> 4 0.491683361920264 0.003546038 0.0000000000 0.02230154
 #> 5 0.000000023731710 0.429258143 0.1916386492 0.66687764
 #> 6 0.422476456495512 0.004840251 0.0000000000 0.02679265
 ```
@@ -265,7 +269,8 @@ simple.slopes <- nice_slopes(
   data = mtcars,
   response = c("mpg", "disp"),
   predictor = "gear",
-  moderator = "wt")
+  moderator = "wt"
+)
 simple.slopes
 #>   Model Number Dependent Variable Predictor (+/-1 SD) df           B          t
 #> 1            1                mpg       gear (LOW-wt) 28  0.14841920  1.0767040
@@ -342,22 +347,26 @@ Make nice violin plots easily with 95% bootstrapped confidence
 intervals.
 
 ``` r
-nice_violin(data = ToothGrowth,
-            group = "dose",
-            response = "len",
-            xlabels = c("Low", "Medium", "High"),
-            comp1 = 1,
-            comp2 = 3,
-            has.d = TRUE,
-            d.y = 30)
+nice_violin(
+  data = ToothGrowth,
+  group = "dose",
+  response = "len",
+  xlabels = c("Low", "Medium", "High"),
+  comp1 = 1,
+  comp2 = 3,
+  has.d = TRUE,
+  d.y = 30
+)
 ```
 
 <img src="man/figures/README-nice_violin-1.png" width="60%" />
 
 ``` r
 # Save plot
-ggplot2::ggsave('niceplot.pdf', width = 7, height = 7, unit = 'in', 
-                dpi = 300, path = "D:/R treasures/")
+ggplot2::ggsave("niceplot.pdf",
+  width = 7, height = 7, unit = "in",
+  dpi = 300, path = "D:/R treasures/"
+)
 ```
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/violin>
@@ -367,26 +376,30 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/violin>
 Make nice scatter plots easily.
 
 ``` r
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             has.confband = TRUE,
-             has.r = TRUE,
-             has.p = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.confband = TRUE,
+  has.r = TRUE,
+  has.p = TRUE
+)
 ```
 
 <img src="man/figures/README-nice_scatter-1.png" width="60%" />
 
 ``` r
-
-nice_scatter(data = mtcars,
-             predictor = "wt",
-             response = "mpg",
-             group = "cyl",
-             has.confband = TRUE)
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.confband = TRUE,
+  has.legend = TRUE
+)
 ```
 
-<img src="man/figures/README-nice_scatter-2.png" width="60%" />
+<img src="man/figures/README-nice_scatter2-1.png" width="60%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/scatter>
 
@@ -396,7 +409,6 @@ Interpolating the Inclusion of the Other in the Self Scale (self-other
 merging) easily.
 
 ``` r
-
 # Score of 3.5 (25% overlap)
 overlap_circle(3.5)
 ```
@@ -421,11 +433,14 @@ colour-coded based on their effect size (0.0-0.2: small (pink/light
 blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).
 
 ``` r
-
-cormatrix_excel(data = infert, 
-                filename = "cormatrix1", 
-                select = c("age", "parity", "induced", "case", "spontaneous", 
-                           "stratum", "pooled.stratum"))
+cormatrix_excel(
+  data = infert,
+  filename = "cormatrix1",
+  select = c(
+    "age", "parity", "induced", "case", "spontaneous",
+    "stratum", "pooled.stratum"
+  )
+)
 #> # Correlation Matrix (pearson-method)
 #> 
 #> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
@@ -462,15 +477,17 @@ values.
 ``` r
 # Create synthetic data frame for the demonstration
 set.seed(50)
-df <- data.frame(scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
-                 scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA))
+df <- data.frame(
+  scale1_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale1_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale1_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale2_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q1 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q2 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA),
+  scale3_Q3 = c(sample(c(NA, 1:6), replace = TRUE), NA, NA)
+)
 
 # Then select your scales by name
 nice_na(df, scales = c("scale1", "scale2", "scale3"))
@@ -494,10 +511,10 @@ inspection.
 
 ``` r
 df1 <- data.frame(
-   id = c(1, 2, 3, 1, 3),
-   item1 = c(NA, 1, 1, 2, 3),
-   item2 = c(NA, 1, 1, 2, 3),
-   item3 = c(NA, 1, 1, 2, 3)
+  id = c(1, 2, 3, 1, 3),
+  item1 = c(NA, 1, 1, 2, 3),
+  item2 = c(NA, 1, 1, 2, 3),
+  item3 = c(NA, 1, 1, 2, 3)
 )
 df1
 #>   id item1 item2 item3
@@ -617,10 +634,11 @@ format_d(t.tests$d)
 Randomize easily with different designs.
 
 ``` r
-
 # Specify design, number of conditions, number of participants, and names of conditions:
-nice_randomize(design = "between", Ncondition = 4, n = 8,
-               condition.names = c("BP","CX","PZ","ZL"))
+nice_randomize(
+  design = "between", Ncondition = 4, n = 8,
+  condition.names = c("BP", "CX", "PZ", "ZL")
+)
 #>   id Condition
 #> 1  1        ZL
 #> 2  2        BP
@@ -632,8 +650,10 @@ nice_randomize(design = "between", Ncondition = 4, n = 8,
 #> 8  8        ZL
 
 # Within-Group Design
-nice_randomize(design = "within", Ncondition = 3, n = 3,
-               condition.names = c("SV","AV","ST"))
+nice_randomize(
+  design = "within", Ncondition = 3, n = 3,
+  condition.names = c("SV", "AV", "ST")
+)
 #>   id    Condition
 #> 1  1 SV - AV - ST
 #> 2  2 AV - ST - SV
@@ -649,7 +669,6 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/randomize>
 Test linear regression assumptions easily with a nice summary table.
 
 ``` r
-
 # Create regression model
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 # View results
@@ -665,12 +684,14 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 Easily make nice density and QQ plots per-group.
 
 ``` r
-nice_normality(data = iris,
-               variable = "Sepal.Length",
-               group = "Species",
-               grid = FALSE,
-               shapiro = TRUE,
-               histogram = TRUE)
+nice_normality(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species",
+  grid = FALSE,
+  shapiro = TRUE,
+  histogram = TRUE
+)
 ```
 
 <img src="man/figures/README-nice_normality-1.png" width="80%" />
@@ -683,9 +704,10 @@ Visually check outliers based on (e.g.) +/- 3 MAD (median absolute
 deviations) or SD (standard deviations).
 
 ``` r
-plot_outliers(airquality, 
-              group = "Month",
-              response = "Ozone")
+plot_outliers(airquality,
+  group = "Month",
+  response = "Ozone"
+)
 ```
 
 <img src="man/figures/README-plot_outliers-1.png" width="70%" />
@@ -693,8 +715,9 @@ plot_outliers(airquality,
 ``` r
 
 plot_outliers(airquality,
-              response = "Ozone",
-              method = "sd")
+  response = "Ozone",
+  method = "sd"
+)
 ```
 
 <img src="man/figures/README-plot_outliers-2.png" width="70%" />
@@ -707,9 +730,11 @@ Obtain variance per group as well as check for the rule of thumb of one
 group having variance four times bigger than any of the other groups.
 
 ``` r
-nice_var(data = iris,
-         variable = "Sepal.Length",
-         group = "Species")
+nice_var(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 #>        Species Setosa Versicolor Virginica Variance.ratio Criteria
 #> 1 Sepal.Length  0.124      0.266     0.404            3.3        4
 #>   Heteroscedastic
@@ -723,9 +748,11 @@ Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 Attempt to visualize variance per group.
 
 ``` r
-nice_varplot(data = iris,
-             variable = "Sepal.Length",
-             group = "Species")
+nice_varplot(
+  data = iris,
+  variable = "Sepal.Length",
+  group = "Species"
+)
 ```
 
 <img src="man/figures/README-nice_varplot-1.png" width="70%" />

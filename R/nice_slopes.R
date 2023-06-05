@@ -99,9 +99,11 @@ nice_slopes <- function(data,
   rlang::check_installed("effectsize", reason = "for this function.")
 
   if (!missing(b.label)) {
-    message(paste("The argument 'b.label' is deprecated.",
-                  "If your data is standardized, capital B will be used automatically.",
-                  "Else, please use argument 'standardize' directly instead."))
+    message(paste(
+      "The argument 'b.label' is deprecated.",
+      "If your data is standardized, capital B will be used automatically.",
+      "Else, please use argument 'standardize' directly instead."
+    ))
   }
 
   if (data_is_standardized(data)) {
@@ -138,9 +140,10 @@ nice_slopes <- function(data,
   models.list <- lapply(formulas, lm, data = data, ...)
 
   table.stats <- nice_lm_slopes(models.list,
-                                predictor = predictor,
-                                moderator = moderator,
-                                ci.alternative = ci.alternative)
+    predictor = predictor,
+    moderator = moderator,
+    ci.alternative = ci.alternative
+  )
   names(table.stats)[names(table.stats) == "b"] <- b.label
 
   if (missing(moderator2)) {
@@ -150,15 +153,19 @@ nice_slopes <- function(data,
 
     # Add a column about moderator to the first column
     table.stats <- dplyr::rename(table.stats,
-                                 Predictor = "Predictor (+/-1 SD)")
+      Predictor = "Predictor (+/-1 SD)"
+    )
     table.stats[moderator2] <- mod2.levels[2]
-    table.stats <- dplyr::select(table.stats, `Dependent Variable`,
-                                 dplyr::all_of(moderator2),
-                                 "Predictor":"CI_upper")
+    table.stats <- dplyr::select(
+      table.stats, `Dependent Variable`,
+      dplyr::all_of(moderator2),
+      "Predictor":"CI_upper"
+    )
 
     # Recode dichotomic group variable moderator2
     data[moderator2] <- ifelse(data[moderator2] == mod2.levels[2],
-                               mod2.levels[1], mod2.levels[2])
+      mod2.levels[1], mod2.levels[2]
+    )
 
     # Generate formulas, models, and simple slopes
     formulas <- paste(
@@ -168,17 +175,21 @@ nice_slopes <- function(data,
     models.list <- lapply(formulas, lm, data = data, ...)
 
     table2.stats <- nice_lm_slopes(models.list,
-                                   predictor = predictor,
-                                   moderator = moderator,
-                                   ci.alternative = ci.alternative)
+      predictor = predictor,
+      moderator = moderator,
+      ci.alternative = ci.alternative
+    )
 
     # Add a column for moderator2
     table2.stats <- dplyr::rename(table2.stats,
-                                  Predictor = "Predictor (+/-1 SD)")
+      Predictor = "Predictor (+/-1 SD)"
+    )
     table2.stats[moderator2] <- mod2.levels[1]
-    table2.stats <- dplyr::select(table2.stats, `Dependent Variable`,
-                                  dplyr::all_of(moderator2),
-                                  "Predictor":"CI_upper")
+    table2.stats <- dplyr::select(
+      table2.stats, `Dependent Variable`,
+      dplyr::all_of(moderator2),
+      "Predictor":"CI_upper"
+    )
     names(table2.stats)[names(table2.stats) == "b"] <- b.label
 
     # Merge with the first table
@@ -187,11 +198,14 @@ nice_slopes <- function(data,
       dplyr::desc(`Dependent Variable`)
     )
     final.table <- dplyr::rename(final.table,
-                                 `Predictor (+/-1 SD)` = "Predictor")
+      `Predictor (+/-1 SD)` = "Predictor"
+    )
     if (length(models.list) > 1 & mod.id == TRUE) {
       model.number <- rep(seq_along(response), each = 3 * 2)
-      final.table <- stats::setNames(cbind(model.number, final.table),
-                              c("Model Number", names(final.table)))
+      final.table <- stats::setNames(
+        cbind(model.number, final.table),
+        c("Model Number", names(final.table))
+      )
       row.names(final.table) <- NULL
     }
     final.table

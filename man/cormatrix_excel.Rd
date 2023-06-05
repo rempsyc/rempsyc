@@ -47,12 +47,16 @@ Based on the \code{correlation} and \code{openxlsx2} packages.
 }
 \examples{
 \dontshow{if (requireNamespace("correlation", quietly = TRUE) && requireNamespace("openxlsx2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontshow{.old_wd <- setwd(tempdir())}
+\dontshow{
+.old_wd <- setwd(tempdir())
+}
 # Basic example
 cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp", "carb"), filename = "cormatrix1")
 cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2")
 cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3")
-\dontshow{setwd(.old_wd)}
+\dontshow{
+setwd(.old_wd)
+}
 \dontshow{\}) # examplesIf}
 }
 \author{

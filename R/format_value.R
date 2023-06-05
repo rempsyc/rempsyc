@@ -59,8 +59,10 @@ format_p <- function(p,
   }
   if (isTRUE(stars)) {
     stars.n <- ifelse(p < .001, "***",
-                      ifelse(p < .01, "**",
-                             ifelse(p < .05, "*", "")))
+      ifelse(p < .01, "**",
+        ifelse(p < .05, "*", "")
+      )
+    )
     stars.n <- ifelse(is.na(stars.n), "", stars.n)
   } else {
     stars.n <- ""

@@ -62,10 +62,10 @@ find_mad <- function(data,
 
   mad0.list <- lapply(col.list, function(x) {
     find_mad0(data,
-              x,
-              ID = ID,
-              criteria = criteria,
-              mad.scores = mad.scores
+      x,
+      ID = ID,
+      criteria = criteria,
+      mad.scores = mad.scores
     )
   })
   names(mad0.list) <- col.list
@@ -96,7 +96,6 @@ find_mad <- function(data,
   attr(out, "criteria") <- criteria
   attr(out, "col.list") <- col.list
   out
-
 }
 
 #' @noRd
@@ -109,7 +108,7 @@ find_mad0 <- function(data, col.list, ID = ID, criteria = 3, mad.scores) {
     mutate(
       Row = row(.[1]),
       across(all_of(col.list), rempsyc::scale_mad,
-             .names = "{col}_mad"
+        .names = "{col}_mad"
       )
     ) %>%
     filter(if_any(ends_with("_mad"), ~ . > criteria | . < -criteria))

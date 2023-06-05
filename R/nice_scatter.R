@@ -299,14 +299,14 @@ nice_scatter <- function(data,
   if (missing(group)) {
     smooth <- ggplot2::stat_smooth(
       formula = y ~ x, geom = "line", method = "lm",
-      fullrange = has.fullrange, color = colours, size = 1
+      fullrange = has.fullrange, color = colours, linewidth = 1
     )
   }
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
     smooth <- ggplot2::stat_smooth(
       formula = y ~ x, geom = "line", method = "lm",
-      fullrange = has.fullrange, size = 1
+      fullrange = has.fullrange, linewidth = 1
     )
   }
   if (!missing(groups.order)) {
@@ -426,11 +426,6 @@ nice_scatter <- function(data,
         ))
       }
     } +
-    {
-      if (has.legend == FALSE) {
-        ggplot2::theme(legend.position = "none")
-      }
-    } +
     ggplot2::labs(
       legend.title = legend.title, colour = legend.title,
       fill = legend.title, linetype = legend.title, shape = legend.title
@@ -468,5 +463,5 @@ nice_scatter <- function(data,
         )
       }
     }
-  theme_apa(plot)
+  theme_apa(plot, has.legend = has.legend)
 }

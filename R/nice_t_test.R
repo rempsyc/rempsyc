@@ -100,7 +100,8 @@ nice_t_test <- function(data,
                         ...) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("effectsize", "methods"),
-                         reason = "for this function.")
+    reason = "for this function."
+  )
   args <- list(...)
   if (methods::hasArg(var.equal)) {
     if (isTRUE(args$var.equal)) {
@@ -109,8 +110,8 @@ nice_t_test <- function(data,
       message_white("Using Welch t-test. \n ")
     }
     pooled_sd <- args$var.equal
-    } else {
-      pooled_sd <- TRUE
+  } else {
+    pooled_sd <- TRUE
   }
   if (methods::hasArg(paired)) {
     paired <- args$paired
