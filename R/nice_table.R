@@ -717,24 +717,24 @@ format_columns <- function(dataframe, table, italics, separate.header,
     ),
     value = c(
       '"95% CI (", flextable::as_i("b"), ")"',
-      '"95% CI (", "\u03B2", ")"',
+      '"95% CI (", "\u03B2", ")"', # beta
       '"95% CI (", flextable::as_i("t"), ")"',
       '"95% CI (", flextable::as_i("d"), ")"',
-      '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"',
-      '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"',
+      '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"', # eta
+      '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"', # eta
       '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"',
-      '"\u03b7", flextable::as_sub("p"), flextable::as_sup("2")',
-      '"\u03b7", flextable::as_sup("2")',
-      '"\u03b7", flextable::as_sub("G"), flextable::as_sup("2")',
+      '"\u03b7", flextable::as_sub("p"), flextable::as_sup("2")', # eta
+      '"\u03b7", flextable::as_sup("2")', # eta
+      '"\u03b7", flextable::as_sub("G"), flextable::as_sup("2")', # eta
       'flextable::as_i("d"), flextable::as_sub("R")',
       '"Predictor (+/-1 ", flextable::as_i("SD"), ")"',
       'flextable::as_i("M"), flextable::as_sub("1"), " - ", flextable::as_i("M"), flextable::as_sub("2")',
-      '"\u03C4"',
-      '"\u03C1"',
+      '"\u03C4"', # tau
+      '"\u03C1"', # rho
       'flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb"))',
-      '"\u03C7", flextable::as_sup("2")',
-      '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")',
-      '"\u03B2"' # This is beta
+      '"\u03C7", flextable::as_sup("2")', # Chi square
+      '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")', # Chi square
+      '"\u03B2"' # beta
     )
   )
   for (i in seq(nrow(compose.table1))) {
