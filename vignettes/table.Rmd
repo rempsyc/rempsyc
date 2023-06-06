@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 knitr::opts_knit$set(root.dir = tempdir())
 
-pkgs <- c("flextable", "broom", "report", "effectsize", "method")
+pkgs <- c("flextable", "broom", "report", "effectsize", "methods")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
