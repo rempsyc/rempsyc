@@ -658,7 +658,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
 
   ##  .....................................
   ##  0-digit columns                 ####
-  cols.0digits <- c("N", "n", "z")
+  cols.0digits <- c("N", "n", "z", "Z")
   if (!missing(separate.header)) {
     cols.0digits.sh <- paste0(sh.pattern, rep(
       cols.0digits,
@@ -795,6 +795,10 @@ format_columns <- function(dataframe, table, italics, separate.header,
         bg = "#D9D9D9"
       )
   }
+
+  # Set attributes for variables which digits should not be changed for later step
+  attr(table, "dont_change") <- c(
+    compose.table0$col, cols.df, cols.2digits, cols.0digits, compose.table2$col)
   table
 }
 
@@ -802,11 +806,7 @@ beautify_flextable <- function(
     dataframe, table, separate.header, col.format.p, col.format.r,
     format.custom, col.format.custom, sh.pattern, unique.pattern,
     format_p_internal) {
-  dont.change0 <- c(
-    "p", "r", "t", "SE", "SD", "F", "df", "b",
-    "M", "N", "n", "Z", "z", "W", "R2", "sr2",
-    "CFI", "TLI", "RMSEA", "SRMR"
-  )
+  dont.change0 <- attr(table, "dont_change")
   dont.change <- paste0("^", dont.change0, "$", collapse = "|")
 
   if (!missing(separate.header)) {
