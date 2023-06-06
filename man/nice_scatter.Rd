@@ -14,6 +14,7 @@ nice_scatter(
   has.jitter = FALSE,
   alpha = 0.7,
   has.line = TRUE,
+  method = "lm",
   has.confband = FALSE,
   has.fullrange = FALSE,
   has.linetype = FALSE,
@@ -59,6 +60,9 @@ or the other, not both.}
 \item{alpha}{The desired level of transparency.}
 
 \item{has.line}{Whether to plot the regression line(s).}
+
+\item{method}{Which method to use for the regression line,
+either \code{"lm"} (default) or \code{"loess"}.}
 
 \item{has.confband}{Logical. Whether to display the
 confidence band around the slope.}
@@ -143,12 +147,13 @@ nice_scatter(
   xtitle = "Weight (1000 lbs)"
 )
 
-# Have points "jittered"
+# Have points "jittered", loess method
 nice_scatter(
   data = mtcars,
   predictor = "wt",
   response = "mpg",
-  has.jitter = TRUE
+  has.jitter = TRUE,
+  method = "loess"
 )
 
 # Change the transparency of the points
@@ -245,22 +250,12 @@ nice_scatter(
   has.line = FALSE
 )
 
-# Add a legend
-nice_scatter(
-  data = mtcars,
-  predictor = "wt",
-  response = "mpg",
-  group = "cyl",
-  has.legend = TRUE
-)
-
 # Change order of labels on the legend
 nice_scatter(
   data = mtcars,
   predictor = "wt",
   response = "mpg",
   group = "cyl",
-  has.legend = TRUE,
   groups.order = c(8, 4, 6)
 )
 
@@ -270,7 +265,6 @@ nice_scatter(
   predictor = "wt",
   response = "mpg",
   group = "cyl",
-  has.legend = TRUE,
   groups.labels = c("Weak", "Average", "Powerful")
 )
 # Warning: This applies after changing order of level
@@ -281,7 +275,6 @@ nice_scatter(
   predictor = "wt",
   response = "mpg",
   group = "cyl",
-  has.legend = TRUE,
   legend.title = "cylinders"
 )
 

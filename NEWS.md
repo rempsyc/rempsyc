@@ -6,6 +6,7 @@
 * `nice_scatter`: 
   * fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
   * `has.legend` now defaults to `TRUE` when using the `group` argument.
+  * New argument `method`, with choices `"lm"` (default) or `"loess"`.
 
 # rempsyc 0.1.2.2
 * `nice_violin`: 

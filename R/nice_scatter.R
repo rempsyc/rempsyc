@@ -13,6 +13,8 @@
 #' or the other, not both.
 #' @param alpha The desired level of transparency.
 #' @param has.line Whether to plot the regression line(s).
+#' @param method Which method to use for the regression line,
+#' either `"lm"` (default) or `"loess"`.
 #' @param has.confband Logical. Whether to display the
 #' confidence band around the slope.
 #' @param has.fullrange Logical. Whether to extend the slope
@@ -70,12 +72,13 @@
 #'   xtitle = "Weight (1000 lbs)"
 #' )
 #'
-#' # Have points "jittered"
+#' # Have points "jittered", loess method
 #' nice_scatter(
 #'   data = mtcars,
 #'   predictor = "wt",
 #'   response = "mpg",
-#'   has.jitter = TRUE
+#'   has.jitter = TRUE,
+#'   method = "loess"
 #' )
 #'
 #' # Change the transparency of the points
@@ -244,6 +247,7 @@ nice_scatter <- function(data,
                          has.jitter = FALSE,
                          alpha = 0.7,
                          has.line = TRUE,
+                         method = "lm",
                          has.confband = FALSE,
                          has.fullrange = FALSE,
                          has.linetype = FALSE,
@@ -286,13 +290,13 @@ nice_scatter <- function(data,
   }
   if (missing(group)) {
     smooth <- ggplot2::stat_smooth(
-      formula = y ~ x, geom = "line", method = "lm",
+      formula = y ~ x, geom = "line", method = method,
       fullrange = has.fullrange, color = colours, linewidth = 1
     )
   } else {
     data[[group]] <- as.factor(data[[group]])
     smooth <- ggplot2::stat_smooth(
-      formula = y ~ x, geom = "line", method = "lm",
+      formula = y ~ x, geom = "line", method = method,
       fullrange = has.fullrange, linewidth = 1
     )
     if (missing(has.legend)) {
@@ -306,11 +310,11 @@ nice_scatter <- function(data,
     levels(data[[group]]) <- groups.labels
   }
   if (has.confband == TRUE & missing(group)) {
-    band <- ggplot2::geom_smooth(formula = y ~ x, method = "lm",
+    band <- ggplot2::geom_smooth(formula = y ~ x, method = method,
                                  colour = NA, fill = colours)
   }
   if (has.confband == TRUE & !missing(group)) {
-    band <- ggplot2::geom_smooth(formula = y ~ x, method = "lm", colour = NA)
+    band <- ggplot2::geom_smooth(formula = y ~ x, method = method, colour = NA)
   }
   if (has.points == TRUE & missing(group) & missing(colours)) {
     observations <- ggplot2::geom_point(size = 2, alpha = alpha, shape = 16)
