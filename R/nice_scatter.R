@@ -33,7 +33,11 @@
 #' @param legend.title The desired legend title.
 #' @param group The group by which to plot the variable
 #' @param colours Desired colours for the plot, if desired.
-#' @param groups.order Specifies the desired display order of the groups.
+#' @param groups.order Specifies the desired display order of the groups
+#' on the legend. Either provide the levels directly, or a string: "increasing"
+#' or "decreasing", to order based on the average value of the variable on the
+#' y axis, or "string.length", to order from the shortest to the longest
+#' string (useful when working with long string names). "Defaults to "none".
 #' @param groups.labels Changes groups names (labels).
 #' Note: This applies after changing order of level.
 #' @param groups.alpha The manually specified transparency
@@ -262,7 +266,7 @@ nice_scatter <- function(data,
                          legend.title = "",
                          group = NULL,
                          colours = "#619CFF",
-                         groups.order = NULL,
+                         groups.order = "none",
                          groups.labels = NULL,
                          groups.alpha = NULL,
                          has.r = FALSE,
@@ -303,9 +307,26 @@ nice_scatter <- function(data,
       has.legend <- TRUE
     }
   }
-  if (!missing(groups.order)) {
+
+  dataSummary <- data %>%
+    group_by(.data[[group]]) %>%
+    summarize(Mean = mean(.data[[response]], na.rm = TRUE))
+
+  if (groups.order[1] == "increasing") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean)])
+  } else if (groups.order[1] == "decreasing") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean,
+                                                          decreasing = TRUE)])
+  } else if (groups.order[1] == "string.length") {
+    data[[group]] <- factor(
+      data[[group]], levels = levels(data[[group]])[order(
+        nchar(levels(data[[group]])))])
+  } else if (groups.order[1] != "none") {
     data[[group]] <- factor(data[[group]], levels = groups.order)
   }
+
   if (!missing(groups.labels)) {
     levels(data[[group]]) <- groups.labels
   }

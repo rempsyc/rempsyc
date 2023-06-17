@@ -33,7 +33,7 @@ nice_violin(
   has.d = FALSE,
   d.x = mean(c(comp1, comp2)) * 1.1,
   d.y = mean(data[[response]]) * 1.3,
-  order.groups = "none",
+  groups.order = "none",
   xlabels.angle = 0
 )
 }
@@ -118,7 +118,7 @@ useful when there are a lot of observations.}
 
 \item{d.y}{The y-axis coordinates for the d-value.}
 
-\item{order.groups}{How to order the group factor levels on
+\item{groups.order}{How to order the group factor levels on
 the x-axis. Either "increasing" or "decreasing", to order
 based on the value of the variable on the y axis, or
 "string.length", to order from the shortest to the longest

@@ -29,7 +29,7 @@ nice_scatter(
   legend.title = "",
   group = NULL,
   colours = "#619CFF",
-  groups.order = NULL,
+  groups.order = "none",
   groups.labels = NULL,
   groups.alpha = NULL,
   has.r = FALSE,
@@ -96,7 +96,11 @@ observations as a function of group.}
 
 \item{colours}{Desired colours for the plot, if desired.}
 
-\item{groups.order}{Specifies the desired display order of the groups.}
+\item{groups.order}{Specifies the desired display order of the groups
+on the legend. Either provide the levels directly, or a string: "increasing"
+or "decreasing", to order based on the average value of the variable on the
+y axis, or "string.length", to order from the shortest to the longest
+string (useful when working with long string names). "Defaults to "none".}
 
 \item{groups.labels}{Changes groups names (labels).
 Note: This applies after changing order of level.}

@@ -61,7 +61,7 @@
 #' @param has.d Whether to display the d-value.
 #' @param d.x The x-axis coordinates for the d-value.
 #' @param d.y The y-axis coordinates for the d-value.
-#' @param order.groups How to order the group factor levels on
+#' @param groups.order How to order the group factor levels on
 #' the x-axis. Either "increasing" or "decreasing", to order
 #' based on the value of the variable on the y axis, or
 #' "string.length", to order from the shortest to the longest
@@ -229,7 +229,7 @@ nice_violin <- function(data,
                         has.d = FALSE,
                         d.x = mean(c(comp1, comp2)) * 1.1,
                         d.y = mean(data[[response]]) * 1.3,
-                        order.groups = "none",
+                        groups.order = "none",
                         xlabels.angle = 0) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("ggplot2"), reason = "for this function.")
@@ -257,14 +257,14 @@ nice_violin <- function(data,
     na.rm = TRUE
   )
 
-  if (order.groups == "increasing") {
+  if (groups.order == "increasing") {
     data[[group]] <- factor(
       data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean)])
-      } else if (order.groups == "decreasing") {
+      } else if (groups.order == "decreasing") {
     data[[group]] <- factor(
       data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean,
                                                           decreasing = TRUE)])
-  } else if (order.groups == "string.length") {
+  } else if (groups.order == "string.length") {
     data[[group]] <- factor(
       data[[group]], levels = levels(data[[group]])[order(
         nchar(levels(data[[group]])))])

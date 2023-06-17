@@ -2,6 +2,10 @@
 * IN PROGRESS
 * CRAN resubmission
 
+# rempsyc 0.1.2.4
+* `nice_scatter`: `groups.order` now also allows automatic grouping based on value for the response variable (one of the desired levels, "increasing", "decreasing", or "string.length"), for consistency with `nice_violin`.
+* `nice_violin`: `order.groups` argument renames to `groups.order` for consistency with `nice_scatter`.
+
 # rempsyc 0.1.2.3
 * `nice_scatter`: 
   * fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
