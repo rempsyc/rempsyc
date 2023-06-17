@@ -303,19 +303,18 @@ nice_scatter <- function(data,
       formula = y ~ x, geom = "line", method = method,
       fullrange = has.fullrange, linewidth = 1
     )
+    dataSummary <- data %>%
+      group_by(.data[[group]]) %>%
+      summarize(Mean = mean(.data[[response]], na.rm = TRUE))
     if (missing(has.legend)) {
       has.legend <- TRUE
     }
   }
 
-  dataSummary <- data %>%
-    group_by(.data[[group]]) %>%
-    summarize(Mean = mean(.data[[response]], na.rm = TRUE))
-
   if (groups.order[1] == "increasing") {
     data[[group]] <- factor(
       data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean)])
-  } else if (groups.order[1] == "decreasing") {
+  } else if (!missing(group) && groups.order[1] == "decreasing") {
     data[[group]] <- factor(
       data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean,
                                                           decreasing = TRUE)])
