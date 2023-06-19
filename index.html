@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,6 +155,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span><span class="op">?</span><span class="va">rempsyc</span></span></code></pre></div>
+<p><strong>Dependencies:</strong> Because <code>rempsyc</code> is a package of convenience functions relying on several external packages, it uses (inspired by the <a href="https://easystats.github.io/easystats/" class="external-link"><code>easystats</code></a> packages) a minimalist philosophy of only installing packages that you need when you need them through <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code>. Should you wish to specifically install all suggested dependencies at once (you can view the full list by clicking on the CRAN badge on this page), you can run the following (be warned that this may take a long time, as some of the suggested packages are only used in the vignettes or examples):</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rempsyc"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -187,7 +190,7 @@
 <code>nice_t_test</code><a class="anchor" aria-label="anchor" href="#nice_t_test"></a>
 </h2>
 <p>Easily compute t-test analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables at once. The 95% confidence interval is for the effect size (Cohen’s d).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/nice_t_test.html">nice_t_test</a></span><span class="op">(</span></span>
@@ -206,12 +209,12 @@
 <span><span class="co">#&gt; 2  2.2295592</span></span>
 <span><span class="co">#&gt; 3 -1.1245498</span></span>
 <span><span class="co">#&gt; 4  2.7329218</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format t-test results</span></span>
 <span><span class="va">t_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">t.tests</span><span class="op">)</span></span>
 <span><span class="va">t_table</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_t_test-1.png"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save to word</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/t-test" class="uri">https://rempsyc.remi-theriault.com/articles/t-test</a></p>
@@ -221,7 +224,7 @@
 <code>nice_contrasts</code><a class="anchor" aria-label="anchor" href="#nice_contrasts"></a>
 </h2>
 <p>Easily compute regression with planned contrast analyses (pairwise comparisons similar to t-tests but more powerful when more than 2 groups), and format in publication-ready format. Supports multiple dependent variables at once (but supports only three groups for the moment). In this particular case, the confidence intervals are bootstraped around the Cohen’s d.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">contrasts</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_contrasts.html">nice_contrasts</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
@@ -237,13 +240,13 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.6483541  4.4833167</span></span>
-<span><span class="co">#&gt; 2  0.8144608  1.9773906</span></span>
-<span><span class="co">#&gt; 3  1.2898542  3.1073436</span></span>
-<span><span class="co">#&gt; 4 -5.7383229 -3.9297322</span></span>
-<span><span class="co">#&gt; 5 -4.3078430 -2.2917952</span></span>
-<span><span class="co">#&gt; 6 -2.2290225 -0.8912713</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; 1  2.7596380  4.5573724</span></span>
+<span><span class="co">#&gt; 2  0.8030446  2.0002886</span></span>
+<span><span class="co">#&gt; 3  1.3642791  3.0250009</span></span>
+<span><span class="co">#&gt; 4 -5.7960034 -3.8486063</span></span>
+<span><span class="co">#&gt; 5 -4.3671827 -2.2516035</span></span>
+<span><span class="co">#&gt; 6 -2.2216117 -0.8399882</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_contrasts-1.png"></p>
@@ -254,7 +257,7 @@
 <code>nice_mod</code><a class="anchor" aria-label="anchor" href="#nice_mod"></a>
 </h2>
 <p>Easily compute moderation analyses, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moderations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_mod.html">nice_mod</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
@@ -270,13 +273,13 @@
 <span><span class="co">#&gt; 5            2               disp        wt 28  0.83273987  7.6662883</span></span>
 <span><span class="co">#&gt; 6            2               disp   gear:wt 28 -0.08758665 -0.8140664</span></span>
 <span><span class="co">#&gt;                   p         sr2     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1 0.431415645312884 0.004805465 0.0000000000 0.02702141</span></span>
+<span><span class="co">#&gt; 1 0.431415645312886 0.004805465 0.0000000000 0.02702141</span></span>
 <span><span class="co">#&gt; 2 0.000000002383144 0.558188818 0.3142326391 0.80214500</span></span>
 <span><span class="co">#&gt; 3 0.039899695159515 0.035022025 0.0003502202 0.09723370</span></span>
-<span><span class="co">#&gt; 4 0.491683361920264 0.003546038 0.0000000000 0.02230154</span></span>
+<span><span class="co">#&gt; 4 0.491683361920263 0.003546038 0.0000000000 0.02230154</span></span>
 <span><span class="co">#&gt; 5 0.000000023731710 0.429258143 0.1916386492 0.66687764</span></span>
 <span><span class="co">#&gt; 6 0.422476456495512 0.004840251 0.0000000000 0.02679265</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format moderation results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">moderations</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_mod-1.png"></p>
@@ -287,7 +290,7 @@
 <code>nice_lm</code><a class="anchor" aria-label="anchor" href="#nice_lm"></a>
 </h2>
 <p>For more complicated models not supported by <code>nice_mod</code>, one can define the model in the traditional way and feed it to <code>nice_lm</code> instead. Supports multiple <code>lm</code> models as well.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">*</span> <span class="va">carb</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">mods</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_lm.html">nice_lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -310,7 +313,7 @@
 <span><span class="co">#&gt; 6 0.137733654712 0.042159840 0.0000000000 0.14133523</span></span>
 <span><span class="co">#&gt; 7 0.002563609014 0.199020425 0.0019902043 0.40691582</span></span>
 <span><span class="co">#&gt; 8 0.288572032972 0.021116556 0.0000000000 0.09136014</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format moderation results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">mods</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_lm-1.png"></p>
@@ -321,7 +324,7 @@
 <code>nice_slopes</code><a class="anchor" aria-label="anchor" href="#nice_slopes"></a>
 </h2>
 <p>Easily compute simple slopes in moderation analysis, with effect sizes, and format in publication-ready format. Supports multiple dependent variables and covariates at once.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simple.slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_slopes.html">nice_slopes</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span><span class="op">)</span>,</span>
@@ -343,7 +346,7 @@
 <span><span class="co">#&gt; 4 0.92610159 0.00006397412        0 0.002570652</span></span>
 <span><span class="co">#&gt; 5 0.49168336 0.00354603816        0 0.022301536</span></span>
 <span><span class="co">#&gt; 6 0.33860037 0.00692298820        0 0.033253212</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format simple slopes results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_slopes-1.png"></p>
@@ -354,7 +357,7 @@
 <code>nice_lm_slopes</code><a class="anchor" aria-label="anchor" href="#nice_lm_slopes"></a>
 </h2>
 <p>For more complicated models not supported by <code>nice_slopes</code>, one can define the model in the traditional way and feed it to <code>nice_lm_slopes</code> instead. Supports multiple <code>lm</code> models as well, but the predictor and moderator need to be the same for these models (the dependent variable can change).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">disp</span> <span class="op">~</span> <span class="va">gear</span> <span class="op">*</span> <span class="va">wt</span>, <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="va">my.models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model1</span>, <span class="va">model2</span><span class="op">)</span></span>
@@ -374,7 +377,7 @@
 <span><span class="co">#&gt; 4 0.92610159 0.00006397412        0 0.002570652</span></span>
 <span><span class="co">#&gt; 5 0.49168336 0.00354603816        0 0.022301536</span></span>
 <span><span class="co">#&gt; 6 0.33860037 0.00692298820        0 0.033253212</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format simple slopes results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">simple.slopes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_lm_slopes-1.png"></p>
@@ -390,7 +393,7 @@
 <code>nice_violin</code><a class="anchor" aria-label="anchor" href="#nice_violin"></a>
 </h2>
 <p>Make nice violin plots easily with 95% bootstrapped confidence intervals.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_violin.html">nice_violin</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"dose"</span>,</span>
@@ -402,7 +405,7 @@
 <span>  d.y <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_violin-1.png" width="60%"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save plot</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"niceplot.pdf"</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">7</span>, height <span class="op">=</span> <span class="fl">7</span>, unit <span class="op">=</span> <span class="st">"in"</span>,</span>
@@ -415,7 +418,7 @@
 <code>nice_scatter</code><a class="anchor" aria-label="anchor" href="#nice_scatter"></a>
 </h2>
 <p>Make nice scatter plots easily.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
@@ -425,7 +428,7 @@
 <span>  has.p <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_scatter-1.png" width="60%"></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_scatter.html">nice_scatter</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span>
@@ -441,11 +444,11 @@
 <code>overlap_circle</code><a class="anchor" aria-label="anchor" href="#overlap_circle"></a>
 </h2>
 <p>Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Score of 3.5 (25% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-overlap_circle-1.png" width="30%"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Score of 6.84 (81.8% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">6.84</span><span class="op">)</span></span></code></pre></div>
@@ -457,7 +460,7 @@
 <code>cormatrix_excel</code><a class="anchor" aria-label="anchor" href="#cormatrix_excel"></a>
 </h2>
 <p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (pink/light blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">infert</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"cormatrix1"</span>,</span>
@@ -494,7 +497,7 @@
 <code>nice_na</code><a class="anchor" aria-label="anchor" href="#nice_na"></a>
 </h2>
 <p>Nicely reports NA values according to existing guidelines (i.e, reporting absolute or percentage of item-based missing values, plus each scale’s maximum amount of missing values for a given participant). Accordingly, allows specifying a list of columns representing questionnaire items to produce a questionnaire-based report of missing values.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create synthetic data frame for the demonstration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -527,7 +530,7 @@
 <code>extract_duplicates</code><a class="anchor" aria-label="anchor" href="#extract_duplicates"></a>
 </h2>
 <p>Extracts ALL duplicates (including the first one, contrary to <code>duplicated</code> or <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">dplyr::distinct</a></code>) to a data frame for visual inspection.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  item1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
@@ -554,7 +557,7 @@
 <code>best_duplicate</code><a class="anchor" aria-label="anchor" href="#best_duplicate"></a>
 </h2>
 <p>Extracts the “best” duplicate: the one with the fewer number of missing values (in case of ties, picks the first one).</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/best_duplicate.html">best_duplicate</a></span><span class="op">(</span><span class="va">df1</span>, id <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (2 duplicates removed)</span></span>
 <span><span class="co">#&gt;   id item1 item2 item3</span></span>
@@ -567,7 +570,7 @@
 <code>scale_mad</code><a class="anchor" aria-label="anchor" href="#scale_mad"></a>
 </h2>
 <p>Scale and center (“standardize”) data based on the median and median absolute deviation (MAD).</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/scale_mad.html">scale_mad</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1]  0.33262558  0.33262558  0.66525116  0.40654238 -0.09239599 -0.20327119</span></span>
 <span><span class="co">#&gt;  [7] -0.90548075  0.96091834  0.66525116  0.00000000 -0.25870878 -0.51741757</span></span>
@@ -581,7 +584,7 @@
 <code>find_mad</code><a class="anchor" aria-label="anchor" href="#find_mad"></a>
 </h2>
 <p>Identify outliers based on (e.g.,) 3 median absolute deviations (MAD) from the median.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/find_mad.html">find_mad</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 2 outlier(s) based on 3 median absolute deviations for variable(s): </span></span>
 <span><span class="co">#&gt;  mpg, cyl, disp, hp, drat, wt, qsec, gear, carb </span></span>
@@ -601,7 +604,7 @@
 <code>winsorize_mad</code><a class="anchor" aria-label="anchor" href="#winsorize_mad"></a>
 </h2>
 <p>Winsorize outliers based on (e.g.,) 3 median absolute deviations (MAD).</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/winsorize_mad.html">winsorize_mad</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">qsec</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] 16.46000 17.02000 18.61000 19.44000 17.02000 20.22000 15.84000 20.00000</span></span>
 <span><span class="co">#&gt;  [9] 21.95765 18.30000 18.90000 17.40000 17.60000 18.00000 17.98000 17.82000</span></span>
@@ -613,7 +616,7 @@
 <code>nice_reverse</code><a class="anchor" aria-label="anchor" href="#nice_reverse"></a>
 </h2>
 <p>Easily recode scores (reverse-score), typically for questionnaire answers.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reverse score of 5 with a maximum score of 5</span></span>
 <span><span class="fu"><a href="reference/nice_reverse.html">nice_reverse</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
@@ -631,7 +634,7 @@
 <code>format_value</code><a class="anchor" aria-label="anchor" href="#format_value"></a>
 </h2>
 <p>Easily format <em>p</em> or <em>r</em> values. Note: converts to <code>character</code> class for use in figures or manuscripts to accommodate e.g., “&lt; .001”.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/format_value.html">format_p</a></span><span class="op">(</span><span class="fl">0.0041231</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] ".004"</span></span>
 <span><span class="fu"><a href="reference/format_value.html">format_p</a></span><span class="op">(</span><span class="va">t.tests</span><span class="op">$</span><span class="va">p</span><span class="op">)</span></span>
@@ -646,7 +649,7 @@
 <code>nice_randomize</code><a class="anchor" aria-label="anchor" href="#nice_randomize"></a>
 </h2>
 <p>Randomize easily with different designs.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
 <span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
 <span>  design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span>
@@ -682,7 +685,7 @@
 <code>nice_assumptions</code><a class="anchor" aria-label="anchor" href="#nice_assumptions"></a>
 </h2>
 <p>Test linear regression assumptions easily with a nice summary table.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create regression model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co"># View results</span></span>
@@ -695,7 +698,7 @@
 <code>nice_normality</code><a class="anchor" aria-label="anchor" href="#nice_normality"></a>
 </h2>
 <p>Easily make nice density and QQ plots per-group.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_normality.html">nice_normality</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -712,13 +715,13 @@
 <code>plot_outliers</code><a class="anchor" aria-label="anchor" href="#plot_outliers"></a>
 </h2>
 <p>Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"Month"</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"Ozone"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_outliers-1.png" width="70%"></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
@@ -732,7 +735,7 @@
 <code>nice_var</code><a class="anchor" aria-label="anchor" href="#nice_var"></a>
 </h2>
 <p>Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -749,7 +752,7 @@
 <code>nice_varplot</code><a class="anchor" aria-label="anchor" href="#nice_varplot"></a>
 </h2>
 <p>Attempt to visualize variance per group.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -788,6 +791,12 @@
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
