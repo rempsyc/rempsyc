@@ -50,12 +50,16 @@ library(rempsyc)
 Basic output with default options (3 conditions, 9 participants, between-group design):
 
 ```{r}
+set.seed(100)
 nice_randomize()
 ```
+
+> ***Note:*** You will notice that I have set a seed with the `set.seed()` function. For reproducibility reasons, users are also encouraged to set a seed before using this function.
 
 Specify design, number of conditions, number of participants, and names of conditions:
 
 ```{r}
+set.seed(100)
 nice_randomize(
   design = "between",
   Ncondition = 4,
@@ -75,6 +79,7 @@ Be aware that this function won't work for between-group designs unless your sam
 Basic output with default options (3 conditions and 9 participants) but with within-subject design specified
 
 ```{r}
+set.seed(100)
 nice_randomize(design = "within")
 ```
 
@@ -83,6 +88,7 @@ Specify design, number of conditions, number of participants, and names of condi
 Note that you could call your conditions anything (like a, b, c, etc.).
 
 ```{r}
+set.seed(100)
 nice_randomize(
   design = "within",
   Ncondition = 4,
@@ -99,6 +105,7 @@ nice_randomize(
 A nice way to make a run sheet quickly (regardless of design) is by adding column names in advance with the `col.names` argument:
 
 ```{r}
+set.seed(100)
 nice_randomized_subjects <- nice_randomize(
   design = "within",
   Ncondition = 4,

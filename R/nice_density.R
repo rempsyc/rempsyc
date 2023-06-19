@@ -78,7 +78,7 @@ nice_density <- function(data,
                          breaks.auto = FALSE,
                          bins = 30) {
   check_col_names(data, c(group, variable))
-  rlang::check_installed("ggplot2", reason = "for this function.")
+  rlang::check_installed("ggplot2", reason = "for this function.", version = "3.4.0")
   if (is.null(group)) {
     group <- "All"
     data[[group]] <- group

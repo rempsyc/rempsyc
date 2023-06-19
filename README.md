@@ -62,6 +62,20 @@ library(rempsyc)
 ?rempsyc
 ```
 
+**Dependencies:** Because `rempsyc` is a package of convenience
+functions relying on several external packages, it uses (inspired by the
+[`easystats`](https://easystats.github.io/easystats/) packages) a
+minimalist philosophy of only installing packages that you need when you
+need them through `rlang::check_installed()`. Should you wish to
+specifically install all suggested dependencies at once (you can view
+the full list by clicking on the CRAN badge on this page), you can run
+the following (be warned that this may take a long time, as some of the
+suggested packages are only used in the vignettes or examples):
+
+``` r
+install.packages("rempsyc", dependencies = TRUE)
+```
+
 ## Overview
 
 [Nice APA tables](#nice-apa-tables)<a name = 'Nice APA tables'/>
@@ -162,12 +176,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.6483541  4.4833167
-#> 2  0.8144608  1.9773906
-#> 3  1.2898542  3.1073436
-#> 4 -5.7383229 -3.9297322
-#> 5 -4.3078430 -2.2917952
-#> 6 -2.2290225 -0.8912713
+#> 1  2.7596380  4.5573724
+#> 2  0.8030446  2.0002886
+#> 3  1.3642791  3.0250009
+#> 4 -5.7960034 -3.8486063
+#> 5 -4.3671827 -2.2516035
+#> 6 -2.2216117 -0.8399882
 ```
 
 ``` r
@@ -201,10 +215,10 @@ moderations
 #> 5            2               disp        wt 28  0.83273987  7.6662883
 #> 6            2               disp   gear:wt 28 -0.08758665 -0.8140664
 #>                   p         sr2     CI_lower   CI_upper
-#> 1 0.431415645312884 0.004805465 0.0000000000 0.02702141
+#> 1 0.431415645312886 0.004805465 0.0000000000 0.02702141
 #> 2 0.000000002383144 0.558188818 0.3142326391 0.80214500
 #> 3 0.039899695159515 0.035022025 0.0003502202 0.09723370
-#> 4 0.491683361920264 0.003546038 0.0000000000 0.02230154
+#> 4 0.491683361920263 0.003546038 0.0000000000 0.02230154
 #> 5 0.000000023731710 0.429258143 0.1916386492 0.66687764
 #> 6 0.422476456495512 0.004840251 0.0000000000 0.02679265
 ```

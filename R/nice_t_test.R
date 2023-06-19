@@ -100,14 +100,15 @@ nice_t_test <- function(data,
                         ...) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("effectsize", "methods"),
+    version = c("0.8.2", NA),
     reason = "for this function."
   )
   args <- list(...)
   if (methods::hasArg(var.equal)) {
     if (isTRUE(args$var.equal)) {
-      message_white("Using Student t-test. \n ")
+      message("Using Student t-test. \n ")
     } else if (isFALSE(args$var.equal)) {
-      message_white("Using Welch t-test. \n ")
+      message("Using Welch t-test. \n ")
     }
     pooled_sd <- args$var.equal
   } else {
@@ -115,13 +116,13 @@ nice_t_test <- function(data,
   }
   if (methods::hasArg(paired)) {
     paired <- args$paired
-    if (paired == TRUE) message_white("Using paired t-test. \n ")
-    if (paired == FALSE) message_white("Using independent samples t-test. \n ")
+    if (paired == TRUE) message("Using paired t-test. \n ")
+    if (paired == FALSE) message("Using independent samples t-test. \n ")
   } else {
     paired <- FALSE
   }
   if (!methods::hasArg(var.equal) & paired == FALSE & warning == TRUE) {
-    message_white(
+    message(
       "Using Welch t-test (base R's default; ",
       "cf. https://doi.org/10.5334/irsp.82).
 For the Student t-test, use `var.equal = TRUE`. \n "
@@ -132,7 +133,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
     formulas <- paste0(response, " ~ ", group)
     formulas <- lapply(formulas, stats::as.formula)
   } else {
-    message_white("Using one-sample t-test. \n ")
+    message("Using one-sample t-test. \n ")
     formulas <- lapply(data[response], as.numeric)
   }
   if (methods::hasArg(mu)) {

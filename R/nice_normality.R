@@ -76,6 +76,7 @@ nice_normality <- function(data,
                            ...) {
   check_col_names(data, c(group, variable))
   rlang::check_installed(c("ggplot2", "see", "patchwork"),
+    version = c("3.4.0", NA, NA),
     reason = "for this function."
   )
 

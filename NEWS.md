@@ -2,6 +2,11 @@
 * IN PROGRESS
 * CRAN resubmission
 
+# rempsyc 0.1.2.5
+* Fixed bug with `check_installed` where required package version were not being specified correctly.
+* A way to install all dependencies at once are now provided in the README file.
+* Contribution Guidelines are now available.
+
 # rempsyc 0.1.2.4
 * `nice_scatter`: `groups.order` now also allows automatic grouping based on value for the response variable (one of the desired levels, "increasing", "decreasing", or "string.length"), for consistency with `nice_violin`.
 * `nice_violin`: `order.groups` argument renames to `groups.order` for consistency with `nice_scatter`.

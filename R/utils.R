@@ -19,11 +19,6 @@ theme_apa <- function(x, has.legend = FALSE) {
 }
 
 #' @noRd
-message_white <- function(...) {
-  message("\033[97m", ..., "\033[97m")
-}
-
-#' @noRd
 check_col_names <- function(data, names) {
   missing.cols <- lapply(names, function(x) {
     x %in% names(data)

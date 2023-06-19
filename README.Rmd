@@ -60,11 +60,16 @@ Or from GitHub, for the very latest version:
 # If package `remotes` isn't already installed, install it with `install.packages("remotes")`
 remotes::install_github("rempsyc/rempsyc")
 ```
-You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
 
+You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
 ``` r
 library(rempsyc)
 ?rempsyc
+```
+
+**Dependencies:** Because `rempsyc` is a package of convenience functions relying on several external packages, it uses (inspired by the [`easystats`](https://easystats.github.io/easystats/) packages) a minimalist philosophy of only installing packages that you need when you need them through `rlang::check_installed()`. Should you wish to specifically install all suggested dependencies at once (you can view the full list by clicking on the CRAN badge on this page), you can run the following (be warned that this may take a long time, as some of the suggested packages are only used in the vignettes or examples):
+``` r
+install.packages("rempsyc", dependencies = TRUE)
 ```
 
 ## Overview
@@ -117,11 +122,11 @@ Easily compute t-test analyses, with effect sizes, and format in publication-rea
 ```{r nice_t_test, warning = FALSE, message = FALSE}
 library(rempsyc)
 
-nice_t_test(
+t.tests <- nice_t_test(
   data = mtcars,
   response = c("mpg", "disp", "drat", "wt"),
   group = "am"
-) -> t.tests
+)
 t.tests
 ```
 
@@ -142,7 +147,10 @@ flextable::save_as_image(table_temp,
 <img src="man/figures/README-nice_t_test-1.png" />
 
 ```{r table_save, warning = FALSE, message = FALSE, eval = FALSE}
-# Save to word
+# Open in Word for quick copy-pasting
+print(my_table, preview ="docx")
+
+# Or save to Word
 flextable::save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 

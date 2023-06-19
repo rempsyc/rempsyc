@@ -62,7 +62,9 @@ plot_outliers <- function(data,
                           yby = 1,
                           ...) {
   check_col_names(data, c(group, response))
-  rlang::check_installed(c("ggplot2"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2"),
+                         version = "3.4.0",
+                         reason = "for this function.")
   mtd <- switch(method,
     "mad" = "median",
     "sd" = "mean"
