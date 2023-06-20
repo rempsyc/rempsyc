@@ -28,7 +28,7 @@ Submit a PR (if you've never heard the term before, that's a Pull Request!). Tha
 
 If you are a bit more experienced however, it is suggested to submit a PR. The recommended workflow to submit a PR is the following.
 
-1. Fork the repository (use: `usethis::create_from_github("rempsyc/rempsyc", fork = TRUE)`).
+1. Fork the repository (use: `usethis::create_from_github("rempsyc/rempsyc")`).
 2. Create a branch (in RStudio, click on the tiny purple flowchart under the `Git` tab, between the blue wheel and `main` branch buttons), and name it based on the theme of your suggested changes.
 3. Commit and then push (`Ctrl+p`) your changes to your branch from RStudio.
 4. Submit a PR with your modified branch (go to your branch on the GitHub website, and it will automatically suggest to open a PR and draft a message for you).
