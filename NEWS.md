@@ -1,5 +1,4 @@
 # rempsyc 0.1.3
-* IN PROGRESS
 * CRAN resubmission
 
 # rempsyc 0.1.2.5
