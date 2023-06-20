@@ -7,5 +7,3 @@
     ") [Computer software]. https://rempsyc.remi-theriault.com "
   )
 }
-
-#' @noRd

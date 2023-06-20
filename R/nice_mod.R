@@ -92,7 +92,7 @@ nice_mod <- function(data,
                      ...) {
   check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
   rlang::check_installed("effectsize",
-                         version = "0.8.2",
+                         version = get_dep_version("effectsize"),
                          reason = "for this function.")
 
   if (!missing(b.label)) {

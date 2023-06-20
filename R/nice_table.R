@@ -155,7 +155,7 @@ nice_table <- function(data,
                        note,
                        separate.header) {
   rlang::check_installed(c("flextable", "methods"),
-    version = c("0.9.1", NA),
+    version = c(get_dep_version("flextable"), NA),
     reason = "for this function."
   )
 

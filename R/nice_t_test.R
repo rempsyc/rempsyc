@@ -100,7 +100,7 @@ nice_t_test <- function(data,
                         ...) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("effectsize", "methods"),
-    version = c("0.8.2", NA),
+    version = c(get_dep_version("effectsize"), NA),
     reason = "for this function."
   )
   args <- list(...)

@@ -78,9 +78,13 @@ This will give us Cohen's *d* by default for the effect size, but it is possible
 (my_table <- nice_table(table.stats))
 ```
 
-**Save the table to Word**
+**Open (or save) the table to Word**
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "contrasts.docx")
 ```
 
@@ -443,9 +447,13 @@ Note that with option `highlight = TRUE`, it will automatically highlight signif
 ))
 ```
 
-**Save the table to Word**
+**Open (or save) the table to Word**
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "contrasts.docx")
 ```
 

@@ -83,9 +83,13 @@ my_table
 
 ### Save table to Word
 
-Let's save it to word for use in a publication (optional).
+Let's open (or save) it to word for use in a publication (optional).
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "t-tests.docx")
 ```
 
