@@ -178,7 +178,7 @@
 <code>nice_table</code><a class="anchor" aria-label="anchor" href="#nice_table"></a>
 </h2>
 <p>Make nice APA tables easily through a wrapper around the <code>flextable</code> package with sensical defaults and automatic formatting features.</p>
-<p>The tables can be saved with the <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
+<p>The tables can be opened in Word with <code>print(table, preview ="docx")</code>, or saved to Word with the <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code> function, and are <code>flextable</code> objects, and can be modified as such. The function also integrates with objects from the <code>broom</code> and <code>report</code> packages. Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/table" class="uri">https://rempsyc.remi-theriault.com/articles/table</a></p>
 <p>Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.</p>
 </div>
 <div class="section level2">
@@ -193,11 +193,11 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/nice_t_test.html">nice_t_test</a></span><span class="op">(</span></span>
+<span><span class="va">t.tests</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_t_test.html">nice_t_test</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"disp"</span>, <span class="st">"drat"</span>, <span class="st">"wt"</span><span class="op">)</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"am"</span></span>
-<span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">t.tests</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">t.tests</span></span>
 <span><span class="co">#&gt;   Dependent Variable         t       df              p         d   CI_lower</span></span>
 <span><span class="co">#&gt; 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731</span></span>
@@ -215,7 +215,10 @@
 <span><span class="va">t_table</span></span></code></pre></div>
 <p><img src="reference/figures/README-nice_t_test-1.png"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Save to word</span></span>
+<code class="sourceCode R"><span><span class="co"># Open in Word for quick copy-pasting</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_table</span>, preview <span class="op">=</span><span class="st">"docx"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Or save to Word</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">t_table</span>, path <span class="op">=</span> <span class="st">"D:/R treasures/t_tests.docx"</span><span class="op">)</span></span></code></pre></div>
 <p>Full tutorial: <a href="https://rempsyc.remi-theriault.com/articles/t-test" class="uri">https://rempsyc.remi-theriault.com/articles/t-test</a></p>
 </div>
@@ -240,12 +243,12 @@
 <span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
 <span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.7596380  4.5573724</span></span>
-<span><span class="co">#&gt; 2  0.8030446  2.0002886</span></span>
-<span><span class="co">#&gt; 3  1.3642791  3.0250009</span></span>
-<span><span class="co">#&gt; 4 -5.7960034 -3.8486063</span></span>
-<span><span class="co">#&gt; 5 -4.3671827 -2.2516035</span></span>
-<span><span class="co">#&gt; 6 -2.2216117 -0.8399882</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  2.7749422  4.5056868</span></span>
+<span><span class="co">#&gt; 2  0.8271079  1.9692478</span></span>
+<span><span class="co">#&gt; 3  1.3418407  3.0306450</span></span>
+<span><span class="co">#&gt; 4 -5.7436105 -3.8434670</span></span>
+<span><span class="co">#&gt; 5 -4.2381805 -2.1244021</span></span>
+<span><span class="co">#&gt; 6 -2.2318706 -0.8736197</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
