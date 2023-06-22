@@ -1,10 +1,27 @@
 #' @title Interpolate the Inclusion of the Other in the Self Scale
 #'
 #' @description Interpolating the Inclusion of the Other in
-#' the Self Scale (self-other merging) easily.
+#' the Self Scale (IOS; self-other merging) easily. The user provides
+#' the IOS score, from 1 to 7, and the function will provide a
+#' percentage of actual area overlap between the two circles
+#' (i.e., not linear overlap), so it is possible to say, e.g.,
+#' that experimental group 1 had an average overlap of X%
+#' with the other person, whereas experimental group 2 had
+#' an average overlap of X% with the other person.
 #'
-#' @param response The variable to plot.
-#' @param categories The desired categories of the two overlapping circles.
+#' @details
+#' The circles are generated through the
+#' `VennDiagram::draw.pairwise.venn()` function and the desired
+#' percentage overlap is passed to its `cross.area` argument
+#' ("The size of the intersection between the sets"). The percentage
+#' overlap values are interpolated from this reference grid:
+#' Score of 1 = 0%, 2 = 10%, 3 = 20%, 4 = 30%, 5 = 55%, 6 = 65%,
+#' 7 = 85%.
+#'
+#' @param response The variable to plot: requires IOS scores ranging
+#' from 1 to 7.
+#' @param categories The desired category names of the two overlapping
+#' circles for display on the plot.
 #'
 #' @keywords self-other merging self-other overlap Venn diagrams social
 #'           psychology
@@ -26,10 +43,9 @@
 #'
 #' \donttest{
 #' # Saving to file (PDF or PNG)
-#' mypath <- tempfile(fileext = ".pdf")
 #' plot <- overlap_circle(3.5)
 #' ggplot2::ggsave(plot,
-#'   file = mypath, width = 7,
+#'   file = tempfile(fileext = ".pdf"), width = 7,
 #'   height = 7, unit = "in", dpi = 300
 #' )
 #' # Change for your own desired path
