@@ -73,11 +73,15 @@ If we want it to look nice
 
 > ***Note:*** The sr2 (semi-partial correlation squared, [also known as delta R-square](https://rdrr.io/cran/rockchalk/man/getDeltaRsquare.html)) allows us to quantify the unique contribution (proportion of variance explained) of an independent variable on the dependent variable, over and above the other variables in the model. sr2 is often considered a better indicator of the practical relevance of a variable.
 
-### Save table to Word
+### Open (or save) table to Word
 
 Let's save it to word for use in a publication (optional).
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "moderations.docx")
 ```
 
