@@ -114,13 +114,13 @@ plot_outliers <- function(data,
     ) +
     ggplot2::geom_hline(
       yintercept = criteria,
-      size = 1,
+      linewidth = 1,
       colour = "red",
       linetype = "dashed"
     ) +
     ggplot2::geom_hline(
       yintercept = -criteria,
-      size = 1,
+      linewidth = 1,
       colour = "red",
       linetype = "dashed"
     )

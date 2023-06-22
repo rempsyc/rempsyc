@@ -1,3 +1,10 @@
+# rempsyc 0.1.4
+* Incoming!
+
+# rempsyc 0.1.3.1
+* Added tests for all functions
+* Accordingly, updated code to stop using deprecated functions from other packages (`dplyr` and `ggplot2`).
+
 # rempsyc 0.1.3
 * CRAN resubmission
 

@@ -60,7 +60,7 @@ nice_assumptions <- function(model) {
 
   names(df) <- c("Model", "shapiro", "bp", "dw")
   df <- df %>%
-    dplyr::mutate(dplyr::across(where(is.numeric), round, 3),
+    dplyr::mutate(dplyr::across(where(is.numeric), \(x) round(x, 3)),
       Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05)
     )
 

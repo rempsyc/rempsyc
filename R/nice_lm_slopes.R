@@ -164,7 +164,7 @@ nice_lm_slopes <- function(model,
   ))
   table.stats <- table.stats[correct.order, ] # 1, 4, 7, 2, 5, 8, 3, 6, 9
   table.stats <- dplyr::rename(table.stats,
-    `Predictor (+/-1 SD)` = .data$Predictor
+    `Predictor (+/-1 SD)` = "Predictor"
   )
 
   names(table.stats)[names(table.stats) == "b"] <- b.label
