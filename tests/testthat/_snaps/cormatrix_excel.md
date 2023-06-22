@@ -1,8 +1,8 @@
 # cormatrix_excel
 
     Code
-      cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp", "carb"),
-      filename = "cormatrix1", verbose = FALSE)
+      suppressWarnings(cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp",
+        "carb"), filename = "cormatrix1", verbose = FALSE))
     Output
       # Correlation Matrix (pearson-method)
       
@@ -18,15 +18,13 @@
       
       
        [Correlation matrix 'cormatrix1.xlsx' has been saved to working directory (or where specified).]
-    Warning <simpleWarning>
-      will not open file when not interactive
-    Output
       NULL
 
 ---
 
     Code
-      cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2", verbose = FALSE)
+      suppressWarnings(cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2",
+        verbose = FALSE))
     Output
       # Correlation Matrix (pearson-method)
       
@@ -41,16 +39,13 @@
       
       
        [Correlation matrix 'cormatrix2.xlsx' has been saved to working directory (or where specified).]
-    Warning <simpleWarning>
-      will not open file when not interactive
-    Output
       NULL
 
 ---
 
     Code
-      cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3",
-        verbose = FALSE)
+      suppressWarnings(cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3",
+        verbose = FALSE))
     Output
       # Correlation Matrix (spearman-method)
       
@@ -67,8 +62,5 @@
       
       
        [Correlation matrix 'cormatrix3.xlsx' has been saved to working directory (or where specified).]
-    Warning <simpleWarning>
-      will not open file when not interactive
-    Output
       NULL
 
