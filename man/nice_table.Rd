@@ -93,7 +93,7 @@ around the \code{flextable} package with sensical defaults and
 automatic formatting features.
 }
 \details{
-The resulting flextable objects can be opened in
+The resulting \code{flextable} objects can be opened in
 Word with \code{print(table, preview ="docx")}, or saved to
 Word with the \code{flextable::save_as_docx()} function.
 }

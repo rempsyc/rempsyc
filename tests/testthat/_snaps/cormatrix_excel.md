@@ -2,7 +2,7 @@
 
     Code
       cormatrix_excel(mtcars, select = c("mpg", "cyl", "disp", "hp", "carb"),
-      filename = "cormatrix1")
+      filename = "cormatrix1", verbose = FALSE)
     Output
       # Correlation Matrix (pearson-method)
       
@@ -26,7 +26,7 @@
 ---
 
     Code
-      cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2")
+      cormatrix_excel(iris, p_adjust = "none", filename = "cormatrix2", verbose = FALSE)
     Output
       # Correlation Matrix (pearson-method)
       
@@ -49,7 +49,8 @@
 ---
 
     Code
-      cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3")
+      cormatrix_excel(airquality, method = "spearman", filename = "cormatrix3",
+        verbose = FALSE)
     Output
       # Correlation Matrix (spearman-method)
       
