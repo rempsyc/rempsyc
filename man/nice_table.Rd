@@ -92,6 +92,11 @@ Make nice APA tables easily through a wrapper
 around the \code{flextable} package with sensical defaults and
 automatic formatting features.
 }
+\details{
+The resulting flextable objects can be opened in
+Word with \code{print(table, preview ="docx")}, or saved to
+Word with the \code{flextable::save_as_docx()} function.
+}
 \examples{
 \dontshow{if (requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic table

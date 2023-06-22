@@ -109,7 +109,7 @@ invisible(lapply(
 
 Make nice APA tables easily through a wrapper around the `flextable` package with sensical defaults and automatic formatting features.
 
-The tables can be saved with the `flextable::save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://rempsyc.remi-theriault.com/articles/table
+The tables can be opened in Word with `print(table, preview ="docx")`, or saved to Word with the `flextable::save_as_docx` function, and are `flextable` objects, and can be modified as such. The function also integrates with objects from the `broom` and `report` packages. Full tutorial: https://rempsyc.remi-theriault.com/articles/table
 
 Note: For a smoother and more integrated presentation flow, this function is now featured along the other functions.
 
@@ -131,12 +131,6 @@ t.tests
 ```
 
 ```{r, results='hide'}
-# Format t-test results
-t_table <- nice_table(t.tests)
-t_table
-```
-
-```{r, screenshot.force = TRUE}
 # Format t-test results
 t_table <- nice_table(t.tests)
 t_table
@@ -165,6 +159,10 @@ Full tutorial: https://rempsyc.remi-theriault.com/articles/t-test
 ## `nice_contrasts `
 
 Easily compute regression with planned contrast analyses (pairwise comparisons similar to t-tests but more powerful when more than 2 groups), and format in publication-ready format. Supports multiple dependent variables at once (but supports only three groups for the moment). In this particular case, the confidence intervals are bootstraped around the Cohen's d.
+
+```{r set.seed, include=FALSE}
+set.seed(100)
+```
 
 ```{r nice_contrasts, warning = FALSE, message = FALSE}
 contrasts <- nice_contrasts(

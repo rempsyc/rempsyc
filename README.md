@@ -99,8 +99,9 @@ assumptions](#testing-assumptions)<a name = 'Testing assumptions'/>
 Make nice APA tables easily through a wrapper around the `flextable`
 package with sensical defaults and automatic formatting features.
 
-The tables can be saved with the `flextable::save_as_docx` function, and
-are `flextable` objects, and can be modified as such. The function also
+The tables can be opened in Word with `print(table, preview ="docx")`,
+or saved to Word with the `flextable::save_as_docx` function, and are
+`flextable` objects, and can be modified as such. The function also
 integrates with objects from the `broom` and `report` packages. Full
 tutorial: <https://rempsyc.remi-theriault.com/articles/table>
 
@@ -118,11 +119,11 @@ The 95% confidence interval is for the effect size (Cohen’s d).
 ``` r
 library(rempsyc)
 
-nice_t_test(
+t.tests <- nice_t_test(
   data = mtcars,
   response = c("mpg", "disp", "drat", "wt"),
   group = "am"
-) -> t.tests
+)
 t.tests
 #>   Dependent Variable         t       df              p         d   CI_lower
 #> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
@@ -145,7 +146,10 @@ t_table
 <img src="man/figures/README-nice_t_test-1.png" />
 
 ``` r
-# Save to word
+# Open in Word for quick copy-pasting
+print(my_table, preview ="docx")
+
+# Or save to Word
 flextable::save_as_docx(t_table, path = "D:/R treasures/t_tests.docx")
 ```
 
@@ -176,12 +180,12 @@ contrasts
 #> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
 #> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
 #>     CI_lower   CI_upper
-#> 1  2.7596380  4.5573724
-#> 2  0.8030446  2.0002886
-#> 3  1.3642791  3.0250009
-#> 4 -5.7960034 -3.8486063
-#> 5 -4.3671827 -2.2516035
-#> 6 -2.2216117 -0.8399882
+#> 1  2.7749422  4.5056868
+#> 2  0.8271079  1.9692478
+#> 3  1.3418407  3.0306450
+#> 4 -5.7436105 -3.8434670
+#> 5 -4.2381805 -2.1244021
+#> 6 -2.2318706 -0.8736197
 ```
 
 ``` r
