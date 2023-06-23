@@ -1,6 +1,13 @@
 # rempsyc 0.1.4
 * Incoming!
 
+# rempsyc 0.1.3.2
+* New functions:
+  * `install_if_not_installed`: will only install specified packages if they are not installed. 
+  * `get_dep_version`: checks the required version of a specific package dependency by looking at the specified package's DESCRIPTION file directly.
+* `best_duplicate`: now supports the `keep.rows` argument, to add a column containing the original rows.
+* `overlap_circle`: now support two other scoring methods: "percentage" (1 to 100), and "direct" (must provide the three values from circle 1, overlapping area, and circle 2).
+
 # rempsyc 0.1.3.1
 * Added tests for all functions
 * Accordingly, updated code to stop using deprecated functions from other packages (`dplyr` and `ggplot2`).

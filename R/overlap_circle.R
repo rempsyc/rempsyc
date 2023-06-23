@@ -19,9 +19,15 @@
 #' 7 = 85%.
 #'
 #' @param response The variable to plot: requires IOS scores ranging
-#' from 1 to 7.
+#' from 1 to 7 (when `scoring = "IOS"`).
 #' @param categories The desired category names of the two overlapping
 #' circles for display on the plot.
+#' @param scoring One of `c("IOS", "percentage", "direct")`. If
+#' `scoring = "IOS"`, response needs to be a value between 1 to 7.
+#' If set to `"percentage"` or `"direct"`, responses need to be
+#' between 0 and 100. If set to `"direct"`, must provide exactly
+#' three values that represent the area from the first circle,
+#' the middle overlapping area, and area from the second circle.
 #'
 #' @keywords self-other merging self-other overlap Venn diagrams social
 #'           psychology
@@ -57,21 +63,39 @@
 #'
 
 overlap_circle <- function(response,
-                           categories = c("Self", "Other")) {
-  if (response < 1 || response > 7) {
-    stop("Overlap score must be between 1 and 7!
-                                        (scoring system of the Inclusion of the
-                                        Other in the Self Scale...)")
-  }
+                           categories = c("Self", "Other"),
+                           scoring = "IOS") {
   rlang::check_installed("VennDiagram", reason = "for this function.")
   grid::grid.newpage()
-  scale <- c(1, 2, 3, 4, 5, 6, 7)
-  overlap <- c(0, 10, 20, 30, 55, 65, 85)
-  po <- round(stats::approx(scale, overlap, xout = response)$y, digits = 2)
+  area1 <- 100
+  area2 <- 100
+  if (scoring == "IOS") {
+    if (response < 1 || response > 7) {
+      stop(c("Overlap score must be between 1 and 7! Else use `scoring = 'percentage'`\n",
+             "(scoring system of the Inclusion of the Other in the Self Scale...)\n"))
+    }
+    scale <- c(1, 2, 3, 4, 5, 6, 7)
+    overlap <- c(0, 10, 20, 30, 55, 65, 85)
+    po <- round(stats::approx(scale, overlap, xout = response)$y, digits = 2)
+  } else {
+    if (any(response < 0 | response > 100)) {
+      stop(c("Overlap percentage score must be between 0 and 100!"))
+    }
+    po <- round(response, digits = 2)
+    if (scoring == "direct") {
+      if (length(response) != 3) {
+        stop(c("Must provide all 3 direct overlap scores!"))
+      }
+      area1 <- response[1]
+      area2 <- response[3]
+      po <- response[2]
+    }
+  }
+
   # po = Percentage overlap
   invisible(VennDiagram::draw.pairwise.venn(
-    area1 = 100,
-    area2 = 100,
+    area1 = area1,
+    area2 = area2,
     cross.area = po,
     category = categories,
     cat.cex = 4,

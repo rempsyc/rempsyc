@@ -4,14 +4,21 @@
 \alias{overlap_circle}
 \title{Interpolate the Inclusion of the Other in the Self Scale}
 \usage{
-overlap_circle(response, categories = c("Self", "Other"))
+overlap_circle(response, categories = c("Self", "Other"), scoring = "IOS")
 }
 \arguments{
 \item{response}{The variable to plot: requires IOS scores ranging
-from 1 to 7.}
+from 1 to 7 (when \code{scoring = "IOS"}).}
 
 \item{categories}{The desired category names of the two overlapping
 circles for display on the plot.}
+
+\item{scoring}{One of \code{c("IOS", "percentage", "direct")}. If
+\code{scoring = "IOS"}, response needs to be a value between 1 to 7.
+If set to \code{"percentage"} or \code{"direct"}, responses need to be
+between 0 and 100. If set to \code{"direct"}, must provide exactly
+three values that represent the area from the first circle,
+the middle overlapping area, and area from the second circle.}
 }
 \value{
 A plot of class gList, displaying overlapping circles relative

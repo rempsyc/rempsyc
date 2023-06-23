@@ -57,7 +57,13 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`. Furthermore, you may be asked to install the following packages if you haven't installed them already (you may decide to install them all now to avoid interrupting your workflow if you wish to follow this tutorial from beginning to end):
+
+```{r}
+install_if_not_installed("VennDiagram")
+```
+
+---
 
 ### Score of 1 (0% overlap)
 
@@ -111,6 +117,20 @@ ggplot2::ggsave(plot,
 This allowed me for instance, for one study (https://doi.org/10.1177/17470218211024826), to compare three of my groups side-by-side following an intervention:
 
 ![](https://rempsyc.remi-theriault.com/images//blog_circles/figure.png)
+
+## Special Cases
+
+It has been requested to be able to either provide the percentage overlap directly, from 1 to 100, or to provide a vector of length three specifying the area from each circle and overlapping region. This is now possible. To better understand the specificities of using the overlap values directly, please see: `?VennDiagram::draw.pairwise.venn`.
+
+```{r}
+overlap_circle(55, scoring = "percentage")
+
+overlap_circle(100, scoring = "percentage")
+
+overlap_circle(c(17, 10, 97), scoring = "direct",
+               categories = c("Self", "Outgroup"))
+
+```
 
 ### Thanks for checking in
 

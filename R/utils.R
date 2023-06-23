@@ -55,7 +55,10 @@ model_is_standardized <- function(models.list) {
   )
 }
 
-#' @noRd
+#' @title Get required version of specified package dependency
+#' @export
+#' @param dep Dependency of the specified package to check
+#' @param pkg Package to check the dependency from
 get_dep_version <- function(dep, pkg = "rempsyc") {
   suggests.field <- utils::packageDescription(pkg, fields = "Suggests")
   suggests.list <- unlist(strsplit(suggests.field, ",", fixed = TRUE))
@@ -67,3 +70,14 @@ get_dep_version <- function(dep, pkg = "rempsyc") {
   }
   out
 }
+
+#' @title Install package if not already installed
+#' @export
+#' @param pkgs Packages to install if not already installed
+install_if_not_installed <- function(pkgs) {
+  successfully_loaded <- vapply(
+    pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+  required_pkgs <- names(which(successfully_loaded == FALSE))
+  utils::install.packages(required_pkgs)
+}
+

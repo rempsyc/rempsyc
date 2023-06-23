@@ -48,7 +48,7 @@ library(performance)
 library(see)
 # Note: if you haven't installed the packages above,
 # you'll need to install them first by using:
-# install.packages("performance") and install.packages("see")
+# install_if_not_installed(c("performance", "see"))
 
 # Create a regression model (using data available in R by default)
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
@@ -71,7 +71,15 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`. Furthermore, you may be asked to install the following packages if you haven't installed them already (you may decide to install them all now to avoid interrupting your workflow if you wish to follow this tutorial from beginning to end):
+
+```{r}
+pkgs <- c("flextable", "performance", "see", "lmtest", "ggplot2",
+          "qqplotr", "ggrepel", "patchwork", "boot")
+install_if_not_installed(pkgs)
+```
+
+---
 
 The raw output doesn't look so nice in the console because the column names are so long, but it does look good in the viewer or when exported to a word processing software because the column names get wrapped. You can try it in RStudio yourself with the following command:
 
