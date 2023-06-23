@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,15 +150,21 @@ Let’s see this.</p>
 <blockquote>
 <p><strong><em>Note:</em></strong> If you haven’t installed this package
 yet, you will need to install it via the following command:
-<code>install.packages("rempsyc")</code>.</p>
+<code>install.packages("rempsyc")</code>. Furthermore, you may be asked
+to install the following packages if you haven’t installed them already
+(you may decide to install them all now to avoid interrupting your
+workflow if you wish to follow this tutorial from beginning to end):</p>
 </blockquote>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_if_not_installed.html">install_if_not_installed</a></span><span class="op">(</span><span class="st">"flextable"</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="between-group-design">Between-Group Design<a class="anchor" aria-label="anchor" href="#between-group-design"></a>
 </h2>
 <p>Basic output with default options (3 conditions, 9 participants,
 between-group design):</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
@@ -179,7 +185,7 @@ function.</p>
 </blockquote>
 <p>Specify design, number of conditions, number of participants, and
 names of conditions:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
 <span>  design <span class="op">=</span> <span class="st">"between"</span>,</span>
@@ -196,7 +202,7 @@ names of conditions:</p>
 <span><span class="co">## 6  6        BP</span></span>
 <span><span class="co">## 7  7        CX</span></span>
 <span><span class="co">## 8  8        ZL</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Warning: sample size needs to be a multiple of your</span></span>
 <span><span class="co"># number of groups if using "between"!</span></span>
 <span><span class="co"># FYI: condition names stand for popular antidepressants:</span></span>
@@ -213,7 +219,7 @@ some operations won’t be able to be completed otherwise.</p>
 </h2>
 <p>Basic output with default options (3 conditions and 9 participants)
 but with within-subject design specified</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span>design <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   id Condition</span></span>
@@ -230,7 +236,7 @@ but with within-subject design specified</p>
 names of conditions:</p>
 <p>Note that you could call your conditions anything (like a, b, c,
 etc.).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
 <span>  design <span class="op">=</span> <span class="st">"within"</span>,</span>
@@ -245,7 +251,7 @@ etc.).</p>
 <span><span class="co">## 4  4 AV - ST - AT - SV</span></span>
 <span><span class="co">## 5  5 ST - AT - SV - AV</span></span>
 <span><span class="co">## 6  6 AT - AV - SV - ST</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># FYI: condition names stand for forms of multisensory stimulation:</span></span>
 <span><span class="co"># SV = Synchronous Visual, AV = Asynchronous Visual,</span></span>
 <span><span class="co"># ST = Synchronous Tactile, AT = Asynchronous Tactile.</span></span></code></pre></div>
@@ -256,7 +262,7 @@ etc.).</p>
 <p>A nice way to make a run sheet quickly (regardless of design) is by
 adding column names in advance with the <code>col.names</code>
 argument:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">nice_randomized_subjects</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
 <span>  design <span class="op">=</span> <span class="st">"within"</span>,</span>
@@ -284,7 +290,7 @@ argument:</p>
 <li>Save the resulting dataframe as a <code>nice_table</code>, and then
 to Word:</li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">runsheet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">nice_randomized_subjects</span><span class="op">)</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">runsheet</span>, path <span class="op">=</span> <span class="st">"runsheet.docx"</span><span class="op">)</span></span>
 <span><span class="co"># Change the path to where you would like to save it.</span></span>
