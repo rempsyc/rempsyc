@@ -21,6 +21,7 @@
     -   Fix error if no dv variation in one of the groups.
     -   Add option to add SEs, skewness, kurtosis 
 -   `nice_contrasts`
+    -   Clarify that Cohen's d is adapted to contrasts and mention how it is calculated...
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
     -   Add option to not use bootstrapping (waiting on `bootES` CRAN version 	1.2.2)
