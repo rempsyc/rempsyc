@@ -14,6 +14,7 @@ A dataframe, with p-value results for the Shapiro-Wilk,
 Breusch-Pagan, and Durbin-Watson tests, as well as a
 diagnostic column reporting how many assumptions are
 not respected for a given model.
+Shapiro-Wilk is set to NA if n < 3 or n > 5000.
 }
 \description{
 Test linear regression assumptions easily with a

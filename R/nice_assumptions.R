@@ -7,12 +7,13 @@
 #'
 #' @details Interpretation: (p) values < .05 imply assumptions are
 #' not respected. Diagnostic is how many assumptions are not
-#' respected for a given model or variable.
+#' respected for a given model or variable. 
 #' @keywords assumptions linear regression statistical violations
 #' @return A dataframe, with p-value results for the Shapiro-Wilk,
 #'         Breusch-Pagan, and Durbin-Watson tests, as well as a
 #'         diagnostic column reporting how many assumptions are
 #'         not respected for a given model.
+#'         Shapiro-Wilk is set to NA if n < 3 or n > 5000.
 #' @export
 #' @examplesIf requireNamespace("lmtest", quietly = TRUE)
 #' # Create a regression model (using data available in R by default)
@@ -44,6 +45,8 @@ nice_assumptions <- function(model) {
     format(x$terms)
   })
   shapiro <- lapply(models.list, function(x) {
+    if(length(x$residuals) > 5000 | length(x$residuals) < 4)
+      return(NA)
     stats::shapiro.test(x$residuals)$p.value
   })
   bp <- lapply(models.list, function(x) {
