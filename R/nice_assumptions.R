@@ -13,6 +13,7 @@
 #'         Breusch-Pagan, and Durbin-Watson tests, as well as a
 #'         diagnostic column reporting how many assumptions are
 #'         not respected for a given model.
+#'         Shapiro-Wilk is set to NA if n < 3 or n > 5000.
 #' @export
 #' @examplesIf requireNamespace("lmtest", quietly = TRUE)
 #' # Create a regression model (using data available in R by default)
@@ -44,6 +45,11 @@ nice_assumptions <- function(model) {
     format(x$terms)
   })
   shapiro <- lapply(models.list, function(x) {
+    if(length(x$residuals) > 5000 || length(x$residuals) < 4) {
+      message("Sample size must be between 4 and 5000 for shapiro.test(); ",
+              "returning NA.")
+      return(NA)
+    }
     stats::shapiro.test(x$residuals)$p.value
   })
   bp <- lapply(models.list, function(x) {
@@ -61,7 +67,7 @@ nice_assumptions <- function(model) {
   names(df) <- c("Model", "shapiro", "bp", "dw")
   df <- df %>%
     dplyr::mutate(dplyr::across(where(is.numeric), \(x) round(x, 3)),
-      Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05)
+      Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05, na.rm = TRUE)
     )
 
   names(df) <- c(
