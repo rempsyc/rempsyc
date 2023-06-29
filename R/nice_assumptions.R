@@ -7,7 +7,7 @@
 #'
 #' @details Interpretation: (p) values < .05 imply assumptions are
 #' not respected. Diagnostic is how many assumptions are not
-#' respected for a given model or variable. 
+#' respected for a given model or variable.
 #' @keywords assumptions linear regression statistical violations
 #' @return A dataframe, with p-value results for the Shapiro-Wilk,
 #'         Breusch-Pagan, and Durbin-Watson tests, as well as a
@@ -45,8 +45,11 @@ nice_assumptions <- function(model) {
     format(x$terms)
   })
   shapiro <- lapply(models.list, function(x) {
-    if(length(x$residuals) > 5000 | length(x$residuals) < 4)
+    if(length(x$residuals) > 5000 | length(x$residuals) < 4) {
+      message("Sample size must be between 3 and 5000 for shapiro.test(); ",
+              "returning NA.")
       return(NA)
+    }
     stats::shapiro.test(x$residuals)$p.value
   })
   bp <- lapply(models.list, function(x) {
@@ -64,7 +67,7 @@ nice_assumptions <- function(model) {
   names(df) <- c("Model", "shapiro", "bp", "dw")
   df <- df %>%
     dplyr::mutate(dplyr::across(where(is.numeric), \(x) round(x, 3)),
-      Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05)
+      Diagnostic = rowSums(dplyr::select(., shapiro:dw) < .05, na.rm = TRUE)
     )
 
   names(df) <- c(

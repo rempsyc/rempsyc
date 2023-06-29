@@ -1,6 +1,9 @@
 # rempsyc 0.1.4
 * Incoming!
 
+# rempsyc 0.1.3.3
+* sjewo
+
 # rempsyc 0.1.3.2
 * New functions:
   * `install_if_not_installed`: will only install specified packages if they are not installed. 
