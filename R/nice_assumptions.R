@@ -45,8 +45,8 @@ nice_assumptions <- function(model) {
     format(x$terms)
   })
   shapiro <- lapply(models.list, function(x) {
-    if(length(x$residuals) > 5000 | length(x$residuals) < 4) {
-      message("Sample size must be between 3 and 5000 for shapiro.test(); ",
+    if(length(x$residuals) > 5000 || length(x$residuals) < 4) {
+      message("Sample size must be between 4 and 5000 for shapiro.test(); ",
               "returning NA.")
       return(NA)
     }
