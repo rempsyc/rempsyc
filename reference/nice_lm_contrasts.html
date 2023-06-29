@@ -189,32 +189,32 @@ Tutorial: <a href="https://rempsyc.remi-theriault.com/articles/contrasts">https:
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">hp</span>, <span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nice_lm_contrasts</span><span class="op">(</span><span class="va">model</span>, group <span class="op">=</span> <span class="st">"cyl"</span>, data <span class="op">=</span> <span class="va">mtcars</span>, bootstraps <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t         p        d  CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 26 0.7047256 0.4872464 3.587739 2.7127620</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 26 0.1302365 0.8973817 1.440495 0.9020259</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 26 0.8452452 0.4056854 2.147244 1.3723431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 26 0.7047256 0.4872464 3.587739 2.6621537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 26 0.1302365 0.8973817 1.440495 0.5634976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 26 0.8452452 0.4056854 2.147244 1.3233566</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.610103</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.003586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2.955949</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.618396</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.952299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.230714</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my.models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">model2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">nice_lm_contrasts</span><span class="op">(</span><span class="va">my.models</span>, group <span class="op">=</span> <span class="st">"cyl"</span>, data <span class="op">=</span> <span class="va">mtcars</span>, bootstraps <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable Comparison df         t            p         d   CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 26 0.7047256 0.4872463657 3.5877388  2.7403724</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 26 0.1302365 0.8973817161 1.4404949  0.7164105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 26 0.8452452 0.4056854062 2.1472439  1.2308149</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4               qsec      4 - 8 29 3.9396785 0.0004711519 1.5873417  0.8611047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5               qsec      6 - 8 29 1.7470521 0.0912125385 0.8087280 -0.1732949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6               qsec      4 - 6 29 1.6103903 0.1181454384 0.7786137 -0.4181842</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg      4 - 8 26 0.7047256 0.4872463657 3.5877388  2.5713470</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg      6 - 8 26 0.1302365 0.8973817161 1.4404949  0.7383180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg      4 - 6 26 0.8452452 0.4056854062 2.1472439  1.2343016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4               qsec      4 - 8 29 3.9396785 0.0004711519 1.5873417  0.8438590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5               qsec      6 - 8 29 1.7470521 0.0912125385 0.8087280 -0.3176867</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6               qsec      4 - 6 29 1.6103903 0.1181454384 0.7786137 -0.3888559</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.419728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.004678</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.027198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2.274711</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 1.977829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 1.870239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.477120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.987943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3.020607</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2.246637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 1.811240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 1.802723</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
