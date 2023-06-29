@@ -1,7 +1,9 @@
 # Development objectives (to-do list)
 
 -   When effectsize new version (0.8.4) is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
--   `nice_lm_contrasts`: improve function and add to contrasts vignette!
+-   `nice_lm_contrasts`:
+    * improve function and add to contrasts vignette!
+    * suggests using set.seed in docs for effect size
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?
 -   `nice_t_test`
