@@ -1,3 +1,9 @@
+## Submission rempsyc 0.1.3
+
+R CMD check results
+
+0 errors | 0 warnings | 0 notes
+
 ## Submission rempsyc 0.1.2
 
 R CMD check results

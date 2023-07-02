@@ -232,7 +232,9 @@ nice_violin <- function(data,
                         groups.order = "none",
                         xlabels.angle = 0) {
   check_col_names(data, c(group, response))
-  rlang::check_installed(c("ggplot2"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2"),
+                         version = get_dep_version("ggplot2"),
+                         reason = "for this function.")
   if (isTRUE(boot)) {
     rlang::check_installed(c("boot"), reason = "for this feature.")
   }

@@ -57,7 +57,15 @@ For the minimal example, we will use the `iris` dataset, which is installed with
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`. Furthermore, you may be asked to install the following packages if you haven't installed them already (you may decide to install them all now to avoid interrupting your workflow if you wish to follow this tutorial from beginning to end):
+
+```{r}
+pkgs <- c("bootES", "emmeans", "flextable", "ggplot2", "boot", 
+          "ggsignif", "ggpubr")
+install_if_not_installed(pkgs)
+```
+
+---
 
 Let's test out the function on existing data
 
@@ -78,9 +86,13 @@ This will give us Cohen's *d* by default for the effect size, but it is possible
 (my_table <- nice_table(table.stats))
 ```
 
-**Save the table to Word**
+**Open (or save) the table to Word**
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "contrasts.docx")
 ```
 
@@ -443,9 +455,13 @@ Note that with option `highlight = TRUE`, it will automatically highlight signif
 ))
 ```
 
-**Save the table to Word**
+**Open (or save) the table to Word**
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "contrasts.docx")
 ```
 

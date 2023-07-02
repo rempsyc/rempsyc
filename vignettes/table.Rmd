@@ -47,7 +47,14 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`. Furthermore, you may be asked to install the following packages if you haven't installed them already (you may decide to install them all now to avoid interrupting your workflow if you wish to follow this tutorial from beginning to end):
+
+```{r}
+pkgs <- c("flextable", "broom", "report", "effectsize")
+install_if_not_installed(pkgs)
+```
+
+---
 
 The function can be used on almost any dataframe (though it does not allow duplicate column names). Here's a simple example using the `mtcars` dataset, which comes with base `R` (meaning you can try this example too without downloading anything).
 
@@ -101,9 +108,15 @@ Next, we can save the flextable as an object, which we can later further edit, v
 my_table <- nice_table(stats.table)
 ```
 
-### Save table to Word
+### Opening/Saving table to Word
 
-One can easily save the table to word by specifying the object name and desired path.
+One can easily open the table in Word for quick copy-pasting.
+
+```{r, eval = FALSE}
+print(my_table, preview ="docx")
+```
+
+Alternatively, one can save the table to Word by specifying the object name and desired path.
 
 ```{r, eval = FALSE}
 flextable::save_as_docx(my_table, path = "nice_tablehere.docx")

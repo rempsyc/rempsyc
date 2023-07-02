@@ -4,12 +4,21 @@
 \alias{overlap_circle}
 \title{Interpolate the Inclusion of the Other in the Self Scale}
 \usage{
-overlap_circle(response, categories = c("Self", "Other"))
+overlap_circle(response, categories = c("Self", "Other"), scoring = "IOS")
 }
 \arguments{
-\item{response}{The variable to plot.}
+\item{response}{The variable to plot: requires IOS scores ranging
+from 1 to 7 (when \code{scoring = "IOS"}).}
 
-\item{categories}{The desired categories of the two overlapping circles.}
+\item{categories}{The desired category names of the two overlapping
+circles for display on the plot.}
+
+\item{scoring}{One of \code{c("IOS", "percentage", "direct")}. If
+\code{scoring = "IOS"}, response needs to be a value between 1 to 7.
+If set to \code{"percentage"} or \code{"direct"}, responses need to be
+between 0 and 100. If set to \code{"direct"}, must provide exactly
+three values that represent the area from the first circle,
+the middle overlapping area, and area from the second circle.}
 }
 \value{
 A plot of class gList, displaying overlapping circles relative
@@ -17,7 +26,22 @@ to the selected score.
 }
 \description{
 Interpolating the Inclusion of the Other in
-the Self Scale (self-other merging) easily.
+the Self Scale (IOS; self-other merging) easily. The user provides
+the IOS score, from 1 to 7, and the function will provide a
+percentage of actual area overlap between the two circles
+(i.e., not linear overlap), so it is possible to say, e.g.,
+that experimental group 1 had an average overlap of X\%
+with the other person, whereas experimental group 2 had
+an average overlap of X\% with the other person.
+}
+\details{
+The circles are generated through the
+\code{VennDiagram::draw.pairwise.venn()} function and the desired
+percentage overlap is passed to its \code{cross.area} argument
+("The size of the intersection between the sets"). The percentage
+overlap values are interpolated from this reference grid:
+Score of 1 = 0\%, 2 = 10\%, 3 = 20\%, 4 = 30\%, 5 = 55\%, 6 = 65\%,
+7 = 85\%.
 }
 \examples{
 \dontshow{if (requireNamespace("VennDiagram", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -35,10 +59,9 @@ overlap_circle(3.12, categories = c("Humans", "Animals"))
 
 \donttest{
 # Saving to file (PDF or PNG)
-mypath <- tempfile(fileext = ".pdf")
 plot <- overlap_circle(3.5)
 ggplot2::ggsave(plot,
-  file = mypath, width = 7,
+  file = tempfile(fileext = ".pdf"), width = 7,
   height = 7, unit = "in", dpi = 300
 )
 # Change for your own desired path

@@ -1,7 +1,9 @@
 # Development objectives (to-do list)
 
--   When effectsize new version is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
--   `nice_lm_contrasts`: improve function and add to contrasts vignette!
+-   When effectsize new version (0.8.4) is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
+-   `nice_lm_contrasts`:
+    * improve function and add to contrasts vignette!
+    * suggests using set.seed in docs for effect size
 -   `rcompanion_groupwiseMean`
     -   Rewrite with only the `boot` package and `dplyr::group_by`?
 -   `nice_t_test`
@@ -21,6 +23,7 @@
     -   Fix error if no dv variation in one of the groups.
     -   Add option to add SEs, skewness, kurtosis 
 -   `nice_contrasts`
+    -   Clarify that Cohen's d is adapted to contrasts and mention how it is calculated...
     -   Need to accommodate: interactions/moderations in the models
     -   Also add option to specify contrasts manually
     -   Add option to not use bootstrapping (waiting on `bootES` CRAN version 	1.2.2)

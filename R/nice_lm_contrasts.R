@@ -18,7 +18,9 @@
 #' The effect size and confidence interval are calculated via
 #' [bootES::bootES].
 #'
-#' For the *easystats* equivalent, see:
+#' Does not for the moment support nested comparisons for marginal means,
+#' only a comparison of all groups. For nested comparisons, please use
+#' [emmeans::contrast()] directly, or for the *easystats* equivalent,
 #' [modelbased::estimate_contrasts()].
 #'
 #' @param model The model to be formatted.

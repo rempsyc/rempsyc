@@ -311,7 +311,7 @@ For psychologists using the Inclusion of Other in the the Self Scale
 interpolate the original discrete scores (1 to 7) into a group average
 representation of the conceptual self-other overlap. For example,
 assuming the group mean is 3.5 on the 1 to 7 scale, `overlap_circle()`
-will draw a 25% overlap from interpolation:
+will draw a 25% area overlap from interpolation:
 
     overlap_circle(3.5)
 
@@ -498,11 +498,11 @@ reporting of results and statistical models*.
 Nuijten, M. B., Hartgerink, C. H., Van Assen, M. A., Epskamp, S., &
 Wicherts, J. M. (2016). The prevalence of statistical reporting errors
 in psychology (1985–2013). *Behavior Research Methods*, *48*, 1205–1226.
-<https://doi.org/doi.org/10.3758/s13428-015-0664-2>
+<https://doi.org/10.3758/s13428-015-0664-2>
 
 Parent, M. C. (2013). Handling item-level missing data: Simpler is just
 as good. *The Counseling Psychologist*, *41*(4), 568–600.
-<https://doi.org/10.1177%2F0011000012445176>
+<https://doi.org/10.1177/0011000012445176>
 
 Quintana, D. S. (2020). *Five things about open and reproducible science
 that every early career researcher should know*. <https://osf.io/2jt9u>

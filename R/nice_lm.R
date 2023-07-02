@@ -70,7 +70,9 @@ nice_lm <- function(model,
                     mod.id = TRUE,
                     ci.alternative = "two.sided",
                     ...) {
-  rlang::check_installed("effectsize", reason = "for this function.")
+  rlang::check_installed("effectsize",
+                         version = get_dep_version("effectsize"),
+                         reason = "for this function.")
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lm")))) {
     models.list <- model
   } else if (inherits(model, "lm")) {

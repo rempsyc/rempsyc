@@ -4,12 +4,15 @@
 \alias{best_duplicate}
 \title{Choose the best duplicate}
 \usage{
-best_duplicate(data, id)
+best_duplicate(data, id, keep.rows = FALSE)
 }
 \arguments{
 \item{data}{The data frame.}
 
 \item{id}{The ID variable for which to check for duplicates.}
+
+\item{keep.rows}{Logical, whether to add a column at the beginning
+of the data frame with the original row indices.}
 }
 \value{
 A dataframe, containing only the "best" duplicates.
@@ -32,7 +35,7 @@ df1 <- data.frame(
   item3 = c(NA, 1, 1, 2, 3)
 )
 
-best_duplicate(df1, id = "id")
+best_duplicate(df1, id = "id", keep.rows = TRUE)
 
 }
 \keyword{duplicates}

@@ -91,7 +91,9 @@ nice_mod <- function(data,
                      ci.alternative = "two.sided",
                      ...) {
   check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
-  rlang::check_installed("effectsize", reason = "for this function.")
+  rlang::check_installed("effectsize",
+                         version = get_dep_version("effectsize"),
+                         reason = "for this function.")
 
   if (!missing(b.label)) {
     message(paste(

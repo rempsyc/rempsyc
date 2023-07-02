@@ -62,7 +62,9 @@ plot_outliers <- function(data,
                           yby = 1,
                           ...) {
   check_col_names(data, c(group, response))
-  rlang::check_installed(c("ggplot2"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2"),
+                         version = get_dep_version("ggplot2"),
+                         reason = "for this function.")
   mtd <- switch(method,
     "mad" = "median",
     "sd" = "mean"
@@ -112,13 +114,13 @@ plot_outliers <- function(data,
     ) +
     ggplot2::geom_hline(
       yintercept = criteria,
-      size = 1,
+      linewidth = 1,
       colour = "red",
       linetype = "dashed"
     ) +
     ggplot2::geom_hline(
       yintercept = -criteria,
-      size = 1,
+      linewidth = 1,
       colour = "red",
       linetype = "dashed"
     )

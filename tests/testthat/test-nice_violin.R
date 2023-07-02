@@ -1,38 +1,34 @@
-test_that("basic", {
+test_that("nice_violin", {
   skip_if_not_installed("ggplot2")
   skip_if_not_installed("boot")
   skip_if_not_installed("ggsignif")
   skip_if_not_installed("ggrepel")
 
-  nice_density(
-    data = iris,
-    variable = "Sepal.Length",
-    group = "Species"
-  )
-
   # Make the basic plot
-  x <- nice_violin(
+  x1 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len"
   )
 
   expect_s3_class(
-    x,
+    x1,
     c("gg", "ggplot2")
   )
 
-  # Save a high-resolution image file to specified directory
-  ggplot2::ggsave("niceviolinplothere.tiff",
+  ggplot2::ggsave("plot.jpg",
     width = 7, height = 7, unit = "in",
     dpi = 300, path = NULL
-  ) # change for your own desired path
+  )
+
+  # expect_snapshot_file("plot.jpg")
+  # Not working...
 
   # Remove file
   unlink("niceviolinplothere.tiff")
 
   # Change x- and y- axes labels
-  nice_violin(
+  x2 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -40,8 +36,13 @@ test_that("basic", {
     xtitle = "Vitamin C Dosage"
   )
 
+  expect_s3_class(
+    x2,
+    c("gg", "ggplot2")
+  )
+
   # See difference between two groups
-  nice_violin(
+  x3 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -49,7 +50,12 @@ test_that("basic", {
     comp2 = "2"
   )
 
-  nice_violin(
+  expect_s3_class(
+    x3,
+    c("gg", "ggplot2")
+  )
+
+  x4 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -57,8 +63,13 @@ test_that("basic", {
     comp2 = 3
   )
 
+  expect_s3_class(
+    x4,
+    c("gg", "ggplot2")
+  )
+
   # Compare all three groups
-  nice_violin(
+  x5 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -69,27 +80,41 @@ test_that("basic", {
     signif_xmin = c(1, 2, 1),
     # Where should the left-sided brackets start (x)?
     signif_xmax = c(2, 3, 3)
+  ) # Where should the right-sided brackets end (x)?
+
+  expect_s3_class(
+    x5,
+    c("gg", "ggplot2")
   )
-  # Where should the right-sided brackets end (x)?
 
   # Set the colours manually
-  nice_violin(
+  x6 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
     colours = c("darkseagreen", "cadetblue", "darkslateblue")
   )
 
+  expect_s3_class(
+    x6,
+    c("gg", "ggplot2")
+  )
+
   # Changing the names of the x-axis labels
-  nice_violin(
+  x7 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
     xlabels = c("Low", "Medium", "High")
   )
 
+  expect_s3_class(
+    x7,
+    c("gg", "ggplot2")
+  )
+
   # Removing the x-axis or y-axis titles
-  nice_violin(
+  x8 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -97,8 +122,13 @@ test_that("basic", {
     xtitle = NULL
   )
 
+  expect_s3_class(
+    x8,
+    c("gg", "ggplot2")
+  )
+
   # Removing the x-axis or y-axis labels (for whatever purpose)
-  nice_violin(
+  x9 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -106,8 +136,13 @@ test_that("basic", {
     has.xlabels = FALSE
   )
 
+  expect_s3_class(
+    x9,
+    c("gg", "ggplot2")
+  )
+
   # Set y-scale manually
-  nice_violin(
+  x10 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -116,16 +151,26 @@ test_that("basic", {
     yby = 5
   )
 
+  expect_s3_class(
+    x10,
+    c("gg", "ggplot2")
+  )
+
   # Plotting individual observations
-  nice_violin(
+  x11 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
     obs = TRUE
   )
 
+  expect_s3_class(
+    x11,
+    c("gg", "ggplot2")
+  )
+
   # Micro-customizations
-  nice_violin(
+  x12 <- nice_violin(
     data = ToothGrowth,
     group = "dose",
     response = "len",
@@ -133,4 +178,10 @@ test_that("basic", {
     alpha = 1,
     border.colour = "black"
   )
+
+  expect_s3_class(
+    x12,
+    c("gg", "ggplot2")
+  )
+
 })

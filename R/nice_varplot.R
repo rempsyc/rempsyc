@@ -64,7 +64,9 @@ nice_varplot <- function(data,
                          shapiro = FALSE,
                          ytitle = variable) {
   check_col_names(data, c(group, variable))
-  rlang::check_installed(c("ggplot2", "ggrepel"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2", "ggrepel"),
+                         version = c(get_dep_version("ggplot2"), NA),
+                         reason = "for this function.")
   data[[group]] <- as.factor(data[[group]])
   {
     if (!missing(groups.labels)) levels(data[[group]]) <- groups.labels

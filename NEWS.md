@@ -1,24 +1,45 @@
+# rempsyc 0.1.4
+* Incoming!
+
+# rempsyc 0.1.3.3
+* `nice_assumptions`: *p* values from `shapiro.test()` are defined only for vectors of length between 3 and 5000 and was thus throwing an error in these cases. `nice_assumptions` now checks for the sample size and returns `NA` for samples outside this range (#17, @sjewo).
+
+# rempsyc 0.1.3.2
+* New functions:
+  * `install_if_not_installed`: will only install specified packages if they are not installed. 
+  * `get_dep_version`: checks the required version of a specific package dependency by looking at the specified package's DESCRIPTION file directly.
+* `best_duplicate`: now supports the `keep.rows` argument, to add a column containing the original rows.
+* `overlap_circle`: now support two other scoring methods: "percentage" (1 to 100), and "direct" (must provide the three values from circle 1, overlapping area, and circle 2).
+
+# rempsyc 0.1.3.1
+* Added tests for all functions
+* Accordingly, updated code to stop using deprecated functions from other packages (`dplyr` and `ggplot2`).
+
 # rempsyc 0.1.3
-* IN PROGRESS
 * CRAN resubmission
 
-# rempsyc 0.1.2.4
+## rempsyc 0.1.2.5
+* Fixed bug with `check_installed` where required package version were not being specified correctly.
+* A way to install all dependencies at once are now provided in the README file.
+* Contribution Guidelines are now available.
+
+## rempsyc 0.1.2.4
 * `nice_scatter`: `groups.order` now also allows automatic grouping based on value for the response variable (one of the desired levels, "increasing", "decreasing", or "string.length"), for consistency with `nice_violin`.
 * `nice_violin`: `order.groups` argument renames to `groups.order` for consistency with `nice_scatter`.
 
-# rempsyc 0.1.2.3
+## rempsyc 0.1.2.3
 * `nice_scatter`: 
   * fix bug whereas the group legend was lost even when using `has.legend = TRUE`.
   * `has.legend` now defaults to `TRUE` when using the `group` argument.
   * New argument `method`, with choices `"lm"` (default) or `"loess"`.
 
-# rempsyc 0.1.2.2
+## rempsyc 0.1.2.2
 * `nice_violin`: 
   * For argument `obs`, there are two new choices: `"dotplot"` (same as `obs = TRUE` for backward compatibility) and `"jitter"`, useful when there are a lot of observations.
   * Add new argument `order.groups`, to order the group factor levels based on value of the "response" variable, or on the string lengths for the group names (factor levels). Defaults to "none" to avoid changing previous behaviour.
   * Add new argument `xlabels.angle`, to tilt the labels of the x-axis (useful when working with long string names).
 
-# rempsyc 0.1.2.1
+## rempsyc 0.1.2.1
 * `nice_table`: Correct beta rounding.
 
 # rempsyc 0.1.2

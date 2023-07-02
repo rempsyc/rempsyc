@@ -4,6 +4,10 @@
 #' around the `flextable` package with sensical defaults and
 #' automatic formatting features.
 #'
+#' @details The resulting `flextable` objects can be opened in
+#' Word with `print(table, preview ="docx")`, or saved to
+#' Word with the `flextable::save_as_docx()` function.
+#'
 #' @param data The data frame, to be converted to a flextable.
 #' The data frame cannot have duplicate column names.
 #' @param italics Which columns headers should be italic? Useful
@@ -155,6 +159,7 @@ nice_table <- function(data,
                        note,
                        separate.header) {
   rlang::check_installed(c("flextable", "methods"),
+    version = c(get_dep_version("flextable"), NA),
     reason = "for this function."
   )
 

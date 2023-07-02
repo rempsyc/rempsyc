@@ -56,7 +56,9 @@ with the standard \emph{t} test because it is based on all the cases
 The effect size and confidence interval are calculated via
 \link[bootES:bootES]{bootES::bootES}.
 
-For the \emph{easystats} equivalent, see:
+Does not for the moment support nested comparisons for marginal means,
+only a comparison of all groups. For nested comparisons, please use
+\code{\link[emmeans:contrast]{emmeans::contrast()}} directly, or for the \emph{easystats} equivalent,
 \code{\link[modelbased:estimate_contrasts]{modelbased::estimate_contrasts()}}.
 }
 \examples{

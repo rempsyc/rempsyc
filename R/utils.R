@@ -19,11 +19,6 @@ theme_apa <- function(x, has.legend = FALSE) {
 }
 
 #' @noRd
-message_white <- function(...) {
-  message("\033[97m", ..., "\033[97m")
-}
-
-#' @noRd
 check_col_names <- function(data, names) {
   missing.cols <- lapply(names, function(x) {
     x %in% names(data)
@@ -59,3 +54,30 @@ model_is_standardized <- function(models.list) {
     }) %>% unlist()
   )
 }
+
+#' @title Get required version of specified package dependency
+#' @export
+#' @param dep Dependency of the specified package to check
+#' @param pkg Package to check the dependency from
+get_dep_version <- function(dep, pkg = "rempsyc") {
+  suggests.field <- utils::packageDescription(pkg, fields = "Suggests")
+  suggests.list <- unlist(strsplit(suggests.field, ",", fixed = TRUE))
+  dep.string <- grep(dep, suggests.list, value = TRUE)
+  dep.string <- sub(".*\\((.*?)\\).*", "\\1", dep.string)
+  out <- gsub("[^0-9.]+", "", dep.string)
+  if (out == "") {
+    out <- NULL
+  }
+  out
+}
+
+#' @title Install package if not already installed
+#' @export
+#' @param pkgs Packages to install if not already installed
+install_if_not_installed <- function(pkgs) {
+  successfully_loaded <- vapply(
+    pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+  required_pkgs <- names(which(successfully_loaded == FALSE))
+  utils::install.packages(required_pkgs)
+}
+

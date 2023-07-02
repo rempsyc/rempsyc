@@ -1,0 +1,11 @@
+test_that("format_value", {
+  expect_snapshot(format_value(0.00041231, "p"))
+  expect_snapshot(format_value(0.00041231, "r"))
+  expect_snapshot(format_value(1.341231, "d"))
+  expect_snapshot(format_p(0.0041231))
+  expect_snapshot(format_p(0.00041231))
+  expect_snapshot(format_r(0.41231))
+  expect_snapshot(format_r(0.041231))
+  expect_snapshot(format_d(1.341231))
+  expect_snapshot(format_d(0.341231))
+})

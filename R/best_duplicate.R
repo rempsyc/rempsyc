@@ -9,6 +9,8 @@
 #' [datawizard::data_duplicated()].
 #' @param data The data frame.
 #' @param id The ID variable for which to check for duplicates.
+#' @param keep.rows Logical, whether to add a column at the beginning
+#' of the data frame with the original row indices.
 #' @keywords duplicates
 #' @return A dataframe, containing only the "best" duplicates.
 #' @export
@@ -20,11 +22,11 @@
 #'   item3 = c(NA, 1, 1, 2, 3)
 #' )
 #'
-#' best_duplicate(df1, id = "id")
+#' best_duplicate(df1, id = "id", keep.rows = TRUE)
 #'
 #' @importFrom dplyr mutate group_by group_by slice_min distinct %>% ungroup
 
-best_duplicate <- function(data, id) {
+best_duplicate <- function(data, id, keep.rows = FALSE) {
   check_col_names(data, id)
 
   og.names <- names(data)
@@ -36,7 +38,15 @@ best_duplicate <- function(data, id) {
     group_by(.data[[id]]) %>%
     slice_min(.data$count_na) %>%
     distinct(.data[[id]], .keep_all = TRUE) %>%
-    select(all_of(og.names))
+    select(-all_of("count_na"))
+
+  if (isTRUE(keep.rows)) {
+    Row <- seq_len(nrow(data))
+    data <- cbind(Row, data)
+  } else {
+    good.dups <- good.dups %>%
+      select(-all_of("Row"))
+  }
 
   good.data <- distinct(data, .data[[id]], .keep_all = TRUE)
   match.index <- good.data[[id]] %in% good.dups[[id]]

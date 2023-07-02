@@ -59,7 +59,9 @@ nice_qq <- function(data,
                     shapiro = FALSE,
                     title = variable) {
   check_col_names(data, c(group, variable))
-  rlang::check_installed(c("ggplot2", "qqplotr"), reason = "for this function.")
+  rlang::check_installed(c("ggplot2", "qqplotr"),
+                         reason = "for this function.",
+                         version = c("3.4.0", "0.0.6"),)
 
   if (is.null(group)) {
     group <- "All"
@@ -117,7 +119,7 @@ nice_qq <- function(data,
     if (grid == TRUE) {
       ggplot2::theme(
         panel.grid.major = ggplot2::element_line(),
-        panel.grid.minor = ggplot2::element_line(size = 0.5)
+        panel.grid.minor = ggplot2::element_line(linewidth = 0.5)
       )
     }
   }

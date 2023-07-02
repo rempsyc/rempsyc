@@ -31,6 +31,18 @@ if (can_evaluate) {
 }
 ```
 
+Sometimes in research, we want to know whether the effect of variable X on Y is affected by a third variable, variable Z. In other terms, we ask if there is an *interaction* between variables X and Z, and their effects on Z.
+
+![](https://rempsyc.remi-theriault.com/images//blog_mod/moderation.png)
+
+Note that this is different from *mediation*, where the mediator is the mechanism that *explains* the link between X and Y (rather than a variable that *modifies* an existing relationship like in moderation).
+
+![](https://rempsyc.remi-theriault.com/images//blog_mod/mediation.png)
+
+In R, we conduct **moderation** analyses using straight linear models with the `lm` function, and we specify interaction effects with the * operator. Not everyone is familiar with using `lm` however, so `rempsyc` provides a (relatively) simpler interface where it is straightforward what variable is the moderator, and which one is the predictor. Although it does not make a difference between the `lm` model, for some (e.g., that find the `lm` function scary), it can be helpful to think about these variables in this way. The other benefit is that it provides a useful effect size and its 95% confidence interval, and formats everything in a table ready to be exported to word through `nice_table`.
+
+The topic of moderations and simple slopes can be a complex one. It is not the goal of this tutorial to describe the theory behind it, only to show a practical way to do them. For a more detailed reading on the topic, please see one of the existing excellent sources on the topic ([1](https://mspeekenbrink.github.io/sdam-r-companion/moderation-and-mediation.html), [2](https://bookdown.org/pingapang9/linear_models_bookdown/chap-moderation.html), [3](https://ademos.people.uic.edu/Chapter14.html)).
+
 ## Getting started
 
 Let's first load the demo data. This data set comes with base `R` (meaning you have it too and can directly type this command into your `R` console).
@@ -45,7 +57,14 @@ Load the `rempsyc` package:
 library(rempsyc)
 ```
 
-> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`.
+> ***Note:*** If you haven't installed this package yet, you will need to install it via the following command: `install.packages("rempsyc")`. Furthermore, you may be asked to install the following packages if you haven't installed them already (you may decide to install them all now to avoid interrupting your workflow if you wish to follow this tutorial from beginning to end):
+
+```{r}
+pkgs <- c("effectsize", "flextable", "interactions")
+install_if_not_installed(pkgs)
+```
+
+---
 
 For moderations and simple slopes, we usually want to standardize (or at least center) our variables.
 
@@ -73,15 +92,21 @@ If we want it to look nice
 
 > ***Note:*** The sr2 (semi-partial correlation squared, [also known as delta R-square](https://rdrr.io/cran/rockchalk/man/getDeltaRsquare.html)) allows us to quantify the unique contribution (proportion of variance explained) of an independent variable on the dependent variable, over and above the other variables in the model. sr2 is often considered a better indicator of the practical relevance of a variable.
 
-### Save table to Word
+### Open (or save) table to Word
 
 Let's save it to word for use in a publication (optional).
 
 ```{r, eval = FALSE}
+# Open in Word
+print(my_table, preview ="docx")
+
+# Save in Word
 flextable::save_as_docx(my_table, path = "moderations.docx")
 ```
 
 ## Simple slopes: `nice_slopes`
+
+You might have heard about "simple slopes" before. But what does that mean? Essentially, this means looking at the strength (regression coefficient) and significance of the slope, when subsetting for observations that are high, low, or average on a variable, typically the moderating variable. A bit further down, this will get clearer by looking at the plot of the interaction, which shows one slope for observations that are high on the wt (moderating) variable, a second slope for those that are low, and a third slope for those that are average.
 
 Let's extract the simple slopes now, including the sr2.
 
