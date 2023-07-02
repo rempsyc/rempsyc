@@ -8,7 +8,7 @@ test_that("nice_contrasts", {
     data = mtcars,
     response = "mpg",
     group = "cyl",
-    bootstraps = 200
+    bootstraps = 1000
   ))
 
   set.seed(100)
@@ -16,7 +16,7 @@ test_that("nice_contrasts", {
     data = mtcars,
     response = "disp",
     group = "gear",
-    bootstraps = 200
+    bootstraps = 2500
   ))
 
   # Multiple dependent variables
@@ -25,7 +25,7 @@ test_that("nice_contrasts", {
     data = mtcars,
     response = c("mpg", "disp", "hp"),
     group = "cyl",
-    bootstraps = 200
+    bootstraps = 800
   ))
 
   # Adding covariates
@@ -35,7 +35,20 @@ test_that("nice_contrasts", {
     response = "mpg",
     group = "cyl",
     covariates = c("disp", "hp"),
-    bootstraps = 200
+    bootstraps = 500
+  ))
+
+  # Several groups
+  mtcars2 <- mtcars
+  mtcars2$carb <- as.factor(mtcars2$carb)
+
+  model <- lm(mpg ~ carb + wt * hp, mtcars2)
+  set.seed(100)
+  expect_snapshot(nice_contrasts(
+    data = mtcars,
+    response = "mpg",
+    group = "carb",
+    bootstraps = 2500
   ))
 
 })

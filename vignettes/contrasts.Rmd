@@ -70,6 +70,7 @@ install_if_not_installed(pkgs)
 Let's test out the function on existing data
 
 ```{r}
+set.seed(100)
 table.stats <- nice_contrasts(
   response = "Sepal.Length",
   group = "Species",
@@ -423,6 +424,7 @@ library(dplyr)
 ```
 
 ```{r}
+set.seed(100)
 table.stats <- nice_contrasts(
   response = DV,
   group = "Group",

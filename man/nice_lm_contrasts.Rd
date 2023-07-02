@@ -8,6 +8,7 @@ nice_lm_contrasts(
   model,
   group,
   data,
+  p_adjust = "none",
   effect.type = "cohens.d",
   bootstraps = 2000,
   ...
@@ -19,6 +20,8 @@ nice_lm_contrasts(
 \item{group}{The group for the comparison.}
 
 \item{data}{The data frame.}
+
+\item{p_adjust}{Character: adjustment method (e.g., "bonferroni") – added to options}
 
 \item{effect.type}{What effect size type to use. One of "cohens.d" (default),
 "akp.robust.d", "unstandardized", "hedges.g", "cohens.d.sigma", or "r".}
@@ -36,9 +39,8 @@ effect size (i.e., dR).
 \description{
 Easily compute planned contrast analyses (pairwise
 comparisons similar to t-tests but more powerful when more than
-2 groups), and format in publication-ready format. Supports only
-three groups for the moment. In this particular case, the
-confidence intervals are bootstraped on chosen effect size
+2 groups), and format in publication-ready format. In this particular
+case, the confidence intervals are bootstraped on chosen effect size
 (default to Cohen's d).
 }
 \details{
@@ -57,17 +59,31 @@ Does not for the moment support nested comparisons for marginal means,
 only a comparison of all groups. For nested comparisons, please use
 \code{\link[emmeans:contrast]{emmeans::contrast()}} directly, or for the \emph{easystats} equivalent,
 \code{\link[modelbased:estimate_contrasts]{modelbased::estimate_contrasts()}}.
+
+When using \code{nice_lm_contrasts()}, please use \code{as.factor()} outside the
+\code{lm()} formula, or it will lead to an error.
 }
 \examples{
-\dontshow{if (requireNamespace("bootES", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("bootES", quietly = TRUE) && requireNamespace("modelbased", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make and format model (group need to be a factor)
-model <- lm(mpg ~ as.factor(cyl) + wt * hp, mtcars)
+mtcars2 <- mtcars
+mtcars2$cyl <- as.factor(mtcars2$cyl)
+model <- lm(mpg ~ cyl + wt * hp, mtcars2)
+set.seed(100)
 nice_lm_contrasts(model, group = "cyl", data = mtcars, bootstraps = 500)
 
-model2 <- lm(qsec ~ as.factor(cyl), data = mtcars)
+# Several models at once
+mtcars2$gear <- as.factor(mtcars2$gear)
+model2 <- lm(qsec ~ cyl, data = mtcars2)
 my.models <- list(model, model2)
-
+set.seed(100)
 nice_lm_contrasts(my.models, group = "cyl", data = mtcars, bootstraps = 500)
+
+# Now supports more than 3 levels
+mtcars2$carb <- as.factor(mtcars2$carb)
+model <- lm(mpg ~ carb + wt * hp, mtcars2)
+set.seed(100)
+nice_lm_contrasts(model, group = "carb", data = mtcars2, bootstraps = 500)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

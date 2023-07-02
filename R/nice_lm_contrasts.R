@@ -2,9 +2,8 @@
 #'
 #' @description Easily compute planned contrast analyses (pairwise
 #' comparisons similar to t-tests but more powerful when more than
-#' 2 groups), and format in publication-ready format. Supports only
-#' three groups for the moment. In this particular case, the
-#' confidence intervals are bootstraped on chosen effect size
+#' 2 groups), and format in publication-ready format. In this particular
+#' case, the confidence intervals are bootstraped on chosen effect size
 #' (default to Cohen's d).
 #'
 #' @details Statistical power is lower with the standard *t* test
@@ -23,9 +22,13 @@
 #' [emmeans::contrast()] directly, or for the *easystats* equivalent,
 #' [modelbased::estimate_contrasts()].
 #'
+#' When using `nice_lm_contrasts()`, please use `as.factor()` outside the
+#' `lm()` formula, or it will lead to an error.
+#'
 #' @param model The model to be formatted.
 #' @param group The group for the comparison.
 #' @param data The data frame.
+#' @param p_adjust Character: adjustment method (e.g., "bonferroni") – added to options
 #' @param effect.type What effect size type to use. One of "cohens.d" (default),
 #' "akp.robust.d", "unstandardized", "hedges.g", "cohens.d.sigma", or "r".
 #' @param bootstraps The number of bootstraps to use for the confidence interval
@@ -37,30 +40,42 @@
 #'         lower and upper 95% confidence intervals of the
 #'         effect size (i.e., dR).
 #' @export
-#' @examplesIf requireNamespace("bootES", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)
+#' @examplesIf requireNamespace("bootES", quietly = TRUE) && requireNamespace("modelbased", quietly = TRUE)
 #' # Make and format model (group need to be a factor)
-#' model <- lm(mpg ~ as.factor(cyl) + wt * hp, mtcars)
+#' mtcars2 <- mtcars
+#' mtcars2$cyl <- as.factor(mtcars2$cyl)
+#' model <- lm(mpg ~ cyl + wt * hp, mtcars2)
+#' set.seed(100)
 #' nice_lm_contrasts(model, group = "cyl", data = mtcars, bootstraps = 500)
 #'
-#' model2 <- lm(qsec ~ as.factor(cyl), data = mtcars)
+#' # Several models at once
+#' mtcars2$gear <- as.factor(mtcars2$gear)
+#' model2 <- lm(qsec ~ cyl, data = mtcars2)
 #' my.models <- list(model, model2)
-#'
+#' set.seed(100)
 #' nice_lm_contrasts(my.models, group = "cyl", data = mtcars, bootstraps = 500)
+#'
+#' # Now supports more than 3 levels
+#' mtcars2$carb <- as.factor(mtcars2$carb)
+#' model <- lm(mpg ~ carb + wt * hp, mtcars2)
+#' set.seed(100)
+#' nice_lm_contrasts(model, group = "carb", data = mtcars2, bootstraps = 500)
 #'
 #' @seealso
 #' \code{\link{nice_contrasts}},
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/contrasts}
 #'
-#' @importFrom dplyr %>% bind_rows
+#' @importFrom dplyr %>% bind_rows select
 
 nice_lm_contrasts <- function(model,
                               group,
                               data,
+                              p_adjust = "none",
                               effect.type = "cohens.d",
                               bootstraps = 2000,
                               ...) {
   check_col_names(data, group)
-  rlang::check_installed(c("bootES", "emmeans"), reason = "for this function.")
+  rlang::check_installed(c("modelbased", "bootES"), reason = "for this function.")
   if (inherits(model, "list")) {
     models.list <- model
   } else {
@@ -81,14 +96,18 @@ nice_lm_contrasts <- function(model,
   # }
 
   data[[group]] <- as.factor(data[[group]])
-  leastsquare.list <- lapply(models.list, emmeans::emmeans, specs = group, data = data)
-  groups.contrasts <- list(
-    comp1 = stats::setNames(c(1, 0, -1), levels(data[[group]])),
-    # Add support x groups
-    comp2 = stats::setNames(c(0, 1, -1), levels(data[[group]])),
-    # Add support x groups
-    comp3 = stats::setNames(c(1, -1, 0), levels(data[[group]]))
-  )
+
+  contrval.list <- suppressWarnings(
+    lapply(models.list, modelbased::get_emcontrasts,
+           contrast = group, adjust = p_adjust))
+
+  contrast <- contrval.list[[1]]@misc$con.coef
+
+  groups.contrasts <- lapply(seq_len(nrow(contrast)), function(x) {
+    z <- contrast[x, ]
+    names(z) <- levels(as.factor(data[[group]]))
+    z
+  })
 
   response.list <- lapply(models.list, function(x) {
     as.character(attributes(x$terms)$variables[[2]])
@@ -109,48 +128,23 @@ nice_lm_contrasts <- function(model,
     })
   })
 
-  contrval.list <- lapply(leastsquare.list, emmeans::contrast,
-    groups.contrasts,
-    adjust = "none"
-  )
-  contrval.sums <- lapply(contrval.list, summary)
-
   boot.sums <- lapply(seq(length(response.list)), function(y) {
     lapply(es.lists, function(x) {
       as.data.frame(summary(x[[y]]))
     }) %>%
-      bind_rows()
-  })
-  list.names <- c("estimates", "SE", "df", "tratio", "pvalue")
-  stats.list <- list()
-  for (i in seq_along(list.names)) {
-    stats.list[[list.names[i]]] <- unlist(c(t((
-      lapply(contrval.sums, `[[`, i + 1)))))
-  }
-  response.names <- rep(unlist(response.list), each = length(contrval.sums[[1]]$contrast))
-  comparisons.names <- rep(
-    c(
-      paste(
-        levels(data[[group]])[1], "-",
-        levels(data[[group]])[3]
-      ), ###### support x groups
-      paste(
-        levels(data[[group]])[2], "-",
-        levels(data[[group]])[3]
-      ), ###### support x groups
-      paste(
-        levels(data[[group]])[1], "-",
-        levels(data[[group]])[2]
-      )
-    ), ###### support x groups
-    times = length(response.list)
-  )
-  table.stats <- data.frame(
-    response.names,
-    comparisons.names,
-    stats.list[-c(1:2)],
-    bind_rows(boot.sums)[1:3]
-  )
+      bind_rows() %>%
+      select(all_of(c("stat", "ci.low", "ci.high")))
+  }) %>%
+    bind_rows()
+
+  table.stats <- contrval.list %>%
+    lapply(as.data.frame) %>%
+    bind_rows() %>%
+    select(all_of(c("contrast", "df", "t.ratio", "p.value")))
+
+  response.names <- rep(unlist(response.list), each = nrow(contrast))
+
+  table.stats <- cbind(response.names, table.stats, boot.sums)
 
   effect.name <- dplyr::case_when(
     effect.type == "unstandardized" ~ "Mean difference",
