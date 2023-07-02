@@ -53,7 +53,10 @@ with the standard \emph{t} test because it is based on all the cases
 (\href{https://web.pdx.edu/~newsomj/uvclass/ho_planned\%20contrasts.pdf}{source}).
 
 The effect size and confidence interval are calculated via
-\link[bootES:bootES]{bootES::bootES}.
+\link[bootES:bootES]{bootES::bootES}, and correct for contrasts but not for covariates and
+other predictors. Because this method uses bootstrapping, it is recommended
+to set a seed before using for reproducibility reasons (e.g.,
+\code{sed.seet(100)}).
 
 Does not for the moment support nested comparisons for marginal means,
 only a comparison of all groups. For nested comparisons, please use
