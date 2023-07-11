@@ -24,7 +24,7 @@ case, the confidence intervals are bootstraped on chosen effect size
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -173,7 +173,10 @@ in the planned contrast the error term is smaller than it is
 with the standard <em>t</em> test because it is based on all the cases
 (<a href="https://web.pdx.edu/~newsomj/uvclass/ho_planned%20contrasts.pdf" class="external-link">source</a>).</p>
 <p>The effect size and confidence interval are calculated via
-<a href="https://rdrr.io/pkg/bootES/man/bootES.html" class="external-link">bootES::bootES</a>.</p>
+<a href="https://rdrr.io/pkg/bootES/man/bootES.html" class="external-link">bootES::bootES</a>, and correct for contrasts but not for covariates and
+other predictors. Because this method uses bootstrapping, it is recommended
+to set a seed before using for reproducibility reasons (e.g.,
+<code>sed.seet(100)</code>).</p>
 <p>Does not for the moment support nested comparisons for marginal means,
 only a comparison of all groups. For nested comparisons, please use
 <code><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">emmeans::contrast()</a></code> directly, or for the <em>easystats</em> equivalent,
