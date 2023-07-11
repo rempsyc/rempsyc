@@ -420,7 +420,7 @@ prepare_report <- function(dataframe, report, short) {
       if (short == TRUE) {
         dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
         dataframe <- dataframe[-(
-          which(is.na(dataframe$Parameter)):nrow(dataframe)), ]
+          which(is.na(dataframe$Parameter))[1]:nrow(dataframe)), ]
       }
     } else if (report == "aov") {
       if ("Eta2_CI_low" %in% names(dataframe)) {
