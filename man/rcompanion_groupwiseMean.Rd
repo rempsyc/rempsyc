@@ -148,7 +148,7 @@ rcompanion_groupwiseMean(
 \dontshow{\}) # examplesIf}
 }
 \references{
-\url{http://rcompanion.org/handbook/C_03.html}
+\url{https://rcompanion.org/handbook/C_03.html}
 }
 \author{
 Salvatore Mangiafico, \email{mangiafico@njaes.rutgers.edu}
