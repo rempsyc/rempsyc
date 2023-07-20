@@ -1,5 +1,5 @@
 # rempsyc 0.1.4
-* Incoming!
+* CRAN submission
 
 # rempsyc 0.1.3.5
 * `nice_table`: fix bug when providing a table of more than one `report::report` object made from Wilcoxon tests.
