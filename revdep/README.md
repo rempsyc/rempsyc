@@ -10,14 +10,14 @@
 |collate  |C.UTF-8                      |
 |ctype    |C.UTF-8                      |
 |tz       |UTC                          |
-|date     |2023-06-19                   |
+|date     |2023-07-20                   |
 |pandoc   |2.19.2 @ /usr/bin/pandoc     |
 
 # Dependencies
 
 |package    |old   |new     |Δ  |
 |:----------|:-----|:-------|:--|
-|rempsyc    |0.1.2 |0.1.2.5 |*  |
+|rempsyc    |0.1.3 |0.1.3.5 |*  |
 |cli        |3.6.1 |3.6.1   |   |
 |dplyr      |1.1.2 |1.1.2   |   |
 |fansi      |1.0.4 |1.0.4   |   |
