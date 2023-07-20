@@ -1,6 +1,9 @@
 # rempsyc 0.1.4
 * Incoming!
 
+# rempsyc 0.1.3.5
+* `nice_table`: fix bug when providing a table of more than one `report::report` object made from Wilcoxon tests.
+
 # rempsyc 0.1.3.4
 * `nice_lm_contrasts` and `nice_contrasts`: Code simplified and now supports more than 3 groups, through easystats' `modelbased` package.
 

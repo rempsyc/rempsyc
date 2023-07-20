@@ -373,9 +373,9 @@ prepare_report <- function(dataframe, report, short) {
     # t.test, aov, and wilcox need to be done separately
     # because they have no model_class attribute
     if ("Method" %in% names(dataframe)) {
-      if (grepl("t-test", dataframe$Method)) {
+      if (all(grepl("t-test", dataframe$Method))) {
         report <- "t.test"
-      } else if (grepl("Wilcox", dataframe$Method)) {
+      } else if (all(grepl("Wilcox", dataframe$Method))) {
         report <- "wilcox"
       }
     } else if ("Sum_Squares" %in% names(dataframe)) {
@@ -420,7 +420,7 @@ prepare_report <- function(dataframe, report, short) {
       if (short == TRUE) {
         dataframe <- select(dataframe, -c("Fit", "95% CI (b)"))
         dataframe <- dataframe[-(
-          which(is.na(dataframe$Parameter)):nrow(dataframe)), ]
+          which(is.na(dataframe$Parameter))[1]:nrow(dataframe)), ]
       }
     } else if (report == "aov") {
       if ("Eta2_CI_low" %in% names(dataframe)) {
