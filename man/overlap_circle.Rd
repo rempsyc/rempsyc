@@ -70,6 +70,11 @@ ggplot2::ggsave(plot,
 }
 \seealso{
 Tutorial: \url{https://rempsyc.remi-theriault.com/articles/circles}
+
+For a javascript web plugin of a continuous version of the Inclusion of
+Other in the Self (IOS) task (instead of the pen and paper version), for
+experiments during data collection, rather than data analysis, please see:
+\url{https://github.com/jspsych/jspsych-contrib/tree/main/packages/plugin-ios}
 }
 \keyword{Venn}
 \keyword{diagrams}
