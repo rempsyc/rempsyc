@@ -505,7 +505,8 @@ as good. *The Counseling Psychologist*, *41*(4), 568–600.
 <https://doi.org/10.1177/0011000012445176>
 
 Quintana, D. S. (2020). *Five things about open and reproducible science
-that every early career researcher should know*. <https://osf.io/2jt9u>
+that every early career researcher should know*. <https://osf.io/2jt9u>.
+<https://doi.org/10.17605/OSF.IO/DZTVQ>
 
 R Core Team. (2022). *R: A language and environment for statistical
 computing*. R Foundation for Statistical Computing.
