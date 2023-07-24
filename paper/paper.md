@@ -73,8 +73,8 @@ export it to Word directly.
 
 Formatting a table properly in R is already a tedious and time-consuming
 task, but fortunately several packages take care of this step [e.g., the {broom} or 
-{report} packages, @reportPackage; @broom2022, and there are several others],
-and there are several others). Exporting these formatted tables to
+{report} packages, @reportPackage; @broom2022, and there are several others]. 
+Exporting these formatted tables to
 Microsoft Word remains a challenge however. Some packages do export to
 Word [e.g., the {apaTables} package 
 @stanley2018reproducible], but their formatting is often
@@ -140,7 +140,7 @@ path.
 Additionally, tables created with `nice_table()` are {flextable} objects
 [@flextable2022], and can be modified as
 such.^[A great resource for this is
-the {flextable} e-book: https://ardata-fr.github.io/flextable-book/]
+the {flextable} e-book: <https://ardata-fr.github.io/flextable-book/>]
 
 ## Formattting Results of Analyses
 
@@ -443,90 +443,3 @@ manuscript. I would also like to acknowledge funding from the Social
 Sciences and Humanities Research Council of Canada.
 
 # References
-
-Aron, A., Aron, E. N., & Smollan, D. (1992). <span
-class="nocase">Inclusion of Other in the Self Scale</span> and the
-structure of interpersonal closeness. *Journal of Personality and Social
-Psychology*, *63*(4), 596. <https://doi.org/10.1037/0022-3514.63.4.596>
-
-Barbone, J. M., & Garbuszus, J. M. (2023). *openxlsx2: Read, write and
-edit ’xlsx’ files*. <https://github.com/JanMarvin/openxlsx2>
-
-Gohel, D., & Skintzos, P. (2022). *Flextable: Functions for tabular
-reporting*. <https://CRAN.R-project.org/package=flextable>
-
-Kozak, M., & Piepho, H.-P. (2018). What’s normal anyway? Residual plots
-are more telling than significance tests when checking ANOVA
-assumptions. *Journal of Agronomy and Crop Science*, *204*(1), 86–98.
-<https://doi.org/10.1111/jac.12220>
-
-Krol, S. A., Thériault, R., Olson, J. A., Raz, A., & Bartz, J. A.
-(2020). Self-concept clarity and the bodily self: Malleability across
-modalities. *Personality and Social Psychology Bulletin*, *46*(5),
-808–820. <https://doi.org/10.1177/0146167219879126>
-
-Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013).
-Detecting outliers: Do not use standard deviation around the mean, use
-absolute deviation around the median. *Journal of Experimental Social
-Psychology*, *49*(4), 764–766.
-<https://doi.org/10.1016/j.jesp.2013.03.013>
-
-Lüdecke, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., & Makowski, D.
-(2021). <span class="nocase">performance</span>: An R package for
-assessment, comparison and testing of statistical models. *Journal of
-Open Source Software*, *6*(60), 3139.
-<https://doi.org/10.21105/joss.03139>
-
-Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Wiernik, B.
-M., Bacher, E., & Thériault, R. (2023). *<span
-class="nocase">easystats</span>: Streamline model interpretation,
-visualization, and reporting*. <https://easystats.github.io/easystats/>
-(Original work published 2019)
-
-Lüdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner,
-P., & Makowski, D. (2021). <span class="nocase">see</span>: An R package
-for visualizing statistical models. *Journal of Open Source Software*,
-*6*(64), 3393. <https://doi.org/10.21105/joss.03393>
-
-Makowski, D., Ben-Shachar, M. S., Patil, I., & Lüdecke, D. (2020).
-Methods and algorithms for correlation analysis in R. *Journal of Open
-Source Software*, *5*(51), 2306. <https://doi.org/10.21105/joss.02306>
-
-Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
-& Wiernik, B. M. (2023). *<span class="nocase">report</span>: Automated
-reporting of results and statistical models*.
-<https://easystats.github.io/report/> (Original work published 2021)
-
-Nuijten, M. B., Hartgerink, C. H., Van Assen, M. A., Epskamp, S., &
-Wicherts, J. M. (2016). The prevalence of statistical reporting errors
-in psychology (1985–2013). *Behavior Research Methods*, *48*, 1205–1226.
-<https://doi.org/10.3758/s13428-015-0664-2>
-
-Parent, M. C. (2013). Handling item-level missing data: Simpler is just
-as good. *The Counseling Psychologist*, *41*(4), 568–600.
-<https://doi.org/10.1177/0011000012445176>
-
-Quintana, D. S. (2020). *Five things about open and reproducible science
-that every early career researcher should know*. <https://osf.io/2jt9u>.
-<https://doi.org/10.17605/OSF.IO/DZTVQ>
-
-R Core Team. (2022). *R: A language and environment for statistical
-computing*. R Foundation for Statistical Computing.
-<https://www.R-project.org/>
-
-Robinson, D., Hayes, A., & Couch, S. (2022). *<span
-class="nocase">broom</span>: Convert statistical objects into tidy
-tibbles*. <https://CRAN.R-project.org/package=broom>
-
-Stanley, D. J., & Spence, J. R. (2018). Reproducible tables in
-psychology using the apaTables package. *Advances in Methods and
-Practices in Psychological Science*, *1*(3), 415–431.
-<https://doi.org/10.1177/2515245918773743>
-
-Thériault, R., Olson, J. A., Krol, S. A., & Raz, A. (2021). Body
-swapping with a Black person boosts empathy: Using virtual reality to
-embody another. *Quarterly Journal of Experimental Psychology*,
-*74*(12), 2057–2074. <https://doi.org/10.1177/17470218211024826>
-
-Wickham, H. (2016). *ggplot2: Elegant graphics for data analysis*.
-Springer-Verlag New York. <https://ggplot2.tidyverse.org>
