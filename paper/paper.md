@@ -36,16 +36,16 @@ common in psychology research and social sciences more broadly.
 
 # Statement of need
 
-There are many reasons to use R ([R Core Team, 2022](#ref-base2021)) for
+There are many reasons to use R [@base2021] for
 analyzing and reporting data from research studies, such as being
-compatible with the ideals of open science ([Quintana,
-2020](#ref-quintana2020)). However, R has a major downside for novices:
+compatible with the ideals of open science [@quintana2020]. 
+However, R has a major downside for novices:
 its steep learning curve due to its programmatic interface, in contrast
 to perhaps more user-friendly point-and-click software. Of course, this
 flexibility is also a strength, as the R community can and does come
 together to produce packages that make using R increasingly easier and
-more user-friendly (e.g., the *easystats* ecosystem [Lüdecke et al.,
-2019/2023](#ref-easystatsPackage)). The {rempsyc} package (Really Easy
+more user-friendly [e.g., the _easystats_ 
+ecosystem @easystatsPackage]. The {rempsyc} package (Really Easy
 Methods for Psychology) contributes to this momentum by providing
 convenience functions that remove as much friction as possible between
 your script and your manuscript (in particular, if you are using
@@ -53,8 +53,8 @@ Microsoft Word).
 
 There are mainly three things that go into a manuscript: text, tables,
 and figures. {rempsyc} does not generate publication-ready text
-summarizing analyses; for this, see the {report} package ([Makowski et
-al., 2021/2023](#ref-reportPackage)). Instead, {rempsyc} focuses on the
+summarizing analyses; for this, see the {report} package [@reportPackage]. 
+Instead, {rempsyc} focuses on the
 production of publication-ready tables and figures. Below, I go over a
 few quick examples of those.
 
@@ -67,18 +67,17 @@ to their manuscript, or retype them manually. Yet, this approach
 increases the risks of copy-paste and retyping errors so common in
 psychology. This problem is not trivial given that according to some
 estimates, up to 50% of articles in psychology have at least one
-statistical error ([Nuijten et al., 2016](#ref-nuijten2016prevalence)).
+statistical error [@nuijten2016prevalence].
 Ideally, one should be able to format the table directly in R, and to
 export it to Word directly.
 
 Formatting a table properly in R is already a tedious and time-consuming
-task, but fortunately several packages take care of this step (e.g., the
-{broom} or {report} packages, [Makowski et al.,
-2021/2023](#ref-reportPackage); [Robinson et al., 2022](#ref-broom2022),
+task, but fortunately several packages take care of this step [e.g., the {broom} or 
+{report} packages, @reportPackage; @broom2022, and there are several others],
 and there are several others). Exporting these formatted tables to
 Microsoft Word remains a challenge however. Some packages do export to
-Word (e.g., the {apaTables} package [Stanley & Spence,
-2018](#ref-stanley2018reproducible)), but their formatting is often
+Word [e.g., the {apaTables} package 
+@stanley2018reproducible], but their formatting is often
 rigid especially when using analyzes or table formats that are not
 supported by default.
 
@@ -116,7 +115,10 @@ We can do the same with a {report} table.
 The {report} package provides quite comprehensive tables, so one may
 request an abbreviated table with the `'short'` argument. For
 convenience, it is also possible to highlight significant results for
-better visual discrimination, using the `'highlight'` argument.[1] Once
+better visual discrimination, using the `'highlight'` argument.^[This argument 
+can be used logically, as `'TRUE'` 
+or `'FALSE'`, but can also be provided with a numeric value representing the 
+cut-off threshold for the _p_ value] Once
 satisfied with the table, we can add a title and note.
 
     my_table <- nice_table(
@@ -136,8 +138,9 @@ path.
     flextable::save_as_docx(my_table, path = "my_table.docx")
 
 Additionally, tables created with `nice_table()` are {flextable} objects
-([Gohel & Skintzos, 2022](#ref-flextable2022)), and can be modified as
-such.[2]
+[@flextable2022], and can be modified as
+such.^[A great resource for this is
+the {flextable} e-book: https://ardata-fr.github.io/flextable-book/]
 
 ## Formattting Results of Analyses
 
@@ -196,16 +199,16 @@ does not use rounded values and the console is impractical for large
 matrices. One may manually round values and export it to a `.csv` file,
 which is an improvement but still unsatisfying.
 
-The {apaTables} package ([Stanley & Spence,
-2018](#ref-stanley2018reproducible)) allows exporting the correlation
+The {apaTables} package  [@stanley2018reproducible] allows exporting the correlation
 matrix to Word in an APA format, and in many cases this already meets
 the formal requirements of APA style. However, the Word format is not
 suitable for large matrices, as it will often spread beyond the
 document’s margin limits.
 
 Another approach is to export the matrix to an image, like the
-{correlation} package does ([Makowski et al.,
-2020](#ref-correlationpackage)).[3] For very small matrices, this works
+{correlation} package does [@correlationpackage].^[Exporting the correlation matrix to an 
+image through the {correlation} package also requires the {see} package 
+[@seepackage]] For very small matrices, this works
 extremely well, and the colour is an immense help to quickly identify
 which correlations are strong or weak, positive or negative, and
 significant or non-significant. Again, however, this does not work so
@@ -215,8 +218,7 @@ large figure becomes difficult.
 When the goal is more exploratory in nature, and one has large matrices,
 it can be beneficial to export them to Excel. {rempsyc} combines the
 idea of using a coloured correlation matrix from the {correlation}
-package with the idea of exporting to Excel using {openxlsx2} ([Barbone
-& Garbuszus, 2023](#ref-openxlsx2package)).
+package with the idea of exporting to Excel using {openxlsx2} [@openxlsx2package].
 
 {rempsyc} also provides some usability improvements, like freezing the
 first row and column so as to be able to easily see which variables
@@ -224,7 +226,9 @@ correlate with which other variables, regardless of how far or deep
 those variables are located within the matrix.
 
 The colour represents the strength of the correlation, whereas the stars
-represent different significance thresholds for the *p* value is.[4] The
+represent different significance thresholds for the *p* value is.^[For 
+convenience, colours are only used when the corresponding _p_ value is 
+at least smaller than .05] The
 exact *p* values are provided in a second tab for reference purposes, so
 all information is readily available in just one function call.
 
@@ -239,8 +243,8 @@ all information is readily available in just one function call.
 
 Preparing figures according to APA style, having them look good, and
 being able to save them in high-resolution with the proper ratios is
-often challenging. Working with {ggplot2} ([Wickham,
-2016](#ref-ggplot2package)) provides tremendous flexibility, but an
+often challenging. Working with {ggplot2} [@ggplot2package] provides tremendous 
+flexibility, but an
 unintended consequence is that doing even trivial operations can at
 times be daunting.
 
@@ -260,8 +264,7 @@ to your preferred format (`.pdf`, `.tiff`, or `.png`).
 
 ![](paper_files/figure-markdown_strict/nice_violin-1.png){width=60%}
 
-For an example of such use in publication, see Thériault et al.
-([2021](#ref-theriault2021swapping)).
+For an example of such use in publication, see @theriault2021swapping.
 
 One can easily save the resulting figure with `ggplot2::ggsave()`,
 specifying the desired file name, extension, and resolution.
@@ -277,7 +280,7 @@ recommended for high-resolution submissions to scientific journals.
 
 ### Scatter Plots
 
-Figures are {ggplot2} objects ([Wickham, 2016](#ref-ggplot2package)),
+Figures are {ggplot2} objects [@ggplot2package],
 and can be modified as such.
 
     nice_scatter(data = mtcars,
@@ -301,13 +304,12 @@ and can be modified as such.
 
 ![](paper_files/figure-markdown_strict/nice_scatter-2.png){width=60%}
 
-For an example of such use in publication, see Krol et al.
-([2020](#ref-krol2020self)).
+For an example of such use in publication, see @krol2020self.
 
 ### Overlapping Circles
 
 For psychologists using the Inclusion of Other in the the Self Scale
-([Aron et al., 1992](#ref-aron1992inclusion)), it can be useful to
+[@aron1992inclusion], it can be useful to
 interpolate the original discrete scores (1 to 7) into a group average
 representation of the conceptual self-other overlap. For example,
 assuming the group mean is 3.5 on the 1 to 7 scale, `overlap_circle()`
@@ -317,18 +319,17 @@ will draw a 25% area overlap from interpolation:
 
 ![](paper_files/figure-markdown_strict/overlap_circle-1.png){width=40%}
 
-For an example of such use in publication, see Thériault et al.
-([2021](#ref-theriault2021swapping)).
+For an example of such use in publication, see @theriault2021swapping.
 
 ## Testing assumptions
 
 When comes time to test assumptions of a linear model, the best option
 is the `check_model()` function from *easystats*’ {performance} package,
-which allows direct visual evaluation of assumptions ([Lüdecke,
-Ben-Shachar, et al., 2021](#ref-performancepackage)). Indeed, visual
+which allows direct visual evaluation of assumptions [@performancepackage]. 
+Indeed, visual
 assessment of diagnostic plots is recommended over statistical tests
 since they are overpowered in large samples and underpowered in small
-samples ([Kozak & Piepho, 2018](#ref-kozak2018s)).
+samples [@kozak2018s].
 
 That said, if for whatever reason one wants to check objective asumption
 tests for a linear model, rempsyc makes this easy with the
@@ -352,7 +353,7 @@ combination of quantile-quantile plots, density plots, and histograms.
 ![](paper_files/figure-markdown_strict/nice_normality-1.png)
 
 Similarly for univariate outliers using median absolute deviations from
-the median (MAD, [Leys et al., 2013](#ref-leys2013outliers)).
+the median [MAD, @leys2013outliers].
 
     plot_outliers(airquality,
                   group = "Month",
@@ -361,7 +362,8 @@ the median (MAD, [Leys et al., 2013](#ref-leys2013outliers)).
 ![](paper_files/figure-markdown_strict/plot_outliers-1.png){width=60%}
 
 Univariate outliers based on the median/MAD can also be simply requested
-with `find_mad()`.[5]
+with `find_mad()`.^[Once one has identified outliers, it is also possible to 
+winsorize them with the `winsorize_mad()` function.]
 
     find_mad(airquality, names(airquality), criteria = 3)
 
@@ -406,7 +408,7 @@ Finally, with the idea of making the analysis workflow easier in mind,
 {rempsyc} also provides a few other utility functions. `nice_na()`
 allows reporting item-level missing values per scale, as well as
 participant’s maximum number of missing items by scale, as per
-recommendations ([Parent, 2013](#ref-parent2013handling)).
+recommendations [@parent2013handling].
 
 `extract_duplicates()` creates a data frame of only observations with a
 duplicated ID or participant number, so they can be investigated more
@@ -528,20 +530,3 @@ embody another. *Quarterly Journal of Experimental Psychology*,
 
 Wickham, H. (2016). *ggplot2: Elegant graphics for data analysis*.
 Springer-Verlag New York. <https://ggplot2.tidyverse.org>
-
-[1] This argument can be used logically, as `'TRUE'` or `'FALSE'`, but
-can also be provided with a numeric value representing the cut-off
-threshold for the *p* value
-
-[2] A great resource for this is the {flextable} e-book:
-<https://ardata-fr.github.io/flextable-book/>
-
-[3] Exporting the correlation matrix to an image through the
-{correlation} package also requires the {see} package ([Lüdecke, Patil,
-et al., 2021](#ref-seepackage))
-
-[4] For convenience, colours are only used when the corresponding *p*
-value is at least smaller than .05
-
-[5] Once one has identified outliers, it is also possible to winsorize
-them with the `winsorize_mad()` function.
