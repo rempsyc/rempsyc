@@ -90,6 +90,9 @@
 <li class="nav-item">
   <a class="nav-link" href="articles/featured.html">Featured In</a>
 </li>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://doi.org/10.21105/joss.05466">JOSS Paper</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -235,20 +238,20 @@
 <span>  covariates <span class="op">=</span> <span class="st">"hp"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">contrasts</span></span>
-<span><span class="co">#&gt;   Dependent Variable Comparison df         t              p         d</span></span>
-<span><span class="co">#&gt; 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739</span></span>
-<span><span class="co">#&gt; 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495</span></span>
-<span><span class="co">#&gt; 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244</span></span>
-<span><span class="co">#&gt; 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022</span></span>
-<span><span class="co">#&gt; 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726</span></span>
-<span><span class="co">#&gt; 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296</span></span>
+<span><span class="co">#&gt;   Dependent Variable  Comparison df         t              p         d</span></span>
+<span><span class="co">#&gt; 1                mpg cyl4 - cyl6 28  3.640418 0.001092088865  2.147244</span></span>
+<span><span class="co">#&gt; 2                mpg cyl4 - cyl8 28  3.663188 0.001028617005  3.587739</span></span>
+<span><span class="co">#&gt; 3                mpg cyl6 - cyl8 28  1.290359 0.207480642577  1.440495</span></span>
+<span><span class="co">#&gt; 4               disp cyl4 - cyl6 28 -2.703423 0.011534398020 -1.514296</span></span>
+<span><span class="co">#&gt; 5               disp cyl4 - cyl8 28 -6.040561 0.000001640986 -4.803022</span></span>
+<span><span class="co">#&gt; 6               disp cyl6 - cyl8 28 -4.861413 0.000040511099 -3.288726</span></span>
 <span><span class="co">#&gt;     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1  2.7749422  4.5056868</span></span>
-<span><span class="co">#&gt; 2  0.8271079  1.9692478</span></span>
-<span><span class="co">#&gt; 3  1.3418407  3.0306450</span></span>
-<span><span class="co">#&gt; 4 -5.7436105 -3.8434670</span></span>
-<span><span class="co">#&gt; 5 -4.2381805 -2.1244021</span></span>
-<span><span class="co">#&gt; 6 -2.2318706 -0.8736197</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  1.3531871  3.1223071</span></span>
+<span><span class="co">#&gt; 2  2.7156109  4.4756393</span></span>
+<span><span class="co">#&gt; 3  0.8435009  1.9939088</span></span>
+<span><span class="co">#&gt; 4 -2.2636521 -0.8826532</span></span>
+<span><span class="co">#&gt; 5 -5.8560355 -3.7464170</span></span>
+<span><span class="co">#&gt; 6 -4.2833778 -2.2040887</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format contrasts results</span></span>
 <span><span class="fu"><a href="reference/nice_table.html">nice_table</a></span><span class="op">(</span><span class="va">contrasts</span>, highlight <span class="op">=</span> <span class="fl">.001</span><span class="op">)</span></span></code></pre></div>
@@ -276,10 +279,10 @@
 <span><span class="co">#&gt; 5            2               disp        wt 28  0.83273987  7.6662883</span></span>
 <span><span class="co">#&gt; 6            2               disp   gear:wt 28 -0.08758665 -0.8140664</span></span>
 <span><span class="co">#&gt;                   p         sr2     CI_lower   CI_upper</span></span>
-<span><span class="co">#&gt; 1 0.431415645312886 0.004805465 0.0000000000 0.02702141</span></span>
+<span><span class="co">#&gt; 1 0.431415645312884 0.004805465 0.0000000000 0.02702141</span></span>
 <span><span class="co">#&gt; 2 0.000000002383144 0.558188818 0.3142326391 0.80214500</span></span>
 <span><span class="co">#&gt; 3 0.039899695159515 0.035022025 0.0003502202 0.09723370</span></span>
-<span><span class="co">#&gt; 4 0.491683361920263 0.003546038 0.0000000000 0.02230154</span></span>
+<span><span class="co">#&gt; 4 0.491683361920264 0.003546038 0.0000000000 0.02230154</span></span>
 <span><span class="co">#&gt; 5 0.000000023731710 0.429258143 0.1916386492 0.66687764</span></span>
 <span><span class="co">#&gt; 6 0.422476456495512 0.004840251 0.0000000000 0.02679265</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -826,6 +829,7 @@
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
 <li><a href="https://shinyus.ipub.com/cranview/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/rempsyc" alt="downloads"></a></li>
 <li><a href="https://shinyus.ipub.com/cranview/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rempsyc" alt="total"></a></li>
+<li><a href="https://doi.org/10.21105/joss.05466" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.05466/status.svg" alt="DOI"></a></li>
 <li><a href="https://github.com/sponsors/rempsyc" class="external-link"><img src="https://img.shields.io/github/sponsors/rempsyc" alt="sponsors"></a></li>
 <li><a href="https://github.com/rempsyc?tab=followers" class="external-link"><img src="https://img.shields.io/github/followers/rempsyc?style=social" alt="followers"></a></li>
 <li><a href="https://github.com/rempsyc/rempsyc/stargazers" class="external-link"><img src="https://img.shields.io/github/stars/rempsyc/rempsyc?style=social" alt="stars"></a></li>
