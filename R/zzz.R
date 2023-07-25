@@ -1,9 +1,8 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    "Suggested APA citation: Th\u00e9riault, R. (2022). ",
+    "Suggested APA citation: Th\u00e9riault, R. (2023). ",
     "rempsyc: Convenience functions ",
-    "for psychology \n(R package version ",
-    utils::packageVersion("rempsyc"),
-    ") [Computer software]. https://rempsyc.remi-theriault.com "
+    "for psychology. \nJournal of Open Source Software, 8(87), ",
+    "5466. https://doi.org/10.21105/joss.05466"
   )
 }
