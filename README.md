@@ -13,6 +13,7 @@ status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.or
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/rempsyc)](https://shinyus.ipub.com/cranview/)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.05466/status.svg)](https://doi.org/10.21105/joss.05466)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![stars](https://img.shields.io/github/stars/rempsyc/rempsyc?style=social)](https://github.com/rempsyc/rempsyc/stargazers)
@@ -172,20 +173,20 @@ contrasts <- nice_contrasts(
   covariates = "hp"
 )
 contrasts
-#>   Dependent Variable Comparison df         t              p         d
-#> 1                mpg      4 - 8 28  3.663188 0.001028617005  3.587739
-#> 2                mpg      6 - 8 28  1.290359 0.207480642577  1.440495
-#> 3                mpg      4 - 6 28  3.640418 0.001092088865  2.147244
-#> 4               disp      4 - 8 28 -6.040561 0.000001640986 -4.803022
-#> 5               disp      6 - 8 28 -4.861413 0.000040511099 -3.288726
-#> 6               disp      4 - 6 28 -2.703423 0.011534398020 -1.514296
+#>   Dependent Variable  Comparison df         t              p         d
+#> 1                mpg cyl4 - cyl6 28  3.640418 0.001092088865  2.147244
+#> 2                mpg cyl4 - cyl8 28  3.663188 0.001028617005  3.587739
+#> 3                mpg cyl6 - cyl8 28  1.290359 0.207480642577  1.440495
+#> 4               disp cyl4 - cyl6 28 -2.703423 0.011534398020 -1.514296
+#> 5               disp cyl4 - cyl8 28 -6.040561 0.000001640986 -4.803022
+#> 6               disp cyl6 - cyl8 28 -4.861413 0.000040511099 -3.288726
 #>     CI_lower   CI_upper
-#> 1  2.7749422  4.5056868
-#> 2  0.8271079  1.9692478
-#> 3  1.3418407  3.0306450
-#> 4 -5.7436105 -3.8434670
-#> 5 -4.2381805 -2.1244021
-#> 6 -2.2318706 -0.8736197
+#> 1  1.3531871  3.1223071
+#> 2  2.7156109  4.4756393
+#> 3  0.8435009  1.9939088
+#> 4 -2.2636521 -0.8826532
+#> 5 -5.8560355 -3.7464170
+#> 6 -4.2833778 -2.2040887
 ```
 
 ``` r
@@ -219,10 +220,10 @@ moderations
 #> 5            2               disp        wt 28  0.83273987  7.6662883
 #> 6            2               disp   gear:wt 28 -0.08758665 -0.8140664
 #>                   p         sr2     CI_lower   CI_upper
-#> 1 0.431415645312886 0.004805465 0.0000000000 0.02702141
+#> 1 0.431415645312884 0.004805465 0.0000000000 0.02702141
 #> 2 0.000000002383144 0.558188818 0.3142326391 0.80214500
 #> 3 0.039899695159515 0.035022025 0.0003502202 0.09723370
-#> 4 0.491683361920263 0.003546038 0.0000000000 0.02230154
+#> 4 0.491683361920264 0.003546038 0.0000000000 0.02230154
 #> 5 0.000000023731710 0.429258143 0.1916386492 0.66687764
 #> 6 0.422476456495512 0.004840251 0.0000000000 0.02679265
 ```
