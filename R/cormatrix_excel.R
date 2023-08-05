@@ -234,8 +234,8 @@ cormatrix_excel <- function(data,
   wb$add_style(p_style1)
   wb$add_style(p_style2)
   wb$add_style(p_style3)
-  wb$styles_mgr$styles$dxfs
-  wb$styles_mgr$dxf
+  # wb$styles_mgr$styles$dxfs
+  # wb$styles_mgr$dxf
 
   # create the worksheets and write the data to the worksheets.
   wb$add_worksheet("r_values")$add_data(x = cm)
