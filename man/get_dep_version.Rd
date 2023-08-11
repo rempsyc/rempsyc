@@ -4,7 +4,7 @@
 \alias{get_dep_version}
 \title{Get required version of specified package dependency}
 \usage{
-get_dep_version(dep, pkg = "rempsyc")
+get_dep_version(dep, pkg = utils::packageName())
 }
 \arguments{
 \item{dep}{Dependency of the specified package to check}

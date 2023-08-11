@@ -163,7 +163,11 @@ nice_table <- function(data,
     reason = "for this function."
   )
 
-  dataframe <- data
+  if (!inherits(data, "data.frame")) {
+    message("Non-dataframe detected. Attempting to coerce to dataframe")
+  }
+
+  dataframe <- as.data.frame(data)
 
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
 
@@ -182,6 +186,7 @@ nice_table <- function(data,
         . == "df_error" ~ "df",
         . == "Cohens_d" ~ "d",
         . == "Coefficient" ~ "b",
+        . == "t.ratio" ~ "t",
         . == "Std_Coefficient" ~ "B",
         . == "r_rank_biserial" ~ "rrb",
         . == "Eta2" ~ "n2",

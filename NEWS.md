@@ -1,3 +1,13 @@
+# rempsyc 0.1.5
+* ✨In the works✨
+
+## rempsyc 0.1.4.1
+
+* `nice_table`: 
+  * Now automatically attempts to convert objects (e.g., `emmGrid`) to a dataframe so save users some headache.
+  * Now automatically converts column name "t.ratio" to "t".
+* `get_dep_version`: various improvements, now more robust
+
 # rempsyc 0.1.4
 * CRAN submission
 

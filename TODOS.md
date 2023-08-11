@@ -1,6 +1,5 @@
 # Development objectives (to-do list)
 
-* `nice_table`: automatically attempt to convert objects (e.g., `emmGrid`) to data frame so save users some headache. Also automatically convert "t.ratio" to "t".
 * When [effectsize](https://cran.r-project.org/package=effectsize) new version (0.8.4) is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
 * `nice_lm_contrasts`:
   * improve function and add to contrasts vignette!
