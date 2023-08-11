@@ -18,7 +18,7 @@ publication-ready format."><meta property="og:image" content="https://rempsyc.re
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -225,10 +225,26 @@ model object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 8.453927e-01 0.0006984424 0.0000000000 0.01347203</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7 4.789590e-01 0.0092872897 0.0000000000 0.05587351</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8 2.885720e-01 0.0211165564 0.0000000000 0.09136014</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># requireNamespace("effectsize", quietly = TRUE) &amp;&amp; packageVersion("effectsize") &gt;=      "0.8.3.5"</span></span></span>
 <span class="r-in"><span><span class="co"># Get interpretations</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, Interpretation <span class="op">=</span> <span class="fu">effectsize</span><span class="fu">::</span><span class="fu">interpret_r2_semipartial</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">sr2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, Interpretation <span class="op">=</span> <span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/interpret_omega_squared.html" class="external-link">interpret_r2_semipartial</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">sr2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Model Number Dependent Variable Predictor df            b          t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            1                mpg       cyl 27 -0.365239089 -0.7180977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2            1                mpg        wt 27 -7.627489287 -5.0146028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3            1                mpg        hp 27 -0.108394273 -3.6404181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4            1                mpg     wt:hp 27  0.025836594  3.2329593</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5            2               qsec      disp 27 -0.006222635 -1.9746464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6            2               qsec      drat 27  0.227692395  0.1968842</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7            2               qsec      carb 27  1.154106215  0.7179431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8            2               qsec drat:carb 27 -0.477539959 -1.0825727</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              p          sr2     CI_lower   CI_upper Interpretation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 4.788652e-01 0.0021596150 0.0000000000 0.01306786     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.928375e-05 0.1053130854 0.0089876445 0.20163853         medium</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.136403e-03 0.0555024045 0.0005550240 0.11934768          small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 3.221753e-03 0.0437733438 0.0004377334 0.09898662          small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5.861684e-02 0.0702566891 0.0000000000 0.19796621         medium</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 8.453927e-01 0.0006984424 0.0000000000 0.01347203     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7 4.789590e-01 0.0092872897 0.0000000000 0.05587351     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 2.885720e-01 0.0211165564 0.0000000000 0.09136014          small</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

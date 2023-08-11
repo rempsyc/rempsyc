@@ -18,7 +18,7 @@ with effect sizes, and format in publication-ready format."><meta property="og:i
     
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -299,10 +299,22 @@ model object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.17270299 0.0097757007 0.0000000000 0.034108645</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.87319157 0.0001287948 0.0000000000 0.002840222</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.78225488 0.0003866236 0.0000000000 0.005088286</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># requireNamespace("effectsize", quietly = TRUE) &amp;&amp; packageVersion("effectsize") &gt;=      "0.8.3.5"</span></span></span>
 <span class="r-in"><span><span class="co"># Get interpretations</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>, Interpretation <span class="op">=</span> <span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/interpret_omega_squared.html" class="external-link">interpret_omega_squared</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">sr2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable am Predictor (+/-1 SD) df           B          t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg  0       gear (LOW-wt) 24  2.34802068  2.0297802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                mpg  0      gear (MEAN-wt) 24  0.54019914  2.7321453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                mpg  0      gear (HIGH-wt) 24 -1.26762239 -1.3171195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                mpg  1       gear (LOW-wt) 24 -0.25154857 -1.4054434</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                mpg  1      gear (MEAN-wt) 24 -0.04783665 -0.1613202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                mpg  1      gear (HIGH-wt) 24  0.15587527  0.2795012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            p          sr2     CI_lower    CI_upper Interpretation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.05360579 0.0203900917 0.0000000000 0.056598989          small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.01161625 0.0369427073 0.0003694271 0.087760631          small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.20023635 0.0085856163 0.0000000000 0.031309188     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.17270299 0.0097757007 0.0000000000 0.034108645     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.87319157 0.0001287948 0.0000000000 0.002840222     very small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.78225488 0.0003866236 0.0000000000 0.005088286     very small</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
