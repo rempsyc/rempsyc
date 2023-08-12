@@ -10,7 +10,7 @@
 #' of using the default one-sided alternative ("greater"), we use the
 #' two-sided alternative.
 #'
-#' To interpret the sr2, use [effectsize::interpret_omega_squared()].
+#' To interpret the sr2, use [effectsize::interpret_r2_semipartial()].
 #'
 #' For the *easystats* equivalent, use [report::report()] on the [lm()]
 #' model object.

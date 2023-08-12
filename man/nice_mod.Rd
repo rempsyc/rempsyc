@@ -72,7 +72,7 @@ the interpretation of the confidence interval. In \code{rempsyc}, instead
 of using the default one-sided alternative ("greater"), we use the
 two-sided alternative.
 
-To interpret the sr2, use \code{\link[effectsize:interpret_omega_squared]{effectsize::interpret_omega_squared()}}.
+To interpret the sr2, use \code{\link[effectsize:interpret_omega_squared]{effectsize::interpret_r2_semipartial()}}.
 
 For the \emph{easystats} equivalent, use \code{\link[report:report]{report::report()}} on the \code{\link[=lm]{lm()}}
 model object.
@@ -116,7 +116,7 @@ x
 \dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("effectsize", quietly = TRUE) && packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get interpretations
-cbind(x, Interpretation = effectsize::interpret_omega_squared(x$sr2))
+cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 \dontshow{\}) # examplesIf}
 }
 \seealso{

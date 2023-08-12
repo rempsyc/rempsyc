@@ -1,6 +1,5 @@
 # Development objectives (to-do list)
 
-* When [effectsize](https://cran.r-project.org/package=effectsize) new version (0.8.4) is on CRAN, update all occurrences of `effectsize::interpret_omega_squared()` to `effectsize::interpret_r2_semipartial()`
 * `nice_lm_contrasts`:
   * improve function and add to contrasts vignette!
 * `nice_contrasts`
