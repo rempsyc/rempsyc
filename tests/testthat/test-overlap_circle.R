@@ -18,9 +18,6 @@ test_that("overlap_circle", {
   # expect_snapshot_file("plot.jpg")
   # Not working...
 
-  # Remove file
-  unlink("plot.jpg")
-
   # Score of 1 (0% overlap)
   x2 <- overlap_circle(1)
 
@@ -40,5 +37,9 @@ test_that("overlap_circle", {
   x5 <- overlap_circle(3.12, categories = c("Humans", "Animals"))
 
   expect_s3_class(x5, "gList")
+
+  # Remove files
+  unlink("plot.jpg")
+  unlink("Rplots.pdf")
 
 })
