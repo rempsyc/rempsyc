@@ -1,6 +1,8 @@
 test_that("overlap_circle", {
   skip_if_not_installed("VennDiagram")
 
+  .old_wd <- setwd(tempdir())
+
   # Saving to file (PDF or PNG)
   x1 <- overlap_circle(3.5)
   ggplot2::ggsave(x1,
@@ -41,5 +43,7 @@ test_that("overlap_circle", {
   # Remove files
   unlink("plot.jpg")
   unlink("Rplots.pdf")
+
+  setwd(.old_wd)
 
 })
