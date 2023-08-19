@@ -14,7 +14,6 @@
   * Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
   * Add option to display group means(?)
 * `nice_varplot`
-  * Make group argument optional
   * Add option to standardize or not
   * Also add option to annotate Levene test on the plot
   * Use violin points, and group-mean centered (but not standardized)
