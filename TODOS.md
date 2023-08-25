@@ -1,5 +1,7 @@
 # Development objectives (to-do list)
 
+* `cormatrix_excel`:
+  * add argument to specify only half of matrix (lower half) for cormatrix_excel function?
 * `nice_lm_contrasts`:
   * improve function and add to contrasts vignette!
 * `nice_contrasts`
