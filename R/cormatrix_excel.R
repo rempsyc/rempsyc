@@ -77,133 +77,133 @@ cormatrix_excel <- function(data,
 
   # Colours
   gray_style <- openxlsx2::create_dxfs_style(
-    bgFill = style_gray,
+    bg_fill = style_gray,
     font_color = style_black,
-    numFmt = "#.#0 _*_*_*"
+    num_fmt = "#.#0 _*_*_*"
   )
 
   p_style <- openxlsx2::create_dxfs_style(
-    bgFill = "",
+    bg_fill = "",
     font_color = style_black,
-    numFmt = "#.##0 _*_*_*"
+    num_fmt = "#.##0 _*_*_*"
   )
   p_style1 <- openxlsx2::create_dxfs_style(
-    bgFill = style_green1,
+    bg_fill = style_green1,
     font_color = style_black,
-    numFmt = "#.##0 _*_*_*"
+    num_fmt = "#.##0 _*_*_*"
   )
   p_style2 <- openxlsx2::create_dxfs_style(
-    bgFill = style_green2,
+    bg_fill = style_green2,
     font_color = style_black,
-    numFmt = "#.##0 _*_*_*"
+    num_fmt = "#.##0 _*_*_*"
   )
   p_style3 <- openxlsx2::create_dxfs_style(
-    bgFill = style_green3,
+    bg_fill = style_green3,
     font_color = style_black,
-    numFmt = "#.##0 _*_*_*"
+    num_fmt = "#.##0 _*_*_*"
   )
 
   # no star
   no_star <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 _*_*_*",
+    num_fmt = "#.#0 _*_*_*",
     font_color = style_black,
-    bgFill = ""
+    bg_fill = ""
   )
 
   # one star
   one_star_pink <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_pink
+    bg_fill = style_pink
   )
   one_star_peach <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_peach
+    bg_fill = style_peach
   )
   one_star_red <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_red
+    bg_fill = style_red
   )
   one_star_lightblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_lightblue
+    bg_fill = style_lightblue
   )
   one_star_midblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_midblue
+    bg_fill = style_midblue
   )
   one_star_darkblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*_*_*",
+    num_fmt = "#.#0 \\*_*_*",
     font_color = style_black,
-    bgFill = style_darkblue
+    bg_fill = style_darkblue
   )
 
   # two stars
   two_stars_pink <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_pink
+    bg_fill = style_pink
   )
   two_stars_peach <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_peach
+    bg_fill = style_peach
   )
   two_stars_red <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_red
+    bg_fill = style_red
   )
   two_stars_lightblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_lightblue
+    bg_fill = style_lightblue
   )
   two_stars_midblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_midblue
+    bg_fill = style_midblue
   )
   two_stars_darkblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*_*",
+    num_fmt = "#.#0 \\*\\*_*",
     font_color = style_black,
-    bgFill = style_darkblue
+    bg_fill = style_darkblue
   )
 
   # three stars
   three_stars_pink <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_pink
+    bg_fill = style_pink
   )
   three_stars_peach <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_peach
+    bg_fill = style_peach
   )
   three_stars_red <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_red
+    bg_fill = style_red
   )
   three_stars_lightblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_lightblue
+    bg_fill = style_lightblue
   )
   three_stars_midblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_midblue
+    bg_fill = style_midblue
   )
   three_stars_darkblue <- openxlsx2::create_dxfs_style(
-    numFmt = "#.#0 \\*\\*\\*",
+    num_fmt = "#.#0 \\*\\*\\*",
     font_color = style_black,
-    bgFill = style_darkblue
+    bg_fill = style_darkblue
   )
 
   # create openxlsx2 workbook
@@ -423,15 +423,15 @@ cormatrix_excel <- function(data,
   )
 
   ## Freeze Panes
-  wb$freeze_pane("r_values", firstCol = TRUE, firstRow = TRUE)
-  wb$freeze_pane("p_values", firstCol = TRUE, firstRow = TRUE)
+  wb$freeze_pane("r_values", first_col = TRUE, first_row = TRUE)
+  wb$freeze_pane("p_values", first_col = TRUE, first_row = TRUE)
 
   # Save Excel
   cat(paste0(
     "\n\n [Correlation matrix '", filename,
     ".xlsx' has been saved to working directory (or where specified).]"
   ))
-  openxlsx2::wb_save(wb, path = paste0(filename, ".xlsx"), overwrite = TRUE)
+  openxlsx2::wb_save(wb, file = paste0(filename, ".xlsx"), overwrite = TRUE)
 
   # open in Excel
   openxlsx2::xl_open(paste0(filename, ".xlsx"))
