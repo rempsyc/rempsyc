@@ -71,13 +71,13 @@ fun <- function() {
 }
 df <- data.frame(
   ID = c("idz", NA),
-  scale1_Q1 = fun(), scale1_Q2 = fun(), scale1_Q3 = fun(),
-  scale2_Q1 = fun(), scale2_Q2 = fun(), scale2_Q3 = fun(),
-  scale3_Q1 = fun(), scale3_Q2 = fun(), scale3_Q3 = fun()
-)
+  open_1 = fun(), open_2 = fun(), open_3 = fun(),
+  extrovert_1 = fun(), extrovert_2 = fun(), extrovert_3 = fun(),
+  agreeable_1 = fun(), agreeable_2 = fun(), agreeable_3 = fun()
+  )
 
 # One can list the scale names directly:
-nice_na(df, scales = c("ID", "scale1", "scale2", "scale3"))
+nice_na(df, scales = c("ID", "open", "extrovert", "agreeable"))
 
 }
 \references{
