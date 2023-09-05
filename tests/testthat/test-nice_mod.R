@@ -33,5 +33,4 @@ test_that("nice_mod", {
     moderator = "wt",
     moderator2 = "am"
   ))
-
 })

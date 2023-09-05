@@ -65,7 +65,7 @@
 #'   open_1 = fun(), open_2 = fun(), open_3 = fun(),
 #'   extrovert_1 = fun(), extrovert_2 = fun(), extrovert_3 = fun(),
 #'   agreeable_1 = fun(), agreeable_2 = fun(), agreeable_3 = fun()
-#'   )
+#' )
 #'
 #' # One can list the scale names directly:
 #' nice_na(df, scales = c("ID", "open", "extrovert", "agreeable"))

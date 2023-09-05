@@ -102,7 +102,9 @@ nice_lm_contrasts <- function(model,
 
   contrval.list <- suppressWarnings(
     lapply(models.list, modelbased::get_emcontrasts,
-           contrast = group, adjust = p_adjust))
+      contrast = group, adjust = p_adjust
+    )
+  )
 
   contrast <- contrval.list[[1]]@misc$con.coef
 

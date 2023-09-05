@@ -8,5 +8,4 @@ test_that("nice_lm_slopes", {
   model2 <- lm(qsec ~ gear * wt, mtcars)
   my.models <- list(model, model2)
   expect_snapshot(nice_lm_slopes(my.models, predictor = "gear", moderator = "wt"))
-
 })

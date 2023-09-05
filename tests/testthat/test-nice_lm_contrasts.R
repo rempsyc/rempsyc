@@ -22,5 +22,4 @@ test_that("nice_lm_contrasts", {
   model <- lm(mpg ~ carb + wt * hp, mtcars2)
   set.seed(100)
   expect_snapshot(nice_lm_contrasts(model, group = "carb", data = mtcars2, bootstraps = 2500))
-
 })

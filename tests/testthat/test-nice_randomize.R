@@ -25,5 +25,4 @@ test_that("nice_randomize", {
       "Tester", "Notes"
     )
   ))
-
-  })
+})

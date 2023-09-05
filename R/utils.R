@@ -76,8 +76,9 @@ get_dep_version <- function(dep, pkg = utils::packageName()) {
 #' @param pkgs Packages to install if not already installed
 install_if_not_installed <- function(pkgs) {
   successfully_loaded <- vapply(
-    pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+    pkgs, requireNamespace,
+    FUN.VALUE = logical(1L), quietly = TRUE
+  )
   required_pkgs <- names(which(successfully_loaded == FALSE))
   utils::install.packages(required_pkgs)
 }
-

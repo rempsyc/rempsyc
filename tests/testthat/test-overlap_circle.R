@@ -6,15 +6,15 @@ test_that("overlap_circle", {
   # Saving to file (PDF or PNG)
   x1 <- overlap_circle(3.5)
   ggplot2::ggsave(x1,
-                  file = "plot.jpg", width = 7,
-                  height = 7, unit = "in", dpi = 300
+    file = "plot.jpg", width = 7,
+    height = 7, unit = "in", dpi = 300
   )
 
   expect_s3_class(x1, "gList")
 
   ggplot2::ggsave("plot.jpg",
-                  width = 7, height = 7, unit = "in",
-                  dpi = 300, path = NULL
+    width = 7, height = 7, unit = "in",
+    dpi = 300, path = NULL
   )
 
   # expect_snapshot_file("plot.jpg")
@@ -45,5 +45,4 @@ test_that("overlap_circle", {
   unlink("Rplots.pdf")
 
   setwd(.old_wd)
-
 })

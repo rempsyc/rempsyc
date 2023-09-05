@@ -808,7 +808,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
 
   # Set attributes for variables which digits should not be changed for later step
   attr(table, "dont_change") <- c(
-    compose.table0$col, cols.df, cols.2digits, cols.0digits, compose.table2$col)
+    compose.table0$col, cols.df, cols.2digits, cols.0digits, compose.table2$col
+  )
   table
 }
 

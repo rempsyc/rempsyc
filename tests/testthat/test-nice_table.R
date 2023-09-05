@@ -75,8 +75,7 @@ test_that("nice_table", {
     row.names = c(NA, -3L), class = "data.frame"
   )
   expect_snapshot(nice_table(header.data,
-             separate.header = TRUE,
-             italics = 2:4
+    separate.header = TRUE,
+    italics = 2:4
   ))
-
 })

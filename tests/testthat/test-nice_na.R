@@ -3,10 +3,10 @@ test_that("nice_na", {
 
   # Use selected columns explicitly
   expect_snapshot(nice_na(airquality,
-          vars = list(
-            c("Ozone", "Solar.R", "Wind"),
-            c("Temp", "Month", "Day")
-          )
+    vars = list(
+      c("Ozone", "Solar.R", "Wind"),
+      c("Temp", "Month", "Day")
+    )
   ))
 
   # If the questionnaire items start with the same name, e.g.,
@@ -23,5 +23,4 @@ test_that("nice_na", {
 
   # One can list the scale names directly:
   expect_snapshot(nice_na(df, scales = c("ID", "scale1", "scale2", "scale3")))
-
 })

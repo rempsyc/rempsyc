@@ -15,8 +15,8 @@ test_that("nice_varplot", {
   )
 
   ggplot2::ggsave("plot.jpg",
-                  width = 7, height = 7, unit = "in",
-                  dpi = 300, path = NULL
+    width = 7, height = 7, unit = "in",
+    dpi = 300, path = NULL
   )
 
   # expect_snapshot_file("plot.jpg")
@@ -48,5 +48,4 @@ test_that("nice_varplot", {
     x2,
     c("gg", "ggplot2")
   )
-
 })

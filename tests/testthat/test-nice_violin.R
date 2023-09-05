@@ -183,5 +183,4 @@ test_that("nice_violin", {
     x12,
     c("gg", "ggplot2")
   )
-
 })

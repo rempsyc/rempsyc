@@ -34,5 +34,4 @@ test_that("nice_slopes", {
     moderator = "wt",
     moderator2 = "am"
   ))
-
 })

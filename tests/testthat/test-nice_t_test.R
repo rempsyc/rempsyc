@@ -49,5 +49,4 @@ test_that("nice_t_test", {
     group = "supp",
     paired = TRUE
   ))
-
 })

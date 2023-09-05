@@ -97,8 +97,9 @@ nice_slopes <- function(data,
                         ...) {
   check_col_names(data, c(predictor, response, moderator, moderator2, covariates))
   rlang::check_installed("effectsize",
-                         version = get_dep_version("effectsize"),
-                         reason = "for this function.")
+    version = get_dep_version("effectsize"),
+    reason = "for this function."
+  )
 
   if (!missing(b.label)) {
     message(paste(
@@ -114,7 +115,8 @@ nice_slopes <- function(data,
       predictor,
       moderator,
       moderator2,
-      covariates)))
+      covariates
+    )))
 
   if (data_is_standardized(data)) {
     b.label <- "B"

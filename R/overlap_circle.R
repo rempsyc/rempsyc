@@ -76,8 +76,10 @@ overlap_circle <- function(response,
   area2 <- 100
   if (scoring == "IOS") {
     if (response < 1 || response > 7) {
-      stop(c("Overlap score must be between 1 and 7! Else use `scoring = 'percentage'`\n",
-             "(scoring system of the Inclusion of the Other in the Self Scale...)\n"))
+      stop(c(
+        "Overlap score must be between 1 and 7! Else use `scoring = 'percentage'`\n",
+        "(scoring system of the Inclusion of the Other in the Self Scale...)\n"
+      ))
     }
     scale <- c(1, 2, 3, 4, 5, 6, 7)
     overlap <- c(0, 10, 20, 30, 55, 65, 85)

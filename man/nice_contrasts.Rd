@@ -111,7 +111,6 @@ nice_contrasts(
   group = "carb",
   bootstraps = 200
 )
-
 }
 \dontshow{\}) # examplesIf}
 }

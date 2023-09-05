@@ -57,7 +57,6 @@
 #'   group = "carb",
 #'   bootstraps = 200
 #' )
-#'
 #' }
 #' @seealso
 #' \code{\link{nice_lm_contrasts}},
@@ -89,7 +88,9 @@ nice_contrasts <- function(response,
   models.list <- lapply(formulas, lm, data = data)
 
   table.stats <- nice_lm_contrasts(
-    models.list, group = group, data = data,
-    effect.type = effect.type, bootstraps = bootstraps)
+    models.list,
+    group = group, data = data,
+    effect.type = effect.type, bootstraps = bootstraps
+  )
   table.stats
 }

@@ -10,5 +10,4 @@ test_that("nice_reverse", {
 
   # Reverse scores with maximum = 3 and minimum = -3
   expect_snapshot(nice_reverse(-3:3, 3, min = -3))
-
 })

@@ -50,5 +50,4 @@ test_that("nice_contrasts", {
     group = "carb",
     bootstraps = 2500
   ))
-
 })
