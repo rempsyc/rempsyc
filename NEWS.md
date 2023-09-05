@@ -1,3 +1,7 @@
+## rempsyc 0.1.5.1
+* `nice_slopes` and `nice_mod`:
+  * Corrected bug when the `data` argument contained character variables when checking whether variables were standardized.
+
 # rempsyc 0.1.5
 * CRAN submission
 

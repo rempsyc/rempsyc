@@ -108,6 +108,14 @@ nice_slopes <- function(data,
     ))
   }
 
+  data <- data %>%
+    dplyr::select(dplyr::any_of(c(
+      response,
+      predictor,
+      moderator,
+      moderator2,
+      covariates)))
+
   if (data_is_standardized(data)) {
     b.label <- "B"
   } else if (isTRUE(standardize)) {
