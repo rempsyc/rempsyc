@@ -14,7 +14,9 @@
 #' you also need data in "long" format rather than wide format (like for
 #' the `ToothGrowth` data set). In this case, the `group` argument refers
 #' to the participant ID for example, so the same group/participant is
-#' measured several times, and thus has several rows.
+#' measured several times, and thus has several rows. Note also that R >= 4.4.0
+#' has stopped supporting the `paired` argument for the formula method used
+#' internally here.
 #'
 #' For the *easystats* equivalent, use: [report::report()] on the
 #' [t.test()] object.
@@ -78,14 +80,6 @@
 #'   mu = 10
 #' )
 #'
-#' # Paired t-test instead of independent samples
-#' # Requires data in "long" format
-#' nice_t_test(
-#'   data = ToothGrowth,
-#'   response = "len",
-#'   group = "supp",
-#'   paired = TRUE
-#' )
 #' # Make sure cases appear in the same order for
 #' # both levels of the grouping factor
 #' @seealso
@@ -116,12 +110,19 @@ nice_t_test <- function(data,
   }
   if (methods::hasArg(paired)) {
     paired <- args$paired
+
+    if (getRversion() >= "4.4.0" && paired == TRUE) {
+      message(
+        "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method.")
+      return(NULL)
+    }
+
     if (paired == TRUE) message("Using paired t-test. \n ")
     if (paired == FALSE) message("Using independent samples t-test. \n ")
   } else {
     paired <- FALSE
   }
-  if (!methods::hasArg(var.equal) & paired == FALSE & warning == TRUE) {
+  if (!methods::hasArg(var.equal) && paired == FALSE && warning == TRUE) {
     message(
       "Using Welch t-test (base R's default; ",
       "cf. https://doi.org/10.5334/irsp.82).
@@ -146,7 +147,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
-  boot.lists <- lapply(formulas, function(x) {
+  es.lists <- lapply(formulas, function(x) {
     effectsize::cohens_d(x,
       data = data,
       paired = paired,
@@ -158,11 +159,11 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   for (i in seq_along(list.names)) {
     list.stats[[list.names[i]]] <- unlist(c(t((lapply(sums.list, `[[`, i)))))
   }
-  d <- unlist(lapply(boot.lists, function(x) {
+  d <- unlist(lapply(es.lists, function(x) {
     (x)["Cohens_d"]
   }))
-  CI_lower <- unlist(lapply(boot.lists, `[[`, "CI_low"))
-  CI_higher <- unlist(lapply(boot.lists, `[[`, "CI_high"))
+  CI_lower <- unlist(lapply(es.lists, `[[`, "CI_low"))
+  CI_higher <- unlist(lapply(es.lists, `[[`, "CI_high"))
   table.stats <- data.frame(
     response,
     list.stats,

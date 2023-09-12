@@ -52,7 +52,9 @@ Note that for paired \emph{t} tests, you need to use \code{paired = TRUE}, and
 you also need data in "long" format rather than wide format (like for
 the \code{ToothGrowth} data set). In this case, the \code{group} argument refers
 to the participant ID for example, so the same group/participant is
-measured several times, and thus has several rows.
+measured several times, and thus has several rows. Note also that R >= 4.4.0
+has stopped supporting the \code{paired} argument for the formula method used
+internally here.
 
 For the \emph{easystats} equivalent, use: \code{\link[report:report]{report::report()}} on the
 \code{\link[=t.test]{t.test()}} object.
@@ -99,14 +101,6 @@ nice_t_test(
   mu = 10
 )
 
-# Paired t-test instead of independent samples
-# Requires data in "long" format
-nice_t_test(
-  data = ToothGrowth,
-  response = "len",
-  group = "supp",
-  paired = TRUE
-)
 # Make sure cases appear in the same order for
 # both levels of the grouping factor
 \dontshow{\}) # examplesIf}

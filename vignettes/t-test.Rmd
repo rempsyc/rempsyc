@@ -146,7 +146,7 @@ nice_t_test(
 
 Note that for paired *t* tests, you need to use `paired = TRUE`, and you also need data in "long" format rather than wide format (like for the `ToothGrowth` data set). In this case, the `group` argument refers to the participant ID for example, so the same group/participant is measured several times, and thus has several rows.
 
-```{r}
+```{r, eval = getRversion() < "4.4.0"}
 nice_t_test(
   data = ToothGrowth,
   response = "len",
@@ -155,6 +155,8 @@ nice_t_test(
 ) |>
   nice_table()
 ```
+
+Note that R >= 4.4.0 has stopped supporting the `paired` argument for the formula method used internally in `nice_t_test()`.
 
 ### Multiple comparison corrections
 

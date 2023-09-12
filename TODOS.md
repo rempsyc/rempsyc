@@ -11,6 +11,7 @@
 * `rcompanion_groupwiseMean`
   * Rewrite with only the `boot` package and `dplyr::group_by`?
 * `nice_t_test`
+  * R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method. Add back support here.
   * Add other optional corrections argument (other than Bonferroni) - can use easystats' effectsize maybe?
   * Add option to specify `robust.d` for a robust version of Cohen's d
   * Add option `bootstrapped.CI` to use a bootstrapped version of the 95% CI
