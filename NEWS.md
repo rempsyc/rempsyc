@@ -1,3 +1,9 @@
+# rempsyc 0.1.7
+* ✨Incoming!✨
+
+## rempsyc 0.1.6.1
+* ✨Incoming!✨
+
 # rempsyc 0.1.6
 * CRAN submission
 
