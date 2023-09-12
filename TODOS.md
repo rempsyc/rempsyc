@@ -1,5 +1,6 @@
 # Development objectives (to-do list)
 
+* Fix `Problem: Missing or empty return value for exported functions: nice_contrasts, nice_mod, nice_slopes, get_dep_version, install_if_not_installed`
 * `cormatrix_excel`:
   * add argument to specify only half of matrix (lower half) for cormatrix_excel function?
 * `nice_lm_contrasts`:
