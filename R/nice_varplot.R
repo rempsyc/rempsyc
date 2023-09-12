@@ -91,7 +91,8 @@ nice_varplot <- function(data,
     xtitle = NULL,
     ytitle = ytitle,
     has.points = FALSE,
-    has.jitter = FALSE
+    has.jitter = FALSE,
+    has.legend = FALSE
   ) +
     ggplot2::geom_jitter(size = 2, width = 0.10) +
     ggplot2::annotate(
