@@ -169,7 +169,9 @@ argument: <code>var.equal = TRUE</code>.</p>
 you also need data in "long" format rather than wide format (like for
 the <code>ToothGrowth</code> data set). In this case, the <code>group</code> argument refers
 to the participant ID for example, so the same group/participant is
-measured several times, and thus has several rows.</p>
+measured several times, and thus has several rows. Note also that R &gt;= 4.4.0
+has stopped supporting the <code>paired</code> argument for the formula method used
+internally here.</p>
 <p>For the <em>easystats</em> equivalent, use: <code><a href="https://easystats.github.io/report/reference/report.html" class="external-link">report::report()</a></code> on the
 <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> object.</p>
     </div>
@@ -264,18 +266,6 @@ measured several times, and thus has several rows.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable        t df            p        d CI_lower CI_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg 9.470995 31 1.154598e-10 1.674251  1.12797 2.208995</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Paired t-test instead of independent samples</span></span></span>
-<span class="r-in"><span><span class="co"># Requires data in "long" format</span></span></span>
-<span class="r-in"><span><span class="fu">nice_t_test</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ToothGrowth</span>,</span></span>
-<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"len"</span>,</span></span>
-<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"supp"</span>,</span></span>
-<span class="r-in"><span>  paired <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using paired t-test. </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable        t df           p         d  CI_lower  CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                len 3.302585 29 0.002549842 0.6029668 0.2088153 0.9883436</span>
 <span class="r-in"><span><span class="co"># Make sure cases appear in the same order for</span></span></span>
 <span class="r-in"><span><span class="co"># both levels of the grouping factor</span></span></span>
 </code></pre></div>
