@@ -183,14 +183,14 @@ nice_table(stats.table, broom = "lm")
 ```{r}
 library(report)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
-(stats.table <- as.data.frame(report(model)))
+(stats.table <- report_table(model))
 nice_table(stats.table)
 ```
 
 The `report` package provides quite comprehensive tables, so one may request an abbreviated table with the `short` argument.
 
 ```{r}
-nice_table(stats.table, short = TRUE)
+nice_table(stats.table, report = "lm", short = TRUE)
 ```
 
 ### `rempsyc` table
