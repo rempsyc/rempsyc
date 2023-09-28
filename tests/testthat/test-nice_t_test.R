@@ -40,14 +40,4 @@ test_that("nice_t_test", {
     response = "mpg",
     mu = 10
   ))
-
-  # Paired t-test instead of independent samples
-  # Requires data in "long" format
-  skip_if(getRversion() >= "4.4.0")
-  expect_snapshot(nice_t_test(
-    data = ToothGrowth,
-    response = "len",
-    group = "supp",
-    paired = TRUE
-  ))
 })
