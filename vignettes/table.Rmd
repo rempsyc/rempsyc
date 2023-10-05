@@ -108,7 +108,7 @@ Next, we can save the flextable as an object, which we can later further edit, v
 my_table <- nice_table(stats.table)
 ```
 
-> Breaking news! APA 7th edition actually advises against using beta (β) to represent standardized coefficients, but instead suggests to use a lowercase italic b followed by an asterisk: _b_*. `rempsyc` will follow this APA recommendation with version 0.1.6.1 and going forward.
+> Breaking news! APA 7th edition actually advises against using beta (β) to represent standardized coefficients, but instead suggests to use a lowercase italic b followed by an asterisk: _b_*. `rempsyc` will follow this APA recommendation with version `0.1.6.1` and going forward.
 
 ### Opening/Saving table to Word
 
@@ -136,7 +136,7 @@ Notice that if you provide the `CI_lower` and `CI_upper` column names, it will a
 
 You can also see that it automatically formats the df, b, t, and p values to italic. It also  correctly rounded each row, and formatted p values as < .001 and stripped the leading zeros (it will do the same for correlations r, R2, sr2).
 
-> Note: in order for this to work automatically, your columns must be named correctly. Currently the function will make the following conversions: p, t, SE, SD, M, W, N, n, z, F, b, r, and df to italic; R2 and sr2 to italic squared, dR to italic R subscript, np2 to italic η subscript-p squared, ges to italic η subscript-G squared, and B to β. Not seeing a symbol that should be there? Contact me and I'll add it!
+> Note: in order for this to work automatically, your columns must be named correctly. Currently the function will make the following conversions: p, t, SE, SD, M, W, N, n, z, F, b, r, and df to italic; R2 and sr2 to italic squared, dR to italic R subscript, np2 to italic η subscript-p squared, ges to italic η subscript-G squared, and B to _b_* (and to β in version <= 0.1.6). Not seeing a symbol that should be there? Contact me and I'll add it!
 
 Let's test this by simply changing our dataframe names for the exercise.
 
