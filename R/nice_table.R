@@ -727,7 +727,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
     ),
     value = c(
       '"95% CI (", flextable::as_i("b"), ")"',
-      '"95% CI (", "\u03B2", ")"', # beta
+      '"95% CI (", flextable::as_i("b"), "*", ")"', # beta
       '"95% CI (", flextable::as_i("t"), ")"',
       '"95% CI (", flextable::as_i("d"), ")"',
       '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"', # eta
@@ -744,7 +744,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
       'flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb"))',
       '"\u03C7", flextable::as_sup("2")', # Chi square
       '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")', # Chi square
-      '"\u03B2"' # beta
+      'flextable::as_i("b"), "*"' # beta
     )
   )
   for (i in seq(nrow(compose.table1))) {

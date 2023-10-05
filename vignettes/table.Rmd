@@ -108,6 +108,8 @@ Next, we can save the flextable as an object, which we can later further edit, v
 my_table <- nice_table(stats.table)
 ```
 
+> Breaking news! APA 7th edition actually advises against using beta (β) to represent standardized coefficients, but instead suggests to use a lowercase italic b followed by an asterisk: _b_*. `rempsyc` will follow this APA recommendation with version 0.1.6.1 and going forward.
+
 ### Opening/Saving table to Word
 
 One can easily open the table in Word for quick copy-pasting.
@@ -184,7 +186,7 @@ nice_table(stats.table, broom = "lm")
 library(report)
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
 (stats.table <- report_table(model))
-nice_table(stats.table)
+nice_table(stats.table, report = "lm")
 ```
 
 The `report` package provides quite comprehensive tables, so one may request an abbreviated table with the `short` argument.

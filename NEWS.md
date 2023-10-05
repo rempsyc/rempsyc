@@ -2,7 +2,7 @@
 * ✨Incoming!✨
 
 ## rempsyc 0.1.6.1
-* ✨Incoming!✨
+* Breaking news: APA 7th edition actually advises against using beta to represent standardized coefficients, but suggests instead to use a lowercase italic b followed by an asterisk: _b_*. `rempsyc` will follow this APA recommendation going forward.
 
 # rempsyc 0.1.6
 * CRAN submission
