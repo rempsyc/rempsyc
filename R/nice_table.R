@@ -744,7 +744,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
       'flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb"))',
       '"\u03C7", flextable::as_sup("2")', # Chi square
       '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")', # Chi square
-      'flextable::as_i("b"), "*"' # beta
+      'flextable::as_i("b"), "*"', # beta
+      '"\u03C3"' # sigma
     )
   )
   for (i in seq(nrow(compose.table1))) {
