@@ -723,7 +723,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
       "95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)",
       "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "np2",
       "n2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2", "tau",
-      "rho", "rrb", "chi2", "chi2.df", "B"
+      "rho", "rrb", "chi2", "chi2.df", "B", "sigma"
     ),
     value = c(
       '"95% CI (", flextable::as_i("b"), ")"',
