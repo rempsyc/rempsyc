@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/rempsyc/rempsyc/workflows/R-CMD-check/badge.svg)](https://github.com/rempsyc/rempsyc/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rempsyc)](https://cran.r-project.org/package=rempsyc)
-[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/ui/#package:rempsyc)
+[![r-universe](https://rempsyc.r-universe.dev/badges/rempsyc)](https://rempsyc.r-universe.dev/rempsyc)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/rempsyc)](https://github.com/rempsyc/rempsyc/commits/main)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/rempsyc)](https://shinyus.ipub.com/cranview/)
@@ -220,10 +220,10 @@ moderations
 #> 5            2               disp        wt 28  0.83273987  7.6662883
 #> 6            2               disp   gear:wt 28 -0.08758665 -0.8140664
 #>                   p         sr2     CI_lower   CI_upper
-#> 1 0.431415645312886 0.004805465 0.0000000000 0.02702141
+#> 1 0.431415645312884 0.004805465 0.0000000000 0.02702141
 #> 2 0.000000002383144 0.558188818 0.3142326391 0.80214500
 #> 3 0.039899695159515 0.035022025 0.0003502202 0.09723370
-#> 4 0.491683361920263 0.003546038 0.0000000000 0.02230154
+#> 4 0.491683361920264 0.003546038 0.0000000000 0.02230154
 #> 5 0.000000023731710 0.429258143 0.1916386492 0.66687764
 #> 6 0.422476456495512 0.004840251 0.0000000000 0.02679265
 ```
