@@ -1,5 +1,5 @@
 # rempsyc 0.1.7
-* ✨Incoming!✨
+* CRAN resubmission
 
 ## rempsyc 0.1.6.2
 * `nice_table`:

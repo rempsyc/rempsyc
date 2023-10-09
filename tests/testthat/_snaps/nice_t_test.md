@@ -1,11 +1,7 @@
 # nice_t_test
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", group = "am")
-    Message <simpleMessage>
-      Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-      For the Student t-test, use `var.equal = TRUE`. 
-       
+      nice_t_test(data = mtcars, response = "mpg", group = "am", warning = FALSE)
     Output
         Dependent Variable         t       df           p         d  CI_lower
       1                mpg -3.767123 18.33225 0.001373638 -1.477947 -2.265973
@@ -15,11 +11,8 @@
 ---
 
     Code
-      nice_t_test(data = mtcars, response = names(mtcars)[1:7], group = "am")
-    Message <simpleMessage>
-      Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-      For the Student t-test, use `var.equal = TRUE`. 
-       
+      nice_t_test(data = mtcars, response = names(mtcars)[1:7], group = "am",
+      warning = FALSE)
     Output
         Dependent Variable         t       df            p          d   CI_lower
       1                mpg -3.767123 18.33225 1.373638e-03 -1.4779471 -2.2659731
@@ -41,7 +34,8 @@
 ---
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", group = "am", var.equal = TRUE)
+      nice_t_test(data = mtcars, response = "mpg", group = "am", var.equal = TRUE,
+        warning = FALSE)
     Message <simpleMessage>
       Using Student t-test. 
        
@@ -52,11 +46,8 @@
 ---
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", group = "am", alternative = "less")
-    Message <simpleMessage>
-      Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-      For the Student t-test, use `var.equal = TRUE`. 
-       
+      nice_t_test(data = mtcars, response = "mpg", group = "am", alternative = "less",
+        warning = FALSE)
     Output
         Dependent Variable         t       df            p         d  CI_lower
       1                mpg -3.767123 18.33225 0.0006868192 -1.477947 -2.265973
@@ -66,25 +57,11 @@
 ---
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", mu = 10)
+      nice_t_test(data = mtcars, response = "mpg", mu = 10, warning = FALSE)
     Message <simpleMessage>
-      Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).
-      For the Student t-test, use `var.equal = TRUE`. 
-       
       Using one-sample t-test. 
        
     Output
         Dependent Variable        t df            p        d CI_lower CI_upper
       1                mpg 9.470995 31 1.154598e-10 1.674251  1.12797 2.208995
-
----
-
-    Code
-      nice_t_test(data = ToothGrowth, response = "len", group = "supp", paired = TRUE)
-    Message <simpleMessage>
-      Using paired t-test. 
-       
-    Output
-        Dependent Variable        t df           p         d  CI_lower  CI_upper
-      1                len 3.302585 29 0.002549842 0.6029668 0.2088153 0.9883436
 

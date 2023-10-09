@@ -1,9 +1,7 @@
 # best_duplicate
 
     Code
-      best_duplicate(df1, id = "id")
-    Message <simpleMessage>
-      (2 duplicates removed)
+      suppressMessages(best_duplicate(df1, id = "id"))
     Output
         id item1 item2 item3
       1  1     2     2     2

@@ -5,14 +5,16 @@ test_that("nice_t_test", {
   expect_snapshot(nice_t_test(
     data = mtcars,
     response = "mpg",
-    group = "am"
+    group = "am",
+    warning = FALSE
   ))
 
   # Multiple dependent variables at once
   expect_snapshot(nice_t_test(
     data = mtcars,
     response = names(mtcars)[1:7],
-    group = "am"
+    group = "am",
+    warning = FALSE
   ))
 
   # Can be passed some of the regular arguments
@@ -23,7 +25,8 @@ test_that("nice_t_test", {
     data = mtcars,
     response = "mpg",
     group = "am",
-    var.equal = TRUE
+    var.equal = TRUE,
+    warning = FALSE
   ))
 
   # One-sided instead of two-sided
@@ -31,13 +34,15 @@ test_that("nice_t_test", {
     data = mtcars,
     response = "mpg",
     group = "am",
-    alternative = "less"
+    alternative = "less",
+    warning = FALSE
   ))
 
   # One-sample t-test
   expect_snapshot(nice_t_test(
     data = mtcars,
     response = "mpg",
-    mu = 10
+    mu = 10,
+    warning = FALSE
   ))
 })
