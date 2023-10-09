@@ -668,7 +668,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
 
   ##  .....................................
   ##  0-digit columns                 ####
-  cols.0digits <- c("N", "n", "z", "Z")
+  cols.0digits <- c("N", "n")
   if (!missing(separate.header)) {
     cols.0digits.sh <- paste0(sh.pattern, rep(
       cols.0digits,
