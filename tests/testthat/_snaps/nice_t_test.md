@@ -1,7 +1,7 @@
 # nice_t_test
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", group = "am", warning = FALSE)
+      nice_t_test(data = mtcars, response = "mpg", group = "am", verbose = FALSE)
     Output
         Dependent Variable         t       df           p         d  CI_lower
       1                mpg -3.767123 18.33225 0.001373638 -1.477947 -2.265973
@@ -12,7 +12,7 @@
 
     Code
       nice_t_test(data = mtcars, response = names(mtcars)[1:7], group = "am",
-      warning = FALSE)
+      verbose = FALSE)
     Output
         Dependent Variable         t       df            p          d   CI_lower
       1                mpg -3.767123 18.33225 1.373638e-03 -1.4779471 -2.2659731
@@ -35,10 +35,7 @@
 
     Code
       nice_t_test(data = mtcars, response = "mpg", group = "am", var.equal = TRUE,
-        warning = FALSE)
-    Message <simpleMessage>
-      Using Student t-test. 
-       
+        verbose = FALSE)
     Output
         Dependent Variable         t df            p         d  CI_lower   CI_upper
       1                mpg -4.106127 30 0.0002850207 -1.477947 -2.265973 -0.6705686
@@ -47,7 +44,7 @@
 
     Code
       nice_t_test(data = mtcars, response = "mpg", group = "am", alternative = "less",
-        warning = FALSE)
+        verbose = FALSE)
     Output
         Dependent Variable         t       df            p         d  CI_lower
       1                mpg -3.767123 18.33225 0.0006868192 -1.477947 -2.265973
@@ -57,10 +54,7 @@
 ---
 
     Code
-      nice_t_test(data = mtcars, response = "mpg", mu = 10, warning = FALSE)
-    Message <simpleMessage>
-      Using one-sample t-test. 
-       
+      nice_t_test(data = mtcars, response = "mpg", mu = 10, verbose = FALSE)
     Output
         Dependent Variable        t df            p        d CI_lower CI_upper
       1                mpg 9.470995 31 1.154598e-10 1.674251  1.12797 2.208995
