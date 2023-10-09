@@ -6,6 +6,7 @@
   * now converts sigma to its unicode counterpart ("\u03C3")
   * "z" and "Z" are now formatted to two digits instead of zero digits to comply with the Wald Z statistics in SEM (with `lavaan` and `lavaanExtra`)
   * now supports conversion of "CI_lower_B" and "CI_upper_B" columns to "95% CI (b*)".
+  * `nice_t_test`: argument warning becomes `verbose` to align with other packages.
 
 ## rempsyc 0.1.6.1
 * Breaking news: APA 7th edition actually advises against using beta to represent standardized coefficients, but suggests instead to use a lowercase italic b followed by an asterisk: _b_*. `rempsyc` will follow this APA recommendation going forward.

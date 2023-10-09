@@ -6,7 +6,7 @@ test_that("nice_t_test", {
     data = mtcars,
     response = "mpg",
     group = "am",
-    warning = FALSE
+    verbose = FALSE
   ))
 
   # Multiple dependent variables at once
@@ -14,7 +14,7 @@ test_that("nice_t_test", {
     data = mtcars,
     response = names(mtcars)[1:7],
     group = "am",
-    warning = FALSE
+    verbose = FALSE
   ))
 
   # Can be passed some of the regular arguments
@@ -26,7 +26,7 @@ test_that("nice_t_test", {
     response = "mpg",
     group = "am",
     var.equal = TRUE,
-    warning = FALSE
+    verbose = FALSE
   ))
 
   # One-sided instead of two-sided
@@ -35,7 +35,7 @@ test_that("nice_t_test", {
     response = "mpg",
     group = "am",
     alternative = "less",
-    warning = FALSE
+    verbose = FALSE
   ))
 
   # One-sample t-test
@@ -43,6 +43,6 @@ test_that("nice_t_test", {
     data = mtcars,
     response = "mpg",
     mu = 10,
-    warning = FALSE
+    verbose = FALSE
   ))
 })

@@ -28,7 +28,7 @@
 #' (for now) is "bonferroni".
 #' @param group The group for the comparison.
 
-#' @param warning Whether to display the Welch test warning or not.
+#' @param verbose Whether to display the Welch test warning or not.
 #' @param ... Further arguments to be passed to the [t.test()]
 #' function (e.g., to use Student instead of Welch test, to
 #' change from two-tail to one-tail, or to do a paired-sample
@@ -90,7 +90,7 @@ nice_t_test <- function(data,
                         response,
                         group = NULL,
                         correction = "none",
-                        warning = TRUE,
+                        verbose = TRUE,
                         ...) {
   check_col_names(data, c(group, response))
   rlang::check_installed(c("effectsize", "methods"),
@@ -98,10 +98,10 @@ nice_t_test <- function(data,
     reason = "for this function."
   )
   args <- list(...)
-  if (methods::hasArg(var.equal)) {
+  if (methods::hasArg(var.equal) && verbose == TRUE) {
     if (isTRUE(args$var.equal)) {
       message("Using Student t-test. \n ")
-    } else if (isFALSE(args$var.equal)) {
+    } else if (isFALSE(args$var.equal) && verbose == TRUE) {
       message("Using Welch t-test. \n ")
     }
     pooled_sd <- args$var.equal
@@ -117,12 +117,12 @@ nice_t_test <- function(data,
       return(NULL)
     }
 
-    if (paired == TRUE) message("Using paired t-test. \n ")
-    if (paired == FALSE) message("Using independent samples t-test. \n ")
+    if (paired == TRUE && verbose == TRUE) message("Using paired t-test. \n ")
+    if (paired == FALSE && verbose == TRUE) message("Using independent samples t-test. \n ")
   } else {
     paired <- FALSE
   }
-  if (!methods::hasArg(var.equal) && paired == FALSE && warning == TRUE) {
+  if (!methods::hasArg(var.equal) && paired == FALSE && verbose == TRUE) {
     message(
       "Using Welch t-test (base R's default; ",
       "cf. https://doi.org/10.5334/irsp.82).
@@ -134,7 +134,9 @@ For the Student t-test, use `var.equal = TRUE`. \n "
     formulas <- paste0(response, " ~ ", group)
     formulas <- lapply(formulas, stats::as.formula)
   } else {
-    message("Using one-sample t-test. \n ")
+    if (verbose == TRUE) {
+      message("Using one-sample t-test. \n ")
+    }
     formulas <- lapply(data[response], as.numeric)
   }
   if (methods::hasArg(mu)) {

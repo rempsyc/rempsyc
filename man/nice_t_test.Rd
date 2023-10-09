@@ -9,7 +9,7 @@ nice_t_test(
   response,
   group = NULL,
   correction = "none",
-  warning = TRUE,
+  verbose = TRUE,
   ...
 )
 }
@@ -24,7 +24,7 @@ nice_t_test(
 to apply, if any. Default is "none" and the only other option
 (for now) is "bonferroni".}
 
-\item{warning}{Whether to display the Welch test warning or not.}
+\item{verbose}{Whether to display the Welch test warning or not.}
 
 \item{...}{Further arguments to be passed to the \code{\link[=t.test]{t.test()}}
 function (e.g., to use Student instead of Welch test, to
