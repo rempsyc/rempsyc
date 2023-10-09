@@ -475,9 +475,18 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
   }
   if ("CI_lower_B" %in% names(dataframe) && "CI_upper_B" %in% names(dataframe)) {
     dataframe <- dataframe %>%
+      rename("95% CI (b)" = "95% CI") %>%
       relocate("B", .after = last_col()) %>%
       format_CI(c("CI_lower_B", "CI_upper_B"),
                 col.name = "95% CI (B)"
+      )
+  }
+  if ("CI_lower_r" %in% names(dataframe) && "CI_upper_r" %in% names(dataframe)) {
+    dataframe <- dataframe %>%
+      rename("95% CI (sigma)" = "95% CI") %>%
+      relocate("r", .after = last_col()) %>%
+      format_CI(c("CI_lower_r", "CI_upper_r"),
+                col.name = "95% CI (r)"
       )
   }
   if ("rmsea.ci.lower" %in% names(dataframe) && "rmsea.ci.upper" %in% names(dataframe)) {
@@ -657,7 +666,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
   ##  .....................................
   ##  2-digit columns                 ####
 
-  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "g", "Mu", "S")
+  # Italicize all these column names
+  cols.2digits <- c("t", "SE", "SD", "F", "b", "M", "W", "d", "g", "Mu", "S", "z", "Z")
   if (!missing(separate.header)) {
     cols.2digits.sh <- paste0(sh.pattern, rep(
       cols.2digits,
@@ -728,18 +738,22 @@ format_columns <- function(dataframe, table, italics, separate.header,
   compose.table1 <- data.frame(
     col = c(
       "95% CI (b)", "95% CI (B)", "95% CI (t)", "95% CI (d)",
-      "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)", "np2",
+      "95% CI (np2)", "95% CI (n2)", "95% CI (rrb)",
+      "95% CI (sigma)", "95% CI (sigma2)", "95% CI (r)", "np2",
       "n2", "ges", "dR", "Predictor (+/-1 SD)", "M1 - M2", "tau",
-      "rho", "rrb", "chi2", "chi2.df", "B", "sigma"
+      "rho", "rrb", "chi2", "chi2.df", "B", "sigma", "sigma2"
     ),
     value = c(
-      '"95% CI (", flextable::as_i("b"), ")"',
+      '"95% CI (", flextable::as_i("b"), ")"', # small b
       '"95% CI (", flextable::as_i("b"), "*", ")"', # beta
-      '"95% CI (", flextable::as_i("t"), ")"',
-      '"95% CI (", flextable::as_i("d"), ")"',
-      '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"', # eta
+      '"95% CI (", flextable::as_i("t"), ")"', # t
+      '"95% CI (", flextable::as_i("d"), ")"', # d
+      '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"', # peta
       '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"', # eta
-      '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"',
+      '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"', #rrb
+      '"95% CI (", "\u03C3", ")"', # sigma
+      '"95% CI (", "\u03C3", flextable::as_sup("2"), ")"', # sigma2
+      '"95% CI (", flextable::as_i("r"), ")"', # r
       '"\u03b7", flextable::as_sub("p"), flextable::as_sup("2")', # eta
       '"\u03b7", flextable::as_sup("2")', # eta
       '"\u03b7", flextable::as_sub("G"), flextable::as_sup("2")', # eta
@@ -752,7 +766,8 @@ format_columns <- function(dataframe, table, italics, separate.header,
       '"\u03C7", flextable::as_sup("2")', # Chi square
       '"\u03C7", flextable::as_sup("2"), "\u2215", flextable::as_i("df")', # Chi square
       'flextable::as_i("b"), "*"', # beta
-      '"\u03C3"' # sigma
+      '"\u03C3"', # sigma
+      '"\u03C3", flextable::as_sup("2")' # sigma
     )
   )
   for (i in seq(nrow(compose.table1))) {
