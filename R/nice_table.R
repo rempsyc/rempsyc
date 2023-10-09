@@ -473,6 +473,13 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
   if ("CI_lower" %in% names(dataframe) && "CI_upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe)
   }
+  if ("CI_lower_B" %in% names(dataframe) && "CI_upper_B" %in% names(dataframe)) {
+    dataframe <- dataframe %>%
+      relocate("B", .after = last_col()) %>%
+      format_CI(c("CI_lower_B", "CI_upper_B"),
+                col.name = "95% CI (B)"
+      )
+  }
   if ("rmsea.ci.lower" %in% names(dataframe) && "rmsea.ci.upper" %in% names(dataframe)) {
     dataframe <- format_CI(dataframe, c(
       "rmsea.ci.lower", "rmsea.ci.upper"
