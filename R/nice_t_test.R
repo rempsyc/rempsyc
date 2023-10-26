@@ -113,7 +113,8 @@ nice_t_test <- function(data,
 
     if (getRversion() >= "4.4.0" && paired == TRUE) {
       message(
-        "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method.")
+        "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method."
+      )
       return(NULL)
     }
 

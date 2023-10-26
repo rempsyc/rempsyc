@@ -478,7 +478,7 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
       rename("95% CI (b)" = "95% CI") %>%
       relocate("B", .after = last_col()) %>%
       format_CI(c("CI_lower_B", "CI_upper_B"),
-                col.name = "95% CI (B)"
+        col.name = "95% CI (B)"
       )
   }
   if ("CI_lower_r" %in% names(dataframe) && "CI_upper_r" %in% names(dataframe)) {
@@ -486,7 +486,7 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
       rename("95% CI (sigma)" = "95% CI") %>%
       relocate("r", .after = last_col()) %>%
       format_CI(c("CI_lower_r", "CI_upper_r"),
-                col.name = "95% CI (r)"
+        col.name = "95% CI (r)"
       )
   }
   if ("rmsea.ci.lower" %in% names(dataframe) && "rmsea.ci.upper" %in% names(dataframe)) {
@@ -750,7 +750,7 @@ format_columns <- function(dataframe, table, italics, separate.header,
       '"95% CI (", flextable::as_i("d"), ")"', # d
       '"95% CI (", "\u03b7", flextable::as_sub("p"), flextable::as_sup("2"), ")"', # peta
       '"95% CI (", "\u03b7", flextable::as_sup("2"), ")"', # eta
-      '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"', #rrb
+      '"95% CI (", flextable::as_i("r"), flextable::as_i(flextable::as_sub("rb")), ")"', # rrb
       '"95% CI (", "\u03C3", ")"', # sigma
       '"95% CI (", "\u03C3", flextable::as_sup("2"), ")"', # sigma2
       '"95% CI (", flextable::as_i("r"), ")"', # r

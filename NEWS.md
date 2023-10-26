@@ -1,3 +1,9 @@
+# rempsyc 0.1.8
+- ✨Incoming✨
+
+## rempsyc 0.1.7.1
+- New function: `nice_scatter_times()`, to plot group (intervention) data over time (1, 2, 3).
+
 # rempsyc 0.1.7
 * CRAN resubmission
 
