@@ -3,29 +3,31 @@
 #' @description Make nice scatter plots over multiple times (T1, T2, T3) easily.
 #'
 #' @param data The data frame.
-#' @param predictor The independent variable to be plotted.
 #' @param response The dependent variable to be plotted.
 #' @param ytitle An optional x-axis label, if desired.
 #' @param group The group by which to plot the variable
+#' @param error_bars Logical, whether to include 95% confidence intervals for means.
 #' @return A scatter plot of class ggplot.
 #' @export
 #' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' # Make the basic plot
-#' nice_scatter(
-#'   data = mtcars,
-#'   predictor = "wt",
-#'   response = "mpg"
+#' nice_scatter_times(
+#'   data = iris,
+#'   response = names(iris)[1:4],
+#'   group = "Species"
 #' )
 #'
 nice_scatter_times <- function(data,
                                response,
-                               ytitle = gsub(".*_", "", response[[1]]),
-                               group = NULL) {
+                               group,
+                               error_bars = FALSE,
+                               ytitle = gsub(".*_", "", response[[1]])) {
   check_col_names(data, c(group))
-  rlang::check_installed("ggplot2",
+  rlang::check_installed(c("ggplot2", "tidyr"),
     reason = "for this function.",
-    version = get_dep_version("ggplot2")
+    version = get_dep_version(c("ggplot2", "tidyr"))
   )
+
   data_summary <- data %>%
     mutate(across(all_of(response), as.numeric)) %>%
     tidyr::pivot_longer(
@@ -41,20 +43,27 @@ nice_scatter_times <- function(data,
       ci = stats::qt(0.975, df = n - 1) * .data$se
     ) %>%
     dplyr::mutate(Time = dplyr::case_match(
-      Time,
+      .data$Time,
       response[1] ~ 1,
       response[2] ~ 2,
-      response[3] ~ 3
+      response[3] ~ 3,
+      response[4] ~ 4
     )) %>%
-    dplyr::rename(Group = .data$group)
+    dplyr::rename(Group = group)
 
   # Plot
-  ggplot2::ggplot(data_summary, ggplot2::aes(x = Time, y = mean)) +
-    ggplot2::geom_line(ggplot2::aes(color = Group), size = 3) +
+  rge <- range(data_summary$Time)
+  ggplot2::ggplot(data_summary, ggplot2::aes(x = .data$Time, y = mean)) +
+    ggplot2::geom_line(ggplot2::aes(color = .data$Group), size = 3) +
     ggplot2::scale_color_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
     ggplot2::geom_point(size = 4, shape = 22, fill = "white", stroke = 1.5) +
-    # ggplot2::geom_errorbar(aes(ymin = mean - ci, ymax = mean + ci), width = 0.2) +
-    ggplot2::scale_x_continuous(limits = c(1, 3), breaks = seq(1, 3, by = 1)) +
+    { if (error_bars) {
+      ggplot2::geom_errorbar(ggplot2::aes(
+        ymin = mean - .data$ci, ymax = mean + .data$ci), width = 0.2)
+      }
+    } +
+    ggplot2::scale_x_continuous(
+      limits = rge, breaks = seq(rge[1], rge[2], by = 1)) +
     ggplot2::theme_bw(base_size = 24) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(colour = "black"),

@@ -7,8 +7,9 @@
 nice_scatter_times(
   data,
   response,
-  ytitle = gsub(".*_", "", response[[1]]),
-  group = NULL
+  group,
+  error_bars = FALSE,
+  ytitle = gsub(".*_", "", response[[1]])
 )
 }
 \arguments{
@@ -16,11 +17,11 @@ nice_scatter_times(
 
 \item{response}{The dependent variable to be plotted.}
 
-\item{ytitle}{An optional x-axis label, if desired.}
-
 \item{group}{The group by which to plot the variable}
 
-\item{predictor}{The independent variable to be plotted.}
+\item{error_bars}{Logical, whether to include 95\% confidence intervals for means.}
+
+\item{ytitle}{An optional x-axis label, if desired.}
 }
 \value{
 A scatter plot of class ggplot.
@@ -31,10 +32,10 @@ Make nice scatter plots over multiple times (T1, T2, T3) easily.
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Make the basic plot
-nice_scatter(
-  data = mtcars,
-  predictor = "wt",
-  response = "mpg"
+nice_scatter_times(
+  data = iris,
+  response = names(iris)[1:4],
+  group = "Species"
 )
 \dontshow{\}) # examplesIf}
 }
