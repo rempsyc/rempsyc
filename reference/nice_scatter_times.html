@@ -106,8 +106,9 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nice_scatter_times</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">response</span>,</span>
-<span>  ytitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">".*_"</span>, <span class="st">""</span>, <span class="va">response</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>  group <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">group</span>,</span>
+<span>  error_bars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ytitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">".*_"</span>, <span class="st">""</span>, <span class="va">response</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -121,16 +122,16 @@
 <dd><p>The dependent variable to be plotted.</p></dd>
 
 
-<dt>ytitle</dt>
-<dd><p>An optional x-axis label, if desired.</p></dd>
-
-
 <dt>group</dt>
 <dd><p>The group by which to plot the variable</p></dd>
 
 
-<dt>predictor</dt>
-<dd><p>The independent variable to be plotted.</p></dd>
+<dt>error_bars</dt>
+<dd><p>Logical, whether to include 95% confidence intervals for means.</p></dd>
+
+
+<dt>ytitle</dt>
+<dd><p>An optional x-axis label, if desired.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -143,10 +144,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Make the basic plot</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="nice_scatter.html">nice_scatter</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
-<span class="r-in"><span>  predictor <span class="op">=</span> <span class="st">"wt"</span>,</span></span>
-<span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span></span></span>
+<span class="r-in"><span><span class="fu">nice_scatter_times</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">iris</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"Species"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nice_scatter_times-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
