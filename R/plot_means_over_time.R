@@ -3,8 +3,7 @@
 #' @description Make nice scatter plots over multiple times (T1, T2, T3) easily.
 #'
 #' @param data The data frame.
-#' @param response The dependent variable to be plotted (e.g.,
-#'  `c("variable_T1", "variable_T2", "variable_T3")`, etc.).
+#' @param response The dependent variable to be plotted.
 #' @param ytitle An optional x-axis label, if desired. If `NULL`, will take the
 #'  variable name of the first variable in `response`, and keep only the part of
 #'  the string before an underscore or period.
