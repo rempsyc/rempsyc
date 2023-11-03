@@ -3,7 +3,8 @@
 #' @description Make nice scatter plots over multiple times (T1, T2, T3) easily.
 #'
 #' @param data The data frame.
-#' @param response The dependent variable to be plotted.
+#' @param response The dependent variable to be plotted (e.g.,
+#'  `c("variable_T1", "variable_T2", "variable_T3")`, etc.).
 #' @param ytitle An optional x-axis label, if desired. If `NULL`, will take the
 #'  variable name of the first variable in `response`, and keep only the part of
 #'  the string before an underscore or period.
@@ -16,7 +17,8 @@
 #' plot_means_over_time(
 #'   data = iris,
 #'   response = names(iris)[1:4],
-#'   group = "Species"
+#'   group = "Species",
+#'   error_bars = TRUE
 #' )
 #'
 plot_means_over_time <- function(data,
@@ -71,8 +73,10 @@ plot_means_over_time <- function(data,
     ggplot2::geom_point(size = 4, shape = 22, fill = "white", stroke = 1.5) +
     { if (error_bars) {
       ggplot2::geom_errorbar(ggplot2::aes(
-        ymin = mean - .data$ci, ymax = mean + .data$ci), width = 0.2)
-      }
+        ymin = mean - .data$ci, ymax = mean + .data$ci),
+        position = ggplot2::position_dodge(2.8), width = 0.2,
+        linewidth = 1)
+    }
     } +
     ggplot2::scale_x_continuous(
       limits = rge, breaks = seq(rge[1], rge[2], by = 1)) +
