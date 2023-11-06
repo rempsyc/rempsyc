@@ -1,6 +1,9 @@
 # rempsyc 0.1.8
 - ✨Incoming✨
 
+## rempsyc 0.1.7.2
+- New function: `grouped_bar_chart()`, to plot categorical data options over several groups.
+
 ## rempsyc 0.1.7.1
 - New function: `plot_means_over_time()`, to plot group (intervention) data over time (1, 2, 3).
 
