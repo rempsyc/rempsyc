@@ -66,25 +66,28 @@ plot_means_over_time <- function(data,
     dplyr::rename(Group = group)
 
   # Plot
-  rge <- range(data_summary$Time)
-  ggplot2::ggplot(data_summary, ggplot2::aes(x = .data$Time, y = mean)) +
+  pd <- ggplot2::position_dodge(2) # move them .05 to the left and right
+  print(data_summary)
+  # rge <- range(data_summary$Time)
+  ggplot2::ggplot(data_summary, ggplot2::aes(x = .data$Time, y = .data$mean)) +
     ggplot2::geom_line(ggplot2::aes(color = .data$Group), size = 3) +
     ggplot2::scale_color_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
-    ggplot2::geom_point(size = 4, shape = 22, fill = "white", stroke = 1.5) +
+    ggplot2::geom_point(size = 4, shape = 22, fill = "white", stroke = 1.5,
+                        position = pd) +
     {
       if (error_bars) {
         ggplot2::geom_errorbar(
           ggplot2::aes(
-            ymin = mean - .data$ci, ymax = mean + .data$ci
-          ),
-          position = ggplot2::position_dodge(2.8), width = 0.2,
-          linewidth = 1
+            ymin = .data$mean - .data$ci, ymax = .data$mean + .data$ci
+          ), colour = "black",
+          position = pd, width = 0.05,
+          linewidth = 1, stat = "identity"
         )
       }
     } +
-    ggplot2::scale_x_continuous(
-      limits = rge, breaks = seq(rge[1], rge[2], by = 1)
-    ) +
+    # ggplot2::scale_x_continuous(
+    #   limits = rge, breaks = seq(rge[1], rge[2], by = 1)
+    # ) #+
     ggplot2::theme_bw(base_size = 24) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(colour = "black"),
