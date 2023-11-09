@@ -4,7 +4,14 @@
 \alias{plot_means_over_time}
 \title{Easy scatter plots over multiple times (T1, T2, T3)}
 \usage{
-plot_means_over_time(data, response, group, error_bars = FALSE, ytitle = NULL)
+plot_means_over_time(
+  data,
+  response,
+  group,
+  error_bars = FALSE,
+  ytitle = NULL,
+  print_table = FALSE
+)
 }
 \arguments{
 \item{data}{The data frame.}
@@ -19,6 +26,8 @@ plot_means_over_time(data, response, group, error_bars = FALSE, ytitle = NULL)
 \item{ytitle}{An optional x-axis label, if desired. If \code{NULL}, will take the
 variable name of the first variable in \code{response}, and keep only the part of
 the string before an underscore or period.}
+
+\item{print_table}{Logical, whether to also print the computed table.}
 }
 \value{
 A scatter plot of class ggplot.

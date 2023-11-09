@@ -51,7 +51,7 @@ grouped_bar_chart <- function(data, response, label = response, group = "T1_Grou
   data %>%
     ggplot2::ggplot(ggplot2::aes(x = .data[[group]], y = n, fill = .data[[response]])) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge()) +
-    ggplot2::labs(x = "Group", y = ifelse(proportion, "Proportion", "Count"), fill = label) +
+    ggplot2::labs(x = "Group", y = ifelse(proportion, "Percentage", "Count"), fill = label) +
     ggplot2::theme_minimal() +
     ggplot2::geom_text(ggplot2::aes(label = labelz(n)),
       position = ggplot2::position_dodge(width = 0.9),

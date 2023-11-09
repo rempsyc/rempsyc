@@ -10,6 +10,7 @@
 #'  the string before an underscore or period.
 #' @param group The group by which to plot the variable
 #' @param error_bars Logical, whether to include 95% confidence intervals for means.
+#' @param print_table Logical, whether to also print the computed table.
 #' @return A scatter plot of class ggplot.
 #' @export
 #' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
@@ -25,7 +26,8 @@ plot_means_over_time <- function(data,
                                  response,
                                  group,
                                  error_bars = FALSE,
-                                 ytitle = NULL) {
+                                 ytitle = NULL,
+                                 print_table = FALSE) {
   check_col_names(data, c(group))
   rlang::check_installed(c("ggplot2", "tidyr"),
     reason = "for this function.",
@@ -66,9 +68,11 @@ plot_means_over_time <- function(data,
     dplyr::rename(Group = group)
 
   # Plot
-  pd <- ggplot2::position_dodge(2) # move them .05 to the left and right
-  print(data_summary)
-  # rge <- range(data_summary$Time)
+  pd <- ggplot2::position_dodge(1) # move them .05 to the left and right
+  if (print_table) {
+    print(data_summary)
+  }
+  rge <- range(data_summary$Time)
   ggplot2::ggplot(data_summary, ggplot2::aes(x = .data$Time, y = .data$mean)) +
     ggplot2::geom_line(ggplot2::aes(color = .data$Group), size = 3) +
     ggplot2::scale_color_manual(values = c("#00BA38", "#619CFF", "#F8766D")) +
@@ -85,9 +89,9 @@ plot_means_over_time <- function(data,
         )
       }
     } +
-    # ggplot2::scale_x_continuous(
-    #   limits = rge, breaks = seq(rge[1], rge[2], by = 1)
-    # ) #+
+    ggplot2::scale_x_continuous(
+      limits = rge #, breaks = seq(rge[1], rge[2], by = 1)
+    ) +
     ggplot2::theme_bw(base_size = 24) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(colour = "black"),
