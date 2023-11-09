@@ -8,9 +8,10 @@ plot_means_over_time(
   data,
   response,
   group,
-  error_bars = FALSE,
+  error_bars = TRUE,
   ytitle = NULL,
-  print_table = FALSE
+  print_table = FALSE,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ variable name of the first variable in \code{response}, and keep only the part o
 the string before an underscore or period.}
 
 \item{print_table}{Logical, whether to also print the computed table.}
+
+\item{verbose}{Logical, whether to also print a note regarding the meaning
+of the error bars.}
 }
 \value{
 A scatter plot of class ggplot.
@@ -35,14 +39,23 @@ A scatter plot of class ggplot.
 \description{
 Make nice scatter plots over multiple times (T1, T2, T3) easily.
 }
+\details{
+Error bars are calculated using the method of Morey (2008) through
+\code{\link[Rmisc:summarySEwithin]{Rmisc::summarySEwithin()}}, but raw means are plotted instead of the normed
+means. For more information, visit:
+http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
+}
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Make the basic plot
 plot_means_over_time(
-  data = iris,
-  response = names(iris)[1:4],
-  group = "Species",
-  error_bars = TRUE
+data = mtcars,
+response = names(mtcars)[3:6],
+group = "cyl"
 )
 \dontshow{\}) # examplesIf}
+}
+\references{
+Morey, R. D. (2008). Confidence intervals from normalized data:
+A correction to Cousineau (2005). Tutorials in Quantitative Methods for
+Psychology, 4(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
 }
