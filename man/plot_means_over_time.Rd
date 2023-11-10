@@ -49,7 +49,7 @@ http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot_means_over_time(
   data = mtcars,
-  response = names(mtcars)[3:6],
+  response = names(mtcars)[6:3],
   group = "cyl"
 )
 \dontshow{\}) # examplesIf}

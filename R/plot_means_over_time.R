@@ -25,7 +25,7 @@
 #' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' plot_means_over_time(
 #'   data = mtcars,
-#'   response = names(mtcars)[3:6],
+#'   response = names(mtcars)[6:3],
 #'   group = "cyl"
 #' )
 
