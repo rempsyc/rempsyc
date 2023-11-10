@@ -7,8 +7,8 @@
 #' means. For more information, visit:
 #' http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
 #' @references Morey, R. D. (2008). Confidence intervals from normalized data:
-#' A correction to Cousineau (2005). Tutorials in Quantitative Methods for
-#' Psychology, 4(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
+#' A correction to Cousineau (2005). *Tutorials in Quantitative Methods for
+#' Psychology*, *4*(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
 #' @param data The data frame.
 #' @param response The dependent variable to be plotted (e.g.,
 #'  `c("variable_T1", "variable_T2", "variable_T3")`, etc.).
@@ -24,9 +24,9 @@
 #' @export
 #' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' plot_means_over_time(
-#' data = mtcars,
-#' response = names(mtcars)[3:6],
-#' group = "cyl"
+#'   data = mtcars,
+#'   response = names(mtcars)[3:6],
+#'   group = "cyl"
 #' )
 
 plot_means_over_time <- function(data,

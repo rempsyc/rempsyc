@@ -48,14 +48,14 @@ http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 plot_means_over_time(
-data = mtcars,
-response = names(mtcars)[3:6],
-group = "cyl"
+  data = mtcars,
+  response = names(mtcars)[3:6],
+  group = "cyl"
 )
 \dontshow{\}) # examplesIf}
 }
 \references{
 Morey, R. D. (2008). Confidence intervals from normalized data:
-A correction to Cousineau (2005). Tutorials in Quantitative Methods for
-Psychology, 4(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
+A correction to Cousineau (2005). \emph{Tutorials in Quantitative Methods for
+Psychology}, \emph{4}(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
 }
