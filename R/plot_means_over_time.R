@@ -15,6 +15,7 @@
 #' @param ytitle An optional x-axis label, if desired. If `NULL`, will take the
 #'  variable name of the first variable in `response`, and keep only the part of
 #'  the string before an underscore or period.
+#' @param legend.title The desired legend title.
 #' @param group The group by which to plot the variable
 #' @param error_bars Logical, whether to include 95% confidence intervals for means.
 #' @param print_table Logical, whether to also print the computed table.
@@ -23,9 +24,11 @@
 #' @return A scatter plot of class ggplot.
 #' @export
 #' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
+#' data <- mtcars
+#' names(data)[6:3] <- paste0("T", 1:4, "_var")
 #' plot_means_over_time(
-#'   data = mtcars,
-#'   response = names(mtcars)[6:3],
+#'   data = data,
+#'   response = names(data)[6:3],
 #'   group = "cyl"
 #' )
 
@@ -34,6 +37,7 @@ plot_means_over_time <- function(data,
                                  group,
                                  error_bars = TRUE,
                                  ytitle = NULL,
+                                 legend.title = "",
                                  print_table = FALSE,
                                  verbose = FALSE) {
   check_col_names(data, c(response, group))
@@ -42,7 +46,7 @@ plot_means_over_time <- function(data,
                          version = get_dep_version(c("ggplot2", "tidyr", "Rmisc"))
   )
   if (is.null(ytitle)) {
-    ytitle <- gsub("([^_.]+).*", "\\1", response[[1]])
+    ytitle <- gsub(".*_", "", response[[1]])
   }
 
   data$subject_ID <- seq(nrow(data))
@@ -105,6 +109,10 @@ plot_means_over_time <- function(data,
       panel.border = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(colour = "black"),
       axis.ticks = ggplot2::element_line(colour = "black")
+    ) +
+    ggplot2::labs(
+      legend.title = legend.title, colour = legend.title,
+      fill = legend.title, linetype = legend.title, shape = legend.title
     ) +
     ggplot2::ylab(ytitle)
   if (verbose && error_bars) {

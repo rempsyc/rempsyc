@@ -10,6 +10,7 @@ plot_means_over_time(
   group,
   error_bars = TRUE,
   ytitle = NULL,
+  legend.title = "",
   print_table = FALSE,
   verbose = FALSE
 )
@@ -27,6 +28,8 @@ plot_means_over_time(
 \item{ytitle}{An optional x-axis label, if desired. If \code{NULL}, will take the
 variable name of the first variable in \code{response}, and keep only the part of
 the string before an underscore or period.}
+
+\item{legend.title}{The desired legend title.}
 
 \item{print_table}{Logical, whether to also print the computed table.}
 
@@ -47,9 +50,11 @@ http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
 }
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+data <- mtcars
+names(data)[6:3] <- paste0("T", 1:4, "_var")
 plot_means_over_time(
-  data = mtcars,
-  response = names(mtcars)[6:3],
+  data = data,
+  response = names(data)[6:3],
   group = "cyl"
 )
 \dontshow{\}) # examplesIf}
