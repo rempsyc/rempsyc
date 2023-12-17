@@ -131,13 +131,13 @@ t.tests <- nice_t_test(
 t.tests
 ```
 
-```{r, results='hide'}
+```{r nice_table, results='hide'}
 # Format t-test results
 t_table <- nice_table(t.tests)
 t_table
 ```
 
-```{r, include=FALSE}
+```{r save_as_image, include=FALSE}
 table_temp <- flextable::autofit(t_table)
 flextable::save_as_image(table_temp,
   path = "man/figures/README-nice_t_test-1.png",
@@ -350,7 +350,6 @@ ggplot2::ggsave("niceplot.pdf",
 )
 ```
 
-
 Full tutorial: https://rempsyc.remi-theriault.com/articles/violin
 
 ## `nice_scatter`
@@ -379,6 +378,25 @@ nice_scatter(
 ```
 
 Full tutorial: https://rempsyc.remi-theriault.com/articles/scatter
+
+## `plot_means_over_time`
+
+Make nice plots of means over time, usually for randomized controlled trials with several groups over several time measurements. Error bars represent 95% confidence intervals adjusted for within-subject variance as by the method of Morey (2008).
+
+```{r plot_means_over_time, warning = FALSE, message = FALSE, fig.width=9, fig.height=5, out.width="70%"}
+data <- mtcars
+names(data)[6:3] <- paste0("T", 1:4, "_some-time-variable")
+plot_means_over_time(
+  data = data,
+  response = names(data)[6:3],
+  group = "cyl"
+) +
+  ggplot2::annotate("text", 
+                    x = c(3.8, 3.8, 4.3), 
+                    y = c(130, 240, 190), 
+                    label = c("*", "*", "***"), 
+                    size = 10)
+```
 
 ## `overlap_circle `
 

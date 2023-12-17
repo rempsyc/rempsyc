@@ -421,6 +421,30 @@ nice_scatter(
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/scatter>
 
+## `plot_means_over_time`
+
+Make nice plots of means over time, usually for randomized controlled
+trials with several groups over several time measurements. Error bars
+represent 95% confidence intervals adjusted for within-subject variance
+as by the method of Morey (2008).
+
+``` r
+data <- mtcars
+names(data)[6:3] <- paste0("T", 1:4, "_some-time-variable")
+plot_means_over_time(
+  data = data,
+  response = names(data)[6:3],
+  group = "cyl"
+) +
+  ggplot2::annotate("text", 
+                    x = c(3.8, 3.8, 4.3), 
+                    y = c(130, 240, 190), 
+                    label = c("*", "*", "***"), 
+                    size = 10)
+```
+
+<img src="man/figures/README-plot_means_over_time-1.png" width="70%" />
+
 ## `overlap_circle`
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other
