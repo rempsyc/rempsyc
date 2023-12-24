@@ -111,6 +111,10 @@
 <span>  ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  legend.title <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  print_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">significance_stars</span>,</span>
+<span>  <span class="va">significance_stars_x</span>,</span>
+<span>  <span class="va">significance_stars_y</span>,</span>
+<span>  <span class="va">significance_bars_x</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -148,6 +152,29 @@ the string before an underscore or period.</p></dd>
 <dd><p>Logical, whether to also print the computed table.</p></dd>
 
 
+<dt>significance_stars</dt>
+<dd><p>Vetor of significance stars to display on the
+plot (e.g,. <code>c("*", "**", "***")</code>).</p></dd>
+
+
+<dt>significance_stars_x</dt>
+<dd><p>Vector of where on the x-axis significance
+stars should appear on the plot (e.g., <code>c(2.2, 3.2, 4.2)</code>).</p></dd>
+
+
+<dt>significance_stars_y</dt>
+<dd><p>Vector of where on the y-axis significance
+stars should appear on the plot. The logic here is different than previous
+arguments. Rather than providing actual coordinates, we provide a list
+object with structure group 1, group 2, and time of comparison, e.g.,
+<code>list(c("group1", "group2", time = 2), c("group1", "group3", time = 3), c("group2", "group3", time = 4))</code>.</p></dd>
+
+
+<dt>significance_bars_x</dt>
+<dd><p>Vector of where on the x-axis vertical
+significance bars should appear on the plot (e.g., <code>c(2:4)</code>).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical, whether to also print a note regarding the meaning
 of the error bars.</p></dd>
@@ -183,6 +210,19 @@ Psychology</em>, <em>4</em>(2), 61-64. <a href="https://doi.org/10.20982/tqmp.04
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_means_over_time-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add significance stars/bars</span></span></span>
+<span class="r-in"><span><span class="fu">plot_means_over_time</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
+<span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
+<span class="r-in"><span>  significance_bars_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.15</span>, <span class="fl">4.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  significance_stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"***"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  significance_stars_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.25</span>, <span class="fl">4.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  significance_stars_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"8"</span>, time <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"8"</span>, time <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_means_over_time-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># significance_stars_y: List with structure: list(c("group1", "group2", time))</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -453,16 +453,17 @@
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="st">"_some-time-variable"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/plot_means_over_time.html">plot_means_over_time</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">data</span>,</span>
 <span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span>
-<span>  group <span class="op">=</span> <span class="st">"cyl"</span></span>
-<span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, </span>
-<span>                    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.8</span>, <span class="fl">3.8</span>, <span class="fl">4.3</span><span class="op">)</span>, </span>
-<span>                    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">130</span>, <span class="fl">240</span>, <span class="fl">190</span><span class="op">)</span>, </span>
-<span>                    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"*"</span>, <span class="st">"***"</span><span class="op">)</span>, </span>
-<span>                    size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span>
+<span>  significance_bars_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.15</span>, <span class="fl">4.15</span><span class="op">)</span>,</span>
+<span>  significance_stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"*"</span>, <span class="st">"***"</span><span class="op">)</span>,</span>
+<span>  significance_stars_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3.25</span>, <span class="fl">4.35</span><span class="op">)</span>,</span>
+<span>  <span class="co"># significance_stars_y: List with structure: list(c("group1", "group2", time))</span></span>
+<span>  significance_stars_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"8"</span>, time <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"8"</span>, time <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_means_over_time-1.png" width="70%"></p>
 </div>
 <div class="section level2">
