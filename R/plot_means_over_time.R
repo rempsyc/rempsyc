@@ -86,8 +86,12 @@ plot_means_over_time <- function(data,
   }
   times <- seq(length(response))
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right
-  p <- ggplot2::ggplot(data_summary, ggplot2::aes(x = .data$Time, y = .data$value,
-                                      group = .data[[group]])) +
+  p <- ggplot2::ggplot(
+    data_summary, ggplot2::aes(
+      x = .data$Time,
+      y = .data$value,
+      group = .data[[group]],
+      colour = .data[[group]])) +
     ggplot2::geom_line(ggplot2::aes(
       color = .data[[group]]), linewidth = 3, position = pd) +
   {
