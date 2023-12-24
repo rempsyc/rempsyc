@@ -12,6 +12,10 @@ plot_means_over_time(
   ytitle = NULL,
   legend.title = "",
   print_table = FALSE,
+  significance_stars,
+  significance_stars_x,
+  significance_stars_y,
+  significance_bars_x,
   verbose = FALSE
 )
 }
@@ -32,6 +36,21 @@ the string before an underscore or period.}
 \item{legend.title}{The desired legend title.}
 
 \item{print_table}{Logical, whether to also print the computed table.}
+
+\item{significance_stars}{Vetor of significance stars to display on the
+plot (e.g,. \code{c("*", "**", "***")}).}
+
+\item{significance_stars_x}{Vector of where on the x-axis significance
+stars should appear on the plot (e.g., \code{c(2.2, 3.2, 4.2)}).}
+
+\item{significance_stars_y}{Vector of where on the y-axis significance
+stars should appear on the plot. The logic here is different than previous
+arguments. Rather than providing actual coordinates, we provide a list
+object with structure group 1, group 2, and time of comparison, e.g.,
+\code{list(c("group1", "group2", time = 2), c("group1", "group3", time = 3), c("group2", "group3", time = 4))}.}
+
+\item{significance_bars_x}{Vector of where on the x-axis vertical
+significance bars should appear on the plot (e.g., \code{c(2:4)}).}
 
 \item{verbose}{Logical, whether to also print a note regarding the meaning
 of the error bars.}
@@ -57,6 +76,18 @@ plot_means_over_time(
   response = names(data)[6:3],
   group = "cyl"
 )
+
+# Add significance stars/bars
+plot_means_over_time(
+  data = data,
+  response = names(data)[6:3],
+  group = "cyl",
+  significance_bars_x = c(3.15, 4.15),
+  significance_stars = c("*", "***"),
+  significance_stars_x = c(3.25, 4.5),
+  significance_stars_y = list(c("4", "8", time = 3),
+                              c("4", "8", time = 4)))
+# significance_stars_y: List with structure: list(c("group1", "group2", time))
 \dontshow{\}) # examplesIf}
 }
 \references{

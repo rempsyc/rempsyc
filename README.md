@@ -431,16 +431,17 @@ as by the method of Morey (2008).
 ``` r
 data <- mtcars
 names(data)[6:3] <- paste0("T", 1:4, "_some-time-variable")
+
 plot_means_over_time(
   data = data,
   response = names(data)[6:3],
-  group = "cyl"
-) +
-  ggplot2::annotate("text", 
-                    x = c(3.8, 3.8, 4.3), 
-                    y = c(130, 240, 190), 
-                    label = c("*", "*", "***"), 
-                    size = 10)
+  group = "cyl",
+  significance_bars_x = c(3.15, 4.15),
+  significance_stars = c("*", "***"),
+  significance_stars_x = c(3.25, 4.35),
+  # significance_stars_y: List with structure: list(c("group1", "group2", time))
+  significance_stars_y = list(c("4", "8", time = 3),
+                              c("4", "8", time = 4)))
 ```
 
 <img src="man/figures/README-plot_means_over_time-1.png" width="70%" />

@@ -1,14 +1,16 @@
 # rempsyc 0.1.8
-- ✨Incoming✨
+* ✨Incoming✨
 
 ## rempsyc 0.1.7.3
-- `plot_means_over_time()`: error bar colours changed from black to group colour to ease the visual distinction of a manual addition of vertical comparison significance bars.
+* `plot_means_over_time()`:
+  * error bar colours changed from black to group colour to ease the visual distinction of a manual addition of vertical comparison significance bars.
+  * New arguments to include significance bars and stars: `significance_bars_x`, `significance_stars`, `significance_stars_x`, `significance_stars_y`
 
 ## rempsyc 0.1.7.2
-- New function: `grouped_bar_chart()`, to plot categorical data options over several groups.
+* New function: `grouped_bar_chart()`, to plot categorical data options over several groups.
 
 ## rempsyc 0.1.7.1
-- New function: `plot_means_over_time()`, to plot group (intervention) data over time (1, 2, 3).
+* New function: `plot_means_over_time()`, to plot group (intervention) data over time (1, 2, 3).
 
 # rempsyc 0.1.7
 * CRAN resubmission

@@ -18,6 +18,17 @@
 #' @param legend.title The desired legend title.
 #' @param group The group by which to plot the variable
 #' @param error_bars Logical, whether to include 95% confidence intervals for means.
+#' @param significance_bars_x Vector of where on the x-axis vertical
+#' significance bars should appear on the plot (e.g., `c(2:4)`).
+#' @param significance_stars Vetor of significance stars to display on the
+#' plot (e.g,. `c("*", "**", "***")`).
+#' @param significance_stars_x Vector of where on the x-axis significance
+#' stars should appear on the plot (e.g., `c(2.2, 3.2, 4.2)`).
+#' @param significance_stars_y Vector of where on the y-axis significance
+#' stars should appear on the plot. The logic here is different than previous
+#' arguments. Rather than providing actual coordinates, we provide a list
+#' object with structure group 1, group 2, and time of comparison, e.g.,
+#' `list(c("group1", "group2", time = 2), c("group1", "group3", time = 3), c("group2", "group3", time = 4))`.
 #' @param print_table Logical, whether to also print the computed table.
 #' @param verbose Logical, whether to also print a note regarding the meaning
 #' of the error bars.
@@ -31,6 +42,18 @@
 #'   response = names(data)[6:3],
 #'   group = "cyl"
 #' )
+#'
+#' # Add significance stars/bars
+#' plot_means_over_time(
+#'   data = data,
+#'   response = names(data)[6:3],
+#'   group = "cyl",
+#'   significance_bars_x = c(3.15, 4.15),
+#'   significance_stars = c("*", "***"),
+#'   significance_stars_x = c(3.25, 4.5),
+#'   significance_stars_y = list(c("4", "8", time = 3),
+#'                               c("4", "8", time = 4)))
+#' # significance_stars_y: List with structure: list(c("group1", "group2", time))
 
 plot_means_over_time <- function(data,
                                  response,
@@ -39,6 +62,10 @@ plot_means_over_time <- function(data,
                                  ytitle = NULL,
                                  legend.title = "",
                                  print_table = FALSE,
+                                 significance_stars,
+                                 significance_stars_x,
+                                 significance_stars_y,
+                                 significance_bars_x,
                                  verbose = FALSE) {
   check_col_names(data, c(response, group))
   rlang::check_installed(c("ggplot2", "tidyr", "Rmisc"),
@@ -85,6 +112,8 @@ plot_means_over_time <- function(data,
     print(data_summary)
   }
   times <- seq(length(response))
+
+  # ggplot2
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right
   p <- ggplot2::ggplot(
     data_summary, ggplot2::aes(
@@ -119,6 +148,61 @@ plot_means_over_time <- function(data,
       fill = legend.title, linetype = legend.title, shape = legend.title
     ) +
     ggplot2::ylab(ytitle)
+  if (!missing(significance_stars)) {
+    # significance bars/stars
+    m <- data %>%
+      dplyr::select(tidyselect::all_of(c(group, response))) %>%
+      dplyr::summarize(dplyr::across(tidyselect::all_of(response), mean), .by = group)
+
+    get_segment_y <- function(m, significance_stars_y, groups = 1:2, value = 1:2) {
+      zz <- dplyr::filter(m, .data[[group]] %in% significance_stars_y[groups]) %>%
+        dplyr::select(as.numeric(significance_stars_y[3]) + 1) %>%
+        unlist()
+      zz[value]
+    }
+
+    significance_stars_y_internal <- lapply(significance_stars_y, function(x) {
+      mean(c(
+        get_segment_y(m, x, groups = 1:2, value = 2),
+        get_segment_y(m, x, groups = 1:2, value = 1)))
+    }) %>% unlist
+
+    p <- p +
+      ggplot2::annotate(
+        "text",
+        x = significance_stars_x,
+        y = significance_stars_y_internal,
+        label = significance_stars,
+        size = 10)
+
+    segment_data_y_internal <- lapply(significance_stars_y, function(x) {
+      get_segment_y(m, x, groups = 1:2, value = 1)
+    }) %>% unlist
+
+    segment_data_yend_internal <- lapply(significance_stars_y, function(x) {
+      get_segment_y(m, x, groups = 1:2, value = 2)
+    }) %>% unlist
+
+    segment_data = data.frame(
+      x = significance_bars_x,
+      xend = significance_bars_x,
+      y = segment_data_y_internal,
+      yend = segment_data_yend_internal
+    )
+
+    segment_data[[group]] <- ""
+
+    p <- p + ggplot2::geom_segment(
+      data = segment_data,
+      ggplot2::aes(x = x,
+          xend = x,
+          y = y,
+          yend = yend),
+      linewidth = 0.5,
+      colour = "black")
+    p
+
+  }
   if (verbose && error_bars) {
     cat("Error bars represent 95% confidence intervals adjusted for",
         "repeated measures as by the method of Morey (2008).")
