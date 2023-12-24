@@ -151,8 +151,8 @@ plot_means_over_time <- function(data,
   if (!missing(significance_stars)) {
     # significance bars/stars
     m <- data %>%
-      dplyr::select(tidyselect::all_of(c(group, response))) %>%
-      dplyr::summarize(dplyr::across(tidyselect::all_of(response), mean), .by = group)
+      dplyr::select(dplyr::all_of(c(group, response))) %>%
+      dplyr::summarize(dplyr::across(dplyr::all_of(response), mean), .by = group)
 
     get_segment_y <- function(m, significance_stars_y, groups = 1:2, value = 1:2) {
       zz <- dplyr::filter(m, .data[[group]] %in% significance_stars_y[groups]) %>%
@@ -194,10 +194,10 @@ plot_means_over_time <- function(data,
 
     p <- p + ggplot2::geom_segment(
       data = segment_data,
-      ggplot2::aes(x = x,
-          xend = x,
-          y = y,
-          yend = yend),
+      ggplot2::aes(x = .data$x,
+          xend = .data$x,
+          y = .data$y,
+          yend = .data$yend),
       linewidth = 0.5,
       colour = "black")
     p
