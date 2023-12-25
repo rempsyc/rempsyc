@@ -138,7 +138,7 @@ plot_means_over_time <- function(data,
                         # colour = "black",
                         stroke = 1.5,
                         position = pd) +
-    discrete_scale("shape", "shape", palette = function(n) {
+    ggplot2::discrete_scale("shape", "shape", palette = function(n) {
       stopifnot("more than 5 shapes not supported" = n <= 5)
       20 + seq_len(n)
     }) +
