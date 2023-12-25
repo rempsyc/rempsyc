@@ -76,6 +76,7 @@ plot_means_over_time <- function(data,
     ytitle <- gsub(".*_", "", response[[1]])
   }
 
+  data <- dplyr::ungroup(data)
   data$subject_ID <- seq(nrow(data))
   data[[group]] <- as.factor(data[[group]])
   data[response] <- lapply(data[response], as.numeric)
