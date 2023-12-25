@@ -11,11 +11,11 @@ plot_means_over_time(
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
-  print_table = FALSE,
   significance_stars,
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  print_table = FALSE,
   verbose = FALSE
 )
 }
@@ -35,8 +35,6 @@ the string before an underscore or period.}
 
 \item{legend.title}{The desired legend title.}
 
-\item{print_table}{Logical, whether to also print the computed table.}
-
 \item{significance_stars}{Vetor of significance stars to display on the
 plot (e.g,. \code{c("*", "**", "***")}).}
 
@@ -51,6 +49,8 @@ object with structure group 1, group 2, and time of comparison, e.g.,
 
 \item{significance_bars_x}{Vector of where on the x-axis vertical
 significance bars should appear on the plot (e.g., \code{c(2:4)}).}
+
+\item{print_table}{Logical, whether to also print the computed table.}
 
 \item{verbose}{Logical, whether to also print a note regarding the meaning
 of the error bars.}

@@ -61,11 +61,11 @@ plot_means_over_time <- function(data,
                                  error_bars = TRUE,
                                  ytitle = NULL,
                                  legend.title = "",
-                                 print_table = FALSE,
                                  significance_stars,
                                  significance_stars_x,
                                  significance_stars_y,
                                  significance_bars_x,
+                                 print_table = FALSE,
                                  verbose = FALSE) {
   check_col_names(data, c(response, group))
   rlang::check_installed(c("ggplot2", "tidyr", "Rmisc"),
@@ -120,6 +120,8 @@ plot_means_over_time <- function(data,
       x = .data$Time,
       y = .data$value,
       group = .data[[group]],
+      # fill = "white",
+      shape = .data[[group]],
       colour = .data[[group]])) +
     ggplot2::geom_line(ggplot2::aes(
       color = .data[[group]]), linewidth = 3, position = pd) +
@@ -130,8 +132,17 @@ plot_means_over_time <- function(data,
         position = pd, linewidth = 1)
       }
     } +
-    ggplot2::geom_point(size = 4, shape = 22, fill = "white", stroke = 1.5,
+    ggplot2::geom_point(size = 4,
+                        # shape = 22,
+                        fill = "white",
+                        # colour = "black",
+                        stroke = 1.5,
                         position = pd) +
+    discrete_scale("shape", "shape", palette = function(n) {
+      stopifnot("more than 5 shapes not supported" = n <= 5)
+      20 + seq_len(n)
+    }) +
+    # guides(fill = guide_legend(override.aes = list(shape = 21))) +
     ggplot2::scale_x_discrete(labels = times) +
     ggplot2::theme_bw(base_size = 24) +
     ggplot2::theme(
@@ -148,11 +159,13 @@ plot_means_over_time <- function(data,
       fill = legend.title, linetype = legend.title, shape = legend.title
     ) +
     ggplot2::ylab(ytitle)
+
   if (!missing(significance_stars)) {
     # significance bars/stars
     m <- data %>%
       dplyr::select(dplyr::all_of(c(group, response))) %>%
-      dplyr::summarize(dplyr::across(dplyr::all_of(response), mean), .by = group)
+      dplyr::summarize(dplyr::across(dplyr::all_of(response), mean),
+                       .by = dplyr::all_of(group))
 
     get_segment_y <- function(m, significance_stars_y, groups = 1:2, value = 1:2) {
       zz <- dplyr::filter(m, .data[[group]] %in% significance_stars_y[groups]) %>%
@@ -190,7 +203,7 @@ plot_means_over_time <- function(data,
       yend = segment_data_yend_internal
     )
 
-    segment_data[[group]] <- ""
+    segment_data[[group]] <- m[[group]][1]
 
     p <- p + ggplot2::geom_segment(
       data = segment_data,
