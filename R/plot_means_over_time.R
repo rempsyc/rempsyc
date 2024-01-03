@@ -17,6 +17,11 @@
 #'  the string before an underscore or period.
 #' @param legend.title The desired legend title.
 #' @param group The group by which to plot the variable
+#' @param groups.order Specifies the desired display order of the groups
+#' on the legend. Either provide the levels directly, or a string: "increasing"
+#' or "decreasing", to order based on the average value of the variable on the
+#' y axis, or "string.length", to order from the shortest to the longest
+#' string (useful when working with long string names). "Defaults to "none".
 #' @param error_bars Logical, whether to include 95% confidence intervals for means.
 #' @param significance_bars_x Vector of where on the x-axis vertical
 #' significance bars should appear on the plot (e.g., `c(2:4)`).
@@ -40,7 +45,8 @@
 #' plot_means_over_time(
 #'   data = data,
 #'   response = names(data)[6:3],
-#'   group = "cyl"
+#'   group = "cyl",
+#'   groups.order = "decreasing"
 #' )
 #'
 #' # Add significance stars/bars
@@ -58,6 +64,7 @@
 plot_means_over_time <- function(data,
                                  response,
                                  group,
+                                 groups.order = "none",
                                  error_bars = TRUE,
                                  ytitle = NULL,
                                  legend.title = "",
@@ -114,6 +121,24 @@ plot_means_over_time <- function(data,
   }
   times <- seq(length(response))
 
+  dataSummary <- data_summary %>%
+    summarize(Mean = mean(value, na.rm = TRUE), .by = .data[[group]])
+
+  if (groups.order[1] == "increasing") {
+    data_summary[[group]] <- factor(
+      data_summary[[group]], levels = levels(data_summary[[group]])[order(dataSummary$Mean)])
+  } else if (groups.order[1] == "decreasing") {
+    data_summary[[group]] <- factor(
+      data_summary[[group]], levels = levels(data_summary[[group]])[order(dataSummary$Mean,
+                                                          decreasing = TRUE)])
+  } else if (groups.order[1] == "string.length") {
+    data_summary[[group]] <- factor(
+      data_summary[[group]], levels = levels(data_summary[[group]])[order(
+        nchar(levels(data_summary[[group]])))])
+  } else if (groups.order[1] != "none") {
+    data_summary[[group]] <- factor(data_summary[[group]], levels = groups.order)
+  }
+
   # ggplot2
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right
   p <- ggplot2::ggplot(
@@ -140,8 +165,9 @@ plot_means_over_time <- function(data,
                         stroke = 1.5,
                         position = pd) +
     ggplot2::discrete_scale("shape", "shape", palette = function(n) {
-      stopifnot("more than 5 shapes not supported" = n <= 5)
-      20 + seq_len(n)
+      # stopifnot("more than 5 shapes not supported" = n <= 5)
+      # 20 + seq_len(n)
+      c(21:25, 0:20)[1:n]
     }) +
     # guides(fill = guide_legend(override.aes = list(shape = 21))) +
     ggplot2::scale_x_discrete(labels = times) +

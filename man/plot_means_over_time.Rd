@@ -8,6 +8,7 @@ plot_means_over_time(
   data,
   response,
   group,
+  groups.order = "none",
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
@@ -26,6 +27,12 @@ plot_means_over_time(
 \code{c("variable_T1", "variable_T2", "variable_T3")}, etc.).}
 
 \item{group}{The group by which to plot the variable}
+
+\item{groups.order}{Specifies the desired display order of the groups
+on the legend. Either provide the levels directly, or a string: "increasing"
+or "decreasing", to order based on the average value of the variable on the
+y axis, or "string.length", to order from the shortest to the longest
+string (useful when working with long string names). "Defaults to "none".}
 
 \item{error_bars}{Logical, whether to include 95\% confidence intervals for means.}
 
@@ -74,7 +81,8 @@ names(data)[6:3] <- paste0("T", 1:4, "_var")
 plot_means_over_time(
   data = data,
   response = names(data)[6:3],
-  group = "cyl"
+  group = "cyl",
+  groups.order = "decreasing"
 )
 
 # Add significance stars/bars

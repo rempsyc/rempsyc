@@ -436,6 +436,7 @@ plot_means_over_time(
   data = data,
   response = names(data)[6:3],
   group = "cyl",
+  groups.order = "decreasing",
   significance_bars_x = c(3.15, 4.15),
   significance_stars = c("*", "***"),
   significance_stars_x = c(3.25, 4.35),

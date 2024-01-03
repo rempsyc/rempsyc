@@ -1,6 +1,11 @@
 # rempsyc 0.1.8
 * ✨Incoming✨
 
+## rempsyc 0.1.7.4
+* `plot_means_over_time()`:
+  * Now supports more than 5 groups (but shapes are not consistent after that)
+  * Gains the `groups.order` argument, like `nice_scatter()`, to organize group factor levels in increasing or decreasing order.
+
 ## rempsyc 0.1.7.3
 * `plot_means_over_time()`:
   * error bar colours changed from black to group colour to ease the visual distinction of a manual addition of vertical comparison significance bars.
