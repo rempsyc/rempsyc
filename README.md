@@ -447,6 +447,30 @@ plot_means_over_time(
 
 <img src="man/figures/README-plot_means_over_time-1.png" width="70%" />
 
+## `grouped_bar_chart`
+
+Make nice plots of means over time, usually for randomized controlled
+trials with several groups over several time measurements. Error bars
+represent 95% confidence intervals adjusted for within-subject variance
+as by the method of Morey (2008).
+
+``` r
+iris2 <- iris
+iris2$plant <- c(
+  rep("yes", 45),
+  rep("no", 45),
+  rep("maybe", 30),
+  rep("NA", 30)
+)
+grouped_bar_chart(
+  data = iris2,
+  response = "plant",
+  group = "Species"
+)
+```
+
+<img src="man/figures/README-grouped_bar_chart-1.png" width="70%" />
+
 ## `overlap_circle`
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other
