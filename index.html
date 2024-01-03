@@ -468,15 +468,35 @@
 <p><img src="reference/figures/README-plot_means_over_time-1.png" width="70%"></p>
 </div>
 <div class="section level2">
+<h2 id="grouped_bar_chart">
+<code>grouped_bar_chart</code><a class="anchor" aria-label="anchor" href="#grouped_bar_chart"></a>
+</h2>
+<p>Make nice plots of means over time, usually for randomized controlled trials with several groups over several time measurements. Error bars represent 95% confidence intervals adjusted for within-subject variance as by the method of Morey (2008).</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris2</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
+<span><span class="va">iris2</span><span class="op">$</span><span class="va">plant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"yes"</span>, <span class="fl">45</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"no"</span>, <span class="fl">45</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"maybe"</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/grouped_bar_chart.html">grouped_bar_chart</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">iris2</span>,</span>
+<span>  response <span class="op">=</span> <span class="st">"plant"</span>,</span>
+<span>  group <span class="op">=</span> <span class="st">"Species"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-grouped_bar_chart-1.png" width="70%"></p>
+</div>
+<div class="section level2">
 <h2 id="overlap_circle">
 <code>overlap_circle</code><a class="anchor" aria-label="anchor" href="#overlap_circle"></a>
 </h2>
 <p>Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Score of 3.5 (25% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-overlap_circle-1.png" width="30%"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Score of 6.84 (81.8% overlap)</span></span>
 <span><span class="fu"><a href="reference/overlap_circle.html">overlap_circle</a></span><span class="op">(</span><span class="fl">6.84</span><span class="op">)</span></span></code></pre></div>
@@ -488,7 +508,7 @@
 <code>cormatrix_excel</code><a class="anchor" aria-label="anchor" href="#cormatrix_excel"></a>
 </h2>
 <p>Easily output a correlation matrix and export it to Microsoft Excel, with the first row and column frozen, and correlation coefficients colour-coded based on their effect size (0.0-0.2: small (pink/light blue); 0.2-0.4: medium (orange/blue); 0.4-1.0: large (red/dark blue)).</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cormatrix_excel.html">cormatrix_excel</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">infert</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"cormatrix1"</span>,</span>
@@ -525,7 +545,7 @@
 <code>nice_na</code><a class="anchor" aria-label="anchor" href="#nice_na"></a>
 </h2>
 <p>Nicely reports NA values according to existing guidelines (i.e, reporting absolute or percentage of item-based missing values, plus each scale’s maximum amount of missing values for a given participant). Accordingly, allows specifying a list of columns representing questionnaire items to produce a questionnaire-based report of missing values.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create synthetic data frame for the demonstration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -558,7 +578,7 @@
 <code>extract_duplicates</code><a class="anchor" aria-label="anchor" href="#extract_duplicates"></a>
 </h2>
 <p>Extracts ALL duplicates (including the first one, contrary to <code>duplicated</code> or <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">dplyr::distinct</a></code>) to a data frame for visual inspection.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>  item1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
@@ -585,7 +605,7 @@
 <code>best_duplicate</code><a class="anchor" aria-label="anchor" href="#best_duplicate"></a>
 </h2>
 <p>Extracts the “best” duplicate: the one with the fewer number of missing values (in case of ties, picks the first one).</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/best_duplicate.html">best_duplicate</a></span><span class="op">(</span><span class="va">df1</span>, id <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (2 duplicates removed)</span></span>
 <span><span class="co">#&gt;   id item1 item2 item3</span></span>
@@ -598,7 +618,7 @@
 <code>scale_mad</code><a class="anchor" aria-label="anchor" href="#scale_mad"></a>
 </h2>
 <p>Scale and center (“standardize”) data based on the median and median absolute deviation (MAD).</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/scale_mad.html">scale_mad</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1]  0.33262558  0.33262558  0.66525116  0.40654238 -0.09239599 -0.20327119</span></span>
 <span><span class="co">#&gt;  [7] -0.90548075  0.96091834  0.66525116  0.00000000 -0.25870878 -0.51741757</span></span>
@@ -612,7 +632,7 @@
 <code>find_mad</code><a class="anchor" aria-label="anchor" href="#find_mad"></a>
 </h2>
 <p>Identify outliers based on (e.g.,) 3 median absolute deviations (MAD) from the median.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/find_mad.html">find_mad</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, col.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 2 outlier(s) based on 3 median absolute deviations for variable(s): </span></span>
 <span><span class="co">#&gt;  mpg, cyl, disp, hp, drat, wt, qsec, gear, carb </span></span>
@@ -632,7 +652,7 @@
 <code>winsorize_mad</code><a class="anchor" aria-label="anchor" href="#winsorize_mad"></a>
 </h2>
 <p>Winsorize outliers based on (e.g.,) 3 median absolute deviations (MAD).</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/winsorize_mad.html">winsorize_mad</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">qsec</span>, criteria <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] 16.46000 17.02000 18.61000 19.44000 17.02000 20.22000 15.84000 20.00000</span></span>
 <span><span class="co">#&gt;  [9] 21.95765 18.30000 18.90000 17.40000 17.60000 18.00000 17.98000 17.82000</span></span>
@@ -644,7 +664,7 @@
 <code>nice_reverse</code><a class="anchor" aria-label="anchor" href="#nice_reverse"></a>
 </h2>
 <p>Easily recode scores (reverse-score), typically for questionnaire answers.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reverse score of 5 with a maximum score of 5</span></span>
 <span><span class="fu"><a href="reference/nice_reverse.html">nice_reverse</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
@@ -662,7 +682,7 @@
 <code>format_value</code><a class="anchor" aria-label="anchor" href="#format_value"></a>
 </h2>
 <p>Easily format <em>p</em> or <em>r</em> values. Note: converts to <code>character</code> class for use in figures or manuscripts to accommodate e.g., “&lt; .001”.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/format_value.html">format_p</a></span><span class="op">(</span><span class="fl">0.0041231</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] ".004"</span></span>
 <span><span class="fu"><a href="reference/format_value.html">format_p</a></span><span class="op">(</span><span class="va">t.tests</span><span class="op">$</span><span class="va">p</span><span class="op">)</span></span>
@@ -677,7 +697,7 @@
 <code>nice_randomize</code><a class="anchor" aria-label="anchor" href="#nice_randomize"></a>
 </h2>
 <p>Randomize easily with different designs.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify design, number of conditions, number of participants, and names of conditions:</span></span>
 <span><span class="fu"><a href="reference/nice_randomize.html">nice_randomize</a></span><span class="op">(</span></span>
 <span>  design <span class="op">=</span> <span class="st">"between"</span>, Ncondition <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">8</span>,</span>
@@ -713,7 +733,7 @@
 <code>nice_assumptions</code><a class="anchor" aria-label="anchor" href="#nice_assumptions"></a>
 </h2>
 <p>Test linear regression assumptions easily with a nice summary table.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create regression model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">*</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">gear</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="co"># View results</span></span>
@@ -726,7 +746,7 @@
 <code>nice_normality</code><a class="anchor" aria-label="anchor" href="#nice_normality"></a>
 </h2>
 <p>Easily make nice density and QQ plots per-group.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_normality.html">nice_normality</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -743,13 +763,13 @@
 <code>plot_outliers</code><a class="anchor" aria-label="anchor" href="#plot_outliers"></a>
 </h2>
 <p>Visually check outliers based on (e.g.) +/- 3 MAD (median absolute deviations) or SD (standard deviations).</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
 <span>  group <span class="op">=</span> <span class="st">"Month"</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"Ozone"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_outliers-1.png" width="70%"></p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">airquality</span>,</span>
 <span>  response <span class="op">=</span> <span class="st">"Ozone"</span>,</span>
@@ -763,7 +783,7 @@
 <code>nice_var</code><a class="anchor" aria-label="anchor" href="#nice_var"></a>
 </h2>
 <p>Obtain variance per group as well as check for the rule of thumb of one group having variance four times bigger than any of the other groups.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_var.html">nice_var</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
@@ -780,7 +800,7 @@
 <code>nice_varplot</code><a class="anchor" aria-label="anchor" href="#nice_varplot"></a>
 </h2>
 <p>Attempt to visualize variance per group.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_varplot.html">nice_varplot</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>  variable <span class="op">=</span> <span class="st">"Sepal.Length"</span>,</span>
