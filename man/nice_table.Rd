@@ -85,7 +85,7 @@ if desired.}
 on name delimiters (i.e., periods ".").}
 }
 \value{
-An APA-formatted table of class "flextable" (and "nice_table").
+An APA-formatted table of class "flextable"
 }
 \description{
 Make nice APA tables easily through a wrapper

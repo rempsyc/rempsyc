@@ -54,7 +54,7 @@
 #' on name delimiters (i.e., periods ".").
 #'
 #' @keywords APA style table
-#' @return An APA-formatted table of class "flextable" (and "nice_table").
+#' @return An APA-formatted table of class "flextable"
 #' @examplesIf requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)
 #' # Make the basic table
 #' my_table <- nice_table(
@@ -260,7 +260,9 @@ nice_table <- function(data,
 
   table <- finalize_table(table, title, nice.borders)
 
-  class(table) <- c("nice_table", class(table))
+  # class(table) <- c("nice_table", class(table))
+  # remove `nice_table` class because of name collision with printing method
+  # of the `afex` package for `nice_table` objects
 
   table
 }
