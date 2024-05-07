@@ -1,6 +1,9 @@
 # rempsyc 0.1.8
 * ✨Incoming✨
 
+## rempsyc 0.1.7.6
+* `nice_lm()` fix a bug with `nice_lm()` which doesn't work with lm models containing a single term (#27)
+
 ## rempsyc 0.1.7.5
 * `nice_table()` loses its `nice_table` class because of a name collision with the printing method of the `afex` package for `nice_table` objects (produced with `afex::nice`, #26)
 

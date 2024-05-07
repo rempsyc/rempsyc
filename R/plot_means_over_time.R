@@ -122,7 +122,7 @@ plot_means_over_time <- function(data,
   times <- seq(length(response))
 
   dataSummary <- data_summary %>%
-    summarize(Mean = mean(value, na.rm = TRUE), .by = all_of(group))
+    summarize(Mean = mean(.data$value, na.rm = TRUE), .by = all_of(group))
 
   if (groups.order[1] == "increasing") {
     data_summary[[group]] <- factor(

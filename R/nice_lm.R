@@ -111,6 +111,11 @@ nice_lm <- function(model,
     z <- effectsize::r2_semipartial(x, alternative = ci.alternative, ...)
     dplyr::select(z, "r2_semipartial", "CI_low", "CI_high")
   })
+  
+  if (as.data.frame(ES.list) %>% nrow() == 1) {
+    sums.list <- lapply(sums.list, function(x) {t(as.matrix(x))})
+  }
+  
   stats.list <- mapply(cbind, df.list, sums.list, ES.list, SIMPLIFY = FALSE)
   stats.list <- lapply(stats.list, function(x) {
     x <- as.data.frame(x)
