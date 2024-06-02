@@ -31,6 +31,10 @@ bug, or request a feature.
 - [Development objectives (to-do
   list)](https://rempsyc.remi-theriault.com/TODOS.html)
 
+> - This is one of the most helpful R packages I’ve used in years! It
+>   saves hours of time and patience and is super easy to implement! -
+>   Mark ([more testimonials](/articles/featured#testimonials))
+
 ## Installation
 
 You can install the `rempsyc` package directly from CRAN:
@@ -127,15 +131,15 @@ t.tests <- nice_t_test(
 )
 t.tests
 #>   Dependent Variable         t       df              p         d   CI_lower
-#> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659731
-#> 2               disp  4.197727 29.25845 0.000230041299  1.445221  0.6417834
+#> 1                mpg -3.767123 18.33225 0.001373638333 -1.477947 -2.2659732
+#> 2               disp  4.197727 29.25845 0.000230041299  1.445221  0.6417836
 #> 3               drat -5.646088 27.19780 0.000005266742 -2.003084 -2.8592770
 #> 4                 wt  5.493905 29.23352 0.000006272020  1.892406  1.0300224
 #>     CI_upper
-#> 1 -0.6705686
-#> 2  2.2295592
-#> 3 -1.1245498
-#> 4  2.7329218
+#> 1 -0.6705684
+#> 2  2.2295594
+#> 3 -1.1245499
+#> 4  2.7329219
 ```
 
 ``` r
