@@ -31,10 +31,11 @@ bug, or request a feature.
 - [Development objectives (to-do
   list)](https://rempsyc.remi-theriault.com/TODOS.html)
 
-> Top 40 new CRAN packages (2022) *This is one of the most helpful R
-> packages I’ve used in years! It saves hours of time and patience and
-> is super easy to implement!* - Mark ([more
-> testimonials](/articles/featured#testimonials))
+Top 40 new CRAN packages (2022)!
+
+> *This is one of the most helpful R packages I’ve used in years! It
+> saves hours of time and patience and is super easy to implement!* -
+> Mark ([more testimonials](/articles/featured#testimonials))
 
 ## Installation
 
