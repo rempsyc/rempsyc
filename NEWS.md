@@ -1,6 +1,9 @@
 # rempsyc 0.1.8
 * ✨Incoming✨
 
+## rempsyc 0.1.7.7
+* `nice_table()` gains a new argument: `spacing` (defaults to double space = 2, but can be set to 1 for single spacing)
+
 ## rempsyc 0.1.7.6
 * `nice_lm()` fix a bug with `nice_lm()` which doesn't work with lm models containing a single term (#27)
 

@@ -38,6 +38,7 @@
 #' @param width Width of the table, in percentage of the
 #' total width, when exported e.g., to Word. For full width,
 #' use `width = 1`.
+#' @param spacing Spacing of the rows (1 = single space, 2 = double space)
 #' @param broom If providing a tidy table produced with the
 #' `broom` package, which model type to use if one wants
 #' automatic formatting (options are "t.test", "lm", "cor.test",
@@ -152,6 +153,7 @@ nice_table <- function(data,
                        format.custom,
                        col.format.custom,
                        width = NULL,
+                       spacing = 2,
                        broom = NULL,
                        report = NULL,
                        short = FALSE,
@@ -233,7 +235,7 @@ nice_table <- function(data,
   nice.borders <- list("width" = 0.5, color = "black", style = "solid")
 
   table <- create_flextable(
-    dataframe, highlight, width, note,
+    dataframe, highlight, width, spacing, note,
     separate.header, nice.borders
   )
 
@@ -562,7 +564,7 @@ prepare_flextable <- function(dataframe, separate.header, col.format.ci,
 }
 
 # create_flextable
-create_flextable <- function(dataframe, highlight, width, note,
+create_flextable <- function(dataframe, highlight, width, spacing, note,
                              separate.header, nice.borders) {
   table <- dataframe %>%
     {
@@ -593,7 +595,7 @@ create_flextable <- function(dataframe, highlight, width, note,
     flextable::align(align = "center", part = "all") %>%
     flextable::align(j = 1, align = "left", part = "body") %>%
     flextable::valign(valign = "center", part = "all") %>%
-    flextable::line_spacing(space = 2, part = "all") %>%
+    flextable::line_spacing(space = spacing, part = "all") %>%
     flextable::fix_border_issues()
 
   if (!is.null(width)) {

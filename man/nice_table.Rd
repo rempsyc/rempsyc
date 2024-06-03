@@ -15,6 +15,7 @@ nice_table(
   format.custom,
   col.format.custom,
   width = NULL,
+  spacing = 2,
   broom = NULL,
   report = NULL,
   short = FALSE,
@@ -63,6 +64,8 @@ function to. Select with numerical range, e.g., 1:3.}
 \item{width}{Width of the table, in percentage of the
 total width, when exported e.g., to Word. For full width,
 use \code{width = 1}.}
+
+\item{spacing}{Spacing of the rows (1 = single space, 2 = double space)}
 
 \item{broom}{If providing a tidy table produced with the
 \code{broom} package, which model type to use if one wants
