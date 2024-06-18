@@ -26,6 +26,7 @@
 #' @param correction What correction for multiple comparison
 #' to apply, if any. Default is "none" and the only other option
 #' (for now) is "bonferroni".
+#' @param paired Whether to use a paired t-test.
 #' @param group The group for the comparison.
 
 #' @param verbose Whether to display the Welch test warning or not.
@@ -90,6 +91,7 @@ nice_t_test <- function(data,
                         response,
                         group = NULL,
                         correction = "none",
+                        paired = FALSE,
                         verbose = TRUE,
                         ...) {
   check_col_names(data, c(group, response))
@@ -108,21 +110,17 @@ nice_t_test <- function(data,
   } else {
     pooled_sd <- TRUE
   }
-  if (methods::hasArg(paired)) {
-    paired <- args$paired
-
-    # if (getRversion() >= "4.4.0" && paired == TRUE) {
-    #   message(
-    #     "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method."
-    #   )
-    #   return(NULL)
-    # }
-
-    if (paired == TRUE && verbose == TRUE) message("Using paired t-test. \n ")
-    if (paired == FALSE && verbose == TRUE) message("Using independent samples t-test. \n ")
-  } else {
-    paired <- FALSE
-  }
+  # if (getRversion() >= "4.4.0" && paired == TRUE) {
+  #   message(
+  #     "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method."
+  #   )
+  #   return(NULL)
+  # }
+  
+  if (paired == TRUE && verbose == TRUE) message(
+    "Using paired t-test (paired order assumed from data). \n ")
+  if (paired == FALSE && verbose == TRUE) message("Using independent samples t-test. \n ")
+  
   if (!methods::hasArg(var.equal) && paired == FALSE && verbose == TRUE) {
     message(
       "Using Welch t-test (base R's default; ",
@@ -132,8 +130,24 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   }
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
-    formulas <- paste0(response, " ~ ", group)
-    formulas <- lapply(formulas, stats::as.formula)
+    if (isTRUE(paired)) {
+      group1 <- as.character(unique(data[group])[2, ])
+      group2 <- as.character(unique(data[group])[1, ])
+      
+      x <- lapply(response, function(i) {
+        data[data[group] == group1, i]
+      })
+      
+      y <- lapply(response, function(i) {
+        data[data[group] == group2, i]
+      })
+      
+      formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
+      formulas <- lapply(formulas, stats::as.formula)
+    } else {
+      formulas <- paste0(response, " ~ ", group)
+      formulas <- lapply(formulas, stats::as.formula)
+    }
   } else {
     if (verbose == TRUE) {
       message("Using one-sample t-test. \n ")
@@ -150,22 +164,6 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
-  if (isTRUE(paired)) {
-    group1 <- as.character(unique(data[group])[2, ])
-    group2 <- as.character(unique(data[group])[1, ])
-    
-    x <- lapply(response, function(i) {
-      data[data[group] == group1, i]
-    })
-    
-    y <- lapply(response, function(i) {
-      data[data[group] == group2, i]
-    })
-    
-    formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
-    formulas <- lapply(formulas, stats::as.formula)
-  } else {
-  }
   es.lists <- lapply(formulas, function(x) {
     effectsize::cohens_d(x,
       data = data,

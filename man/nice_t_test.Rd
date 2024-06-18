@@ -9,6 +9,7 @@ nice_t_test(
   response,
   group = NULL,
   correction = "none",
+  paired = FALSE,
   verbose = TRUE,
   ...
 )
@@ -23,6 +24,8 @@ nice_t_test(
 \item{correction}{What correction for multiple comparison
 to apply, if any. Default is "none" and the only other option
 (for now) is "bonferroni".}
+
+\item{paired}{Whether to use a paired t-test.}
 
 \item{verbose}{Whether to display the Welch test warning or not.}
 
