@@ -59,3 +59,12 @@
         Dependent Variable        t df            p        d CI_lower CI_upper
       1                mpg 9.470995 31 1.154598e-10 1.674251  1.12797 2.208995
 
+---
+
+    Code
+      nice_t_test(data = ToothGrowth, response = "len", group = "supp", paired = TRUE,
+        verbose = FALSE)
+    Output
+        Dependent Variable        t df           p         d  CI_lower  CI_upper
+      1                len 3.302585 29 0.002549842 0.6029668 0.2088153 0.9883437
+

@@ -111,12 +111,12 @@ nice_t_test <- function(data,
   if (methods::hasArg(paired)) {
     paired <- args$paired
 
-    if (getRversion() >= "4.4.0" && paired == TRUE) {
-      message(
-        "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method."
-      )
-      return(NULL)
-    }
+    # if (getRversion() >= "4.4.0" && paired == TRUE) {
+    #   message(
+    #     "R >= 4.4.0 has stopped supporting the 'paired' argument for the formula method."
+    #   )
+    #   return(NULL)
+    # }
 
     if (paired == TRUE && verbose == TRUE) message("Using paired t-test. \n ")
     if (paired == FALSE && verbose == TRUE) message("Using independent samples t-test. \n ")
@@ -150,12 +150,28 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
+  if (isTRUE(paired)) {
+    group1 <- as.character(unique(data[group])[2, ])
+    group2 <- as.character(unique(data[group])[1, ])
+    
+    x <- lapply(response, function(i) {
+      data[data[group] == group1, i]
+    })
+    
+    y <- lapply(response, function(i) {
+      data[data[group] == group2, i]
+    })
+    
+    formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
+    formulas <- lapply(formulas, stats::as.formula)
+  } else {
+  }
   es.lists <- lapply(formulas, function(x) {
     effectsize::cohens_d(x,
       data = data,
-      paired = paired,
       mu = mu,
-      pooled_sd = pooled_sd
+      pooled_sd = pooled_sd,
+      verbose = verbose
     )
   })
   list.stats <- list()

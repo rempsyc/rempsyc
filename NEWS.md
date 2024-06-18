@@ -1,6 +1,9 @@
 # rempsyc 0.1.8
 * ✨Incoming✨
 
+## rempsyc 0.1.7.8
+* `nice_t_test`: add temporary workaround for paired t-tests failing (#28)
+
 ## rempsyc 0.1.7.7
 * `nice_table()` gains a new argument: `spacing` (defaults to double space = 2, but can be set to 1 for single spacing)
 
