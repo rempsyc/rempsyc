@@ -114,6 +114,7 @@ is for the effect size, Cohen's d, both provided by the <code>effectsize</code> 
 <span>  <span class="va">response</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  correction <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  paired <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -137,6 +138,10 @@ is for the effect size, Cohen's d, both provided by the <code>effectsize</code> 
 <dd><p>What correction for multiple comparison
 to apply, if any. Default is "none" and the only other option
 (for now) is "bonferroni".</p></dd>
+
+
+<dt>paired</dt>
+<dd><p>Whether to use a paired t-test.</p></dd>
 
 
 <dt>verbose</dt>
@@ -188,6 +193,8 @@ internally here.</p>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using independent samples t-test. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
@@ -202,6 +209,8 @@ internally here.</p>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using independent samples t-test. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
@@ -234,6 +243,8 @@ internally here.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Student t-test. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using independent samples t-test. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Dependent Variable         t df            p         d  CI_lower   CI_upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                mpg -4.106127 30 0.0002850207 -1.477947 -2.265973 -0.6705684</span>
 <span class="r-in"><span></span></span>
@@ -244,6 +255,8 @@ internally here.</p>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"am"</span>,</span></span>
 <span class="r-in"><span>  alternative <span class="op">=</span> <span class="st">"less"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using independent samples t-test. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
@@ -258,6 +271,8 @@ internally here.</p>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="st">"mpg"</span>,</span></span>
 <span class="r-in"><span>  mu <span class="op">=</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using independent samples t-test. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using Welch t-test (base R's default; cf. https://doi.org/10.5334/irsp.82).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For the Student t-test, use `var.equal = TRUE`. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
