@@ -1,5 +1,11 @@
-# rempsyc 0.1.8
+# rempsyc 0.1.9
 * ✨Incoming✨
+
+## rempsyc 0.1.9.1
+* ✨Incoming✨
+
+# rempsyc 0.1.8
+* New CRAN submission
 
 ## rempsyc 0.1.7.8
 * `nice_t_test`: add temporary workaround for paired t-tests failing (#28)
