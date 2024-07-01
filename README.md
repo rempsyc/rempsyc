@@ -35,7 +35,7 @@ Top 40 new CRAN packages (2022)!
 
 > *This is one of the most helpful R packages I’ve used in years! It
 > saves hours of time and patience and is super easy to implement!* -
-> Mark ([more testimonials](/articles/featured#testimonials))
+> Mark ([more testimonials](https://rempsyc.remi-theriault.com/articles/featured.html#testimonials))
 
 ## Installation
 
