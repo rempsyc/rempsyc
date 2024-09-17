@@ -169,7 +169,9 @@ nice_density <- function(data,
           inherit.aes = FALSE,
           size = 6,
           force = 0,
-          parse = TRUE
+          parse = TRUE,
+          vjust = "inward", 
+          hjust = "inward"
         )
       }
     } +
