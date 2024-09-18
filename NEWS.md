@@ -1,8 +1,11 @@
 # rempsyc 0.1.9
 * ✨Incoming✨
 
-## rempsyc 0.1.9.1
-* ✨Incoming✨
+## rempsyc 0.1.8.2
+* `best_duplicate`: fix a bug with grouped tibbles leading to an error
+
+## rempsyc 0.1.8.1
+* `nice_density`: add `vjust = "inward"` and `hjust = "inward"` to annotation to fix changes in `ggpubr`
 
 # rempsyc 0.1.8
 * New CRAN submission

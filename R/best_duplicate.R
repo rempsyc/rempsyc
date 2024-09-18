@@ -29,6 +29,8 @@
 best_duplicate <- function(data, id, keep.rows = FALSE) {
   check_col_names(data, id)
 
+  data <- as.data.frame(data)
+  
   og.names <- names(data)
   dups <- data %>%
     extract_duplicates(id)
