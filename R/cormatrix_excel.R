@@ -9,6 +9,9 @@
 #'
 #' Based on the `correlation` and `openxlsx2` packages.
 #'
+#' @details For the *easystats* equivalent, see:
+#' [correlation::cormatrix_to_excel()].
+#'
 #' @param data The data frame
 #' @param filename Desired filename (path can be added before hand
 #' but no need to specify extension).
@@ -22,7 +25,8 @@
 #'
 #' @keywords correlation matrix Excel
 #' @author Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
-#' the original `rempsyc::cormatrix_excel`.
+#' the original [rempsyc::cormatrix_excel] (now imported from
+#' [correlation::cormatrix_to_excel]).
 #' @return A Microsoft Excel document, containing the colour-coded
 #'         correlation matrix with significance stars, on the first
 #'         sheet, and the colour-coded p-values on the second sheet.
@@ -44,9 +48,8 @@ cormatrix_excel <- function(data,
                             p_adjust = "none",
                             print.mat = TRUE,
                             ...) {
-
   rlang::check_installed(c("correlation", "openxlsx2"),
-                         reason = "for this function."
+    reason = "for this function."
   )
 
   correlation::cormatrix_to_excel(
@@ -54,6 +57,7 @@ cormatrix_excel <- function(data,
     filename = filename,
     overwrite = overwrite,
     print.mat = print.mat,
+    p_adjust = p_adjust,
     ...
   )
 }
