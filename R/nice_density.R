@@ -170,7 +170,7 @@ nice_density <- function(data,
           size = 6,
           force = 0,
           parse = TRUE,
-          vjust = "inward", 
+          vjust = "inward",
           hjust = "inward"
         )
       }

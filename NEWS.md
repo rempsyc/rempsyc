@@ -1,5 +1,5 @@
 # rempsyc 0.1.9
-* ✨Incoming✨
+* New CRAN submission
 
 ## rempsyc 0.1.8.3
 * `cormatrix_excel` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance.

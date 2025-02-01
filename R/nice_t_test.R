@@ -116,11 +116,14 @@ nice_t_test <- function(data,
   #   )
   #   return(NULL)
   # }
-  
-  if (paired == TRUE && verbose == TRUE) message(
-    "Using paired t-test (paired order assumed from data). \n ")
+
+  if (paired == TRUE && verbose == TRUE) {
+    message(
+      "Using paired t-test (paired order assumed from data). \n "
+    )
+  }
   if (paired == FALSE && verbose == TRUE) message("Using independent samples t-test. \n ")
-  
+
   if (!methods::hasArg(var.equal) && paired == FALSE && verbose == TRUE) {
     message(
       "Using Welch t-test (base R's default; ",
@@ -133,15 +136,15 @@ For the Student t-test, use `var.equal = TRUE`. \n "
     if (isTRUE(paired)) {
       group1 <- as.character(unique(data[group])[2, ])
       group2 <- as.character(unique(data[group])[1, ])
-      
+
       x <- lapply(response, function(i) {
         data[data[group] == group1, i]
       })
-      
+
       y <- lapply(response, function(i) {
         data[data[group] == group2, i]
       })
-      
+
       formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
       formulas <- lapply(formulas, stats::as.formula)
     } else {

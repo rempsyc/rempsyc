@@ -93,8 +93,11 @@ plot_means_over_time(
   significance_bars_x = c(3.15, 4.15),
   significance_stars = c("*", "***"),
   significance_stars_x = c(3.25, 4.5),
-  significance_stars_y = list(c("4", "8", time = 3),
-                              c("4", "8", time = 4)))
+  significance_stars_y = list(
+    c("4", "8", time = 3),
+    c("4", "8", time = 4)
+  )
+)
 # significance_stars_y: List with structure: list(c("group1", "group2", time))
 \dontshow{\}) # examplesIf}
 }

@@ -57,10 +57,12 @@
 #'   significance_bars_x = c(3.15, 4.15),
 #'   significance_stars = c("*", "***"),
 #'   significance_stars_x = c(3.25, 4.5),
-#'   significance_stars_y = list(c("4", "8", time = 3),
-#'                               c("4", "8", time = 4)))
+#'   significance_stars_y = list(
+#'     c("4", "8", time = 3),
+#'     c("4", "8", time = 4)
+#'   )
+#' )
 #' # significance_stars_y: List with structure: list(c("group1", "group2", time))
-
 plot_means_over_time <- function(data,
                                  response,
                                  group,
@@ -76,8 +78,8 @@ plot_means_over_time <- function(data,
                                  verbose = FALSE) {
   check_col_names(data, c(response, group))
   rlang::check_installed(c("ggplot2", "tidyr", "Rmisc"),
-                         reason = "for this function.",
-                         version = get_dep_version(c("ggplot2", "tidyr", "Rmisc"))
+    reason = "for this function.",
+    version = get_dep_version(c("ggplot2", "tidyr", "Rmisc"))
   )
   if (is.null(ytitle)) {
     ytitle <- gsub(".*_", "", response[[1]])
@@ -93,7 +95,8 @@ plot_means_over_time <- function(data,
     data,
     dplyr::all_of(response),
     names_to = "Time",
-    names_ptypes = factor())
+    names_ptypes = factor()
+  )
 
   data_summary <- Rmisc::summarySEwithin(
     data_long,
@@ -102,7 +105,8 @@ plot_means_over_time <- function(data,
     betweenvars = group,
     idvar = "subject_ID",
     na.rm = FALSE,
-    conf.interval = .95)
+    conf.interval = .95
+  )
 
   data_summary2 <- data_long %>%
     dplyr::group_by(.data[[group]], .data$Time) %>%
@@ -126,15 +130,23 @@ plot_means_over_time <- function(data,
 
   if (groups.order[1] == "increasing") {
     data_summary[[group]] <- factor(
-      data_summary[[group]], levels = levels(data_summary[[group]])[order(dataSummary$Mean)])
+      data_summary[[group]],
+      levels = levels(data_summary[[group]])[order(dataSummary$Mean)]
+    )
   } else if (groups.order[1] == "decreasing") {
     data_summary[[group]] <- factor(
-      data_summary[[group]], levels = levels(data_summary[[group]])[order(dataSummary$Mean,
-                                                          decreasing = TRUE)])
+      data_summary[[group]],
+      levels = levels(data_summary[[group]])[order(dataSummary$Mean,
+        decreasing = TRUE
+      )]
+    )
   } else if (groups.order[1] == "string.length") {
     data_summary[[group]] <- factor(
-      data_summary[[group]], levels = levels(data_summary[[group]])[order(
-        nchar(levels(data_summary[[group]])))])
+      data_summary[[group]],
+      levels = levels(data_summary[[group]])[order(
+        nchar(levels(data_summary[[group]]))
+      )]
+    )
   } else if (groups.order[1] != "none") {
     data_summary[[group]] <- factor(data_summary[[group]], levels = groups.order)
   }
@@ -148,22 +160,30 @@ plot_means_over_time <- function(data,
       group = .data[[group]],
       # fill = "white",
       shape = .data[[group]],
-      colour = .data[[group]])) +
+      colour = .data[[group]]
+    )
+  ) +
     ggplot2::geom_line(ggplot2::aes(
-      color = .data[[group]]), linewidth = 3, position = pd) +
-  {
-    if (error_bars) {
-      ggplot2::geom_errorbar(width = .1, ggplot2::aes(
-        ymin = .data$value - .data$ci, ymax = .data$value + .data$ci),
-        position = pd, linewidth = 1)
+      color = .data[[group]]
+    ), linewidth = 3, position = pd) +
+    {
+      if (error_bars) {
+        ggplot2::geom_errorbar(
+          width = .1, ggplot2::aes(
+            ymin = .data$value - .data$ci, ymax = .data$value + .data$ci
+          ),
+          position = pd, linewidth = 1
+        )
       }
     } +
-    ggplot2::geom_point(size = 4,
-                        # shape = 22,
-                        fill = "white",
-                        # colour = "black",
-                        stroke = 1.5,
-                        position = pd) +
+    ggplot2::geom_point(
+      size = 4,
+      # shape = 22,
+      fill = "white",
+      # colour = "black",
+      stroke = 1.5,
+      position = pd
+    ) +
     ggplot2::discrete_scale("shape", "shape", palette = function(n) {
       # stopifnot("more than 5 shapes not supported" = n <= 5)
       # 20 + seq_len(n)
@@ -192,7 +212,8 @@ plot_means_over_time <- function(data,
     m <- data %>%
       dplyr::select(dplyr::all_of(c(group, response))) %>%
       dplyr::summarize(dplyr::across(dplyr::all_of(response), mean),
-                       .by = dplyr::all_of(group))
+        .by = dplyr::all_of(group)
+      )
 
     get_segment_y <- function(m, significance_stars_y, groups = 1:2, value = 1:2) {
       zz <- dplyr::filter(m, .data[[group]] %in% significance_stars_y[groups]) %>%
@@ -204,8 +225,9 @@ plot_means_over_time <- function(data,
     significance_stars_y_internal <- lapply(significance_stars_y, function(x) {
       mean(c(
         get_segment_y(m, x, groups = 1:2, value = 2),
-        get_segment_y(m, x, groups = 1:2, value = 1)))
-    }) %>% unlist
+        get_segment_y(m, x, groups = 1:2, value = 1)
+      ))
+    }) %>% unlist()
 
     p <- p +
       ggplot2::annotate(
@@ -213,17 +235,18 @@ plot_means_over_time <- function(data,
         x = significance_stars_x,
         y = significance_stars_y_internal,
         label = significance_stars,
-        size = 10)
+        size = 10
+      )
 
     segment_data_y_internal <- lapply(significance_stars_y, function(x) {
       get_segment_y(m, x, groups = 1:2, value = 1)
-    }) %>% unlist
+    }) %>% unlist()
 
     segment_data_yend_internal <- lapply(significance_stars_y, function(x) {
       get_segment_y(m, x, groups = 1:2, value = 2)
-    }) %>% unlist
+    }) %>% unlist()
 
-    segment_data = data.frame(
+    segment_data <- data.frame(
       x = significance_bars_x,
       xend = significance_bars_x,
       y = segment_data_y_internal,
@@ -234,18 +257,22 @@ plot_means_over_time <- function(data,
 
     p <- p + ggplot2::geom_segment(
       data = segment_data,
-      ggplot2::aes(x = .data$x,
-          xend = .data$x,
-          y = .data$y,
-          yend = .data$yend),
+      ggplot2::aes(
+        x = .data$x,
+        xend = .data$x,
+        y = .data$y,
+        yend = .data$yend
+      ),
       linewidth = 0.5,
-      colour = "black")
+      colour = "black"
+    )
     p
-
   }
   if (verbose && error_bars) {
-    cat("Error bars represent 95% confidence intervals adjusted for",
-        "repeated measures as by the method of Morey (2008).")
+    cat(
+      "Error bars represent 95% confidence intervals adjusted for",
+      "repeated measures as by the method of Morey (2008)."
+    )
   }
   p
 }
