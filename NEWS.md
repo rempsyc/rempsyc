@@ -1,6 +1,9 @@
 # rempsyc 0.1.9
 * ✨Incoming✨
 
+## rempsyc 0.1.8.3
+* `cormatrix_excel` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance.
+
 ## rempsyc 0.1.8.2
 * `best_duplicate`: fix a bug with grouped tibbles leading to an error
 

@@ -45,6 +45,10 @@ for small (.10), medium (.30), and large (.50) correlation sizes.
 
 Based on the \code{correlation} and \code{openxlsx2} packages.
 }
+\details{
+For the \emph{easystats} equivalent, see:
+\code{\link[correlation:cormatrix_to_excel]{correlation::cormatrix_to_excel()}}.
+}
 \examples{
 \dontshow{if (requireNamespace("correlation", quietly = TRUE) && requireNamespace("openxlsx2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontshow{
@@ -61,7 +65,8 @@ setwd(.old_wd)
 }
 \author{
 Adapted from @JanMarvin (JanMarvin/openxlsx2#286) and
-the original \code{rempsyc::cormatrix_excel}.
+the original \link{cormatrix_excel} (now imported from
+\link[correlation:cormatrix_to_excel]{correlation::cormatrix_to_excel}).
 }
 \keyword{Excel}
 \keyword{correlation}
