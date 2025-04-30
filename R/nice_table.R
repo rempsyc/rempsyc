@@ -451,6 +451,12 @@ prepare_report <- function(dataframe, report, short) {
         )
     }
   }
+  if (all(c("Cohens_d_CI_low", "Cohens_d_CI_high") %in% names(dataframe))) {
+    dataframe <- dataframe %>%
+      format_CI(c("Cohens_d_CI_low", "Cohens_d_CI_high"),
+                col.name = "95% CI (d)"
+      )
+  }
   dataframe
 }
 
