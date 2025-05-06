@@ -457,6 +457,12 @@ prepare_report <- function(dataframe, report, short) {
                 col.name = "95% CI (d)"
       )
   }
+  if (all(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high") %in% names(dataframe))) {
+    dataframe <- dataframe %>%
+      format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
+                col.name = "95% CI (B)"
+      )
+  }
   dataframe
 }
 
