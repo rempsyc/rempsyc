@@ -1,5 +1,7 @@
 test_that("nice_normality", {
   skip_if_not_installed("ggplot2")
+  skip_if_not_installed("qqplotr")
+  skip_if_not_installed("ggrepel")
 
   x1 <- nice_normality(
     data = iris,

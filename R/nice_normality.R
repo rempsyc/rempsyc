@@ -28,7 +28,7 @@
 #'         resulting from \code{\link{nice_density}} and \code{\link{nice_qq}}.
 #' @keywords QQ plots normality density distribution
 #' @export
-#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("see", quietly = TRUE) && requireNamespace("patchwork", quietly = TRUE)
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("see", quietly = TRUE) && requireNamespace("patchwork", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE) && requireNamespace("qqplotr", quietly = TRUE)
 #' # Make the basic plot
 #' nice_normality(
 #'   data = iris,
