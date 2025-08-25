@@ -49,6 +49,16 @@
 #' @param has.p Whether to display the p-value.
 #' @param p.x The x-axis coordinates for the p-value.
 #' @param p.y The y-axis coordinates for the p-value.
+#' @param has.ids Whether to display point IDs/labels on the plot.
+#' @param id.column The column name to use for point labels. If not specified,
+#' row names will be used.
+#' @param has.group.r Whether to display correlation coefficients for each group
+#' separately when using grouping.
+#' @param group.r.x The x-axis coordinates for group correlation coefficients.
+#' @param group.r.y The y-axis coordinates for group correlation coefficients.
+#' @param has.group.p Whether to display p-values for each group separately.
+#' @param group.p.x The x-axis coordinates for group p-values.
+#' @param group.p.y The y-axis coordinates for group p-values.
 #'
 #' @keywords scatter plots
 #' @return A scatter plot of class ggplot.
@@ -233,6 +243,24 @@
 #'   group = "cyl",
 #'   has.shape = TRUE
 #' )
+#'
+#' # Display point IDs/labels
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   has.ids = TRUE
+#' )
+#'
+#' # Display group correlations separately
+#' nice_scatter(
+#'   data = mtcars,
+#'   predictor = "wt",
+#'   response = "mpg",
+#'   group = "cyl",
+#'   has.group.r = TRUE,
+#'   has.group.p = TRUE
+#' )
 #' }
 #'
 #' @seealso
@@ -241,6 +269,7 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
 #' @importFrom stats cor.test
+#' @importFrom dplyr group_by summarize mutate do
 
 nice_scatter <- function(data,
                          predictor,
@@ -274,12 +303,33 @@ nice_scatter <- function(data,
                          r.y = -Inf,
                          has.p = FALSE,
                          p.x = Inf,
-                         p.y = -Inf) {
+                         p.y = -Inf,
+                         has.ids = FALSE,
+                         id.column = NULL,
+                         has.group.r = FALSE,
+                         group.r.x = Inf,
+                         group.r.y = Inf,
+                         has.group.p = FALSE,
+                         group.p.x = Inf,
+                         group.p.y = Inf) {
   check_col_names(data, c(predictor, response))
   rlang::check_installed("ggplot2",
                          reason = "for this function.",
                          version = get_dep_version("ggplot2"))
   has.groups <- !missing(group)
+  
+  # Prepare ID column for labels if requested
+  if (has.ids == TRUE) {
+    if (!is.null(id.column)) {
+      check_col_names(data, id.column)
+      data$.id_labels <- data[[id.column]]
+    } else {
+      data$.id_labels <- rownames(data)
+      if (is.null(data$.id_labels) || all(data$.id_labels == as.character(seq_len(nrow(data))))) {
+        data$.id_labels <- seq_len(nrow(data))
+      }
+    }
+  }
   if (has.r == TRUE) {
     r <- format_r(cor.test(data[[predictor]],
       data[[response]],
@@ -310,6 +360,23 @@ nice_scatter <- function(data,
       summarize(Mean = mean(.data[[response]], na.rm = TRUE))
     if (missing(has.legend)) {
       has.legend <- TRUE
+    }
+    
+    # Calculate correlations by group if requested
+    if (has.group.r == TRUE || has.group.p == TRUE) {
+      group_correlations <- data %>%
+        group_by(.data[[group]]) %>%
+        do({
+          cor_result <- cor.test(.[[predictor]], .[[response]], use = "complete.obs")
+          data.frame(
+            r = cor_result$estimate,
+            p = cor_result$p.value
+          )
+        }) %>%
+        mutate(
+          r_formatted = format_r(r),
+          p_formatted = format_p(p, sign = TRUE)
+        )
     }
   }
 
@@ -449,6 +516,54 @@ nice_scatter <- function(data,
     {
       if (!missing(groups.alpha)) {
         ggplot2::scale_alpha_manual(values = groups.alpha, guide = "none")
+      }
+    } +
+    {
+      if (has.ids == TRUE) {
+        rlang::check_installed("ggrepel", reason = "for displaying IDs.")
+        ggrepel::geom_text_repel(
+          ggplot2::aes(label = .data$.id_labels),
+          size = 3,
+          max.overlaps = Inf
+        )
+      }
+    } +
+    {
+      if (has.group.r == TRUE && !missing(group)) {
+        # Create text data for group correlations
+        group_r_data <- group_correlations %>%
+          mutate(
+            x = group.r.x,
+            y = group.r.y - (seq_len(n()) - 1) * 0.1 * diff(range(data[[response]], na.rm = TRUE)),
+            label = sprintf("%s: r = %s", .data[[group]], r_formatted)
+          )
+        ggplot2::geom_text(
+          data = group_r_data,
+          ggplot2::aes(x = x, y = y, label = label),
+          inherit.aes = FALSE,
+          hjust = 1,
+          vjust = 1,
+          size = 6
+        )
+      }
+    } +
+    {
+      if (has.group.p == TRUE && !missing(group)) {
+        # Create text data for group p-values
+        group_p_data <- group_correlations %>%
+          mutate(
+            x = group.p.x,
+            y = group.p.y - (seq_len(n()) - 1) * 0.1 * diff(range(data[[response]], na.rm = TRUE)),
+            label = sprintf("%s: p %s", .data[[group]], p_formatted)
+          )
+        ggplot2::geom_text(
+          data = group_p_data,
+          ggplot2::aes(x = x, y = y, label = label),
+          inherit.aes = FALSE,
+          hjust = 1,
+          vjust = 1,
+          size = 6
+        )
       }
     } +
     {

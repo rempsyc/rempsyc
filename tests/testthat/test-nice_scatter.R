@@ -280,4 +280,49 @@ test_that("nice_scatter", {
     x19,
     c("gg", "ggplot2")
   )
+
+  # Test ID display functionality
+  x20 <- nice_scatter(
+    data = mtcars,
+    predictor = "wt",
+    response = "mpg",
+    has.ids = TRUE
+  )
+
+  expect_s3_class(
+    x20,
+    c("gg", "ggplot2")
+  )
+
+  # Test group correlations
+  x21 <- nice_scatter(
+    data = mtcars,
+    predictor = "wt",
+    response = "mpg",
+    group = "cyl",
+    has.group.r = TRUE,
+    has.group.p = TRUE
+  )
+
+  expect_s3_class(
+    x21,
+    c("gg", "ggplot2")
+  )
+
+  # Test with custom ID column (using car names)
+  mtcars_with_names <- mtcars
+  mtcars_with_names$car_name <- rownames(mtcars)
+  
+  x22 <- nice_scatter(
+    data = mtcars_with_names,
+    predictor = "wt",
+    response = "mpg",
+    has.ids = TRUE,
+    id.column = "car_name"
+  )
+
+  expect_s3_class(
+    x22,
+    c("gg", "ggplot2")
+  )
 })
