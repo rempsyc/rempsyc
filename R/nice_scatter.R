@@ -269,7 +269,7 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
 #' @importFrom stats cor.test
-#' @importFrom dplyr group_by summarize mutate do
+#' @importFrom dplyr group_by summarize mutate do row_number %>%
 
 nice_scatter <- function(data,
                          predictor,
@@ -317,6 +317,9 @@ nice_scatter <- function(data,
                          reason = "for this function.",
                          version = get_dep_version("ggplot2"))
   has.groups <- !missing(group)
+  
+  # Initialize group correlations variable
+  group_correlations <- NULL
   
   # Prepare ID column for labels if requested
   if (has.ids == TRUE) {
@@ -529,12 +532,14 @@ nice_scatter <- function(data,
       }
     } +
     {
-      if (has.group.r == TRUE && !missing(group)) {
+      if (has.group.r == TRUE && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group correlations
+        y_range <- diff(range(data[[response]], na.rm = TRUE))
+        y_spacing <- y_range * 0.05  # 5% of range for spacing
         group_r_data <- group_correlations %>%
           mutate(
             x = group.r.x,
-            y = group.r.y - (seq_len(n()) - 1) * 0.1 * diff(range(data[[response]], na.rm = TRUE)),
+            y = group.r.y - (row_number() - 1) * y_spacing,
             label = sprintf("%s: r = %s", .data[[group]], r_formatted)
           )
         ggplot2::geom_text(
@@ -548,12 +553,14 @@ nice_scatter <- function(data,
       }
     } +
     {
-      if (has.group.p == TRUE && !missing(group)) {
+      if (has.group.p == TRUE && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group p-values
+        y_range <- diff(range(data[[response]], na.rm = TRUE))
+        y_spacing <- y_range * 0.05  # 5% of range for spacing
         group_p_data <- group_correlations %>%
           mutate(
             x = group.p.x,
-            y = group.p.y - (seq_len(n()) - 1) * 0.1 * diff(range(data[[response]], na.rm = TRUE)),
+            y = group.p.y - (row_number() - 1) * y_spacing,
             label = sprintf("%s: p %s", .data[[group]], p_formatted)
           )
         ggplot2::geom_text(
