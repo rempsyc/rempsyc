@@ -329,6 +329,7 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 11. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
 12. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
 13. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+14. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
 
 ### Modifying Existing Functions
 1. Edit the function in appropriate `/R/[file].R`
@@ -344,6 +345,7 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 11. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
 12. **Always test the specific function manually**
 13. Run full test suite to check for regressions
+14. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
 
 ### Before Committing Changes
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try:
@@ -380,6 +382,46 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 # - "Codoc mismatches from Rd file"
 # - Fix these issues before committing
 ```
+
+### Pull Request Requirements
+**CRITICAL**: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.
+
+#### Creating Reprexes for PRs:
+
+1. **Use base R datasets** when possible (e.g., `mtcars`, `iris`, `airquality`) for reproducible examples
+2. **Show before/after behavior** with your code changes
+3. **Use the reprex package** for consistent formatting:
+   ```r
+   # Install if needed
+   install.packages("reprex")
+   
+   # Copy your example code, then:
+   library(reprex)
+   reprex()
+   ```
+
+4. **Include both examples** in your PR description:
+   - **Before**: Code showing the current (problematic) behavior
+   - **After**: Code showing the improved behavior with your changes
+
+#### Quick Reprex Creation Workflow:
+```r
+# Example PR reprex template:
+# BEFORE (current behavior):
+library(rempsyc)
+data(mtcars)
+# [show current function behavior that needs improvement]
+
+# AFTER (with your changes):  
+library(rempsyc)
+data(mtcars)  
+# [show improved function behavior after your changes]
+```
+
+**RStudio Users**: Use the reprex addin for faster creation:
+- Install reprex: `install.packages("reprex")`
+- Go to `Addins` → Search "reprex" → Select "Render reprex..."
+- Copy code → Use addin → Check "Append session info" → Render
 
 **Workflow Logic**: 
 - Lint first to identify all style issues
@@ -550,6 +592,20 @@ R CMD check rempsyc_*.tar.gz 2>&1 | grep -i "codoc"
 
 # All tests must pass (94+ passing tests expected):
 R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+```
+
+#### 5. PR Description Requirements  
+**CRITICAL**: Always include reprexes in PR descriptions to demonstrate code changes:
+```r
+# Create examples showing before/after behavior:
+library(rempsyc)
+data(mtcars)
+
+# BEFORE (if modifying existing function):
+# [show current behavior]
+
+# AFTER (with your changes):
+# [show improved behavior]
 ```
 
 ## Performance Notes
