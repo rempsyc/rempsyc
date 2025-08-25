@@ -371,11 +371,12 @@ nice_scatter <- function(data,
         group_by(.data[[group]]) %>%
         reframe({
           cor_result <- cor.test(.data[[predictor]], .data[[response]], use = "complete.obs")
-          data.frame(
-            !!group := unique(.data[[group]]),
+          result_df <- data.frame(
             r = cor_result$estimate,
             p = cor_result$p.value
           )
+          result_df[[group]] <- unique(.data[[group]])
+          result_df
         }) %>%
         mutate(
           r_formatted = format_r(r),
