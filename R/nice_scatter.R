@@ -269,7 +269,7 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
 #' @importFrom stats cor.test
-#' @importFrom dplyr group_by summarize mutate do row_number %>%
+#' @importFrom dplyr group_by summarize mutate do %>%
 
 nice_scatter <- function(data,
                          predictor,
@@ -539,7 +539,7 @@ nice_scatter <- function(data,
         group_r_data <- group_correlations %>%
           mutate(
             x = group.r.x,
-            y = group.r.y - (row_number() - 1) * y_spacing,
+            y = group.r.y - (dplyr::row_number() - 1) * y_spacing,
             label = sprintf("%s: r = %s", .data[[group]], r_formatted)
           )
         ggplot2::geom_text(
@@ -560,7 +560,7 @@ nice_scatter <- function(data,
         group_p_data <- group_correlations %>%
           mutate(
             x = group.p.x,
-            y = group.p.y - (row_number() - 1) * y_spacing,
+            y = group.p.y - (dplyr::row_number() - 1) * y_spacing,
             label = sprintf("%s: p %s", .data[[group]], p_formatted)
           )
         ggplot2::geom_text(
