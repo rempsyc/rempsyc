@@ -8,16 +8,124 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 ## Environment Setup
 
 ### Install R and Required System Dependencies
+**CRITICAL**: Always ensure R is properly installed and functional before proceeding with any package development tasks.
+
 ```bash
-# Ubuntu/Debian systems
+# Ubuntu/Debian systems - ALWAYS run this first in every session
 sudo apt update
 sudo apt install -y r-base r-base-dev
+
+# Verify R installation is working
+R --version
+which R
 
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
 
-# If styler or roxygen2 are not available via system packages, install via R:
-# R --no-restore --no-save -e 'install.packages(c("styler", "roxygen2"), repos="https://cloud.r-project.org/")'
+# Install reprex (ESSENTIAL for creating reproducible examples in PRs)
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+
+# Install other essential development packages via system packages when possible
+sudo apt install -y r-cran-devtools r-cran-roxygen2 r-cran-styler || echo "Some packages not available via apt, will install via R"
+
+# If styler, roxygen2, or devtools are not available via system packages, install via R:
+R --no-restore --no-save -e '
+packages_needed <- c("styler", "roxygen2", "devtools")
+packages_installed <- rownames(installed.packages())
+packages_to_install <- setdiff(packages_needed, packages_installed)
+if (length(packages_to_install) > 0) {
+  install.packages(packages_to_install, repos="https://cloud.r-project.org/")
+}
+'
+```
+
+### Verify R Installation and Core Packages
+**NEVER SKIP**: Always run this verification after installing R:
+
+```bash
+# Test R basic functionality
+R --no-restore --no-save -e 'print("R is working correctly")'
+
+# Verify core packages are available
+R --no-restore --no-save -e '
+required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")
+missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
+if (length(missing_packages) > 0) {
+  cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")
+  cat("Run installation commands to install missing packages\n")
+} else {
+  cat("All core development packages are available\n")
+}
+'
+```
+
+### Essential reprex Package Setup
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it's installed and functional.
+
+```bash
+# Install reprex if not already installed
+R --no-restore --no-save -e '
+if (!requireNamespace("reprex", quietly = TRUE)) {
+  # Try multiple installation methods
+  tryCatch({
+    install.packages("reprex", repos="https://cloud.r-project.org/")
+  }, error = function(e1) {
+    tryCatch({
+      install.packages("reprex", repos="https://r-universe.dev")
+    }, error = function(e2) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+      pak::pak("reprex")
+    })
+  })
+}
+'
+
+# Verify reprex functionality with a simple test
+R --no-restore --no-save -e '
+library(reprex)
+# Test reprex with simple code
+test_code <- "
+x <- 1:5
+mean(x)
+"
+result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+if (length(result) > 0) {
+  cat("reprex package is working correctly\n")
+} else {
+  stop("reprex package installation failed - this is required for PR creation")
+}
+'
+```
+
+### Install Function-Specific Dependencies  
+**DYNAMIC**: When working on specific functions, install their required suggested packages:
+
+```bash
+# Use the package's built-in utility to install dependencies for specific functions
+# This leverages the install_if_not_installed() function from rempsyc
+R --no-restore --no-save -e '
+# First build and install the current rempsyc package to access utility functions
+if (file.exists("DESCRIPTION")) {
+  # We are in the package directory
+  system("R CMD build .")
+  pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+  if (!is.na(pkg_file)) {
+    system(paste("R CMD INSTALL", pkg_file))
+  }
+}
+
+# Load rempsyc to access install_if_not_installed function
+library(rempsyc)
+
+# Example: Install packages needed for table functions
+if (exists("install_if_not_installed")) {
+  install_if_not_installed(c("flextable", "ggplot2"))
+} else {
+  # Fallback method
+  packages <- c("flextable", "ggplot2", "effectsize", "performance")
+  install.packages(packages[!packages %in% rownames(installed.packages())], repos="https://cloud.r-project.org/")
+}
+'
 ```
 
 ### Set Up R User Library
@@ -160,6 +268,42 @@ print("Core functions working correctly")
 '
 ```
 
+### MANDATORY: Test reprex Functionality Before Making Changes
+**CRITICAL**: Always verify reprex is working before modifying any code that will require a PR:
+
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+R --no-restore --no-save -e '
+# Load required packages
+library(reprex)
+library(rempsyc)
+
+# Create a test reprex with actual rempsyc function
+test_code <- "
+library(rempsyc)
+data(mtcars)
+
+# Example function test
+result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+print(result)
+"
+
+# Generate reprex
+cat("Testing reprex functionality...\n")
+reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+
+# Verify it worked
+if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
+  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")
+  cat("Sample reprex output (first few lines):\n")
+  cat(paste(head(reprex_result, 10), collapse = "\n"))
+  cat("\n")
+} else {
+  stop("FAILED: reprex is not working correctly - install reprex before proceeding")
+}
+'
+```
+
 ### Manual Function Testing Workflow
 After making changes to package functions:
 
@@ -229,8 +373,15 @@ Many functions require optional packages. The package uses `rlang::check_install
 
 **Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2
 
+**ESSENTIAL for development**: reprex (mandatory for creating PR examples)
+
 ### Installing Additional Packages (if needed)
+**PRIORITY**: Always install reprex first, then install other packages as needed for specific functions:
+
 ```bash
+# ALWAYS install reprex first (essential for PR creation):
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+
 # Via system packages (recommended):
 sudo apt install -y r-cran-[package-name]
 
@@ -243,6 +394,15 @@ R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r
 
 # Via pak package (faster, handles dependencies better):
 R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'
+
+# Batch install common development packages:
+R --no-restore --no-save -e '
+essential_packages <- c("reprex", "flextable", "ggplot2", "effectsize", "performance", "testthat", "styler", "roxygen2")
+missing_packages <- essential_packages[!sapply(essential_packages, requireNamespace, quietly = TRUE)]
+if (length(missing_packages) > 0) {
+  install.packages(missing_packages, repos="https://cloud.r-project.org/")
+}
+'
 ```
 
 ## Code Quality and Best Practices
@@ -386,36 +546,93 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 ### Pull Request Requirements
 **CRITICAL**: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.
 
+**MANDATORY**: Use the actual `reprex` package - NEVER simulate or guess at reprex output. The repository owner needs to see actual function behavior, including plots/images that cannot be simulated.
+
 #### Creating Reprexes for PRs:
 
 1. **Use base R datasets** when possible (e.g., `mtcars`, `iris`, `airquality`) for reproducible examples
 2. **Show before/after behavior** with your code changes
-3. **Use the reprex package** for consistent formatting:
-   ```r
-   # Install if needed
-   install.packages("reprex")
-   
-   # Copy your example code, then:
+3. **ALWAYS use the actual reprex package** for consistent formatting:
+   ```bash
+   # Ensure reprex is installed and working BEFORE creating PR
+   R --no-restore --no-save -e '
+   if (!requireNamespace("reprex", quietly = TRUE)) {
+     stop("reprex package MUST be installed before creating PRs")
+   }
    library(reprex)
-   reprex()
+   # Test with simple example first
+   test_result <- reprex(input = "x <- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)
+   if (length(test_result) == 0) {
+     stop("reprex package is not working correctly")
+   }
+   cat("reprex is ready for PR creation\n")
+   '
    ```
 
-4. **Include both examples** in your PR description:
-   - **Before**: Code showing the current (problematic) behavior
-   - **After**: Code showing the improved behavior with your changes
+4. **Generate ACTUAL reprex output** using this workflow:
+   ```r
+   library(reprex)
+   
+   # For BEFORE behavior (if modifying existing function):
+   before_code <- "
+   library(rempsyc)
+   data(mtcars)
+   # [your code showing current behavior]
+   "
+   before_reprex <- reprex(input = before_code, venue = "gh", advertise = FALSE)
+   
+   # For AFTER behavior (with your changes):
+   after_code <- "
+   library(rempsyc)
+   data(mtcars)
+   # [your code showing improved behavior]
+   "
+   after_reprex <- reprex(input = after_code, venue = "gh", advertise = FALSE)
+   ```
+
+5. **Include both ACTUAL reprex outputs** in your PR description:
+   - **Before**: Real reprex output showing the current (problematic) behavior
+   - **After**: Real reprex output showing the improved behavior with your changes
 
 #### Quick Reprex Creation Workflow:
-```r
-# Example PR reprex template:
-# BEFORE (current behavior):
+**NEVER SKIP**: Always generate actual reprex, never simulate or guess:
+
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+R --no-restore --no-save -e '
+library(reprex)
+library(rempsyc)
+
+# Create ACTUAL reprex for your changes
+example_code <- "
 library(rempsyc)
 data(mtcars)
-# [show current function behavior that needs improvement]
 
-# AFTER (with your changes):  
-library(rempsyc)
-data(mtcars)  
-# [show improved function behavior after your changes]
+# Example: test the function you modified
+result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+print(result)
+
+# If working with plots, include them:
+if (requireNamespace(\"ggplot2\", quietly = TRUE)) {
+  plot_result <- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")
+  print(plot_result)
+}
+"
+
+# Generate actual reprex
+actual_reprex <- reprex(input = example_code, venue = "gh", advertise = FALSE)
+
+# Verify it worked
+if (length(actual_reprex) > 0) {
+  cat("SUCCESS: Generated actual reprex for PR\n")
+  cat("Copy this output to your PR description:\n")
+  cat("========================================\n")
+  cat(paste(actual_reprex, collapse = "\n"))
+  cat("\n========================================\n")
+} else {
+  stop("FAILED: Could not generate reprex - fix reprex installation first")
+}
+'
 ```
 
 **RStudio Users**: Use the reprex addin for faster creation:
@@ -480,6 +697,37 @@ data(mtcars)
   - Use system packages: `sudo apt install r-cran-[package]`
   - Try R-universe: `repos="https://r-universe.dev"`  
   - Use pak package: `pak::pak("[package-name]")`
+
+### reprex Package Issues
+- **Cause**: reprex package not installed or not working correctly
+- **Solution**: Follow the comprehensive reprex installation steps:
+  ```bash
+  # Multi-method installation
+  R --no-restore --no-save -e '
+  if (!requireNamespace("reprex", quietly = TRUE)) {
+    tryCatch({
+      install.packages("reprex", repos="https://cloud.r-project.org/")
+    }, error = function(e1) {
+      tryCatch({
+        install.packages("reprex", repos="https://r-universe.dev")
+      }, error = function(e2) {
+        install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+        pak::pak("reprex")
+      })
+    })
+  }
+  '
+  ```
+- **Verification**: Always test reprex functionality before creating PRs using the validation scenario
+
+### reprex Not Generating Output
+- **Cause**: Code errors, missing packages, or input format issues
+- **Solution**: 
+  - Test with simple code first: `x <- 1:5; mean(x)`
+  - Ensure all required packages are loaded in the reprex code
+  - Use `venue = "gh"` for GitHub-formatted output
+  - Check for syntax errors in the input code
+- **Debug**: Use `reprex(input = your_code, venue = "gh", advertise = FALSE, show = TRUE)` to see detailed output
 
 ## Common Reference Information
 
