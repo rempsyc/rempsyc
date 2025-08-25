@@ -55,10 +55,14 @@
 #' @param has.group.r Whether to display correlation coefficients for each group
 #' separately when using grouping.
 #' @param group.r.x The x-axis coordinates for group correlation coefficients.
+#' If NULL (default), will be positioned at the right side of the plot.
 #' @param group.r.y The y-axis coordinates for group correlation coefficients.
+#' If NULL (default), will be positioned at the top of the plot.
 #' @param has.group.p Whether to display p-values for each group separately.
 #' @param group.p.x The x-axis coordinates for group p-values.
+#' If NULL (default), will be positioned at the right side of the plot.
 #' @param group.p.y The y-axis coordinates for group p-values.
+#' If NULL (default), will be positioned slightly below group r values to avoid overlap.
 #'
 #' @keywords scatter plots
 #' @return A scatter plot of class ggplot.
@@ -307,11 +311,11 @@ nice_scatter <- function(data,
                          has.ids = FALSE,
                          id.column = NULL,
                          has.group.r = FALSE,
-                         group.r.x = Inf,
-                         group.r.y = Inf,
+                         group.r.x = NULL,
+                         group.r.y = NULL,
                          has.group.p = FALSE,
-                         group.p.x = Inf,
-                         group.p.y = Inf) {
+                         group.p.x = NULL,
+                         group.p.y = NULL) {
   check_col_names(data, c(predictor, response))
   rlang::check_installed("ggplot2",
                          reason = "for this function.",
@@ -382,6 +386,28 @@ nice_scatter <- function(data,
           r_formatted = format_r(r),
           p_formatted = format_p(p, sign = TRUE)
         )
+      
+      # Set default positions for group correlations to avoid overlap
+      x_range <- range(data[[predictor]], na.rm = TRUE)
+      y_range <- range(data[[response]], na.rm = TRUE)
+      
+      if (is.null(group.r.x)) {
+        group.r.x <- x_range[2]  # Right side
+      }
+      if (is.null(group.r.y)) {
+        group.r.y <- y_range[2]  # Top
+      }
+      if (is.null(group.p.x)) {
+        group.p.x <- x_range[2]  # Right side
+      }
+      if (is.null(group.p.y)) {
+        # If both r and p are shown, offset p values to the right
+        if (has.group.r && has.group.p) {
+          group.p.y <- y_range[2] - diff(y_range) * 0.15  # Slightly below r values
+        } else {
+          group.p.y <- y_range[2]  # Same as r if only p is shown
+        }
+      }
     }
   }
 
