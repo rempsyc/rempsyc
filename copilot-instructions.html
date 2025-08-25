@@ -74,8 +74,8 @@
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Install core R packages via system package manager (recommended)</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># If styler is not available via system packages, install via R:</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># If styler or roxygen2 are not available via system packages, install via R:</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># R --no-restore --no-save -e 'install.packages(c("styler", "roxygen2"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-up-r-user-library">Set Up R User Library<a class="anchor" aria-label="anchor" href="#set-up-r-user-library"></a></h3>
@@ -130,14 +130,26 @@
 <p>Expected results: - Automatic code formatting according to tidyverse style guide - Consistent indentation, spacing, and bracket placement - Files will be modified in-place if styling changes are needed - Use after making changes but before committing</p>
 </div>
 <div class="section level3">
+<h3 id="update-documentation-with-roxygen2">Update Documentation with roxygen2<a class="anchor" aria-label="anchor" href="#update-documentation-with-roxygen2"></a></h3>
+<p><strong>NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># Update documentation after making changes to roxygen2 comments</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># Alternative using devtools</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'devtools::document()'</span></span></code></pre></div>
+<p>Expected results: - Updates .Rd files in man/ directory from roxygen2 comments - Updates NAMESPACE file with exports/imports - Essential step after modifying function documentation or adding/removing exports - Must be run before building the package if documentation was changed</p>
+<p><strong>When to use</strong>: Always run this after: - Adding or modifying roxygen2 comments (the <code>#'</code> comments above functions) - Adding new exported functions - Changing function parameters or return values in documentation - Adding or removing <code>@export</code>, <code>@import</code>, or <code>@importFrom</code> tags</p>
+</div>
+<div class="section level3">
 <h3 id="run-r-cmd-check">Run R CMD Check<a class="anchor" aria-label="anchor" href="#run-r-cmd-check"></a></h3>
 <p><strong>NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># Without suggested packages (due to network limitations):</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_0.1.91.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># With all checks (if network access available):</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># R CMD check rempsyc_0.1.91.tar.gz</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># Without suggested packages (due to network limitations):</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_0.1.91.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># With all checks (if network access available):</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># R CMD check rempsyc_0.1.91.tar.gz</span></span></code></pre></div>
 <p>Expected results: - Status: 1 ERROR (missing suggested packages - normal), 2 NOTEs<br>
 - Core functionality passes all checks - Tests pass correctly - Examples may fail due to missing optional packages (expected)</p>
 </div>
@@ -147,43 +159,43 @@
 <div class="section level3">
 <h3 id="always-test-core-functions-after-changes">Always Test Core Functions After Changes<a class="anchor" aria-label="anchor" href="#always-test-core-functions-after-changes"></a></h3>
 <p>Test the main functions to ensure they work correctly:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="st"># Test t-test function</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = "mpg", group = "am")</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="st">print(result)</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="st"># Test table formatting</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="st">library(testthat)  # If available</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="st">if (requireNamespace("flextable", quietly = TRUE)) {</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="st">  table &lt;- nice_table(result)</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="st">  print("Table creation successful")</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="st">  print("Flextable not available - table creation skipped")</span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="st"># Test basic data functions</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="st">data &lt;- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")</span></span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="st">print("Core functions working correctly")</span></span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="st"># Test t-test function</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = "mpg", group = "am")</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="st">print(result)</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="st"># Test table formatting</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="st">library(testthat)  # If available</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="st">if (requireNamespace("flextable", quietly = TRUE)) {</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="st">  table &lt;- nice_table(result)</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="st">  print("Table creation successful")</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="st">  print("Flextable not available - table creation skipped")</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="st"># Test basic data functions</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="st">data &lt;- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="st">print("Core functions working correctly")</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="manual-function-testing-workflow">Manual Function Testing Workflow<a class="anchor" aria-label="anchor" href="#manual-function-testing-workflow"></a></h3>
 <p>After making changes to package functions:</p>
 <ol style="list-style-type: decimal"><li>
 <p><strong>Always rebuild and reinstall the package</strong>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">R</span> CMD build . <span class="kw">&amp;&amp;</span> <span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">R</span> CMD build . <span class="kw">&amp;&amp;</span> <span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span></code></pre></div>
 </li>
 <li>
 <p><strong>Test the specific function you modified</strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); [your_function_test_here]'</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); [your_function_test_here]'</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Run relevant tests</strong>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'</span></span></code></pre></div>
 </li>
 </ol></div>
 </div>
@@ -191,17 +203,17 @@
 <h2 id="key-locations-and-files">Key Locations and Files<a class="anchor" aria-label="anchor" href="#key-locations-and-files"></a></h2>
 <div class="section level3">
 <h3 id="repository-exploration-commands">Repository Exploration Commands<a class="anchor" aria-label="anchor" href="#repository-exploration-commands"></a></h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># View repository structure</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># View R source files</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/R/</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co"># View test files</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/tests/testthat/</span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># Check package metadata</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="fu">cat</span> /home/runner/work/rempsyc/rempsyc/DESCRIPTION</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># View repository structure</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># View R source files</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/R/</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># View test files</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/tests/testthat/</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># Check package metadata</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="fu">cat</span> /home/runner/work/rempsyc/rempsyc/DESCRIPTION</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="source-code-structure">Source Code Structure<a class="anchor" aria-label="anchor" href="#source-code-structure"></a></h3>
@@ -236,22 +248,104 @@
 <h2 id="dependencies-and-package-management">Dependencies and Package Management<a class="anchor" aria-label="anchor" href="#dependencies-and-package-management"></a></h2>
 <div class="section level3">
 <h3 id="core-dependencies-always-required">Core Dependencies (Always Required)<a class="anchor" aria-label="anchor" href="#core-dependencies-always-required"></a></h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># In DESCRIPTION file:</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>Imports<span class="sc">:</span> rlang, <span class="fu">dplyr</span> (<span class="sc">&gt;=</span> <span class="dv">1</span>.<span class="fl">1.0</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>Depends<span class="sc">:</span> <span class="fu">R</span> (<span class="sc">&gt;=</span> <span class="fl">3.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># In DESCRIPTION file:</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>Imports<span class="sc">:</span> rlang, <span class="fu">dplyr</span> (<span class="sc">&gt;=</span> <span class="dv">1</span>.<span class="fl">1.0</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>Depends<span class="sc">:</span> <span class="fu">R</span> (<span class="sc">&gt;=</span> <span class="fl">3.6</span>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="suggested-packages-optional">Suggested Packages (Optional)<a class="anchor" aria-label="anchor" href="#suggested-packages-optional"></a></h3>
 <p>Many functions require optional packages. The package uses <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code> to prompt users to install needed packages when functions are called.</p>
-<p><strong>Key suggested packages</strong>: flextable, ggplot2, effectsize, performance, testthat, styler</p>
+<p><strong>Key suggested packages</strong>: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2</p>
 </div>
 <div class="section level3">
 <h3 id="installing-additional-packages-if-needed">Installing Additional Packages (if needed)<a class="anchor" aria-label="anchor" href="#installing-additional-packages-if-needed"></a></h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Via system packages (recommended):</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-<span class="pp">[</span><span class="ss">package</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Via R (if network available):</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Via system packages (recommended):</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-<span class="pp">[</span><span class="ss">package</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Via R (if CRAN network available):</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co"># Alternative sources when CRAN is blocked:</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co"># Via R-universe (alternative CRAN mirror):</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://r-universe.dev")'</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co"># Via pak package (faster, handles dependencies better):</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="code-quality-and-best-practices">Code Quality and Best Practices<a class="anchor" aria-label="anchor" href="#code-quality-and-best-practices"></a></h2>
+<div class="section level3">
+<h3 id="avoiding-global-variable-binding-issues">Avoiding Global Variable Binding Issues<a class="anchor" aria-label="anchor" href="#avoiding-global-variable-binding-issues"></a></h3>
+<p><strong>CRITICAL</strong>: Always use proper variable referencing to prevent “no visible binding for global variable” warnings that make CI workflows fail.</p>
+<div class="section level4">
+<h4 id="recommended-approaches">Recommended Approaches:<a class="anchor" aria-label="anchor" href="#recommended-approaches"></a></h4>
+<ol style="list-style-type: decimal"><li>
+<p><strong>For dplyr operations</strong>: Use <code>.data[[variable_name]]</code> notation</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] notation</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>mean_val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">response_var</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># INCORRECT: Direct variable names (causes binding warnings)</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group_var</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>mean_val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">response_var</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>For ggplot2 operations</strong>: Use <code>.data[[variable_name]]</code> or <code>aes_string()</code></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] in aes()</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x_var</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ALTERNATIVE: Use aes_string() for string variables</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes_string</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_var</span>, y <span class="op">=</span> <span class="va">y_var</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Import required functions</strong>: Always explicitly import from other packages</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' @importFrom dplyr group_by summarize</span></span>
+<span><span class="co">#' @importFrom ggplot2 ggplot aes</span></span></code></pre></div>
+</li>
+</ol></div>
+<div class="section level4">
+<h4 id="discouraged-approaches">Discouraged Approaches:<a class="anchor" aria-label="anchor" href="#discouraged-approaches"></a></h4>
+<ul><li>
+<strong>DO NOT</strong> create <code>global_variables.R</code> files with <code><a href="https://rdrr.io/r/utils/globalVariables.html" class="external-link">utils::globalVariables()</a></code>
+</li>
+<li>
+<strong>DO NOT</strong> use bare variable names in dplyr or ggplot operations</li>
+<li>
+<strong>DO NOT</strong> rely on global variable declarations to suppress warnings</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="ensuring-documentation-code-consistency">Ensuring Documentation-Code Consistency<a class="anchor" aria-label="anchor" href="#ensuring-documentation-code-consistency"></a></h3>
+<p><strong>CRITICAL</strong>: Documentation must exactly match function arguments to prevent “Codoc mismatches” warnings.</p>
+<div class="section level4">
+<h4 id="documentation-validation-steps">Documentation Validation Steps:<a class="anchor" aria-label="anchor" href="#documentation-validation-steps"></a></h4>
+<ol style="list-style-type: decimal"><li>
+<p><strong>Match all parameter names exactly</strong>:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' @param response The dependent variable name</span></span>
+<span><span class="co">#' @param group The grouping variable name  </span></span>
+<span><span class="va">function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">group</span><span class="op">)</span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Update documentation when changing parameters</strong>:</p>
+<ul><li>Always run <code>roxygen2::document()</code> after parameter changes</li>
+<li>Check that <code>.Rd</code> files reflect actual function signatures</li>
+<li>Verify examples use correct parameter names</li>
+</ul></li>
+<li>
+<p><strong>Validate before building</strong>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Check for documentation mismatches</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># Look for "Codoc mismatches" warnings</span></span></code></pre></div>
+</li>
+</ol></div>
 </div>
 </div>
 <div class="section level2">
@@ -260,13 +354,26 @@
 <h3 id="adding-a-new-function">Adding a New Function<a class="anchor" aria-label="anchor" href="#adding-a-new-function"></a></h3>
 <ol style="list-style-type: decimal"><li>Create the function in <code>/R/[function_name].R</code>
 </li>
-<li>Add roxygen2 documentation above the function</li>
-<li>Add exports to roxygen2 comments if needed</li>
+<li>
+<strong>Use proper variable referencing</strong>: Use <code>.data[[var]]</code> for dplyr/ggplot2 operations</li>
+<li>Add roxygen2 documentation above the function (ensure parameter names match exactly)</li>
+<li>Add <code>@importFrom</code> statements for all external functions used</li>
+<li>Add exports to roxygen2 comments if needed (<code>@export</code>)</li>
 <li>Create tests in <code>/tests/testthat/test-[function_name].R</code>
+</li>
+<li>
+<strong>Check for global variable issues</strong>: <code>R CMD check</code> should show no binding warnings</li>
+<li>
+<strong>Lint the code</strong>: <code>R --no-restore --no-save -e 'library(lintr); lint_package()'</code>
 </li>
 <li>
 <strong>Style the code</strong>: <code>R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'</code>
 </li>
+<li>
+<strong>Update documentation</strong>: <code>R --no-restore --no-save -e 'roxygen2::document()'</code>
+</li>
+<li>
+<strong>Validate documentation consistency</strong>: Check for “Codoc mismatches” warnings</li>
 <li>Rebuild and test: <code>R CMD build . &amp;&amp; R CMD INSTALL rempsyc_*.tar.gz</code>
 </li>
 <li>Run tests: <code>R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'</code>
@@ -276,11 +383,24 @@
 <h3 id="modifying-existing-functions">Modifying Existing Functions<a class="anchor" aria-label="anchor" href="#modifying-existing-functions"></a></h3>
 <ol style="list-style-type: decimal"><li>Edit the function in appropriate <code>/R/[file].R</code>
 </li>
-<li>Update documentation if needed</li>
+<li>
+<strong>Ensure proper variable referencing</strong>: Replace bare variable names with <code>.data[[var]]</code> notation</li>
+<li>Update documentation if parameters changed (ensure exact parameter name matches)</li>
+<li>Update <code>@importFrom</code> statements if new external functions are used</li>
 <li>Update tests if function behavior changes</li>
+<li>
+<strong>Check for global variable issues</strong>: <code>R CMD check</code> should show no binding warnings</li>
+<li>
+<strong>Lint the code</strong>: <code>R --no-restore --no-save -e 'library(lintr); lint_package()'</code>
+</li>
 <li>
 <strong>Style the code</strong>: <code>R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'</code>
 </li>
+<li>
+<strong>Update documentation if changed</strong>: <code>R --no-restore --no-save -e 'roxygen2::document()'</code>
+</li>
+<li>
+<strong>Validate documentation consistency</strong>: Check for “Codoc mismatches” warnings</li>
 <li>
 <strong>Always rebuild and reinstall</strong>: <code>R CMD build . &amp;&amp; R CMD INSTALL rempsyc_*.tar.gz</code>
 </li>
@@ -289,26 +409,38 @@
 </ol></div>
 <div class="section level3">
 <h3 id="before-committing-changes">Before Committing Changes<a class="anchor" aria-label="anchor" href="#before-committing-changes"></a></h3>
-<p>Always run this complete validation sequence:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># 1. Style code (10-30 seconds) - optional but recommended</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co"># 2. Build (19 seconds)</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co"># 3. Install  </span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co"># 4. Test (11 seconds) </span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co"># 5. Lint (20 seconds)</span></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co"># 6. R CMD check (~30 seconds) - only if making significant changes</span></span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span></code></pre></div>
+<p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a></span>
+<span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
+<span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
+<p><strong>Workflow Logic</strong>: - Lint first to identify all style issues - Style second to automatically fix what can be fixed - Update documentation third if any roxygen2 comments were changed - Build and test last to validate everything works together</p>
 </div>
 </div>
 <div class="section level2">
@@ -357,6 +489,56 @@
 <li>
 <strong>Solution</strong>: Install via R: <code>R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'</code> or skip styling step if not critical</li>
 </ul></div>
+<div class="section level3">
+<h3 id="roxygen2-not-available">Roxygen2 Not Available<a class="anchor" aria-label="anchor" href="#roxygen2-not-available"></a></h3>
+<ul><li>
+<strong>Cause</strong>: roxygen2 package not installed</li>
+<li>
+<strong>Solution</strong>: Install via R: <code>R --no-restore --no-save -e 'install.packages("roxygen2", repos="https://cloud.r-project.org/")'</code> or use devtools: <code>R --no-restore --no-save -e 'devtools::document()'</code>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-build-failures">Documentation Build Failures<a class="anchor" aria-label="anchor" href="#documentation-build-failures"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Documentation not updated after changing roxygen2 comments</li>
+<li>
+<strong>Solution</strong>: Run <code>R --no-restore --no-save -e 'roxygen2::document()'</code> before building the package</li>
+</ul></div>
+<div class="section level3">
+<h3 id="global-variable-binding-warnings-no-visible-binding">Global Variable Binding Warnings (“no visible binding”)<a class="anchor" aria-label="anchor" href="#global-variable-binding-warnings-no-visible-binding"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Using bare variable names in dplyr/ggplot2 operations instead of proper notation</li>
+<li>
+<strong>Solution</strong>: Replace with <code>.data[[variable_name]]</code> notation and add proper <code>@importFrom</code> statements</li>
+<li>
+<strong>Example</strong>: Change <code>group_by(var)</code> to <code>group_by(.data[[var]])</code>
+</li>
+<li>
+<strong>DO NOT</strong>: Create <code>global_variables.R</code> files with <code><a href="https://rdrr.io/r/utils/globalVariables.html" class="external-link">utils::globalVariables()</a></code>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-mismatch-warnings-codoc-mismatches">Documentation Mismatch Warnings (“Codoc mismatches”)<a class="anchor" aria-label="anchor" href="#documentation-mismatch-warnings-codoc-mismatches"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Function parameter names don’t match the documentation</li>
+<li>
+<strong>Solution</strong>: Ensure <code>@param parameter_name</code> exactly matches function arguments</li>
+<li>
+<strong>Prevention</strong>: Always run <code>roxygen2::document()</code> after changing function signatures</li>
+</ul></div>
+<div class="section level3">
+<h3 id="crannetwork-access-blocked">CRAN/Network Access Blocked<a class="anchor" aria-label="anchor" href="#crannetwork-access-blocked"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Cannot install packages from CRAN mirrors</li>
+<li>
+<strong>Solutions</strong>:
+<ul><li>Use system packages: <code>sudo apt install r-cran-[package]</code>
+</li>
+<li>Try R-universe: <code>repos="https://r-universe.dev"</code><br></li>
+<li>Use pak package: <code>pak::pak("[package-name]")</code>
+</li>
+</ul></li>
+</ul></div>
 </div>
 <div class="section level2">
 <h2 id="common-reference-information">Common Reference Information<a class="anchor" aria-label="anchor" href="#common-reference-information"></a></h2>
@@ -388,12 +570,42 @@ vignettes/          - R Markdown tutorials</code></pre>
 <h3 id="core-r-functions-by-file">Core R Functions by File<a class="anchor" aria-label="anchor" href="#core-r-functions-by-file"></a></h3>
 <pre><code>R/nice_t_test.R      - t-test analysis
 R/nice_table.R       - APA formatted tables
-R/nice_scatter.R     - Scatter plot visualization
+R/nice_scatter.R     - Scatter plot visualization (uses .data[[var]] notation)
 R/nice_violin.R      - Violin plot visualization
 R/extract_duplicates.R - Data cleaning utilities
 R/nice_na.R          - Missing data analysis
 R/format_value.R     - Value formatting (p, r, d values)
-R/scale_mad.R        - Robust standardization</code></pre>
+R/scale_mad.R        - Robust standardization
+R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
+</div>
+<div class="section level3">
+<h3 id="code-quality-examples">Code Quality Examples<a class="anchor" aria-label="anchor" href="#code-quality-examples"></a></h3>
+<div class="section level4">
+<h4 id="correct-proper-variable-referencing">CORRECT: Proper Variable Referencing<a class="anchor" aria-label="anchor" href="#correct-proper-variable-referencing"></a></h4>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># In dplyr operations - USE .data[[var]] notation:</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>mean_val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">response</span><span class="op">]</span><span class="op">]</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># In ggplot operations - USE .data[[var]] notation:</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">predictor</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">response</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Always include proper imports:</span></span>
+<span><span class="co">#' @importFrom dplyr group_by summarize</span></span>
+<span><span class="co">#' @importFrom ggplot2 ggplot aes</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="incorrect-causes-ci-failures">INCORRECT: Causes CI Failures<a class="anchor" aria-label="anchor" href="#incorrect-causes-ci-failures"></a></h4>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># DO NOT: Bare variable names (causes binding warnings)</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarize</span><span class="op">(</span>mean_val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">response</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># DO NOT: Add to global_variables.R file</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/globalVariables.html" class="external-link">globalVariables</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"group"</span>, <span class="st">"response"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -401,6 +613,47 @@ R/scale_mad.R        - Robust standardization</code></pre>
 <p>The package uses GitHub Actions with these workflows: - <strong>R-CMD-check</strong>: Multi-platform testing (Ubuntu, macOS, Windows)<br>
 - <strong>lint</strong>: Code style checking with lintr - <strong>test-coverage</strong>: Code coverage reporting with covr - <strong>pkgdown</strong>: Documentation website generation</p>
 <p>These workflows run automatically on pushes and pull requests to main/master branches.</p>
+<div class="section level3">
+<h3 id="ensuring-ci-workflows-pass-on-first-try">Ensuring CI Workflows Pass on First Try<a class="anchor" aria-label="anchor" href="#ensuring-ci-workflows-pass-on-first-try"></a></h3>
+<p><strong>CRITICAL</strong>: Follow these guidelines to prevent CI failures:</p>
+<div class="section level4">
+<h4 id="id_1-global-variable-binding-prevention">1. Global Variable Binding Prevention<a class="anchor" aria-label="anchor" href="#id_1-global-variable-binding-prevention"></a></h4>
+<ul><li>
+<strong>Always</strong> use <code>.data[[variable_name]]</code> in dplyr operations</li>
+<li>
+<strong>Always</strong> add <code>@importFrom package function</code> for external functions</li>
+<li>
+<strong>Never</strong> create <code>global_variables.R</code> files with <code><a href="https://rdrr.io/r/utils/globalVariables.html" class="external-link">utils::globalVariables()</a></code>
+</li>
+<li>
+<strong>Test locally</strong>: <code>R CMD check</code> should show no “no visible binding” warnings</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_2-documentation-consistency-validation">2. Documentation Consistency Validation<a class="anchor" aria-label="anchor" href="#id_2-documentation-consistency-validation"></a></h4>
+<ul><li>
+<strong>Always</strong> ensure parameter names in <code>@param</code> match function arguments exactly</li>
+<li>
+<strong>Always</strong> run <code>roxygen2::document()</code> after changing function signatures</li>
+<li>
+<strong>Test locally</strong>: Look for “Codoc mismatches” warnings during build</li>
+</ul></div>
+<div class="section level4">
+<h4 id="id_3-package-installation-strategy">3. Package Installation Strategy<a class="anchor" aria-label="anchor" href="#id_3-package-installation-strategy"></a></h4>
+<p>When packages can’t be installed from CRAN: - <strong>Primary</strong>: Use system packages via <code>sudo apt install r-cran-[package]</code> - <strong>Alternative</strong>: Use R-universe repository: <code>repos="https://r-universe.dev"</code> - <strong>Advanced</strong>: Use pak package for better dependency resolution</p>
+</div>
+<div class="section level4">
+<h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>
+<p>Before making any PR, verify locally:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="performance-notes">Performance Notes<a class="anchor" aria-label="anchor" href="#performance-notes"></a></h2>
@@ -408,6 +661,8 @@ R/scale_mad.R        - Robust standardization</code></pre>
 <li>Package install: ~3 seconds<br></li>
 <li>Test suite: ~11 seconds (99 tests: 94 pass, 5 snapshot failures expected)</li>
 <li>Linting: ~20 seconds (673 style issues - normal for existing codebase)</li>
+<li>Code styling: ~10-30 seconds depending on package size</li>
+<li>Documentation update: ~5-15 seconds (roxygen2)</li>
 <li>R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)</li>
 <li>Function loading after install: Near instant</li>
 </ul><p><strong>CRITICAL</strong>: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).</p>
