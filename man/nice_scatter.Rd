@@ -37,7 +37,15 @@ nice_scatter(
   r.y = -Inf,
   has.p = FALSE,
   p.x = Inf,
-  p.y = -Inf
+  p.y = -Inf,
+  has.ids = FALSE,
+  id.column = NULL,
+  has.group.r = FALSE,
+  group.r.x = Inf,
+  group.r.y = Inf,
+  has.group.p = FALSE,
+  group.p.x = Inf,
+  group.p.y = Inf
 )
 }
 \arguments{
@@ -120,6 +128,24 @@ separately.}
 \item{p.x}{The x-axis coordinates for the p-value.}
 
 \item{p.y}{The y-axis coordinates for the p-value.}
+
+\item{has.ids}{Whether to display point IDs/labels on the plot.}
+
+\item{id.column}{The column name to use for point labels. If not specified,
+row names will be used.}
+
+\item{has.group.r}{Whether to display correlation coefficients for each group
+separately when using grouping.}
+
+\item{group.r.x}{The x-axis coordinates for group correlation coefficients.}
+
+\item{group.r.y}{The y-axis coordinates for group correlation coefficients.}
+
+\item{has.group.p}{Whether to display p-values for each group separately.}
+
+\item{group.p.x}{The x-axis coordinates for group p-values.}
+
+\item{group.p.y}{The y-axis coordinates for group p-values.}
 }
 \value{
 A scatter plot of class ggplot.
@@ -307,6 +333,35 @@ nice_scatter(
   response = "mpg",
   group = "cyl",
   has.shape = TRUE
+)
+
+# Display point IDs/labels
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  has.ids = TRUE
+)
+
+# Display group-wise correlations
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.group.r = TRUE
+)
+
+# Display both group and overall correlations
+nice_scatter(
+  data = mtcars,
+  predictor = "wt",
+  response = "mpg",
+  group = "cyl",
+  has.group.r = TRUE,
+  has.group.p = TRUE,
+  has.r = TRUE,
+  has.p = TRUE
 )
 }
 \dontshow{\}) # examplesIf}
