@@ -378,6 +378,8 @@
 </li>
 <li>Run tests: <code>R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'</code>
 </li>
+<li>
+<strong>Create reprex examples</strong>: Prepare reproducible examples showing the new function in action for PR description</li>
 </ol></div>
 <div class="section level3">
 <h3 id="modifying-existing-functions">Modifying Existing Functions<a class="anchor" aria-label="anchor" href="#modifying-existing-functions"></a></h3>
@@ -406,6 +408,8 @@
 </li>
 <li><strong>Always test the specific function manually</strong></li>
 <li>Run full test suite to check for regressions</li>
+<li>
+<strong>Create before/after reprexes</strong>: Prepare examples showing the old vs new behavior for PR description</li>
 </ol></div>
 <div class="section level3">
 <h3 id="before-committing-changes">Before Committing Changes<a class="anchor" aria-label="anchor" href="#before-committing-changes"></a></h3>
@@ -440,7 +444,48 @@
 <span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
 <span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
 <span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="pull-request-requirements">Pull Request Requirements<a class="anchor" aria-label="anchor" href="#pull-request-requirements"></a></h3>
+<p><strong>CRITICAL</strong>: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.</p>
+<div class="section level4">
+<h4 id="creating-reprexes-for-prs">Creating Reprexes for PRs:<a class="anchor" aria-label="anchor" href="#creating-reprexes-for-prs"></a></h4>
+<ol style="list-style-type: decimal"><li><p><strong>Use base R datasets</strong> when possible (e.g., <code>mtcars</code>, <code>iris</code>, <code>airquality</code>) for reproducible examples</p></li>
+<li><p><strong>Show before/after behavior</strong> with your code changes</p></li>
+<li>
+<p><strong>Use the reprex package</strong> for consistent formatting:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install if needed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"reprex"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Copy your example code, then:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://reprex.tidyverse.org" class="external-link">reprex</a></span><span class="op">)</span></span>
+<span><span class="fu">reprex</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Include both examples</strong> in your PR description:</p>
+<ul><li>
+<strong>Before</strong>: Code showing the current (problematic) behavior</li>
+<li>
+<strong>After</strong>: Code showing the improved behavior with your changes</li>
+</ul></li>
+</ol></div>
+<div class="section level4">
+<h4 id="quick-reprex-creation-workflow">Quick Reprex Creation Workflow:<a class="anchor" aria-label="anchor" href="#quick-reprex-creation-workflow"></a></h4>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example PR reprex template:</span></span>
+<span><span class="co"># BEFORE (current behavior):</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="co"># [show current function behavior that needs improvement]</span></span>
+<span></span>
+<span><span class="co"># AFTER (with your changes):  </span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>  </span>
+<span><span class="co"># [show improved function behavior after your changes]</span></span></code></pre></div>
+<p><strong>RStudio Users</strong>: Use the reprex addin for faster creation: - Install reprex: <code>install.packages("reprex")</code> - Go to <code>Addins</code> → Search “reprex” → Select “Render reprex…” - Copy code → Use addin → Check “Append session info” → Render</p>
 <p><strong>Workflow Logic</strong>: - Lint first to identify all style issues - Style second to automatically fix what can be fixed - Update documentation third if any roxygen2 comments were changed - Build and test last to validate everything works together</p>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -582,7 +627,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <h3 id="code-quality-examples">Code Quality Examples<a class="anchor" aria-label="anchor" href="#code-quality-examples"></a></h3>
 <div class="section level4">
 <h4 id="correct-proper-variable-referencing">CORRECT: Proper Variable Referencing<a class="anchor" aria-label="anchor" href="#correct-proper-variable-referencing"></a></h4>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In dplyr operations - USE .data[[var]] notation:</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -597,7 +642,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 </div>
 <div class="section level4">
 <h4 id="incorrect-causes-ci-failures">INCORRECT: Causes CI Failures<a class="anchor" aria-label="anchor" href="#incorrect-causes-ci-failures"></a></h4>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># DO NOT: Bare variable names (causes binding warnings)</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -644,14 +689,28 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <div class="section level4">
 <h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>
 <p>Before making any PR, verify locally:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="id_5-pr-description-requirements">5. PR Description Requirements<a class="anchor" aria-label="anchor" href="#id_5-pr-description-requirements"></a></h4>
+<p><strong>CRITICAL</strong>: Always include reprexes in PR descriptions to demonstrate code changes:</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create examples showing before/after behavior:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># BEFORE (if modifying existing function):</span></span>
+<span><span class="co"># [show current behavior]</span></span>
+<span></span>
+<span><span class="co"># AFTER (with your changes):</span></span>
+<span><span class="co"># [show improved behavior]</span></span></code></pre></div>
 </div>
 </div>
 </div>
