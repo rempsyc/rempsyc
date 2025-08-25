@@ -269,7 +269,7 @@
 #' \url{https://rempsyc.remi-theriault.com/articles/scatter}
 #'
 #' @importFrom stats cor.test
-#' @importFrom dplyr group_by summarize mutate do %>%
+#' @importFrom dplyr group_by summarize mutate reframe row_number %>%
 
 nice_scatter <- function(data,
                          predictor,
@@ -322,7 +322,7 @@ nice_scatter <- function(data,
   group_correlations <- NULL
   
   # Prepare ID column for labels if requested
-  if (has.ids == TRUE) {
+  if (has.ids) {
     if (!is.null(id.column)) {
       check_col_names(data, id.column)
       data$.id_labels <- data[[id.column]]
@@ -366,12 +366,13 @@ nice_scatter <- function(data,
     }
     
     # Calculate correlations by group if requested
-    if (has.group.r == TRUE || has.group.p == TRUE) {
+    if (has.group.r || has.group.p) {
       group_correlations <- data %>%
         group_by(.data[[group]]) %>%
-        do({
-          cor_result <- cor.test(.[[predictor]], .[[response]], use = "complete.obs")
+        reframe({
+          cor_result <- cor.test(.data[[predictor]], .data[[response]], use = "complete.obs")
           data.frame(
+            !!group := unique(.data[[group]]),
             r = cor_result$estimate,
             p = cor_result$p.value
           )
@@ -522,7 +523,7 @@ nice_scatter <- function(data,
       }
     } +
     {
-      if (has.ids == TRUE) {
+      if (has.ids) {
         rlang::check_installed("ggrepel", reason = "for displaying IDs.")
         ggrepel::geom_text_repel(
           ggplot2::aes(label = .data$.id_labels),
@@ -532,7 +533,7 @@ nice_scatter <- function(data,
       }
     } +
     {
-      if (has.group.r == TRUE && !missing(group) && !is.null(group_correlations)) {
+      if (has.group.r && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group correlations
         y_range <- diff(range(data[[response]], na.rm = TRUE))
         y_spacing <- y_range * 0.05  # 5% of range for spacing
@@ -553,7 +554,7 @@ nice_scatter <- function(data,
       }
     } +
     {
-      if (has.group.p == TRUE && !missing(group) && !is.null(group_correlations)) {
+      if (has.group.p && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group p-values
         y_range <- diff(range(data[[response]], na.rm = TRUE))
         y_spacing <- y_range * 0.05  # 5% of range for spacing
