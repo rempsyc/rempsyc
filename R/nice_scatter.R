@@ -392,16 +392,16 @@ nice_scatter <- function(data,
       y_range <- range(data[[response]], na.rm = TRUE)
       
       if (is.null(group.r.x)) {
-        group.r.x <- x_range[2]  # Right side
+        group.r.x <- x_range[1] + diff(x_range) * 0.02  # Left side with small margin
       }
       if (is.null(group.r.y)) {
         group.r.y <- y_range[2]  # Top
       }
       if (is.null(group.p.x)) {
-        group.p.x <- x_range[2]  # Right side
+        group.p.x <- x_range[1] + diff(x_range) * 0.02  # Left side with small margin
       }
       if (is.null(group.p.y)) {
-        # If both r and p are shown, offset p values to the right
+        # If both r and p are shown, offset p values below r values
         if (has.group.r && has.group.p) {
           group.p.y <- y_range[2] - diff(y_range) * 0.15  # Slightly below r values
         } else {
@@ -563,20 +563,21 @@ nice_scatter <- function(data,
       if (has.group.r && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group correlations
         y_range <- diff(range(data[[response]], na.rm = TRUE))
-        y_spacing <- y_range * 0.05  # 5% of range for spacing
+        y_spacing <- y_range * 0.08  # 8% of range for better spacing
         group_r_data <- group_correlations %>%
           mutate(
             x = group.r.x,
             y = group.r.y - (dplyr::row_number() - 1) * y_spacing,
-            label = sprintf("%s: r = %s", .data[[group]], r_formatted)
+            label = sprintf("%s: italic('r')~'='~'%s'", .data[[group]], r_formatted)
           )
         ggplot2::geom_text(
           data = group_r_data,
           ggplot2::aes(x = x, y = y, label = label),
           inherit.aes = FALSE,
-          hjust = 1,
+          hjust = 0,
           vjust = 1,
-          size = 6
+          size = 6,
+          parse = TRUE
         )
       }
     } +
@@ -584,20 +585,21 @@ nice_scatter <- function(data,
       if (has.group.p && !missing(group) && !is.null(group_correlations)) {
         # Create text data for group p-values
         y_range <- diff(range(data[[response]], na.rm = TRUE))
-        y_spacing <- y_range * 0.05  # 5% of range for spacing
+        y_spacing <- y_range * 0.08  # 8% of range for better spacing
         group_p_data <- group_correlations %>%
           mutate(
             x = group.p.x,
             y = group.p.y - (dplyr::row_number() - 1) * y_spacing,
-            label = sprintf("%s: p %s", .data[[group]], p_formatted)
+            label = sprintf("%s: italic('p')~'%s'", .data[[group]], p_formatted)
           )
         ggplot2::geom_text(
           data = group_p_data,
           ggplot2::aes(x = x, y = y, label = label),
           inherit.aes = FALSE,
-          hjust = 1,
+          hjust = 0,
           vjust = 1,
-          size = 6
+          size = 6,
+          parse = TRUE
         )
       }
     } +
