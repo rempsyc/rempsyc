@@ -15,6 +15,9 @@ sudo apt install -y r-base r-base-dev
 
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
+
+# If styler is not available via system packages, install via R:
+# R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'
 ```
 
 ### Set Up R User Library
@@ -67,6 +70,26 @@ Expected results:
 - Many style warnings (673+ issues found - normal for existing codebase)
 - Focus on new code adhering to style guidelines
 - Package is functional despite style warnings
+
+### Auto-format Code with Styler
+**NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+# Style entire package
+R --no-restore --no-save -e 'library(styler); style_pkg()'
+
+# Style specific file
+R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'
+
+# Style specific directory
+R --no-restore --no-save -e 'library(styler); style_dir("R")'
+```
+
+Expected results:
+- Automatic code formatting according to tidyverse style guide
+- Consistent indentation, spacing, and bracket placement
+- Files will be modified in-place if styling changes are needed
+- Use after making changes but before committing
 
 ### Run R CMD Check
 **NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.**
@@ -181,7 +204,7 @@ Depends: R (>= 3.6)
 ### Suggested Packages (Optional)
 Many functions require optional packages. The package uses `rlang::check_installed()` to prompt users to install needed packages when functions are called.
 
-**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat
+**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler
 
 ### Installing Additional Packages (if needed)
 ```bash
@@ -199,35 +222,40 @@ R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://c
 2. Add roxygen2 documentation above the function
 3. Add exports to roxygen2 comments if needed
 4. Create tests in `/tests/testthat/test-[function_name].R`
-5. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-6. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+5. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
+6. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+7. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
 
 ### Modifying Existing Functions
 1. Edit the function in appropriate `/R/[file].R`
 2. Update documentation if needed
 3. Update tests if function behavior changes
-4. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-5. **Always test the specific function manually**
-6. Run full test suite to check for regressions
+4. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
+5. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+6. **Always test the specific function manually**
+7. Run full test suite to check for regressions
 
 ### Before Committing Changes
 Always run this complete validation sequence:
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
 
-# 1. Build (19 seconds)
+# 1. Style code (10-30 seconds) - optional but recommended
+R --no-restore --no-save -e 'library(styler); style_pkg()'
+
+# 2. Build (19 seconds)
 R CMD build .
 
-# 2. Install  
+# 3. Install  
 R CMD INSTALL rempsyc_*.tar.gz
 
-# 3. Test (11 seconds) 
+# 4. Test (11 seconds) 
 R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
 
-# 4. Lint (20 seconds)
+# 5. Lint (20 seconds)
 R --no-restore --no-save -e 'library(lintr); lint_package()'
 
-# 5. R CMD check (~30 seconds) - only if making significant changes
+# 6. R CMD check (~30 seconds) - only if making significant changes
 _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes
 ```
 
@@ -252,6 +280,10 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 ### Build Failures
 - **Cause**: Syntax errors, missing dependencies, or file issues
 - **Solution**: Check specific error messages, ensure DESCRIPTION is correct, verify all R files have valid syntax
+
+### Styler Not Available
+- **Cause**: styler package not installed
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'` or skip styling step if not critical
 
 ## Common Reference Information
 
