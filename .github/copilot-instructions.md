@@ -16,8 +16,8 @@ sudo apt install -y r-base r-base-dev
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
 
-# If styler is not available via system packages, install via R:
-# R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'
+# If styler or roxygen2 are not available via system packages, install via R:
+# R --no-restore --no-save -e 'install.packages(c("styler", "roxygen2"), repos="https://cloud.r-project.org/")'
 ```
 
 ### Set Up R User Library
@@ -90,6 +90,29 @@ Expected results:
 - Consistent indentation, spacing, and bracket placement
 - Files will be modified in-place if styling changes are needed
 - Use after making changes but before committing
+
+### Update Documentation with roxygen2
+**NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.**
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+# Update documentation after making changes to roxygen2 comments
+R --no-restore --no-save -e 'roxygen2::document()'
+
+# Alternative using devtools
+R --no-restore --no-save -e 'devtools::document()'
+```
+
+Expected results:
+- Updates .Rd files in man/ directory from roxygen2 comments
+- Updates NAMESPACE file with exports/imports
+- Essential step after modifying function documentation or adding/removing exports
+- Must be run before building the package if documentation was changed
+
+**When to use**: Always run this after:
+- Adding or modifying roxygen2 comments (the `#'` comments above functions)
+- Adding new exported functions
+- Changing function parameters or return values in documentation
+- Adding or removing `@export`, `@import`, or `@importFrom` tags
 
 ### Run R CMD Check
 **NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.**
@@ -204,7 +227,7 @@ Depends: R (>= 3.6)
 ### Suggested Packages (Optional)
 Many functions require optional packages. The package uses `rlang::check_installed()` to prompt users to install needed packages when functions are called.
 
-**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler
+**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2
 
 ### Installing Additional Packages (if needed)
 ```bash
@@ -222,42 +245,55 @@ R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://c
 2. Add roxygen2 documentation above the function
 3. Add exports to roxygen2 comments if needed
 4. Create tests in `/tests/testthat/test-[function_name].R`
-5. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
-6. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-7. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+5. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+6. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
+7. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
+8. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+9. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
 
 ### Modifying Existing Functions
 1. Edit the function in appropriate `/R/[file].R`
 2. Update documentation if needed
 3. Update tests if function behavior changes
-4. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
-5. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-6. **Always test the specific function manually**
-7. Run full test suite to check for regressions
+4. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+5. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
+6. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
+7. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+8. **Always test the specific function manually**
+9. Run full test suite to check for regressions
 
 ### Before Committing Changes
 Always run this complete validation sequence:
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
 
-# 1. Style code (10-30 seconds) - optional but recommended
-R --no-restore --no-save -e 'library(styler); style_pkg()'
-
-# 2. Build (19 seconds)
-R CMD build .
-
-# 3. Install  
-R CMD INSTALL rempsyc_*.tar.gz
-
-# 4. Test (11 seconds) 
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
-
-# 5. Lint (20 seconds)
+# 1. Lint code first to identify style issues (20 seconds)
 R --no-restore --no-save -e 'library(lintr); lint_package()'
 
-# 6. R CMD check (~30 seconds) - only if making significant changes
+# 2. Style code to automatically fix issues (10-30 seconds) - optional but recommended
+R --no-restore --no-save -e 'library(styler); style_pkg()'
+
+# 3. Update documentation if documentation was changed (5-15 seconds)
+R --no-restore --no-save -e 'roxygen2::document()'
+
+# 4. Build (19 seconds)
+R CMD build .
+
+# 5. Install  
+R CMD INSTALL rempsyc_*.tar.gz
+
+# 6. Test (11 seconds) 
+R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+
+# 7. R CMD check (~30 seconds) - only if making significant changes
 _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes
 ```
+
+**Workflow Logic**: 
+- Lint first to identify all style issues
+- Style second to automatically fix what can be fixed
+- Update documentation third if any roxygen2 comments were changed
+- Build and test last to validate everything works together
 
 ## Troubleshooting
 
@@ -284,6 +320,14 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 ### Styler Not Available
 - **Cause**: styler package not installed
 - **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'` or skip styling step if not critical
+
+### Roxygen2 Not Available
+- **Cause**: roxygen2 package not installed
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", repos="https://cloud.r-project.org/")'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
+
+### Documentation Build Failures
+- **Cause**: Documentation not updated after changing roxygen2 comments
+- **Solution**: Run `R --no-restore --no-save -e 'roxygen2::document()'` before building the package
 
 ## Common Reference Information
 
@@ -341,6 +385,8 @@ These workflows run automatically on pushes and pull requests to main/master bra
 - Package install: ~3 seconds  
 - Test suite: ~11 seconds (99 tests: 94 pass, 5 snapshot failures expected)
 - Linting: ~20 seconds (673 style issues - normal for existing codebase)
+- Code styling: ~10-30 seconds depending on package size
+- Documentation update: ~5-15 seconds (roxygen2)
 - R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
 - Function loading after install: Near instant
 
