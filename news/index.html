@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.91</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,20 +57,36 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.9" id="rempsyc-019">rempsyc 0.1.9<a class="anchor" aria-label="anchor" href="#rempsyc-019"></a></h2><p class="text-muted">CRAN release: 2025-02-01</p>
-<ul><li>New CRAN submission</li>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="rempsyc-020">rempsyc 0.2.0<a class="anchor" aria-label="anchor" href="#rempsyc-020"></a></h2>
+<ul><li>New CRAN submission (incoming)</li>
 </ul><div class="section level3">
-<h3 id="rempsyc-0-1-9">rempsyc 0.1.8.3<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-9"></a></h3>
+<h3 id="rempsyc-0-2-0">rempsyc 0.1.9.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-2-0"></a></h3>
 <ul><li>
-<code>cormatrix_excel</code> now relies entirely on <code><a href="https://easystats.github.io/correlation/reference/cormatrix_to_excel.html" class="external-link">correlation::cormatrix_to_excel()</a></code> to reduce maintenance.</li>
+<code>nice_scatter</code>: Major enhancement with two highly requested features:
+<ul><li>
+<strong>Point ID display</strong>: New <code>has.ids</code> parameter displays point labels/IDs directly on scatter plots using <code>ggrepel</code> for intelligent non-overlapping positioning. Use <code>id.column</code> to specify a custom column for labels, defaults to row names.</li>
+<li>
+<strong>Group-wise correlations</strong>: New <code>has.group.r</code> and <code>has.group.p</code> parameters display correlation statistics for each group separately with smart anti-overlap positioning. r-values position on left side, p-values on right side to prevent overlap. Includes automatic italic formatting consistent with overall correlation display.</li>
+<li>Both features integrate seamlessly with all existing plot options and maintain backward compatibility.</li>
+</ul></li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-9-1">rempsyc 0.1.8.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-9-1"></a></h3>
+<h3 id="rempsyc-0-2-0-1">rempsyc 0.1.9.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-2-0-1"></a></h3>
+<ul><li>
+<code>nice_table</code>: Fixed cross-environment snapshot test failures by replacing snapshot tests with robust class-based assertions, ensuring consistent behavior across different R environments and platforms.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.9" id="rempsyc-019">rempsyc 0.1.9<a class="anchor" aria-label="anchor" href="#rempsyc-019"></a></h2><p class="text-muted">CRAN release: 2025-02-01</p>
+<ul><li>
+<code>cormatrix_excel</code> now relies entirely on <code><a href="https://easystats.github.io/correlation/reference/cormatrix_to_excel.html" class="external-link">correlation::cormatrix_to_excel()</a></code> to reduce maintenance.</li>
+</ul><div class="section level3">
+<h3 id="rempsyc-0-1-9">rempsyc 0.1.8.2<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-9"></a></h3>
 <ul><li>
 <code>best_duplicate</code>: fix a bug with grouped tibbles leading to an error</li>
 </ul></div>
 <div class="section level3">
-<h3 id="rempsyc-0-1-9-2">rempsyc 0.1.8.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-9-2"></a></h3>
+<h3 id="rempsyc-0-1-9-1">rempsyc 0.1.8.1<a class="anchor" aria-label="anchor" href="#rempsyc-0-1-9-1"></a></h3>
 <ul><li>
 <code>nice_density</code>: add <code>vjust = "inward"</code> and <code>hjust = "inward"</code> to annotation to fix changes in <code>ggpubr</code>
 </li>
