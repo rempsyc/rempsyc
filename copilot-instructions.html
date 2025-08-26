@@ -62,16 +62,14 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h2>
 <p>The <code>rempsyc</code> package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.</p>
+<p><strong>CRITICAL REMINDER</strong>: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the <a href="#version-management-and-changelog-updates">Version Management section</a> for detailed instructions.</p>
 </div>
 <div class="section level2">
 <h2 id="pre-configured-environment">Pre-Configured Environment<a class="anchor" aria-label="anchor" href="#pre-configured-environment"></a></h2>
-<p><strong>NEW</strong>: This repository now includes <code>.github/workflows/copilot-setup-steps.yml</code> which automatically configures the development environment before GitHub Copilot starts working. This pre-installs:</p>
-<ul><li>R and system dependencies</li>
-<li>Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)</li>
-<li>Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)</li>
-<li>The rempsyc package itself (built and installed)</li>
-<li>Verified functionality of core functions and reprex</li>
-</ul><p><strong>If the pre-configured environment is working</strong>, you can skip most manual installation steps below and go directly to the <a href="#build-and-development-workflow">Build and Development Workflow</a> section.</p>
+<p><strong>NEW</strong>: This repository now includes <code>.github/workflows/copilot-setup-steps.yml</code> which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed:</p>
+<p><strong>For R package development tasks</strong> (editing .R files, functions, tests, etc.), it pre-installs: - R and system dependencies - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex) - Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.) - The rempsyc package itself (built and installed) - Verified functionality of core functions and reprex</p>
+<p><strong>For documentation/configuration tasks</strong> (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup: - Repository checkout only - Skips time-consuming R installation and package setup - Saves significant time for non-code changes</p>
+<p><strong>If the pre-configured environment is working</strong>, you can skip most manual installation steps below and go directly to the <a href="#build-and-development-workflow">Build and Development Workflow</a> section.</p>
 <p><strong>Verification</strong>: Check if the environment is pre-configured by running:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); packageVersion("rempsyc")'</span></span></code></pre></div>
 <p>If this works without errors, the environment is ready. If not, follow the manual setup below.</p>
@@ -617,6 +615,10 @@
 <li>Run tests: <code>R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'</code>
 </li>
 <li>
+<strong>Update version number</strong>: Bump version in DESCRIPTION file (see Version Management section)</li>
+<li>
+<strong>Update NEWS.md</strong>: Add changelog entry describing the new function (see Version Management section)</li>
+<li>
 <strong>Create reprex examples</strong>: Prepare reproducible examples showing the new function in action for PR description</li>
 </ol></div>
 <div class="section level3">
@@ -653,69 +655,200 @@
 <li><strong>Always test the specific function manually</strong></li>
 <li>Run full test suite to check for regressions</li>
 <li>
+<strong>Update version number</strong>: Bump version in DESCRIPTION file (see Version Management section)</li>
+<li>
+<strong>Update NEWS.md</strong>: Add changelog entry describing your changes (see Version Management section)</li>
+<li>
 <strong>Create before/after reprexes</strong>: Prepare examples showing the old vs new behavior for PR description</li>
 </ol></div>
+</div>
+<div class="section level2">
+<h2 id="version-management-and-changelog-updates">Version Management and Changelog Updates<a class="anchor" aria-label="anchor" href="#version-management-and-changelog-updates"></a></h2>
+<p><strong>CRITICAL</strong>: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.</p>
+<div class="section level3">
+<h3 id="version-numbering-system">Version Numbering System<a class="anchor" aria-label="anchor" href="#version-numbering-system"></a></h3>
+<p>The rempsyc package follows this versioning pattern: - <strong>Major releases</strong> (CRAN submissions): Two decimals (e.g., 0.1.9, 0.1.8, 0.1.7) - <strong>Development versions</strong> (between CRAN releases): Three decimals (e.g., 0.1.8.3, 0.1.8.2, 0.1.8.1)</p>
+</div>
+<div class="section level3">
+<h3 id="when-to-bump-versions">When to Bump Versions<a class="anchor" aria-label="anchor" href="#when-to-bump-versions"></a></h3>
+<p><strong>ALWAYS</strong> bump the version for ANY change that affects the package: 1. <strong>Bug fixes</strong>: Increment the third decimal (0.1.91 → 0.1.92) 2. <strong>New features</strong>: Increment the third decimal (0.1.91 → 0.1.92) 3. <strong>Breaking changes</strong>: Increment the second decimal (0.1.91 → 0.2.0) - rare 4. <strong>Documentation-only changes</strong>: Still increment third decimal for tracking</p>
+</div>
+<div class="section level3">
+<h3 id="how-to-update-version-number">How to Update Version Number<a class="anchor" aria-label="anchor" href="#how-to-update-version-number"></a></h3>
+<ol style="list-style-type: decimal"><li>
+<p><strong>Edit the DESCRIPTION file</strong>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="co"># Find current version</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co"># Update to next version (example: 0.1.91 → 0.1.92)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Version update pattern</strong>:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Current version: 0.1.91</span></span>
+<span><span class="co"># For your PR: 0.1.92</span></span>
+<span><span class="co"># Next PR: 0.1.93</span></span>
+<span><span class="co"># etc.</span></span></code></pre></div>
+</li>
+</ol></div>
+<div class="section level3">
+<h3 id="how-to-update-newsmd">How to Update NEWS.md<a class="anchor" aria-label="anchor" href="#how-to-update-newsmd"></a></h3>
+<p><strong>MANDATORY</strong>: Add your changes to the top of NEWS.md following this exact format:</p>
+<ol style="list-style-type: decimal"><li>
+<p><strong>For first change after a major release</strong> (e.g., after 0.1.9 was released):</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu"># rempsyc 0.1.10</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="ss">* </span>CRAN submission (when ready)</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="fu">## rempsyc 0.1.9.1</span></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="ss">* </span>Your change description here</span></code></pre></div>
+</li>
+<li>
+<p><strong>For subsequent development changes</strong> (when 0.1.9.1 already exists):</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu"># rempsyc 0.1.10</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="ss">* </span>CRAN submission (when ready)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="fu">## rempsyc 0.1.9.2</span></span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="ss">* </span>Your new change description here</span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="fu">## rempsyc 0.1.9.1  </span></span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="ss">* </span>Previous change description here</span></code></pre></div>
+</li>
+<li>
+<p><strong>Change description guidelines</strong>:</p>
+<ul><li>Use function names in backticks: <code><a href="reference/nice_table.html">nice_table()</a></code>
+</li>
+<li>Be specific about what changed</li>
+<li>Include issue references if applicable: (#28)</li>
+<li>Examples:
+<ul><li>
+<code><a href="reference/nice_table.html">nice_table()</a></code>: fix bug with grouped tibbles leading to an error</li>
+<li>
+<code><a href="reference/nice_scatter.html">nice_scatter()</a></code>: add new <code>color_by</code> argument for categorical coloring<br></li>
+<li>
+<code><a href="reference/cormatrix_excel.html">cormatrix_excel()</a></code> now relies entirely on <code><a href="https://easystats.github.io/correlation/reference/cormatrix_to_excel.html" class="external-link">correlation::cormatrix_to_excel()</a></code> to reduce maintenance</li>
+</ul></li>
+</ul></li>
+</ol></div>
+<div class="section level3">
+<h3 id="automated-version-management-workflow">Automated Version Management Workflow<a class="anchor" aria-label="anchor" href="#automated-version-management-workflow"></a></h3>
+<p><strong>Follow this exact sequence for every PR</strong>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co"># Step 1: Check current version</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A5</span> <span class="st">"^# rempsyc"</span> NEWS.md <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co"># Step 2: Determine new version number</span></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co"># Current: 0.1.91 → New: 0.1.92 (example)</span></span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="co"># Step 3: Update DESCRIPTION file</span></span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Version: 0.1.91/Version: 0.1.92/'</span> DESCRIPTION</span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="co"># Step 4: Update NEWS.md (add entry at the top)</span></span>
+<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="co"># Use your preferred text editor or str_replace_editor</span></span>
+<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a><span class="co"># Step 5: Verify updates</span></span>
+<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a><span class="fu">head</span> <span class="at">-10</span> NEWS.md</span>
+<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a><span class="co"># Step 6: Proceed with normal build/test workflow</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="version-update-examples">Version Update Examples<a class="anchor" aria-label="anchor" href="#version-update-examples"></a></h3>
+<div class="section level4">
+<h4 id="example-1-bug-fix">Example 1: Bug Fix<a class="anchor" aria-label="anchor" href="#example-1-bug-fix"></a></h4>
+<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.1.91 → 0.1.92</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="fu">## rempsyc 0.1.91.1  </span></span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a><span class="ss">* </span><span class="in">`nice_table()`</span>: fix column alignment issue with long variable names</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="example-2-new-feature">Example 2: New Feature<a class="anchor" aria-label="anchor" href="#example-2-new-feature"></a></h4>
+<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.1.92 → 0.1.93</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="fu">## rempsyc 0.1.92.1</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="ss">* </span><span class="in">`nice_scatter()`</span>: add <span class="in">`theme_preset`</span> argument for quick plot styling options</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="example-3-multiple-changes">Example 3: Multiple Changes<a class="anchor" aria-label="anchor" href="#example-3-multiple-changes"></a></h4>
+<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.1.93 → 0.1.94  </span></span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="fu">## rempsyc 0.1.93.1</span></span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a><span class="ss">* </span><span class="in">`nice_violin()`</span>: improve error messages for invalid grouping variables</span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a><span class="ss">* </span><span class="in">`plot_outliers()`</span>: add support for custom outlier detection methods</span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a><span class="ss">* </span>Documentation updates for improved clarity across all visualization functions</span></code></pre></div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="before-committing-changes">Before Committing Changes<a class="anchor" aria-label="anchor" href="#before-committing-changes"></a></h3>
 <p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
-<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
-<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
-<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a></span>
-<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
-<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
-<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a></span>
-<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
-<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
-<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a></span>
-<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
-<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb32-26"><a href="#cb32-26" tabindex="-1"></a></span>
-<span id="cb32-27"><a href="#cb32-27" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
-<span id="cb32-28"><a href="#cb32-28" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
-<span id="cb32-29"><a href="#cb32-29" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
-<span id="cb32-30"><a href="#cb32-30" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co"># 0. MANDATORY: Update version number and NEWS.md (see Version Management section below)</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
+<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
+<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
+<span id="cb40-12"><a href="#cb40-12" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb40-13"><a href="#cb40-13" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
+<span id="cb40-15"><a href="#cb40-15" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb40-16"><a href="#cb40-16" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
+<span id="cb40-18"><a href="#cb40-18" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb40-19"><a href="#cb40-19" tabindex="-1"></a></span>
+<span id="cb40-20"><a href="#cb40-20" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
+<span id="cb40-21"><a href="#cb40-21" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
+<span id="cb40-22"><a href="#cb40-22" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
+<span id="cb40-24"><a href="#cb40-24" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
+<span id="cb40-25"><a href="#cb40-25" tabindex="-1"></a></span>
+<span id="cb40-26"><a href="#cb40-26" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
+<span id="cb40-27"><a href="#cb40-27" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb40-28"><a href="#cb40-28" tabindex="-1"></a></span>
+<span id="cb40-29"><a href="#cb40-29" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
+<span id="cb40-30"><a href="#cb40-30" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
+<span id="cb40-31"><a href="#cb40-31" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
+<span id="cb40-32"><a href="#cb40-32" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-request-requirements">Pull Request Requirements<a class="anchor" aria-label="anchor" href="#pull-request-requirements"></a></h3>
-<p><strong>CRITICAL</strong>: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.</p>
-<p><strong>MANDATORY</strong>: Use the actual <code>reprex</code> package - NEVER simulate or guess at reprex output. The repository owner needs to see actual function behavior, including plots/images that cannot be simulated.</p>
+<p><strong>CRITICAL</strong>: When creating pull requests, you MUST include ALL of the following:</p>
+<ol style="list-style-type: decimal"><li>
+<strong>Version number bump</strong> in DESCRIPTION file (see Version Management section above)</li>
+<li>
+<strong>NEWS.md changelog entry</strong> with your changes (see Version Management section above)<br></li>
+<li>
+<strong>Reprexes</strong> (minimally reproducible examples) showing the old and new behavior for comparison</li>
+</ol><p><strong>MANDATORY</strong>: Use the actual <code>reprex</code> package - NEVER simulate or guess at reprex output. The repository owner needs to see actual function behavior, including plots/images that cannot be simulated.</p>
+<p><strong>VERSION MANAGEMENT IS NOT OPTIONAL</strong>: Every PR must include version updates and changelog entries. PRs without these updates will be rejected.</p>
 <div class="section level4">
 <h4 id="creating-reprexes-for-prs">Creating Reprexes for PRs:<a class="anchor" aria-label="anchor" href="#creating-reprexes-for-prs"></a></h4>
 <ol style="list-style-type: decimal"><li><p><strong>Use base R datasets</strong> when possible (e.g., <code>mtcars</code>, <code>iris</code>, <code>airquality</code>) for reproducible examples</p></li>
 <li><p><strong>Show before/after behavior</strong> with your code changes</p></li>
 <li>
 <p><strong>ALWAYS use the actual reprex package</strong> for consistent formatting:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
-<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
-<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
-<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
-<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
-<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
+<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
+<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
+<span id="cb41-10"><a href="#cb41-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
+<span id="cb41-11"><a href="#cb41-11" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb41-12"><a href="#cb41-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
+<span id="cb41-13"><a href="#cb41-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Generate ACTUAL reprex output</strong> using this workflow:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://reprex.tidyverse.org" class="external-link">reprex</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For BEFORE behavior (if modifying existing function):</span></span>
@@ -745,41 +878,41 @@
 <div class="section level4">
 <h4 id="quick-reprex-creation-workflow">Quick Reprex Creation Workflow:<a class="anchor" aria-label="anchor" href="#quick-reprex-creation-workflow"></a></h4>
 <p><strong>NEVER SKIP</strong>: Always generate actual reprex, never simulate or guess:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex for your changes</span></span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="st">example_code &lt;- "</span></span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a><span class="st"># Example: test the function you modified</span></span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
-<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a><span class="st">print(result)</span></span>
-<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" tabindex="-1"></a><span class="st"># If working with plots, include them:</span></span>
-<span id="cb35-16"><a href="#cb35-16" tabindex="-1"></a><span class="st">if (requireNamespace(\"ggplot2\", quietly = TRUE)) {</span></span>
-<span id="cb35-17"><a href="#cb35-17" tabindex="-1"></a><span class="st">  plot_result &lt;- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")</span></span>
-<span id="cb35-18"><a href="#cb35-18" tabindex="-1"></a><span class="st">  print(plot_result)</span></span>
-<span id="cb35-19"><a href="#cb35-19" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb35-20"><a href="#cb35-20" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb35-21"><a href="#cb35-21" tabindex="-1"></a></span>
-<span id="cb35-22"><a href="#cb35-22" tabindex="-1"></a><span class="st"># Generate actual reprex</span></span>
-<span id="cb35-23"><a href="#cb35-23" tabindex="-1"></a><span class="st">actual_reprex &lt;- reprex(input = example_code, venue = "gh", advertise = FALSE)</span></span>
-<span id="cb35-24"><a href="#cb35-24" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="#cb35-25" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
-<span id="cb35-26"><a href="#cb35-26" tabindex="-1"></a><span class="st">if (length(actual_reprex) &gt; 0) {</span></span>
-<span id="cb35-27"><a href="#cb35-27" tabindex="-1"></a><span class="st">  cat("SUCCESS: Generated actual reprex for PR\n")</span></span>
-<span id="cb35-28"><a href="#cb35-28" tabindex="-1"></a><span class="st">  cat("Copy this output to your PR description:\n")</span></span>
-<span id="cb35-29"><a href="#cb35-29" tabindex="-1"></a><span class="st">  cat("========================================\n")</span></span>
-<span id="cb35-30"><a href="#cb35-30" tabindex="-1"></a><span class="st">  cat(paste(actual_reprex, collapse = "\n"))</span></span>
-<span id="cb35-31"><a href="#cb35-31" tabindex="-1"></a><span class="st">  cat("\n========================================\n")</span></span>
-<span id="cb35-32"><a href="#cb35-32" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb35-33"><a href="#cb35-33" tabindex="-1"></a><span class="st">  stop("FAILED: Could not generate reprex - fix reprex installation first")</span></span>
-<span id="cb35-34"><a href="#cb35-34" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb35-35"><a href="#cb35-35" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex for your changes</span></span>
+<span id="cb43-7"><a href="#cb43-7" tabindex="-1"></a><span class="st">example_code &lt;- "</span></span>
+<span id="cb43-8"><a href="#cb43-8" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb43-9"><a href="#cb43-9" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
+<span id="cb43-10"><a href="#cb43-10" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" tabindex="-1"></a><span class="st"># Example: test the function you modified</span></span>
+<span id="cb43-12"><a href="#cb43-12" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
+<span id="cb43-13"><a href="#cb43-13" tabindex="-1"></a><span class="st">print(result)</span></span>
+<span id="cb43-14"><a href="#cb43-14" tabindex="-1"></a></span>
+<span id="cb43-15"><a href="#cb43-15" tabindex="-1"></a><span class="st"># If working with plots, include them:</span></span>
+<span id="cb43-16"><a href="#cb43-16" tabindex="-1"></a><span class="st">if (requireNamespace(\"ggplot2\", quietly = TRUE)) {</span></span>
+<span id="cb43-17"><a href="#cb43-17" tabindex="-1"></a><span class="st">  plot_result &lt;- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")</span></span>
+<span id="cb43-18"><a href="#cb43-18" tabindex="-1"></a><span class="st">  print(plot_result)</span></span>
+<span id="cb43-19"><a href="#cb43-19" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb43-20"><a href="#cb43-20" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb43-21"><a href="#cb43-21" tabindex="-1"></a></span>
+<span id="cb43-22"><a href="#cb43-22" tabindex="-1"></a><span class="st"># Generate actual reprex</span></span>
+<span id="cb43-23"><a href="#cb43-23" tabindex="-1"></a><span class="st">actual_reprex &lt;- reprex(input = example_code, venue = "gh", advertise = FALSE)</span></span>
+<span id="cb43-24"><a href="#cb43-24" tabindex="-1"></a></span>
+<span id="cb43-25"><a href="#cb43-25" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
+<span id="cb43-26"><a href="#cb43-26" tabindex="-1"></a><span class="st">if (length(actual_reprex) &gt; 0) {</span></span>
+<span id="cb43-27"><a href="#cb43-27" tabindex="-1"></a><span class="st">  cat("SUCCESS: Generated actual reprex for PR\n")</span></span>
+<span id="cb43-28"><a href="#cb43-28" tabindex="-1"></a><span class="st">  cat("Copy this output to your PR description:\n")</span></span>
+<span id="cb43-29"><a href="#cb43-29" tabindex="-1"></a><span class="st">  cat("========================================\n")</span></span>
+<span id="cb43-30"><a href="#cb43-30" tabindex="-1"></a><span class="st">  cat(paste(actual_reprex, collapse = "\n"))</span></span>
+<span id="cb43-31"><a href="#cb43-31" tabindex="-1"></a><span class="st">  cat("\n========================================\n")</span></span>
+<span id="cb43-32"><a href="#cb43-32" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb43-33"><a href="#cb43-33" tabindex="-1"></a><span class="st">  stop("FAILED: Could not generate reprex - fix reprex installation first")</span></span>
+<span id="cb43-34"><a href="#cb43-34" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb43-35"><a href="#cb43-35" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 <p><strong>RStudio Users</strong>: Use the reprex addin for faster creation: - Install reprex: <code>install.packages("reprex")</code> - Go to <code>Addins</code> → Search “reprex” → Select “Render reprex…” - Copy code → Use addin → Check “Append session info” → Render</p>
 <p><strong>Workflow Logic</strong>: - Lint first to identify all style issues - Style second to automatically fix what can be fixed - Update documentation third if any roxygen2 comments were changed - Build and test last to validate everything works together</p>
 </div>
@@ -895,21 +1028,21 @@
 <ul><li><p><strong>Cause</strong>: reprex package not installed or not working correctly</p></li>
 <li>
 <p><strong>Solution</strong>: Follow the comprehensive reprex installation steps:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
-<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
-<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
-<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
-<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a><span class="st">    })</span></span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="st">  })</span></span>
-<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb44-4"><a href="#cb44-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
+<span id="cb44-5"><a href="#cb44-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
+<span id="cb44-6"><a href="#cb44-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
+<span id="cb44-7"><a href="#cb44-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
+<span id="cb44-8"><a href="#cb44-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
+<span id="cb44-9"><a href="#cb44-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
+<span id="cb44-10"><a href="#cb44-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
+<span id="cb44-11"><a href="#cb44-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
+<span id="cb44-12"><a href="#cb44-12" tabindex="-1"></a><span class="st">    })</span></span>
+<span id="cb44-13"><a href="#cb44-13" tabindex="-1"></a><span class="st">  })</span></span>
+<span id="cb44-14"><a href="#cb44-14" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb44-15"><a href="#cb44-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </li>
 <li><p><strong>Verification</strong>: Always test reprex functionality before creating PRs using the validation scenario</p></li>
 </ul></div>
@@ -971,7 +1104,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <h3 id="code-quality-examples">Code Quality Examples<a class="anchor" aria-label="anchor" href="#code-quality-examples"></a></h3>
 <div class="section level4">
 <h4 id="correct-proper-variable-referencing">CORRECT: Proper Variable Referencing<a class="anchor" aria-label="anchor" href="#correct-proper-variable-referencing"></a></h4>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In dplyr operations - USE .data[[var]] notation:</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -986,7 +1119,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 </div>
 <div class="section level4">
 <h4 id="incorrect-causes-ci-failures">INCORRECT: Causes CI Failures<a class="anchor" aria-label="anchor" href="#incorrect-causes-ci-failures"></a></h4>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># DO NOT: Bare variable names (causes binding warnings)</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -1033,19 +1166,19 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <div class="section level4">
 <h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>
 <p>Before making any PR, verify locally:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
-<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
-<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
-<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
-<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="id_5-pr-description-requirements">5. PR Description Requirements<a class="anchor" aria-label="anchor" href="#id_5-pr-description-requirements"></a></h4>
 <p><strong>CRITICAL</strong>: Always include reprexes in PR descriptions to demonstrate code changes:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create examples showing before/after behavior:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
