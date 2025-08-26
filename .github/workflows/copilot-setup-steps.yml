@@ -6,6 +6,8 @@ name: copilot-setup-steps
 
 on:
   workflow_dispatch:
+  # This workflow is automatically triggered by GitHub Copilot
+  # before the agent starts working in the repository
 
 jobs:
   copilot-setup-steps:
@@ -100,9 +102,13 @@ jobs:
 
       - name: Install rempsyc package dependencies
         run: |
-          # Install package dependencies using setup-r-dependencies
-          install.packages("remotes", repos = "https://cloud.r-project.org/")
-          remotes::install_deps(dependencies = TRUE)
+          # Install package dependencies using remotes
+          tryCatch({
+            install.packages("remotes", repos = "https://cloud.r-project.org/")
+            remotes::install_deps(dependencies = TRUE)
+          }, error = function(e) {
+            cat("Warning: Some dependencies may not have installed:", e$message, "\n")
+          })
         shell: Rscript {0}
 
       - name: Build rempsyc package
