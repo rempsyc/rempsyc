@@ -55,14 +55,14 @@
 #' @param has.group.r Whether to display correlation coefficients for each group
 #' separately when using grouping.
 #' @param group.r.x The x-axis coordinates for group correlation coefficients.
-#' If NULL (default), will be positioned at the right side of the plot.
+#' If NULL (default), will be positioned at the left side of the plot.
 #' @param group.r.y The y-axis coordinates for group correlation coefficients.
 #' If NULL (default), will be positioned at the top of the plot.
 #' @param has.group.p Whether to display p-values for each group separately.
 #' @param group.p.x The x-axis coordinates for group p-values.
 #' If NULL (default), will be positioned at the right side of the plot.
 #' @param group.p.y The y-axis coordinates for group p-values.
-#' If NULL (default), will be positioned slightly below group r values to avoid overlap.
+#' If NULL (default), will be positioned at the top of the plot.
 #'
 #' @keywords scatter plots
 #' @return A scatter plot of class ggplot.
@@ -388,6 +388,7 @@ nice_scatter <- function(data,
         )
       
       # Set default positions for group correlations to avoid overlap
+      # Strategy: r-values on left, p-values on right to prevent overlap
       x_range <- range(data[[predictor]], na.rm = TRUE)
       y_range <- range(data[[response]], na.rm = TRUE)
       
@@ -398,15 +399,10 @@ nice_scatter <- function(data,
         group.r.y <- y_range[2]  # Top
       }
       if (is.null(group.p.x)) {
-        group.p.x <- x_range[1] + diff(x_range) * 0.02  # Left side with small margin
+        group.p.x <- x_range[2] - diff(x_range) * 0.02  # Right side with small margin
       }
       if (is.null(group.p.y)) {
-        # If both r and p are shown, offset p values below r values
-        if (has.group.r && has.group.p) {
-          group.p.y <- y_range[2] - diff(y_range) * 0.15  # Slightly below r values
-        } else {
-          group.p.y <- y_range[2]  # Same as r if only p is shown
-        }
+        group.p.y <- y_range[2]  # Same vertical level as r values (but different horizontal)
       }
     }
   }
@@ -596,7 +592,7 @@ nice_scatter <- function(data,
           data = group_p_data,
           ggplot2::aes(x = x, y = y, label = label),
           inherit.aes = FALSE,
-          hjust = 0,
+          hjust = 1,  # Right-align text since positioned on right side
           vjust = 1,
           size = 6,
           parse = TRUE
