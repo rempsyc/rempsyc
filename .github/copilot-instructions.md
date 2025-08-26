@@ -5,6 +5,8 @@ Always follow these instructions EXACTLY and only search for additional context 
 ## Overview
 The `rempsyc` package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.
 
+**CRITICAL REMINDER**: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the [Version Management section](#version-management-and-changelog-updates) for detailed instructions.
+
 ## Pre-Configured Environment 
 
 **NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This pre-installs:
@@ -574,7 +576,9 @@ R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), rep
 13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
 14. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
 15. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
-16. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
+16. **Update version number**: Bump version in DESCRIPTION file (see Version Management section)
+17. **Update NEWS.md**: Add changelog entry describing the new function (see Version Management section)
+18. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
 
 ### Modifying Existing Functions
 1. **Identify current function dependencies**: Check which packages the function currently requires
@@ -593,13 +597,142 @@ R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), rep
 14. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
 15. **Always test the specific function manually**
 16. Run full test suite to check for regressions
-17. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+17. **Update version number**: Bump version in DESCRIPTION file (see Version Management section)
+18. **Update NEWS.md**: Add changelog entry describing your changes (see Version Management section)
+19. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+
+## Version Management and Changelog Updates
+
+**CRITICAL**: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.
+
+### Version Numbering System
+
+The rempsyc package follows this versioning pattern:
+- **Major releases** (CRAN submissions): Two decimals (e.g., 0.1.9, 0.1.8, 0.1.7)
+- **Development versions** (between CRAN releases): Three decimals (e.g., 0.1.8.3, 0.1.8.2, 0.1.8.1)
+
+### When to Bump Versions
+
+**ALWAYS** bump the version for ANY change that affects the package:
+1. **Bug fixes**: Increment the third decimal (0.1.91 → 0.1.92)
+2. **New features**: Increment the third decimal (0.1.91 → 0.1.92) 
+3. **Breaking changes**: Increment the second decimal (0.1.91 → 0.2.0) - rare
+4. **Documentation-only changes**: Still increment third decimal for tracking
+
+### How to Update Version Number
+
+1. **Edit the DESCRIPTION file**:
+   ```bash
+   cd /home/runner/work/rempsyc/rempsyc
+   # Find current version
+   grep "Version:" DESCRIPTION
+   # Update to next version (example: 0.1.91 → 0.1.92)
+   ```
+
+2. **Version update pattern**:
+   ```r
+   # Current version: 0.1.91
+   # For your PR: 0.1.92
+   # Next PR: 0.1.93
+   # etc.
+   ```
+
+### How to Update NEWS.md
+
+**MANDATORY**: Add your changes to the top of NEWS.md following this exact format:
+
+1. **For first change after a major release** (e.g., after 0.1.9 was released):
+   ```markdown
+   # rempsyc 0.1.10
+   * CRAN submission (when ready)
+   
+   ## rempsyc 0.1.9.1
+   * Your change description here
+   ```
+
+2. **For subsequent development changes** (when 0.1.9.1 already exists):
+   ```markdown
+   # rempsyc 0.1.10
+   * CRAN submission (when ready)
+   
+   ## rempsyc 0.1.9.2
+   * Your new change description here
+   
+   ## rempsyc 0.1.9.1  
+   * Previous change description here
+   ```
+
+3. **Change description guidelines**:
+   - Use function names in backticks: `nice_table()`
+   - Be specific about what changed
+   - Include issue references if applicable: (#28)
+   - Examples:
+     - `nice_table()`: fix bug with grouped tibbles leading to an error
+     - `nice_scatter()`: add new `color_by` argument for categorical coloring  
+     - `cormatrix_excel()` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance
+
+### Automated Version Management Workflow
+
+**Follow this exact sequence for every PR**:
+
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+
+# Step 1: Check current version
+grep "Version:" DESCRIPTION
+grep -A5 "^# rempsyc" NEWS.md | head -10
+
+# Step 2: Determine new version number
+# Current: 0.1.91 → New: 0.1.92 (example)
+
+# Step 3: Update DESCRIPTION file
+sed -i 's/Version: 0.1.91/Version: 0.1.92/' DESCRIPTION
+
+# Step 4: Update NEWS.md (add entry at the top)
+# Use your preferred text editor or str_replace_editor
+
+# Step 5: Verify updates
+grep "Version:" DESCRIPTION
+head -10 NEWS.md
+
+# Step 6: Proceed with normal build/test workflow
+```
+
+### Version Update Examples
+
+#### Example 1: Bug Fix
+```markdown
+# In DESCRIPTION: Version: 0.1.91 → 0.1.92
+# In NEWS.md (add at top):
+## rempsyc 0.1.91.1  
+* `nice_table()`: fix column alignment issue with long variable names
+```
+
+#### Example 2: New Feature  
+```markdown
+# In DESCRIPTION: Version: 0.1.92 → 0.1.93
+# In NEWS.md (add at top):
+## rempsyc 0.1.92.1
+* `nice_scatter()`: add `theme_preset` argument for quick plot styling options
+```
+
+#### Example 3: Multiple Changes
+```markdown
+# In DESCRIPTION: Version: 0.1.93 → 0.1.94  
+# In NEWS.md (add at top):
+## rempsyc 0.1.93.1
+* `nice_violin()`: improve error messages for invalid grouping variables
+* `plot_outliers()`: add support for custom outlier detection methods
+* Documentation updates for improved clarity across all visualization functions
+```
 
 ### Before Committing Changes
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try:
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
+
+# 0. MANDATORY: Update version number and NEWS.md (see Version Management section below)
 
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
@@ -632,9 +765,15 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 ```
 
 ### Pull Request Requirements
-**CRITICAL**: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.
+**CRITICAL**: When creating pull requests, you MUST include ALL of the following:
+
+1. **Version number bump** in DESCRIPTION file (see Version Management section above)
+2. **NEWS.md changelog entry** with your changes (see Version Management section above)  
+3. **Reprexes** (minimally reproducible examples) showing the old and new behavior for comparison
 
 **MANDATORY**: Use the actual `reprex` package - NEVER simulate or guess at reprex output. The repository owner needs to see actual function behavior, including plots/images that cannot be simulated.
+
+**VERSION MANAGEMENT IS NOT OPTIONAL**: Every PR must include version updates and changelog entries. PRs without these updates will be rejected.
 
 #### Creating Reprexes for PRs:
 
