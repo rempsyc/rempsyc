@@ -7,17 +7,146 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 ## Environment Setup
 
+### Package Installation Philosophy
+**CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.
+
 ### Install R and Required System Dependencies
+**CRITICAL**: Always ensure R is properly installed and functional before proceeding with any package development tasks.
+
 ```bash
-# Ubuntu/Debian systems
+# Ubuntu/Debian systems - ALWAYS run this first in every session
 sudo apt update
 sudo apt install -y r-base r-base-dev
+
+# Verify R installation is working
+R --version
+which R
 
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
 
-# If styler or roxygen2 are not available via system packages, install via R:
-# R --no-restore --no-save -e 'install.packages(c("styler", "roxygen2"), repos="https://cloud.r-project.org/")'
+# Install reprex (ESSENTIAL for creating reproducible examples in PRs)
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+
+# Install other essential development packages via system packages when possible
+sudo apt install -y r-cran-devtools r-cran-roxygen2 r-cran-styler || echo "Some packages not available via apt, will install via R"
+
+# If styler, roxygen2, or devtools are not available via system packages, install via R:
+R --no-restore --no-save -e '
+packages_needed <- c("styler", "roxygen2", "devtools")
+packages_installed <- rownames(installed.packages())
+packages_to_install <- setdiff(packages_needed, packages_installed)
+if (length(packages_to_install) > 0) {
+  install.packages(packages_to_install, repos="https://cloud.r-project.org/")
+}
+'
+```
+
+### Verify R Installation and Core Packages
+**NEVER SKIP**: Always run this verification after installing R:
+
+```bash
+# Test R basic functionality
+R --no-restore --no-save -e 'print("R is working correctly")'
+
+# Verify core packages are available
+R --no-restore --no-save -e '
+required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")
+missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
+if (length(missing_packages) > 0) {
+  cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")
+  cat("Run installation commands to install missing packages\n")
+} else {
+  cat("All core development packages are available\n")
+}
+'
+```
+
+### Essential reprex Package Setup
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it's installed and functional.
+
+```bash
+# Install reprex if not already installed
+R --no-restore --no-save -e '
+if (!requireNamespace("reprex", quietly = TRUE)) {
+  # Try multiple installation methods
+  tryCatch({
+    install.packages("reprex", repos="https://cloud.r-project.org/")
+  }, error = function(e1) {
+    tryCatch({
+      install.packages("reprex", repos="https://r-universe.dev")
+    }, error = function(e2) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+      pak::pak("reprex")
+    })
+  })
+}
+'
+
+# Verify reprex functionality with a simple test
+R --no-restore --no-save -e '
+library(reprex)
+# Test reprex with simple code
+test_code <- "
+x <- 1:5
+mean(x)
+"
+result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+if (length(result) > 0) {
+  cat("reprex package is working correctly\n")
+} else {
+  stop("reprex package installation failed - this is required for PR creation")
+}
+'
+```
+
+### Install Function-Specific Dependencies Only
+**CRITICAL**: Only install packages that are actually used by the specific function you are modifying. DO NOT install all suggested packages upfront as this causes long installation times.
+
+#### Determine Required Packages for Your Function
+```bash
+# Step 1: Find which packages your specific function actually requires
+# Check the function's rlang::check_installed() calls in the source code
+cd /home/runner/work/rempsyc/rempsyc
+grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
+
+# Or search for all function dependencies:
+# grep -r "check_installed\|requireNamespace" R/[your_function_file].R
+```
+
+#### Install Only Required Packages
+```bash
+# Step 2: Install ONLY the packages found in Step 1
+# Example: If working on nice_scatter(), you only need ggplot2
+R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+
+# Example: If working on nice_table(), you only need flextable  
+R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+
+# Example: If working on nice_violin(), you need multiple packages
+R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+```
+
+#### Use rempsyc's Built-in Utility (After Building Package)
+```bash
+# Alternative: Use rempsyc's install_if_not_installed() for specific packages
+R --no-restore --no-save -e '
+# First build and install the current rempsyc package to access utility functions
+if (file.exists("DESCRIPTION")) {
+  system("R CMD build .")
+  pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+  if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))
+}
+
+# Load rempsyc and install only specific packages for your function
+library(rempsyc)
+# ONLY install packages needed for your specific function:
+if (exists("install_if_not_installed")) {
+  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter
+} else {
+  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback
+}
+'
 ```
 
 ### Set Up R User Library
@@ -28,6 +157,19 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 ```
 
 ## Build and Development Workflow
+
+### Targeted Package Installation Workflow
+**ESSENTIAL**: Follow this targeted approach to avoid "The package installation is taking a long time" issues:
+
+1. **Identify your function**: Determine which specific function you're modifying
+2. **Find dependencies**: Check what packages that function actually requires:
+   ```bash
+   cd /home/runner/work/rempsyc/rempsyc
+   grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[your_function].R
+   ```
+3. **Install only required packages**: Install ONLY the packages found in step 2
+4. **Test function**: Test that your specific function works with the installed packages
+5. **Proceed with development**: Build, test, and develop normally
 
 ### Build the Package
 **NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.**
@@ -160,6 +302,42 @@ print("Core functions working correctly")
 '
 ```
 
+### MANDATORY: Test reprex Functionality Before Making Changes
+**CRITICAL**: Always verify reprex is working before modifying any code that will require a PR:
+
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+R --no-restore --no-save -e '
+# Load required packages
+library(reprex)
+library(rempsyc)
+
+# Create a test reprex with actual rempsyc function
+test_code <- "
+library(rempsyc)
+data(mtcars)
+
+# Example function test
+result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+print(result)
+"
+
+# Generate reprex
+cat("Testing reprex functionality...\n")
+reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+
+# Verify it worked
+if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
+  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")
+  cat("Sample reprex output (first few lines):\n")
+  cat(paste(head(reprex_result, 10), collapse = "\n"))
+  cat("\n")
+} else {
+  stop("FAILED: reprex is not working correctly - install reprex before proceeding")
+}
+'
+```
+
 ### Manual Function Testing Workflow
 After making changes to package functions:
 
@@ -229,12 +407,19 @@ Many functions require optional packages. The package uses `rlang::check_install
 
 **Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2
 
-### Installing Additional Packages (if needed)
+**ESSENTIAL for development**: reprex (mandatory for creating PR examples)
+
+### Installing Additional Packages (Only When Needed)
+**PRIORITY**: Always install reprex first, then install other packages ONLY as needed for the specific function you are modifying:
+
 ```bash
-# Via system packages (recommended):
+# ALWAYS install reprex first (essential for PR creation):
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+
+# Via system packages (recommended for individual packages):
 sudo apt install -y r-cran-[package-name]
 
-# Via R (if CRAN network available):
+# Via R (if CRAN network available, for individual packages):
 R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://cloud.r-project.org/")'
 
 # Alternative sources when CRAN is blocked:
@@ -243,6 +428,45 @@ R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r
 
 # Via pak package (faster, handles dependencies better):
 R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'
+```
+
+#### Common Function-Specific Package Requirements
+**DO NOT install all of these - only install what you need for your specific function:**
+
+- **nice_table()**: flextable
+- **nice_scatter()**: ggplot2  
+- **nice_violin()**: ggplot2, boot, ggsignif
+- **nice_qq()**: ggplot2, qqplotr, ggrepel
+- **cormatrix_excel()**: correlation, openxlsx2
+- **nice_lm_slopes()**: effectsize
+- **overlap_circle()**: VennDiagram
+- **plot_outliers()**: ggplot2
+
+#### Check Function Dependencies Before Installing
+```bash
+# Find exactly which packages a function requires:
+cd /home/runner/work/rempsyc/rempsyc
+grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[function_file].R
+
+# Examples:
+# For nice_scatter.R: only requires ggplot2
+# For nice_table.R: only requires flextable  
+# For nice_violin.R: requires ggplot2, boot, ggsignif
+```
+
+#### Targeted Installation Examples
+```bash
+# Example 1: Working on nice_scatter() function
+R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+
+# Example 2: Working on nice_table() function  
+R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+
+# Example 3: Working on nice_violin() function (multiple dependencies)
+R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+
+# Example 4: Working on cormatrix_excel() function
+R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'
 ```
 
 ## Code Quality and Best Practices
@@ -317,35 +541,40 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 
 ### Adding a New Function
 1. Create the function in `/R/[function_name].R`
-2. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
-3. Add roxygen2 documentation above the function (ensure parameter names match exactly)
-4. Add `@importFrom` statements for all external functions used
-5. Add exports to roxygen2 comments if needed (`@export`)
-6. Create tests in `/tests/testthat/test-[function_name].R`
-7. **Check for global variable issues**: `R CMD check` should show no binding warnings
-8. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-9. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
-10. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
-11. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-12. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-13. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
-14. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
+2. **Identify required packages**: Check which packages the function will need using `rlang::check_installed()`
+3. **Install only required packages**: Use targeted installation instead of batch installation
+4. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
+5. Add roxygen2 documentation above the function (ensure parameter names match exactly)
+6. Add `@importFrom` statements for all external functions used
+7. Add exports to roxygen2 comments if needed (`@export`)
+8. Create tests in `/tests/testthat/test-[function_name].R`
+9. **Check for global variable issues**: `R CMD check` should show no binding warnings
+10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
+12. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
+13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+14. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+15. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+16. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
 
 ### Modifying Existing Functions
-1. Edit the function in appropriate `/R/[file].R`
-2. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
-3. Update documentation if parameters changed (ensure exact parameter name matches)
-4. Update `@importFrom` statements if new external functions are used
-5. Update tests if function behavior changes
-6. **Check for global variable issues**: `R CMD check` should show no binding warnings
-7. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-8. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
-9. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
-10. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-11. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-12. **Always test the specific function manually**
-13. Run full test suite to check for regressions
-14. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+1. **Identify current function dependencies**: Check which packages the function currently requires
+2. Edit the function in appropriate `/R/[file].R`
+3. **Check if new packages are needed**: If adding functionality, identify any new package requirements
+4. **Install only new required packages**: Install only what's newly needed, not all suggested packages
+5. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
+6. Update documentation if parameters changed (ensure exact parameter name matches)
+7. Update `@importFrom` statements if new external functions are used
+8. Update tests if function behavior changes
+9. **Check for global variable issues**: `R CMD check` should show no binding warnings
+10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
+12. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
+13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+14. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+15. **Always test the specific function manually**
+16. Run full test suite to check for regressions
+17. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
 
 ### Before Committing Changes
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try:
@@ -386,36 +615,93 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 ### Pull Request Requirements
 **CRITICAL**: When creating pull requests, always include reprexes (minimally reproducible examples) showing the old and new behavior for comparison. This is essential for code review and validation.
 
+**MANDATORY**: Use the actual `reprex` package - NEVER simulate or guess at reprex output. The repository owner needs to see actual function behavior, including plots/images that cannot be simulated.
+
 #### Creating Reprexes for PRs:
 
 1. **Use base R datasets** when possible (e.g., `mtcars`, `iris`, `airquality`) for reproducible examples
 2. **Show before/after behavior** with your code changes
-3. **Use the reprex package** for consistent formatting:
-   ```r
-   # Install if needed
-   install.packages("reprex")
-   
-   # Copy your example code, then:
+3. **ALWAYS use the actual reprex package** for consistent formatting:
+   ```bash
+   # Ensure reprex is installed and working BEFORE creating PR
+   R --no-restore --no-save -e '
+   if (!requireNamespace("reprex", quietly = TRUE)) {
+     stop("reprex package MUST be installed before creating PRs")
+   }
    library(reprex)
-   reprex()
+   # Test with simple example first
+   test_result <- reprex(input = "x <- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)
+   if (length(test_result) == 0) {
+     stop("reprex package is not working correctly")
+   }
+   cat("reprex is ready for PR creation\n")
+   '
    ```
 
-4. **Include both examples** in your PR description:
-   - **Before**: Code showing the current (problematic) behavior
-   - **After**: Code showing the improved behavior with your changes
+4. **Generate ACTUAL reprex output** using this workflow:
+   ```r
+   library(reprex)
+   
+   # For BEFORE behavior (if modifying existing function):
+   before_code <- "
+   library(rempsyc)
+   data(mtcars)
+   # [your code showing current behavior]
+   "
+   before_reprex <- reprex(input = before_code, venue = "gh", advertise = FALSE)
+   
+   # For AFTER behavior (with your changes):
+   after_code <- "
+   library(rempsyc)
+   data(mtcars)
+   # [your code showing improved behavior]
+   "
+   after_reprex <- reprex(input = after_code, venue = "gh", advertise = FALSE)
+   ```
+
+5. **Include both ACTUAL reprex outputs** in your PR description:
+   - **Before**: Real reprex output showing the current (problematic) behavior
+   - **After**: Real reprex output showing the improved behavior with your changes
 
 #### Quick Reprex Creation Workflow:
-```r
-# Example PR reprex template:
-# BEFORE (current behavior):
+**NEVER SKIP**: Always generate actual reprex, never simulate or guess:
+
+```bash
+cd /home/runner/work/rempsyc/rempsyc
+R --no-restore --no-save -e '
+library(reprex)
+library(rempsyc)
+
+# Create ACTUAL reprex for your changes
+example_code <- "
 library(rempsyc)
 data(mtcars)
-# [show current function behavior that needs improvement]
 
-# AFTER (with your changes):  
-library(rempsyc)
-data(mtcars)  
-# [show improved function behavior after your changes]
+# Example: test the function you modified
+result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+print(result)
+
+# If working with plots, include them:
+if (requireNamespace(\"ggplot2\", quietly = TRUE)) {
+  plot_result <- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")
+  print(plot_result)
+}
+"
+
+# Generate actual reprex
+actual_reprex <- reprex(input = example_code, venue = "gh", advertise = FALSE)
+
+# Verify it worked
+if (length(actual_reprex) > 0) {
+  cat("SUCCESS: Generated actual reprex for PR\n")
+  cat("Copy this output to your PR description:\n")
+  cat("========================================\n")
+  cat(paste(actual_reprex, collapse = "\n"))
+  cat("\n========================================\n")
+} else {
+  stop("FAILED: Could not generate reprex - fix reprex installation first")
+}
+'
 ```
 
 **RStudio Users**: Use the reprex addin for faster creation:
@@ -430,6 +716,11 @@ data(mtcars)
 - Build and test last to validate everything works together
 
 ## Troubleshooting
+
+### "The package installation is taking a long time"
+- **Cause**: Installing too many suggested packages instead of only the ones needed for the current function
+- **Solution**: Follow the targeted installation approach - only install packages specifically required by the function you're modifying
+- **Prevention**: Always use `grep -A2 -B2 "rlang::check_installed" R/[function_file].R` to identify minimal dependencies first
 
 ### "Could not find function" Errors
 - **Cause**: Package not loaded or installed
@@ -480,6 +771,37 @@ data(mtcars)
   - Use system packages: `sudo apt install r-cran-[package]`
   - Try R-universe: `repos="https://r-universe.dev"`  
   - Use pak package: `pak::pak("[package-name]")`
+
+### reprex Package Issues
+- **Cause**: reprex package not installed or not working correctly
+- **Solution**: Follow the comprehensive reprex installation steps:
+  ```bash
+  # Multi-method installation
+  R --no-restore --no-save -e '
+  if (!requireNamespace("reprex", quietly = TRUE)) {
+    tryCatch({
+      install.packages("reprex", repos="https://cloud.r-project.org/")
+    }, error = function(e1) {
+      tryCatch({
+        install.packages("reprex", repos="https://r-universe.dev")
+      }, error = function(e2) {
+        install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+        pak::pak("reprex")
+      })
+    })
+  }
+  '
+  ```
+- **Verification**: Always test reprex functionality before creating PRs using the validation scenario
+
+### reprex Not Generating Output
+- **Cause**: Code errors, missing packages, or input format issues
+- **Solution**: 
+  - Test with simple code first: `x <- 1:5; mean(x)`
+  - Ensure all required packages are loaded in the reprex code
+  - Use `venue = "gh"` for GitHub-formatted output
+  - Check for syntax errors in the input code
+- **Debug**: Use `reprex(input = your_code, venue = "gh", advertise = FALSE, show = TRUE)` to see detailed output
 
 ## Common Reference Information
 
@@ -618,5 +940,8 @@ data(mtcars)
 - Documentation update: ~5-15 seconds (roxygen2)
 - R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
 - Function loading after install: Near instant
+- **Package installation**: 1-5 seconds per package (targeted) vs 2-10 minutes (batch installation of all suggested packages)
 
 **CRITICAL**: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).
+
+**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. Installing all 22+ suggested packages takes 2-10 minutes; installing 1-3 specific packages takes 1-5 seconds each.
