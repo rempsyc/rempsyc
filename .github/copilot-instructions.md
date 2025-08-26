@@ -9,13 +9,19 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 ## Pre-Configured Environment 
 
-**NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This pre-installs:
+**NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed:
 
+**For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
 - R and system dependencies
 - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
 - Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)
 - The rempsyc package itself (built and installed)
 - Verified functionality of core functions and reprex
+
+**For documentation/configuration tasks** (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup:
+- Repository checkout only
+- Skips time-consuming R installation and package setup
+- Saves significant time for non-code changes
 
 **If the pre-configured environment is working**, you can skip most manual installation steps below and go directly to the [Build and Development Workflow](#build-and-development-workflow) section.
 

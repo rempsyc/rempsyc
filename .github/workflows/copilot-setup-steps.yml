@@ -23,16 +23,63 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
+      - name: Determine if R setup is needed
+        id: check_r_needed
+        run: |
+          echo "Checking if R environment setup is needed..."
+          
+          # Check if this is likely a documentation-only or configuration change
+          # by looking for indicators that suggest R functionality will be needed
+          
+          R_NEEDED=true
+          
+          # Get the branch name if available
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "Branch: $BRANCH_NAME"
+          
+          # Check recent commits for file patterns
+          if git log --name-only -10 --pretty=format: | grep -E '\.(R|Rd|Rmd)$' > /dev/null; then
+            echo "Found R-related files in recent commits - R setup needed"
+            R_NEEDED=true
+          elif git log --name-only -5 --pretty=format: | grep -E '^(tests/|R/|man/|vignettes/)' > /dev/null; then
+            echo "Found R package structure changes - R setup needed"
+            R_NEEDED=true
+          elif git log --oneline -5 | grep -iE '(function|package|test|build|check|install)' > /dev/null; then
+            echo "Found R development keywords in commit messages - R setup needed"
+            R_NEEDED=true
+          else
+            # Check if recent changes are only to documentation/config files
+            RECENT_FILES=$(git log --name-only -5 --pretty=format: | sort -u)
+            echo "Recent files changed:"
+            echo "$RECENT_FILES"
+            
+            # If only these types of files changed, skip R setup
+            if echo "$RECENT_FILES" | grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|\.md$|\.yml$|\.yaml$)$' | grep -E '.' > /dev/null; then
+              echo "Found changes beyond documentation/config files - R setup needed"
+              R_NEEDED=true
+            else
+              echo "Only documentation/config files changed - R setup can be skipped"
+              R_NEEDED=false
+            fi
+          fi
+          
+          echo "R_NEEDED=$R_NEEDED" >> $GITHUB_OUTPUT
+          echo "Final decision: R setup needed = $R_NEEDED"
+        shell: bash
+        
       - name: Setup R
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'release'
           use-public-rspm: true
           
       - name: Setup pandoc (required for building vignettes)
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install system dependencies
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -49,12 +96,14 @@ jobs:
             r-base-dev
 
       - name: Setup R user library
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           mkdir -p ~/R/library
           echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
         shell: bash
 
       - name: Cache R packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: actions/cache@v3
         with:
           path: ~/.local/share/renv
@@ -63,6 +112,7 @@ jobs:
             ${{ runner.os }}-renv-
 
       - name: Install core R development packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Install essential development packages first
           install.packages(c(
@@ -78,6 +128,7 @@ jobs:
         shell: Rscript {0}
         
       - name: Install commonly used suggested packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Install the most commonly required suggested packages
           # Based on analysis of rlang::check_installed() calls in source code
@@ -101,6 +152,7 @@ jobs:
         continue-on-error: true
 
       - name: Install rempsyc package dependencies
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Install package dependencies using remotes
           tryCatch({
@@ -112,12 +164,14 @@ jobs:
         shell: Rscript {0}
 
       - name: Build rempsyc package
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Build the current package
           system("R CMD build .")
         shell: Rscript {0}
         
       - name: Install rempsyc package  
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Install the built package
           pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
@@ -130,6 +184,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Verify R installation and packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           cat("=== R Version ===\n")
           print(R.version.string)
@@ -154,6 +209,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test core rempsyc functionality
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           library(rempsyc)
           
@@ -200,6 +256,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test reprex functionality  
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           library(reprex)
           library(rempsyc)
@@ -235,14 +292,25 @@ jobs:
 
       - name: Display environment summary
         run: |
-          cat("=== GitHub Copilot Environment Setup Complete ===\n\n")
+          echo "=== GitHub Copilot Environment Setup Complete ==="
+          echo ""
           
-          cat("✓ R", R.version.string, "\n")
-          cat("✓ rempsyc package installed and functional\n")
-          cat("✓ Core development tools available (lintr, styler, reprex)\n")
-          cat("✓ Common suggested packages installed\n")
-          cat("✓ Package building and testing capabilities verified\n\n")
-          
-          cat("The environment is ready for GitHub Copilot to begin development work.\n")
-          cat("Copilot can now build, test, lint, and create reproducible examples.\n")
-        shell: Rscript {0}
+          if [ "${{ steps.check_r_needed.outputs.R_NEEDED }}" == "true" ]; then
+            echo "✓ Full R development environment configured:"
+            echo "  - R and system dependencies installed"
+            echo "  - rempsyc package built and installed"
+            echo "  - Core development tools available (lintr, styler, reprex)"
+            echo "  - Common suggested packages installed"
+            echo "  - Package building and testing capabilities verified"
+            echo ""
+            echo "The environment is ready for R package development work."
+            echo "Copilot can now build, test, lint, and create reproducible examples."
+          else
+            echo "✓ Minimal environment configured:"
+            echo "  - Repository checked out and ready"
+            echo "  - R setup skipped (not needed for documentation/config changes)"
+            echo ""
+            echo "The environment is ready for documentation and configuration work."
+            echo "If R functionality is needed later, the full setup will run automatically."
+          fi
+        shell: bash
