@@ -64,7 +64,20 @@
 <p>The <code>rempsyc</code> package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.</p>
 </div>
 <div class="section level2">
-<h2 id="environment-setup">Environment Setup<a class="anchor" aria-label="anchor" href="#environment-setup"></a></h2>
+<h2 id="pre-configured-environment">Pre-Configured Environment<a class="anchor" aria-label="anchor" href="#pre-configured-environment"></a></h2>
+<p><strong>NEW</strong>: This repository now includes <code>.github/workflows/copilot-setup-steps.yml</code> which automatically configures the development environment before GitHub Copilot starts working. This pre-installs:</p>
+<ul><li>R and system dependencies</li>
+<li>Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)</li>
+<li>Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)</li>
+<li>The rempsyc package itself (built and installed)</li>
+<li>Verified functionality of core functions and reprex</li>
+</ul><p><strong>If the pre-configured environment is working</strong>, you can skip most manual installation steps below and go directly to the <a href="#build-and-development-workflow">Build and Development Workflow</a> section.</p>
+<p><strong>Verification</strong>: Check if the environment is pre-configured by running:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); packageVersion("rempsyc")'</span></span></code></pre></div>
+<p>If this works without errors, the environment is ready. If not, follow the manual setup below.</p>
+</div>
+<div class="section level2">
+<h2 id="environment-setup-manual---if-pre-configuration-failed">Environment Setup (Manual - if pre-configuration failed)<a class="anchor" aria-label="anchor" href="#environment-setup-manual---if-pre-configuration-failed"></a></h2>
 <div class="section level3">
 <h3 id="package-installation-philosophy">Package Installation Philosophy<a class="anchor" aria-label="anchor" href="#package-installation-philosophy"></a></h3>
 <p><strong>CRITICAL</strong>: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.</p>
@@ -72,139 +85,139 @@
 <div class="section level3">
 <h3 id="install-r-and-required-system-dependencies">Install R and Required System Dependencies<a class="anchor" aria-label="anchor" href="#install-r-and-required-system-dependencies"></a></h3>
 <p><strong>CRITICAL</strong>: Always ensure R is properly installed and functional before proceeding with any package development tasks.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Ubuntu/Debian systems - ALWAYS run this first in every session</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-base r-base-dev</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Verify R installation is working</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--version</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">which</span> R</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Install core R packages via system package manager (recommended)</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Install reprex (ESSENTIAL for creating reproducible examples in PRs)</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co"># Install other essential development packages via system packages when possible</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-devtools r-cran-roxygen2 r-cran-styler <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"Some packages not available via apt, will install via R"</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co"># If styler, roxygen2, or devtools are not available via system packages, install via R:</span></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="st">packages_needed &lt;- c("styler", "roxygen2", "devtools")</span></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="st">packages_installed &lt;- rownames(installed.packages())</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="st">packages_to_install &lt;- setdiff(packages_needed, packages_installed)</span></span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="st">if (length(packages_to_install) &gt; 0) {</span></span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, repos="https://cloud.r-project.org/")</span></span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Ubuntu/Debian systems - ALWAYS run this first in every session</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-base r-base-dev</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Verify R installation is working</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--version</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">which</span> R</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Install core R packages via system package manager (recommended)</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># Install reprex (ESSENTIAL for creating reproducible examples in PRs)</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># Install other essential development packages via system packages when possible</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-devtools r-cran-roxygen2 r-cran-styler <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"Some packages not available via apt, will install via R"</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># If styler, roxygen2, or devtools are not available via system packages, install via R:</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="st">packages_needed &lt;- c("styler", "roxygen2", "devtools")</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="st">packages_installed &lt;- rownames(installed.packages())</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="st">packages_to_install &lt;- setdiff(packages_needed, packages_installed)</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="st">if (length(packages_to_install) &gt; 0) {</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, repos="https://cloud.r-project.org/")</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="verify-r-installation-and-core-packages">Verify R Installation and Core Packages<a class="anchor" aria-label="anchor" href="#verify-r-installation-and-core-packages"></a></h3>
 <p><strong>NEVER SKIP</strong>: Always run this verification after installing R:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Test R basic functionality</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'print("R is working correctly")'</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># Verify core packages are available</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="st">required_packages &lt;- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="st">missing_packages &lt;- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="st">if (length(missing_packages) &gt; 0) {</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="st">  cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="st">  cat("Run installation commands to install missing packages\n")</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="st">  cat("All core development packages are available\n")</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Test R basic functionality</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'print("R is working correctly")'</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Verify core packages are available</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="st">required_packages &lt;- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="st">missing_packages &lt;- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="st">if (length(missing_packages) &gt; 0) {</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="st">  cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="st">  cat("Run installation commands to install missing packages\n")</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="st">  cat("All core development packages are available\n")</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="essential-reprex-package-setup">Essential reprex Package Setup<a class="anchor" aria-label="anchor" href="#essential-reprex-package-setup"></a></h3>
 <p><strong>CRITICAL</strong>: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it’s installed and functional.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Install reprex if not already installed</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="st">  # Try multiple installation methods</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="st">    })</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="st">  })</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="st">'</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co"># Verify reprex functionality with a simple test</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="st"># Test reprex with simple code</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="st">test_code &lt;- "</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="st">x &lt;- 1:5</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="st">mean(x)</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="st">result &lt;- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="st">if (length(result) &gt; 0) {</span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="st">  cat("reprex package is working correctly\n")</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="st">  stop("reprex package installation failed - this is required for PR creation")</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Install reprex if not already installed</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="st">  # Try multiple installation methods</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">    })</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">  })</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co"># Verify reprex functionality with a simple test</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="st"># Test reprex with simple code</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="st">test_code &lt;- "</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="st">x &lt;- 1:5</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="st">mean(x)</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="st">result &lt;- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="st">if (length(result) &gt; 0) {</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="st">  cat("reprex package is working correctly\n")</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="st">  stop("reprex package installation failed - this is required for PR creation")</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="install-function-specific-dependencies-only">Install Function-Specific Dependencies Only<a class="anchor" aria-label="anchor" href="#install-function-specific-dependencies-only"></a></h3>
 <p><strong>CRITICAL</strong>: Only install packages that are actually used by the specific function you are modifying. DO NOT install all suggested packages upfront as this causes long installation times.</p>
 <div class="section level4">
 <h4 id="determine-required-packages-for-your-function">Determine Required Packages for Your Function<a class="anchor" aria-label="anchor" href="#determine-required-packages-for-your-function"></a></h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Step 1: Find which packages your specific function actually requires</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># Check the function's rlang::check_installed() calls in the source code</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed"</span> R/<span class="pp">[</span><span class="ss">your_function_file</span><span class="pp">]</span>.R</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Or search for all function dependencies:</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># grep -r "check_installed\|requireNamespace" R/[your_function_file].R</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Step 1: Find which packages your specific function actually requires</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Check the function's rlang::check_installed() calls in the source code</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed"</span> R/<span class="pp">[</span><span class="ss">your_function_file</span><span class="pp">]</span>.R</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Or search for all function dependencies:</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># grep -r "check_installed\|requireNamespace" R/[your_function_file].R</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="install-only-required-packages">Install Only Required Packages<a class="anchor" aria-label="anchor" href="#install-only-required-packages"></a></h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Step 2: Install ONLY the packages found in Step 1</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Example: If working on nice_scatter(), you only need ggplot2</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("ggplot2", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Example: If working on nice_table(), you only need flextable  </span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("flextable", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Example: If working on nice_violin(), you need multiple packages</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Step 2: Install ONLY the packages found in Step 1</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Example: If working on nice_scatter(), you only need ggplot2</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("ggplot2", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Example: If working on nice_table(), you only need flextable  </span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("flextable", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Example: If working on nice_violin(), you need multiple packages</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="use-rempsycs-built-in-utility-after-building-package">Use rempsyc’s Built-in Utility (After Building Package)<a class="anchor" aria-label="anchor" href="#use-rempsycs-built-in-utility-after-building-package"></a></h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Alternative: Use rempsyc's install_if_not_installed() for specific packages</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="st"># First build and install the current rempsyc package to access utility functions</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="st">if (file.exists("DESCRIPTION")) {</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="st">  system("R CMD build .")</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="st">  pkg_file &lt;- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="st">  if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="st"># Load rempsyc and install only specific packages for your function</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="st"># ONLY install packages needed for your specific function:</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="st">if (exists("install_if_not_installed")) {</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="st">  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="st">  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Alternative: Use rempsyc's install_if_not_installed() for specific packages</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="st"># First build and install the current rempsyc package to access utility functions</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="st">if (file.exists("DESCRIPTION")) {</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="st">  system("R CMD build .")</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="st">  pkg_file &lt;- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="st">  if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="st"># Load rempsyc and install only specific packages for your function</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="st"># ONLY install packages needed for your specific function:</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="st">if (exists("install_if_not_installed")) {</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="st">  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="st">  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="set-up-r-user-library">Set Up R User Library<a class="anchor" aria-label="anchor" href="#set-up-r-user-library"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Create user library directory</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/R/library</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'R_LIBS_USER=~/R/library'</span> <span class="op">&gt;&gt;</span> ~/.Renviron</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Create user library directory</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/R/library</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'R_LIBS_USER=~/R/library'</span> <span class="op">&gt;&gt;</span> ~/.Renviron</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -215,8 +228,8 @@
 <ol style="list-style-type: decimal"><li><p><strong>Identify your function</strong>: Determine which specific function you’re modifying</p></li>
 <li>
 <p><strong>Find dependencies</strong>: Check what packages that function actually requires:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed\|requireNamespace"</span> R/<span class="pp">[</span><span class="ss">your_function</span><span class="pp">]</span>.R</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed\|requireNamespace"</span> R/<span class="pp">[</span><span class="ss">your_function</span><span class="pp">]</span>.R</span></code></pre></div>
 </li>
 <li><p><strong>Install only required packages</strong>: Install ONLY the packages found in step 2</p></li>
 <li><p><strong>Test function</strong>: Test that your specific function works with the installed packages</p></li>
@@ -225,67 +238,67 @@
 <div class="section level3">
 <h3 id="build-the-package">Build the Package<a class="anchor" aria-label="anchor" href="#build-the-package"></a></h3>
 <p><strong>NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Creates: rempsyc_0.1.91.tar.gz (version may vary)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># Creates: rempsyc_0.1.91.tar.gz (version may vary)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="install-the-package">Install the Package<a class="anchor" aria-label="anchor" href="#install-the-package"></a></h3>
 <p><strong>NEVER CANCEL: Install takes ~3 seconds. Set timeout to 60+ seconds.</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_0.1.91.tar.gz</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># Or install from source:</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># R CMD INSTALL .</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_0.1.91.tar.gz</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co"># Or install from source:</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># R CMD INSTALL .</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-tests">Run Tests<a class="anchor" aria-label="anchor" href="#run-tests"></a></h3>
 <p><strong>NEVER CANCEL: Tests take ~11 seconds. Set timeout to 30+ seconds.</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
 <p>Expected results: - ~99 tests processed across multiple test files - ~94 tests should pass - 3-5 snapshot failures due to minor precision differences (normal and expected) - Some tests may be skipped if optional packages not available</p>
 </div>
 <div class="section level3">
 <h3 id="run-linting">Run Linting<a class="anchor" aria-label="anchor" href="#run-linting"></a></h3>
 <p><strong>NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span></code></pre></div>
 <p>Expected results: - Many style warnings (673+ issues found - normal for existing codebase) - Focus on new code adhering to style guidelines - Package is functional despite style warnings</p>
 </div>
 <div class="section level3">
 <h3 id="auto-format-code-with-styler">Auto-format Code with Styler<a class="anchor" aria-label="anchor" href="#auto-format-code-with-styler"></a></h3>
 <p><strong>NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># Style entire package</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co"># Style specific file</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_file("R/[function_name].R")'</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co"># Style specific directory</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_dir("R")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co"># Style entire package</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Style specific file</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_file("R/[function_name].R")'</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># Style specific directory</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_dir("R")'</span></span></code></pre></div>
 <p>Expected results: - Automatic code formatting according to tidyverse style guide - Consistent indentation, spacing, and bracket placement - Files will be modified in-place if styling changes are needed - Use after making changes but before committing</p>
 </div>
 <div class="section level3">
 <h3 id="update-documentation-with-roxygen2">Update Documentation with roxygen2<a class="anchor" aria-label="anchor" href="#update-documentation-with-roxygen2"></a></h3>
 <p><strong>NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co"># Update documentation after making changes to roxygen2 comments</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Alternative using devtools</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'devtools::document()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># Update documentation after making changes to roxygen2 comments</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Alternative using devtools</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'devtools::document()'</span></span></code></pre></div>
 <p>Expected results: - Updates .Rd files in man/ directory from roxygen2 comments - Updates NAMESPACE file with exports/imports - Essential step after modifying function documentation or adding/removing exports - Must be run before building the package if documentation was changed</p>
 <p><strong>When to use</strong>: Always run this after: - Adding or modifying roxygen2 comments (the <code>#'</code> comments above functions) - Adding new exported functions - Changing function parameters or return values in documentation - Adding or removing <code>@export</code>, <code>@import</code>, or <code>@importFrom</code> tags</p>
 </div>
 <div class="section level3">
 <h3 id="run-r-cmd-check">Run R CMD Check<a class="anchor" aria-label="anchor" href="#run-r-cmd-check"></a></h3>
 <p><strong>NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># Without suggested packages (due to network limitations):</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_0.1.91.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># With all checks (if network access available):</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co"># R CMD check rempsyc_0.1.91.tar.gz</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co"># Without suggested packages (due to network limitations):</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_0.1.91.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># With all checks (if network access available):</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co"># R CMD check rempsyc_0.1.91.tar.gz</span></span></code></pre></div>
 <p>Expected results: - Status: 1 ERROR (missing suggested packages - normal), 2 NOTEs<br>
 - Core functionality passes all checks - Tests pass correctly - Examples may fail due to missing optional packages (expected)</p>
 </div>
@@ -295,77 +308,77 @@
 <div class="section level3">
 <h3 id="always-test-core-functions-after-changes">Always Test Core Functions After Changes<a class="anchor" aria-label="anchor" href="#always-test-core-functions-after-changes"></a></h3>
 <p>Test the main functions to ensure they work correctly:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="st"># Test t-test function</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = "mpg", group = "am")</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="st">print(result)</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="st"># Test table formatting</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="st">library(testthat)  # If available</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="st">if (requireNamespace("flextable", quietly = TRUE)) {</span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="st">  table &lt;- nice_table(result)</span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="st">  print("Table creation successful")</span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="st">  print("Flextable not available - table creation skipped")</span></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="st"># Test basic data functions</span></span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="st">data &lt;- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")</span></span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="st">print("Core functions working correctly")</span></span>
-<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="st"># Test t-test function</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = "mpg", group = "am")</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="st">print(result)</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="st"># Test table formatting</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="st">library(testthat)  # If available</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="st">if (requireNamespace("flextable", quietly = TRUE)) {</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="st">  table &lt;- nice_table(result)</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="st">  print("Table creation successful")</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="st">  print("Flextable not available - table creation skipped")</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="st"># Test basic data functions</span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="st">data &lt;- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")</span></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="st">print("Core functions working correctly")</span></span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mandatory-test-reprex-functionality-before-making-changes">MANDATORY: Test reprex Functionality Before Making Changes<a class="anchor" aria-label="anchor" href="#mandatory-test-reprex-functionality-before-making-changes"></a></h3>
 <p><strong>CRITICAL</strong>: Always verify reprex is working before modifying any code that will require a PR:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="st"># Load required packages</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="st"># Create a test reprex with actual rempsyc function</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="st">test_code &lt;- "</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="st"># Example function test</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="st">print(result)</span></span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="st"># Generate reprex</span></span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="st">cat("Testing reprex functionality...\n")</span></span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="st">reprex_result &lt;- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)</span></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
-<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a><span class="st">if (length(reprex_result) &gt; 0 &amp;&amp; any(grepl("library\\(rempsyc\\)", reprex_result))) {</span></span>
-<span id="cb17-23"><a href="#cb17-23" tabindex="-1"></a><span class="st">  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")</span></span>
-<span id="cb17-24"><a href="#cb17-24" tabindex="-1"></a><span class="st">  cat("Sample reprex output (first few lines):\n")</span></span>
-<span id="cb17-25"><a href="#cb17-25" tabindex="-1"></a><span class="st">  cat(paste(head(reprex_result, 10), collapse = "\n"))</span></span>
-<span id="cb17-26"><a href="#cb17-26" tabindex="-1"></a><span class="st">  cat("\n")</span></span>
-<span id="cb17-27"><a href="#cb17-27" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb17-28"><a href="#cb17-28" tabindex="-1"></a><span class="st">  stop("FAILED: reprex is not working correctly - install reprex before proceeding")</span></span>
-<span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="st"># Load required packages</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="st"># Create a test reprex with actual rempsyc function</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="st">test_code &lt;- "</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="st"># Example function test</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="st">print(result)</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="st"># Generate reprex</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="st">cat("Testing reprex functionality...\n")</span></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="st">reprex_result &lt;- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a><span class="st">if (length(reprex_result) &gt; 0 &amp;&amp; any(grepl("library\\(rempsyc\\)", reprex_result))) {</span></span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a><span class="st">  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")</span></span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a><span class="st">  cat("Sample reprex output (first few lines):\n")</span></span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a><span class="st">  cat(paste(head(reprex_result, 10), collapse = "\n"))</span></span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a><span class="st">  cat("\n")</span></span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a><span class="st">  stop("FAILED: reprex is not working correctly - install reprex before proceeding")</span></span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="manual-function-testing-workflow">Manual Function Testing Workflow<a class="anchor" aria-label="anchor" href="#manual-function-testing-workflow"></a></h3>
 <p>After making changes to package functions:</p>
 <ol style="list-style-type: decimal"><li>
 <p><strong>Always rebuild and reinstall the package</strong>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">R</span> CMD build . <span class="kw">&amp;&amp;</span> <span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">R</span> CMD build . <span class="kw">&amp;&amp;</span> <span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span></code></pre></div>
 </li>
 <li>
 <p><strong>Test the specific function you modified</strong>:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); [your_function_test_here]'</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(rempsyc); [your_function_test_here]'</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Run relevant tests</strong>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'</span></span></code></pre></div>
 </li>
 </ol></div>
 </div>
@@ -373,17 +386,17 @@
 <h2 id="key-locations-and-files">Key Locations and Files<a class="anchor" aria-label="anchor" href="#key-locations-and-files"></a></h2>
 <div class="section level3">
 <h3 id="repository-exploration-commands">Repository Exploration Commands<a class="anchor" aria-label="anchor" href="#repository-exploration-commands"></a></h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># View repository structure</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># View R source files</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/R/</span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># View test files</span></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/tests/testthat/</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co"># Check package metadata</span></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="fu">cat</span> /home/runner/work/rempsyc/rempsyc/DESCRIPTION</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># View repository structure</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># View R source files</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/R/</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># View test files</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /home/runner/work/rempsyc/rempsyc/tests/testthat/</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="co"># Check package metadata</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="fu">cat</span> /home/runner/work/rempsyc/rempsyc/DESCRIPTION</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="source-code-structure">Source Code Structure<a class="anchor" aria-label="anchor" href="#source-code-structure"></a></h3>
@@ -418,9 +431,9 @@
 <h2 id="dependencies-and-package-management">Dependencies and Package Management<a class="anchor" aria-label="anchor" href="#dependencies-and-package-management"></a></h2>
 <div class="section level3">
 <h3 id="core-dependencies-always-required">Core Dependencies (Always Required)<a class="anchor" aria-label="anchor" href="#core-dependencies-always-required"></a></h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># In DESCRIPTION file:</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>Imports<span class="sc">:</span> rlang, <span class="fu">dplyr</span> (<span class="sc">&gt;=</span> <span class="dv">1</span>.<span class="fl">1.0</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>Depends<span class="sc">:</span> <span class="fu">R</span> (<span class="sc">&gt;=</span> <span class="fl">3.6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># In DESCRIPTION file:</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>Imports<span class="sc">:</span> rlang, <span class="fu">dplyr</span> (<span class="sc">&gt;=</span> <span class="dv">1</span>.<span class="fl">1.0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>Depends<span class="sc">:</span> <span class="fu">R</span> (<span class="sc">&gt;=</span> <span class="fl">3.6</span>)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="suggested-packages-optional">Suggested Packages (Optional)<a class="anchor" aria-label="anchor" href="#suggested-packages-optional"></a></h3>
@@ -431,21 +444,21 @@
 <div class="section level3">
 <h3 id="installing-additional-packages-only-when-needed">Installing Additional Packages (Only When Needed)<a class="anchor" aria-label="anchor" href="#installing-additional-packages-only-when-needed"></a></h3>
 <p><strong>PRIORITY</strong>: Always install reprex first, then install other packages ONLY as needed for the specific function you are modifying:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># ALWAYS install reprex first (essential for PR creation):</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co"># Via system packages (recommended for individual packages):</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-<span class="pp">[</span><span class="ss">package</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co"># Via R (if CRAN network available, for individual packages):</span></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co"># Alternative sources when CRAN is blocked:</span></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co"># Via R-universe (alternative CRAN mirror):</span></span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://r-universe.dev")'</span></span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co"># Via pak package (faster, handles dependencies better):</span></span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># ALWAYS install reprex first (essential for PR creation):</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># Via system packages (recommended for individual packages):</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-<span class="pp">[</span><span class="ss">package</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co"># Via R (if CRAN network available, for individual packages):</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co"># Alternative sources when CRAN is blocked:</span></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a><span class="co"># Via R-universe (alternative CRAN mirror):</span></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", repos="https://r-universe.dev")'</span></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a><span class="co"># Via pak package (faster, handles dependencies better):</span></span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="common-function-specific-package-requirements">Common Function-Specific Package Requirements<a class="anchor" aria-label="anchor" href="#common-function-specific-package-requirements"></a></h4>
 <p><strong>DO NOT install all of these - only install what you need for your specific function:</strong></p>
@@ -468,28 +481,28 @@
 </ul></div>
 <div class="section level4">
 <h4 id="check-function-dependencies-before-installing">Check Function Dependencies Before Installing<a class="anchor" aria-label="anchor" href="#check-function-dependencies-before-installing"></a></h4>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Find exactly which packages a function requires:</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed\|requireNamespace"</span> R/<span class="pp">[</span><span class="ss">function_file</span><span class="pp">]</span>.R</span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co"># Examples:</span></span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co"># For nice_scatter.R: only requires ggplot2</span></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co"># For nice_table.R: only requires flextable  </span></span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co"># For nice_violin.R: requires ggplot2, boot, ggsignif</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Find exactly which packages a function requires:</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A2</span> <span class="at">-B2</span> <span class="st">"rlang::check_installed\|requireNamespace"</span> R/<span class="pp">[</span><span class="ss">function_file</span><span class="pp">]</span>.R</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># Examples:</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># For nice_scatter.R: only requires ggplot2</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># For nice_table.R: only requires flextable  </span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># For nice_violin.R: requires ggplot2, boot, ggsignif</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="targeted-installation-examples">Targeted Installation Examples<a class="anchor" aria-label="anchor" href="#targeted-installation-examples"></a></h4>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Example 1: Working on nice_scatter() function</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("ggplot2", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Example 2: Working on nice_table() function  </span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("flextable", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># Example 3: Working on nice_violin() function (multiple dependencies)</span></span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co"># Example 4: Working on cormatrix_excel() function</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Example 1: Working on nice_scatter() function</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("ggplot2", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co"># Example 2: Working on nice_table() function  </span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("flextable", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co"># Example 3: Working on nice_violin() function (multiple dependencies)</span></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co"># Example 4: Working on cormatrix_excel() function</span></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -502,7 +515,7 @@
 <h4 id="recommended-approaches">Recommended Approaches:<a class="anchor" aria-label="anchor" href="#recommended-approaches"></a></h4>
 <ol style="list-style-type: decimal"><li>
 <p><strong>For dplyr operations</strong>: Use <code>.data[[variable_name]]</code> notation</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] notation</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -515,7 +528,7 @@
 </li>
 <li>
 <p><strong>For ggplot2 operations</strong>: Use <code>.data[[variable_name]]</code> or <code>aes_string()</code></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] in aes()</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x_var</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -524,7 +537,7 @@
 </li>
 <li>
 <p><strong>Import required functions</strong>: Always explicitly import from other packages</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @importFrom dplyr group_by summarize</span></span>
 <span><span class="co">#' @importFrom ggplot2 ggplot aes</span></span></code></pre></div>
 </li>
@@ -547,7 +560,7 @@
 <h4 id="documentation-validation-steps">Documentation Validation Steps:<a class="anchor" aria-label="anchor" href="#documentation-validation-steps"></a></h4>
 <ol style="list-style-type: decimal"><li>
 <p><strong>Match all parameter names exactly</strong>:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @param response The dependent variable name</span></span>
 <span><span class="co">#' @param group The grouping variable name  </span></span>
 <span><span class="va">function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">group</span><span class="op">)</span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></span></code></pre></div>
@@ -560,10 +573,10 @@
 </ul></li>
 <li>
 <p><strong>Validate before building</strong>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Check for documentation mismatches</span></span>
-<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co"># Look for "Codoc mismatches" warnings</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Check for documentation mismatches</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co"># Look for "Codoc mismatches" warnings</span></span></code></pre></div>
 </li>
 </ol></div>
 </div>
@@ -645,36 +658,36 @@
 <div class="section level3">
 <h3 id="before-committing-changes">Before Committing Changes<a class="anchor" aria-label="anchor" href="#before-committing-changes"></a></h3>
 <p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
-<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
-<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
-<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb31-17"><a href="#cb31-17" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
-<span id="cb31-19"><a href="#cb31-19" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
-<span id="cb31-20"><a href="#cb31-20" tabindex="-1"></a></span>
-<span id="cb31-21"><a href="#cb31-21" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
-<span id="cb31-22"><a href="#cb31-22" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
-<span id="cb31-23"><a href="#cb31-23" tabindex="-1"></a></span>
-<span id="cb31-24"><a href="#cb31-24" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
-<span id="cb31-25"><a href="#cb31-25" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb31-26"><a href="#cb31-26" tabindex="-1"></a></span>
-<span id="cb31-27"><a href="#cb31-27" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
-<span id="cb31-28"><a href="#cb31-28" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
-<span id="cb31-29"><a href="#cb31-29" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
-<span id="cb31-30"><a href="#cb31-30" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
+<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
+<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb32-14"><a href="#cb32-14" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
+<span id="cb32-16"><a href="#cb32-16" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb32-17"><a href="#cb32-17" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
+<span id="cb32-19"><a href="#cb32-19" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
+<span id="cb32-20"><a href="#cb32-20" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
+<span id="cb32-22"><a href="#cb32-22" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
+<span id="cb32-23"><a href="#cb32-23" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
+<span id="cb32-25"><a href="#cb32-25" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb32-26"><a href="#cb32-26" tabindex="-1"></a></span>
+<span id="cb32-27"><a href="#cb32-27" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
+<span id="cb32-28"><a href="#cb32-28" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
+<span id="cb32-29"><a href="#cb32-29" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
+<span id="cb32-30"><a href="#cb32-30" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-request-requirements">Pull Request Requirements<a class="anchor" aria-label="anchor" href="#pull-request-requirements"></a></h3>
@@ -686,23 +699,23 @@
 <li><p><strong>Show before/after behavior</strong> with your code changes</p></li>
 <li>
 <p><strong>ALWAYS use the actual reprex package</strong> for consistent formatting:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
-<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
-<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
-<span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
-<span id="cb32-11"><a href="#cb32-11" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb32-12"><a href="#cb32-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
-<span id="cb32-13"><a href="#cb32-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Generate ACTUAL reprex output</strong> using this workflow:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://reprex.tidyverse.org" class="external-link">reprex</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For BEFORE behavior (if modifying existing function):</span></span>
@@ -732,41 +745,41 @@
 <div class="section level4">
 <h4 id="quick-reprex-creation-workflow">Quick Reprex Creation Workflow:<a class="anchor" aria-label="anchor" href="#quick-reprex-creation-workflow"></a></h4>
 <p><strong>NEVER SKIP</strong>: Always generate actual reprex, never simulate or guess:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex for your changes</span></span>
-<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="st">example_code &lt;- "</span></span>
-<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
-<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
-<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a><span class="st"># Example: test the function you modified</span></span>
-<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
-<span id="cb34-13"><a href="#cb34-13" tabindex="-1"></a><span class="st">print(result)</span></span>
-<span id="cb34-14"><a href="#cb34-14" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a><span class="st"># If working with plots, include them:</span></span>
-<span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a><span class="st">if (requireNamespace(\"ggplot2\", quietly = TRUE)) {</span></span>
-<span id="cb34-17"><a href="#cb34-17" tabindex="-1"></a><span class="st">  plot_result &lt;- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")</span></span>
-<span id="cb34-18"><a href="#cb34-18" tabindex="-1"></a><span class="st">  print(plot_result)</span></span>
-<span id="cb34-19"><a href="#cb34-19" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb34-20"><a href="#cb34-20" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb34-21"><a href="#cb34-21" tabindex="-1"></a></span>
-<span id="cb34-22"><a href="#cb34-22" tabindex="-1"></a><span class="st"># Generate actual reprex</span></span>
-<span id="cb34-23"><a href="#cb34-23" tabindex="-1"></a><span class="st">actual_reprex &lt;- reprex(input = example_code, venue = "gh", advertise = FALSE)</span></span>
-<span id="cb34-24"><a href="#cb34-24" tabindex="-1"></a></span>
-<span id="cb34-25"><a href="#cb34-25" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
-<span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a><span class="st">if (length(actual_reprex) &gt; 0) {</span></span>
-<span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a><span class="st">  cat("SUCCESS: Generated actual reprex for PR\n")</span></span>
-<span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a><span class="st">  cat("Copy this output to your PR description:\n")</span></span>
-<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a><span class="st">  cat("========================================\n")</span></span>
-<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a><span class="st">  cat(paste(actual_reprex, collapse = "\n"))</span></span>
-<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a><span class="st">  cat("\n========================================\n")</span></span>
-<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a><span class="st">} else {</span></span>
-<span id="cb34-33"><a href="#cb34-33" tabindex="-1"></a><span class="st">  stop("FAILED: Could not generate reprex - fix reprex installation first")</span></span>
-<span id="cb34-34"><a href="#cb34-34" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb34-35"><a href="#cb34-35" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex for your changes</span></span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="st">example_code &lt;- "</span></span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="st">library(rempsyc)</span></span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="st">data(mtcars)</span></span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a><span class="st"># Example: test the function you modified</span></span>
+<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="st">result &lt;- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")</span></span>
+<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a><span class="st">print(result)</span></span>
+<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" tabindex="-1"></a><span class="st"># If working with plots, include them:</span></span>
+<span id="cb35-16"><a href="#cb35-16" tabindex="-1"></a><span class="st">if (requireNamespace(\"ggplot2\", quietly = TRUE)) {</span></span>
+<span id="cb35-17"><a href="#cb35-17" tabindex="-1"></a><span class="st">  plot_result &lt;- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")</span></span>
+<span id="cb35-18"><a href="#cb35-18" tabindex="-1"></a><span class="st">  print(plot_result)</span></span>
+<span id="cb35-19"><a href="#cb35-19" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb35-20"><a href="#cb35-20" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb35-21"><a href="#cb35-21" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="#cb35-22" tabindex="-1"></a><span class="st"># Generate actual reprex</span></span>
+<span id="cb35-23"><a href="#cb35-23" tabindex="-1"></a><span class="st">actual_reprex &lt;- reprex(input = example_code, venue = "gh", advertise = FALSE)</span></span>
+<span id="cb35-24"><a href="#cb35-24" tabindex="-1"></a></span>
+<span id="cb35-25"><a href="#cb35-25" tabindex="-1"></a><span class="st"># Verify it worked</span></span>
+<span id="cb35-26"><a href="#cb35-26" tabindex="-1"></a><span class="st">if (length(actual_reprex) &gt; 0) {</span></span>
+<span id="cb35-27"><a href="#cb35-27" tabindex="-1"></a><span class="st">  cat("SUCCESS: Generated actual reprex for PR\n")</span></span>
+<span id="cb35-28"><a href="#cb35-28" tabindex="-1"></a><span class="st">  cat("Copy this output to your PR description:\n")</span></span>
+<span id="cb35-29"><a href="#cb35-29" tabindex="-1"></a><span class="st">  cat("========================================\n")</span></span>
+<span id="cb35-30"><a href="#cb35-30" tabindex="-1"></a><span class="st">  cat(paste(actual_reprex, collapse = "\n"))</span></span>
+<span id="cb35-31"><a href="#cb35-31" tabindex="-1"></a><span class="st">  cat("\n========================================\n")</span></span>
+<span id="cb35-32"><a href="#cb35-32" tabindex="-1"></a><span class="st">} else {</span></span>
+<span id="cb35-33"><a href="#cb35-33" tabindex="-1"></a><span class="st">  stop("FAILED: Could not generate reprex - fix reprex installation first")</span></span>
+<span id="cb35-34"><a href="#cb35-34" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb35-35"><a href="#cb35-35" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 <p><strong>RStudio Users</strong>: Use the reprex addin for faster creation: - Install reprex: <code>install.packages("reprex")</code> - Go to <code>Addins</code> → Search “reprex” → Select “Render reprex…” - Copy code → Use addin → Check “Append session info” → Render</p>
 <p><strong>Workflow Logic</strong>: - Lint first to identify all style issues - Style second to automatically fix what can be fixed - Update documentation third if any roxygen2 comments were changed - Build and test last to validate everything works together</p>
 </div>
@@ -882,21 +895,21 @@
 <ul><li><p><strong>Cause</strong>: reprex package not installed or not working correctly</p></li>
 <li>
 <p><strong>Solution</strong>: Follow the comprehensive reprex installation steps:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="st">    })</span></span>
-<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a><span class="st">  })</span></span>
-<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb35-15"><a href="#cb35-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a><span class="st">    })</span></span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="st">  })</span></span>
+<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </li>
 <li><p><strong>Verification</strong>: Always test reprex functionality before creating PRs using the validation scenario</p></li>
 </ul></div>
@@ -958,7 +971,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <h3 id="code-quality-examples">Code Quality Examples<a class="anchor" aria-label="anchor" href="#code-quality-examples"></a></h3>
 <div class="section level4">
 <h4 id="correct-proper-variable-referencing">CORRECT: Proper Variable Referencing<a class="anchor" aria-label="anchor" href="#correct-proper-variable-referencing"></a></h4>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In dplyr operations - USE .data[[var]] notation:</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -973,7 +986,7 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 </div>
 <div class="section level4">
 <h4 id="incorrect-causes-ci-failures">INCORRECT: Causes CI Failures<a class="anchor" aria-label="anchor" href="#incorrect-causes-ci-failures"></a></h4>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># DO NOT: Bare variable names (causes binding warnings)</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -1020,19 +1033,19 @@ R/global_variables.R - DEPRECATED: Do not add to this file</code></pre>
 <div class="section level4">
 <h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>
 <p>Before making any PR, verify locally:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
-<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
-<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
-<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
-<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
-<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="co"># All tests must pass (94+ passing tests expected):</span></span>
+<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="id_5-pr-description-requirements">5. PR Description Requirements<a class="anchor" aria-label="anchor" href="#id_5-pr-description-requirements"></a></h4>
 <p><strong>CRITICAL</strong>: Always include reprexes in PR descriptions to demonstrate code changes:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create examples showing before/after behavior:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com">rempsyc</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
