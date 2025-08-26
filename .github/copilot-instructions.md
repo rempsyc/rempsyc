@@ -7,6 +7,9 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 ## Environment Setup
 
+### Package Installation Philosophy
+**CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.
+
 ### Install R and Required System Dependencies
 **CRITICAL**: Always ensure R is properly installed and functional before proceeding with any package development tasks.
 
@@ -97,33 +100,51 @@ if (length(result) > 0) {
 '
 ```
 
-### Install Function-Specific Dependencies  
-**DYNAMIC**: When working on specific functions, install their required suggested packages:
+### Install Function-Specific Dependencies Only
+**CRITICAL**: Only install packages that are actually used by the specific function you are modifying. DO NOT install all suggested packages upfront as this causes long installation times.
 
+#### Determine Required Packages for Your Function
 ```bash
-# Use the package's built-in utility to install dependencies for specific functions
-# This leverages the install_if_not_installed() function from rempsyc
+# Step 1: Find which packages your specific function actually requires
+# Check the function's rlang::check_installed() calls in the source code
+cd /home/runner/work/rempsyc/rempsyc
+grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
+
+# Or search for all function dependencies:
+# grep -r "check_installed\|requireNamespace" R/[your_function_file].R
+```
+
+#### Install Only Required Packages
+```bash
+# Step 2: Install ONLY the packages found in Step 1
+# Example: If working on nice_scatter(), you only need ggplot2
+R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+
+# Example: If working on nice_table(), you only need flextable  
+R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+
+# Example: If working on nice_violin(), you need multiple packages
+R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+```
+
+#### Use rempsyc's Built-in Utility (After Building Package)
+```bash
+# Alternative: Use rempsyc's install_if_not_installed() for specific packages
 R --no-restore --no-save -e '
 # First build and install the current rempsyc package to access utility functions
 if (file.exists("DESCRIPTION")) {
-  # We are in the package directory
   system("R CMD build .")
   pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
-  if (!is.na(pkg_file)) {
-    system(paste("R CMD INSTALL", pkg_file))
-  }
+  if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))
 }
 
-# Load rempsyc to access install_if_not_installed function
+# Load rempsyc and install only specific packages for your function
 library(rempsyc)
-
-# Example: Install packages needed for table functions
+# ONLY install packages needed for your specific function:
 if (exists("install_if_not_installed")) {
-  install_if_not_installed(c("flextable", "ggplot2"))
+  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter
 } else {
-  # Fallback method
-  packages <- c("flextable", "ggplot2", "effectsize", "performance")
-  install.packages(packages[!packages %in% rownames(installed.packages())], repos="https://cloud.r-project.org/")
+  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback
 }
 '
 ```
@@ -136,6 +157,19 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 ```
 
 ## Build and Development Workflow
+
+### Targeted Package Installation Workflow
+**ESSENTIAL**: Follow this targeted approach to avoid "The package installation is taking a long time" issues:
+
+1. **Identify your function**: Determine which specific function you're modifying
+2. **Find dependencies**: Check what packages that function actually requires:
+   ```bash
+   cd /home/runner/work/rempsyc/rempsyc
+   grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[your_function].R
+   ```
+3. **Install only required packages**: Install ONLY the packages found in step 2
+4. **Test function**: Test that your specific function works with the installed packages
+5. **Proceed with development**: Build, test, and develop normally
 
 ### Build the Package
 **NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.**
@@ -375,17 +409,17 @@ Many functions require optional packages. The package uses `rlang::check_install
 
 **ESSENTIAL for development**: reprex (mandatory for creating PR examples)
 
-### Installing Additional Packages (if needed)
-**PRIORITY**: Always install reprex first, then install other packages as needed for specific functions:
+### Installing Additional Packages (Only When Needed)
+**PRIORITY**: Always install reprex first, then install other packages ONLY as needed for the specific function you are modifying:
 
 ```bash
 # ALWAYS install reprex first (essential for PR creation):
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
 
-# Via system packages (recommended):
+# Via system packages (recommended for individual packages):
 sudo apt install -y r-cran-[package-name]
 
-# Via R (if CRAN network available):
+# Via R (if CRAN network available, for individual packages):
 R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://cloud.r-project.org/")'
 
 # Alternative sources when CRAN is blocked:
@@ -394,15 +428,45 @@ R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r
 
 # Via pak package (faster, handles dependencies better):
 R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'
+```
 
-# Batch install common development packages:
-R --no-restore --no-save -e '
-essential_packages <- c("reprex", "flextable", "ggplot2", "effectsize", "performance", "testthat", "styler", "roxygen2")
-missing_packages <- essential_packages[!sapply(essential_packages, requireNamespace, quietly = TRUE)]
-if (length(missing_packages) > 0) {
-  install.packages(missing_packages, repos="https://cloud.r-project.org/")
-}
-'
+#### Common Function-Specific Package Requirements
+**DO NOT install all of these - only install what you need for your specific function:**
+
+- **nice_table()**: flextable
+- **nice_scatter()**: ggplot2  
+- **nice_violin()**: ggplot2, boot, ggsignif
+- **nice_qq()**: ggplot2, qqplotr, ggrepel
+- **cormatrix_excel()**: correlation, openxlsx2
+- **nice_lm_slopes()**: effectsize
+- **overlap_circle()**: VennDiagram
+- **plot_outliers()**: ggplot2
+
+#### Check Function Dependencies Before Installing
+```bash
+# Find exactly which packages a function requires:
+cd /home/runner/work/rempsyc/rempsyc
+grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[function_file].R
+
+# Examples:
+# For nice_scatter.R: only requires ggplot2
+# For nice_table.R: only requires flextable  
+# For nice_violin.R: requires ggplot2, boot, ggsignif
+```
+
+#### Targeted Installation Examples
+```bash
+# Example 1: Working on nice_scatter() function
+R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+
+# Example 2: Working on nice_table() function  
+R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+
+# Example 3: Working on nice_violin() function (multiple dependencies)
+R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+
+# Example 4: Working on cormatrix_excel() function
+R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'
 ```
 
 ## Code Quality and Best Practices
@@ -477,35 +541,40 @@ if (length(missing_packages) > 0) {
 
 ### Adding a New Function
 1. Create the function in `/R/[function_name].R`
-2. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
-3. Add roxygen2 documentation above the function (ensure parameter names match exactly)
-4. Add `@importFrom` statements for all external functions used
-5. Add exports to roxygen2 comments if needed (`@export`)
-6. Create tests in `/tests/testthat/test-[function_name].R`
-7. **Check for global variable issues**: `R CMD check` should show no binding warnings
-8. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-9. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
-10. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
-11. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-12. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-13. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
-14. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
+2. **Identify required packages**: Check which packages the function will need using `rlang::check_installed()`
+3. **Install only required packages**: Use targeted installation instead of batch installation
+4. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
+5. Add roxygen2 documentation above the function (ensure parameter names match exactly)
+6. Add `@importFrom` statements for all external functions used
+7. Add exports to roxygen2 comments if needed (`@export`)
+8. Create tests in `/tests/testthat/test-[function_name].R`
+9. **Check for global variable issues**: `R CMD check` should show no binding warnings
+10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
+12. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
+13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+14. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+15. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+16. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
 
 ### Modifying Existing Functions
-1. Edit the function in appropriate `/R/[file].R`
-2. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
-3. Update documentation if parameters changed (ensure exact parameter name matches)
-4. Update `@importFrom` statements if new external functions are used
-5. Update tests if function behavior changes
-6. **Check for global variable issues**: `R CMD check` should show no binding warnings
-7. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-8. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
-9. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
-10. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-11. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-12. **Always test the specific function manually**
-13. Run full test suite to check for regressions
-14. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+1. **Identify current function dependencies**: Check which packages the function currently requires
+2. Edit the function in appropriate `/R/[file].R`
+3. **Check if new packages are needed**: If adding functionality, identify any new package requirements
+4. **Install only new required packages**: Install only what's newly needed, not all suggested packages
+5. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
+6. Update documentation if parameters changed (ensure exact parameter name matches)
+7. Update `@importFrom` statements if new external functions are used
+8. Update tests if function behavior changes
+9. **Check for global variable issues**: `R CMD check` should show no binding warnings
+10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
+12. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
+13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+14. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+15. **Always test the specific function manually**
+16. Run full test suite to check for regressions
+17. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
 
 ### Before Committing Changes
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try:
@@ -647,6 +716,11 @@ if (length(actual_reprex) > 0) {
 - Build and test last to validate everything works together
 
 ## Troubleshooting
+
+### "The package installation is taking a long time"
+- **Cause**: Installing too many suggested packages instead of only the ones needed for the current function
+- **Solution**: Follow the targeted installation approach - only install packages specifically required by the function you're modifying
+- **Prevention**: Always use `grep -A2 -B2 "rlang::check_installed" R/[function_file].R` to identify minimal dependencies first
 
 ### "Could not find function" Errors
 - **Cause**: Package not loaded or installed
@@ -866,5 +940,8 @@ data(mtcars)
 - Documentation update: ~5-15 seconds (roxygen2)
 - R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
 - Function loading after install: Near instant
+- **Package installation**: 1-5 seconds per package (targeted) vs 2-10 minutes (batch installation of all suggested packages)
 
 **CRITICAL**: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).
+
+**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. Installing all 22+ suggested packages takes 2-10 minutes; installing 1-3 specific packages takes 1-5 seconds each.
