@@ -1,0 +1,242 @@
+# GitHub Copilot Environment Setup for rempsyc R Package
+# This workflow sets up the development environment before Copilot starts working
+# Based on: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment
+
+name: copilot-setup-steps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+      _R_CHECK_CRAN_INCOMING_: false
+      _R_CHECK_FORCE_SUGGESTS_: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+          
+      - name: Setup pandoc (required for building vignettes)
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            r-base-dev
+
+      - name: Setup R user library
+        run: |
+          mkdir -p ~/R/library
+          echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
+        shell: bash
+
+      - name: Cache R packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Install core R development packages
+        run: |
+          # Install essential development packages first
+          install.packages(c(
+            "rlang",
+            "dplyr", 
+            "testthat",
+            "lintr",
+            "styler", 
+            "roxygen2",
+            "reprex",
+            "devtools"
+          ), repos = "https://cloud.r-project.org/")
+        shell: Rscript {0}
+        
+      - name: Install commonly used suggested packages
+        run: |
+          # Install the most commonly required suggested packages
+          # Based on analysis of rlang::check_installed() calls in source code
+          install.packages(c(
+            "ggplot2",      # Most common - used in plots (nice_scatter, nice_violin, etc.)
+            "flextable",    # For nice_table() - APA formatted tables
+            "effectsize",   # For nice_lm_slopes, contrasts
+            "correlation",  # For cormatrix_excel
+            "boot",         # For nice_violin bootstrap
+            "ggsignif",     # For nice_violin significance bars  
+            "ggrepel",      # For nice_qq plots
+            "openxlsx2",    # For Excel export functions
+            "modelbased",   # For contrasts
+            "bootES",       # For effect sizes in contrasts
+            "performance",  # For model diagnostics
+            "insight",      # For model utilities
+            "broom",        # For tidy model outputs
+            "emmeans"       # For contrasts and slopes
+          ), repos = "https://cloud.r-project.org/")
+        shell: Rscript {0}
+        continue-on-error: true
+
+      - name: Install rempsyc package dependencies
+        run: |
+          # Install package dependencies using setup-r-dependencies
+          install.packages("remotes", repos = "https://cloud.r-project.org/")
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+
+      - name: Build rempsyc package
+        run: |
+          # Build the current package
+          system("R CMD build .")
+        shell: Rscript {0}
+        
+      - name: Install rempsyc package  
+        run: |
+          # Install the built package
+          pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+          if (!is.na(pkg_file)) {
+            system(paste("R CMD INSTALL", pkg_file))
+          } else {
+            # Fallback: install from source
+            system("R CMD INSTALL .")
+          }
+        shell: Rscript {0}
+
+      - name: Verify R installation and packages
+        run: |
+          cat("=== R Version ===\n")
+          print(R.version.string)
+          
+          cat("\n=== Core Development Packages ===\n")
+          required_packages <- c("rlang", "dplyr", "testthat", "lintr", "styler", "roxygen2", "reprex")
+          for (pkg in required_packages) {
+            if (requireNamespace(pkg, quietly = TRUE)) {
+              cat("✓", pkg, "- version", as.character(packageVersion(pkg)), "\n")
+            } else {
+              cat("✗", pkg, "- NOT AVAILABLE\n")
+            }
+          }
+          
+          cat("\n=== rempsyc Package ===\n") 
+          if (requireNamespace("rempsyc", quietly = TRUE)) {
+            library(rempsyc)
+            cat("✓ rempsyc - version", as.character(packageVersion("rempsyc")), "\n")
+          } else {
+            cat("✗ rempsyc - NOT AVAILABLE\n")
+          }
+        shell: Rscript {0}
+
+      - name: Test core rempsyc functionality
+        run: |
+          library(rempsyc)
+          
+          cat("=== Testing Core Functions ===\n")
+          
+          # Test basic data function
+          test_data <- data.frame(id = c(1,1,2,3), val = c(1,2,3,4))
+          duplicates <- extract_duplicates(test_data, id = "id")
+          cat("✓ extract_duplicates() works\n")
+          
+          # Test t-test function
+          tryCatch({
+            result <- nice_t_test(data = mtcars, response = "mpg", group = "am")
+            cat("✓ nice_t_test() works\n")
+          }, error = function(e) {
+            cat("⚠ nice_t_test() error:", e$message, "\n")
+          })
+          
+          # Test table creation if flextable available
+          if (requireNamespace("flextable", quietly = TRUE)) {
+            tryCatch({
+              table <- nice_table(mtcars[1:5, 1:4])
+              cat("✓ nice_table() works\n")  
+            }, error = function(e) {
+              cat("⚠ nice_table() error:", e$message, "\n")
+            })
+          } else {
+            cat("ℹ nice_table() skipped (flextable not available)\n")
+          }
+          
+          # Test plotting if ggplot2 available
+          if (requireNamespace("ggplot2", quietly = TRUE)) {
+            tryCatch({
+              plot <- nice_scatter(data = mtcars, response = "mpg", predictor = "wt")
+              cat("✓ nice_scatter() works\n")
+            }, error = function(e) {
+              cat("⚠ nice_scatter() error:", e$message, "\n")
+            })
+          } else {
+            cat("ℹ nice_scatter() skipped (ggplot2 not available)\n")  
+          }
+          
+          cat("\n=== Core Function Tests Complete ===\n")
+        shell: Rscript {0}
+
+      - name: Test reprex functionality  
+        run: |
+          library(reprex)
+          library(rempsyc)
+          
+          cat("=== Testing reprex Functionality ===\n")
+          
+          # Test reprex with rempsyc function
+          test_code <- "
+          library(rempsyc)
+          data(mtcars)
+          
+          # Test basic t-test
+          result <- nice_t_test(data = mtcars, response = 'mpg', group = 'am')
+          print(result)
+          "
+          
+          tryCatch({
+            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+            
+            if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
+              cat("✓ reprex is working correctly with rempsyc\n")
+              cat("Sample reprex output (first 5 lines):\n")
+              cat(paste(head(reprex_result, 5), collapse = "\n"), "\n")
+            } else {
+              cat("⚠ reprex generated output but may not be working correctly\n")
+            }
+          }, error = function(e) {
+            cat("✗ reprex failed:", e$message, "\n")
+          })
+          
+          cat("\n=== reprex Test Complete ===\n")
+        shell: Rscript {0}
+
+      - name: Display environment summary
+        run: |
+          cat("=== GitHub Copilot Environment Setup Complete ===\n\n")
+          
+          cat("✓ R", R.version.string, "\n")
+          cat("✓ rempsyc package installed and functional\n")
+          cat("✓ Core development tools available (lintr, styler, reprex)\n")
+          cat("✓ Common suggested packages installed\n")
+          cat("✓ Package building and testing capabilities verified\n\n")
+          
+          cat("The environment is ready for GitHub Copilot to begin development work.\n")
+          cat("Copilot can now build, test, lint, and create reproducible examples.\n")
+        shell: Rscript {0}

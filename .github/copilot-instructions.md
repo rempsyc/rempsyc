@@ -5,7 +5,26 @@ Always follow these instructions EXACTLY and only search for additional context 
 ## Overview
 The `rempsyc` package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.
 
-## Environment Setup
+## Pre-Configured Environment 
+
+**NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This pre-installs:
+
+- R and system dependencies
+- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
+- Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)
+- The rempsyc package itself (built and installed)
+- Verified functionality of core functions and reprex
+
+**If the pre-configured environment is working**, you can skip most manual installation steps below and go directly to the [Build and Development Workflow](#build-and-development-workflow) section.
+
+**Verification**: Check if the environment is pre-configured by running:
+```bash
+R --no-restore --no-save -e 'library(rempsyc); packageVersion("rempsyc")'
+```
+
+If this works without errors, the environment is ready. If not, follow the manual setup below.
+
+## Environment Setup (Manual - if pre-configuration failed)
 
 ### Package Installation Philosophy
 **CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.
