@@ -1,7 +1,16 @@
 # rempsyc 0.1.9
 * New CRAN submission
 
-## rempsyc 0.1.8.3
+## rempsyc 0.1.9.2
+* `nice_scatter`: Major enhancement with two highly requested features:
+  * **Point ID display**: New `has.ids` parameter displays point labels/IDs directly on scatter plots using `ggrepel` for intelligent non-overlapping positioning. Use `id.column` to specify a custom column for labels, defaults to row names.
+  * **Group-wise correlations**: New `has.group.r` and `has.group.p` parameters display correlation statistics for each group separately with smart anti-overlap positioning. r-values position on left side, p-values on right side to prevent overlap. Includes automatic italic formatting consistent with overall correlation display.
+  * Both features integrate seamlessly with all existing plot options and maintain backward compatibility.
+
+## rempsyc 0.1.9.1
+* `nice_table`: Fixed cross-environment snapshot test failures by replacing snapshot tests with robust class-based assertions, ensuring consistent behavior across different R environments and platforms.
+
+# rempsyc 0.1.9
 * `cormatrix_excel` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance.
 
 ## rempsyc 0.1.8.2
