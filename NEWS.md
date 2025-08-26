@@ -1,5 +1,5 @@
-# rempsyc 0.1.9
-* New CRAN submission
+# rempsyc 0.2.0
+* New CRAN submission (incoming)
 
 ## rempsyc 0.1.9.2
 * `nice_scatter`: Major enhancement with two highly requested features:
