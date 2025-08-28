@@ -106,12 +106,12 @@ nice_lm_slopes <- function(model,
     x$model
   })
 
-  # Check that moderator is numeric/continuous (simple slopes require ±1 SD calculation)
+  # Check that moderator is numeric/continuous (simple slopes require +/- 1 SD calculation)
   lapply(data.list, function(data) {
     if (!is.numeric(data[[moderator]])) {
       stop(paste0(
         "The moderator '", moderator, "' must be numeric/continuous for simple slopes analysis. ",
-        "Factor moderators are not supported as simple slopes are calculated at ±1 SD from the mean. ",
+        "Factor moderators are not supported as simple slopes are calculated at +/- 1 SD from the mean. ",
         "For factor moderators, consider using nice_contrasts() or other appropriate functions instead."
       ))
     }
