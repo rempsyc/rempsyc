@@ -63,6 +63,7 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h2>
 <p>The <code>rempsyc</code> package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.</p>
 <p><strong>CRITICAL REMINDER</strong>: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the <a href="#version-management-and-changelog-updates">Version Management section</a> for detailed instructions.</p>
+<p><strong>VERSION MANAGEMENT FREQUENCY</strong>: Version numbers and NEWS.md should be updated <strong>ONCE PER PULL REQUEST</strong>, not once per commit. Multiple commits within the same PR should use the same version number.</p>
 </div>
 <div class="section level2">
 <h2 id="pre-configured-environment">Pre-Configured Environment<a class="anchor" aria-label="anchor" href="#pre-configured-environment"></a></h2>
@@ -583,7 +584,9 @@
 <h2 id="common-development-tasks">Common Development Tasks<a class="anchor" aria-label="anchor" href="#common-development-tasks"></a></h2>
 <div class="section level3">
 <h3 id="adding-a-new-function">Adding a New Function<a class="anchor" aria-label="anchor" href="#adding-a-new-function"></a></h3>
-<ol style="list-style-type: decimal"><li>Create the function in <code>/R/[function_name].R</code>
+<ol style="list-style-type: decimal"><li>
+<strong>FIRST: Update version number and NEWS.md</strong> (see Version Management section - do this ONCE per PR)</li>
+<li>Create the function in <code>/R/[function_name].R</code>
 </li>
 <li>
 <strong>Identify required packages</strong>: Check which packages the function will need using <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code>
@@ -615,15 +618,15 @@
 <li>Run tests: <code>R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'</code>
 </li>
 <li>
-<strong>Update version number</strong>: Bump version in DESCRIPTION file (see Version Management section)</li>
-<li>
-<strong>Update NEWS.md</strong>: Add changelog entry describing the new function (see Version Management section)</li>
-<li>
 <strong>Create reprex examples</strong>: Prepare reproducible examples showing the new function in action for PR description</li>
+<li>
+<strong>If making additional commits</strong>: DO NOT update version/NEWS.md again - use same version for all commits in this PR</li>
 </ol></div>
 <div class="section level3">
 <h3 id="modifying-existing-functions">Modifying Existing Functions<a class="anchor" aria-label="anchor" href="#modifying-existing-functions"></a></h3>
 <ol style="list-style-type: decimal"><li>
+<strong>FIRST: Update version number and NEWS.md</strong> (see Version Management section - do this ONCE per PR)</li>
+<li>
 <strong>Identify current function dependencies</strong>: Check which packages the function currently requires</li>
 <li>Edit the function in appropriate <code>/R/[file].R</code>
 </li>
@@ -655,16 +658,15 @@
 <li><strong>Always test the specific function manually</strong></li>
 <li>Run full test suite to check for regressions</li>
 <li>
-<strong>Update version number</strong>: Bump version in DESCRIPTION file (see Version Management section)</li>
-<li>
-<strong>Update NEWS.md</strong>: Add changelog entry describing your changes (see Version Management section)</li>
-<li>
 <strong>Create before/after reprexes</strong>: Prepare examples showing the old vs new behavior for PR description</li>
+<li>
+<strong>If making additional commits</strong>: DO NOT update version/NEWS.md again - use same version for all commits in this PR</li>
 </ol></div>
 </div>
 <div class="section level2">
 <h2 id="version-management-and-changelog-updates">Version Management and Changelog Updates<a class="anchor" aria-label="anchor" href="#version-management-and-changelog-updates"></a></h2>
 <p><strong>CRITICAL</strong>: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.</p>
+<p><strong>IMPORTANT CLARIFICATION</strong>: Version numbers should be bumped <strong>ONCE PER PULL REQUEST</strong>, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.</p>
 <div class="section level3">
 <h3 id="version-numbering-system">Version Numbering System<a class="anchor" aria-label="anchor" href="#version-numbering-system"></a></h3>
 <p>The rempsyc package follows this versioning pattern: - <strong>Major releases</strong> (CRAN submissions): Two decimals (e.g., 0.1.9, 0.1.8, 0.1.7) - <strong>Development versions</strong> (between CRAN releases): Three decimals (e.g., 0.1.8.3, 0.1.8.2, 0.1.8.1)</p>
@@ -672,6 +674,13 @@
 <div class="section level3">
 <h3 id="when-to-bump-versions">When to Bump Versions<a class="anchor" aria-label="anchor" href="#when-to-bump-versions"></a></h3>
 <p><strong>ALWAYS</strong> bump the version for ANY change that affects the package: 1. <strong>Bug fixes</strong>: Increment the third decimal (0.1.91 → 0.1.92) 2. <strong>New features</strong>: Increment the third decimal (0.1.91 → 0.1.92) 3. <strong>Breaking changes</strong>: Increment the second decimal (0.1.91 → 0.2.0) - rare 4. <strong>Documentation-only changes</strong>: Still increment third decimal for tracking</p>
+</div>
+<div class="section level3">
+<h3 id="multiple-commits-within-a-single-pr">Multiple Commits Within a Single PR<a class="anchor" aria-label="anchor" href="#multiple-commits-within-a-single-pr"></a></h3>
+<p><strong>CRITICAL RULE</strong>: If your PR involves multiple commits, use the same version number for ALL commits in that PR.</p>
+<p><strong>Correct approach for multi-commit PR</strong>: 1. <strong>At the start of your PR work</strong>: Bump version from 0.1.91 → 0.1.92 and update NEWS.md 2. <strong>First commit</strong>: Contains version bump + your first set of changes 3. <strong>Subsequent commits</strong>: Use the same version (0.1.92) for any additional changes 4. <strong>Do NOT bump version again</strong> until you start a new PR</p>
+<p><strong>Example of correct multi-commit PR</strong>: - Commit 1: “Bump version to 0.1.92 and add new feature X” - Commit 2: “Fix bug in feature X (still version 0.1.92)” - Commit 3: “Update documentation for feature X (still version 0.1.92)” - All commits use version 0.1.92, NEWS.md updated once in commit 1</p>
+<p><strong>NEVER do this</strong> (incorrect approach): - Commit 1: “Add feature X, bump to 0.1.92” - Commit 2: “Fix bug in feature X, bump to 0.1.93” ❌ WRONG - Commit 3: “Update docs, bump to 0.1.94” ❌ WRONG</p>
 </div>
 <div class="section level3">
 <h3 id="how-to-update-version-number">How to Update Version Number<a class="anchor" aria-label="anchor" href="#how-to-update-version-number"></a></h3>
@@ -731,7 +740,7 @@
 </ol></div>
 <div class="section level3">
 <h3 id="automated-version-management-workflow">Automated Version Management Workflow<a class="anchor" aria-label="anchor" href="#automated-version-management-workflow"></a></h3>
-<p><strong>Follow this exact sequence for every PR</strong>:</p>
+<p><strong>Follow this exact sequence ONCE PER PR</strong> (not per commit):</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
 <span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co"># Step 1: Check current version</span></span>
@@ -741,17 +750,19 @@
 <span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co"># Step 2: Determine new version number</span></span>
 <span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co"># Current: 0.1.91 → New: 0.1.92 (example)</span></span>
 <span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="co"># Step 3: Update DESCRIPTION file</span></span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="co"># Step 3: Update DESCRIPTION file (ONCE per PR)</span></span>
 <span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Version: 0.1.91/Version: 0.1.92/'</span> DESCRIPTION</span>
 <span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a></span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="co"># Step 4: Update NEWS.md (add entry at the top)</span></span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="co"># Step 4: Update NEWS.md (ONCE per PR - add entry at the top)</span></span>
 <span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="co"># Use your preferred text editor or str_replace_editor</span></span>
 <span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a></span>
 <span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a><span class="co"># Step 5: Verify updates</span></span>
 <span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
 <span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a><span class="fu">head</span> <span class="at">-10</span> NEWS.md</span>
 <span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a></span>
-<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a><span class="co"># Step 6: Proceed with normal build/test workflow</span></span></code></pre></div>
+<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a><span class="co"># Step 6: Proceed with normal build/test workflow</span></span>
+<span id="cb36-21"><a href="#cb36-21" tabindex="-1"></a><span class="co"># Step 7: Make your code changes and commit everything together</span></span>
+<span id="cb36-22"><a href="#cb36-22" tabindex="-1"></a><span class="co"># Step 8: Any additional commits in this PR should NOT change version numbers again</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="version-update-examples">Version Update Examples<a class="anchor" aria-label="anchor" href="#version-update-examples"></a></h3>
@@ -780,40 +791,41 @@
 </div>
 </div>
 <div class="section level3">
-<h3 id="before-committing-changes">Before Committing Changes<a class="anchor" aria-label="anchor" href="#before-committing-changes"></a></h3>
-<p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try:</p>
+<h3 id="before-submitting-your-pr-final-validation">Before Submitting Your PR (Final Validation)<a class="anchor" aria-label="anchor" href="#before-submitting-your-pr-final-validation"></a></h3>
+<p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/rempsyc/rempsyc</span>
 <span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co"># 0. MANDATORY: Update version number and NEWS.md (see Version Management section below)</span></span>
-<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
-<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
-<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
-<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
-<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a></span>
-<span id="cb40-11"><a href="#cb40-11" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
-<span id="cb40-12"><a href="#cb40-12" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb40-13"><a href="#cb40-13" tabindex="-1"></a></span>
-<span id="cb40-14"><a href="#cb40-14" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
-<span id="cb40-15"><a href="#cb40-15" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb40-16"><a href="#cb40-16" tabindex="-1"></a></span>
-<span id="cb40-17"><a href="#cb40-17" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
-<span id="cb40-18"><a href="#cb40-18" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb40-19"><a href="#cb40-19" tabindex="-1"></a></span>
-<span id="cb40-20"><a href="#cb40-20" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
-<span id="cb40-21"><a href="#cb40-21" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
-<span id="cb40-22"><a href="#cb40-22" tabindex="-1"></a></span>
-<span id="cb40-23"><a href="#cb40-23" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
-<span id="cb40-24"><a href="#cb40-24" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
-<span id="cb40-25"><a href="#cb40-25" tabindex="-1"></a></span>
-<span id="cb40-26"><a href="#cb40-26" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing</span></span>
-<span id="cb40-27"><a href="#cb40-27" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb40-28"><a href="#cb40-28" tabindex="-1"></a></span>
-<span id="cb40-29"><a href="#cb40-29" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
-<span id="cb40-30"><a href="#cb40-30" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
-<span id="cb40-31"><a href="#cb40-31" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
-<span id="cb40-32"><a href="#cb40-32" tabindex="-1"></a><span class="co"># - Fix these issues before committing</span></span></code></pre></div>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co"># 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co">#    (Do NOT update them again if this is a subsequent commit in the same PR)</span></span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds)</span></span>
+<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package()'</span></span>
+<span id="cb40-11"><a href="#cb40-11" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
+<span id="cb40-13"><a href="#cb40-13" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb40-14"><a href="#cb40-14" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
+<span id="cb40-16"><a href="#cb40-16" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb40-17"><a href="#cb40-17" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
+<span id="cb40-19"><a href="#cb40-19" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb40-20"><a href="#cb40-20" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
+<span id="cb40-22"><a href="#cb40-22" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL rempsyc_<span class="pp">*</span>.tar.gz</span>
+<span id="cb40-23"><a href="#cb40-23" tabindex="-1"></a></span>
+<span id="cb40-24"><a href="#cb40-24" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
+<span id="cb40-25"><a href="#cb40-25" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(rempsyc); test_local()'</span></span>
+<span id="cb40-26"><a href="#cb40-26" tabindex="-1"></a></span>
+<span id="cb40-27"><a href="#cb40-27" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission</span></span>
+<span id="cb40-28"><a href="#cb40-28" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check rempsyc_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb40-29"><a href="#cb40-29" tabindex="-1"></a></span>
+<span id="cb40-30"><a href="#cb40-30" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
+<span id="cb40-31"><a href="#cb40-31" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
+<span id="cb40-32"><a href="#cb40-32" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
+<span id="cb40-33"><a href="#cb40-33" tabindex="-1"></a><span class="co"># - Fix these issues before submitting your PR</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-request-requirements">Pull Request Requirements<a class="anchor" aria-label="anchor" href="#pull-request-requirements"></a></h3>
