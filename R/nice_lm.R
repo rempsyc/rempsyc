@@ -112,7 +112,36 @@ nice_lm <- function(model,
     dplyr::select(z, "r2_semipartial", "CI_low", "CI_high")
   })
 
-  if (as.data.frame(ES.list) %>% nrow() == 1) {
+  # Handle dimension mismatch between sums.list and ES.list for factor variables
+  # with multiple levels by expanding ES.list to match coefficient structure
+  ES.list <- lapply(seq_along(models.list), function(i) {
+    sums_data <- sums.list[[i]]
+    es_data <- ES.list[[i]]
+    assign_vector <- models.list[[i]]$assign[-1]  # Remove intercept
+    
+    # If dimensions already match, return as-is
+    if (nrow(sums_data) == nrow(es_data)) {
+      return(es_data)
+    }
+    
+    # Expand effect sizes to match coefficient structure
+    expanded_es <- data.frame(
+      r2_semipartial = numeric(nrow(sums_data)),
+      CI_low = numeric(nrow(sums_data)), 
+      CI_high = numeric(nrow(sums_data))
+    )
+    
+    # Map each coefficient to its corresponding effect size using assign vector
+    for (j in seq_along(assign_vector)) {
+      term_index <- assign_vector[j]
+      expanded_es[j, ] <- es_data[term_index, ]
+    }
+    
+    return(expanded_es)
+  })
+
+  # Check if we need to transpose sums.list (legacy logic for single-parameter models)
+  if (length(models.list) == 1 && nrow(ES.list[[1]]) == 1) {
     sums.list <- lapply(sums.list, function(x) {
       t(as.matrix(x))
     })
