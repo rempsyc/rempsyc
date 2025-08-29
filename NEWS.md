@@ -1,6 +1,9 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.4
+* Optimize custom copilot setup: Remove suggested packages from automated setup to save 3-7 minutes installation time. Suggested packages are now installed on-demand based on specific PR requirements, following targeted installation approach (#51)
+
 ## rempsyc 0.1.9.3
 * `nice_lm()`: fix bug with factor covariates having more than two levels causing "arguments imply differing number of rows" error (#31)
 * `nice_lm_slopes()`: add better error message when factor moderators are used, explaining that only continuous moderators are supported. Also add explicit test documenting that continuous moderators work correctly even when models contain factor covariates with multiple levels

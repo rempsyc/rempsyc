@@ -16,7 +16,7 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
 - R and system dependencies
 - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
-- Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)
+- **IMPORTANT**: Suggested packages are NOT installed during setup (install as needed per PR)
 - The rempsyc package itself (built and installed)
 - Verified functionality of core functions and reprex
 
@@ -34,10 +34,25 @@ R --no-restore --no-save -e 'library(rempsyc); packageVersion("rempsyc")'
 
 If this works without errors, the environment is ready. If not, follow the manual setup below.
 
+## IMPORTANT: Optimized Package Installation Strategy
+
+**CRITICAL CHANGE**: To save time, the pre-configured environment does NOT install suggested packages by default. Instead:
+
+1. **Core development packages are pre-installed**: rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools
+2. **Suggested packages are installed on-demand**: Only install packages needed for your specific PR
+3. **Significant time savings**: Setup takes ~2-3 minutes instead of 5-10 minutes
+4. **Follow targeted installation**: Use the guidance below to install only what you need
+
+**What this means for your workflow**:
+- ✅ Core development tools (linting, testing, documentation) work immediately
+- ✅ Basic package building and testing work out of the box  
+- ⚠️ Function-specific packages (ggplot2, flextable, etc.) need to be installed when working on those functions
+- 📖 Always use the [Targeted Package Installation](#targeted-package-installation-workflow) approach below
+
 ## Environment Setup (Manual - if pre-configuration failed)
 
 ### Package Installation Philosophy
-**CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.
+**CRITICAL - OPTIMIZED APPROACH**: Install packages minimally and on-demand to avoid long installation times. The pre-configured environment does NOT install suggested packages - only core development tools. Only install packages that are actually required by the specific function you are modifying in your current PR.
 
 ### Install R and Required System Dependencies
 **CRITICAL**: Always ensure R is properly installed and functional before proceeding with any package development tasks.
@@ -911,7 +926,8 @@ if (length(actual_reprex) > 0) {
 
 ### "The package installation is taking a long time"
 - **Cause**: Installing too many suggested packages instead of only the ones needed for the current function
-- **Solution**: Follow the targeted installation approach - only install packages specifically required by the function you're modifying
+- **Solution**: Follow the targeted installation approach - only install packages specifically required by the function you're modifying  
+- **NEW**: The pre-configured environment no longer installs suggested packages to prevent this issue
 - **Prevention**: Always use `grep -A2 -B2 "rlang::check_installed" R/[function_file].R` to identify minimal dependencies first
 
 ### "Could not find function" Errors
@@ -1133,7 +1149,8 @@ data(mtcars)
 - R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
 - Function loading after install: Near instant
 - **Package installation**: 1-5 seconds per package (targeted) vs 2-10 minutes (batch installation of all suggested packages)
+- **Pre-configured environment setup**: ~2-3 minutes (core tools only) vs ~5-10 minutes (with all suggested packages)
 
 **CRITICAL**: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).
 
-**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. Installing all 22+ suggested packages takes 2-10 minutes; installing 1-3 specific packages takes 1-5 seconds each.
+**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. The pre-configured environment installs only core development packages (~2-3 minutes); installing additional suggested packages takes 1-5 seconds each when needed, vs 2-10 minutes for all 22+ suggested packages at once.

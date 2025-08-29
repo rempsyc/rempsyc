@@ -174,29 +174,9 @@ jobs:
           ), repos = "https://cloud.r-project.org/")
         shell: Rscript {0}
         
-      - name: Install commonly used suggested packages
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install the most commonly required suggested packages
-          # Based on analysis of rlang::check_installed() calls in source code
-          install.packages(c(
-            "ggplot2",      # Most common - used in plots (nice_scatter, nice_violin, etc.)
-            "flextable",    # For nice_table() - APA formatted tables
-            "effectsize",   # For nice_lm_slopes, contrasts
-            "correlation",  # For cormatrix_excel
-            "boot",         # For nice_violin bootstrap
-            "ggsignif",     # For nice_violin significance bars  
-            "ggrepel",      # For nice_qq plots
-            "openxlsx2",    # For Excel export functions
-            "modelbased",   # For contrasts
-            "bootES",       # For effect sizes in contrasts
-            "performance",  # For model diagnostics
-            "insight",      # For model utilities
-            "broom",        # For tidy model outputs
-            "emmeans"       # For contrasts and slopes
-          ), repos = "https://cloud.r-project.org/")
-        shell: Rscript {0}
-        continue-on-error: true
+      # NOTE: Suggested packages are NOT installed during setup to save time
+      # These should be installed on-demand based on specific PR requirements
+      # See copilot-instructions.md for targeted installation guidance
 
       - name: Install rempsyc package dependencies
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
@@ -347,7 +327,7 @@ jobs:
             echo "  - R and system dependencies installed"
             echo "  - rempsyc package built and installed"
             echo "  - Core development tools available (lintr, styler, reprex)"
-            echo "  - Common suggested packages installed"
+            echo "  - Suggested packages NOT installed (install as needed per PR)"
             echo "  - Package building and testing capabilities verified"
             echo ""
             echo "The environment is ready for R package development work."
