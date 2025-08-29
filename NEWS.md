@@ -1,6 +1,9 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.5
+* Incoming
+
 ## rempsyc 0.1.9.4
 * Optimize custom copilot setup: Remove suggested packages from automated setup to save 3-7 minutes installation time. Suggested packages are now installed on-demand based on specific PR requirements, following targeted installation approach (#51)
 
