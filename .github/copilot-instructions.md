@@ -893,45 +893,46 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
    - **Before**: Real reprex output showing the current (problematic) behavior
    - **After**: Real reprex output showing the improved behavior with your changes
 
-#### Quick Reprex Creation Workflow:
-**NEVER SKIP**: Always generate actual reprex, never simulate or guess:
+#### Optimized Reprex Creation with Image Handling:
+**ESSENTIAL**: Always generate actual reprex with automatic imgur integration for plots:
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 library(rempsyc)
 
-# Create ACTUAL reprex for your changes
-example_code <- "
-library(rempsyc)
-data(mtcars)
+# Create ACTUAL reprex - plots automatically uploaded to imgur
+reprex_result <- reprex({
+  library(rempsyc)
+  library(ggplot2)
 
-# Example: test the function you modified
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
-print(result)
+  # Example: Create visualization with your function  
+  plot <- nice_scatter(
+    data = mtcars,
+    response = "mpg",
+    predictor = "wt", 
+    has.r = TRUE,
+    has.p = TRUE
+  )
+  
+  print(plot)
+  
+}, venue = "gh", advertise = TRUE, html_preview = FALSE)
 
-# If working with plots, include them:
-if (requireNamespace(\"ggplot2\", quietly = TRUE)) {
-  plot_result <- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")
-  print(plot_result)
-}
-"
-
-# Generate actual reprex
-actual_reprex <- reprex(input = example_code, venue = "gh", advertise = FALSE)
-
-# Verify it worked
-if (length(actual_reprex) > 0) {
-  cat("SUCCESS: Generated actual reprex for PR\n")
-  cat("Copy this output to your PR description:\n")
-  cat("========================================\n")
-  cat(paste(actual_reprex, collapse = "\n"))
-  cat("\n========================================\n")
-} else {
-  stop("FAILED: Could not generate reprex - fix reprex installation first")
-}
+# Display complete reprex with imgur links embedded
+cat(paste(reprex_result, collapse = "\n"))
 '
+```
+
+**Key Benefits of This Approach**:
+- ✅ **Automatic image hosting**: Plots automatically uploaded to imgur (whitelisted domain)
+- ✅ **No local artifacts**: No PNG files left in repository to accidentally commit  
+- ✅ **Complete format**: Includes "Created on [date] with reprex v[version]" footer
+- ✅ **Direct embedding**: Images display directly in GitHub responses
+- ✅ **Clean workflow**: No manual upload or cleanup steps required
+
+**CRITICAL**: Always set `advertise = TRUE` to get the complete format with date/version info that provides authority to your reprex.
 ```
 
 **RStudio Users**: Use the reprex addin for faster creation:
