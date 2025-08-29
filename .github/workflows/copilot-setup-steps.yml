@@ -130,7 +130,7 @@ jobs:
           r-version: 'release'
           use-public-rspm: true
           
-      - name: Setup pandoc (required for building vignettes)
+      - name: Setup pandoc (required for building vignettes and reprex)
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: r-lib/actions/setup-pandoc@v2
 
@@ -179,7 +179,11 @@ jobs:
             "styler", 
             "roxygen2",
             "reprex",
-            "devtools"
+            "devtools",
+            # Dependencies specifically needed for reprex functionality
+            "knitr",
+            "rmarkdown",
+            "clipr"
           ), repos = "https://cloud.r-project.org/")
         shell: Rscript {0}
         
@@ -293,6 +297,8 @@ jobs:
 
       - name: Test reprex functionality  
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        env:
+          CLIPR_ALLOW: true
         run: |
           library(reprex)
           library(rempsyc)
@@ -304,23 +310,33 @@ jobs:
           library(rempsyc)
           data(mtcars)
           
-          # Test basic t-test
-          result <- nice_t_test(data = mtcars, response = 'mpg', group = 'am')
-          print(result)
+          # Test basic data manipulation function
+          df <- data.frame(id = c(1, 2, 3, 1, 3), score = c(NA, 85, 92, 88, 95))
+          duplicates <- extract_duplicates(df, id = 'id')
+          print('Duplicates found:')
+          print(duplicates)
           "
           
           tryCatch({
-            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE, html_preview = FALSE)
             
             if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
               cat("✓ reprex is working correctly with rempsyc\n")
-              cat("Sample reprex output (first 5 lines):\n")
-              cat(paste(head(reprex_result, 5), collapse = "\n"), "\n")
+              cat("Sample reprex output (first 10 lines):\n")
+              cat(paste(head(reprex_result, 10), collapse = "\n"), "\n")
+              
+              # Check for complete reprex format including session info
+              if (any(grepl("Created on", reprex_result)) || any(grepl("reprex v", reprex_result))) {
+                cat("✓ Complete reprex format with session info detected\n")
+              } else {
+                cat("⚠ reprex output may be incomplete - missing session info\n")
+              }
             } else {
               cat("⚠ reprex generated output but may not be working correctly\n")
             }
           }, error = function(e) {
             cat("✗ reprex failed:", e$message, "\n")
+            cat("This may be due to missing dependencies or environment issues\n")
           })
           
           cat("\n=== reprex Test Complete ===\n")
@@ -335,7 +351,8 @@ jobs:
             echo "✓ Full R development environment configured:"
             echo "  - R and system dependencies installed"
             echo "  - rempsyc package built and installed"
-            echo "  - Core development tools available (lintr, styler, reprex)"
+            echo "  - Core development tools available (lintr, styler, roxygen2)"
+            echo "  - Complete reprex setup (reprex + knitr + rmarkdown + pandoc)"
             echo "  - Suggested packages NOT installed (install as needed per PR)"
             echo "  - Package building and testing capabilities verified"
             echo ""
