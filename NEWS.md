@@ -1,6 +1,10 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.3
+* `nice_lm()`: fix bug with factor covariates having more than two levels causing "arguments imply differing number of rows" error (#31)
+* `nice_lm_slopes()`: add better error message when factor moderators are used, explaining that only continuous moderators are supported. Also add explicit test documenting that continuous moderators work correctly even when models contain factor covariates with multiple levels
+
 ## rempsyc 0.1.9.2
 * `nice_scatter`: Major enhancement with two highly requested features:
   * **Point ID display**: New `has.ids` parameter displays point labels/IDs directly on scatter plots using `ggrepel` for intelligent non-overlapping positioning. Use `id.column` to specify a custom column for labels, defaults to row names.
