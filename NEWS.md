@@ -1,6 +1,9 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.5
+* Testing custom GitHub Copilot environment setup workflow: Added minor code change to validate R setup detection logic for code-related PRs
+
 ## rempsyc 0.1.9.4
 * Optimize custom copilot setup: Remove suggested packages from automated setup to save 3-7 minutes installation time. Suggested packages are now installed on-demand based on specific PR requirements, following targeted installation approach (#51)
 
