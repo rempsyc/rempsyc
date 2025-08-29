@@ -14,8 +14,9 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 **NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed using **sophisticated conditional logic**:
 
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
-- R and system dependencies
-- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
+- R and system dependencies  
+- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools)
+- **Complete reprex setup**: knitr, rmarkdown, pandoc, clipr (all dependencies needed for creating reproducible examples)
 - **IMPORTANT**: Suggested packages are NOT installed during setup (install as needed per PR)
 - The rempsyc package itself (built and installed)
 - Verified functionality of core functions and reprex
@@ -39,13 +40,15 @@ If this works without errors, the environment is ready. If not, follow the manua
 
 **CRITICAL CHANGE**: To save time, the pre-configured environment does NOT install suggested packages by default. Instead:
 
-1. **Core development packages are pre-installed**: rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools
-2. **Suggested packages are installed on-demand**: Only install packages needed for your specific PR
-3. **Significant time savings**: Setup takes ~2-3 minutes instead of 5-10 minutes
-4. **Follow targeted installation**: Use the guidance below to install only what you need
+1. **Core development packages are pre-installed**: rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools, knitr, rmarkdown, clipr
+2. **Complete reprex functionality**: All dependencies for creating reproducible examples are pre-installed and tested
+3. **Suggested packages are installed on-demand**: Only install packages needed for your specific PR
+4. **Significant time savings**: Setup takes ~2-3 minutes instead of 5-10 minutes  
+5. **Follow targeted installation**: Use the guidance below to install only what you need
 
 **What this means for your workflow**:
 - ✅ Core development tools (linting, testing, documentation) work immediately
+- ✅ **reprex functionality works out-of-the-box** (knitr, rmarkdown, pandoc, clipr pre-installed)
 - ✅ Basic package building and testing work out of the box  
 - ⚠️ Function-specific packages (ggplot2, flextable, etc.) need to be installed when working on those functions
 - 📖 Always use the [Targeted Package Installation](#targeted-package-installation-workflow) approach below
@@ -100,7 +103,8 @@ which R
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
 
-# Install reprex (ESSENTIAL for creating reproducible examples in PRs)
+# Install reprex (ESSENTIAL for creating reproducible examples in PRs)  
+# NOTE: In pre-configured environment, reprex + all dependencies are already installed
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
 
 # Install other essential development packages via system packages when possible
@@ -126,22 +130,31 @@ R --no-restore --no-save -e 'print("R is working correctly")'
 
 # Verify core packages are available
 R --no-restore --no-save -e '
-required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")
+required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2", "knitr", "rmarkdown", "clipr")
 missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
 if (length(missing_packages) > 0) {
   cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")
   cat("Run installation commands to install missing packages\n")
 } else {
   cat("All core development packages are available\n")
+  cat("reprex functionality fully supported\n")
 }
 '
 ```
 
-### Essential reprex Package Setup
-**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it's installed and functional.
+### Essential reprex Package Setup  
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. 
+
+**If using the pre-configured environment**: reprex and all its dependencies (pandoc, knitr, rmarkdown, clipr) are already installed and tested. Skip to step 4 to verify functionality.
+
+**If setting up manually**: Follow this complete setup process:
 
 ```bash
-# Install reprex if not already installed
+# Step 1: Install required dependencies for reprex
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+
+# Step 2: Install reprex package
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   # Try multiple installation methods
@@ -158,22 +171,26 @@ if (!requireNamespace("reprex", quietly = TRUE)) {
 }
 '
 
-# Verify reprex functionality with a simple test
-R --no-restore --no-save -e '
+# Step 3: CRITICAL - Set environment variable and test
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 # Test reprex with simple code
-test_code <- "
-x <- 1:5
-mean(x)
-"
-result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
 if (length(result) > 0) {
-  cat("reprex package is working correctly\n")
+  cat("SUCCESS: reprex package is working correctly\n")
+  cat("Sample output:\n")
+  cat(paste(head(result, 5), collapse = "\n"))
 } else {
-  stop("reprex package installation failed - this is required for PR creation")
+  stop("FAILED: reprex package installation failed - this is required for PR creation")
 }
 '
 ```
+
+**ESSENTIAL**: Always run `export CLIPR_ALLOW=TRUE` before using reprex to prevent crashes.
 
 ### Install Function-Specific Dependencies Only
 **CRITICAL**: Only install packages that are actually used by the specific function you are modifying. DO NOT install all suggested packages upfront as this causes long installation times.
@@ -382,33 +399,38 @@ print("Core functions working correctly")
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
 library(rempsyc)
 
-# Create a test reprex with actual rempsyc function
-test_code <- "
-library(rempsyc)
-data(mtcars)
-
-# Example function test
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
-print(result)
-"
-
-# Generate reprex
-cat("Testing reprex functionality...\n")
-reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+# Create a test reprex with actual rempsyc function (WORKING EXAMPLE)
+reprex_result <- reprex({
+  library(rempsyc)
+  
+  # Example with extract_duplicates function
+  df1 <- data.frame(
+    id = c(1, 2, 3, 1, 3),
+    score = c(NA, 85, 92, 88, 95)
+  )
+  
+  print("Original data:")
+  print(df1)
+  
+  duplicates <- extract_duplicates(df1, id = "id")
+  print("Duplicates found:")
+  print(duplicates)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
 
 # Verify it worked
 if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
-  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")
-  cat("Sample reprex output (first few lines):\n")
-  cat(paste(head(reprex_result, 10), collapse = "\n"))
+  cat("SUCCESS: reprex is working correctly with rempsyc functions\n")
+  cat("Sample reprex output:\n")
+  cat(paste(reprex_result, collapse = "\n"))
   cat("\n")
 } else {
-  stop("FAILED: reprex is not working correctly - install reprex before proceeding")
+  stop("FAILED: reprex is not working correctly - follow debugging guide in Troubleshooting section")
 }
 '
 ```
@@ -901,45 +923,46 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
    - **Before**: Real reprex output showing the current (problematic) behavior
    - **After**: Real reprex output showing the improved behavior with your changes
 
-#### Quick Reprex Creation Workflow:
-**NEVER SKIP**: Always generate actual reprex, never simulate or guess:
+#### Optimized Reprex Creation with Image Handling:
+**ESSENTIAL**: Always generate actual reprex with automatic imgur integration for plots:
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 library(rempsyc)
 
-# Create ACTUAL reprex for your changes
-example_code <- "
-library(rempsyc)
-data(mtcars)
+# Create ACTUAL reprex - plots automatically uploaded to imgur
+reprex_result <- reprex({
+  library(rempsyc)
+  library(ggplot2)
 
-# Example: test the function you modified
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
-print(result)
+  # Example: Create visualization with your function  
+  plot <- nice_scatter(
+    data = mtcars,
+    response = "mpg",
+    predictor = "wt", 
+    has.r = TRUE,
+    has.p = TRUE
+  )
+  
+  print(plot)
+  
+}, venue = "gh", advertise = TRUE, html_preview = FALSE)
 
-# If working with plots, include them:
-if (requireNamespace(\"ggplot2\", quietly = TRUE)) {
-  plot_result <- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")
-  print(plot_result)
-}
-"
-
-# Generate actual reprex
-actual_reprex <- reprex(input = example_code, venue = "gh", advertise = FALSE)
-
-# Verify it worked
-if (length(actual_reprex) > 0) {
-  cat("SUCCESS: Generated actual reprex for PR\n")
-  cat("Copy this output to your PR description:\n")
-  cat("========================================\n")
-  cat(paste(actual_reprex, collapse = "\n"))
-  cat("\n========================================\n")
-} else {
-  stop("FAILED: Could not generate reprex - fix reprex installation first")
-}
+# Display complete reprex with imgur links embedded
+cat(paste(reprex_result, collapse = "\n"))
 '
+```
+
+**Key Benefits of This Approach**:
+- ✅ **Automatic image hosting**: Plots automatically uploaded to imgur (whitelisted domain)
+- ✅ **No local artifacts**: No PNG files left in repository to accidentally commit  
+- ✅ **Complete format**: Includes "Created on [date] with reprex v[version]" footer
+- ✅ **Direct embedding**: Images display directly in GitHub responses
+- ✅ **Clean workflow**: No manual upload or cleanup steps required
+
+**CRITICAL**: Always set `advertise = TRUE` to get the complete format with date/version info that provides authority to your reprex.
 ```
 
 **RStudio Users**: Use the reprex addin for faster creation:
@@ -1011,36 +1034,119 @@ if (length(actual_reprex) > 0) {
   - Try R-universe: `repos="https://r-universe.dev"`  
   - Use pak package: `pak::pak("[package-name]")`
 
-### reprex Package Issues
-- **Cause**: reprex package not installed or not working correctly
-- **Solution**: Follow the comprehensive reprex installation steps:
-  ```bash
-  # Multi-method installation
-  R --no-restore --no-save -e '
-  if (!requireNamespace("reprex", quietly = TRUE)) {
-    tryCatch({
-      install.packages("reprex", repos="https://cloud.r-project.org/")
-    }, error = function(e1) {
-      tryCatch({
-        install.packages("reprex", repos="https://r-universe.dev")
-      }, error = function(e2) {
-        install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-        pak::pak("reprex")
-      })
-    })
-  }
-  '
-  ```
-- **Verification**: Always test reprex functionality before creating PRs using the validation scenario
+### reprex Package Issues and Complete Debugging Guide
+**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. 
 
-### reprex Not Generating Output
-- **Cause**: Code errors, missing packages, or input format issues
-- **Solution**: 
-  - Test with simple code first: `x <- 1:5; mean(x)`
-  - Ensure all required packages are loaded in the reprex code
-  - Use `venue = "gh"` for GitHub-formatted output
-  - Check for syntax errors in the input code
-- **Debug**: Use `reprex(input = your_code, venue = "gh", advertise = FALSE, show = TRUE)` to see detailed output
+**NEW**: In the pre-configured environment (copilot-setup-steps.yml), all reprex dependencies are now pre-installed: pandoc, knitr, rmarkdown, clipr. If you're using the pre-configured environment, skip to Step 3 (Set Environment Variables).
+
+**For manual setup or debugging**: Follow this complete debugging guide:
+
+#### Step 1: Install Required Dependencies
+```bash
+# Install core dependencies first
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+```
+
+#### Step 2: Install reprex Package
+```bash
+# Multi-method installation
+R --no-restore --no-save -e '
+if (!requireNamespace("reprex", quietly = TRUE)) {
+  tryCatch({
+    install.packages("reprex", repos="https://cloud.r-project.org/")
+  }, error = function(e1) {
+    tryCatch({
+      install.packages("reprex", repos="https://r-universe.dev")
+    }, error = function(e2) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+      pak::pak("reprex")
+    })
+  })
+}
+'
+```
+
+#### Step 3: Set Environment Variables (CRITICAL)
+```bash
+# ESSENTIAL: Set clipboard environment variable to prevent crashes
+export CLIPR_ALLOW=TRUE
+```
+
+#### Step 4: Test reprex with Simple Example
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Test basic functionality
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: Basic reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Step 5: Test reprex with rempsyc Functions
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Working reprex example with rempsyc
+result <- reprex({
+  library(rempsyc)
+  
+  # Example with extract_duplicates function
+  df1 <- data.frame(
+    id = c(1, 2, 3, 1, 3),
+    score = c(NA, 85, 92, 88, 95)
+  )
+  
+  print("Original data:")
+  print(df1)
+  
+  duplicates <- extract_duplicates(df1, id = "id")
+  print("Duplicates found:")
+  print(duplicates)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: rempsyc reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Common Error Solutions:
+
+**Error: "This reprex appears to crash R"**
+- **Cause**: CLIPR_ALLOW not set or missing dependencies
+- **Solution**: Set `export CLIPR_ALLOW=TRUE` and install pandoc, knitr, rmarkdown
+
+**Error: "CLIPR_ALLOW has not been set"**
+- **Cause**: Missing environment variable
+- **Solution**: Always run `export CLIPR_ALLOW=TRUE` before using reprex
+
+**Plot Rendering Issues**
+- **Cause**: Complex ggplot objects cause crashes in reprex rendering
+- **Solution**: For plots, keep examples simple or use `ggsave()` to save plots separately
+- **Workaround**: Document plot creation without displaying the plot object in reprex
+
+#### Verified Working Example Template
+```r
+# ALWAYS use this pattern for rempsyc reprex:
+export CLIPR_ALLOW=TRUE
+library(reprex)
+
+result <- reprex({
+  library(rempsyc)
+  
+  # Your rempsyc example here
+  # Keep it simple, avoid complex plots in reprex
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+```
 
 ## Common Reference Information
 
