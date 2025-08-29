@@ -14,8 +14,9 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 **NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed using **sophisticated conditional logic**:
 
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
-- R and system dependencies
-- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
+- R and system dependencies  
+- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools)
+- **Complete reprex setup**: knitr, rmarkdown, pandoc, clipr (all dependencies needed for creating reproducible examples)
 - **IMPORTANT**: Suggested packages are NOT installed during setup (install as needed per PR)
 - The rempsyc package itself (built and installed)
 - Verified functionality of core functions and reprex
@@ -39,13 +40,15 @@ If this works without errors, the environment is ready. If not, follow the manua
 
 **CRITICAL CHANGE**: To save time, the pre-configured environment does NOT install suggested packages by default. Instead:
 
-1. **Core development packages are pre-installed**: rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools
-2. **Suggested packages are installed on-demand**: Only install packages needed for your specific PR
-3. **Significant time savings**: Setup takes ~2-3 minutes instead of 5-10 minutes
-4. **Follow targeted installation**: Use the guidance below to install only what you need
+1. **Core development packages are pre-installed**: rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools, knitr, rmarkdown, clipr
+2. **Complete reprex functionality**: All dependencies for creating reproducible examples are pre-installed and tested
+3. **Suggested packages are installed on-demand**: Only install packages needed for your specific PR
+4. **Significant time savings**: Setup takes ~2-3 minutes instead of 5-10 minutes  
+5. **Follow targeted installation**: Use the guidance below to install only what you need
 
 **What this means for your workflow**:
 - ✅ Core development tools (linting, testing, documentation) work immediately
+- ✅ **reprex functionality works out-of-the-box** (knitr, rmarkdown, pandoc, clipr pre-installed)
 - ✅ Basic package building and testing work out of the box  
 - ⚠️ Function-specific packages (ggplot2, flextable, etc.) need to be installed when working on those functions
 - 📖 Always use the [Targeted Package Installation](#targeted-package-installation-workflow) approach below
@@ -70,7 +73,8 @@ which R
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
 
-# Install reprex (ESSENTIAL for creating reproducible examples in PRs)
+# Install reprex (ESSENTIAL for creating reproducible examples in PRs)  
+# NOTE: In pre-configured environment, reprex + all dependencies are already installed
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
 
 # Install other essential development packages via system packages when possible
@@ -96,19 +100,24 @@ R --no-restore --no-save -e 'print("R is working correctly")'
 
 # Verify core packages are available
 R --no-restore --no-save -e '
-required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")
+required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2", "knitr", "rmarkdown", "clipr")
 missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
 if (length(missing_packages) > 0) {
   cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")
   cat("Run installation commands to install missing packages\n")
 } else {
   cat("All core development packages are available\n")
+  cat("reprex functionality fully supported\n")
 }
 '
 ```
 
 ### Essential reprex Package Setup  
-**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Follow this complete setup process:
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. 
+
+**If using the pre-configured environment**: reprex and all its dependencies (pandoc, knitr, rmarkdown, clipr) are already installed and tested. Skip to step 4 to verify functionality.
+
+**If setting up manually**: Follow this complete setup process:
 
 ```bash
 # Step 1: Install required dependencies for reprex
@@ -995,7 +1004,11 @@ if (length(actual_reprex) > 0) {
   - Use pak package: `pak::pak("[package-name]")`
 
 ### reprex Package Issues and Complete Debugging Guide
-**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. Follow this complete debugging guide:
+**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. 
+
+**NEW**: In the pre-configured environment (copilot-setup-steps.yml), all reprex dependencies are now pre-installed: pandoc, knitr, rmarkdown, clipr. If you're using the pre-configured environment, skip to Step 3 (Set Environment Variables).
+
+**For manual setup or debugging**: Follow this complete debugging guide:
 
 #### Step 1: Install Required Dependencies
 ```bash
