@@ -1,5 +1,4 @@
 #' @noRd
-# Test comment for copilot environment setup detection
 theme_apa <- function(x, has.legend = FALSE) {
   x +
     ggplot2::theme_bw(base_size = 24) +
