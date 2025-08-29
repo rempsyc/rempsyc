@@ -107,11 +107,15 @@ if (length(missing_packages) > 0) {
 '
 ```
 
-### Essential reprex Package Setup
-**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it's installed and functional.
+### Essential reprex Package Setup  
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Follow this complete setup process:
 
 ```bash
-# Install reprex if not already installed
+# Step 1: Install required dependencies for reprex
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+
+# Step 2: Install reprex package
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   # Try multiple installation methods
@@ -128,22 +132,26 @@ if (!requireNamespace("reprex", quietly = TRUE)) {
 }
 '
 
-# Verify reprex functionality with a simple test
-R --no-restore --no-save -e '
+# Step 3: CRITICAL - Set environment variable and test
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 # Test reprex with simple code
-test_code <- "
-x <- 1:5
-mean(x)
-"
-result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
 if (length(result) > 0) {
-  cat("reprex package is working correctly\n")
+  cat("SUCCESS: reprex package is working correctly\n")
+  cat("Sample output:\n")
+  cat(paste(head(result, 5), collapse = "\n"))
 } else {
-  stop("reprex package installation failed - this is required for PR creation")
+  stop("FAILED: reprex package installation failed - this is required for PR creation")
 }
 '
 ```
+
+**ESSENTIAL**: Always run `export CLIPR_ALLOW=TRUE` before using reprex to prevent crashes.
 
 ### Install Function-Specific Dependencies Only
 **CRITICAL**: Only install packages that are actually used by the specific function you are modifying. DO NOT install all suggested packages upfront as this causes long installation times.
@@ -352,33 +360,38 @@ print("Core functions working correctly")
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
 library(rempsyc)
 
-# Create a test reprex with actual rempsyc function
-test_code <- "
-library(rempsyc)
-data(mtcars)
-
-# Example function test
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
-print(result)
-"
-
-# Generate reprex
-cat("Testing reprex functionality...\n")
-reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+# Create a test reprex with actual rempsyc function (WORKING EXAMPLE)
+reprex_result <- reprex({
+  library(rempsyc)
+  
+  # Example with extract_duplicates function
+  df1 <- data.frame(
+    id = c(1, 2, 3, 1, 3),
+    score = c(NA, 85, 92, 88, 95)
+  )
+  
+  print("Original data:")
+  print(df1)
+  
+  duplicates <- extract_duplicates(df1, id = "id")
+  print("Duplicates found:")
+  print(duplicates)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
 
 # Verify it worked
 if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
-  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")
-  cat("Sample reprex output (first few lines):\n")
-  cat(paste(head(reprex_result, 10), collapse = "\n"))
+  cat("SUCCESS: reprex is working correctly with rempsyc functions\n")
+  cat("Sample reprex output:\n")
+  cat(paste(reprex_result, collapse = "\n"))
   cat("\n")
 } else {
-  stop("FAILED: reprex is not working correctly - install reprex before proceeding")
+  stop("FAILED: reprex is not working correctly - follow debugging guide in Troubleshooting section")
 }
 '
 ```
@@ -981,36 +994,115 @@ if (length(actual_reprex) > 0) {
   - Try R-universe: `repos="https://r-universe.dev"`  
   - Use pak package: `pak::pak("[package-name]")`
 
-### reprex Package Issues
-- **Cause**: reprex package not installed or not working correctly
-- **Solution**: Follow the comprehensive reprex installation steps:
-  ```bash
-  # Multi-method installation
-  R --no-restore --no-save -e '
-  if (!requireNamespace("reprex", quietly = TRUE)) {
-    tryCatch({
-      install.packages("reprex", repos="https://cloud.r-project.org/")
-    }, error = function(e1) {
-      tryCatch({
-        install.packages("reprex", repos="https://r-universe.dev")
-      }, error = function(e2) {
-        install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-        pak::pak("reprex")
-      })
-    })
-  }
-  '
-  ```
-- **Verification**: Always test reprex functionality before creating PRs using the validation scenario
+### reprex Package Issues and Complete Debugging Guide
+**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. Follow this complete debugging guide:
 
-### reprex Not Generating Output
-- **Cause**: Code errors, missing packages, or input format issues
-- **Solution**: 
-  - Test with simple code first: `x <- 1:5; mean(x)`
-  - Ensure all required packages are loaded in the reprex code
-  - Use `venue = "gh"` for GitHub-formatted output
-  - Check for syntax errors in the input code
-- **Debug**: Use `reprex(input = your_code, venue = "gh", advertise = FALSE, show = TRUE)` to see detailed output
+#### Step 1: Install Required Dependencies
+```bash
+# Install core dependencies first
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+```
+
+#### Step 2: Install reprex Package
+```bash
+# Multi-method installation
+R --no-restore --no-save -e '
+if (!requireNamespace("reprex", quietly = TRUE)) {
+  tryCatch({
+    install.packages("reprex", repos="https://cloud.r-project.org/")
+  }, error = function(e1) {
+    tryCatch({
+      install.packages("reprex", repos="https://r-universe.dev")
+    }, error = function(e2) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+      pak::pak("reprex")
+    })
+  })
+}
+'
+```
+
+#### Step 3: Set Environment Variables (CRITICAL)
+```bash
+# ESSENTIAL: Set clipboard environment variable to prevent crashes
+export CLIPR_ALLOW=TRUE
+```
+
+#### Step 4: Test reprex with Simple Example
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Test basic functionality
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: Basic reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Step 5: Test reprex with rempsyc Functions
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Working reprex example with rempsyc
+result <- reprex({
+  library(rempsyc)
+  
+  # Example with extract_duplicates function
+  df1 <- data.frame(
+    id = c(1, 2, 3, 1, 3),
+    score = c(NA, 85, 92, 88, 95)
+  )
+  
+  print("Original data:")
+  print(df1)
+  
+  duplicates <- extract_duplicates(df1, id = "id")
+  print("Duplicates found:")
+  print(duplicates)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: rempsyc reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Common Error Solutions:
+
+**Error: "This reprex appears to crash R"**
+- **Cause**: CLIPR_ALLOW not set or missing dependencies
+- **Solution**: Set `export CLIPR_ALLOW=TRUE` and install pandoc, knitr, rmarkdown
+
+**Error: "CLIPR_ALLOW has not been set"**
+- **Cause**: Missing environment variable
+- **Solution**: Always run `export CLIPR_ALLOW=TRUE` before using reprex
+
+**Plot Rendering Issues**
+- **Cause**: Complex ggplot objects cause crashes in reprex rendering
+- **Solution**: For plots, keep examples simple or use `ggsave()` to save plots separately
+- **Workaround**: Document plot creation without displaying the plot object in reprex
+
+#### Verified Working Example Template
+```r
+# ALWAYS use this pattern for rempsyc reprex:
+export CLIPR_ALLOW=TRUE
+library(reprex)
+
+result <- reprex({
+  library(rempsyc)
+  
+  # Your rempsyc example here
+  # Keep it simple, avoid complex plots in reprex
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+```
 
 ## Common Reference Information
 
