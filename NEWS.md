@@ -1,6 +1,9 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.6
+* Optimize copilot setup workflow part 2: Replace manual `install.packages()` approach with efficient `r-lib/actions/setup-r-dependencies@v2` using pak for better dependency resolution, automatic caching, and targeted package installation. This follows the proven patterns used in other workflows (R-CMD-check, pkgdown) and eliminates redundant manual caching steps (#63)
+
 ## rempsyc 0.1.9.5
 * Further optimize copilot setup workflow for 50%+ time reduction: Remove redundant system packages (`r-base-dev`, graphics libraries), fix R package caching to target correct directories, remove contradictory suggested package installation step, optimize git checkout to use shallow clone, and streamline testing to essential verification only. Combined with previous optimizations, this achieves significant setup time improvements while maintaining core development functionality
 

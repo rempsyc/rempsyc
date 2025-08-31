@@ -151,60 +151,35 @@ jobs:
           echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
         shell: bash
 
-      - name: Cache R packages
+      - name: Install R dependencies using pak
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        uses: actions/cache@v3
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: |
-            ~/.R/
-            ~/R/
-          key: ${{ runner.os }}-r-${{ hashFiles('**/DESCRIPTION') }}-v2
-          restore-keys: |
-            ${{ runner.os }}-r-
-
-      - name: Install core R development packages
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install essential development packages first
-          install.packages(c(
-            "rlang",
-            "dplyr", 
-            "testthat",
-            "lintr",
-            "styler", 
-            "roxygen2",
-            "reprex",
-            "devtools",
-            # Dependencies specifically needed for reprex functionality
-            "knitr",
-            "rmarkdown",
-            "clipr"
-          ), repos = "https://cloud.r-project.org/")
-        shell: Rscript {0}
+          # Use stable pak for reliable dependency resolution
+          dependencies: '"hard"'
+          # Install core package dependencies and essential development tools
+          extra-packages: |
+            local::.
+            any::testthat
+            any::lintr
+            any::styler
+            any::roxygen2
+            any::devtools
+            any::reprex
+            any::knitr
+            any::rmarkdown
+            any::clipr
+          needs: check
+          # Let r-lib/actions handle caching automatically (more efficient than manual cache)
         
-      # NOTE: Suggested packages are NOT installed during setup to save time
-      # These should be installed on-demand based on specific PR requirements
-      # See copilot-instructions.md for targeted installation guidance
+      # NOTE: Suggested packages are NOT installed during setup to save time.
+      # Only core dependencies (Imports/Depends) and essential development tools are installed.
+      # Additional packages are installed on-demand based on specific PR requirements.
+      # See copilot-instructions.md for targeted installation guidance.
 
-      - name: Build rempsyc package
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Build the current package
-          system("R CMD build .")
-        shell: Rscript {0}
-        
-      - name: Install rempsyc package  
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install the built package
-          pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
-          if (!is.na(pkg_file)) {
-            system(paste("R CMD INSTALL", pkg_file))
-          } else {
-            # Fallback: install from source
-            system("R CMD INSTALL .")
-          }
-        shell: Rscript {0}
+      # NOTE: The local package (rempsyc) is automatically built and installed
+      # by setup-r-dependencies@v2 when using 'local::.', eliminating the need
+      # for manual build/install steps
 
       - name: Verify R installation and packages
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
@@ -222,7 +197,7 @@ jobs:
             }
           }
           
-          cat("\n=== rempsyc Package ===\n") 
+          cat("\n=== rempsyc Package (auto-installed by setup-r-dependencies) ===\n") 
           if (requireNamespace("rempsyc", quietly = TRUE)) {
             library(rempsyc)
             cat("✓ rempsyc - version", as.character(packageVersion("rempsyc")), "\n")
@@ -254,11 +229,13 @@ jobs:
           echo ""
           
           if [ "${{ steps.check_r_needed.outputs.R_NEEDED }}" == "true" ]; then
-            echo "✓ Optimized R development environment configured:"
+            echo "✓ Optimized R development environment configured using pak:"
             echo "  - R and essential system dependencies installed"
-            echo "  - rempsyc package built and installed" 
-            echo "  - Core development tools available (lintr, styler, roxygen2)"
+            echo "  - Core package dependencies (Imports/Depends) installed via setup-r-dependencies"
+            echo "  - rempsyc package automatically built and installed" 
+            echo "  - Essential development tools (lintr, styler, roxygen2, devtools)"
             echo "  - reprex dependencies ready (reprex + knitr + rmarkdown + pandoc)"
+            echo "  - Efficient pak-based dependency resolution with automatic caching"
             echo "  - Suggested packages NOT installed (install as needed per PR)"
             echo "  - Minimal testing performed for faster setup"
             echo ""
