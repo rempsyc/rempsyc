@@ -82,3 +82,58 @@ install_if_not_installed <- function(pkgs) {
   required_pkgs <- names(which(successfully_loaded == FALSE))
   utils::install.packages(required_pkgs)
 }
+
+#' @noRd
+#' @title Apply variable labels to column names
+#' @description Internal function to replace column names with variable labels when available
+#' @param data A data frame with potentially labeled variables
+#' @return Data frame with labels applied to column names where available
+apply_variable_labels <- function(data) {
+  # Get original column names
+  original_names <- names(data)
+  
+  # Extract labels for each column
+  labels <- vapply(data, function(x) {
+    label <- attr(x, "label")
+    if (is.null(label) || length(label) == 0 || is.na(label) || label == "") {
+      NA_character_
+    } else {
+      as.character(label)
+    }
+  }, character(1))
+  
+  # Replace column names with labels where available
+  new_names <- ifelse(is.na(labels), original_names, labels)
+  names(data) <- new_names
+  
+  # Store original names as an attribute for potential future reference
+  attr(data, "original_names") <- original_names
+  
+  return(data)
+}
+
+#' @noRd  
+#' @title Assign variable labels to data frame columns
+#' @description Internal function to set variable labels as attributes on data frame columns
+#' @param data A data frame
+#' @param labels A named vector of labels where names correspond to column names
+#' @return Data frame with labels assigned as attributes
+assign_variable_labels <- function(data, labels) {
+  if (missing(labels) || is.null(labels)) {
+    return(data)
+  }
+  
+  # Ensure labels is a named vector
+  if (is.null(names(labels))) {
+    stop("Labels must be a named vector")
+  }
+  
+  # Apply labels to matching columns
+  for (col_name in names(labels)) {
+    if (col_name %in% names(data)) {
+      attr(data[[col_name]], "label") <- unname(labels[col_name])
+    }
+  }
+  
+  return(data)
+}

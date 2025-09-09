@@ -53,6 +53,9 @@
 #' if desired.
 #' @param separate.header Logical, whether to separate headers based
 #' on name delimiters (i.e., periods ".").
+#' @param use.labels Logical, whether to use variable labels as column names
+#' when available. Variable labels are expected to be stored as "label" attributes
+#' on data frame columns. Defaults to FALSE for backward compatibility.
 #'
 #' @keywords APA style table
 #' @return An APA-formatted table of class "flextable"
@@ -133,6 +136,13 @@
 #'   italics = 2:4
 #' )
 #'
+#' # Using variable labels
+#' labeled.data <- head(mtcars[c("mpg", "cyl", "wt")])
+#' attr(labeled.data$mpg, "label") <- "Miles per Gallon"
+#' attr(labeled.data$cyl, "label") <- "Number of Cylinders"
+#' attr(labeled.data$wt, "label") <- "Weight (1000 lbs)"
+#' nice_table(labeled.data, use.labels = TRUE)
+#'
 #' @importFrom dplyr mutate %>% select matches
 #' case_when relocate across contains select_if any_of
 #' last_col
@@ -159,7 +169,8 @@ nice_table <- function(data,
                        short = FALSE,
                        title,
                        note,
-                       separate.header) {
+                       separate.header,
+                       use.labels = FALSE) {
   rlang::check_installed(c("flextable", "methods"),
     version = c(get_dep_version("flextable"), NA),
     reason = "for this function."
@@ -170,6 +181,11 @@ nice_table <- function(data,
   }
 
   dataframe <- as.data.frame(data)
+
+  # Apply variable labels if requested
+  if (isTRUE(use.labels)) {
+    dataframe <- apply_variable_labels(dataframe)
+  }
 
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
 

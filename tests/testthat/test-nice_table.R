@@ -112,3 +112,44 @@ test_that("nice_table", {
   expect_equal(nrow(result_table$header$dataset), 2) # separate.header = TRUE creates 2 header rows
   expect_equal(nrow(result_table$body$dataset), 3) # 3 rows of data
 })
+
+test_that("nice_table with variable labels", {
+  skip_if_not_installed("flextable")
+  skip_if_not_installed("methods")
+  
+  # Create test data with variable labels
+  test_data <- head(mtcars[c("mpg", "cyl", "wt")])
+  attr(test_data$mpg, "label") <- "Miles per Gallon"
+  attr(test_data$cyl, "label") <- "Number of Cylinders"
+  attr(test_data$wt, "label") <- "Weight (1000 lbs)"
+  
+  # Test with use.labels = TRUE
+  labeled_table <- nice_table(test_data, use.labels = TRUE)
+  expect_s3_class(labeled_table, "flextable")
+  expect_equal(labeled_table$col_keys, c("Miles per Gallon", "Number of Cylinders", "Weight (1000 lbs)"))
+  expect_equal(nrow(labeled_table$body$dataset), 6) # 6 rows (head of mtcars)
+  
+  # Test with use.labels = FALSE (default) - should use original names
+  unlabeled_table <- nice_table(test_data, use.labels = FALSE)
+  expect_s3_class(unlabeled_table, "flextable")
+  expect_equal(unlabeled_table$col_keys, c("mpg", "cyl", "wt"))
+  expect_equal(nrow(unlabeled_table$body$dataset), 6) # 6 rows (head of mtcars)
+  
+  # Test with mixed labels (some columns have labels, others don't)
+  mixed_data <- head(mtcars[c("mpg", "cyl", "hp")])
+  attr(mixed_data$mpg, "label") <- "Miles per Gallon"
+  attr(mixed_data$cyl, "label") <- "Number of Cylinders"
+  # hp has no label
+  
+  mixed_table <- nice_table(mixed_data, use.labels = TRUE)
+  expect_s3_class(mixed_table, "flextable")
+  expect_equal(mixed_table$col_keys, c("Miles per Gallon", "Number of Cylinders", "hp"))
+  expect_equal(nrow(mixed_table$body$dataset), 6) # 6 rows (head of mtcars)
+  
+  # Test with no labels at all
+  no_labels_data <- head(mtcars[c("mpg", "cyl", "wt")])
+  no_labels_table <- nice_table(no_labels_data, use.labels = TRUE)
+  expect_s3_class(no_labels_table, "flextable")
+  expect_equal(no_labels_table$col_keys, c("mpg", "cyl", "wt"))
+  expect_equal(nrow(no_labels_table$body$dataset), 6) # 6 rows (head of mtcars)
+})
