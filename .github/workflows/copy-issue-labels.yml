@@ -1,8 +1,9 @@
-name: Inherit Issue Labels
+# .github/workflows/copy-issue-label-to-linked-pr.yml
+name: Copy issue label to linked PRs
 
 on:
-  pull_request:
-    types: [opened, edited, synchronize, reopened]
+  issues:
+    types: [labeled]   # add 'unlabeled' if you also want to remove it from PRs
 
 permissions:
   contents: read
@@ -10,18 +11,45 @@ permissions:
   pull-requests: write
 
 jobs:
-  copy-labels:
+  push-label:
+    if: ${{ github.event.label.name == 'question' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Copy labels from linked issue (body)
-        uses: michalvankodev/copy-issue-labels@v1.2.1
+      - name: Add label to linked PRs
+        uses: actions/github-script@v7
         with:
-          repo-token: ${{ github.token }}
-          custom-keywords: 'fixes|closes|resolves|refs|addresses'
+          github-token: ${{ github.token }}
+          script: |
+            const {owner, repo} = context.repo
+            const issue_number = context.payload.issue.number
+            const label = context.payload.label.name
 
-      - name: Copy labels from linked issue (title)
-        uses: michalvankodev/copy-issue-labels@v1.2.1
-        with:
-          repo-token: ${{ github.token }}
-          from-title: true
-          custom-keywords: 'fixes|closes|resolves|refs|addresses'
+            // Get timeline to find linked PRs (covers sidebar "linked" and body references)
+            const events = await github.paginate(
+              github.rest.issues.listEventsForTimeline,
+              {
+                owner, repo, issue_number, per_page: 100,
+                mediaType: { previews: ['mockingbird'] } // required for timeline
+              }
+            )
+
+            const prs = [...new Set(
+              events
+                .filter(e =>
+                  (e.event === 'connected' || e.event === 'cross-referenced') &&
+                  e.source?.issue?.pull_request
+                )
+                .map(e => e.source.issue.number)
+            )]
+
+            if (prs.length === 0) {
+              core.info('No linked PRs found.')
+              return
+            }
+
+            for (const pr of prs) {
+              await github.rest.issues.addLabels({
+                owner, repo, issue_number: pr, labels: [label]
+              })
+              core.info(`Added "${label}" to PR #${pr}`)
+            }
