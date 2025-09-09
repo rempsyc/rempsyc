@@ -1,5 +1,5 @@
 #' @title Extract all duplicates
-#'
+#' 
 #' @description Extract all duplicates, for visual inspection.
 #' Note that it also contains the first occurrence of future
 #' duplicates, unlike [duplicated()] or [dplyr::distinct()]). Also
