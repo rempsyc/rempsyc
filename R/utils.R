@@ -65,15 +65,26 @@ get_dep_version <- function(dep, pkg = utils::packageName()) {
     pkg <- "rempsyc"
   }
   
-  suggests_field <- utils::packageDescription(pkg, fields = "Suggests")
-  suggests_list <- unlist(strsplit(suggests_field, ",", fixed = TRUE))
-  out <- lapply(dep, function(x) {
-    dep_string <- grep(x, suggests_list, value = TRUE, fixed = TRUE)
-    dep_string <- dep_string[which.min(nchar(dep_string))]
-    dep_string <- unlist(strsplit(dep_string, ">", fixed = TRUE))
-    gsub("[^0-9.]+", "", dep_string[2])
+  # Try to get package description, return NA if not available
+  tryCatch({
+    suggests_field <- utils::packageDescription(pkg, fields = "Suggests")
+    if (is.na(suggests_field) || is.null(suggests_field)) {
+      return(NA_character_)
+    }
+    suggests_list <- unlist(strsplit(suggests_field, ",", fixed = TRUE))
+    out <- lapply(dep, function(x) {
+      dep_string <- grep(x, suggests_list, value = TRUE, fixed = TRUE)
+      if (length(dep_string) == 0) return(NA_character_)
+      dep_string <- dep_string[which.min(nchar(dep_string))]
+      dep_string <- unlist(strsplit(dep_string, ">", fixed = TRUE))
+      if (length(dep_string) < 2) return(NA_character_)
+      gsub("[^0-9.]+", "", dep_string[2])
+    })
+    unlist(out)
+  }, error = function(e) {
+    # Return NA if there's any error (e.g., package not found)
+    rep(NA_character_, length(dep))
   })
-  unlist(out)
 }
 
 #' @title Install package if not already installed
