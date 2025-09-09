@@ -3,33 +3,50 @@ name: Copy issue label to linked PRs (wait for link)
 
 on:
   issues:
-    types: [labeled]   # add 'unlabeled' later if you also want to remove from PRs
+    types: [opened, labeled]   # opened covers issues created WITH the label
 
 permissions:
   contents: read
   issues: write
   pull-requests: write
 
+# Avoid parallel duplicates per issue
+concurrency:
+  group: mirror-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for a linked PR, then mirror the label
+      - name: Wait for a linked PR, then mirror the "question" label
         uses: actions/github-script@v7
         with:
           github-token: ${{ github.token }}
           script: |
+            const TARGET = 'question'
             const {owner, repo} = context.repo
-            const issue_number = context.payload.issue.number
-            const label = context.payload.label.name
+            const issue = context.payload.issue
 
-            // Helper: fetch PRs linked to this issue (covers sidebar link + "Fixes #X")
+            // Decide if we should act:
+            // - on "opened": issue.labels already contains TARGET?
+            // - on "labeled": was the added label TARGET?
+            const labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name)
+            const hasTargetNow = labels.includes(TARGET)
+            const isTargetLabeledEvent = context.payload.action === 'labeled'
+              && context.payload.label?.name === TARGET
+            if (!(hasTargetNow || isTargetLabeledEvent)) {
+              core.info(`Issue has no "${TARGET}" label; nothing to do.`)
+              return
+            }
+
+            // Helper: find PRs linked to this issue (covers sidebar link & "Fixes #X")
             async function findLinkedPRs() {
               const events = await github.paginate(
                 github.rest.issues.listEventsForTimeline,
                 {
-                  owner, repo, issue_number, per_page: 100,
-                  mediaType: { previews: ['mockingbird'] } // timeline API
+                  owner, repo, issue_number: issue.number, per_page: 100,
+                  mediaType: { previews: ['mockingbird'] }
                 }
               )
               const prs = [...new Set(
@@ -43,7 +60,7 @@ jobs:
               return prs
             }
 
-            // Poll for up to 10 minutes until a PR is linked
+            // Poll up to 10 minutes for a PR link to appear
             const deadline = Date.now() + 10 * 60 * 1000
             let prs = await findLinkedPRs()
             while (prs.length === 0 && Date.now() < deadline) {
@@ -51,15 +68,15 @@ jobs:
               await new Promise(r => setTimeout(r, 20_000))
               prs = await findLinkedPRs()
             }
-
             if (prs.length === 0) {
-              core.info('No linked PR found before timeout. Exiting gracefully.')
+              core.info('No linked PR found before timeout. Exiting.')
               return
             }
 
+            // Add the label to each linked PR
             for (const pr of prs) {
               await github.rest.issues.addLabels({
-                owner, repo, issue_number: pr, labels: [label]
+                owner, repo, issue_number: pr, labels: [TARGET]
               })
-              core.info(`Added "${label}" to PR #${pr}`)
+              core.info(`Added "${TARGET}" to PR #${pr}`)
             }
