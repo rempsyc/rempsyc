@@ -1,0 +1,14 @@
+name: Inherit Issue Labels
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  copy-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy labels from linked issue
+        uses: michalvankodev/copy-issue-labels@v1.2.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
