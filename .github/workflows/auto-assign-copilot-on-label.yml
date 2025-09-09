@@ -1,0 +1,16 @@
+# .github/workflows/auto-assign-copilot-on-label.yml
+name: Auto-assign Copilot on label
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  assign:
+    if: ${{ github.event.label.name == 'question' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign Copilot
+        run: gh issue edit ${{ github.event.issue.number }} --add-assignee "@copilot"
+        env:
+          GH_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}  # user PAT with repo + Copilot access
