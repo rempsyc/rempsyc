@@ -1,9 +1,9 @@
 # .github/workflows/copy-issue-label-to-linked-pr.yml
-name: Copy issue label to linked PRs
+name: Copy issue label to linked PRs (wait for link)
 
 on:
   issues:
-    types: [labeled]   # add 'unlabeled' if you also want to remove it from PRs
+    types: [labeled]   # add 'unlabeled' later if you also want to remove from PRs
 
 permissions:
   contents: read
@@ -11,11 +11,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  push-label:
-    if: ${{ github.event.label.name == 'question' }}
+  mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Add label to linked PRs
+      - name: Wait for a linked PR, then mirror the label
         uses: actions/github-script@v7
         with:
           github-token: ${{ github.token }}
@@ -24,26 +23,37 @@ jobs:
             const issue_number = context.payload.issue.number
             const label = context.payload.label.name
 
-            // Get timeline to find linked PRs (covers sidebar "linked" and body references)
-            const events = await github.paginate(
-              github.rest.issues.listEventsForTimeline,
-              {
-                owner, repo, issue_number, per_page: 100,
-                mediaType: { previews: ['mockingbird'] } // required for timeline
-              }
-            )
+            // Helper: fetch PRs linked to this issue (covers sidebar link + "Fixes #X")
+            async function findLinkedPRs() {
+              const events = await github.paginate(
+                github.rest.issues.listEventsForTimeline,
+                {
+                  owner, repo, issue_number, per_page: 100,
+                  mediaType: { previews: ['mockingbird'] } // timeline API
+                }
+              )
+              const prs = [...new Set(
+                events
+                  .filter(e =>
+                    (e.event === 'connected' || e.event === 'cross-referenced') &&
+                    e.source?.issue?.pull_request
+                  )
+                  .map(e => e.source.issue.number)
+              )]
+              return prs
+            }
 
-            const prs = [...new Set(
-              events
-                .filter(e =>
-                  (e.event === 'connected' || e.event === 'cross-referenced') &&
-                  e.source?.issue?.pull_request
-                )
-                .map(e => e.source.issue.number)
-            )]
+            // Poll for up to 10 minutes until a PR is linked
+            const deadline = Date.now() + 10 * 60 * 1000
+            let prs = await findLinkedPRs()
+            while (prs.length === 0 && Date.now() < deadline) {
+              core.info('No linked PR yet; waiting 20s…')
+              await new Promise(r => setTimeout(r, 20_000))
+              prs = await findLinkedPRs()
+            }
 
             if (prs.length === 0) {
-              core.info('No linked PRs found.')
+              core.info('No linked PR found before timeout. Exiting gracefully.')
               return
             }
 
