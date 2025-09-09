@@ -60,6 +60,11 @@ model_is_standardized <- function(models.list) {
 #' @param dep Dependency of the specified package to check
 #' @param pkg Package to check the dependency from
 get_dep_version <- function(dep, pkg = utils::packageName()) {
+  # Handle case when not called from a package context
+  if (is.null(pkg) || length(pkg) == 0 || pkg == "") {
+    pkg <- "rempsyc"
+  }
+  
   suggests_field <- utils::packageDescription(pkg, fields = "Suggests")
   suggests_list <- unlist(strsplit(suggests_field, ",", fixed = TRUE))
   out <- lapply(dep, function(x) {

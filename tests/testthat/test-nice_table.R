@@ -152,4 +152,10 @@ test_that("nice_table with variable labels", {
   expect_s3_class(no_labels_table, "flextable")
   expect_equal(no_labels_table$col_keys, c("mpg", "cyl", "wt"))
   expect_equal(nrow(no_labels_table$body$dataset), 6) # 6 rows (head of mtcars)
+  
+  # Test that default behavior is unchanged (use.labels = FALSE by default)
+  default_table <- nice_table(test_data)
+  expect_s3_class(default_table, "flextable")
+  expect_equal(default_table$col_keys, c("mpg", "cyl", "wt"))
+  expect_equal(nrow(default_table$body$dataset), 6) # 6 rows (head of mtcars)
 })
