@@ -2,9 +2,7 @@
 * New CRAN submission (incoming)
 
 ## rempsyc 0.1.9.7
-* Add comprehensive test coverage for `grouped_bar_chart()` and `plot_means_over_time()` functions (#79)
-* Tests cover all function parameters, different data types, and plot output validation
-* Improved package test coverage from 71.33% by adding tests for previously untested functions
+* Add more automatic confidence interval column name conversions for `nice_table()`.
 
 ## rempsyc 0.1.9.6
 * Optimize copilot setup workflow part 2: Replace manual `install.packages()` approach with efficient `r-lib/actions/setup-r-dependencies@v2` using pak for better dependency resolution, automatic caching, and targeted package installation. This follows the proven patterns used in other workflows (R-CMD-check, pkgdown) and eliminates redundant manual caching steps (#63)
