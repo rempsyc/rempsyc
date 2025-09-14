@@ -201,40 +201,44 @@
 #'
 #' @importFrom rlang .data UQ
 
-nice_violin <- function(data,
-                        response,
-                        group = NULL,
-                        boot = FALSE,
-                        bootstraps = 2000,
-                        colours,
-                        xlabels = NULL,
-                        ytitle = response,
-                        xtitle = NULL,
-                        has.ylabels = TRUE,
-                        has.xlabels = TRUE,
-                        comp1 = 1,
-                        comp2 = 2,
-                        signif_annotation = NULL,
-                        signif_yposition = NULL,
-                        signif_xmin = NULL,
-                        signif_xmax = NULL,
-                        ymin,
-                        ymax,
-                        yby = 1,
-                        CIcap.width = 0.1,
-                        obs = FALSE,
-                        alpha = 1,
-                        border.colour = "black",
-                        border.size = 2,
-                        has.d = FALSE,
-                        d.x = mean(c(comp1, comp2)) * 1.1,
-                        d.y = mean(data[[response]]) * 1.3,
-                        groups.order = "none",
-                        xlabels.angle = 0) {
+nice_violin <- function(
+  data,
+  response,
+  group = NULL,
+  boot = FALSE,
+  bootstraps = 2000,
+  colours,
+  xlabels = NULL,
+  ytitle = response,
+  xtitle = NULL,
+  has.ylabels = TRUE,
+  has.xlabels = TRUE,
+  comp1 = 1,
+  comp2 = 2,
+  signif_annotation = NULL,
+  signif_yposition = NULL,
+  signif_xmin = NULL,
+  signif_xmax = NULL,
+  ymin,
+  ymax,
+  yby = 1,
+  CIcap.width = 0.1,
+  obs = FALSE,
+  alpha = 1,
+  border.colour = "black",
+  border.size = 2,
+  has.d = FALSE,
+  d.x = mean(c(comp1, comp2)) * 1.1,
+  d.y = mean(data[[response]]) * 1.3,
+  groups.order = "none",
+  xlabels.angle = 0
+) {
   check_col_names(data, c(group, response))
-  rlang::check_installed(c("ggplot2"),
-                         version = get_dep_version("ggplot2"),
-                         reason = "for this function.")
+  rlang::check_installed(
+    c("ggplot2"),
+    version = get_dep_version("ggplot2"),
+    reason = "for this function."
+  )
   if (isTRUE(boot)) {
     rlang::check_installed(c("boot"), reason = "for this feature.")
   }
@@ -261,21 +265,31 @@ nice_violin <- function(data,
 
   if (groups.order == "increasing") {
     data[[group]] <- factor(
-      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean)])
-      } else if (groups.order == "decreasing") {
+      data[[group]],
+      levels = levels(data[[group]])[order(dataSummary$Mean)]
+    )
+  } else if (groups.order == "decreasing") {
     data[[group]] <- factor(
-      data[[group]], levels = levels(data[[group]])[order(dataSummary$Mean,
-                                                          decreasing = TRUE)])
+      data[[group]],
+      levels = levels(data[[group]])[order(dataSummary$Mean, decreasing = TRUE)]
+    )
   } else if (groups.order == "string.length") {
     data[[group]] <- factor(
-      data[[group]], levels = levels(data[[group]])[order(
-        nchar(levels(data[[group]])))])
+      data[[group]],
+      levels = levels(data[[group]])[order(
+        nchar(levels(data[[group]]))
+      )]
+    )
   }
 
-  if (has.d == TRUE & any(
-    !missing(comp1), !missing(comp2),
-    !missing(signif_xmin)
-  )) {
+  if (
+    has.d == TRUE &
+      any(
+        !missing(comp1),
+        !missing(comp2),
+        !missing(signif_xmin)
+      )
+  ) {
     if (missing(comp1) & missing(comp2) & !missing(signif_xmin)) {
       comp1.temp <- signif_xmin[1]
       comp2.temp <- signif_xmax[1]
@@ -284,22 +298,28 @@ nice_violin <- function(data,
       comp2.temp <- comp2
     }
     data.d <- data %>%
-      dplyr::filter(UQ(dplyr::sym(group)) %in% levels(
-        data[[group]]
-      )[c(comp1.temp, comp2.temp)]) %>%
+      dplyr::filter(
+        UQ(dplyr::sym(group)) %in%
+          levels(
+            data[[group]]
+          )[c(comp1.temp, comp2.temp)]
+      ) %>%
       droplevels()
-    d <- round(effectsize::cohens_d(response,
-      y = group,
-      data = data.d
-    )$Cohens_d, 2)
+    d <- round(
+      effectsize::cohens_d(response, y = group, data = data.d)$Cohens_d,
+      2
+    )
     d <- format_d(abs(d))
     d <- paste("=", d)
   }
-  plot <- ggplot2::ggplot(data, ggplot2::aes(
-    x = .data[[group]],
-    y = .data[[response]],
-    fill = .data[[group]]
-  )) +
+  plot <- ggplot2::ggplot(
+    data,
+    ggplot2::aes(
+      x = .data[[group]],
+      y = .data[[response]],
+      fill = .data[[group]]
+    )
+  ) +
     {
       if (!missing(colours)) {
         ggplot2::scale_fill_manual(values = colours)
@@ -312,31 +332,41 @@ nice_violin <- function(data,
     } +
     ggplot2::ylab(ytitle) +
     ggplot2::xlab(xtitle) +
-    ggplot2::geom_violin(color = border.colour,
-                         alpha = alpha,
-                         linewidth = border.size) +
-    ggplot2::geom_point(ggplot2::aes(y = .data$Mean),
+    ggplot2::geom_violin(
+      color = border.colour,
+      alpha = alpha,
+      linewidth = border.size
+    ) +
+    ggplot2::geom_point(
+      ggplot2::aes(y = .data$Mean),
       color = "black",
       size = 4,
       data = dataSummary
     ) +
-    ggplot2::geom_errorbar(ggplot2::aes(
-      y = .data$Mean,
-      ymin = dataSummary[, 5],
-      ymax = dataSummary[, 6]
-    ),
-    color = "black",
-    linewidth = 1,
-    width = CIcap.width,
-    data = dataSummary
+    ggplot2::geom_errorbar(
+      ggplot2::aes(
+        y = .data$Mean,
+        ymin = dataSummary[, 5],
+        ymax = dataSummary[, 6]
+      ),
+      color = "black",
+      linewidth = 1,
+      width = CIcap.width,
+      data = dataSummary
     )
   plot <- theme_apa(plot) +
     {
       if (xlabels.angle != 0) {
-        ggplot2::theme(axis.text.x = ggplot2::element_text(
-          angle = xlabels.angle, size = 15, vjust = 1, hjust = 1))
+        ggplot2::theme(
+          axis.text.x = ggplot2::element_text(
+            angle = xlabels.angle,
+            size = 15,
+            vjust = 1,
+            hjust = 1
+          )
+        )
       }
-    }+
+    } +
     {
       if (isTRUE(obs) || obs == "dotplot") {
         ggplot2::geom_dotplot(
@@ -374,7 +404,8 @@ nice_violin <- function(data,
     {
       if (!missing(ymin)) {
         ggplot2::scale_y_continuous(
-          limits = c(ymin, ymax), breaks = seq(ymin, ymax, by = yby)
+          limits = c(ymin, ymax),
+          breaks = seq(ymin, ymax, by = yby)
         )
       }
     } +
@@ -382,8 +413,11 @@ nice_violin <- function(data,
       if (!missing(comp1)) {
         rlang::check_installed("ggsignif", reason = "for this function.")
         ggsignif::geom_signif(
-          comparisons = list(c(comp1, comp2)), test = "t.test",
-          map_signif_level = TRUE, size = 1.3, textsize = 8
+          comparisons = list(c(comp1, comp2)),
+          test = "t.test",
+          map_signif_level = TRUE,
+          size = 1.3,
+          textsize = 8
         )
       }
     } +
@@ -391,15 +425,23 @@ nice_violin <- function(data,
       if (!missing(signif_annotation)) {
         rlang::check_installed("ggsignif", reason = "for this function.")
         ggsignif::geom_signif(
-          annotation = signif_annotation, y_position = signif_yposition,
-          xmin = signif_xmin, xmax = signif_xmax, size = 1.3, textsize = 8
+          annotation = signif_annotation,
+          y_position = signif_yposition,
+          xmin = signif_xmin,
+          xmax = signif_xmax,
+          size = 1.3,
+          textsize = 8
         )
       }
     } +
-    if (has.d == TRUE & any(
-      !missing(comp1), !missing(comp2),
-      !missing(signif_xmin)
-    )) {
+    if (
+      has.d == TRUE &
+        any(
+          !missing(comp1),
+          !missing(comp2),
+          !missing(signif_xmin)
+        )
+    ) {
       ggplot2::annotate(
         geom = "text",
         x = d.x,

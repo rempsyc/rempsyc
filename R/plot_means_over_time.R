@@ -63,21 +63,24 @@
 #'   )
 #' )
 #' # significance_stars_y: List with structure: list(c("group1", "group2", time))
-plot_means_over_time <- function(data,
-                                 response,
-                                 group,
-                                 groups.order = "none",
-                                 error_bars = TRUE,
-                                 ytitle = NULL,
-                                 legend.title = "",
-                                 significance_stars,
-                                 significance_stars_x,
-                                 significance_stars_y,
-                                 significance_bars_x,
-                                 print_table = FALSE,
-                                 verbose = FALSE) {
+plot_means_over_time <- function(
+  data,
+  response,
+  group,
+  groups.order = "none",
+  error_bars = TRUE,
+  ytitle = NULL,
+  legend.title = "",
+  significance_stars,
+  significance_stars_x,
+  significance_stars_y,
+  significance_bars_x,
+  print_table = FALSE,
+  verbose = FALSE
+) {
   check_col_names(data, c(response, group))
-  rlang::check_installed(c("ggplot2", "tidyr", "Rmisc"),
+  rlang::check_installed(
+    c("ggplot2", "tidyr", "Rmisc"),
     reason = "for this function.",
     version = get_dep_version(c("ggplot2", "tidyr", "Rmisc"))
   )
@@ -136,7 +139,8 @@ plot_means_over_time <- function(data,
   } else if (groups.order[1] == "decreasing") {
     data_summary[[group]] <- factor(
       data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(dataSummary$Mean,
+      levels = levels(data_summary[[group]])[order(
+        dataSummary$Mean,
         decreasing = TRUE
       )]
     )
@@ -148,13 +152,17 @@ plot_means_over_time <- function(data,
       )]
     )
   } else if (groups.order[1] != "none") {
-    data_summary[[group]] <- factor(data_summary[[group]], levels = groups.order)
+    data_summary[[group]] <- factor(
+      data_summary[[group]],
+      levels = groups.order
+    )
   }
 
   # ggplot2
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right
   p <- ggplot2::ggplot(
-    data_summary, ggplot2::aes(
+    data_summary,
+    ggplot2::aes(
       x = .data$Time,
       y = .data$value,
       group = .data[[group]],
@@ -163,16 +171,23 @@ plot_means_over_time <- function(data,
       colour = .data[[group]]
     )
   ) +
-    ggplot2::geom_line(ggplot2::aes(
-      color = .data[[group]]
-    ), linewidth = 3, position = pd) +
+    ggplot2::geom_line(
+      ggplot2::aes(
+        color = .data[[group]]
+      ),
+      linewidth = 3,
+      position = pd
+    ) +
     {
       if (error_bars) {
         ggplot2::geom_errorbar(
-          width = .1, ggplot2::aes(
-            ymin = .data$value - .data$ci, ymax = .data$value + .data$ci
+          width = .1,
+          ggplot2::aes(
+            ymin = .data$value - .data$ci,
+            ymax = .data$value + .data$ci
           ),
-          position = pd, linewidth = 1
+          position = pd,
+          linewidth = 1
         )
       }
     } +
@@ -184,7 +199,7 @@ plot_means_over_time <- function(data,
       stroke = 1.5,
       position = pd
     ) +
-    ggplot2::discrete_scale("shape", "shape", palette = function(n) {
+    ggplot2::discrete_scale("shape", palette = function(n) {
       # stopifnot("more than 5 shapes not supported" = n <= 5)
       # 20 + seq_len(n)
       c(21:25, 0:20)[1:n]
@@ -202,8 +217,8 @@ plot_means_over_time <- function(data,
       axis.ticks = ggplot2::element_line(colour = "black")
     ) +
     ggplot2::labs(
-      legend.title = legend.title, colour = legend.title,
-      fill = legend.title, linetype = legend.title, shape = legend.title
+      colour = legend.title,
+      shape = legend.title
     ) +
     ggplot2::ylab(ytitle)
 
@@ -211,12 +226,19 @@ plot_means_over_time <- function(data,
     # significance bars/stars
     m <- data %>%
       dplyr::select(dplyr::all_of(c(group, response))) %>%
-      dplyr::summarize(dplyr::across(dplyr::all_of(response), mean),
+      dplyr::summarize(
+        dplyr::across(dplyr::all_of(response), mean),
         .by = dplyr::all_of(group)
       )
 
-    get_segment_y <- function(m, significance_stars_y, groups = 1:2, value = 1:2) {
-      zz <- dplyr::filter(m, .data[[group]] %in% significance_stars_y[groups]) %>%
+    get_segment_y <- function(m,
+                              significance_stars_y,
+                              groups = 1:2,
+                              value = 1:2) {
+      zz <- dplyr::filter(
+        m,
+        .data[[group]] %in% significance_stars_y[groups]
+      ) %>%
         dplyr::select(as.numeric(significance_stars_y[3]) + 1) %>%
         unlist()
       zz[value]
@@ -227,7 +249,8 @@ plot_means_over_time <- function(data,
         get_segment_y(m, x, groups = 1:2, value = 2),
         get_segment_y(m, x, groups = 1:2, value = 1)
       ))
-    }) %>% unlist()
+    }) %>%
+      unlist()
 
     p <- p +
       ggplot2::annotate(
@@ -240,11 +263,13 @@ plot_means_over_time <- function(data,
 
     segment_data_y_internal <- lapply(significance_stars_y, function(x) {
       get_segment_y(m, x, groups = 1:2, value = 1)
-    }) %>% unlist()
+    }) %>%
+      unlist()
 
     segment_data_yend_internal <- lapply(significance_stars_y, function(x) {
       get_segment_y(m, x, groups = 1:2, value = 2)
-    }) %>% unlist()
+    }) %>%
+      unlist()
 
     segment_data <- data.frame(
       x = significance_bars_x,
@@ -255,17 +280,18 @@ plot_means_over_time <- function(data,
 
     segment_data[[group]] <- m[[group]][1]
 
-    p <- p + ggplot2::geom_segment(
-      data = segment_data,
-      ggplot2::aes(
-        x = .data$x,
-        xend = .data$x,
-        y = .data$y,
-        yend = .data$yend
-      ),
-      linewidth = 0.5,
-      colour = "black"
-    )
+    p <- p +
+      ggplot2::geom_segment(
+        data = segment_data,
+        ggplot2::aes(
+          x = .data$x,
+          xend = .data$x,
+          y = .data$y,
+          yend = .data$yend
+        ),
+        linewidth = 0.5,
+        colour = "black"
+      )
     p
   }
   if (verbose && error_bars) {

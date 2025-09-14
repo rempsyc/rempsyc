@@ -312,7 +312,7 @@ test_that("nice_scatter", {
   # Test with custom ID column (using car names)
   mtcars_with_names <- mtcars
   mtcars_with_names$car_name <- rownames(mtcars)
-  
+
   x22 <- nice_scatter(
     data = mtcars_with_names,
     predictor = "wt",

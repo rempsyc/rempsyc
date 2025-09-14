@@ -117,26 +117,26 @@ nice_lm <- function(model,
   ES.list <- lapply(seq_along(models.list), function(i) {
     sums_data <- sums.list[[i]]
     es_data <- ES.list[[i]]
-    assign_vector <- models.list[[i]]$assign[-1]  # Remove intercept
-    
+    assign_vector <- models.list[[i]]$assign[-1] # Remove intercept
+
     # If dimensions already match, return as-is
     if (nrow(sums_data) == nrow(es_data)) {
       return(es_data)
     }
-    
+
     # Expand effect sizes to match coefficient structure
     expanded_es <- data.frame(
       r2_semipartial = numeric(nrow(sums_data)),
-      CI_low = numeric(nrow(sums_data)), 
+      CI_low = numeric(nrow(sums_data)),
       CI_high = numeric(nrow(sums_data))
     )
-    
+
     # Map each coefficient to its corresponding effect size using assign vector
     for (j in seq_along(assign_vector)) {
       term_index <- assign_vector[j]
       expanded_es[j, ] <- es_data[term_index, ]
     }
-    
+
     return(expanded_es)
   })
 
