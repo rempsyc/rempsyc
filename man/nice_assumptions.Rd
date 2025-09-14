@@ -26,7 +26,7 @@ not respected. Diagnostic is how many assumptions are not
 respected for a given model or variable.
 }
 \examples{
-\dontshow{if (requireNamespace("lmtest", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lmtest", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Create a regression model (using data available in R by default)
 model <- lm(mpg ~ wt * cyl + gear, data = mtcars)
 nice_assumptions(model)

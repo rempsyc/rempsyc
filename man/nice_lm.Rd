@@ -65,7 +65,7 @@ For the \emph{easystats} equivalent, use \code{\link[report:report]{report::repo
 model object.
 }
 \examples{
-\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make and format model
 model <- lm(mpg ~ cyl + wt * hp, mtcars)
 nice_lm(model)
@@ -76,7 +76,7 @@ my.models <- list(model, model2)
 x <- nice_lm(my.models)
 x
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("effectsize", quietly = TRUE) && packageVersion("effectsize") >= "0.8.3.5") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE) && packageVersion("effectsize") >= "0.8.3.5") withAutoprint(\{ # examplesIf}
 # Get interpretations
 cbind(x, Interpretation = effectsize::interpret_r2_semipartial(x$sr2))
 \dontshow{\}) # examplesIf}

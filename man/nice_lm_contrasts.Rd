@@ -67,7 +67,7 @@ When using \code{nice_lm_contrasts()}, please use \code{as.factor()} outside the
 \code{lm()} formula, or it will lead to an error.
 }
 \examples{
-\dontshow{if (requireNamespace("bootES", quietly = TRUE) && requireNamespace("modelbased", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("bootES", quietly = TRUE) && requireNamespace("modelbased", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make and format model (group need to be a factor)
 mtcars2 <- mtcars
 mtcars2$cyl <- as.factor(mtcars2$cyl)

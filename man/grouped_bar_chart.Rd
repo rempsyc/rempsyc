@@ -34,7 +34,7 @@ A bar plot of class ggplot.
 Make nice grouped bar charts easily.
 }
 \examples{
-\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make the basic plot
 iris2 <- iris
 iris2$plant <- c(

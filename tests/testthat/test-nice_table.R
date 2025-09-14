@@ -63,7 +63,7 @@ test_that("nice_table", {
   expect_s3_class(p_format_table, "flextable")
   expect_equal(length(p_format_table$col_keys), 4) # 4 columns
   expect_equal(nrow(p_format_table$body$dataset), 6) # 6 rows
-  
+
   r_format_table <- nice_table(test[8:11], col.format.r = 1:4)
   expect_s3_class(r_format_table, "flextable")
   expect_equal(length(r_format_table$col_keys), 4) # 4 columns
@@ -76,7 +76,7 @@ test_that("nice_table", {
   custom_table1 <- nice_table(test[8:11], col.format.custom = 2:4, format.custom = "fun")
   expect_s3_class(custom_table1, "flextable")
   expect_equal(length(custom_table1$col_keys), 4) # 4 columns
-  
+
   fun <<- function(x) {
     paste("x", x)
   }
@@ -98,7 +98,7 @@ test_that("nice_table", {
     ),
     row.names = c(NA, -3L), class = "data.frame"
   )
-  
+
   # Test that nice_table returns a proper flextable object (not snapshot due to cross-environment differences)
   result_table <- nice_table(header.data,
     separate.header = TRUE,

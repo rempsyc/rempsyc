@@ -312,9 +312,10 @@ format_flex <- function(table, j, digits = 2, value, fun) {
 
 # parse_formatter
 parse_formatter <- function(
-    table,
-    call = "table <- table %>% flextable::set_formatter",
-    column, fun) {
+  table,
+  call = "table <- table %>% flextable::set_formatter",
+  column, fun
+) {
   rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
   eval(parse(text = rExpression))
 }
@@ -454,13 +455,13 @@ prepare_report <- function(dataframe, report, short) {
   if (all(c("Cohens_d_CI_low", "Cohens_d_CI_high") %in% names(dataframe))) {
     dataframe <- dataframe %>%
       format_CI(c("Cohens_d_CI_low", "Cohens_d_CI_high"),
-                col.name = "95% CI (d)"
+        col.name = "95% CI (d)"
       )
   }
   if (all(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high") %in% names(dataframe))) {
     dataframe <- dataframe %>%
       format_CI(c("Std_Coefficient_CI_low", "Std_Coefficient_CI_high"),
-                col.name = "95% CI (B)"
+        col.name = "95% CI (B)"
       )
   }
   dataframe
@@ -853,9 +854,10 @@ format_columns <- function(dataframe, table, italics, separate.header,
 }
 
 beautify_flextable <- function(
-    dataframe, table, separate.header, col.format.p, col.format.r,
-    format.custom, col.format.custom, sh.pattern, unique.pattern,
-    format_p_internal) {
+  dataframe, table, separate.header, col.format.p, col.format.r,
+  format.custom, col.format.custom, sh.pattern, unique.pattern,
+  format_p_internal
+) {
   dont.change0 <- attr(table, "dont_change")
   dont.change <- paste0("^", dont.change0, "$", collapse = "|")
 

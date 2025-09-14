@@ -185,7 +185,7 @@ test_that("plot_means_over_time", {
   expect_true("GeomPoint" %in% class(p1$layers[[3]]$geom))
 
   # Test plot without error bars has fewer layers
-  expect_length(p6$layers, 2)  # Should have line and point layers only
+  expect_length(p6$layers, 2) # Should have line and point layers only
 
   # Verify plot data structure
   plot_data <- ggplot2::ggplot_build(p1)$data[[1]]

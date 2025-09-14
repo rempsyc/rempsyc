@@ -63,7 +63,7 @@ For the \emph{easystats} equivalent, use: \code{\link[report:report]{report::rep
 \code{\link[=t.test]{t.test()}} object.
 }
 \examples{
-\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("effectsize", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make the basic table
 nice_t_test(
   data = mtcars,
