@@ -1,5 +1,5 @@
 # rempsyc 0.2.0
-* New CRAN submission (incoming)
+* New CRAN submission
 
 ## rempsyc 0.1.9.7
 * Add more automatic confidence interval column name conversions for `nice_table()`.
