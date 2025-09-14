@@ -144,7 +144,7 @@ the \link{rcompanion_groupwiseMean} function.
 For the \emph{easystats} equivalent, see: \code{\link[see:geom_violindot]{see::geom_violindot()}}.
 }
 \examples{
-\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("boot", quietly = TRUE) && requireNamespace("ggsignif", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("boot", quietly = TRUE) && requireNamespace("ggsignif", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make the basic plot
 nice_violin(
   data = ToothGrowth,

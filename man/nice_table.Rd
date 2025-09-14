@@ -101,7 +101,7 @@ Word with \code{print(table, preview ="docx")}, or saved to
 Word with the \code{flextable::save_as_docx()} function.
 }
 \examples{
-\dontshow{if (requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("flextable", quietly = TRUE) && requireNamespace("methods", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make the basic table
 my_table <- nice_table(
   mtcars[1:3, ],

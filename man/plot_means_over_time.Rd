@@ -75,7 +75,7 @@ means. For more information, visit:
 http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
 }
 \examples{
-\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 data <- mtcars
 names(data)[6:3] <- paste0("T", 1:4, "_var")
 plot_means_over_time(

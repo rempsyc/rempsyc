@@ -50,7 +50,7 @@ For the \emph{easystats} equivalent, see:
 \code{\link[correlation:cormatrix_to_excel]{correlation::cormatrix_to_excel()}}.
 }
 \examples{
-\dontshow{if (requireNamespace("correlation", quietly = TRUE) && requireNamespace("openxlsx2", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("correlation", quietly = TRUE) && requireNamespace("openxlsx2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \dontshow{
 .old_wd <- setwd(tempdir())
 }

@@ -44,7 +44,7 @@ Score of 1 = 0\%, 2 = 10\%, 3 = 20\%, 4 = 30\%, 5 = 55\%, 6 = 65\%,
 7 = 85\%.
 }
 \examples{
-\dontshow{if (requireNamespace("VennDiagram", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("VennDiagram", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Score of 1 (0\% overlap)
 overlap_circle(1)
 

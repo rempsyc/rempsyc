@@ -1,6 +1,9 @@
 # rempsyc 0.2.0
 * New CRAN submission (incoming)
 
+## rempsyc 0.1.9.7
+* Add more automatic confidence interval column name conversions for `nice_table()`.
+
 ## rempsyc 0.1.9.6
 * Optimize copilot setup workflow part 2: Replace manual `install.packages()` approach with efficient `r-lib/actions/setup-r-dependencies@v2` using pak for better dependency resolution, automatic caching, and targeted package installation. This follows the proven patterns used in other workflows (R-CMD-check, pkgdown) and eliminates redundant manual caching steps (#63)
 

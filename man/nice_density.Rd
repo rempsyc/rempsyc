@@ -62,7 +62,7 @@ reference line representing a matched normal distribution.
 Make nice density plots easily. Internally, uses \code{na.rm = TRUE}.
 }
 \examples{
-\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE) && requireNamespace("ggrepel", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Make the basic plot
 nice_density(
   data = iris,
