@@ -51,13 +51,16 @@ uses the Welch t-test per default (see why here:
 To use the Student t-test, simply add the following
 argument: \code{var.equal = TRUE}.
 
-Note that for paired \emph{t} tests, you need to use \code{paired = TRUE}, and
-you also need data in "long" format rather than wide format (like for
-the \code{ToothGrowth} data set). In this case, the \code{group} argument refers
-to the participant ID for example, so the same group/participant is
-measured several times, and thus has several rows. Note also that R >= 4.4.0
-has stopped supporting the \code{paired} argument for the formula method used
-internally here.
+For paired \emph{t} tests, set \code{paired = TRUE} and provide data in "long" format
+where each measurement is a separate row. The \code{group} argument should specify
+the variable that distinguishes the two measurements (e.g., "pre" vs "post",
+"condition A" vs "condition B"). The function will automatically extract and
+pair the measurements by their order in the data. Ensure that rows are properly
+ordered so that the first occurrence of each group level corresponds to the
+same subject/unit as the second occurrence.
+
+This works seamlessly with \code{dplyr::group_by()} for analyzing multiple groups
+or conditions simultaneously (see examples).
 
 For the \emph{easystats} equivalent, use: \code{\link[report:report]{report::report()}} on the
 \code{\link[=t.test]{t.test()}} object.
@@ -104,8 +107,14 @@ nice_t_test(
   mu = 10
 )
 
-# Make sure cases appear in the same order for
-# both levels of the grouping factor
+# Paired t-test (in long format)
+# Each participant/unit measured twice
+nice_t_test(
+  data = ToothGrowth,
+  response = "len",
+  group = "supp",
+  paired = TRUE
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -10,13 +10,16 @@
 #' To use the Student t-test, simply add the following
 #' argument: `var.equal = TRUE`.
 #'
-#' Note that for paired *t* tests, you need to use `paired = TRUE`, and
-#' you also need data in "long" format rather than wide format (like for
-#' the `ToothGrowth` data set). In this case, the `group` argument refers
-#' to the participant ID for example, so the same group/participant is
-#' measured several times, and thus has several rows. Note also that R >= 4.4.0
-#' has stopped supporting the `paired` argument for the formula method used
-#' internally here.
+#' For paired *t* tests, set `paired = TRUE` and provide data in "long" format
+#' where each measurement is a separate row. The `group` argument should specify
+#' the variable that distinguishes the two measurements (e.g., "pre" vs "post",
+#' "condition A" vs "condition B"). The function will automatically extract and
+#' pair the measurements by their order in the data. Ensure that rows are properly
+#' ordered so that the first occurrence of each group level corresponds to the 
+#' same subject/unit as the second occurrence. 
+#' 
+#' This works seamlessly with `dplyr::group_by()` for analyzing multiple groups
+#' or conditions simultaneously (see examples).
 #'
 #' For the *easystats* equivalent, use: [report::report()] on the
 #' [t.test()] object.
@@ -81,8 +84,14 @@
 #'   mu = 10
 #' )
 #'
-#' # Make sure cases appear in the same order for
-#' # both levels of the grouping factor
+#' # Paired t-test (in long format)
+#' # Each participant/unit measured twice
+#' nice_t_test(
+#'   data = ToothGrowth,
+#'   response = "len",
+#'   group = "supp",
+#'   paired = TRUE
+#' )
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 #'
