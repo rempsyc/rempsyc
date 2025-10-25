@@ -10,13 +10,16 @@
 #' To use the Student t-test, simply add the following
 #' argument: `var.equal = TRUE`.
 #'
-#' Note that for paired *t* tests, you need to use `paired = TRUE`, and
-#' you also need data in "long" format rather than wide format (like for
-#' the `ToothGrowth` data set). In this case, the `group` argument refers
-#' to the participant ID for example, so the same group/participant is
-#' measured several times, and thus has several rows. Note also that R >= 4.4.0
-#' has stopped supporting the `paired` argument for the formula method used
-#' internally here.
+#' For paired *t* tests, set `paired = TRUE` and provide data in "long" format
+#' where each measurement is a separate row. The `group` argument should specify
+#' the variable that distinguishes the two measurements (e.g., "pre" vs "post",
+#' "condition A" vs "condition B"). The function will automatically extract and
+#' pair the measurements by their order in the data. Ensure that rows are
+#' properly ordered so that the first occurrence of each group level corresponds
+#' to the same subject/unit as the second occurrence.
+#'
+#' This works seamlessly with `dplyr::group_by()` for analyzing multiple groups
+#' or conditions simultaneously (see examples).
 #'
 #' For the *easystats* equivalent, use: [report::report()] on the
 #' [t.test()] object.
@@ -81,8 +84,14 @@
 #'   mu = 10
 #' )
 #'
-#' # Make sure cases appear in the same order for
-#' # both levels of the grouping factor
+#' # Paired t-test (in long format)
+#' # Each participant/unit measured twice
+#' nice_t_test(
+#'   data = ToothGrowth,
+#'   response = "len",
+#'   group = "supp",
+#'   paired = TRUE
+#' )
 #' @seealso
 #' Tutorial: \url{https://rempsyc.remi-theriault.com/articles/t-test}
 #'
@@ -134,19 +143,24 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
     if (isTRUE(paired)) {
-      group1 <- as.character(unique(data[group])[2, ])
-      group2 <- as.character(unique(data[group])[1, ])
+      # For paired t-tests, extract vectors directly (required in R >= 4.4.0)
+      group_levels <- levels(data[[group]])
+      if (length(group_levels) != 2) {
+        stop("Paired t-test requires exactly 2 levels in the grouping variable")
+      }
+      group1 <- group_levels[1]
+      group2 <- group_levels[2]
 
-      x <- lapply(response, function(i) {
-        data[data[group] == group1, i]
+      x_list <- lapply(response, function(i) {
+        data[data[[group]] == group1, i, drop = TRUE]
       })
 
-      y <- lapply(response, function(i) {
-        data[data[group] == group2, i]
+      y_list <- lapply(response, function(i) {
+        data[data[[group]] == group2, i, drop = TRUE]
       })
 
-      formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
-      formulas <- lapply(formulas, stats::as.formula)
+      # For paired tests, we don't use formulas
+      formulas <- NULL
     } else {
       formulas <- paste0(response, " ~ ", group)
       formulas <- lapply(formulas, stats::as.formula)
@@ -162,19 +176,41 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   } else {
     mu <- 0
   }
-  mod.list <- lapply(formulas, stats::t.test, data = data, ...)
+
+  # Perform t-tests
+  if (!missing(group) && isTRUE(paired)) {
+    # For paired tests, pass vectors directly
+    mod.list <- mapply(function(x, y) {
+      stats::t.test(x, y, paired = TRUE, ...)
+    }, x_list, y_list, SIMPLIFY = FALSE)
+  } else {
+    mod.list <- lapply(formulas, stats::t.test, data = data, ...)
+  }
+
   list.names <- c("statistic", "parameter", "p.value")
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
-  es.lists <- lapply(formulas, function(x) {
-    effectsize::cohens_d(x,
-      data = data,
-      mu = mu,
-      pooled_sd = pooled_sd,
-      verbose = verbose
-    )
-  })
+  
+  # Calculate effect sizes
+  if (!missing(group) && isTRUE(paired)) {
+    # For paired tests, pass vectors directly to cohens_d
+    es.lists <- mapply(function(x, y) {
+      effectsize::cohens_d(x, y,
+        paired = TRUE,
+        verbose = verbose
+      )
+    }, x_list, y_list, SIMPLIFY = FALSE)
+  } else {
+    es.lists <- lapply(formulas, function(x) {
+      effectsize::cohens_d(x,
+        data = data,
+        mu = mu,
+        pooled_sd = pooled_sd,
+        verbose = verbose
+      )
+    })
+  }
   list.stats <- list()
   for (i in seq_along(list.names)) {
     list.stats[[list.names[i]]] <- unlist(c(t((lapply(sums.list, `[[`, i)))))

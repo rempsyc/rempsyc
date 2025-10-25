@@ -1,3 +1,6 @@
+# rempsyc 0.2.1
+* `nice_t_test()`: Fixed paired t-test functionality to work correctly with long-format data in grouped scenarios. The function now properly extracts vectors and passes them directly to `t.test()` and `effectsize::cohens_d()` instead of using the formula method, which is not supported for paired tests in R >= 4.4.0. This resolves errors when using `paired = TRUE` with `dplyr::group_by()` and `tidyr::pivot_longer()`.
+
 # rempsyc 0.2.0
 * New CRAN submission
 
