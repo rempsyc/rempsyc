@@ -134,19 +134,24 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   if (!missing(group)) {
     data[[group]] <- as.factor(data[[group]])
     if (isTRUE(paired)) {
-      group1 <- as.character(unique(data[group])[2, ])
-      group2 <- as.character(unique(data[group])[1, ])
+      # For paired t-tests, extract vectors directly (required in R >= 4.4.0)
+      group_levels <- levels(data[[group]])
+      if (length(group_levels) != 2) {
+        stop("Paired t-test requires exactly 2 levels in the grouping variable")
+      }
+      group1 <- group_levels[1]
+      group2 <- group_levels[2]
 
-      x <- lapply(response, function(i) {
-        data[data[group] == group1, i]
+      x_list <- lapply(response, function(i) {
+        data[data[[group]] == group1, i, drop = TRUE]
       })
 
-      y <- lapply(response, function(i) {
-        data[data[group] == group2, i]
+      y_list <- lapply(response, function(i) {
+        data[data[[group]] == group2, i, drop = TRUE]
       })
-
-      formulas <- paste0("Pair(", x, ", ", y, ") ~ 1")
-      formulas <- lapply(formulas, stats::as.formula)
+      
+      # For paired tests, we don't use formulas
+      formulas <- NULL
     } else {
       formulas <- paste0(response, " ~ ", group)
       formulas <- lapply(formulas, stats::as.formula)
@@ -162,19 +167,41 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   } else {
     mu <- 0
   }
-  mod.list <- lapply(formulas, stats::t.test, data = data, ...)
+  
+  # Perform t-tests
+  if (!missing(group) && isTRUE(paired)) {
+    # For paired tests, pass vectors directly
+    mod.list <- mapply(function(x, y) {
+      stats::t.test(x, y, paired = TRUE, ...)
+    }, x_list, y_list, SIMPLIFY = FALSE)
+  } else {
+    mod.list <- lapply(formulas, stats::t.test, data = data, ...)
+  }
+  
   list.names <- c("statistic", "parameter", "p.value")
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
   })
-  es.lists <- lapply(formulas, function(x) {
-    effectsize::cohens_d(x,
-      data = data,
-      mu = mu,
-      pooled_sd = pooled_sd,
-      verbose = verbose
-    )
-  })
+  
+  # Calculate effect sizes
+  if (!missing(group) && isTRUE(paired)) {
+    # For paired tests, pass vectors directly to cohens_d
+    es.lists <- mapply(function(x, y) {
+      effectsize::cohens_d(x, y,
+        paired = TRUE,
+        verbose = verbose
+      )
+    }, x_list, y_list, SIMPLIFY = FALSE)
+  } else {
+    es.lists <- lapply(formulas, function(x) {
+      effectsize::cohens_d(x,
+        data = data,
+        mu = mu,
+        pooled_sd = pooled_sd,
+        verbose = verbose
+      )
+    })
+  }
   list.stats <- list()
   for (i in seq_along(list.names)) {
     list.stats[[list.names[i]]] <- unlist(c(t((lapply(sums.list, `[[`, i)))))
