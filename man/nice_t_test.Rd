@@ -55,9 +55,9 @@ For paired \emph{t} tests, set \code{paired = TRUE} and provide data in "long" f
 where each measurement is a separate row. The \code{group} argument should specify
 the variable that distinguishes the two measurements (e.g., "pre" vs "post",
 "condition A" vs "condition B"). The function will automatically extract and
-pair the measurements by their order in the data. Ensure that rows are properly
-ordered so that the first occurrence of each group level corresponds to the
-same subject/unit as the second occurrence.
+pair the measurements by their order in the data. Ensure that rows are
+properly ordered so that the first occurrence of each group level corresponds
+to the same subject/unit as the second occurrence.
 
 This works seamlessly with \code{dplyr::group_by()} for analyzing multiple groups
 or conditions simultaneously (see examples).

@@ -14,10 +14,10 @@
 #' where each measurement is a separate row. The `group` argument should specify
 #' the variable that distinguishes the two measurements (e.g., "pre" vs "post",
 #' "condition A" vs "condition B"). The function will automatically extract and
-#' pair the measurements by their order in the data. Ensure that rows are properly
-#' ordered so that the first occurrence of each group level corresponds to the 
-#' same subject/unit as the second occurrence. 
-#' 
+#' pair the measurements by their order in the data. Ensure that rows are
+#' properly ordered so that the first occurrence of each group level corresponds
+#' to the same subject/unit as the second occurrence.
+#'
 #' This works seamlessly with `dplyr::group_by()` for analyzing multiple groups
 #' or conditions simultaneously (see examples).
 #'
@@ -158,7 +158,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
       y_list <- lapply(response, function(i) {
         data[data[[group]] == group2, i, drop = TRUE]
       })
-      
+
       # For paired tests, we don't use formulas
       formulas <- NULL
     } else {
@@ -176,7 +176,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   } else {
     mu <- 0
   }
-  
+
   # Perform t-tests
   if (!missing(group) && isTRUE(paired)) {
     # For paired tests, pass vectors directly
@@ -186,7 +186,7 @@ For the Student t-test, use `var.equal = TRUE`. \n "
   } else {
     mod.list <- lapply(formulas, stats::t.test, data = data, ...)
   }
-  
+
   list.names <- c("statistic", "parameter", "p.value")
   sums.list <- lapply(mod.list, function(x) {
     (x)[list.names]
