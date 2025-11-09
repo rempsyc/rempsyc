@@ -866,10 +866,8 @@ format_columns <- function(
   cols.2digits <- c(
     "t",
     "SE",
-    "SD",
     "F",
     "b",
-    "M",
     "W",
     "d",
     "g",
@@ -893,6 +891,32 @@ format_columns <- function(
     if (i %in% names(dataframe)) {
       table <- table %>%
         format_flex(j = i)
+    }
+  }
+
+  ##  .....................................
+  ##  1-digit columns                 ####
+
+  # Italicize all these column names
+  cols.1digits <- c(
+    "SD",
+    "M"
+  )
+  if (!missing(separate.header)) {
+    cols.1digits.sh <- paste0(
+      sh.pattern,
+      rep(
+        cols.1digits,
+        each = unique.pattern
+      )
+    )
+    cols.1digits <- c(cols.1digits, cols.1digits.sh)
+  }
+
+  for (i in cols.1digits) {
+    if (i %in% names(dataframe)) {
+      table <- table %>%
+        format_flex(j = i, digits = 1)
     }
   }
 
@@ -1076,6 +1100,7 @@ format_columns <- function(
   attr(table, "dont_change") <- c(
     compose.table0$col,
     cols.df,
+    cols.1digits,
     cols.2digits,
     cols.0digits,
     compose.table2$col

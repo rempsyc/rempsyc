@@ -1,3 +1,6 @@
+# rempsyc 0.2.0.1
+* Change `nice_table()` defaults for means and standard deviations to one decimal (as likely more common to use these from surveys and questionnaires) (#84)
+
 # rempsyc 0.2.0
 * New CRAN submission
 
