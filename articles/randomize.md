@@ -1,0 +1,263 @@
+# Easy randomization in R
+
+## Getting started
+
+Here’s how to easily nice_randomize for either within-subject or
+between-group!
+
+Sure, you might just want to generate a random number n times, and hope
+each group gets approximately the same number of participants assigned
+to it. Or, you can make sure of this by making “blocks” without
+replacements. So if you had four groups, each block of four would
+contain each group once, in a random order, which you would then repeat.
+Let’s see this.
+
+Load the `rempsyc` package:
+
+``` r
+library(rempsyc)
+```
+
+> ***Note:*** If you haven’t installed this package yet, you will need
+> to install it via the following command:
+> `install.packages("rempsyc")`. Furthermore, you may be asked to
+> install the following packages if you haven’t installed them already
+> (you may decide to install them all now to avoid interrupting your
+> workflow if you wish to follow this tutorial from beginning to end):
+
+``` r
+install_if_not_installed("flextable")
+```
+
+------------------------------------------------------------------------
+
+## Between-Group Design
+
+Basic output with default options (3 conditions, 9 participants,
+between-group design):
+
+``` r
+set.seed(100)
+nice_randomize()
+```
+
+    ##   id Condition
+    ## 1  1         b
+    ## 2  2         a
+    ## 3  3         c
+    ## 4  4         c
+    ## 5  5         a
+    ## 6  6         b
+    ## 7  7         b
+    ## 8  8         c
+    ## 9  9         a
+
+> ***Note:*** You will notice that I have set a seed with the
+> [`set.seed()`](https://rdrr.io/r/base/Random.html) function. For
+> reproducibility reasons, users are also encouraged to set a seed
+> before using this function.
+
+Specify design, number of conditions, number of participants, and names
+of conditions:
+
+``` r
+set.seed(100)
+nice_randomize(
+  design = "between",
+  Ncondition = 4,
+  n = 8,
+  condition.names = c("BP", "CX", "PZ", "ZL")
+)
+```
+
+    ##   id Condition
+    ## 1  1        CX
+    ## 2  2        PZ
+    ## 3  3        ZL
+    ## 4  4        BP
+    ## 5  5        PZ
+    ## 6  6        BP
+    ## 7  7        CX
+    ## 8  8        ZL
+
+``` r
+# Warning: sample size needs to be a multiple of your
+# number of groups if using "between"!
+# FYI: condition names stand for popular antidepressants:
+# BP = Bupropion, CX = Celexa, PZ = Prozac, ZL = Zoloft.
+```
+
+Be aware that this function won’t work for between-group designs unless
+your sample size is a multiple of your number of groups (so for 4
+groups, sample size can’t be 5, 6, or 7, but you can have 4, 8, 12,
+etc., participants). You can still try otherwise but you will get an
+error and a warning message. That is because it works by “blocks” so
+some operations won’t be able to be completed otherwise.
+
+## Within-Group Design
+
+Basic output with default options (3 conditions and 9 participants) but
+with within-subject design specified
+
+``` r
+set.seed(100)
+nice_randomize(design = "within")
+```
+
+    ##   id Condition
+    ## 1  1 b - a - c
+    ## 2  2 c - a - b
+    ## 3  3 b - c - a
+    ## 4  4 b - c - a
+    ## 5  5 c - b - a
+    ## 6  6 c - a - b
+    ## 7  7 c - b - a
+    ## 8  8 a - b - c
+    ## 9  9 c - b - a
+
+Specify design, number of conditions, number of participants, and names
+of conditions:
+
+Note that you could call your conditions anything (like a, b, c, etc.).
+
+``` r
+set.seed(100)
+nice_randomize(
+  design = "within",
+  Ncondition = 4,
+  n = 6,
+  condition.names = c("SV", "AV", "ST", "AT")
+)
+```
+
+    ##   id         Condition
+    ## 1  1 AV - ST - AT - SV
+    ## 2  2 ST - SV - AV - AT
+    ## 3  3 AT - ST - AV - SV
+    ## 4  4 AV - ST - AT - SV
+    ## 5  5 ST - AT - SV - AV
+    ## 6  6 AT - AV - SV - ST
+
+``` r
+# FYI: condition names stand for forms of multisensory stimulation:
+# SV = Synchronous Visual, AV = Asynchronous Visual,
+# ST = Synchronous Tactile, AT = Asynchronous Tactile.
+```
+
+## Make a quick runsheet
+
+A nice way to make a run sheet quickly (regardless of design) is by
+adding column names in advance with the `col.names` argument:
+
+``` r
+set.seed(100)
+nice_randomized_subjects <- nice_randomize(
+  design = "within",
+  Ncondition = 4,
+  n = 128,
+  condition.names = c("SV", "AV", "ST", "AT"),
+  col.names = c(
+    "id", "Condition", "Date/Time",
+    "SONA ID", "Age/Gd.", "Handedness",
+    "Tester", "Notes"
+  )
+)
+head(nice_randomized_subjects)
+```
+
+    ##   id         Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes
+    ## 1  1 AV - ST - AT - SV        NA      NA      NA         NA     NA    NA
+    ## 2  2 ST - SV - AV - AT        NA      NA      NA         NA     NA    NA
+    ## 3  3 AT - ST - AV - SV        NA      NA      NA         NA     NA    NA
+    ## 4  4 AV - ST - AT - SV        NA      NA      NA         NA     NA    NA
+    ## 5  5 ST - AT - SV - AV        NA      NA      NA         NA     NA    NA
+    ## 6  6 AT - AV - SV - ST        NA      NA      NA         NA     NA    NA
+
+### Save data frame to Word
+
+1.  Save the resulting dataframe as a `nice_table`, and then to Word:
+
+``` r
+runsheet <- nice_table(nice_randomized_subjects)
+flextable::save_as_docx(runsheet, path = "runsheet.docx")
+# Change the path to where you would like to save it.
+# If you copy-paste your path name, remember to
+# use "R" slashes ('/' rather than '\').
+# Also remember to specify the .docx extension of the file.
+```
+
+2.  After saving your dataframe to Word, open it in Word.
+
+3.  Make your document horizontal by going to the Layout tab, Page Setup
+    section, then clicking on the “Orientation” button and selecting the
+    *Landscape* option.
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step4.png)
+
+4.  Select whole table.
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step5.png)
+
+5.  Left align table.
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/flextable2.png)
+
+6.  Turn off preferred width in table properties.
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/flextable3.png)
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/flextable4.png)
+
+7.  Make required formatting arrangements: In the Home tab, Paragraph
+    section, click on the Borders button, then click *All Borders*.
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step6.png)
+
+8.  Next adjust the columns width to fit your page (especially the
+    “Notes” column, which should be wider).
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step8.png)
+
+9.  If necessary, pull the table left with the little square pound *Move
+    Table Column* button in top margin to create more space (note that
+    the table should be selected first).
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step9.png)
+
+10. Double-click on the header to edit it and add a title (e.g., “Study
+    3 Runsheet”); center and bold (suggested font size: 14).
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step11.png)
+
+11. Under the title in smaller font (not bold; suggested size: 12), add
+    the legend for the conditions (e.g., “SV = Synchronous Visual, AV =
+    Asynchronous Visual, ST = Synchronous Tactile, AT = Asynchronous
+    Tactile”).
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step12.png)
+
+12. Add a page number at the bottom of the page by going to the Insert
+    tab, Header & Footer section, and click on the “Page Number” button,
+    then selecting “Bottom of Page”, then *Plain Number 3* (which is
+    bottom right).
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step14.png)
+
+13. Now ‘Save As’ using the F12 keyboard key, then select save as .pdf,
+    and you’re done! :)
+
+![](https://rempsyc.remi-theriault.com/images/blog_randomize/step15.png)
+
+You can now use this runsheet yourself, print it, or send it to your
+research assistants!
+
+Note: you might want to save that word document as you work on it to not
+lose it and perhaps reuse it in the future!
+
+### Thanks for checking in
+
+Make sure to check out this page again if you use the code after a time
+or if you encounter errors, as I periodically update or improve the
+code. Feel free to contact me for comments, questions, or requests to
+improve this function at <https://github.com/rempsyc/rempsyc/issues>.
+See all tutorials here: <https://remi-theriault.com/tutorials>.

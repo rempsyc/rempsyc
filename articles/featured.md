@@ -1,0 +1,121 @@
+# rempsyc: Featured In
+
+As the `rempsyc` package is starting to gain momentum, an increasing
+number of external sources are citing or writing about `rempsyc`. This
+document is meant to be a sort of recension of these external sources.
+
+## Testimonials
+
+> - This package is amazing! We are eternally grateful! - Pavlos
+>
+> - Thank you for making such a useful package - Petar
+>
+> - Keep up the good work with *rempsyc* it’s very impressive and very
+>   useful! - Denis
+>
+> - Thank you for your R tutorials! - Santhi
+>
+> - Thanks for rempsyc. Works out of the box like a charm. - Ulrich
+>
+> - I am writing to express my appreciation for the “rempsyc” package,
+>   which has significantly simplified the process of creating APA-style
+>   tables for my research. Thank you for your excellent work! - Liman
+>
+> - Thank you a thousand times for the work done on these R packages, on
+>   the vignettes, the articles… Currently completing my MSc thesis, you
+>   allow me to save considerable time! Thanks! - Guillaume
+>
+> - I am loving the function nice_table to create APA formatted tables
+>   and it has worked for me wonderfully many times. - Seglima
+>
+> - This is one of the most helpful R packages I’ve used in years! It
+>   saves hours of time and patience and is super easy to implement! -
+>   Mark
+>
+> - What a fantastic package. Thank you. - John
+>
+> - After some hours of working with the nice_table function, I got to
+>   know it pretty well. It is working perfect – I am impressed - Mihaly
+>
+> - Thanks for the great work on this package - Olivier
+>
+> - I have been using your rempsyc package in R to generate tables, to
+>   which I am extremely grateful. Thank you for having come up with
+>   such useful package - Keith
+>
+> - Thank you for providing this useful package! - Sebastian
+>
+> - Thank you for creating such a helpful package for APA tables - I
+>   hope this will be a life saver for my thesis formatting - Michaela
+>
+> - Just discovered your Publication-ready APA tables tutorials. They
+>   are Great! Thank you so much - Yayouk
+>
+> - I also just want to say how much I love this package and function so
+>   much! Thank you so much for your work and contribution! - Seungju
+>
+> - Your rempsyc package is amazing! - Ville
+>
+> - Thanks for this wonderful and useful package - Maya
+>
+> - Your package is amazing! - Hugo
+>
+> - I discovered your rempsyc extension to the flextable package and am
+>   quite impressed - Tom
+>
+> - This package is amazing – thank you so much - Taylor
+
+## r-bloggers
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/r-bloggers_title.png)](https://www.r-bloggers.com/2022/10/september-2022-top-40-new-cran-packages/)
+
+## Dr Lyndon Walker
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/walker.png)](https://drlyndonwalker.com/apa-tables-and-psychology-oriented-analysis-in-r-with-the-rempsyc-package/)
+
+------------------------------------------------------------------------
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/walker_twitter.png)](https://twitter.com/DrLyndonWalker/status/1595700549927960577)
+
+## Prof. Erik Marsja, PhD
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/marsja_twitter.png)](https://twitter.com/MarsjaSe/status/1655460976764805120)
+
+------------------------------------------------------------------------
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/marsja.png)](https://www.marsja.se/report-correlation-in-apa-style-using-r-text-tables/)
+
+## Sharon Machlis
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/machlis_title.png)](https://www.infoworld.com/article/3667496/12-ggplot-extensions-for-snazzier-r-graphics.html?page=2)
+
+------------------------------------------------------------------------
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/machlis_twitter.png)](https://twitter.com/sharon000/status/1562039354649976832)
+
+## r-pubs
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/r-pubs_title.png)](https://rpubs.com/abova/nptest)
+
+## Jeromy Anglim
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/anglim_title.png)](http://jeromyanglim.blogspot.com/2017/03/generating-apa-style-tables-in-r.md)
+
+## papaja
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/papaja.png)](https://www.rdocumentation.org/packages/papaja/versions/0.1.1)
+
+## Université du Québec à Montréal
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/leduc.png)](https://psychologie.uqam.ca/wp-content/uploads/sites/73/2023/01/Quelques-packages-R-utiles.pdf)
+
+------------------------------------------------------------------------
+
+[![](https://rempsyc.remi-theriault.com/images/blog_featured/agepsycs.png)](https://agepsycs.files.wordpress.com/2021/11/ressources_agepsy-cs_automne2021.pdf)
+
+## Citations
+
+Now that citations are increasing, it is less trouble to just link to
+Google Scholar rather than list all publications here manually ;)
+
+<https://scholar.google.com/scholar?cites=825773511059505683&hl=en>
