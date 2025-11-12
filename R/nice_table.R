@@ -172,6 +172,8 @@ nice_table <- function(
     message("Non-dataframe detected. Attempting to coerce to dataframe")
   }
 
+  flextable::set_flextable_defaults(background.color = "white")
+
   dataframe <- as.data.frame(data)
 
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
@@ -362,7 +364,15 @@ format_CI <- function(
 }
 
 # format_flex
-format_flex <- function(table, j, digits = 2, value, fun, separate.header = FALSE, level.number = NULL) {
+format_flex <- function(
+  table,
+  j,
+  digits = 2,
+  value,
+  fun,
+  separate.header = FALSE,
+  level.number = NULL
+) {
   if (missing(value)) {
     if (separate.header && !is.null(level.number)) {
       table <- table %>%
@@ -838,7 +848,7 @@ format_columns <- function(
     ) +
       1
   }
-  
+
   ##  ....................................
   ##  Special cases                  ####
   # Fix header with italics
@@ -867,9 +877,12 @@ format_columns <- function(
     if (i %in% names(dataframe)) {
       df.digits <- ifelse(any(dataframe[i] %% 1 == 0), 0, 2)
       table <- table %>%
-        format_flex(j = i, digits = df.digits, 
-                    separate.header = has.separate.header, 
-                    level.number = level.number)
+        format_flex(
+          j = i,
+          digits = df.digits,
+          separate.header = has.separate.header,
+          level.number = level.number
+        )
     }
   }
 
@@ -904,9 +917,11 @@ format_columns <- function(
   for (i in cols.2digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i,
-                    separate.header = has.separate.header,
-                    level.number = level.number)
+        format_flex(
+          j = i,
+          separate.header = has.separate.header,
+          level.number = level.number
+        )
     }
   }
 
@@ -932,9 +947,12 @@ format_columns <- function(
   for (i in cols.1digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i, digits = 1,
-                    separate.header = has.separate.header,
-                    level.number = level.number)
+        format_flex(
+          j = i,
+          digits = 1,
+          separate.header = has.separate.header,
+          level.number = level.number
+        )
     }
   }
 
@@ -955,9 +973,12 @@ format_columns <- function(
   for (i in cols.0digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i, digits = 0,
-                    separate.header = has.separate.header,
-                    level.number = level.number)
+        format_flex(
+          j = i,
+          digits = 0,
+          separate.header = has.separate.header,
+          level.number = level.number
+        )
     }
   }
 
