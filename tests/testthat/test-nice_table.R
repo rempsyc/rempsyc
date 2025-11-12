@@ -111,4 +111,21 @@ test_that("nice_table", {
   expect_equal(result_table$col_keys, c("Variable", "setosa.M", "setosa.SD", "versicolor.M", "versicolor.SD"))
   expect_equal(nrow(result_table$header$dataset), 2) # separate.header = TRUE creates 2 header rows
   expect_equal(nrow(result_table$body$dataset), 3) # 3 rows of data
+  
+  # Test that group headers (row 1) are NOT italicized but column headers (row 2) ARE italicized
+  # This is for the fix of issue: "remove italicisations in separate.header"
+  # Row 1 should have "setosa" and "versicolor" (group names) - NOT italic
+  # Row 2 should have "M" and "SD" (column names) - SHOULD be italic for columns specified in italics parameter
+  italic_matrix <- result_table$header$styles$text$italic$data
+  
+  # Test row 1 (group headers) - should NOT be italic for any column
+  expect_false(italic_matrix[1, "setosa.M"])   # "setosa" group header should NOT be italic
+  expect_false(italic_matrix[1, "setosa.SD"])  # "setosa" group header should NOT be italic
+  expect_false(italic_matrix[1, "versicolor.M"]) # "versicolor" group header should NOT be italic
+  expect_false(italic_matrix[1, "versicolor.SD"]) # "versicolor" group header should NOT be italic
+  
+  # Test row 2 (column headers) - SHOULD be italic for columns in italics parameter (2:4)
+  expect_true(italic_matrix[2, "setosa.M"])    # M should be italic (column 2 in italics parameter)
+  expect_true(italic_matrix[2, "setosa.SD"])   # SD should be italic (column 3 in italics parameter)
+  expect_true(italic_matrix[2, "versicolor.M"]) # M should be italic (column 4 in italics parameter)
 })
