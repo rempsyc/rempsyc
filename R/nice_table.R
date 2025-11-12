@@ -362,11 +362,17 @@ format_CI <- function(
 }
 
 # format_flex
-format_flex <- function(table, j, digits = 2, value, fun) {
+format_flex <- function(table, j, digits = 2, value, fun, separate.header = FALSE, level.number = NULL) {
   if (missing(value)) {
-    table <- table %>%
-      flextable::italic(j = j, part = "header") %>%
-      flextable::colformat_double(j = j, big.mark = ",", digits = digits)
+    if (separate.header && !is.null(level.number)) {
+      table <- table %>%
+        flextable::italic(j = j, i = level.number, part = "header") %>%
+        flextable::colformat_double(j = j, big.mark = ",", digits = digits)
+    } else {
+      table <- table %>%
+        flextable::italic(j = j, part = "header") %>%
+        flextable::colformat_double(j = j, big.mark = ",", digits = digits)
+    }
   } else {
     rExpression <- paste0("flextable::as_paragraph(", value, ")")
     table <- table %>%
@@ -820,13 +826,10 @@ format_columns <- function(
   unique.pattern,
   format_p_internal
 ) {
-  ##  ....................................
-  ##  Special cases                  ####
-  # Fix header with italics
-  if (!missing(italics) & missing(separate.header)) {
-    table <- table %>%
-      flextable::italic(j = italics, part = "header")
-  } else if (!missing(italics) & !missing(separate.header)) {
+  # Calculate level.number for separate.header mode
+  level.number <- NULL
+  has.separate.header <- !missing(separate.header)
+  if (has.separate.header) {
     level.number <- sum(
       charToRaw(names(
         dataframe[2]
@@ -834,6 +837,15 @@ format_columns <- function(
         charToRaw(".")
     ) +
       1
+  }
+  
+  ##  ....................................
+  ##  Special cases                  ####
+  # Fix header with italics
+  if (!missing(italics) & missing(separate.header)) {
+    table <- table %>%
+      flextable::italic(j = italics, part = "header")
+  } else if (!missing(italics) & !missing(separate.header)) {
     table <- table %>%
       flextable::italic(j = italics, i = level.number, part = "header")
   }
@@ -855,7 +867,9 @@ format_columns <- function(
     if (i %in% names(dataframe)) {
       df.digits <- ifelse(any(dataframe[i] %% 1 == 0), 0, 2)
       table <- table %>%
-        format_flex(j = i, digits = df.digits)
+        format_flex(j = i, digits = df.digits, 
+                    separate.header = has.separate.header, 
+                    level.number = level.number)
     }
   }
 
@@ -890,7 +904,9 @@ format_columns <- function(
   for (i in cols.2digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i)
+        format_flex(j = i,
+                    separate.header = has.separate.header,
+                    level.number = level.number)
     }
   }
 
@@ -916,7 +932,9 @@ format_columns <- function(
   for (i in cols.1digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i, digits = 1)
+        format_flex(j = i, digits = 1,
+                    separate.header = has.separate.header,
+                    level.number = level.number)
     }
   }
 
@@ -937,7 +955,9 @@ format_columns <- function(
   for (i in cols.0digits) {
     if (i %in% names(dataframe)) {
       table <- table %>%
-        format_flex(j = i, digits = 0)
+        format_flex(j = i, digits = 0,
+                    separate.header = has.separate.header,
+                    level.number = level.number)
     }
   }
 
@@ -971,7 +991,9 @@ format_columns <- function(
       table <- table %>%
         format_flex(
           j = compose.table0[i, "col"],
-          fun = compose.table0[i, "fun"]
+          fun = compose.table0[i, "fun"],
+          separate.header = has.separate.header,
+          level.number = level.number
         )
     }
   }
