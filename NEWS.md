@@ -1,5 +1,5 @@
 # rempsyc 0.2.0.2
-* `nice_table()`: Fix italicization in `separate.header` mode - group header rows (e.g., "Left", "Right") are no longer italicized, only the actual column name rows (e.g., "n", "M", "SD") are italicized as intended. This resolves the issue where all header rows were being italicized instead of just the bottom row containing column names.
+* `nice_table()`: Fix italicization in `separate.header` mode - group header rows (e.g., "Left", "Right") are no longer italicized, only the actual column name rows (e.g., "n", "M", "SD") are italicized as intended. This resolves the issue where all header rows were being italicized instead of just the bottom row containing column names (#85)
 
 # rempsyc 0.2.0.1
 * Change `nice_table()` defaults for means and standard deviations to one decimal (as likely more common to use these from surveys and questionnaires) (#84)
