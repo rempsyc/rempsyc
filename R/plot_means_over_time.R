@@ -2,10 +2,13 @@
 #'
 #' @description Make nice scatter plots over multiple times (T1, T2, T3) easily.
 #'
-#' @details Error bars are calculated using the method of Morey (2008) through
-#' [Rmisc::summarySEwithin()], but raw means are plotted instead of the normed
-#' means. For more information, visit:
+#' @details By default, error bars are calculated using the method of Morey (2008)
+#' through [Rmisc::summarySEwithin()], but raw means are plotted instead of the
+#' normed means. For more information, visit:
 #' http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
+#'
+#' Use `ci_type = "between"` for regular (between-subject) confidence intervals
+#' when working with simulated data or non-repeated-measures designs.
 #' @references Morey, R. D. (2008). Confidence intervals from normalized data:
 #' A correction to Cousineau (2005). *Tutorials in Quantitative Methods for
 #' Psychology*, *4*(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
@@ -16,13 +19,21 @@
 #'  variable name of the first variable in `response`, and keep only the part of
 #'  the string before an underscore or period.
 #' @param legend.title The desired legend title.
+#' @param legend.position The position of the legend. Can be "right" (default),
+#' "left", "top", "bottom", or "none" to hide the legend. Useful for positioning
+#' the legend at the bottom for very wide figures.
 #' @param group The group by which to plot the variable
 #' @param groups.order Specifies the desired display order of the groups
 #' on the legend. Either provide the levels directly, or a string: "increasing"
 #' or "decreasing", to order based on the average value of the variable on the
 #' y axis, or "string.length", to order from the shortest to the longest
 #' string (useful when working with long string names). "Defaults to "none".
-#' @param error_bars Logical, whether to include 95% confidence intervals for means.
+#' @param ci_type Character string specifying the type of confidence interval
+#' to use. Options are `"within"` (default) for within-subject adjusted CIs
+#' using the Morey (2008) correction, or `"between"` for regular between-subject
+#' CIs. Use `"between"` for simulated data or non-repeated-measures designs.
+#' @param error_bars Logical, whether to include 95% confidence intervals for
+#' means.
 #' @param significance_bars_x Vector of where on the x-axis vertical
 #' significance bars should appear on the plot (e.g., `c(2:4)`).
 #' @param significance_stars Vetor of significance stars to display on the
@@ -68,9 +79,11 @@ plot_means_over_time <- function(
   response,
   group,
   groups.order = "none",
+  ci_type = "within",
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
+  legend.position = "right",
   significance_stars,
   significance_stars_x,
   significance_stars_y,
@@ -79,6 +92,9 @@ plot_means_over_time <- function(
   verbose = FALSE
 ) {
   check_col_names(data, c(response, group))
+  if (!ci_type %in% c("within", "between")) {
+    stop("ci_type must be either 'within' or 'between'")
+  }
   rlang::check_installed(
     c("ggplot2", "tidyr", "Rmisc"),
     reason = "for this function.",
@@ -101,27 +117,60 @@ plot_means_over_time <- function(
     names_ptypes = factor()
   )
 
-  data_summary <- Rmisc::summarySEwithin(
-    data_long,
-    measurevar = "value",
-    withinvars = "Time",
-    betweenvars = group,
-    idvar = "subject_ID",
-    na.rm = FALSE,
-    conf.interval = .95
-  )
+  # Calculate summary statistics based on ci_type
+  if (ci_type == "within") {
+    # Use Morey (2008) within-subject adjusted CIs
+    # Suppress warnings for groups with insufficient data (N < 2)
+    data_summary <- suppressWarnings(Rmisc::summarySEwithin(
+      data_long,
+      measurevar = "value",
+      withinvars = "Time",
+      betweenvars = group,
+      idvar = "subject_ID",
+      na.rm = TRUE,
+      conf.interval = .95
+    ))
 
-  data_summary2 <- data_long %>%
-    dplyr::group_by(.data[[group]], .data$Time) %>%
-    dplyr::summarize(
-      mean = mean(.data$value),
-      sd = stats::sd(.data$value),
-      n = dplyr::n(),
-      se = sd / sqrt(n),
-      ci = stats::qt(0.975, df = n - 1) * .data$se
+    # Replace normed means with raw means
+    data_summary2 <- data_long %>%
+      dplyr::group_by(.data[[group]], .data$Time) %>%
+      dplyr::summarize(
+        mean = mean(.data$value, na.rm = TRUE),
+        .groups = "drop"
+      )
+
+    data_summary$value <- data_summary2$mean
+  } else {
+    # Use regular between-subject CIs
+    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
+    group_col <- group
+    agg_result <- stats::aggregate(
+      value ~ data_long[[group_col]] + Time,
+      data = data_long,
+      FUN = function(x) c(
+        N = sum(!is.na(x)),
+        mean = mean(x, na.rm = TRUE),
+        sd = sd(x, na.rm = TRUE)
+      ),
+      na.action = stats::na.pass
     )
-
-  data_summary$value <- data_summary2$mean
+    data_summary <- data.frame(
+      agg_result[, 1:2],
+      as.data.frame(agg_result$value)
+    )
+    names(data_summary)[1] <- group_col
+    names(data_summary)[3:5] <- c("N", "value", "sd")
+    data_summary$N <- as.integer(data_summary$N)
+    data_summary[[group_col]] <- as.factor(data_summary[[group_col]])
+    data_summary$Time <- as.factor(data_summary$Time)
+    data_summary$se <- data_summary$sd / sqrt(data_summary$N)
+    # Only compute CI when N >= 2 to avoid qt() warnings
+    data_summary$ci <- suppressWarnings(ifelse(
+      data_summary$N >= 2,
+      stats::qt(0.975, df = data_summary$N - 1) * data_summary$se,
+      NA_real_
+    ))
+  }
 
   if (print_table) {
     print(data_summary)
@@ -214,7 +263,8 @@ plot_means_over_time <- function(
       panel.grid.minor = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(colour = "black"),
-      axis.ticks = ggplot2::element_line(colour = "black")
+      axis.ticks = ggplot2::element_line(colour = "black"),
+      legend.position = legend.position
     ) +
     ggplot2::labs(
       colour = legend.title,
@@ -295,10 +345,17 @@ plot_means_over_time <- function(
     p
   }
   if (verbose && error_bars) {
-    cat(
-      "Error bars represent 95% confidence intervals adjusted for",
-      "repeated measures as by the method of Morey (2008)."
-    )
+    if (ci_type == "within") {
+      cat(
+        "Error bars represent 95% confidence intervals adjusted for",
+        "repeated measures as by the method of Morey (2008).\n"
+      )
+    } else {
+      cat(
+        "Error bars represent regular 95% confidence intervals",
+        "(between-subject).\n"
+      )
+    }
   }
   p
 }
