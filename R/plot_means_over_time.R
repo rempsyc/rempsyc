@@ -19,6 +19,9 @@
 #'  variable name of the first variable in `response`, and keep only the part of
 #'  the string before an underscore or period.
 #' @param legend.title The desired legend title.
+#' @param legend.position The position of the legend. Can be "right" (default),
+#' "left", "top", "bottom", or "none" to hide the legend. Useful for positioning
+#' the legend at the bottom for very wide figures.
 #' @param group The group by which to plot the variable
 #' @param groups.order Specifies the desired display order of the groups
 #' on the legend. Either provide the levels directly, or a string: "increasing"
@@ -80,6 +83,7 @@ plot_means_over_time <- function(
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
+  legend.position = "right",
   significance_stars,
   significance_stars_x,
   significance_stars_y,
@@ -240,7 +244,8 @@ plot_means_over_time <- function(
       panel.grid.minor = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(colour = "black"),
-      axis.ticks = ggplot2::element_line(colour = "black")
+      axis.ticks = ggplot2::element_line(colour = "black"),
+      legend.position = legend.position
     ) +
     ggplot2::labs(
       colour = legend.title,

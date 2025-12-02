@@ -322,3 +322,52 @@ test_that("plot_means_over_time handles missing data", {
     c("gg", "ggplot2")
   )
 })
+
+test_that("plot_means_over_time with legend.position parameter", {
+  skip_if_not_installed("ggplot2")
+  skip_if_not_installed("tidyr")
+  skip_if_not_installed("Rmisc")
+
+  # Create test data with time series variables
+  data <- mtcars
+  names(data)[6:3] <- paste0("T", 1:4, "_var")
+
+  # Test with legend.position = "bottom"
+  p_bottom <- plot_means_over_time(
+    data = data,
+    response = names(data)[6:3],
+    group = "cyl",
+    legend.position = "bottom"
+  )
+
+  expect_s3_class(
+    p_bottom,
+    c("gg", "ggplot2")
+  )
+
+  # Test with legend.position = "none"
+  p_none <- plot_means_over_time(
+    data = data,
+    response = names(data)[6:3],
+    group = "cyl",
+    legend.position = "none"
+  )
+
+  expect_s3_class(
+    p_none,
+    c("gg", "ggplot2")
+  )
+
+  # Test with legend.position = "left"
+  p_left <- plot_means_over_time(
+    data = data,
+    response = names(data)[6:3],
+    group = "cyl",
+    legend.position = "left"
+  )
+
+  expect_s3_class(
+    p_left,
+    c("gg", "ggplot2")
+  )
+})
