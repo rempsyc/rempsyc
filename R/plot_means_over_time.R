@@ -120,7 +120,8 @@ plot_means_over_time <- function(
   # Calculate summary statistics based on ci_type
   if (ci_type == "within") {
     # Use Morey (2008) within-subject adjusted CIs
-    data_summary <- Rmisc::summarySEwithin(
+    # Suppress warnings for groups with insufficient data (N < 2)
+    data_summary <- suppressWarnings(Rmisc::summarySEwithin(
       data_long,
       measurevar = "value",
       withinvars = "Time",
@@ -128,7 +129,7 @@ plot_means_over_time <- function(
       idvar = "subject_ID",
       na.rm = TRUE,
       conf.interval = .95
-    )
+    ))
 
     # Replace normed means with raw means
     data_summary2 <- data_long %>%
@@ -141,7 +142,8 @@ plot_means_over_time <- function(
     data_summary$value <- data_summary2$mean
   } else {
     # Use regular between-subject CIs
-    data_summary <- data_long %>%
+    # Suppress warnings for groups with insufficient data (N < 2)
+    data_summary <- suppressWarnings(data_long %>%
       dplyr::group_by(.data[[group]], .data$Time) %>%
       dplyr::summarize(
         N = sum(!is.na(.data$value)),
@@ -150,7 +152,7 @@ plot_means_over_time <- function(
         se = .data$sd / sqrt(.data$N),
         ci = stats::qt(0.975, df = .data$N - 1) * .data$se,
         .groups = "drop"
-      )
+      ))
   }
 
   if (print_table) {
