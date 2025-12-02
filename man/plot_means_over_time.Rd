@@ -13,6 +13,7 @@ plot_means_over_time(
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
+  legend.position = "right",
   significance_stars,
   significance_stars_x,
   significance_stars_y,
@@ -48,6 +49,10 @@ variable name of the first variable in \code{response}, and keep only the part o
 the string before an underscore or period.}
 
 \item{legend.title}{The desired legend title.}
+
+\item{legend.position}{The position of the legend. Can be "right" (default),
+"left", "top", "bottom", or "none" to hide the legend. Useful for positioning
+the legend at the bottom for very wide figures.}
 
 \item{significance_stars}{Vetor of significance stars to display on the
 plot (e.g,. \code{c("*", "**", "***")}).}
