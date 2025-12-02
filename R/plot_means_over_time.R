@@ -88,6 +88,9 @@ plot_means_over_time <- function(
   verbose = FALSE
 ) {
   check_col_names(data, c(response, group))
+  if (!ci_type %in% c("within", "between")) {
+    stop("ci_type must be either 'within' or 'between'")
+  }
   rlang::check_installed(
     c("ggplot2", "tidyr", "Rmisc"),
     reason = "for this function.",
@@ -132,7 +135,7 @@ plot_means_over_time <- function(
       )
 
     data_summary$value <- data_summary2$mean
-  } else if (ci_type == "between") {
+  } else {
     # Use regular between-subject CIs
     data_summary <- data_long %>%
       dplyr::group_by(.data[[group]], .data$Time) %>%
@@ -144,8 +147,6 @@ plot_means_over_time <- function(
         ci = stats::qt(0.975, df = .data$N - 1) * .data$se,
         .groups = "drop"
       )
-  } else {
-    stop("ci_type must be either 'within' or 'between'")
   }
 
   if (print_table) {
