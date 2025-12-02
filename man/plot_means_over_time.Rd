@@ -9,6 +9,7 @@ plot_means_over_time(
   response,
   group,
   groups.order = "none",
+  ci_type = "within",
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
@@ -34,7 +35,13 @@ or "decreasing", to order based on the average value of the variable on the
 y axis, or "string.length", to order from the shortest to the longest
 string (useful when working with long string names). "Defaults to "none".}
 
-\item{error_bars}{Logical, whether to include 95\% confidence intervals for means.}
+\item{ci_type}{Character string specifying the type of confidence interval
+to use. Options are \code{"within"} (default) for within-subject adjusted CIs
+using the Morey (2008) correction, or \code{"between"} for regular between-subject
+CIs. Use \code{"between"} for simulated data or non-repeated-measures designs.}
+
+\item{error_bars}{Logical, whether to include 95\% confidence intervals for
+means.}
 
 \item{ytitle}{An optional x-axis label, if desired. If \code{NULL}, will take the
 variable name of the first variable in \code{response}, and keep only the part of
@@ -69,10 +76,13 @@ A scatter plot of class ggplot.
 Make nice scatter plots over multiple times (T1, T2, T3) easily.
 }
 \details{
-Error bars are calculated using the method of Morey (2008) through
-\code{\link[Rmisc:summarySEwithin]{Rmisc::summarySEwithin()}}, but raw means are plotted instead of the normed
-means. For more information, visit:
+By default, error bars are calculated using the method of Morey (2008)
+through \code{\link[Rmisc:summarySEwithin]{Rmisc::summarySEwithin()}}, but raw means are plotted instead of the
+normed means. For more information, visit:
 http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
+
+Use \code{ci_type = "between"} for regular (between-subject) confidence intervals
+when working with simulated data or non-repeated-measures designs.
 }
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
