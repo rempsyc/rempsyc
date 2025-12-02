@@ -1,3 +1,6 @@
+# rempsyc 0.2.0.3
+* `plot_means_over_time()`: Add support for missing data via `na.rm = TRUE` in `Rmisc::summarySEwithin()`. Also add new `ci_type` parameter to choose between within-subject adjusted CIs (Morey, 2008; default, `ci_type = "within"`) and regular between-subject CIs (`ci_type = "between"`) for simulated or non-repeated-measures data.
+
 # rempsyc 0.2.0.2
 * `nice_table()`: Fix italicization in `separate.header` mode - group header rows (e.g., "Left", "Right") are no longer italicized, only the actual column name rows (e.g., "n", "M", "SD") are italicized as intended. This resolves the issue where all header rows were being italicized instead of just the bottom row containing column names (#85)
 

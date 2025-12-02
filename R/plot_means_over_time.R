@@ -2,10 +2,13 @@
 #'
 #' @description Make nice scatter plots over multiple times (T1, T2, T3) easily.
 #'
-#' @details Error bars are calculated using the method of Morey (2008) through
-#' [Rmisc::summarySEwithin()], but raw means are plotted instead of the normed
-#' means. For more information, visit:
+#' @details By default, error bars are calculated using the method of Morey (2008)
+#' through [Rmisc::summarySEwithin()], but raw means are plotted instead of the
+#' normed means. For more information, visit:
 #' http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).
+#'
+#' Use `ci_type = "between"` for regular (between-subject) confidence intervals
+#' when working with simulated data or non-repeated-measures designs.
 #' @references Morey, R. D. (2008). Confidence intervals from normalized data:
 #' A correction to Cousineau (2005). *Tutorials in Quantitative Methods for
 #' Psychology*, *4*(2), 61-64. \doi{10.20982/tqmp.04.2.p061}
@@ -22,7 +25,12 @@
 #' or "decreasing", to order based on the average value of the variable on the
 #' y axis, or "string.length", to order from the shortest to the longest
 #' string (useful when working with long string names). "Defaults to "none".
-#' @param error_bars Logical, whether to include 95% confidence intervals for means.
+#' @param ci_type Character string specifying the type of confidence interval
+#' to use. Options are `"within"` (default) for within-subject adjusted CIs
+#' using the Morey (2008) correction, or `"between"` for regular between-subject
+#' CIs. Use `"between"` for simulated data or non-repeated-measures designs.
+#' @param error_bars Logical, whether to include 95% confidence intervals for
+#' means.
 #' @param significance_bars_x Vector of where on the x-axis vertical
 #' significance bars should appear on the plot (e.g., `c(2:4)`).
 #' @param significance_stars Vetor of significance stars to display on the
@@ -68,6 +76,7 @@ plot_means_over_time <- function(
   response,
   group,
   groups.order = "none",
+  ci_type = "within",
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
@@ -101,27 +110,43 @@ plot_means_over_time <- function(
     names_ptypes = factor()
   )
 
-  data_summary <- Rmisc::summarySEwithin(
-    data_long,
-    measurevar = "value",
-    withinvars = "Time",
-    betweenvars = group,
-    idvar = "subject_ID",
-    na.rm = FALSE,
-    conf.interval = .95
-  )
-
-  data_summary2 <- data_long %>%
-    dplyr::group_by(.data[[group]], .data$Time) %>%
-    dplyr::summarize(
-      mean = mean(.data$value),
-      sd = stats::sd(.data$value),
-      n = dplyr::n(),
-      se = sd / sqrt(n),
-      ci = stats::qt(0.975, df = n - 1) * .data$se
+  # Calculate summary statistics based on ci_type
+  if (ci_type == "within") {
+    # Use Morey (2008) within-subject adjusted CIs
+    data_summary <- Rmisc::summarySEwithin(
+      data_long,
+      measurevar = "value",
+      withinvars = "Time",
+      betweenvars = group,
+      idvar = "subject_ID",
+      na.rm = TRUE,
+      conf.interval = .95
     )
 
-  data_summary$value <- data_summary2$mean
+    # Replace normed means with raw means
+    data_summary2 <- data_long %>%
+      dplyr::group_by(.data[[group]], .data$Time) %>%
+      dplyr::summarize(
+        mean = mean(.data$value, na.rm = TRUE),
+        .groups = "drop"
+      )
+
+    data_summary$value <- data_summary2$mean
+  } else if (ci_type == "between") {
+    # Use regular between-subject CIs
+    data_summary <- data_long %>%
+      dplyr::group_by(.data[[group]], .data$Time) %>%
+      dplyr::summarize(
+        N = sum(!is.na(.data$value)),
+        value = mean(.data$value, na.rm = TRUE),
+        sd = stats::sd(.data$value, na.rm = TRUE),
+        se = .data$sd / sqrt(.data$N),
+        ci = stats::qt(0.975, df = .data$N - 1) * .data$se,
+        .groups = "drop"
+      )
+  } else {
+    stop("ci_type must be either 'within' or 'between'")
+  }
 
   if (print_table) {
     print(data_summary)
@@ -295,10 +320,17 @@ plot_means_over_time <- function(
     p
   }
   if (verbose && error_bars) {
-    cat(
-      "Error bars represent 95% confidence intervals adjusted for",
-      "repeated measures as by the method of Morey (2008)."
-    )
+    if (ci_type == "within") {
+      cat(
+        "Error bars represent 95% confidence intervals adjusted for",
+        "repeated measures as by the method of Morey (2008).\n"
+      )
+    } else {
+      cat(
+        "Error bars represent regular 95% confidence intervals",
+        "(between-subject).\n"
+      )
+    }
   }
   p
 }

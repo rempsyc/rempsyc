@@ -192,3 +192,133 @@ test_that("plot_means_over_time", {
   expect_true(ncol(plot_data) > 0)
   expect_true(nrow(plot_data) > 0)
 })
+
+test_that("plot_means_over_time with ci_type parameter", {
+  skip_if_not_installed("ggplot2")
+  skip_if_not_installed("tidyr")
+  skip_if_not_installed("Rmisc")
+
+  # Create test data with time series variables
+  data <- mtcars
+  names(data)[6:3] <- paste0("T", 1:4, "_var")
+
+  # Test with ci_type = "within" (default)
+  p_within <- plot_means_over_time(
+    data = data,
+    response = names(data)[6:3],
+    group = "cyl",
+    ci_type = "within"
+  )
+
+  expect_s3_class(
+    p_within,
+    c("gg", "ggplot2")
+  )
+
+  # Test with ci_type = "between"
+  p_between <- plot_means_over_time(
+    data = data,
+    response = names(data)[6:3],
+    group = "cyl",
+    ci_type = "between"
+  )
+
+  expect_s3_class(
+    p_between,
+    c("gg", "ggplot2")
+  )
+
+  # Test verbose message for "within" ci_type
+  output_within <- capture.output({
+    verbose_within <- plot_means_over_time(
+      data = data,
+      response = names(data)[6:3],
+      group = "cyl",
+      ci_type = "within",
+      verbose = TRUE
+    )
+  })
+
+  expect_true(any(grepl("Morey", output_within)))
+
+  # Test verbose message for "between" ci_type
+  output_between <- capture.output({
+    verbose_between <- plot_means_over_time(
+      data = data,
+      response = names(data)[6:3],
+      group = "cyl",
+      ci_type = "between",
+      verbose = TRUE
+    )
+  })
+
+  expect_true(any(grepl("between-subject", output_between)))
+
+  # Test error for invalid ci_type
+  expect_error(
+    plot_means_over_time(
+      data = data,
+      response = names(data)[6:3],
+      group = "cyl",
+      ci_type = "invalid"
+    ),
+    "ci_type must be either"
+  )
+})
+
+test_that("plot_means_over_time handles missing data", {
+  skip_if_not_installed("ggplot2")
+  skip_if_not_installed("tidyr")
+  skip_if_not_installed("Rmisc")
+
+  # Create test data with time series variables and missing values
+  data <- mtcars
+  names(data)[6:3] <- paste0("T", 1:4, "_var")
+
+  # Add missing values
+  data_na <- data
+  data_na[1:5, 3] <- NA
+  data_na[10:15, 4] <- NA
+
+  # Test with missing data and within-subject CIs (default)
+  p_na_within <- plot_means_over_time(
+    data = data_na,
+    response = names(data_na)[6:3],
+    group = "cyl"
+  )
+
+  expect_s3_class(
+    p_na_within,
+    c("gg", "ggplot2")
+  )
+
+  # Test with missing data and between-subject CIs
+  p_na_between <- plot_means_over_time(
+    data = data_na,
+    response = names(data_na)[6:3],
+    group = "cyl",
+    ci_type = "between"
+  )
+
+  expect_s3_class(
+    p_na_between,
+    c("gg", "ggplot2")
+  )
+
+  # Test with heavily missing data
+  data_heavy_na <- data
+  data_heavy_na[1:10, 3] <- NA
+  data_heavy_na[15:25, 4] <- NA
+  data_heavy_na[5:12, 5] <- NA
+
+  p_heavy_na <- plot_means_over_time(
+    data = data_heavy_na,
+    response = names(data_heavy_na)[6:3],
+    group = "cyl"
+  )
+
+  expect_s3_class(
+    p_heavy_na,
+    c("gg", "ggplot2")
+  )
+})
