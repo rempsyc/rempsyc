@@ -142,17 +142,34 @@ plot_means_over_time <- function(
     data_summary$value <- data_summary2$mean
   } else {
     # Use regular between-subject CIs
-    # Suppress warnings for groups with insufficient data (N < 2)
-    data_summary <- suppressWarnings(data_long %>%
-      dplyr::group_by(.data[[group]], .data$Time) %>%
-      dplyr::summarize(
-        N = sum(!is.na(.data$value)),
-        value = mean(.data$value, na.rm = TRUE),
-        sd = stats::sd(.data$value, na.rm = TRUE),
-        se = .data$sd / sqrt(.data$N),
-        ci = stats::qt(0.975, df = .data$N - 1) * .data$se,
-        .groups = "drop"
-      ))
+    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
+    group_col <- group
+    agg_result <- stats::aggregate(
+      value ~ data_long[[group_col]] + Time,
+      data = data_long,
+      FUN = function(x) c(
+        N = sum(!is.na(x)),
+        mean = mean(x, na.rm = TRUE),
+        sd = sd(x, na.rm = TRUE)
+      ),
+      na.action = stats::na.pass
+    )
+    data_summary <- data.frame(
+      agg_result[, 1:2],
+      as.data.frame(agg_result$value)
+    )
+    names(data_summary)[1] <- group_col
+    names(data_summary)[3:5] <- c("N", "value", "sd")
+    data_summary$N <- as.integer(data_summary$N)
+    data_summary[[group_col]] <- as.factor(data_summary[[group_col]])
+    data_summary$Time <- as.factor(data_summary$Time)
+    data_summary$se <- data_summary$sd / sqrt(data_summary$N)
+    # Only compute CI when N >= 2 to avoid qt() warnings
+    data_summary$ci <- suppressWarnings(ifelse(
+      data_summary$N >= 2,
+      stats::qt(0.975, df = data_summary$N - 1) * data_summary$se,
+      NA_real_
+    ))
   }
 
   if (print_table) {
