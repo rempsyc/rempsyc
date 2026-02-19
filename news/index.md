@@ -8,7 +8,9 @@
   `ci_type = "between"` modes. Fix inconsistent color mappings caused by
   factor level reordering across CI types by enforcing original factor
   levels before plotting. Improve internal grouping logic to dynamically
-  accommodate additional grouping variables.
+  accommodate additional grouping variables. Also add new `line_width`
+  and `point_size` arguments to control line thickness and point size
+  for improved flexibility across presentation and publication formats.
 
 ## rempsyc 0.2.0.3
 

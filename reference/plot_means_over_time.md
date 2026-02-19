@@ -19,6 +19,8 @@ plot_means_over_time(
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  line_width = 3,
+  point_size = 4,
   print_table = FALSE,
   verbose = FALSE,
   facet = NULL
@@ -100,6 +102,16 @@ plot_means_over_time(
   Vector of where on the x-axis vertical significance bars should appear
   on the plot (e.g., `c(2:4)`).
 
+- line_width:
+
+  Numeric. Line thickness used in `geom_line()`. Defaults to 3. Can be
+  reduced for publication figures or increased for presentation slides.
+
+- point_size:
+
+  Numeric. Point size used in `geom_point()`. Defaults to 4. Adjust to
+  improve readability depending on output format.
+
 - print_table:
 
   Logical, whether to also print the computed table.
@@ -150,7 +162,7 @@ plot_means_over_time(
   facet = "am"
 )
 #> Automatically converting the following non-factors to factors: am
-
+#> Error in plot_means_over_time(data = data, response = names(data)[6:3],     group = "cyl", groups.order = "decreasing", facet = "am"): object 'linewidth' not found
 
 # Add significance stars/bars
 plot_means_over_time(
@@ -165,6 +177,6 @@ plot_means_over_time(
     c("4", "8", time = 4)
   )
 )
-
+#> Error in plot_means_over_time(data = data, response = names(data)[6:3],     group = "cyl", significance_bars_x = c(3.15, 4.15), significance_stars = c("*",         "***"), significance_stars_x = c(3.25, 4.5), significance_stars_y = list(c("4",         "8", time = 3), c("4", "8", time = 4))): object 'linewidth' not found
 # significance_stars_y: List with structure: list(c("group1", "group2", time))
 ```

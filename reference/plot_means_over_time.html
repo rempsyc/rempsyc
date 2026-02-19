@@ -77,6 +77,8 @@
 <span>  <span class="va">significance_stars_x</span>,</span>
 <span>  <span class="va">significance_stars_y</span>,</span>
 <span>  <span class="va">significance_bars_x</span>,</span>
+<span>  line_width <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">4</span>,</span>
 <span>  print_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  facet <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -159,6 +161,17 @@ object with structure group 1, group 2, and time of comparison, e.g.,
 significance bars should appear on the plot (e.g., <code>c(2:4)</code>).</p></dd>
 
 
+<dt id="arg-line-width">line_width<a class="anchor" aria-label="anchor" href="#arg-line-width"></a></dt>
+<dd><p>Numeric. Line thickness used in <code>geom_line()</code>.
+Defaults to 3. Can be reduced for publication figures or increased
+for presentation slides.</p></dd>
+
+
+<dt id="arg-point-size">point_size<a class="anchor" aria-label="anchor" href="#arg-point-size"></a></dt>
+<dd><p>Numeric. Point size used in <code>geom_point()</code>.
+Defaults to 4. Adjust to improve readability depending on output format.</p></dd>
+
+
 <dt id="arg-print-table">print_table<a class="anchor" aria-label="anchor" href="#arg-print-table"></a></dt>
 <dd><p>Logical, whether to also print the computed table.</p></dd>
 
@@ -204,7 +217,7 @@ Psychology</em>, <em>4</em>(2), 61-64. <a href="https://doi.org/10.20982/tqmp.04
 <span class="r-in"><span>  facet <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Automatically converting the following non-factors to factors: am</span>
-<span class="r-plt img"><img src="plot_means_over_time-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot_means_over_time(data = data, response = names(data)[6:3],     group = "cyl", groups.order = "decreasing", facet = "am"):</span> object 'linewidth' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add significance stars/bars</span></span></span>
 <span class="r-in"><span><span class="fu">plot_means_over_time</span><span class="op">(</span></span></span>
@@ -219,7 +232,7 @@ Psychology</em>, <em>4</em>(2), 61-64. <a href="https://doi.org/10.20982/tqmp.04
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"8"</span>, time <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_means_over_time-2.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot_means_over_time(data = data, response = names(data)[6:3],     group = "cyl", significance_bars_x = c(3.15, 4.15), significance_stars = c("*",         "***"), significance_stars_x = c(3.25, 4.5), significance_stars_y = list(c("4",         "8", time = 3), c("4", "8", time = 4))):</span> object 'linewidth' not found</span>
 <span class="r-in"><span><span class="co"># significance_stars_y: List with structure: list(c("group1", "group2", time))</span></span></span>
 </code></pre></div>
     </div>
