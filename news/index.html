@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,21 @@
       <small>Source: <a href="https://github.com/rempsyc/rempsyc/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0.4" id="rempsyc-0204">rempsyc 0.2.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0204"></a></h2>
+<ul><li>
+<code><a href="../reference/plot_means_over_time.html">plot_means_over_time()</a></code>: Add support for optional faceting via new facet argument. Facet variable is now correctly handled in both <code>ci_type = "within"</code> and <code>ci_type = "between"</code> modes. Fix inconsistent color mappings caused by factor level reordering across CI types by enforcing original factor levels before plotting. Improve internal grouping logic to dynamically accommodate additional grouping variables.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0.3" id="rempsyc-0203">rempsyc 0.2.0.3<a class="anchor" aria-label="anchor" href="#rempsyc-0203"></a></h2>
+<ul><li>
+<code><a href="../reference/plot_means_over_time.html">plot_means_over_time()</a></code>: Add support for missing data via <code>na.rm = TRUE</code> in <code><a href="https://rdrr.io/pkg/Rmisc/man/summarySEwithin.html" class="external-link">Rmisc::summarySEwithin()</a></code>. Also add new <code>ci_type</code> parameter to choose between within-subject adjusted CIs (Morey, 2008; default, <code>ci_type = "within"</code>) and regular between-subject CIs (<code>ci_type = "between"</code>) for simulated or non-repeated-measures data. Also add new <code>legend.position</code> parameter to control legend placement (e.g., “bottom” for wide figures).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0.2" id="rempsyc-0202">rempsyc 0.2.0.2<a class="anchor" aria-label="anchor" href="#rempsyc-0202"></a></h2>
+<ul><li>
+<code><a href="../reference/nice_table.html">nice_table()</a></code>: Fix italicization in <code>separate.header</code> mode - group header rows (e.g., “Left”, “Right”) are no longer italicized, only the actual column name rows (e.g., “n”, “M”, “SD”) are italicized as intended. This resolves the issue where all header rows were being italicized instead of just the bottom row containing column names (<a href="https://github.com/rempsyc/rempsyc/issues/85" class="external-link">#85</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0.1" id="rempsyc-0201">rempsyc 0.2.0.1<a class="anchor" aria-label="anchor" href="#rempsyc-0201"></a></h2>
 <ul><li>Change <code><a href="../reference/nice_table.html">nice_table()</a></code> defaults for means and standard deviations to one decimal (as likely more common to use these from surveys and questionnaires) (<a href="https://github.com/rempsyc/rempsyc/issues/84" class="external-link">#84</a>)</li>

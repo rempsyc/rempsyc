@@ -1,5 +1,36 @@
 # Changelog
 
+## rempsyc 0.2.0.4
+
+- [`plot_means_over_time()`](https://rempsyc.remi-theriault.com/reference/plot_means_over_time.md):
+  Add support for optional faceting via new facet argument. Facet
+  variable is now correctly handled in both `ci_type = "within"` and
+  `ci_type = "between"` modes. Fix inconsistent color mappings caused by
+  factor level reordering across CI types by enforcing original factor
+  levels before plotting. Improve internal grouping logic to dynamically
+  accommodate additional grouping variables.
+
+## rempsyc 0.2.0.3
+
+- [`plot_means_over_time()`](https://rempsyc.remi-theriault.com/reference/plot_means_over_time.md):
+  Add support for missing data via `na.rm = TRUE` in
+  [`Rmisc::summarySEwithin()`](https://rdrr.io/pkg/Rmisc/man/summarySEwithin.html).
+  Also add new `ci_type` parameter to choose between within-subject
+  adjusted CIs (Morey, 2008; default, `ci_type = "within"`) and regular
+  between-subject CIs (`ci_type = "between"`) for simulated or
+  non-repeated-measures data. Also add new `legend.position` parameter
+  to control legend placement (e.g., “bottom” for wide figures).
+
+## rempsyc 0.2.0.2
+
+- [`nice_table()`](https://rempsyc.remi-theriault.com/reference/nice_table.md):
+  Fix italicization in `separate.header` mode - group header rows (e.g.,
+  “Left”, “Right”) are no longer italicized, only the actual column name
+  rows (e.g., “n”, “M”, “SD”) are italicized as intended. This resolves
+  the issue where all header rows were being italicized instead of just
+  the bottom row containing column names
+  ([\#85](https://github.com/rempsyc/rempsyc/issues/85))
+
 ## rempsyc 0.2.0.1
 
 - Change

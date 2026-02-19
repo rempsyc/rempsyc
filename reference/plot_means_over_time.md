@@ -10,15 +10,18 @@ plot_means_over_time(
   response,
   group,
   groups.order = "none",
+  ci_type = "within",
   error_bars = TRUE,
   ytitle = NULL,
   legend.title = "",
+  legend.position = "right",
   significance_stars,
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
   print_table = FALSE,
-  verbose = FALSE
+  verbose = FALSE,
+  facet = NULL
 )
 ```
 
@@ -46,6 +49,14 @@ plot_means_over_time(
   longest string (useful when working with long string names). "Defaults
   to "none".
 
+- ci_type:
+
+  Character string specifying the type of confidence interval to use.
+  Options are `"within"` (default) for within-subject adjusted CIs using
+  the Morey (2008) correction, or `"between"` for regular
+  between-subject CIs. Use `"between"` for simulated data or
+  non-repeated-measures designs.
+
 - error_bars:
 
   Logical, whether to include 95% confidence intervals for means.
@@ -59,6 +70,12 @@ plot_means_over_time(
 - legend.title:
 
   The desired legend title.
+
+- legend.position:
+
+  The position of the legend. Can be "right" (default), "left", "top",
+  "bottom", or "none" to hide the legend. Useful for positioning the
+  legend at the bottom for very wide figures.
 
 - significance_stars:
 
@@ -98,11 +115,16 @@ A scatter plot of class ggplot.
 
 ## Details
 
-Error bars are calculated using the method of Morey (2008) through
+By default, error bars are calculated using the method of Morey (2008)
+through
 [`Rmisc::summarySEwithin()`](https://rdrr.io/pkg/Rmisc/man/summarySEwithin.html),
 but raw means are plotted instead of the normed means. For more
 information, visit:
 http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars\_(ggplot2).
+
+Use `ci_type = "between"` for regular (between-subject) confidence
+intervals when working with simulated data or non-repeated-measures
+designs.
 
 ## References
 
@@ -120,8 +142,10 @@ plot_means_over_time(
   data = data,
   response = names(data)[6:3],
   group = "cyl",
-  groups.order = "decreasing"
+  groups.order = "decreasing",
+  facet = "am"
 )
+#> Automatically converting the following non-factors to factors: am
 
 
 # Add significance stars/bars

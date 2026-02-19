@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rempsyc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,15 +68,18 @@
 <span>  <span class="va">response</span>,</span>
 <span>  <span class="va">group</span>,</span>
 <span>  groups.order <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  ci_type <span class="op">=</span> <span class="st">"within"</span>,</span>
 <span>  error_bars <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ytitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  legend.title <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  legend.position <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>  <span class="va">significance_stars</span>,</span>
 <span>  <span class="va">significance_stars_x</span>,</span>
 <span>  <span class="va">significance_stars_y</span>,</span>
 <span>  <span class="va">significance_bars_x</span>,</span>
 <span>  print_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  facet <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -105,8 +108,16 @@ y axis, or "string.length", to order from the shortest to the longest
 string (useful when working with long string names). "Defaults to "none".</p></dd>
 
 
+<dt id="arg-ci-type">ci_type<a class="anchor" aria-label="anchor" href="#arg-ci-type"></a></dt>
+<dd><p>Character string specifying the type of confidence interval
+to use. Options are <code>"within"</code> (default) for within-subject adjusted CIs
+using the Morey (2008) correction, or <code>"between"</code> for regular between-subject
+CIs. Use <code>"between"</code> for simulated data or non-repeated-measures designs.</p></dd>
+
+
 <dt id="arg-error-bars">error_bars<a class="anchor" aria-label="anchor" href="#arg-error-bars"></a></dt>
-<dd><p>Logical, whether to include 95% confidence intervals for means.</p></dd>
+<dd><p>Logical, whether to include 95% confidence intervals for
+means.</p></dd>
 
 
 <dt id="arg-ytitle">ytitle<a class="anchor" aria-label="anchor" href="#arg-ytitle"></a></dt>
@@ -117,6 +128,12 @@ the string before an underscore or period.</p></dd>
 
 <dt id="arg-legend-title">legend.title<a class="anchor" aria-label="anchor" href="#arg-legend-title"></a></dt>
 <dd><p>The desired legend title.</p></dd>
+
+
+<dt id="arg-legend-position">legend.position<a class="anchor" aria-label="anchor" href="#arg-legend-position"></a></dt>
+<dd><p>The position of the legend. Can be "right" (default),
+"left", "top", "bottom", or "none" to hide the legend. Useful for positioning
+the legend at the bottom for very wide figures.</p></dd>
 
 
 <dt id="arg-significance-stars">significance_stars<a class="anchor" aria-label="anchor" href="#arg-significance-stars"></a></dt>
@@ -157,10 +174,12 @@ of the error bars.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Error bars are calculated using the method of Morey (2008) through
-<code><a href="https://rdrr.io/pkg/Rmisc/man/summarySEwithin.html" class="external-link">Rmisc::summarySEwithin()</a></code>, but raw means are plotted instead of the normed
-means. For more information, visit:
+    <p>By default, error bars are calculated using the method of Morey (2008)
+through <code><a href="https://rdrr.io/pkg/Rmisc/man/summarySEwithin.html" class="external-link">Rmisc::summarySEwithin()</a></code>, but raw means are plotted instead of the
+normed means. For more information, visit:
 http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2).</p>
+<p>Use <code>ci_type = "between"</code> for regular (between-subject) confidence intervals
+when working with simulated data or non-repeated-measures designs.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -177,8 +196,10 @@ Psychology</em>, <em>4</em>(2), 61-64. <a href="https://doi.org/10.20982/tqmp.04
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">data</span>,</span></span>
 <span class="r-in"><span>  response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"cyl"</span>,</span></span>
-<span class="r-in"><span>  groups.order <span class="op">=</span> <span class="st">"decreasing"</span></span></span>
+<span class="r-in"><span>  groups.order <span class="op">=</span> <span class="st">"decreasing"</span>,</span></span>
+<span class="r-in"><span>  facet <span class="op">=</span> <span class="st">"am"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Automatically converting the following non-factors to factors: am</span>
 <span class="r-plt img"><img src="plot_means_over_time-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add significance stars/bars</span></span></span>
