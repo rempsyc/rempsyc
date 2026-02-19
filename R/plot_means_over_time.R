@@ -253,7 +253,7 @@ plot_means_over_time <- function(
       ggplot2::aes(
         color = .data[[group]]
       ),
-      linewidth = linewidth,
+      linewidth = line_width,
       position = pd
     ) +
     {
