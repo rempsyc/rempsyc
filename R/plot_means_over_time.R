@@ -46,6 +46,12 @@
 #' arguments. Rather than providing actual coordinates, we provide a list
 #' object with structure group 1, group 2, and time of comparison, e.g.,
 #' `list(c("group1", "group2", time = 2), c("group1", "group3", time = 3), c("group2", "group3", time = 4))`.
+#' @param line_width Numeric. Line thickness used in `geom_line()`.
+#'   Defaults to 3. Can be reduced for publication figures or increased
+#'   for presentation slides.
+#'
+#' @param point_size Numeric. Point size used in `geom_point()`.
+#'   Defaults to 4. Adjust to improve readability depending on output format.
 #' @param print_table Logical, whether to also print the computed table.
 #' @param verbose Logical, whether to also print a note regarding the meaning
 #' of the error bars.
@@ -90,6 +96,8 @@ plot_means_over_time <- function(
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  line_width = 3,
+  point_size = 4,
   print_table = FALSE,
   verbose = FALSE,
   facet = NULL
@@ -149,17 +157,13 @@ plot_means_over_time <- function(
     data_summary$value <- data_summary2$mean
   } else {
     # Use regular between-subject CIs
-    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
     group_col <- group
     rhs_terms <- c(group_col, "Time")
-    # # Support faceting
-    # if (!is.null(facet) && facet %in% names(data)) {
-    #   data[[facet_var]] <- as.factor(data[[facet_var]])
-    # }
     if (!is.null(facet)) {
       rhs_terms <- c(rhs_terms, facet)
     }
 
+    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
     agg_result <- stats::aggregate(
       reformulate(rhs_terms, response = "value"),
       data = data_long,
@@ -172,18 +176,6 @@ plot_means_over_time <- function(
       },
       na.action = stats::na.pass
     )
-    # agg_result <- stats::aggregate(
-    #   value ~ data_long[[group_col]] + Time,
-    #   data = data_long,
-    #   FUN = function(x) {
-    #     c(
-    #       N = sum(!is.na(x)),
-    #       mean = mean(x, na.rm = TRUE),
-    #       sd = sd(x, na.rm = TRUE)
-    #     )
-    #   },
-    #   na.action = stats::na.pass
-    # )
     grouping_vars <- setdiff(names(agg_result), "value")
     data_summary <- cbind(
       agg_result[grouping_vars],
@@ -261,7 +253,7 @@ plot_means_over_time <- function(
       ggplot2::aes(
         color = .data[[group]]
       ),
-      linewidth = 3,
+      linewidth = linewidth,
       position = pd
     ) +
     {
@@ -278,7 +270,7 @@ plot_means_over_time <- function(
       }
     } +
     ggplot2::geom_point(
-      size = 4,
+      size = point_size,
       # shape = 22,
       fill = "white",
       # colour = "black",

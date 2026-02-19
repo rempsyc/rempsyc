@@ -18,6 +18,8 @@ plot_means_over_time(
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  line_width = 3,
+  point_size = 4,
   print_table = FALSE,
   verbose = FALSE,
   facet = NULL
@@ -69,6 +71,13 @@ object with structure group 1, group 2, and time of comparison, e.g.,
 
 \item{significance_bars_x}{Vector of where on the x-axis vertical
 significance bars should appear on the plot (e.g., \code{c(2:4)}).}
+
+\item{line_width}{Numeric. Line thickness used in \code{geom_line()}.
+Defaults to 3. Can be reduced for publication figures or increased
+for presentation slides.}
+
+\item{point_size}{Numeric. Point size used in \code{geom_point()}.
+Defaults to 4. Adjust to improve readability depending on output format.}
 
 \item{print_table}{Logical, whether to also print the computed table.}
 
