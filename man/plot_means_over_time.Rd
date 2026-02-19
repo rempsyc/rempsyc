@@ -19,7 +19,8 @@ plot_means_over_time(
   significance_stars_y,
   significance_bars_x,
   print_table = FALSE,
-  verbose = FALSE
+  verbose = FALSE,
+  facet = NULL
 )
 }
 \arguments{
@@ -97,7 +98,8 @@ plot_means_over_time(
   data = data,
   response = names(data)[6:3],
   group = "cyl",
-  groups.order = "decreasing"
+  groups.order = "decreasing",
+  facet = "am"
 )
 
 # Add significance stars/bars

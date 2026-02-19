@@ -57,7 +57,8 @@
 #'   data = data,
 #'   response = names(data)[6:3],
 #'   group = "cyl",
-#'   groups.order = "decreasing"
+#'   groups.order = "decreasing",
+#'   facet = "am"
 #' )
 #'
 #' # Add significance stars/bars
@@ -89,7 +90,8 @@ plot_means_over_time <- function(
   significance_stars_y,
   significance_bars_x,
   print_table = FALSE,
-  verbose = FALSE
+  verbose = FALSE,
+  facet = NULL
 ) {
   check_col_names(data, c(response, group))
   if (!ci_type %in% c("within", "between")) {
@@ -103,7 +105,7 @@ plot_means_over_time <- function(
   if (is.null(ytitle)) {
     ytitle <- gsub(".*_", "", response[[1]])
   }
-
+  original_levels <- levels(as.factor(data[[group]]))
   data <- dplyr::ungroup(data)
   data$subject_ID <- seq(nrow(data))
   data[[group]] <- as.factor(data[[group]])
@@ -119,13 +121,17 @@ plot_means_over_time <- function(
 
   # Calculate summary statistics based on ci_type
   if (ci_type == "within") {
+    between_vars <- group
+    if (!is.null(facet)) {
+      between_vars <- c(group, facet)
+    }
     # Use Morey (2008) within-subject adjusted CIs
     # Suppress warnings for groups with insufficient data (N < 2)
     data_summary <- suppressWarnings(Rmisc::summarySEwithin(
       data_long,
       measurevar = "value",
       withinvars = "Time",
-      betweenvars = group,
+      betweenvars = between_vars,
       idvar = "subject_ID",
       na.rm = TRUE,
       conf.interval = .95
@@ -144,22 +150,47 @@ plot_means_over_time <- function(
     # Use regular between-subject CIs
     # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
     group_col <- group
+    rhs_terms <- c(group_col, "Time")
+    # # Support faceting
+    # if (!is.null(facet) && facet %in% names(data)) {
+    #   data[[facet_var]] <- as.factor(data[[facet_var]])
+    # }
+    if (!is.null(facet)) {
+      rhs_terms <- c(rhs_terms, facet)
+    }
+
     agg_result <- stats::aggregate(
-      value ~ data_long[[group_col]] + Time,
+      reformulate(rhs_terms, response = "value"),
       data = data_long,
-      FUN = function(x) c(
-        N = sum(!is.na(x)),
-        mean = mean(x, na.rm = TRUE),
-        sd = sd(x, na.rm = TRUE)
-      ),
+      FUN = function(x) {
+        c(
+          N = sum(!is.na(x)),
+          mean = mean(x, na.rm = TRUE),
+          sd = sd(x, na.rm = TRUE)
+        )
+      },
       na.action = stats::na.pass
     )
-    data_summary <- data.frame(
-      agg_result[, 1:2],
+    # agg_result <- stats::aggregate(
+    #   value ~ data_long[[group_col]] + Time,
+    #   data = data_long,
+    #   FUN = function(x) {
+    #     c(
+    #       N = sum(!is.na(x)),
+    #       mean = mean(x, na.rm = TRUE),
+    #       sd = sd(x, na.rm = TRUE)
+    #     )
+    #   },
+    #   na.action = stats::na.pass
+    # )
+    grouping_vars <- setdiff(names(agg_result), "value")
+    data_summary <- cbind(
+      agg_result[grouping_vars],
       as.data.frame(agg_result$value)
     )
-    names(data_summary)[1] <- group_col
-    names(data_summary)[3:5] <- c("N", "value", "sd")
+    names(data_summary)[
+      (length(grouping_vars) + 1):(length(grouping_vars) + 3)
+    ] <- c("N", "value", "sd")
     data_summary$N <- as.integer(data_summary$N)
     data_summary[[group_col]] <- as.factor(data_summary[[group_col]])
     data_summary$Time <- as.factor(data_summary$Time)
@@ -206,6 +237,11 @@ plot_means_over_time <- function(
       levels = groups.order
     )
   }
+  # Retrieve original levels for data consistency
+  data_summary[[group]] <- factor(
+    data_summary[[group]],
+    levels = original_levels
+  )
 
   # ggplot2
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right
@@ -281,10 +317,12 @@ plot_means_over_time <- function(
         .by = dplyr::all_of(group)
       )
 
-    get_segment_y <- function(m,
-                              significance_stars_y,
-                              groups = 1:2,
-                              value = 1:2) {
+    get_segment_y <- function(
+      m,
+      significance_stars_y,
+      groups = 1:2,
+      value = 1:2
+    ) {
       zz <- dplyr::filter(
         m,
         .data[[group]] %in% significance_stars_y[groups]
@@ -356,6 +394,9 @@ plot_means_over_time <- function(
         "(between-subject).\n"
       )
     }
+  }
+  if (!is.null(facet)) {
+    p <- p + ggplot2::facet_wrap(stats::as.formula(paste("~", facet)))
   }
   p
 }
