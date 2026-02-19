@@ -74,6 +74,8 @@ significance bars should appear on the plot (e.g., \code{c(2:4)}).}
 
 \item{verbose}{Logical, whether to also print a note regarding the meaning
 of the error bars.}
+
+\item{facet}{The variable by which to facet grid.}
 }
 \value{
 A scatter plot of class ggplot.

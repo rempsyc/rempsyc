@@ -28,6 +28,7 @@
 #' or "decreasing", to order based on the average value of the variable on the
 #' y axis, or "string.length", to order from the shortest to the longest
 #' string (useful when working with long string names). "Defaults to "none".
+#' @param facet The variable by which to facet grid.
 #' @param ci_type Character string specifying the type of confidence interval
 #' to use. Options are `"within"` (default) for within-subject adjusted CIs
 #' using the Morey (2008) correction, or `"between"` for regular between-subject
