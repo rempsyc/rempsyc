@@ -109,6 +109,10 @@ plot_means_over_time(
   Logical, whether to also print a note regarding the meaning of the
   error bars.
 
+- facet:
+
+  The variable by which to facet grid.
+
 ## Value
 
 A scatter plot of class ggplot.
