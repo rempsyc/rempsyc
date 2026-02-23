@@ -57,6 +57,15 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0.5" id="rempsyc-0205">rempsyc 0.2.0.5<a class="anchor" aria-label="anchor" href="#rempsyc-0205"></a></h2>
+<ul><li>
+<code><a href="../reference/plot_means_over_time.html">plot_means_over_time()</a></code>: Restored and improved <code>groups.order</code> functionality. Factor levels are now handled more robustly and consistently across different <code>ci_type</code> options and when using <code>facet</code>. Added support for ordering facets via new <code>facets.order</code> argument (“increasing”, “decreasing”, or explicit level vector).</li>
+<li>Added internal utilities <code>.compute_group_levels()</code> and <code>.apply_group_order()</code> to standardize group ordering logic across plotting functions.</li>
+<li>
+<code><a href="../reference/nice_scatter.html">nice_scatter()</a></code>: Fixed edge case when <code>groups.order</code> is specified without a group argument (now fails safely). Removed unsupported <code>legend.title</code> label from <code><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs()</a></code> to avoid warnings.</li>
+</ul><p>Improved factor handling to prevent unintended legend reordering when using custom scales (e.g., manual colour/shape mappings).</p>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0.4" id="rempsyc-0204">rempsyc 0.2.0.4<a class="anchor" aria-label="anchor" href="#rempsyc-0204"></a></h2>
 <ul><li>
 <code><a href="../reference/plot_means_over_time.html">plot_means_over_time()</a></code>: Add support for optional faceting via new facet argument. Facet variable is now correctly handled in both <code>ci_type = "within"</code> and <code>ci_type = "between"</code> modes. Fix inconsistent color mappings caused by factor level reordering across CI types by enforcing original factor levels before plotting. Improve internal grouping logic to dynamically accommodate additional grouping variables. Also add new <code>line_width</code> and <code>point_size</code> arguments to control line thickness and point size for improved flexibility across presentation and publication formats.</li>

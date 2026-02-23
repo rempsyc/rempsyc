@@ -21,9 +21,10 @@ plot_means_over_time(
   significance_bars_x,
   line_width = 3,
   point_size = 4,
+  facet = NULL,
+  facets.order = "none",
   print_table = FALSE,
-  verbose = FALSE,
-  facet = NULL
+  verbose = FALSE
 )
 ```
 
@@ -112,6 +113,18 @@ plot_means_over_time(
   Numeric. Point size used in `geom_point()`. Defaults to 4. Adjust to
   improve readability depending on output format.
 
+- facet:
+
+  The variable by which to facet grid.
+
+- facets.order:
+
+  Specifies the desired display order of facet panels. Either provide
+  the levels directly, or a string: "increasing" or "decreasing", to
+  order panels based on the average value of the y variable, or
+  "string.length" to order panels by facet label length. Defaults to
+  "none".
+
 - print_table:
 
   Logical, whether to also print the computed table.
@@ -120,10 +133,6 @@ plot_means_over_time(
 
   Logical, whether to also print a note regarding the meaning of the
   error bars.
-
-- facet:
-
-  The variable by which to facet grid.
 
 ## Value
 

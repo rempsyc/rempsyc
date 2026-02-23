@@ -1,5 +1,25 @@
 # Changelog
 
+## rempsyc 0.2.0.5
+
+- [`plot_means_over_time()`](https://rempsyc.remi-theriault.com/reference/plot_means_over_time.md):
+  Restored and improved `groups.order` functionality. Factor levels are
+  now handled more robustly and consistently across different `ci_type`
+  options and when using `facet`. Added support for ordering facets via
+  new `facets.order` argument (“increasing”, “decreasing”, or explicit
+  level vector).
+- Added internal utilities `.compute_group_levels()` and
+  `.apply_group_order()` to standardize group ordering logic across
+  plotting functions.
+- [`nice_scatter()`](https://rempsyc.remi-theriault.com/reference/nice_scatter.md):
+  Fixed edge case when `groups.order` is specified without a group
+  argument (now fails safely). Removed unsupported `legend.title` label
+  from [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html) to
+  avoid warnings.
+
+Improved factor handling to prevent unintended legend reordering when
+using custom scales (e.g., manual colour/shape mappings).
+
 ## rempsyc 0.2.0.4
 
 - [`plot_means_over_time()`](https://rempsyc.remi-theriault.com/reference/plot_means_over_time.md):

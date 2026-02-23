@@ -80,8 +80,6 @@ nice_varplot(
   variable = "Sepal.Length",
   group = "Species"
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Further customization
@@ -101,6 +99,4 @@ nice_varplot(
     "(c) Virginica"
   )
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 ```

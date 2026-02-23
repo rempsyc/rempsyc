@@ -251,16 +251,12 @@ nice_scatter(
   predictor = "wt",
   response = "mpg"
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 # \donttest{
 # Save a high-resolution image file to specified directory
 ggplot2::ggsave("nicescatterplothere.pdf", width = 7,
   height = 7, unit = "in", dpi = 300
 ) # change for your own desired path
-#> Ignoring unknown labels:
-#> • legend.title : ""
 # Change x- and y- axis labels
 nice_scatter(
   data = mtcars,
@@ -269,8 +265,6 @@ nice_scatter(
   ytitle = "Miles/(US) gallon",
   xtitle = "Weight (1000 lbs)"
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Have points "jittered", loess method
@@ -281,8 +275,6 @@ nice_scatter(
   has.jitter = TRUE,
   method = "loess"
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Change the transparency of the points
@@ -292,8 +284,6 @@ nice_scatter(
   response = "mpg",
   alpha = 1
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Remove points
@@ -305,7 +295,6 @@ nice_scatter(
   has.jitter = FALSE
 )
 #> Ignoring unknown labels:
-#> • legend.title : ""
 #> • colour : ""
 
 
@@ -316,8 +305,6 @@ nice_scatter(
   response = "mpg",
   has.confband = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Set x- and y- scales manually
@@ -332,8 +319,6 @@ nice_scatter(
   ymax = 35,
   yby = 5
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 #> Warning: Removed 7 rows containing missing values or values outside the scale range
 #> (`geom_line()`).
 
@@ -346,7 +331,6 @@ nice_scatter(
   colours = "blueviolet"
 )
 #> Ignoring unknown labels:
-#> • legend.title : ""
 #> • colour : ""
 
 
@@ -358,8 +342,6 @@ nice_scatter(
   has.r = TRUE,
   has.p = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Change location of correlation coefficient or p-value
@@ -374,8 +356,6 @@ nice_scatter(
   p.x = 5,
   p.y = 20
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Plot by group
@@ -385,8 +365,6 @@ nice_scatter(
   response = "mpg",
   group = "cyl"
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Use full range on the slope/confidence band
@@ -397,8 +375,6 @@ nice_scatter(
   group = "cyl",
   has.fullrange = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Remove lines
@@ -410,7 +386,6 @@ nice_scatter(
   has.line = FALSE
 )
 #> Ignoring unknown labels:
-#> • legend.title : ""
 #> • shape : ""
 
 
@@ -422,8 +397,6 @@ nice_scatter(
   group = "cyl",
   groups.order = c(8, 4, 6)
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Change legend labels
@@ -434,8 +407,6 @@ nice_scatter(
   group = "cyl",
   groups.labels = c("Weak", "Average", "Powerful")
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 # Warning: This applies after changing order of level
 
@@ -447,8 +418,6 @@ nice_scatter(
   group = "cyl",
   legend.title = "cylinders"
 )
-#> Ignoring unknown labels:
-#> • legend.title : "cylinders"
 
 
 # Plot by group + manually specify colours
@@ -459,8 +428,6 @@ nice_scatter(
   group = "cyl",
   colours = c("burlywood", "darkgoldenrod", "chocolate")
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Plot by group + use different line types for each group
@@ -471,8 +438,6 @@ nice_scatter(
   group = "cyl",
   has.linetype = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Plot by group + use different point shapes for each group
@@ -483,8 +448,6 @@ nice_scatter(
   group = "cyl",
   has.shape = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Display point IDs/labels
@@ -494,8 +457,6 @@ nice_scatter(
   response = "mpg",
   has.ids = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 
 # Display group correlations separately
@@ -507,8 +468,6 @@ nice_scatter(
   has.group.r = TRUE,
   has.group.p = TRUE
 )
-#> Ignoring unknown labels:
-#> • legend.title : ""
 
 # }
 ```
