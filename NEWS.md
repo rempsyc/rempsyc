@@ -1,3 +1,9 @@
+# rempsyc 0.2.0.5
+* `plot_means_over_time()`: Restored and improved `groups.order` functionality. Factor levels are now handled more robustly and consistently across different `ci_type` options and when using `facet`. Added support for ordering facets via new `facets.order` argument ("increasing", "decreasing", or explicit level vector).
+* Added internal utilities `.compute_group_levels()` and `.apply_group_order()` to standardize group ordering logic across plotting functions.
+* `nice_scatter()`: Fixed edge case when `groups.order` is specified without a group argument (now fails safely). Removed unsupported `legend.title` label from `labs()` to avoid warnings.
+
+Improved factor handling to prevent unintended legend reordering when using custom scales (e.g., manual colour/shape mappings).
 
 # rempsyc 0.2.0.4
 * `plot_means_over_time()`: Add support for optional faceting via new facet argument. Facet variable is now correctly handled in both `ci_type = "within"` and `ci_type = "between"` modes. Fix inconsistent color mappings caused by factor level reordering across CI types by enforcing original factor levels before plotting. Improve internal grouping logic to dynamically accommodate additional grouping variables. Also add new `line_width` and `point_size` arguments to control line thickness and point size for improved flexibility across presentation and publication formats.

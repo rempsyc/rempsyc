@@ -20,9 +20,10 @@ plot_means_over_time(
   significance_bars_x,
   line_width = 3,
   point_size = 4,
+  facet = NULL,
+  facets.order = "none",
   print_table = FALSE,
-  verbose = FALSE,
-  facet = NULL
+  verbose = FALSE
 )
 }
 \arguments{
@@ -79,12 +80,18 @@ for presentation slides.}
 \item{point_size}{Numeric. Point size used in \code{geom_point()}.
 Defaults to 4. Adjust to improve readability depending on output format.}
 
+\item{facet}{The variable by which to facet grid.}
+
+\item{facets.order}{Specifies the desired display order of facet panels.
+Either provide the levels directly, or a string: "increasing" or
+"decreasing", to order panels based on the average value of the
+y variable, or "string.length" to order panels by facet label length.
+Defaults to "none".}
+
 \item{print_table}{Logical, whether to also print the computed table.}
 
 \item{verbose}{Logical, whether to also print a note regarding the meaning
 of the error bars.}
-
-\item{facet}{The variable by which to facet grid.}
 }
 \value{
 A scatter plot of class ggplot.

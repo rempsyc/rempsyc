@@ -52,6 +52,12 @@
 #'
 #' @param point_size Numeric. Point size used in `geom_point()`.
 #'   Defaults to 4. Adjust to improve readability depending on output format.
+#' @param facet The variable by which to facet grid.
+#' @param facets.order Specifies the desired display order of facet panels.
+#'   Either provide the levels directly, or a string: "increasing" or
+#'   "decreasing", to order panels based on the average value of the
+#'   y variable, or "string.length" to order panels by facet label length.
+#'   Defaults to "none".
 #' @param print_table Logical, whether to also print the computed table.
 #' @param verbose Logical, whether to also print a note regarding the meaning
 #' of the error bars.
@@ -98,9 +104,10 @@ plot_means_over_time <- function(
   significance_bars_x,
   line_width = 3,
   point_size = 4,
+  facet = NULL,
+  facets.order = "none",
   print_table = FALSE,
-  verbose = FALSE,
-  facet = NULL
+  verbose = FALSE
 ) {
   check_col_names(data, c(response, group))
   if (!ci_type %in% c("within", "between")) {
@@ -114,7 +121,7 @@ plot_means_over_time <- function(
   if (is.null(ytitle)) {
     ytitle <- gsub(".*_", "", response[[1]])
   }
-  original_levels <- levels(as.factor(data[[group]]))
+  # original_levels <- levels(as.factor(data[[group]]))
   data <- dplyr::ungroup(data)
   data$subject_ID <- seq(nrow(data))
   data[[group]] <- as.factor(data[[group]])
@@ -147,12 +154,22 @@ plot_means_over_time <- function(
     ))
 
     # Replace normed means with raw means
+    group_vars <- c(group, "Time")
+    if (!is.null(facet)) {
+      group_vars <- c(group_vars, facet)
+    }
     data_summary2 <- data_long %>%
-      dplyr::group_by(.data[[group]], .data$Time) %>%
+      dplyr::group_by(dplyr::across(all_of(group_vars))) %>%
       dplyr::summarize(
         mean = mean(.data$value, na.rm = TRUE),
         .groups = "drop"
       )
+    # data_summary2 <- data_long %>%
+    #   dplyr::group_by(.data[[group]], .data$Time) %>%
+    #   dplyr::summarize(
+    #     mean = mean(.data$value, na.rm = TRUE),
+    #     .groups = "drop"
+    #   )
 
     data_summary$value <- data_summary2$mean
   } else {
@@ -204,37 +221,21 @@ plot_means_over_time <- function(
   dataSummary <- data_summary %>%
     summarize(Mean = mean(.data$value, na.rm = TRUE), .by = all_of(group))
 
-  if (groups.order[1] == "increasing") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(dataSummary$Mean)]
-    )
-  } else if (groups.order[1] == "decreasing") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(
-        dataSummary$Mean,
-        decreasing = TRUE
-      )]
-    )
-  } else if (groups.order[1] == "string.length") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(
-        nchar(levels(data_summary[[group]]))
-      )]
-    )
-  } else if (groups.order[1] != "none") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = groups.order
+  data_summary <- .reorder_groups(
+    data = data_summary,
+    group = group,
+    response = "value",
+    groups.order = groups.order
+  )
+
+  if (!is.null(facet) && facets.order != "none") {
+    data_summary <- .reorder_groups(
+      data = data_summary,
+      group = facet,
+      response = "value",
+      groups.order = facets.order
     )
   }
-  # Retrieve original levels for data consistency
-  data_summary[[group]] <- factor(
-    data_summary[[group]],
-    levels = original_levels
-  )
 
   # ggplot2
   pd <- ggplot2::position_dodge(0.2) # move them .01 to the left and right

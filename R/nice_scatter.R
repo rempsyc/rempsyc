@@ -430,26 +430,12 @@ nice_scatter <- function(
     }
   }
 
-  if (groups.order[1] == "increasing") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(dataSummary$Mean)]
-    )
-  } else if (!missing(group) && groups.order[1] == "decreasing") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(dataSummary$Mean, decreasing = TRUE)]
-    )
-  } else if (groups.order[1] == "string.length") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(
-        nchar(levels(data[[group]]))
-      )]
-    )
-  } else if (groups.order[1] != "none") {
-    data[[group]] <- factor(data[[group]], levels = groups.order)
-  }
+  data <- .reorder_groups(
+    data = data,
+    group = group,
+    response = response,
+    groups.order = groups.order
+  )
 
   if (!missing(groups.labels)) {
     levels(data[[group]]) <- groups.labels
@@ -571,7 +557,6 @@ nice_scatter <- function(
       }
     } +
     ggplot2::labs(
-      legend.title = legend.title,
       colour = legend.title,
       fill = legend.title,
       linetype = legend.title,

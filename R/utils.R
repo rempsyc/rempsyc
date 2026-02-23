@@ -11,7 +11,8 @@ theme_apa <- function(x, has.legend = FALSE) {
       panel.border = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(colour = "black"),
       axis.ticks = ggplot2::element_line(colour = "black")
-    ) + {
+    ) +
+    {
       if (has.legend == FALSE) {
         ggplot2::theme(legend.position = "none")
       }
@@ -28,22 +29,33 @@ check_col_names <- function(data, names) {
     id <- which(!unlist(missing.cols))
     if (isTRUE(length(id) >= 1)) {
       missing.cols <- toString(names[id])
-      stop(paste0("Variables not found: ", missing.cols, ". Please double check spelling."))
+      stop(paste0(
+        "Variables not found: ",
+        missing.cols,
+        ". Please double check spelling."
+      ))
     }
   }
 }
 
 #' @noRd
 data_is_standardized <- function(data) {
-  data <- dplyr::select(data, -dplyr::where(is.factor), -dplyr::where(function(x) {
-    length(unique(x)) == 2
-  }))
-  all(lapply(data, function(x) {
-    y <- x %>%
-      attributes() %>%
-      names()
-    all(any(grepl("center", y)), any(grepl("scale", y)))
-  }) %>% unlist())
+  data <- dplyr::select(
+    data,
+    -dplyr::where(is.factor),
+    -dplyr::where(function(x) {
+      length(unique(x)) == 2
+    })
+  )
+  all(
+    lapply(data, function(x) {
+      y <- x %>%
+        attributes() %>%
+        names()
+      all(any(grepl("center", y)), any(grepl("scale", y)))
+    }) %>%
+      unlist()
+  )
 }
 
 #' @noRd
@@ -51,7 +63,8 @@ model_is_standardized <- function(models.list) {
   all(
     lapply(models.list, function(submodel) {
       data_is_standardized(submodel$model)
-    }) %>% unlist()
+    }) %>%
+      unlist()
   )
 }
 
@@ -76,9 +89,62 @@ get_dep_version <- function(dep, pkg = utils::packageName()) {
 #' @param pkgs Packages to install if not already installed
 install_if_not_installed <- function(pkgs) {
   successfully_loaded <- vapply(
-    pkgs, requireNamespace,
-    FUN.VALUE = logical(1L), quietly = TRUE
+    pkgs,
+    requireNamespace,
+    FUN.VALUE = logical(1L),
+    quietly = TRUE
   )
   required_pkgs <- names(which(successfully_loaded == FALSE))
   utils::install.packages(required_pkgs)
+}
+
+#' @title Reorder grouping variable in rempsyc plots
+#'
+#' @keywords internal
+#' @noRd
+.reorder_groups <- function(
+  data,
+  group = NULL,
+  response = NULL,
+  groups.order = "none"
+) {
+  if (is.null(group) || !group %in% names(data)) {
+    return(data)
+  }
+
+  original_levels <- levels(as.factor(data[[group]]))
+
+  # normalize (so vector orders don't break `if`)
+  go1 <- groups.order[1]
+
+  if (is.character(go1) && go1 == "none") {
+    data[[group]] <- factor(data[[group]], levels = original_levels)
+    return(data)
+  }
+
+  if (is.character(go1) && go1 %in% c("increasing", "decreasing")) {
+    if (is.null(response)) {
+      stop("`response` must be provided for increasing/decreasing ordering.")
+    }
+    summary_df <- data %>%
+      dplyr::summarise(
+        Mean = mean(.data[[response]], na.rm = TRUE),
+        .by = all_of(group)
+      )
+    new_levels <- summary_df %>%
+      dplyr::arrange(if (go1 == "increasing") Mean else dplyr::desc(Mean)) %>%
+      dplyr::pull(.data[[group]])
+    data[[group]] <- factor(data[[group]], levels = new_levels)
+    return(data)
+  }
+
+  if (is.character(go1) && go1 == "string.length") {
+    new_levels <- original_levels[order(nchar(original_levels))]
+    data[[group]] <- factor(data[[group]], levels = new_levels)
+    return(data)
+  }
+
+  # custom order vector (numeric or character)
+  data[[group]] <- factor(data[[group]], levels = groups.order)
+  data
 }
