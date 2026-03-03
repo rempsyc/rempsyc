@@ -1,5 +1,12 @@
 # Changelog
 
+## rempsyc 0.2.0.6
+
+- [`plot_prepost()`](https://rempsyc.remi-theriault.com/reference/plot_prepost.md):
+  Added new function for paired pre–post (within-subject) plots with
+  optional mean overlay. Uses standard evaluation (character column
+  names).
+
 ## rempsyc 0.2.0.5
 
 - [`plot_means_over_time()`](https://rempsyc.remi-theriault.com/reference/plot_means_over_time.md):
