@@ -13,6 +13,7 @@ plot_prepost(
   pre,
   post,
   group = NULL,
+  colors = NULL,
   pre_label = "Pre",
   post_label = "Post",
   y_label = NULL,
@@ -38,6 +39,17 @@ plot_prepost(
 - post:
 
   Unquoted name of the post-intervention variable.
+
+- group:
+
+  Optional character string specifying a grouping variable. When
+  provided, individual trajectories and (if requested) mean lines are
+  colored by group.
+
+- colors:
+
+  Optional named character vector of colors for the `group` variable.
+  Names must match group levels.
 
 - pre_label:
 

@@ -74,6 +74,7 @@ mean overlay. Designed for thermometer-style scales or other continuous outcomes
 <span>  <span class="va">pre</span>,</span>
 <span>  <span class="va">post</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pre_label <span class="op">=</span> <span class="st">"Pre"</span>,</span>
 <span>  post_label <span class="op">=</span> <span class="st">"Post"</span>,</span>
 <span>  y_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -100,6 +101,17 @@ mean overlay. Designed for thermometer-style scales or other continuous outcomes
 
 <dt id="arg-post">post<a class="anchor" aria-label="anchor" href="#arg-post"></a></dt>
 <dd><p>Unquoted name of the post-intervention variable.</p></dd>
+
+
+<dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
+<dd><p>Optional character string specifying a grouping variable.
+When provided, individual trajectories and (if requested) mean lines
+are colored by group.</p></dd>
+
+
+<dt id="arg-colors">colors<a class="anchor" aria-label="anchor" href="#arg-colors"></a></dt>
+<dd><p>Optional named character vector of colors for the <code>group</code> variable.
+Names must match group levels.</p></dd>
 
 
 <dt id="arg-pre-label">pre_label<a class="anchor" aria-label="anchor" href="#arg-pre-label"></a></dt>
