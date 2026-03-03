@@ -426,6 +426,26 @@ grouped_bar_chart(
 )
 ```
 
+## `plot_prepost`
+
+Make nice paired pre–post spaghetti plots, usually for for pre–post designs.
+
+```{r plot_prepost, warning = FALSE, message = FALSE, out.width="70%"}
+df <- data.frame(
+  pre = rnorm(50, 25, 5),
+  post = rnorm(50, 15, 5)
+)
+
+plot_prepost(
+  df, 
+  pre = "pre", 
+  post = "post",
+  pre_label = "Before",
+  post_label = "After",
+  title = "Reduction in Affective Polarization",
+  show_mean = TRUE)
+```
+
 ## `overlap_circle `
 
 Interpolating the Inclusion of the Other in the Self Scale (self-other merging) easily.

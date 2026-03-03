@@ -35,7 +35,8 @@ Top 40 new CRAN packages (2022)!
 
 > *This is one of the most helpful R packages I’ve used in years! It
 > saves hours of time and patience and is super easy to implement!* -
-> Mark ([more testimonials](https://rempsyc.remi-theriault.com/articles/featured.html#testimonials))
+> Mark ([more
+> testimonials](https://rempsyc.remi-theriault.com/articles/featured.html#testimonials))
 
 ## Installation
 
@@ -384,7 +385,7 @@ nice_violin(
 )
 ```
 
-<img src="man/figures/README-nice_violin-1.png" width="60%" />
+<img src="man/figures/README-nice_violin-1.png" alt="" width="60%" />
 
 ``` r
 # Save plot
@@ -411,7 +412,7 @@ nice_scatter(
 )
 ```
 
-<img src="man/figures/README-nice_scatter-1.png" width="60%" />
+<img src="man/figures/README-nice_scatter-1.png" alt="" width="60%" />
 
 ``` r
 nice_scatter(
@@ -423,7 +424,7 @@ nice_scatter(
 )
 ```
 
-<img src="man/figures/README-nice_scatter2-1.png" width="70%" />
+<img src="man/figures/README-nice_scatter2-1.png" alt="" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/scatter>
 
@@ -447,11 +448,14 @@ plot_means_over_time(
   significance_stars = c("*", "***"),
   significance_stars_x = c(3.25, 4.35),
   # significance_stars_y: List with structure: list(c("group1", "group2", time))
-  significance_stars_y = list(c("4", "8", time = 3),
-                              c("4", "8", time = 4)))
+  significance_stars_y = list(
+    c("4", "8", time = 3),
+    c("4", "8", time = 4)
+  )
+)
 ```
 
-<img src="man/figures/README-plot_means_over_time-1.png" width="70%" />
+<img src="man/figures/README-plot_means_over_time-1.png" alt="" width="70%" />
 
 ## `grouped_bar_chart`
 
@@ -475,7 +479,30 @@ grouped_bar_chart(
 )
 ```
 
-<img src="man/figures/README-grouped_bar_chart-1.png" width="70%" />
+<img src="man/figures/README-grouped_bar_chart-1.png" alt="" width="70%" />
+
+## `plot_prepost`
+
+Make nice paired pre–post spaghetti plots, usually for for pre–post
+designs.
+
+``` r
+df <- data.frame(
+  pre = rnorm(50, 25, 5),
+  post = rnorm(50, 15, 5)
+)
+
+plot_prepost(
+  df, 
+  pre = "pre", 
+  post = "post",
+  pre_label = "Before",
+  post_label = "After",
+  title = "Reduction in Affective Polarization",
+  show_mean = TRUE)
+```
+
+<img src="man/figures/README-plot_prepost-1.png" alt="" width="70%" />
 
 ## `overlap_circle`
 
@@ -487,7 +514,7 @@ merging) easily.
 overlap_circle(3.5)
 ```
 
-<img src="man/figures/README-overlap_circle-1.png" width="30%" />
+<img src="man/figures/README-overlap_circle-1.png" alt="" width="30%" />
 
 ``` r
 
@@ -495,7 +522,7 @@ overlap_circle(3.5)
 overlap_circle(6.84)
 ```
 
-<img src="man/figures/README-overlap_circle-2.png" width="30%" />
+<img src="man/figures/README-overlap_circle-2.png" alt="" width="30%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/circles>
 
@@ -517,15 +544,25 @@ cormatrix_excel(
 )
 #> # Correlation Matrix (pearson-method)
 #> 
-#> Parameter      |      age |   parity |  induced |     case | spontaneous |  stratum | pooled.stratum
-#> ----------------------------------------------------------------------------------------------------
-#> age            |          |     0.08 |    -0.10 | 3.53e-03 |       -0.08 | -0.21*** |        -0.17**
-#> parity         |     0.08 |          |  0.45*** | 8.91e-03 |     0.31*** | -0.31*** |           0.12
-#> induced        |    -0.10 |  0.45*** |          |     0.02 |    -0.27*** |    -0.10 |          0.16*
-#> case           | 3.53e-03 | 8.91e-03 |     0.02 |          |     0.36*** | 3.83e-03 |       4.86e-03
-#> spontaneous    |    -0.08 |  0.31*** | -0.27*** |  0.36*** |             |     0.06 |        0.21***
-#> stratum        | -0.21*** | -0.31*** |    -0.10 | 3.83e-03 |        0.06 |          |        0.75***
-#> pooled.stratum |  -0.17** |     0.12 |    0.16* | 4.86e-03 |     0.21*** |  0.75*** |               
+#> Parameter      |      age |   parity |  induced |    case | spontaneous
+#> -----------------------------------------------------------------------
+#> age            |          |     0.08 |    -0.10 |    0.00 |       -0.08
+#> parity         |     0.08 |          |  0.45*** |    0.01 |     0.31***
+#> induced        |    -0.10 |  0.45*** |          |    0.02 |    -0.27***
+#> case           |     0.00 |     0.01 |     0.02 |         |     0.36***
+#> spontaneous    |    -0.08 |  0.31*** | -0.27*** | 0.36*** |            
+#> stratum        | -0.21*** | -0.31*** |    -0.10 |    0.00 |        0.06
+#> pooled.stratum |  -0.17** |     0.12 |    0.16* |    0.00 |     0.21***
+#> 
+#> Parameter      |  stratum | pooled.stratum
+#> ------------------------------------------
+#> age            | -0.21*** |        -0.17**
+#> parity         | -0.31*** |           0.12
+#> induced        |    -0.10 |          0.16*
+#> case           |     0.00 |           0.00
+#> spontaneous    |     0.06 |        0.21***
+#> stratum        |          |        0.75***
+#> pooled.stratum |  0.75*** |               
 #> 
 #> p-value adjustment method: none
 #> 
@@ -768,7 +805,7 @@ nice_normality(
 )
 ```
 
-<img src="man/figures/README-nice_normality-1.png" width="80%" />
+<img src="man/figures/README-nice_normality-1.png" alt="" width="80%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
@@ -784,7 +821,7 @@ plot_outliers(airquality,
 )
 ```
 
-<img src="man/figures/README-plot_outliers-1.png" width="70%" />
+<img src="man/figures/README-plot_outliers-1.png" alt="" width="70%" />
 
 ``` r
 
@@ -794,7 +831,7 @@ plot_outliers(airquality,
 )
 ```
 
-<img src="man/figures/README-plot_outliers-2.png" width="70%" />
+<img src="man/figures/README-plot_outliers-2.png" alt="" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
@@ -829,7 +866,7 @@ nice_varplot(
 )
 ```
 
-<img src="man/figures/README-nice_varplot-1.png" width="70%" />
+<img src="man/figures/README-nice_varplot-1.png" alt="" width="70%" />
 
 Full tutorial: <https://rempsyc.remi-theriault.com/articles/assumptions>
 
