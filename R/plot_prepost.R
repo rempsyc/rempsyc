@@ -7,6 +7,11 @@
 #' @param data A data frame in wide format containing the pre and post variables.
 #' @param pre Unquoted name of the pre-intervention variable.
 #' @param post Unquoted name of the post-intervention variable.
+#' @param group Optional character string specifying a grouping variable.
+#' When provided, individual trajectories and (if requested) mean lines
+#' are colored by group.
+#' @param colors Optional named character vector of colors for the `group` variable.
+#' Names must match group levels.
 #' @param pre_label Character. Label displayed for the pre condition.
 #' @param post_label Character. Label displayed for the post condition.
 #' @param y_label Character. Label for the y-axis. Defaults to NULL.
@@ -53,6 +58,7 @@ plot_prepost <- function(
   pre,
   post,
   group = NULL,
+  colors = NULL,
   pre_label = "Pre",
   post_label = "Post",
   y_label = NULL,
@@ -100,9 +106,8 @@ plot_prepost <- function(
   }
 
   p <- ggplot2::ggplot(df_long, aes_mapping) +
-    ggplot2::geom_line(alpha = line_alpha, linewidth = .6, colour = "grey50") +
     ggplot2::geom_point(
-      shape = 21,
+      # shape = 21,
       position = ggplot2::position_jitter(width = jitter, height = 0),
       size = point_size,
       alpha = point_alpha
@@ -118,6 +123,21 @@ plot_prepost <- function(
       y = y_label,
       color = group
     )
+
+  if (is.null(group)) {
+    p <- p +
+      ggplot2::geom_line(
+        alpha = line_alpha,
+        linewidth = .6,
+        colour = "grey50"
+      )
+  } else {
+    p <- p +
+      ggplot2::geom_line(
+        alpha = line_alpha,
+        linewidth = .6
+      )
+  }
 
   if (show_mean) {
     if (is.null(group)) {
@@ -140,6 +160,10 @@ plot_prepost <- function(
           linetype = "dashed"
         )
     }
+  }
+
+  if (!is.null(group) && !is.null(colors)) {
+    p <- p + ggplot2::scale_color_manual(values = colors)
   }
 
   return(p)

@@ -9,6 +9,7 @@ plot_prepost(
   pre,
   post,
   group = NULL,
+  colors = NULL,
   pre_label = "Pre",
   post_label = "Post",
   y_label = NULL,
@@ -26,6 +27,13 @@ plot_prepost(
 \item{pre}{Unquoted name of the pre-intervention variable.}
 
 \item{post}{Unquoted name of the post-intervention variable.}
+
+\item{group}{Optional character string specifying a grouping variable.
+When provided, individual trajectories and (if requested) mean lines
+are colored by group.}
+
+\item{colors}{Optional named character vector of colors for the \code{group} variable.
+Names must match group levels.}
 
 \item{pre_label}{Character. Label displayed for the pre condition.}
 
