@@ -13,6 +13,10 @@
 #' @param title Character. Optional plot title.
 #' @param point_size Numeric. Size of individual points. Default is 2.
 #' @param line_alpha Numeric between 0 and 1. Transparency of paired lines.
+#' @param point_alpha Numeric between 0 and 1. Transparency level for individual points.
+#' Lower values are recommended for large samples to reduce overplotting.
+#' @param jitter Numeric. Horizontal jitter width applied to individual points
+#' (no vertical jitter). Useful for large samples to improve visibility of overlap.
 #' @param show_mean Logical. If TRUE, overlays the mean trajectory.
 #'
 #' @details
@@ -23,34 +27,50 @@
 #' @return A ggplot object.
 #'
 #' @examples
-#' df <- data.frame(
-#'   pre = rnorm(50, 25, 5),
-#'   post = rnorm(50, 15, 5)
-#' )
+#' if (requireNamespace("dplyr", quietly = TRUE) &&
+#'     requireNamespace("tidyr", quietly = TRUE) &&
+#'     requireNamespace("ggplot2", quietly = TRUE)) {
 #'
-#' plot_prepost(df, "pre", "post",
-#'               pre_label = "Before",
-#'               post_label = "After",
-#'               title = "Reduction in Affective Polarization",
-#'               show_mean = TRUE)
+#'   df <- data.frame(
+#'     pre = rnorm(50, 25, 5),
+#'     post = rnorm(50, 15, 5)
+#'   )
 #'
+#'   plot_prepost(
+#'     df,
+#'     "pre",
+#'     "post",
+#'     pre_label = "Before",
+#'     post_label = "After",
+#'     title = "Reduction in Affective Polarization",
+#'     show_mean = TRUE
+#'   )
+#' }
 #' @export
 
 plot_prepost <- function(
   data,
   pre,
   post,
+  group = NULL,
   pre_label = "Pre",
   post_label = "Post",
   y_label = NULL,
   title = NULL,
   point_size = 2,
   line_alpha = .35,
+  point_alpha = 0.5,
+  jitter = 0,
   show_mean = FALSE
 ) {
   df_long <- data %>%
     dplyr::mutate(.id = dplyr::row_number()) %>%
-    dplyr::select(.data$.id, .data[[pre]], .data[[post]]) %>%
+    dplyr::select(
+      .data$.id,
+      .data[[pre]],
+      .data[[post]],
+      dplyr::all_of(group)
+    ) %>%
     tidyr::pivot_longer(
       cols = c(.data[[pre]], .data[[post]]),
       names_to = "condition",
@@ -63,26 +83,31 @@ plot_prepost <- function(
         labels = c(pre_label, post_label)
       )
     )
-  p <- ggplot2::ggplot(
-    df_long,
+
+  aes_mapping <- if (is.null(group)) {
     ggplot2::aes(
       x = .data$condition,
       y = .data$score,
       group = .data$.id
     )
-  ) +
-    ggplot2::geom_line(
-      color = "black",
-      alpha = line_alpha,
-      linewidth = .5
-    ) +
+  } else {
+    ggplot2::aes(
+      x = .data$condition,
+      y = .data$score,
+      group = .data$.id,
+      color = .data[[group]]
+    )
+  }
+
+  p <- ggplot2::ggplot(df_long, aes_mapping) +
+    ggplot2::geom_line(alpha = line_alpha, linewidth = .6, colour = "grey50") +
     ggplot2::geom_point(
+      shape = 21,
+      position = ggplot2::position_jitter(width = jitter, height = 0),
       size = point_size,
-      alpha = .85
+      alpha = point_alpha
     ) +
-    ggplot2::scale_x_discrete(
-      expand = ggplot2::expansion(add = 0.1)
-    ) +
+    ggplot2::scale_x_discrete(expand = ggplot2::expansion(add = 0.1)) +
     ggplot2::theme_classic(base_size = 13) +
     ggplot2::theme(
       plot.title = ggplot2::element_text(face = "bold"),
@@ -90,16 +115,32 @@ plot_prepost <- function(
     ) +
     ggplot2::labs(
       title = title,
-      y = y_label
+      y = y_label,
+      color = group
     )
+
   if (show_mean) {
-    p <- p +
-      ggplot2::stat_summary(
-        ggplot2::aes(group = 1),
-        fun = base::mean,
-        geom = "line",
-        linewidth = 1
-      )
+    if (is.null(group)) {
+      p <- p +
+        ggplot2::stat_summary(
+          ggplot2::aes(group = 1),
+          fun = base::mean,
+          geom = "line",
+          linewidth = 1.2,
+          linetype = "dashed",
+          color = "black"
+        )
+    } else {
+      p <- p +
+        ggplot2::stat_summary(
+          ggplot2::aes(group = .data[[group]]),
+          fun = base::mean,
+          geom = "line",
+          linewidth = 1.2,
+          linetype = "dashed"
+        )
+    }
   }
+
   return(p)
 }

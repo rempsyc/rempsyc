@@ -8,12 +8,15 @@ plot_prepost(
   data,
   pre,
   post,
+  group = NULL,
   pre_label = "Pre",
   post_label = "Post",
   y_label = NULL,
   title = NULL,
   point_size = 2,
   line_alpha = 0.35,
+  point_alpha = 0.5,
+  jitter = 0,
   show_mean = FALSE
 )
 }
@@ -36,6 +39,12 @@ plot_prepost(
 
 \item{line_alpha}{Numeric between 0 and 1. Transparency of paired lines.}
 
+\item{point_alpha}{Numeric between 0 and 1. Transparency level for individual points.
+Lower values are recommended for large samples to reduce overplotting.}
+
+\item{jitter}{Numeric. Horizontal jitter width applied to individual points
+(no vertical jitter). Useful for large samples to improve visibility of overlap.}
+
 \item{show_mean}{Logical. If TRUE, overlays the mean trajectory.}
 }
 \value{
@@ -52,15 +61,23 @@ It is intended for within-subject comparisons (e.g., pre–post RCT outcomes).
 No axis limits are imposed; scaling adapts to the data range.
 }
 \examples{
-df <- data.frame(
-  pre = rnorm(50, 25, 5),
-  post = rnorm(50, 15, 5)
-)
+if (requireNamespace("dplyr", quietly = TRUE) &&
+    requireNamespace("tidyr", quietly = TRUE) &&
+    requireNamespace("ggplot2", quietly = TRUE)) {
 
-plot_prepost(df, "pre", "post",
-              pre_label = "Before",
-              post_label = "After",
-              title = "Reduction in Affective Polarization",
-              show_mean = TRUE)
+  df <- data.frame(
+    pre = rnorm(50, 25, 5),
+    post = rnorm(50, 15, 5)
+  )
 
+  plot_prepost(
+    df,
+    "pre",
+    "post",
+    pre_label = "Before",
+    post_label = "After",
+    title = "Reduction in Affective Polarization",
+    show_mean = TRUE
+  )
+}
 }
