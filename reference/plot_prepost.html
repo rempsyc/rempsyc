@@ -73,12 +73,15 @@ mean overlay. Designed for thermometer-style scales or other continuous outcomes
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">pre</span>,</span>
 <span>  <span class="va">post</span>,</span>
+<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pre_label <span class="op">=</span> <span class="st">"Pre"</span>,</span>
 <span>  post_label <span class="op">=</span> <span class="st">"Post"</span>,</span>
 <span>  y_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  point_size <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  line_alpha <span class="op">=</span> <span class="fl">0.35</span>,</span>
+<span>  point_alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  jitter <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  show_mean <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -123,6 +126,16 @@ mean overlay. Designed for thermometer-style scales or other continuous outcomes
 <dd><p>Numeric between 0 and 1. Transparency of paired lines.</p></dd>
 
 
+<dt id="arg-point-alpha">point_alpha<a class="anchor" aria-label="anchor" href="#arg-point-alpha"></a></dt>
+<dd><p>Numeric between 0 and 1. Transparency level for individual points.
+Lower values are recommended for large samples to reduce overplotting.</p></dd>
+
+
+<dt id="arg-jitter">jitter<a class="anchor" aria-label="anchor" href="#arg-jitter"></a></dt>
+<dd><p>Numeric. Horizontal jitter width applied to individual points
+(no vertical jitter). Useful for large samples to improve visibility of overlap.</p></dd>
+
+
 <dt id="arg-show-mean">show_mean<a class="anchor" aria-label="anchor" href="#arg-show-mean"></a></dt>
 <dd><p>Logical. If TRUE, overlays the mean trajectory.</p></dd>
 
@@ -140,18 +153,26 @@ No axis limits are imposed; scaling adapts to the data range.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  pre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">plot_prepost</span><span class="op">(</span><span class="va">df</span>, <span class="st">"pre"</span>, <span class="st">"post"</span>,</span></span>
-<span class="r-in"><span>              pre_label <span class="op">=</span> <span class="st">"Before"</span>,</span></span>
-<span class="r-in"><span>              post_label <span class="op">=</span> <span class="st">"After"</span>,</span></span>
-<span class="r-in"><span>              title <span class="op">=</span> <span class="st">"Reduction in Affective Polarization"</span>,</span></span>
-<span class="r-in"><span>              show_mean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    pre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">plot_prepost</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">df</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"pre"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"post"</span>,</span></span>
+<span class="r-in"><span>    pre_label <span class="op">=</span> <span class="st">"Before"</span>,</span></span>
+<span class="r-in"><span>    post_label <span class="op">=</span> <span class="st">"After"</span>,</span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Reduction in Affective Polarization"</span>,</span></span>
+<span class="r-in"><span>    show_mean <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="plot_prepost-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
