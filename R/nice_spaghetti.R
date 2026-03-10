@@ -15,7 +15,8 @@
 #' Names must match group levels.
 #' @param pre_label Character. Label displayed for the pre condition.
 #' @param post_label Character. Label displayed for the post condition.
-#' @param y_label Character. Label for the y-axis. Defaults to NULL.
+#' @param y_label Character. Label for the y-axis.
+#' If NULL, a label is inferred from `pre` and `post`.
 #' @param title Character. Optional plot title.
 #' @param subtitle Character. Optional plot subtitle.
 #' @param point_size Numeric. Size of individual points. Default is 2.
@@ -39,14 +40,14 @@
 #'     requireNamespace("ggplot2", quietly = TRUE)) {
 #'
 #'   df <- data.frame(
-#'     pre = rnorm(50, 25, 5),
-#'     post = rnorm(50, 15, 5)
+#'     pre_var = rnorm(50, 25, 5),
+#'     post_var = rnorm(50, 15, 5)
 #'   )
 #'
 #'   nice_spaghetti(
 #'     df,
-#'     "pre",
-#'     "post",
+#'     "pre_var",
+#'     "post_var",
 #'     pre_label = "Before",
 #'     post_label = "After",
 #'     title = "Reduction in Affective Polarization",
@@ -72,6 +73,33 @@ nice_spaghetti <- function(
   jitter = 0,
   show_mean = FALSE
 ) {
+  if (is.null(y_label)) {
+    infer_base_name <- function(x) {
+      x <- gsub(
+        "(^|[_.])(?:pre|post|before|after|baseline|followup|t1|t2|time1|time2)([_.]|$)",
+        " ",
+        x,
+        ignore.case = TRUE,
+        perl = TRUE
+      )
+      x <- gsub("[_.]+", " ", x)
+      trimws(gsub("\\s+", " ", x))
+    }
+
+    pre_base <- infer_base_name(pre)
+    post_base <- infer_base_name(post)
+
+    if (
+      nzchar(pre_base) &&
+        nzchar(post_base) &&
+        tolower(pre_base) == tolower(post_base)
+    ) {
+      y_label <- pre_base
+    } else {
+      y_label <- gsub("[_.]+", " ", pre)
+    }
+  }
+
   df_long <- data %>%
     dplyr::mutate(.id = dplyr::row_number()) %>%
     dplyr::select(

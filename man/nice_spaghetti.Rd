@@ -40,7 +40,8 @@ Names must match group levels.}
 
 \item{post_label}{Character. Label displayed for the post condition.}
 
-\item{y_label}{Character. Label for the y-axis. Defaults to NULL.}
+\item{y_label}{Character. Label for the y-axis.
+If NULL, a label is inferred from \code{pre} and \code{post}.}
 
 \item{title}{Character. Optional plot title.}
 
@@ -78,14 +79,14 @@ if (requireNamespace("dplyr", quietly = TRUE) &&
     requireNamespace("ggplot2", quietly = TRUE)) {
 
   df <- data.frame(
-    pre = rnorm(50, 25, 5),
-    post = rnorm(50, 15, 5)
+    pre_var = rnorm(50, 25, 5),
+    post_var = rnorm(50, 15, 5)
   )
 
   nice_spaghetti(
     df,
-    "pre",
-    "post",
+    "pre_var",
+    "post_var",
     pre_label = "Before",
     post_label = "After",
     title = "Reduction in Affective Polarization",

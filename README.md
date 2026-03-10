@@ -487,14 +487,14 @@ Make nice paired pre-post spaghetti plots, usually for pre-post designs.
 
 ``` r
 df <- data.frame(
-  pre = rnorm(50, 25, 5),
-  post = rnorm(50, 15, 5)
+  pre_var = rnorm(50, 25, 5),
+  post_var = rnorm(50, 15, 5)
 )
 
 nice_spaghetti(
   df, 
-  pre = "pre", 
-  post = "post",
+  pre = "pre_var", 
+  post = "post_var",
   pre_label = "Before",
   post_label = "After",
   title = "Reduction in Affective Polarization",
@@ -883,5 +883,3 @@ automatically, see my other package, `lavaanExtra`.
 
 Thank you for your support. You can support me and this package here:
 <https://github.com/sponsors/rempsyc>
-
-
