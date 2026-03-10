@@ -1,5 +1,6 @@
 # rempsyc 0.2.0.6
-* `plot_prepost()`: Added new function for paired pre–post (within-subject) plots with optional mean overlay. Uses standard evaluation (character column names).
+* Renamed `plot_prepost()` to `nice_spaghetti()`.
+* `nice_spaghetti()`: Added a new `subtitle` argument.
 
 # rempsyc 0.2.0.5
 * `plot_means_over_time()`: Restored and improved `groups.order` functionality. Factor levels are now handled more robustly and consistently across different `ci_type` options and when using `facet`. Added support for ordering facets via new `facets.order` argument ("increasing", "decreasing", or explicit level vector).

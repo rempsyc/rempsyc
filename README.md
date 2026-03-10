@@ -481,10 +481,9 @@ grouped_bar_chart(
 
 <img src="man/figures/README-grouped_bar_chart-1.png" alt="" width="70%" />
 
-## `plot_prepost`
+## `nice_spaghetti`
 
-Make nice paired pre–post spaghetti plots, usually for for pre–post
-designs.
+Make nice paired pre-post spaghetti plots, usually for pre-post designs.
 
 ``` r
 df <- data.frame(
@@ -492,17 +491,18 @@ df <- data.frame(
   post = rnorm(50, 15, 5)
 )
 
-plot_prepost(
+nice_spaghetti(
   df, 
   pre = "pre", 
   post = "post",
   pre_label = "Before",
   post_label = "After",
   title = "Reduction in Affective Polarization",
+  subtitle = "Individual trajectories and group mean",
   show_mean = TRUE)
 ```
 
-<img src="man/figures/README-plot_prepost-1.png" alt="" width="70%" />
+<img src="man/figures/README-nice_spaghetti-1.png" alt="" width="70%" />
 
 ## `overlap_circle`
 
@@ -883,3 +883,5 @@ automatically, see my other package, `lavaanExtra`.
 
 Thank you for your support. You can support me and this package here:
 <https://github.com/sponsors/rempsyc>
+
+

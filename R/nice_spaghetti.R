@@ -1,8 +1,9 @@
-#' Paired Pre–Post Spaghetti Plot
+#' Nice Spaghetti Plot for Two Within-Subject Conditions
 #'
-#' Creates a publication-ready paired (within-subject) plot for pre–post designs.
+#' Creates a publication-ready paired (within-subject) spaghetti plot.
 #' Individual participant trajectories are shown as connected lines with optional
-#' mean overlay. Designed for thermometer-style scales or other continuous outcomes.
+#' mean overlay. Designed for pre-post designs and other two-condition repeated
+#' measures outcomes.
 #'
 #' @param data A data frame in wide format containing the pre and post variables.
 #' @param pre Unquoted name of the pre-intervention variable.
@@ -16,6 +17,7 @@
 #' @param post_label Character. Label displayed for the post condition.
 #' @param y_label Character. Label for the y-axis. Defaults to NULL.
 #' @param title Character. Optional plot title.
+#' @param subtitle Character. Optional plot subtitle.
 #' @param point_size Numeric. Size of individual points. Default is 2.
 #' @param line_alpha Numeric between 0 and 1. Transparency of paired lines.
 #' @param point_alpha Numeric between 0 and 1. Transparency level for individual points.
@@ -26,7 +28,7 @@
 #'
 #' @details
 #' The function reshapes wide data internally using tidy evaluation.
-#' It is intended for within-subject comparisons (e.g., pre–post RCT outcomes).
+#' It is intended for within-subject comparisons (e.g., pre-post RCT outcomes).
 #' No axis limits are imposed; scaling adapts to the data range.
 #'
 #' @return A ggplot object.
@@ -41,19 +43,19 @@
 #'     post = rnorm(50, 15, 5)
 #'   )
 #'
-#'   plot_prepost(
+#'   nice_spaghetti(
 #'     df,
 #'     "pre",
 #'     "post",
 #'     pre_label = "Before",
 #'     post_label = "After",
 #'     title = "Reduction in Affective Polarization",
+#'     subtitle = "Individual trajectories and group mean",
 #'     show_mean = TRUE
 #'   )
 #' }
 #' @export
-
-plot_prepost <- function(
+nice_spaghetti <- function(
   data,
   pre,
   post,
@@ -63,6 +65,7 @@ plot_prepost <- function(
   post_label = "Post",
   y_label = NULL,
   title = NULL,
+  subtitle = NULL,
   point_size = 2,
   line_alpha = .35,
   point_alpha = 0.5,
@@ -107,7 +110,6 @@ plot_prepost <- function(
 
   p <- ggplot2::ggplot(df_long, aes_mapping) +
     ggplot2::geom_point(
-      # shape = 21,
       position = ggplot2::position_jitter(width = jitter, height = 0),
       size = point_size,
       alpha = point_alpha
@@ -120,6 +122,7 @@ plot_prepost <- function(
     ) +
     ggplot2::labs(
       title = title,
+      subtitle = subtitle,
       y = y_label,
       color = group
     )
