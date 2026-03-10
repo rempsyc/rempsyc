@@ -453,14 +453,14 @@
 <p>Make nice paired pre-post spaghetti plots, usually for pre-post designs.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  pre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>  post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span>  pre_var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span>
+<span>  post_var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/nice_spaghetti.html">nice_spaghetti</a></span><span class="op">(</span></span>
 <span>  <span class="va">df</span>, </span>
-<span>  pre <span class="op">=</span> <span class="st">"pre"</span>, </span>
-<span>  post <span class="op">=</span> <span class="st">"post"</span>,</span>
+<span>  pre <span class="op">=</span> <span class="st">"pre_var"</span>, </span>
+<span>  post <span class="op">=</span> <span class="st">"post_var"</span>,</span>
 <span>  pre_label <span class="op">=</span> <span class="st">"Before"</span>,</span>
 <span>  post_label <span class="op">=</span> <span class="st">"After"</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Reduction in Affective Polarization"</span>,</span>

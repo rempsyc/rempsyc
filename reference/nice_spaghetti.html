@@ -127,7 +127,8 @@ Names must match group levels.</p></dd>
 
 
 <dt id="arg-y-label">y_label<a class="anchor" aria-label="anchor" href="#arg-y-label"></a></dt>
-<dd><p>Character. Label for the y-axis. Defaults to NULL.</p></dd>
+<dd><p>Character. Label for the y-axis.
+If NULL, a label is inferred from <code>pre</code> and <code>post</code>.</p></dd>
 
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
@@ -178,14 +179,14 @@ No axis limits are imposed; scaling adapts to the data range.</p>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggplot2"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    pre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    post <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    pre_var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    post_var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">15</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu">nice_spaghetti</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">df</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"pre"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"post"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"pre_var"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"post_var"</span>,</span></span>
 <span class="r-in"><span>    pre_label <span class="op">=</span> <span class="st">"Before"</span>,</span></span>
 <span class="r-in"><span>    post_label <span class="op">=</span> <span class="st">"After"</span>,</span></span>
 <span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Reduction in Affective Polarization"</span>,</span></span>
