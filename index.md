@@ -466,10 +466,9 @@ grouped_bar_chart(
 
 ![](reference/figures/README-grouped_bar_chart-1.png)
 
-## `plot_prepost`
+## `nice_spaghetti`
 
-Make nice paired pre–post spaghetti plots, usually for for pre–post
-designs.
+Make nice paired pre-post spaghetti plots, usually for pre-post designs.
 
 ``` r
 df <- data.frame(
@@ -477,17 +476,18 @@ df <- data.frame(
   post = rnorm(50, 15, 5)
 )
 
-plot_prepost(
+nice_spaghetti(
   df, 
   pre = "pre", 
   post = "post",
   pre_label = "Before",
   post_label = "After",
   title = "Reduction in Affective Polarization",
+  subtitle = "Individual trajectories and group mean",
   show_mean = TRUE)
 ```
 
-![](reference/figures/README-plot_prepost-1.png)
+![](reference/figures/README-nice_spaghetti-1.png)
 
 ## `overlap_circle`
 

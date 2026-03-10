@@ -466,10 +466,9 @@ grouped_bar_chart(
 
 ![](reference/figures/README-grouped_bar_chart-1.png)
 
-## `plot_prepost`
+## `nice_spaghetti`
 
-Make nice paired pre–post spaghetti plots, usually for for pre–post
-designs.
+Make nice paired pre-post spaghetti plots, usually for pre-post designs.
 
 ``` r
 df <- data.frame(
@@ -477,17 +476,18 @@ df <- data.frame(
   post = rnorm(50, 15, 5)
 )
 
-plot_prepost(
+nice_spaghetti(
   df, 
   pre = "pre", 
   post = "post",
   pre_label = "Before",
   post_label = "After",
   title = "Reduction in Affective Polarization",
+  subtitle = "Individual trajectories and group mean",
   show_mean = TRUE)
 ```
 
-![](reference/figures/README-plot_prepost-1.png)
+![](reference/figures/README-nice_spaghetti-1.png)
 
 ## `overlap_circle`
 
@@ -920,6 +920,8 @@ Thank you for your support. You can support me and this package here:
   : Easy scatter plots
 - [`nice_slopes()`](https://rempsyc.remi-theriault.com/reference/nice_slopes.md)
   : Easy simple slopes
+- [`nice_spaghetti()`](https://rempsyc.remi-theriault.com/reference/nice_spaghetti.md)
+  : Nice Spaghetti Plot for Two Within-Subject Conditions
 - [`nice_t_test()`](https://rempsyc.remi-theriault.com/reference/nice_t_test.md)
   : Easy t-tests
 - [`nice_table()`](https://rempsyc.remi-theriault.com/reference/nice_table.md)
@@ -936,8 +938,6 @@ Thank you for your support. You can support me and this package here:
   : Easy scatter plots over multiple times (T1, T2, T3)
 - [`plot_outliers()`](https://rempsyc.remi-theriault.com/reference/plot_outliers.md)
   : Visually check outliers (dot plot)
-- [`plot_prepost()`](https://rempsyc.remi-theriault.com/reference/plot_prepost.md)
-  : Paired Pre–Post Spaghetti Plot
 - [`scale_mad()`](https://rempsyc.remi-theriault.com/reference/scale_mad.md)
   : Standardize based on the absolute median deviation
 - [`winsorize_mad()`](https://rempsyc.remi-theriault.com/reference/winsorize_mad.md)

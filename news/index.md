@@ -2,10 +2,10 @@
 
 ## rempsyc 0.2.0.6
 
-- [`plot_prepost()`](https://rempsyc.remi-theriault.com/reference/plot_prepost.md):
-  Added new function for paired pre–post (within-subject) plots with
-  optional mean overlay. Uses standard evaluation (character column
-  names).
+- Renamed `plot_prepost()` to
+  [`nice_spaghetti()`](https://rempsyc.remi-theriault.com/reference/nice_spaghetti.md).
+- [`nice_spaghetti()`](https://rempsyc.remi-theriault.com/reference/nice_spaghetti.md):
+  Added a new `subtitle` argument.
 
 ## rempsyc 0.2.0.5
 

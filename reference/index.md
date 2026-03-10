@@ -49,6 +49,8 @@
   : Easy scatter plots
 - [`nice_slopes()`](https://rempsyc.remi-theriault.com/reference/nice_slopes.md)
   : Easy simple slopes
+- [`nice_spaghetti()`](https://rempsyc.remi-theriault.com/reference/nice_spaghetti.md)
+  : Nice Spaghetti Plot for Two Within-Subject Conditions
 - [`nice_t_test()`](https://rempsyc.remi-theriault.com/reference/nice_t_test.md)
   : Easy t-tests
 - [`nice_table()`](https://rempsyc.remi-theriault.com/reference/nice_table.md)
@@ -65,8 +67,6 @@
   : Easy scatter plots over multiple times (T1, T2, T3)
 - [`plot_outliers()`](https://rempsyc.remi-theriault.com/reference/plot_outliers.md)
   : Visually check outliers (dot plot)
-- [`plot_prepost()`](https://rempsyc.remi-theriault.com/reference/plot_prepost.md)
-  : Paired Pre–Post Spaghetti Plot
 - [`scale_mad()`](https://rempsyc.remi-theriault.com/reference/scale_mad.md)
   : Standardize based on the absolute median deviation
 - [`winsorize_mad()`](https://rempsyc.remi-theriault.com/reference/winsorize_mad.md)

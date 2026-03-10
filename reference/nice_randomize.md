@@ -58,13 +58,13 @@ nice_randomize(
 )
 #>   id Condition
 #> 1  1        ZL
-#> 2  2        PZ
-#> 3  3        CX
-#> 4  4        BP
-#> 5  5        ZL
-#> 6  6        PZ
-#> 7  7        BP
-#> 8  8        CX
+#> 2  2        BP
+#> 3  3        PZ
+#> 4  4        CX
+#> 5  5        PZ
+#> 6  6        ZL
+#> 7  7        CX
+#> 8  8        BP
 
 # Within-Group Design
 nice_randomize(
@@ -72,12 +72,12 @@ nice_randomize(
   condition.names = c("SV", "AV", "ST", "AT")
 )
 #>   id         Condition
-#> 1  1 SV - AV - AT - ST
-#> 2  2 AV - AT - SV - ST
-#> 3  3 ST - AV - AT - SV
-#> 4  4 SV - AT - AV - ST
-#> 5  5 SV - AT - ST - AV
-#> 6  6 AV - AT - ST - SV
+#> 1  1 AT - ST - SV - AV
+#> 2  2 SV - AV - AT - ST
+#> 3  3 AV - AT - SV - ST
+#> 4  4 ST - AV - AT - SV
+#> 5  5 SV - AT - AV - ST
+#> 6  6 SV - AT - ST - AV
 
 # Make a quick runsheet
 randomized <- nice_randomize(
@@ -91,10 +91,10 @@ randomized <- nice_randomize(
 )
 head(randomized)
 #>   id         Condition Date/Time SONA ID Age/Gd. Handedness Tester Notes
-#> 1  1 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA
-#> 2  2 ST - SV - AV - AT        NA      NA      NA         NA     NA    NA
+#> 1  1 AV - AT - ST - SV        NA      NA      NA         NA     NA    NA
+#> 2  2 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA
 #> 3  3 ST - SV - AV - AT        NA      NA      NA         NA     NA    NA
-#> 4  4 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA
-#> 5  5 AT - ST - SV - AV        NA      NA      NA         NA     NA    NA
-#> 6  6 SV - ST - AT - AV        NA      NA      NA         NA     NA    NA
+#> 4  4 ST - SV - AV - AT        NA      NA      NA         NA     NA    NA
+#> 5  5 SV - ST - AV - AT        NA      NA      NA         NA     NA    NA
+#> 6  6 AT - ST - SV - AV        NA      NA      NA         NA     NA    NA
 ```
