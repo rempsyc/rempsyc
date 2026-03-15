@@ -263,24 +263,12 @@ nice_violin <- function(
     na.rm = TRUE
   )
 
-  if (groups.order == "increasing") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(dataSummary$Mean)]
-    )
-  } else if (groups.order == "decreasing") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(dataSummary$Mean, decreasing = TRUE)]
-    )
-  } else if (groups.order == "string.length") {
-    data[[group]] <- factor(
-      data[[group]],
-      levels = levels(data[[group]])[order(
-        nchar(levels(data[[group]]))
-      )]
-    )
-  }
+  data <- .reorder_groups(
+    data = data,
+    group = group,
+    response = response,
+    groups.order = groups.order
+  )
 
   if (
     has.d == TRUE &

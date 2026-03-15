@@ -28,6 +28,7 @@
 #' or "decreasing", to order based on the average value of the variable on the
 #' y axis, or "string.length", to order from the shortest to the longest
 #' string (useful when working with long string names). "Defaults to "none".
+#' @param facet The variable by which to facet grid.
 #' @param ci_type Character string specifying the type of confidence interval
 #' to use. Options are `"within"` (default) for within-subject adjusted CIs
 #' using the Morey (2008) correction, or `"between"` for regular between-subject
@@ -45,6 +46,18 @@
 #' arguments. Rather than providing actual coordinates, we provide a list
 #' object with structure group 1, group 2, and time of comparison, e.g.,
 #' `list(c("group1", "group2", time = 2), c("group1", "group3", time = 3), c("group2", "group3", time = 4))`.
+#' @param line_width Numeric. Line thickness used in `geom_line()`.
+#'   Defaults to 3. Can be reduced for publication figures or increased
+#'   for presentation slides.
+#'
+#' @param point_size Numeric. Point size used in `geom_point()`.
+#'   Defaults to 4. Adjust to improve readability depending on output format.
+#' @param facet The variable by which to facet grid.
+#' @param facets.order Specifies the desired display order of facet panels.
+#'   Either provide the levels directly, or a string: "increasing" or
+#'   "decreasing", to order panels based on the average value of the
+#'   y variable, or "string.length" to order panels by facet label length.
+#'   Defaults to "none".
 #' @param print_table Logical, whether to also print the computed table.
 #' @param verbose Logical, whether to also print a note regarding the meaning
 #' of the error bars.
@@ -57,7 +70,8 @@
 #'   data = data,
 #'   response = names(data)[6:3],
 #'   group = "cyl",
-#'   groups.order = "decreasing"
+#'   groups.order = "decreasing",
+#'   facet = "am"
 #' )
 #'
 #' # Add significance stars/bars
@@ -88,6 +102,10 @@ plot_means_over_time <- function(
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  line_width = 3,
+  point_size = 4,
+  facet = NULL,
+  facets.order = "none",
   print_table = FALSE,
   verbose = FALSE
 ) {
@@ -103,7 +121,7 @@ plot_means_over_time <- function(
   if (is.null(ytitle)) {
     ytitle <- gsub(".*_", "", response[[1]])
   }
-
+  # original_levels <- levels(as.factor(data[[group]]))
   data <- dplyr::ungroup(data)
   data$subject_ID <- seq(nrow(data))
   data[[group]] <- as.factor(data[[group]])
@@ -119,47 +137,70 @@ plot_means_over_time <- function(
 
   # Calculate summary statistics based on ci_type
   if (ci_type == "within") {
+    between_vars <- group
+    if (!is.null(facet)) {
+      between_vars <- c(group, facet)
+    }
     # Use Morey (2008) within-subject adjusted CIs
     # Suppress warnings for groups with insufficient data (N < 2)
     data_summary <- suppressWarnings(Rmisc::summarySEwithin(
       data_long,
       measurevar = "value",
       withinvars = "Time",
-      betweenvars = group,
+      betweenvars = between_vars,
       idvar = "subject_ID",
       na.rm = TRUE,
       conf.interval = .95
     ))
 
     # Replace normed means with raw means
+    group_vars <- c(group, "Time")
+    if (!is.null(facet)) {
+      group_vars <- c(group_vars, facet)
+    }
     data_summary2 <- data_long %>%
-      dplyr::group_by(.data[[group]], .data$Time) %>%
+      dplyr::group_by(dplyr::across(all_of(group_vars))) %>%
       dplyr::summarize(
         mean = mean(.data$value, na.rm = TRUE),
         .groups = "drop"
       )
+    # data_summary2 <- data_long %>%
+    #   dplyr::group_by(.data[[group]], .data$Time) %>%
+    #   dplyr::summarize(
+    #     mean = mean(.data$value, na.rm = TRUE),
+    #     .groups = "drop"
+    #   )
 
     data_summary$value <- data_summary2$mean
   } else {
     # Use regular between-subject CIs
-    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
     group_col <- group
+    rhs_terms <- c(group_col, "Time")
+    if (!is.null(facet)) {
+      rhs_terms <- c(rhs_terms, facet)
+    }
+
+    # Use base R aggregate to avoid namespace issues with stats::sd in dplyr
     agg_result <- stats::aggregate(
-      value ~ data_long[[group_col]] + Time,
+      reformulate(rhs_terms, response = "value"),
       data = data_long,
-      FUN = function(x) c(
-        N = sum(!is.na(x)),
-        mean = mean(x, na.rm = TRUE),
-        sd = sd(x, na.rm = TRUE)
-      ),
+      FUN = function(x) {
+        c(
+          N = sum(!is.na(x)),
+          mean = mean(x, na.rm = TRUE),
+          sd = sd(x, na.rm = TRUE)
+        )
+      },
       na.action = stats::na.pass
     )
-    data_summary <- data.frame(
-      agg_result[, 1:2],
+    grouping_vars <- setdiff(names(agg_result), "value")
+    data_summary <- cbind(
+      agg_result[grouping_vars],
       as.data.frame(agg_result$value)
     )
-    names(data_summary)[1] <- group_col
-    names(data_summary)[3:5] <- c("N", "value", "sd")
+    names(data_summary)[
+      (length(grouping_vars) + 1):(length(grouping_vars) + 3)
+    ] <- c("N", "value", "sd")
     data_summary$N <- as.integer(data_summary$N)
     data_summary[[group_col]] <- as.factor(data_summary[[group_col]])
     data_summary$Time <- as.factor(data_summary$Time)
@@ -180,30 +221,19 @@ plot_means_over_time <- function(
   dataSummary <- data_summary %>%
     summarize(Mean = mean(.data$value, na.rm = TRUE), .by = all_of(group))
 
-  if (groups.order[1] == "increasing") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(dataSummary$Mean)]
-    )
-  } else if (groups.order[1] == "decreasing") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(
-        dataSummary$Mean,
-        decreasing = TRUE
-      )]
-    )
-  } else if (groups.order[1] == "string.length") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = levels(data_summary[[group]])[order(
-        nchar(levels(data_summary[[group]]))
-      )]
-    )
-  } else if (groups.order[1] != "none") {
-    data_summary[[group]] <- factor(
-      data_summary[[group]],
-      levels = groups.order
+  data_summary <- .reorder_groups(
+    data = data_summary,
+    group = group,
+    response = "value",
+    groups.order = groups.order
+  )
+
+  if (!is.null(facet) && facets.order != "none") {
+    data_summary <- .reorder_groups(
+      data = data_summary,
+      group = facet,
+      response = "value",
+      groups.order = facets.order
     )
   }
 
@@ -224,7 +254,7 @@ plot_means_over_time <- function(
       ggplot2::aes(
         color = .data[[group]]
       ),
-      linewidth = 3,
+      linewidth = line_width,
       position = pd
     ) +
     {
@@ -241,7 +271,7 @@ plot_means_over_time <- function(
       }
     } +
     ggplot2::geom_point(
-      size = 4,
+      size = point_size,
       # shape = 22,
       fill = "white",
       # colour = "black",
@@ -281,10 +311,12 @@ plot_means_over_time <- function(
         .by = dplyr::all_of(group)
       )
 
-    get_segment_y <- function(m,
-                              significance_stars_y,
-                              groups = 1:2,
-                              value = 1:2) {
+    get_segment_y <- function(
+      m,
+      significance_stars_y,
+      groups = 1:2,
+      value = 1:2
+    ) {
       zz <- dplyr::filter(
         m,
         .data[[group]] %in% significance_stars_y[groups]
@@ -356,6 +388,9 @@ plot_means_over_time <- function(
         "(between-subject).\n"
       )
     }
+  }
+  if (!is.null(facet)) {
+    p <- p + ggplot2::facet_wrap(stats::as.formula(paste("~", facet)))
   }
   p
 }

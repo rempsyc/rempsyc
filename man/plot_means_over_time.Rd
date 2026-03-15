@@ -18,6 +18,10 @@ plot_means_over_time(
   significance_stars_x,
   significance_stars_y,
   significance_bars_x,
+  line_width = 3,
+  point_size = 4,
+  facet = NULL,
+  facets.order = "none",
   print_table = FALSE,
   verbose = FALSE
 )
@@ -69,6 +73,21 @@ object with structure group 1, group 2, and time of comparison, e.g.,
 \item{significance_bars_x}{Vector of where on the x-axis vertical
 significance bars should appear on the plot (e.g., \code{c(2:4)}).}
 
+\item{line_width}{Numeric. Line thickness used in \code{geom_line()}.
+Defaults to 3. Can be reduced for publication figures or increased
+for presentation slides.}
+
+\item{point_size}{Numeric. Point size used in \code{geom_point()}.
+Defaults to 4. Adjust to improve readability depending on output format.}
+
+\item{facet}{The variable by which to facet grid.}
+
+\item{facets.order}{Specifies the desired display order of facet panels.
+Either provide the levels directly, or a string: "increasing" or
+"decreasing", to order panels based on the average value of the
+y variable, or "string.length" to order panels by facet label length.
+Defaults to "none".}
+
 \item{print_table}{Logical, whether to also print the computed table.}
 
 \item{verbose}{Logical, whether to also print a note regarding the meaning
@@ -97,7 +116,8 @@ plot_means_over_time(
   data = data,
   response = names(data)[6:3],
   group = "cyl",
-  groups.order = "decreasing"
+  groups.order = "decreasing",
+  facet = "am"
 )
 
 # Add significance stars/bars
