@@ -46,6 +46,14 @@ test_that("nice_table", {
   expect_true("95% CI" %in% stats_table$col_keys) # CI formatting creates this column
   expect_equal(nrow(stats_table$body$dataset), 5) # 5 rows in model coefficients
 
+  # Raw summary coefficient tables should infer the term column from row names
+  raw_stats <- as.data.frame(summary(model)$coefficients)
+  raw_stats_table <- nice_table(raw_stats)
+  expect_s3_class(raw_stats_table, "flextable")
+  expect_equal(raw_stats_table$col_keys, c("Term", "b", "SE", "t", "p"))
+  expect_equal(raw_stats_table$body$dataset$Term[1], "(Intercept)")
+  expect_true(all(c("cyl", "wt", "hp", "wt × hp") %in% raw_stats_table$body$dataset$Term))
+
   # Test different column names
   test <- head(mtcars)
   names(test) <- c(

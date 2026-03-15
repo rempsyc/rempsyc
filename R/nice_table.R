@@ -176,6 +176,8 @@ nice_table <- function(
 
   dataframe <- as.data.frame(data)
 
+  dataframe <- prepare_table_terms(dataframe)
+
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
 
   #   _______________________________________
@@ -185,12 +187,29 @@ nice_table <- function(
       ~ case_when(
         . == "p.value" ~ "p",
         . == "pvalue" ~ "p",
+        . == "p_val" ~ "p",
+        . == "p-value" ~ "p",
+        . == "Pr(>|t|)" ~ "p",
+        . == "Pr(>|z|)" ~ "p",
+        . == "Pr(>|F|)" ~ "p",
         . == "chisq" ~ "chi2",
         . == "conf.high" ~ "CI_upper",
         . == "df_error" ~ "df",
         . == "Cohens_d" ~ "d",
         . == "Coefficient" ~ "b",
+        . == "Estimate" ~ "b",
+        . == "estimate" ~ "b",
+        . == "Std. Error" ~ "SE",
+        . == "Std.Error" ~ "SE",
+        . == "std_error" ~ "SE",
+        . == "std.error" ~ "SE",
         . == "t.ratio" ~ "t",
+        . == "t value" ~ "t",
+        . == "t.value" ~ "t",
+        . == "z value" ~ "z",
+        . == "z.value" ~ "z",
+        . == "F value" ~ "F",
+        . == "F.value" ~ "F",
         . == "Std_Coefficient" ~ "B",
         . == "r_rank_biserial" ~ "rrb",
         . == "Eta2" ~ "n2",
@@ -409,6 +428,65 @@ parse_formatter <- function(
 ) {
   rExpression <- paste0(call, "(`", column, "` = ", fun, ")")
   eval(parse(text = rExpression))
+}
+
+# prepare_table_terms
+prepare_table_terms <- function(dataframe) {
+  existing.term.cols <- c(
+    "Term",
+    "term",
+    "Predictor",
+    "predictor",
+    "Parameter",
+    "parameter",
+    "Variable",
+    "variable",
+    "Dependent Variable"
+  )
+
+  row.names.data <- row.names(dataframe)
+  has.default.row.names <- identical(
+    row.names.data,
+    as.character(seq_len(nrow(dataframe)))
+  )
+
+  summary.term.aliases <- c(
+    "Estimate",
+    "estimate",
+    "Std. Error",
+    "Std.Error",
+    "std_error",
+    "std.error",
+    "t value",
+    "t.value",
+    "z value",
+    "z.value",
+    "F value",
+    "F.value",
+    "Pr(>|t|)",
+    "Pr(>|z|)",
+    "Pr(>|F|)",
+    "Coefficient",
+    "Std_Coefficient"
+  )
+
+  looks.like.coefficient.table <-
+    sum(names(dataframe) %in% summary.term.aliases) >= 2
+
+  if (
+    !any(existing.term.cols %in% names(dataframe)) &&
+      !has.default.row.names &&
+      looks.like.coefficient.table
+  ) {
+    dataframe <- cbind(
+      Term = row.names.data,
+      dataframe,
+      stringsAsFactors = FALSE
+    )
+  }
+
+  row.names(dataframe) <- NULL
+  dataframe
 }
 
 # prepare_broom
