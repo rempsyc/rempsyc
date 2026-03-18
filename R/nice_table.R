@@ -135,7 +135,7 @@
 #'
 #' @importFrom dplyr mutate %>% select matches
 #' case_when relocate across contains select_if any_of
-#' last_col
+#' last_col where
 #' @importFrom rlang :=
 #'
 #' @seealso
@@ -179,6 +179,7 @@ nice_table <- function(
   dataframe <- prepare_table_terms(dataframe)
 
   format_p_internal <- ifelse(isTRUE(stars), "format_p_stars", "format_p")
+  normalize_estimate_name <- is.null(broom) || broom == "lm"
 
   #   _______________________________________
   #   Replace possible alternative names ####
@@ -198,7 +199,7 @@ nice_table <- function(
         . == "Cohens_d" ~ "d",
         . == "Coefficient" ~ "b",
         . == "Estimate" ~ "b",
-        . == "estimate" ~ "b",
+        . == "estimate" & normalize_estimate_name ~ "b",
         . == "Std. Error" ~ "SE",
         . == "Std.Error" ~ "SE",
         . == "std_error" ~ "SE",
@@ -715,7 +716,7 @@ prepare_flextable <- function(
       "90% CI (RMSEA)"
     )
     if ("rmsea" %in% names(dataframe)) {
-      relocate(dataframe, "90% CI (RMSEA)", .after = "rmsea")
+      dplyr::relocate(dataframe, "90% CI (RMSEA)", .after = "rmsea")
     }
   }
   if (!missing(separate.header)) {
@@ -1258,8 +1259,8 @@ beautify_flextable <- function(
 
   table <- table %>%
     flextable::colformat_double(
-      j = (select(dataframe, where(is.numeric)) %>%
-        select(-matches(dont.change, ignore.case = FALSE)) %>%
+      j = (dplyr::select(dataframe, dplyr::where(is.numeric)) %>%
+        dplyr::select(-matches(dont.change, ignore.case = FALSE)) %>%
         names()),
       big.mark = ",",
       digits = 2
