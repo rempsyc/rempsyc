@@ -1,5 +1,15 @@
 # Changelog
 
+## rempsyc 0.2.0.7
+
+- [`nice_table()`](https://rempsyc.remi-theriault.com/reference/nice_table.md):
+  Add direct support for raw coefficient tables such as
+  `as.data.frame(summary(model)$coefficients)` by automatically
+  promoting coefficient row names to a `Term` column when appropriate,
+  and automatically formatting additional common model-summary column
+  names such as `Estimate`, `Std. Error`, `t value`, `z value`,
+  `F value`, and `Pr(>|t|)`.
+
 ## rempsyc 0.2.0.6
 
 - Renamed `plot_prepost()` to
@@ -38,6 +48,7 @@ using custom scales (e.g., manual colour/shape mappings).
   accommodate additional grouping variables. Also add new `line_width`
   and `point_size` arguments to control line thickness and point size
   for improved flexibility across presentation and publication formats.
+  \>\>\>\>\>\>\> 92877fe70688913045aee030d0d060e24524d22f
 
 ## rempsyc 0.2.0.3
 
